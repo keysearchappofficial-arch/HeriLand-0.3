@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HeriLand | Sarawak Travel AI</title>
+  <title>HeriLand</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
 <div class="app">
 
-  <!-- Desktop Left AI Panel -->
-  <aside class="ai-sidebar">
-    <div class="brand-row">
+  <!-- Desktop Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
       <div class="brand-mark">H</div>
       <div>
         <div class="brand-name">HeriLand</div>
@@ -20,284 +20,195 @@
       </div>
     </div>
 
-    <div class="location-box">
-      <span class="icon-wrap">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 21s7-6.4 7-12a7 7 0 0 0-14 0c0 5.6 7 12 7 12z"></path>
-          <circle cx="12" cy="9" r="2.4"></circle>
-        </svg>
-      </span>
-      <div>
-        <small>目前位置</small>
-        <strong id="currentLocationText">Kuching, Sarawak</strong>
-      </div>
+    <div class="side-location">
+      <small>目前位置</small>
+      <strong id="desktopLocation">Kuching, Sarawak</strong>
     </div>
 
-    <section class="ai-chat-panel">
-
-  <div class="ai-message ai-message-system">
-    <div class="ai-avatar">H</div>
-    <div class="ai-bubble">
+    <div class="ai-box">
       <small>AI Guide</small>
-      <p id="aiGreeting">
-        我看到你現在在 Kuching。今天想輕鬆一點，還是想探索附近？
-      </p>
+      <h1>你現在想怎麼玩砂拉越？</h1>
+      <p id="aiNoteText">選一個狀態，我幫你推薦現在適合去的地方。</p>
     </div>
-  </div>
 
-  <div class="ai-prompt-row">
-    <button class="ai-chip active" data-mood="relax">附近放鬆</button>
-    <button class="ai-chip" data-mood="food">現在吃什麼</button>
-    <button class="ai-chip" data-mood="view">看風景</button>
-    <button class="ai-chip" data-mood="hidden">隱藏點</button>
-  </div>
-
-  <div class="ai-horizontal-cards" id="aiSuggestionCards">
-    <!-- JS 生成 -->
-  </div>
-
-  <div class="ai-message ai-message-user">
-    <div class="ai-bubble user">
-      <p id="aiUserState">想找一個不用太多人、可以慢慢走的地方。</p>
+    <div class="mood-list">
+      <button class="mood-btn active" data-mood="relax">放鬆一下</button>
+      <button class="mood-btn" data-mood="food">找東西吃</button>
+      <button class="mood-btn" data-mood="view">看風景</button>
+      <button class="mood-btn" data-mood="hidden">找隱藏點</button>
     </div>
-  </div>
-
-  <div class="ai-message ai-message-system">
-    <div class="ai-avatar">H</div>
-    <div class="ai-bubble">
-      <small>HeriLand 建議</small>
-      <p id="aiNoteText">
-        Kuching 下午偏熱，建議先找靠水或室內的地方，傍晚再去戶外走走。
-      </p>
-    </div>
-  </div>
-
-</section>
   </aside>
 
-  <!-- Main Content -->
-  <main class="main-area">
+  <!-- Main -->
+  <main class="main">
 
     <!-- Mobile Top -->
     <header class="mobile-top">
-  <div class="mobile-location">
-    <small>Your Location</small>
-    <strong>Kuching, Sarawak</strong>
-  </div>
-
-  <button class="plain-icon">
-    <!-- search icon -->
-  </button>
-</header>
-
-<div class="mobile-search-row">
-  <input placeholder="search places..." />
-  <button class="filter-mobile-btn">☰</button>
-</div>
-
-    <!-- Desktop Top Bar -->
-    <header class="desktop-top">
-      <div class="search-shell">
+      <div>
+        <small>Your Location</small>
+        <strong id="mobileLocation">Kuching, Sarawak</strong>
+      </div>
+      <button class="icon-btn" aria-label="search">
         <svg viewBox="0 0 24 24">
           <circle cx="11" cy="11" r="7"></circle>
-          <path d="M20 20l-3.4-3.4"></path>
+          <path d="M20 20l-3.5-3.5"></path>
         </svg>
-        <input id="searchInput" type="text" placeholder="搜尋地點、咖啡、夜景、在地美食..." />
-      </div>
-
-      <nav class="top-nav">
-        <button class="top-link active">推薦</button>
-        <button class="top-link">地圖</button>
-        <button class="top-link">行程</button>
-        <button class="top-link">收藏</button>
-      </nav>
+      </button>
     </header>
 
+    <!-- Desktop Top -->
+    <header class="desktop-top">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+        <input id="searchInput" placeholder="搜尋地點、美食、風景..." />
+      </div>
+    </header>
+
+    <!-- Mobile Search -->
+    <div class="mobile-search">
+      <input id="mobileSearchInput" placeholder="search places..." />
+      <button>☰</button>
+    </div>
+
     <!-- Hero -->
-    <section class="hero-section" id="heroSection">
-      <img id="heroImage" src="" alt="HeriLand recommendation" />
-      <div class="hero-overlay"></div>
-
+    <section class="hero" id="heroCard">
+      <img id="heroImage" src="" alt="">
       <div class="hero-content">
-        <div class="hero-label">AI 今日推薦</div>
+        <small>AI 今日推薦</small>
         <h2 id="heroTitle"></h2>
-        <p id="heroDesc"></p>
-
-        <div class="hero-actions">
-          <button class="primary-btn" onclick="openDetail(0)">
-            看看這裡
-          </button>
-          <button class="ghost-btn" onclick="openAiSheet()">
-            重新推薦
-          </button>
-        </div>
+        <button onclick="openDetail(0)">看看這裡</button>
       </div>
     </section>
 
-    <!-- Mobile AI Mood -->
-    <section class="mobile-ai-card">
+    <!-- Mobile AI hint -->
+    <section class="mobile-ai-hint">
       <div>
         <small>AI Guide</small>
-        <strong>你現在想怎麼玩？</strong>
+        <strong id="mobileAiText">今天適合從輕鬆的地方開始。</strong>
       </div>
-      <button onclick="openAiSheet()">選狀態</button>
+      <button onclick="toggleMobileMood()">選狀態</button>
     </section>
 
-    <!-- Content Header -->
-    <section class="content-head">
+    <!-- Mobile moods -->
+    <section class="mobile-moods" id="mobileMoods">
+      <button class="mood-chip active" data-mood="relax">放鬆</button>
+      <button class="mood-chip" data-mood="food">美食</button>
+      <button class="mood-chip" data-mood="view">風景</button>
+      <button class="mood-chip" data-mood="hidden">隱藏點</button>
+    </section>
+
+    <!-- Section Head -->
+    <section class="section-head">
       <div>
-        <p class="eyebrow">HeriLand Picks</p>
-        <h2 id="sectionTitle">適合放鬆的地方</h2>
+        <small>HeriLand Picks</small>
+        <h2 id="sectionTitle">推薦地點</h2>
       </div>
-
-      <button class="map-btn">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 6l6-2 6 2 6-2v16l-6 2-6-2-6 2z"></path>
-          <path d="M10 4v16"></path>
-          <path d="M16 6v16"></path>
-        </svg>
-        地圖模式
-      </button>
+      <button class="map-btn">地圖</button>
     </section>
-	
-	<section class="recommend-grid" id="recommendGrid"></section>
-	
-<section class="route-strip">
-  <div>
-    <small>AI Route</small>
-    <h3>今晚可以這樣走</h3>
-  </div>
 
-  <div class="route-steps">
-    <button>01 河邊散步</button>
-    <button>02 在地晚餐</button>
-    <button>03 夜景</button>
-  </div>
-</section>
-
-    <!-- Place Flow -->
-    <section class="place-flow" id="placeFlow"></section>
+    <!-- Cards -->
+    <section class="place-grid" id="placeGrid"></section>
 
   </main>
 </div>
 
-<section class="detail-view show" id="detailView">
+<!-- Detail Page -->
+<section class="detail-page" id="detailPage">
 
-  <!-- 上方圖片 -->
-  <div class="detail-hero">
-    <img id="detailImage" src="https://images.unsplash.com/photo-1502877338535-766e1452684a" />
+  <div class="detail-gallery">
+    <button class="detail-back" onclick="closeDetail()">
+      <svg viewBox="0 0 24 24">
+        <path d="M15 18l-6-6 6-6"></path>
+      </svg>
+    </button>
+
+    <button class="detail-save">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </button>
+
+    <img id="detailImage" src="" alt="">
+
+    <div class="gallery-dots">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 
-  <!-- 內容區 -->
   <div class="detail-panel">
 
-    <!-- 基本資訊 -->
-    <div class="detail-head">
-      <h1 id="detailTitle">6k Car Care</h1>
+    <section class="detail-head">
+      <h1 id="detailTitle"></h1>
 
-      <div class="detail-meta">
-        <span>📍 Avinashi Rd</span>
+      <div class="detail-line">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21s7-6.4 7-12a7 7 0 0 0-14 0c0 5.6 7 12 7 12z"></path>
+          <circle cx="12" cy="9" r="2.4"></circle>
+        </svg>
+        <span id="detailAddress"></span>
       </div>
 
-      <div class="detail-meta">
-        <span>📞 +91 70944 40550</span>
-        <span>⏰ 9AM – 11PM</span>
+      <div class="detail-info-row">
+        <div>
+          <small>店面電話</small>
+          <strong id="detailPhone"></strong>
+        </div>
+        <div>
+          <small>營業時間</small>
+          <strong id="detailHours"></strong>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 聯絡人 -->
-    <div class="detail-agent">
-      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200" />
-
-      <div class="agent-info">
-        <strong>Zara Venkat</strong>
-        <small>Agent</small>
+    <section class="detail-contact">
+      <img id="detailContactImage" src="" alt="">
+      <div>
+        <strong id="detailContactName"></strong>
+        <small>聯絡人</small>
       </div>
+      <button>Contact Now</button>
+    </section>
 
-      <button class="agent-btn">Contact Now</button>
-    </div>
+    <section class="detail-section">
+      <h2>店的簡介</h2>
+      <p id="detailIntro"></p>
+    </section>
 
-    <!-- Description -->
-    <div class="detail-section">
-      <h3>Description</h3>
-      <p>
-        Give your car a refreshing deep clean with our Premium Car Wash.
-        High-quality foam and eco-friendly products remove dirt and stains.
-      </p>
-    </div>
-
-    <!-- Services -->
-    <div class="detail-section">
-      <h3>What’s Included</h3>
-
-      <ul class="detail-list">
-        <li>Foam exterior wash</li>
-        <li>Interior vacuum cleaning</li>
-        <li>Dashboard wiping</li>
-        <li>Tire and rim cleaning</li>
-      </ul>
-    </div>
+    <section class="detail-section">
+      <h2>店的服務</h2>
+      <ul id="detailServices"></ul>
+    </section>
 
   </div>
 
-  <!-- 底部按鈕 -->
   <div class="detail-cta">
-    <button>Book Now</button>
+    <button class="secondary-btn">加入行程</button>
+    <button class="primary-cta">帶我去</button>
   </div>
 
-</section>
-
-<!-- Mobile AI Sheet -->
-<section class="ai-sheet" id="aiSheet">
-  <div class="sheet-backdrop" onclick="closeAiSheet()"></div>
-
-  <div class="sheet-panel">
-    <div class="sheet-handle"></div>
-
-    <div class="sheet-head">
-      <h2>你現在想怎麼玩砂拉越？</h2>
-      <p>選一個狀態，我會更新推薦。</p>
-    </div>
-
-    <div class="sheet-moods">
-      <button onclick="selectMoodFromSheet('relax')">放鬆一下</button>
-      <button onclick="selectMoodFromSheet('food')">找東西吃</button>
-      <button onclick="selectMoodFromSheet('view')">看風景</button>
-      <button onclick="selectMoodFromSheet('hidden')">找隱藏點</button>
-    </div>
-  </div>
 </section>
 
 <!-- Mobile Bottom Nav -->
 <nav class="mobile-bottom-nav">
   <button class="active">
-    <svg viewBox="0 0 24 24">
-      <path d="M4 11l8-7 8 7v9H4z"></path>
-    </svg>
+    <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"></path></svg>
     推薦
   </button>
-
   <button>
-    <svg viewBox="0 0 24 24">
-      <path d="M4 6l6-2 6 2 6-2v16l-6 2-6-2-6 2z"></path>
-      <path d="M10 4v16"></path>
-      <path d="M16 6v16"></path>
-    </svg>
+    <svg viewBox="0 0 24 24"><path d="M4 6l6-2 6 2 6-2v16l-6 2-6-2-6 2z"></path></svg>
     地圖
   </button>
-
-  <button onclick="openAiSheet()">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8L12 3z"></path>
-    </svg>
+  <button>
+    <svg viewBox="0 0 24 24"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8L12 3z"></path></svg>
     AI
   </button>
-
   <button>
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4"></circle>
-      <path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"></path>
-    </svg>
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"></path></svg>
     我的
   </button>
 </nav>
