@@ -1,0 +1,264 @@
+@media (max-width: 820px) {
+
+  body {
+    background: #f6f5f1;
+  }
+
+  .app {
+    display: block;
+    min-height: 100vh;
+  }
+
+  .sidebar,
+  .desktop-top {
+    display: none;
+  }
+
+  .main {
+    padding: 0 18px 96px;
+    max-width: none;
+  }
+
+  .mobile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0 12px;
+  }
+
+  .mobile-top small {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .mobile-top strong {
+    font-size: 18px;
+    letter-spacing: -0.3px;
+  }
+
+  .icon-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 14px;
+    background: rgba(255,255,255,.78);
+    display: grid;
+    place-items: center;
+  }
+
+  .mobile-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .mobile-search input {
+    flex: 1;
+    height: 46px;
+    border: none;
+    border-radius: 14px;
+    background: rgba(255,255,255,.78);
+    padding: 0 15px;
+    outline: none;
+  }
+
+  .mobile-search button {
+    width: 46px;
+    border: none;
+    border-radius: 14px;
+    background: rgba(255,255,255,.78);
+  }
+
+  .hero {
+    height: 150px;
+    border-radius: 18px;
+  }
+
+  .hero-content {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .hero-content small {
+    display: none;
+  }
+
+  .hero-content h2 {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    max-width: 220px;
+  }
+
+  .hero-content button {
+    margin-top: 10px;
+    padding: 8px 13px;
+    font-size: 13px;
+  }
+
+  .mobile-ai-hint {
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,.66);
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 16px;
+    padding: 14px;
+  }
+
+  .mobile-ai-hint small {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .mobile-ai-hint strong {
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .mobile-ai-hint button {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 850;
+  }
+
+  .mobile-moods {
+    display: none;
+    gap: 8px;
+    overflow-x: auto;
+    margin-top: 12px;
+    padding-bottom: 4px;
+  }
+
+  .mobile-moods.show {
+    display: flex;
+  }
+
+  .mood-chip {
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.7);
+    border-radius: 999px;
+    padding: 9px 13px;
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .mood-chip.active {
+    background: #111;
+    color: #fff;
+  }
+
+  .section-head {
+    margin: 24px 0 14px;
+  }
+
+  .section-head small {
+    display: none;
+  }
+
+  .section-head h2 {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .map-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: var(--muted);
+  }
+
+  .place-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .place-card {
+    border-radius: 18px;
+    box-shadow: none;
+  }
+
+  .place-image {
+    height: 135px;
+  }
+
+  .place-body {
+    padding: 12px;
+  }
+
+  .place-body h3 {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .place-tags span {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    width: calc(100% - 36px);
+    max-width: 430px;
+    height: 62px;
+    border-radius: 24px;
+    background: rgba(255,255,255,.9);
+    border: 1px solid rgba(0,0,0,.08);
+    backdrop-filter: blur(18px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    z-index: 150;
+  }
+
+  .mobile-bottom-nav button {
+    border: none;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    color: #777;
+    font-size: 11px;
+  }
+
+  .mobile-bottom-nav button.active {
+    color: #111;
+    font-weight: 850;
+  }
+
+  .mobile-bottom-nav svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .detail-gallery {
+    height: 360px;
+  }
+
+  .detail-panel {
+    width: 100%;
+    padding: 22px 20px 120px;
+  }
+
+  .detail-head h1 {
+    font-size: 24px;
+  }
+
+  .detail-info-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .detail-contact button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
