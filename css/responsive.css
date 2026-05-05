@@ -12,20 +12,17 @@
   }
 }
 
-/* =========================
-   Mobile App Style
-   像汽車 App 那種手機版節奏
-========================= */
-
 @media (max-width: 820px) {
 
   body {
-    background: var(--bg);
+    background: #e9e9e6;
   }
 
   .app {
     display: block;
     min-height: 100vh;
+    background: #f8f8f5;
+    padding-bottom: 86px;
   }
 
   .ai-sidebar,
@@ -34,215 +31,212 @@
   }
 
   .main-area {
-    padding: 0 0 96px;
+    padding: 0 18px 90px;
     max-width: none;
   }
 
-  /* =========================
-     Mobile Top
-  ========================= */
-
+  /* Top location */
   .mobile-top {
-    height: 72px;
-    padding: 12px 18px;
+    height: auto;
+    padding: 22px 0 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+  }
 
-    position: sticky;
-    top: 0;
-    z-index: 30;
+  .mobile-location small {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
 
-    background: rgba(247,245,239,.86);
-    backdrop-filter: blur(18px);
+  .mobile-location strong {
+    font-size: 18px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
   }
 
   .plain-icon {
     width: 42px;
     height: 42px;
-    border: 1px solid rgba(0,0,0,.08);
-    border-radius: 50%;
-    background: rgba(255,255,255,.76);
+    border-radius: 14px;
+    border: none;
+    background: #fff;
     display: grid;
     place-items: center;
+    box-shadow: 0 8px 22px rgba(0,0,0,.06);
   }
 
-  .mobile-brand {
-    font-size: 20px;
-    font-weight: 850;
-    letter-spacing: -0.6px;
-    text-align: center;
+  /* Search row */
+  .mobile-search-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
   }
 
-  .mobile-sub {
-    margin-top: 2px;
-    font-size: 12px;
-    color: var(--muted);
-    text-align: center;
+  .mobile-search-row input {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 14px;
+    background: #fff;
+    padding: 0 16px;
+    font-size: 14px;
+    outline: none;
+    box-shadow: 0 8px 22px rgba(0,0,0,.05);
   }
 
-  /* =========================
-     Hero 主視覺
-  ========================= */
+  .filter-mobile-btn {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 14px;
+    background: #fff;
+    font-size: 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.05);
+  }
 
+  /* Banner：像你圖裡那張藍色洗車 Banner */
   .hero-section {
-    height: 390px;
-    border-radius: 0 0 34px 34px;
-    margin: 0;
+    height: 150px;
+    border-radius: 18px;
+    margin: 0 0 18px;
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.12)
+    );
   }
 
   .hero-content {
-    left: 22px;
-    right: 22px;
-    bottom: 34px;
-    max-width: none;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    max-width: 220px;
   }
 
   .hero-label {
-    font-size: 12px;
-    padding: 7px 11px;
-    margin-bottom: 12px;
+    display: none;
   }
 
   .hero-content h2 {
-    font-size: 34px;
-    line-height: 1.04;
-    letter-spacing: -1.6px;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
   }
 
   .hero-content p {
-    margin-top: 10px;
-    font-size: 14px;
-    line-height: 1.55;
-    max-width: 300px;
+    display: none;
   }
 
   .hero-actions {
-    margin-top: 18px;
-    gap: 10px;
+    margin-top: 10px;
   }
 
-  .primary-btn,
+  .primary-btn {
+    padding: 8px 13px;
+    font-size: 13px;
+    border-radius: 999px;
+  }
+
   .ghost-btn {
-    padding: 12px 16px;
-    font-size: 14px;
+    display: none;
   }
 
-  /* =========================
-     AI 小提示卡
-  ========================= */
-
+  /* AI 提示小卡 */
   .mobile-ai-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    margin: -30px 18px 0;
-    padding: 16px;
-
-    position: relative;
-    z-index: 5;
-
-    border-radius: 22px;
-    border: 1px solid rgba(255,255,255,.78);
-    background: rgba(255,255,255,.86);
-    backdrop-filter: blur(18px);
+    margin: 0 0 18px;
+    padding: 14px;
+    border-radius: 16px;
+    background: #eef3ff;
+    border: none;
   }
 
   .mobile-ai-card small {
-    display: block;
-    color: var(--muted);
-    font-size: 12px;
-    margin-bottom: 4px;
+    display: none;
   }
 
   .mobile-ai-card strong {
-    font-size: 16px;
-    letter-spacing: -0.2px;
+    font-size: 15px;
+    line-height: 1.35;
   }
 
   .mobile-ai-card button {
     border: none;
-    background: var(--dark);
-    color: #fff;
-    border-radius: 999px;
-    padding: 10px 14px;
+    background: transparent;
+    color: #111;
     font-size: 13px;
     font-weight: 800;
   }
 
-  /* =========================
-     Section Head
-  ========================= */
-
+  /* Section */
   .content-head {
-    margin: 28px 18px 14px;
+    margin: 8px 0 12px;
     align-items: center;
   }
 
   .content-head .eyebrow {
-    font-size: 11px;
-    margin-bottom: 6px;
-  }
-
-  .content-head h2 {
-    font-size: 23px;
-    letter-spacing: -0.8px;
-  }
-
-  .map-btn {
-    padding: 9px 12px;
-    font-size: 13px;
-    background: rgba(255,255,255,.74);
-  }
-
-  /* =========================
-     推薦卡：手機橫向滑動
-     像你一開始給我的那種 App 節奏
-  ========================= */
-
-  .recommend-grid {
-    display: flex;
-    overflow-x: auto;
-    gap: 14px;
-
-    padding: 0 18px 8px;
-    margin-top: 18px;
-
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .recommend-grid::-webkit-scrollbar {
     display: none;
   }
 
+  .content-head h2 {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .map-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* 推薦卡：像 screenshot 的 Nearest Shops */
+  .recommend-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0;
+    margin-top: 0;
+    overflow: visible;
+  }
+
   .recommend-card {
-    flex: 0 0 245px;
-    border-radius: 24px;
-    scroll-snap-align: start;
-    background: rgba(255,255,255,.82);
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 10px 26px rgba(0,0,0,.06);
   }
 
   .recommend-card:first-child {
     grid-column: auto;
   }
 
+  .recommend-image-wrap,
   .recommend-card:first-child .recommend-image-wrap {
-    height: 170px;
-  }
-
-  .recommend-image-wrap {
-    height: 170px;
+    height: 210px;
+    border-radius: 0;
   }
 
   .recommend-body {
-    padding: 13px;
+    padding: 14px 16px 16px;
   }
 
   .recommend-body h3 {
-    font-size: 15px;
-    line-height: 1.35;
+    font-size: 17px;
     margin-bottom: 8px;
   }
 
@@ -252,239 +246,48 @@
 
   .recommend-tags span {
     font-size: 11px;
-    padding: 4px 7px;
+    padding: 5px 8px;
   }
 
   .recommend-save {
-    width: 32px;
-    height: 32px;
-    top: 10px;
-    right: 10px;
+    width: 36px;
+    height: 36px;
+    top: 12px;
+    right: 12px;
   }
 
-  /* =========================
-     舊 place-flow 行動版先弱化
-     如果你目前主畫面用 recommendGrid，可以直接隱藏
-  ========================= */
-
-  .place-flow {
-    display: none;
-  }
-
-  /* =========================
-     Route Strip
-  ========================= */
-
+  .place-flow,
   .route-strip {
-    margin: 18px;
-    padding: 18px;
-    display: block;
-    border-radius: 24px;
-  }
-
-  .route-strip h3 {
-    font-size: 21px;
-  }
-
-  .route-steps {
-    margin-top: 16px;
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .route-steps::-webkit-scrollbar {
     display: none;
   }
 
-  .route-steps button {
-    flex: 0 0 auto;
-    padding: 9px 13px;
-    font-size: 13px;
-  }
-
-  /* =========================
-     Detail 行動版
-  ========================= */
-
-  .detail-hero {
-    height: 58vh;
-    min-height: 420px;
-    border-radius: 0 0 34px 34px;
-  }
-
-  .detail-top {
-    left: 18px;
-    right: 18px;
-    top: 18px;
-  }
-
-  .detail-title {
-    left: 22px;
-    right: 22px;
-    bottom: 36px;
-  }
-
-  .detail-title h1 {
-    font-size: 38px;
-    line-height: 1.04;
-    letter-spacing: -1.6px;
-  }
-
-  .detail-title p {
-    font-size: 14px;
-  }
-
-  .detail-body {
-    width: calc(100% - 36px);
-    padding: 28px 0 120px;
-  }
-
-  .guide-block {
-    padding: 24px;
-    border-radius: 24px;
-  }
-
-  .guide-block h2 {
-    font-size: 26px;
-    line-height: 1.25;
-  }
-
-  .info-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .info-item {
-    border-radius: 18px;
-    padding: 15px;
-  }
-
-  .detail-text p {
-    font-size: 16px;
-    line-height: 1.75;
-  }
-
-  .detail-cta {
-    bottom: 18px;
-    width: calc(100% - 28px);
-  }
-
-  /* =========================
-     AI Sheet
-  ========================= */
-
-  .ai-sheet {
-    position: fixed;
-    inset: 0;
-    z-index: 180;
-    pointer-events: none;
-    display: block;
-  }
-
-  .ai-sheet.show {
-    pointer-events: auto;
-  }
-
-  .sheet-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,.3);
-    opacity: 0;
-    transition: .25s var(--ease);
-  }
-
-  .ai-sheet.show .sheet-backdrop {
-    opacity: 1;
-  }
-
-  .sheet-panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    background: var(--bg);
-    border-radius: 30px 30px 0 0;
-    padding: 14px 20px 28px;
-
-    transform: translateY(100%);
-    transition: .32s var(--ease);
-  }
-
-  .ai-sheet.show .sheet-panel {
-    transform: translateY(0);
-  }
-
-  .sheet-handle {
-    width: 46px;
-    height: 5px;
-    background: rgba(0,0,0,.18);
-    border-radius: 999px;
-    margin: 0 auto 18px;
-  }
-
-  .sheet-head h2 {
-    font-size: 26px;
-    letter-spacing: -1px;
-  }
-
-  .sheet-head p {
-    color: var(--muted);
-    margin-top: 8px;
-  }
-
-  .sheet-moods {
-    display: grid;
-    gap: 12px;
-    margin-top: 20px;
-  }
-
-  .sheet-moods button {
-    text-align: left;
-    border: 1px solid var(--line);
-    background: rgba(255,255,255,.74);
-    border-radius: 18px;
-    padding: 16px;
-    font-weight: 850;
-  }
-
-  /* =========================
-     Bottom Nav：固定在底部
-  ========================= */
-
+  /* Bottom nav 固定底部 */
   .mobile-bottom-nav {
     position: fixed;
     left: 50%;
     bottom: 14px;
     transform: translateX(-50%);
-
-    width: calc(100% - 28px);
-    max-width: 430px;
-    height: 64px;
-
+    width: calc(100% - 36px);
+    max-width: 390px;
+    height: 62px;
     border-radius: 24px;
+    background: rgba(255,255,255,.92);
     border: 1px solid rgba(0,0,0,.08);
-    background: rgba(255,255,255,.88);
-    backdrop-filter: blur(20px);
-
+    backdrop-filter: blur(18px);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-
     z-index: 120;
+    box-shadow: 0 14px 36px rgba(0,0,0,.12);
   }
 
   .mobile-bottom-nav button {
     border: none;
     background: transparent;
-
     display: grid;
     place-items: center;
     gap: 2px;
-
-    color: #666;
     font-size: 11px;
+    color: #777;
   }
 
   .mobile-bottom-nav button.active {
