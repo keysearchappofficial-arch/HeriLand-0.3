@@ -1,16 +1,11 @@
 :root {
-  --bg: #f7f5ef;
+  --bg: #f6f5f1;
   --paper: #ffffff;
-  --text: #101010;
-  --muted: #6f6f6f;
-  --soft: #eeeeea;
-  --line: rgba(0, 0, 0, 0.09);
-  --dark: #101010;
-  --dark-2: #1a1a1a;
-  --radius-lg: 34px;
-  --radius-md: 22px;
-  --radius-sm: 14px;
-  --sidebar: 360px;
+  --text: #111111;
+  --muted: #777777;
+  --line: rgba(0,0,0,.08);
+  --dark: #111111;
+  --radius: 20px;
   --ease: cubic-bezier(.2,.8,.2,1);
 }
 
@@ -52,20 +47,4 @@ svg {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.eyebrow {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.mobile-top,
-.mobile-ai-card,
-.mobile-bottom-nav,
-.ai-sheet {
-  display: none;
 }
