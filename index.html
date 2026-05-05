@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeriLand | Sarawak Travel AI</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Desktop Left AI Panel -->
+  <aside class="ai-sidebar">
+    <div class="brand-row">
+      <div class="brand-mark">H</div>
+      <div>
+        <div class="brand-name">HeriLand</div>
+        <div class="brand-sub">Sarawak Travel AI</div>
+      </div>
+    </div>
+
+    <div class="location-box">
+      <span class="icon-wrap">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21s7-6.4 7-12a7 7 0 0 0-14 0c0 5.6 7 12 7 12z"></path>
+          <circle cx="12" cy="9" r="2.4"></circle>
+        </svg>
+      </span>
+      <div>
+        <small>目前位置</small>
+        <strong id="currentLocationText">Kuching, Sarawak</strong>
+      </div>
+    </div>
+
+    <section class="ai-chat-panel">
+
+  <div class="ai-message ai-message-system">
+    <div class="ai-avatar">H</div>
+    <div class="ai-bubble">
+      <small>AI Guide</small>
+      <p id="aiGreeting">
+        我看到你現在在 Kuching。今天想輕鬆一點，還是想探索附近？
+      </p>
+    </div>
+  </div>
+
+  <div class="ai-prompt-row">
+    <button class="ai-chip active" data-mood="relax">附近放鬆</button>
+    <button class="ai-chip" data-mood="food">現在吃什麼</button>
+    <button class="ai-chip" data-mood="view">看風景</button>
+    <button class="ai-chip" data-mood="hidden">隱藏點</button>
+  </div>
+
+  <div class="ai-horizontal-cards" id="aiSuggestionCards">
+    <!-- JS 生成 -->
+  </div>
+
+  <div class="ai-message ai-message-user">
+    <div class="ai-bubble user">
+      <p id="aiUserState">想找一個不用太多人、可以慢慢走的地方。</p>
+    </div>
+  </div>
+
+  <div class="ai-message ai-message-system">
+    <div class="ai-avatar">H</div>
+    <div class="ai-bubble">
+      <small>HeriLand 建議</small>
+      <p id="aiNoteText">
+        Kuching 下午偏熱，建議先找靠水或室內的地方，傍晚再去戶外走走。
+      </p>
+    </div>
+  </div>
+
+</section>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-area">
+
+    <!-- Mobile Top -->
+    <header class="mobile-top">
+      <button class="plain-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+
+      <div>
+        <div class="mobile-brand">HeriLand</div>
+        <div class="mobile-sub">Kuching, Sarawak</div>
+      </div>
+
+      <button class="plain-icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.4-3.4"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Desktop Top Bar -->
+    <header class="desktop-top">
+      <div class="search-shell">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.4-3.4"></path>
+        </svg>
+        <input id="searchInput" type="text" placeholder="搜尋地點、咖啡、夜景、在地美食..." />
+      </div>
+
+      <nav class="top-nav">
+        <button class="top-link active">推薦</button>
+        <button class="top-link">地圖</button>
+        <button class="top-link">行程</button>
+        <button class="top-link">收藏</button>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-section" id="heroSection">
+      <img id="heroImage" src="" alt="HeriLand recommendation" />
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="hero-label">AI 今日推薦</div>
+        <h2 id="heroTitle"></h2>
+        <p id="heroDesc"></p>
+
+        <div class="hero-actions">
+          <button class="primary-btn" onclick="openDetail(0)">
+            看看這裡
+          </button>
+          <button class="ghost-btn" onclick="openAiSheet()">
+            重新推薦
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile AI Mood -->
+    <section class="mobile-ai-card">
+      <div>
+        <small>AI Guide</small>
+        <strong>你現在想怎麼玩？</strong>
+      </div>
+      <button onclick="openAiSheet()">選狀態</button>
+    </section>
+
+    <!-- Content Header -->
+    <section class="content-head">
+      <div>
+        <p class="eyebrow">HeriLand Picks</p>
+        <h2 id="sectionTitle">適合放鬆的地方</h2>
+      </div>
+
+      <button class="map-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 6l6-2 6 2 6-2v16l-6 2-6-2-6 2z"></path>
+          <path d="M10 4v16"></path>
+          <path d="M16 6v16"></path>
+        </svg>
+        地圖模式
+      </button>
+    </section>
+	
+	<section class="recommend-grid" id="recommendGrid"></section>
+	
+<section class="route-strip">
+  <div>
+    <small>AI Route</small>
+    <h3>今晚可以這樣走</h3>
+  </div>
+
+  <div class="route-steps">
+    <button>01 河邊散步</button>
+    <button>02 在地晚餐</button>
+    <button>03 夜景</button>
+  </div>
+</section>
+
+    <!-- Place Flow -->
+    <section class="place-flow" id="placeFlow"></section>
+
+  </main>
+</div>
+
+<!-- Detail View -->
+<section class="detail-view" id="detailView">
+  <div class="detail-hero">
+    <img id="detailImage" src="" alt="" />
+    <div class="detail-overlay"></div>
+
+    <div class="detail-top">
+      <button class="round-btn" onclick="closeDetail()">
+        <svg viewBox="0 0 24 24">
+          <path d="M15 18l-6-6 6-6"></path>
+        </svg>
+      </button>
+
+      <button class="round-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="detail-title">
+      <p id="detailMeta"></p>
+      <h1 id="detailTitle"></h1>
+    </div>
+  </div>
+
+  <div class="detail-body">
+    <section class="guide-block">
+      <p class="block-label">AI Guide</p>
+      <h2 id="detailGuide"></h2>
+    </section>
+
+    <section class="info-row">
+      <div class="info-item">
+        <small>距離</small>
+        <strong id="detailDistance"></strong>
+      </div>
+
+      <div class="info-item">
+        <small>適合</small>
+        <strong id="detailMood"></strong>
+      </div>
+
+      <div class="info-item">
+        <small>建議時間</small>
+        <strong id="detailTime"></strong>
+      </div>
+
+      <div class="info-item">
+        <small>人流</small>
+        <strong id="detailCrowd"></strong>
+      </div>
+    </section>
+
+    <section class="detail-text">
+      <h3>為什麼推薦這裡？</h3>
+      <p id="detailReason"></p>
+    </section>
+  </div>
+
+  <div class="detail-cta">
+    <button class="secondary-action">加入行程</button>
+    <button class="main-action">帶我去</button>
+  </div>
+</section>
+
+<!-- Mobile AI Sheet -->
+<section class="ai-sheet" id="aiSheet">
+  <div class="sheet-backdrop" onclick="closeAiSheet()"></div>
+
+  <div class="sheet-panel">
+    <div class="sheet-handle"></div>
+
+    <div class="sheet-head">
+      <h2>你現在想怎麼玩砂拉越？</h2>
+      <p>選一個狀態，我會更新推薦。</p>
+    </div>
+
+    <div class="sheet-moods">
+      <button onclick="selectMoodFromSheet('relax')">放鬆一下</button>
+      <button onclick="selectMoodFromSheet('food')">找東西吃</button>
+      <button onclick="selectMoodFromSheet('view')">看風景</button>
+      <button onclick="selectMoodFromSheet('hidden')">找隱藏點</button>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Bottom Nav -->
+<nav class="mobile-bottom-nav">
+  <button class="active">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 11l8-7 8 7v9H4z"></path>
+    </svg>
+    推薦
+  </button>
+
+  <button>
+    <svg viewBox="0 0 24 24">
+      <path d="M4 6l6-2 6 2 6-2v16l-6 2-6-2-6 2z"></path>
+      <path d="M10 4v16"></path>
+      <path d="M16 6v16"></path>
+    </svg>
+    地圖
+  </button>
+
+  <button onclick="openAiSheet()">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8L12 3z"></path>
+    </svg>
+    AI
+  </button>
+
+  <button>
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4"></circle>
+      <path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"></path>
+    </svg>
+    我的
+  </button>
+</nav>
+
+<script src="js/app.js"></script>
+</body>
+</html>

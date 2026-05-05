@@ -1,0 +1,54 @@
+.desktop-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 24px;
+}
+
+.search-shell {
+  flex: 1;
+  max-width: 580px;
+  height: 50px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .72);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  backdrop-filter: blur(18px);
+}
+
+.search-shell svg {
+  color: #444;
+  flex-shrink: 0;
+}
+
+.search-shell input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.top-link {
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.top-link.active {
+  background: var(--dark);
+  color: white;
+}
