@@ -25,18 +25,43 @@
       <strong id="desktopLocation">Kuching, Sarawak</strong>
     </div>
 
-    <div class="ai-box">
-      <small>AI Guide</small>
-      <h1>你現在想怎麼玩砂拉越？</h1>
-      <p id="aiNoteText">選一個狀態，我幫你推薦現在適合去的地方。</p>
+<div class="ai-guide-panel">
+
+  <div class="ai-box">
+    <small>AI Guide</small>
+    <h1>你現在想怎麼玩砂拉越？</h1>
+    <p id="aiNoteText">選一個狀態，我幫你推薦現在適合去的地方。</p>
+  </div>
+
+  <div class="mood-list">
+    <button class="mood-btn active" data-mood="relax">放鬆一下</button>
+    <button class="mood-btn" data-mood="food">找東西吃</button>
+    <button class="mood-btn" data-mood="view">看風景</button>
+    <button class="mood-btn" data-mood="hidden">找隱藏點</button>
+  </div>
+
+  <div class="ai-chat-preview">
+    <div class="ai-msg ai-msg-bot">
+      <div class="ai-dot">H</div>
+      <p>我會依照你的定位、時間和狀態，先幫你挑幾個最適合的方向。</p>
     </div>
 
-    <div class="mood-list">
-      <button class="mood-btn active" data-mood="relax">放鬆一下</button>
-      <button class="mood-btn" data-mood="food">找東西吃</button>
-      <button class="mood-btn" data-mood="view">看風景</button>
-      <button class="mood-btn" data-mood="hidden">找隱藏點</button>
+    <div class="ai-msg ai-msg-user">
+      <p>我想找一個不要太累的地方。</p>
     </div>
+  </div>
+
+</div>
+
+<div class="ai-input-bar">
+  <input id="aiInput" placeholder="問問 HeriLand..." />
+  <button id="aiSendBtn" type="button">
+    <svg viewBox="0 0 24 24">
+      <path d="M22 2L11 13"></path>
+      <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+    </svg>
+  </button>
+</div>
   </aside>
 
   <!-- Main -->
