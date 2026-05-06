@@ -1,4 +1,4 @@
-import { places, moodConfig, cities, reviews, spots } from "./data.js";
+import { places, moodConfig, cities, reviews, spots, foods } from "./data.js";
 
 let currentMood = "relax";
 let currentPlaces = [];
@@ -29,11 +29,13 @@ function init() {
   initLocation();
   bindBottomNavAutoHide();
   bindSpotControls();
+  bindFoodControls();
 
   renderMood("relax");
   renderCities();
   renderReviews();
   renderSpots();
+  renderFoods();
 
 }
 
@@ -215,6 +217,44 @@ function bindSpotControls() {
       left: 320,
       behavior: "smooth"
     });
+  });
+}
+
+function renderFoods() {
+  const foodScroll = document.getElementById("foodScroll");
+  if (!foodScroll) return;
+
+  foodScroll.innerHTML = "";
+
+  foods.slice(0, 20).forEach(food => {
+    const card = document.createElement("article");
+    card.className = "food-card";
+
+    card.innerHTML = `
+      <img src="${food.image}" alt="${food.name}">
+      <div class="food-body">
+        <h3>${food.name}</h3>
+        <p>${food.location}</p>
+      </div>
+    `;
+
+    foodScroll.appendChild(card);
+  });
+}
+
+function bindFoodControls() {
+  const scroll = document.getElementById("foodScroll");
+  const prev = document.getElementById("foodPrevBtn");
+  const next = document.getElementById("foodNextBtn");
+
+  if (!scroll || !prev || !next) return;
+
+  prev.addEventListener("click", () => {
+    scroll.scrollBy({ left: -320, behavior: "smooth" });
+  });
+
+  next.addEventListener("click", () => {
+    scroll.scrollBy({ left: 320, behavior: "smooth" });
   });
 }
 
