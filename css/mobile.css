@@ -1598,7 +1598,6 @@
   overflow-x: auto;
   gap: 14px;
   padding: 0 0 10px;
-  
   grid-template-columns: repeat(2, 1fr);
 }
 
