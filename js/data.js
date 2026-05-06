@@ -86,6 +86,39 @@ export const places = [
   }
 ];
 
+export const cities = [
+  {
+    id: "kuching",
+    name: "Kuching",
+    tag: "#城市散步",
+    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "miri",
+    name: "Miri",
+    tag: "#海邊夕陽",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "sibu",
+    name: "Sibu",
+    tag: "#在地美食",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "bintulu",
+    name: "Bintulu",
+    tag: "#自然慢旅",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "sarikei",
+    name: "Sarikei",
+    tag: "#小城生活",
+    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80"
+  }
+];
+
 export const moodConfig = {
   relax: {
     title: "適合放鬆的地方",
