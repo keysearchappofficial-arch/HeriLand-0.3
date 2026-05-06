@@ -149,8 +149,9 @@ function renderReviews() {
 
   reviewGrid.innerHTML = "";
 
-  reviews.forEach(review => {
+  const displayReviews = reviews.slice(0, 8);
 
+  displayReviews.forEach(review => {
     const card = document.createElement("article");
     card.className = "review-card";
 
@@ -161,17 +162,12 @@ function renderReviews() {
 
       <div class="review-body">
         <h3>${review.title}</h3>
-
-        <p>
-          ${truncateText(review.description, 20)}
-        </p>
-
+        <p>${truncateText(review.description, 20)}</p>
         <small>${review.place}</small>
       </div>
     `;
 
     reviewGrid.appendChild(card);
-
   });
 }
 
