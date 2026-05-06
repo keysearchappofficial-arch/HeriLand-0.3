@@ -1244,7 +1244,7 @@
 }
 
 .spot-sheet.show .spot-sheet-panel {
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 /* Header */
