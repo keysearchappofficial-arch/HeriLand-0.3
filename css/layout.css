@@ -31,3 +31,14 @@
 .mobile-bottom-nav {
   display: none;
 }
+
+/* =========================
+   Shared Page Container
+   給 city / event / transport 這種內頁使用
+========================= */
+
+.page-container {
+  width: min(1320px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 32px 0 90px;
+}
