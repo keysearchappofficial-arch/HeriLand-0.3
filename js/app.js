@@ -355,8 +355,7 @@ window.toggleMobileMood = toggleMobileMood;
 
 function bindMobileMenu() {
 
-  const menu =
-    document.getElementById("mobileMenu");
+const menu = document.querySelector(".mobile-menu");
 
   const openBtn =
     document.getElementById("mobileMenuBtn");
@@ -396,7 +395,9 @@ function bindMobileMenu() {
 
 }
 
-init();
+window.addEventListener("componentsReady", () => {
+  init();
+});
 
 function truncateText(text, max) {
   if (text.length <= max) return text;
