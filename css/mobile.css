@@ -220,7 +220,7 @@
   backdrop-filter: blur(18px);
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 
   z-index: 150;
   transition:
@@ -243,6 +243,7 @@
   gap: 2px;
   color: #777;
   font-size: 11px;
+  line-height: 1;
 }
 
 .mobile-bottom-nav button.active {
@@ -251,8 +252,8 @@
 }
 
 .mobile-bottom-nav svg {
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
 }
 
 /* 內容底部留白，避免最後卡片被底部導航擋住 */
