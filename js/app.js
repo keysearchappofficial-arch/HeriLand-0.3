@@ -28,10 +28,13 @@ function init() {
   bindSearch();
   initLocation();
   bindBottomNavAutoHide();
+  bindSpotControls();
 
   renderMood("relax");
   renderCities();
   renderReviews();
+  renderSpots();
+
 }
 
 function bindBottomNavAutoHide() {
@@ -168,6 +171,50 @@ function renderReviews() {
     `;
 
     reviewGrid.appendChild(card);
+  });
+}
+
+function renderSpots() {
+  const spotScroll = document.getElementById("spotScroll");
+  if (!spotScroll) return;
+
+  spotScroll.innerHTML = "";
+
+  spots.slice(0, 20).forEach(spot => {
+    const card = document.createElement("article");
+    card.className = "spot-card";
+
+    card.innerHTML = `
+      <img src="${spot.image}" alt="${spot.name}">
+      <div class="spot-body">
+        <h3>${spot.name}</h3>
+        <p>${spot.location}</p>
+      </div>
+    `;
+
+    spotScroll.appendChild(card);
+  });
+}
+
+function bindSpotControls() {
+  const scroll = document.getElementById("spotScroll");
+  const prev = document.getElementById("spotPrevBtn");
+  const next = document.getElementById("spotNextBtn");
+
+  if (!scroll || !prev || !next) return;
+
+  prev.addEventListener("click", () => {
+    scroll.scrollBy({
+      left: -320,
+      behavior: "smooth"
+    });
+  });
+
+  next.addEventListener("click", () => {
+    scroll.scrollBy({
+      left: 320,
+      behavior: "smooth"
+    });
   });
 }
 
