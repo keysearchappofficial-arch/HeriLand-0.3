@@ -1630,5 +1630,17 @@
     line-height: 1.65;
     
   }
+  
+  .spot-scroll-wrap,
+
+  .food-scroll-wrap,
+
+  .event-scroll-wrap {
+
+    padding-left: 18px;
+
+    padding-right: 18px;
+
+  
 
 }
