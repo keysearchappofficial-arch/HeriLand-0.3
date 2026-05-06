@@ -638,6 +638,11 @@
   font-size: 17px;
 }
 
+  .spot-inline-controls,
+.food-inline-controls {
+  display: none;
+}
+
   /* =========================
    Event Section - Mobile
 ========================= */
