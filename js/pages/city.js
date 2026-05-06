@@ -556,7 +556,7 @@ function renderEvents() {
 
   carousel.innerHTML = "";
 
-  events.slice(0, 3).forEach(event => {
+  events.slice(0, 2).forEach(event => {
     const card = document.createElement("article");
     card.className = "city-event-card";
 
