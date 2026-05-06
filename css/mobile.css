@@ -976,4 +976,63 @@
   line-height: 1.6;
 }
 
+  /* =========================
+   Spot Section Mobile
+========================= */
+
+.city-section {
+  margin-top: 34px;
+}
+
+.section-head {
+  margin-bottom: 16px;
+}
+
+.section-head h2 {
+  font-size: 24px;
+}
+
+.section-more-btn {
+  display: none;
+}
+
+/* 橫向滑動 */
+
+.spot-grid {
+  display: flex;
+
+  overflow-x: auto;
+
+  gap: 14px;
+
+  padding-bottom: 4px;
+
+  scrollbar-width: none;
+}
+
+.spot-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.spot-card {
+  flex: 0 0 calc(50vw - 28px);
+}
+
+.spot-image {
+  height: 170px;
+}
+
+.spot-body {
+  padding: 13px;
+}
+
+.spot-body h3 {
+  font-size: 15px;
+}
+
+.spot-body p {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 }
