@@ -1037,7 +1037,7 @@
 
 /* 卡片本體：不要太卡片感 */
 .city-spot-section .spot-card {
-  flex: 0 0 46%;
+  flex: 0 0 calc(50vw - 22px);
   min-width: 0;
 
   background: transparent;
@@ -1133,7 +1133,7 @@
 
   padding: 20px 18px 28px;
 
-  border-radius: 28px 28px 0 0;
+  border-radius: 0;
 
   transform: translateY(100%);
 }
