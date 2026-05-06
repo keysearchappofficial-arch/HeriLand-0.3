@@ -1428,9 +1428,6 @@
   overflow: hidden;
 }
 
-.food-sheet-grid .food-body {
-  padding: 10px 0 0;
-}
   .food-sheet-grid .food-body p {
   display: block;
   -webkit-line-clamp: initial;
