@@ -455,4 +455,95 @@
   color: #999;
   font-size: 12px;
 }
+
+  /* =========================
+   Spot Section - Mobile
+========================= */
+
+.spot-section {
+  margin-top: 36px;
+  padding-bottom: 16px;
+}
+
+.spot-head {
+  margin-bottom: 16px;
+}
+
+.spot-head h2 {
+  font-size: 22px;
+  letter-spacing: -0.6px;
+  line-height: 1.15;
+}
+
+.spot-head p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.spot-scroll-wrap {
+  margin-left: -18px;
+  margin-right: -18px;
+  overflow: hidden;
+}
+
+.spot-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0 18px 8px;
+  scroll-snap-type: x mandatory;
+}
+
+.spot-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.spot-card {
+  flex: 0 0 220px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255,255,255,.76);
+  border: 1px solid rgba(0,0,0,.05);
+  scroll-snap-align: start;
+}
+
+.spot-card img {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+}
+
+.spot-body {
+  padding: 12px;
+}
+
+.spot-body h3 {
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.spot-body p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.spot-controls {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spot-controls button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.82);
+  font-size: 17px;
+}
 }
