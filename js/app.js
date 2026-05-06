@@ -27,9 +27,9 @@ function init() {
   bindMoodButtons();
   bindSearch();
   initLocation();
-  bindBottomNavAutoHide();
   bindSpotControls();
   bindFoodControls();
+  bindMobileMenu();
 
   renderMood("relax");
   renderCities();
@@ -38,36 +38,6 @@ function init() {
   renderFoods();
   renderEvents();
 
-}
-
-function bindBottomNavAutoHide() {
-  const nav = document.querySelector(".mobile-bottom-nav");
-  if (!nav) return;
-
-  let lastScrollY = window.scrollY;
-  let scrollTimer = null;
-
-  window.addEventListener("scroll", () => {
-    const currentScrollY = window.scrollY;
-    const isScrollingDown = currentScrollY > lastScrollY;
-    const isNearTop = currentScrollY < 80;
-
-    if (isNearTop) {
-      nav.classList.remove("is-hidden");
-    } else if (isScrollingDown) {
-      nav.classList.add("is-hidden");
-    } else {
-      nav.classList.remove("is-hidden");
-    }
-
-    clearTimeout(scrollTimer);
-
-    scrollTimer = setTimeout(() => {
-      nav.classList.remove("is-hidden");
-    }, 420);
-
-    lastScrollY = currentScrollY;
-  }, { passive: true });
 }
 
 function renderMood(mood) {
@@ -382,6 +352,49 @@ function setText(id, value) {
 window.openDetail = openDetail;
 window.closeDetail = closeDetail;
 window.toggleMobileMood = toggleMobileMood;
+
+function bindMobileMenu() {
+
+  const menu =
+    document.getElementById("mobileMenu");
+
+  const openBtn =
+    document.getElementById("mobileMenuBtn");
+
+  const closeBtn =
+    document.getElementById("mobileMenuClose");
+
+  if (!menu || !openBtn || !closeBtn) return;
+
+  openBtn.addEventListener("click", () => {
+
+    menu.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+  });
+
+  closeBtn.addEventListener("click", () => {
+
+    menu.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+  });
+
+  menu.addEventListener("click", e => {
+
+    if (e.target === menu) {
+
+      menu.classList.remove("show");
+
+      document.body.style.overflow = "";
+
+    }
+
+  });
+
+}
 
 init();
 
