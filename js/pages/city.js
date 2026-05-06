@@ -176,6 +176,7 @@ const spots = [
 function init() {
   renderCityTabs();
   renderCity(cities[0]);
+  renderSpots();
 }
 
 /* =========================
@@ -278,3 +279,43 @@ function renderCity(city) {
 ========================= */
 
 init();
+
+function renderSpots() {
+
+  const grid =
+    document.getElementById("spotGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  spots.forEach(spot => {
+
+    const card =
+      document.createElement("article");
+
+    card.className = "spot-card";
+
+    card.innerHTML = `
+      <div class="spot-image">
+        <img src="${spot.image}" alt="${spot.title}">
+      </div>
+
+      <div class="spot-body">
+
+        <h3>${spot.title}</h3>
+
+        <p>${spot.desc}</p>
+
+        <div class="spot-meta">
+          ${spot.meta}
+        </div>
+
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+}
