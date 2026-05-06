@@ -231,6 +231,8 @@ const spots = [
 
 ];
 
+let currentSpotCount = 10;
+
 /* =========================
    Init
 ========================= */
@@ -240,7 +242,8 @@ function init() {
   
   renderCityTabs();
   renderCity(cities[0]);
-  renderSpots();
+  renderSpots(10);
+  bindSpotMore();
 }
 
 /* =========================
@@ -344,7 +347,7 @@ function renderCity(city) {
 
 init();
 
-function renderSpots() {
+function renderSpots(limit = currentSpotCount) {
 
   const grid =
     document.getElementById("spotGrid");
@@ -353,32 +356,55 @@ function renderSpots() {
 
   grid.innerHTML = "";
 
-  spots.forEach(spot => {
+  spots
+    .slice(0, limit)
+    .forEach(spot => {
 
-    const card =
-      document.createElement("article");
+      const card =
+        document.createElement("article");
 
-    card.className = "spot-card";
+      card.className = "spot-card";
 
-    card.innerHTML = `
-      <div class="spot-image">
-        <img src="${spot.image}" alt="${spot.title}">
-      </div>
-
-      <div class="spot-body">
-
-        <h3>${spot.title}</h3>
-
-        <p>${spot.desc}</p>
-
-        <div class="spot-meta">
-          ${spot.meta}
+      card.innerHTML = `
+        <div class="spot-image">
+          <img src="${spot.image}" alt="${spot.title}">
         </div>
 
-      </div>
-    `;
+        <div class="spot-body">
 
-    grid.appendChild(card);
+          <h3>${spot.title}</h3>
+
+          <p>${spot.desc}</p>
+
+          <div class="spot-meta">
+            ${spot.meta}
+          </div>
+
+        </div>
+      `;
+
+      grid.appendChild(card);
+
+    });
+
+}
+
+function bindSpotMore() {
+
+  const button =
+    document.getElementById("spotMoreBtn");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+
+    currentSpotCount += 5;
+
+    renderSpots(currentSpotCount);
+
+    if (currentSpotCount >= spots.length) {
+      button.style.display = "none";
+    }
 
   });
 
