@@ -12,6 +12,72 @@ async function loadComponent(selector, file) {
 
 }
 
-loadComponent("#navbar", "./components/navbar.html");
-loadComponent("#footer", "./components/footer.html");
-loadComponent("#mobileNav", "./components/mobile-nav.html");
+/* =========================
+   Mobile Menu
+========================= */
+
+async function renderMobileMenu() {
+
+  const target =
+    document.querySelector("#mobileMenu");
+
+  if (!target) return;
+
+  target.innerHTML = `
+    <div class="mobile-menu">
+
+      <div class="mobile-menu-panel">
+
+        <div class="mobile-menu-head">
+
+          <strong>HeriLand</strong>
+
+          <button
+            id="mobileMenuClose"
+            type="button"
+          >
+            ×
+          </button>
+
+        </div>
+
+        <div id="mobileNav"></div>
+
+        <div class="mobile-menu-ai">
+
+          <small>AI Guide</small>
+
+          <p>
+            我會依照你現在的位置、時間和狀態，
+            幫你推薦現在適合的砂拉越體驗。
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  await loadComponent(
+    "#mobileNav",
+    "./components/mobile-nav.html"
+  );
+
+}
+
+/* =========================
+   Shared Components
+========================= */
+
+loadComponent(
+  "#navbar",
+  "./components/navbar.html"
+);
+
+loadComponent(
+  "#footer",
+  "./components/footer.html"
+);
+
+renderMobileMenu();
