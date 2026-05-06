@@ -232,6 +232,80 @@ export const reviews = [
   }
 ];
 
+export const spots = [
+  {
+    name: "Kuching Waterfront",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Bako National Park",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Miri Beach",
+    location: "Miri",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Kuching Waterfront",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Bako National Park",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Kuching Waterfront",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Bako National Park",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Kuching Waterfront",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Bako National Park",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Kuching Waterfront",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Bako National Park",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Kuching Waterfront",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Bako National Park",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Niah Caves",
+    location: "Miri",
+    image: "https://images.unsplash.com/photo-1517821360905-7f294d4af577?auto=format&fit=crop&w=900&q=80"
+  }
+  // 之後最多放 20 個
+];
+
 export const moodConfig = {
   relax: {
     title: "適合放鬆的地方",
