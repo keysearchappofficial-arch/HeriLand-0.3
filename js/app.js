@@ -1,4 +1,4 @@
-import { places, moodConfig, cities } from "./data.js";
+import { places, moodConfig, cities, reviews } from "./data.js";
 
 let currentMood = "relax";
 let currentPlaces = [];
@@ -28,8 +28,10 @@ function init() {
   bindSearch();
   initLocation();
   bindBottomNavAutoHide();
+
   renderMood("relax");
   renderCities();
+  renderReviews();
 }
 
 function bindBottomNavAutoHide() {
@@ -141,6 +143,38 @@ function renderCities() {
   });
 }
 
+function renderReviews() {
+  const reviewGrid = document.getElementById("reviewGrid");
+  if (!reviewGrid) return;
+
+  reviewGrid.innerHTML = "";
+
+  reviews.forEach(review => {
+
+    const card = document.createElement("article");
+    card.className = "review-card";
+
+    card.innerHTML = `
+      <div class="review-image">
+        <img src="${review.image}" alt="${review.title}">
+      </div>
+
+      <div class="review-body">
+        <h3>${review.title}</h3>
+
+        <p>
+          ${truncateText(review.description, 20)}
+        </p>
+
+        <small>${review.place}</small>
+      </div>
+    `;
+
+    reviewGrid.appendChild(card);
+
+  });
+}
+
 function openDetail(index) {
   const place = currentPlaces[index];
   if (!place) return;
@@ -240,3 +274,8 @@ window.closeDetail = closeDetail;
 window.toggleMobileMood = toggleMobileMood;
 
 init();
+
+function truncateText(text, max) {
+  if (text.length <= max) return text;
+  return text.slice(0, max) + "...";
+}
