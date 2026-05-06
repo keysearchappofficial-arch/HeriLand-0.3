@@ -1,58 +1,180 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeriLand Cities</title>
 
-  <title>HeriLand City</title>
-
-  <link rel="stylesheet" href="./css/base.css">
-  <link rel="stylesheet" href="./css/layout.css">
-  <link rel="stylesheet" href="./css/pages/city.css">
-  <link rel="stylesheet" href="./css/mobile.css">
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/pages/city.css" />
+  <link rel="stylesheet" href="./css/mobile.css" />
 </head>
 
 <body>
 
-  <main class="city-page">
+<main class="city-page">
 
-    <header class="city-nav">
-  <a class="city-logo" href="./index.html">
-    <span>H</span>
-    <strong>HeriLand</strong>
-  </a>
+  <!-- Desktop / Page Top Nav -->
+  <header class="city-nav">
+    <a class="city-logo" href="./index.html">
+      <span>H</span>
+      <strong>HeriLand</strong>
+    </a>
 
-  <div class="city-search">
-    <svg viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="7"></circle>
-      <path d="M20 20l-3.5-3.5"></path>
-    </svg>
-    <input id="citySearchInput" placeholder="搜尋城市、景點、美食..." />
-  </div>
+    <div class="city-search">
+      <svg viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M20 20l-3.5-3.5"></path>
+      </svg>
+      <input id="citySearchInput" placeholder="搜尋城市、景點、美食..." />
+    </div>
 
-  <nav class="city-nav-links">
-    <a href="./index.html">探索</a>
-    <a class="active" href="./city.html">城市</a>
-    <a href="#">交通</a>
-    <a href="#">活動</a>
-    <a href="#">AI Guide</a>
-  </nav>
-</header>
-    
-    <section class="city-top">
+    <nav class="city-nav-links">
+      <a href="./index.html">探索</a>
+      <a class="active" href="./city.html">城市</a>
+      <a href="./transport.html">交通</a>
+      <a href="./index.html#eventSection">活動</a>
+      <a href="./index.html#aiGuide">AI Guide</a>
+    </nav>
+  </header>
 
-      <div class="city-top-head">
-        <h1>Explore Sarawak</h1>
-        <p>選擇一個城市開始探索</p>
+  <!-- City Top -->
+  <section class="city-top">
+    <div class="city-top-head">
+      <h1>Explore Sarawak</h1>
+      <p>選擇一個城市開始探索</p>
+    </div>
+
+    <div class="city-tabs" id="cityTabs"></div>
+  </section>
+
+  <!-- Current City Hero -->
+  <section class="city-hero">
+    <img id="cityHeroImage" src="" alt="">
+
+    <div class="city-hero-content">
+      <small>HeriLand City Guide</small>
+      <h2 id="cityHeroTitle">Kuching</h2>
+      <p id="cityHeroDesc">
+        從城市散步、美食、景點和活動開始探索砂拉越。
+      </p>
+    </div>
+  </section>
+
+  <!-- AI City Hint -->
+  <section class="city-ai-note">
+    <div>
+      <small>AI Guide</small>
+      <p id="cityAiText">
+        第一次來 Kuching？建議先從河邊、老街和在地美食開始。
+      </p>
+    </div>
+  </section>
+
+  <!-- City Sections Placeholder -->
+  <section class="city-content-grid">
+
+    <article class="city-content-card">
+      <h3>景點推薦</h3>
+      <p id="citySpotText">適合先從 Waterfront 和城市散步路線開始。</p>
+      <button>查看景點</button>
+    </article>
+
+    <article class="city-content-card">
+      <h3>美食推薦</h3>
+      <p id="cityFoodText">找一間在地 Laksa 或 Kolo Mee，先吃一頓穩的。</p>
+      <button>查看美食</button>
+    </article>
+
+    <article class="city-content-card">
+      <h3>近期活動</h3>
+      <p id="cityEventText">看看這個城市最近有什麼市集、展覽或夜間活動。</p>
+      <button>查看活動</button>
+    </article>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer city-footer">
+
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <div class="footer-logo">H</div>
+
+        <div>
+          <h3>HeriLand</h3>
+          <p>Made for exploring Sarawak slowly.</p>
+        </div>
       </div>
 
-      <div class="city-tabs" id="cityTabs"></div>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Tiktok</a>
+        <a href="#">Maps</a>
+      </div>
 
-    </section>
+    </div>
 
-  </main>
+    <div class="footer-bottom">
+      <div class="footer-cities">
+        Kuching · Miri · Sibu · Bintulu
+      </div>
 
-  <script type="module" src="./js/pages/city.js"></script>
+      <small>© 2026 HeriLand</small>
+    </div>
 
+  </footer>
+
+</main>
+
+<!-- Mobile Bottom Nav -->
+<nav class="mobile-bottom-nav">
+
+  <a href="./index.html">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 11l8-7 8 7v9H4z"></path>
+    </svg>
+    探索
+  </a>
+
+  <a href="./transport.html">
+    <svg viewBox="0 0 24 24">
+      <path d="M3 17h18"></path>
+      <path d="M6 17l1.5-5h9L18 17"></path>
+      <circle cx="7.5" cy="18.5" r="1.5"></circle>
+      <circle cx="16.5" cy="18.5" r="1.5"></circle>
+    </svg>
+    交通
+  </a>
+
+  <a href="./index.html#eventSection">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3v18"></path>
+      <path d="M5 8h14"></path>
+      <path d="M5 16h14"></path>
+    </svg>
+    活動
+  </a>
+
+  <a href="./index.html#aiGuide">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8L12 3z"></path>
+    </svg>
+    AI
+  </a>
+
+  <a href="#">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4"></circle>
+      <path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"></path>
+    </svg>
+    我的
+  </a>
+
+</nav>
+
+<script type="module" src="./js/pages/city.js"></script>
 </body>
 </html>
