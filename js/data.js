@@ -329,6 +329,33 @@ export const foods = [
   }
 ];
 
+export const events = [
+  {
+    title: "Kuching Waterfront Night Walk",
+    date: "每週五・晚上 7:00",
+    location: "Kuching Waterfront",
+    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    title: "Sarawak Food Weekend",
+    date: "本週末",
+    location: "Kuching City Center",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    title: "Miri Sunset Market",
+    date: "週六・下午 5:00",
+    location: "Miri",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    title: "Rainforest Culture Walk",
+    date: "假日限定",
+    location: "Sarawak",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1000&q=80"
+  }
+];
+
 export const moodConfig = {
   relax: {
     title: "適合放鬆的地方",
