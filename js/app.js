@@ -1,4 +1,4 @@
-import { places, moodConfig, cities, reviews, spots, foods } from "./data.js";
+import { places, moodConfig, cities, reviews, spots, foods, events } from "./data.js";
 
 let currentMood = "relax";
 let currentPlaces = [];
@@ -36,6 +36,7 @@ function init() {
   renderReviews();
   renderSpots();
   renderFoods();
+  renderEvents();
 
 }
 
@@ -255,6 +256,32 @@ function bindFoodControls() {
 
   next.addEventListener("click", () => {
     scroll.scrollBy({ left: 320, behavior: "smooth" });
+  });
+}
+
+function renderEvents() {
+  const eventGrid = document.getElementById("eventGrid");
+  if (!eventGrid) return;
+
+  eventGrid.innerHTML = "";
+
+  events.forEach(event => {
+    const card = document.createElement("article");
+    card.className = "event-card";
+
+    card.innerHTML = `
+      <div class="event-image">
+        <img src="${event.image}" alt="${event.title}">
+      </div>
+
+      <div class="event-body">
+        <h3>${event.title}</h3>
+        <p>${event.date}</p>
+        <small>${event.location}</small>
+      </div>
+    `;
+
+    eventGrid.appendChild(card);
   });
 }
 
