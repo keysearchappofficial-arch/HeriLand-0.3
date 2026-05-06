@@ -494,3 +494,97 @@
   font-weight: 850;
   letter-spacing: -0.8px;
 }
+
+/* =========================
+   Review Section - Desktop
+========================= */
+
+.review-section {
+  margin-top: 46px;
+}
+
+.review-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.review-head h2 {
+  font-size: 28px;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.review-head p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.review-more-btn {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.72);
+  border-radius: 999px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.review-card {
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.05);
+  transition: transform .25s var(--ease), background .25s var(--ease);
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  background: #fff;
+}
+
+.review-image {
+  height: 145px;
+}
+
+.review-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-body {
+  padding: 13px;
+}
+
+.review-body h3 {
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.2px;
+  margin-bottom: 8px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-body p {
+  color: #666;
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+
+.review-body small {
+  color: #999;
+  font-size: 12px;
+}
