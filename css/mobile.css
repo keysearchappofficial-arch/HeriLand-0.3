@@ -1157,6 +1157,8 @@
 
   .spot-sheet-grid .spot-card {
   flex: initial;
+  background: transparent;
+  border: none;
 }
 
 }
