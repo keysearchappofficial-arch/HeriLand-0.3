@@ -301,6 +301,7 @@ function init() {
 
   renderEvents();
   bindEventControls();
+  bindEventAutoSlide();
 }
 
 /* =========================
@@ -596,6 +597,28 @@ function bindEventControls() {
       behavior: "smooth"
     });
   });
+}
+
+function bindEventAutoSlide() {
+  const carousel = document.getElementById("eventCarousel");
+  if (!carousel) return;
+
+  const isMobile = window.matchMedia("(max-width: 820px)").matches;
+  if (!isMobile) return;
+
+  let index = 0;
+
+  setInterval(() => {
+    const cards = carousel.querySelectorAll(".city-event-card");
+    if (!cards.length) return;
+
+    index = (index + 1) % cards.length;
+
+    carousel.scrollTo({
+      left: cards[index].offsetLeft - 18,
+      behavior: "smooth"
+    });
+  }, 3800);
 }
 
 /* =========================
