@@ -302,7 +302,7 @@ function bindTypeChips() {
 function bindMobileMenu() {
 
   const menu =
-    document.getElementById("mobileMenu");
+    document.querySelector(".mobile-menu");
 
   const openBtn =
     document.getElementById("mobileMenuBtn");
@@ -313,21 +313,20 @@ function bindMobileMenu() {
   if (!menu || !openBtn || !closeBtn) return;
 
   openBtn.addEventListener("click", () => {
-
     menu.classList.add("show");
-
-    document.body.style.overflow =
-      "hidden";
-
+    document.body.style.overflow = "hidden";
   });
 
   closeBtn.addEventListener("click", () => {
-
     menu.classList.remove("show");
+    document.body.style.overflow = "";
+  });
 
-    document.body.style.overflow =
-      "";
-
+  menu.addEventListener("click", e => {
+    if (e.target === menu) {
+      menu.classList.remove("show");
+      document.body.style.overflow = "";
+    }
   });
 
 }
@@ -336,4 +335,6 @@ function bindMobileMenu() {
    Start
 ========================= */
 
-init();
+window.addEventListener("componentsReady", () => {
+  init();
+});
