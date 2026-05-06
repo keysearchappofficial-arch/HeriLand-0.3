@@ -1204,6 +1204,7 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  padding:10px;
 }
 
 .city-spot-section .spot-meta {
