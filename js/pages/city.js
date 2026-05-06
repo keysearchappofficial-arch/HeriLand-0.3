@@ -158,6 +158,68 @@ const spots = [
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
     meta: "River Side"
   },
+  {
+    title: "Kuching Waterfront",
+    desc: "適合傍晚慢慢散步，看河景和城市燈光。",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    meta: "Kuching"
+  },
+
+  {
+    title: "Santubong Beach",
+    desc: "比較安靜的海邊，適合放空。",
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    meta: "Santubong"
+  },
+
+  {
+    title: "Old Town Street",
+    desc: "適合慢慢走和拍照的老街區。",
+    image:
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+    meta: "Old Town"
+  },
+
+  {
+    title: "River Sunset Point",
+    desc: "黃昏的光線會讓整個河邊很舒服。",
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    meta: "River Side"
+  },
+  {
+    title: "Kuching Waterfront",
+    desc: "適合傍晚慢慢散步，看河景和城市燈光。",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    meta: "Kuching"
+  },
+
+  {
+    title: "Santubong Beach",
+    desc: "比較安靜的海邊，適合放空。",
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    meta: "Santubong"
+  },
+
+  {
+    title: "Old Town Street",
+    desc: "適合慢慢走和拍照的老街區。",
+    image:
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+    meta: "Old Town"
+  },
+
+  {
+    title: "River Sunset Point",
+    desc: "黃昏的光線會讓整個河邊很舒服。",
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    meta: "River Side"
+  },
 
   {
     title: "Hidden Riverside",
