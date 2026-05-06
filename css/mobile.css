@@ -1176,7 +1176,7 @@
 
 /* 文字 */
 .city-spot-section .spot-body {
-  padding: 18px;
+  padding: 10px;
 }
 
 .city-spot-section .spot-body h3 {
@@ -1343,7 +1343,7 @@
 }
 
 .city-food-section .food-body {
-  padding: 18px;
+  padding: 10px;
 }
 
 .city-food-section .food-body h3 {
@@ -1593,43 +1593,48 @@
 
   /* Grid */
 
+/* =========================
+   Mobile Event Grid
+========================= */
+
 .event-grid {
-  display: flex;
-  overflow-x: auto;
-  gap: 14px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+
+  padding: 0;
+
+  overflow: visible;
 }
-
-  .event-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Card */
 
 .event-card {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
-  grid-template-columns: repeat(2, 1fr);
+  flex: initial;
+  width: 100%;
+  min-width: 0;
 }
 
-  .event-card-image {
-    aspect-ratio: 1 / 1.04;
-    border-radius: 24px;
-  }
+.event-card-image {
+  aspect-ratio: 1 / 1.08;
+  border-radius: 20px;
+}
 
-  .event-card-body {
-    padding: 12px;
-  }
+.event-card-body {
+  padding-top: 10px;
+}
 
-  .event-card-body h3 {
-    font-size: 22px;
-  }
+.event-card-body h3 {
+  font-size: 17px;
+  line-height: 1.22;
+  letter-spacing: -0.5px;
+}
 
-  .event-card-body p {
-    font-size: 13px;
-    line-height: 1.65;
-    
-  }
+.event-card-body p {
+  font-size: 12px;
+  line-height: 1.55;
+
+  -webkit-line-clamp: 2;
+}
   
 }
