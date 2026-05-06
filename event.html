@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HeriLand Events</title>
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/pages/event.css" />
+  <link rel="stylesheet" href="./css/mobile.css" />
+</head>
+
+<body>
+
+<div id="navbar"></div>
+
+<main class="event-page">
+
+  <!-- Hero -->
+  <section class="event-hero">
+
+    <img
+      src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1600&q=80"
+      alt=""
+    >
+
+    <div class="event-hero-content">
+
+      <small>Tonight in Sarawak</small>
+
+      <h1>
+        今晚比較適合
+        <br>
+        慢慢逛。
+      </h1>
+
+      <p>
+        河邊、市集、夜晚燈光和比較有生活感的活動。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- Chips -->
+  <section class="event-chips">
+
+    <button class="active">全部</button>
+    <button>夜市</button>
+    <button>Live</button>
+    <button>市集</button>
+    <button>文化</button>
+    <button>戶外</button>
+
+  </section>
+
+  <!-- Featured -->
+  <section class="featured-event">
+
+    <div class="featured-event-image">
+      <img
+        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80"
+        alt=""
+      >
+    </div>
+
+    <div class="featured-event-content">
+
+      <small>Tonight Highlight</small>
+
+      <h2>
+        Kuching Waterfront Night Walk
+      </h2>
+
+      <p>
+        比起白天，晚上更適合沿著河邊慢慢走。
+        有街頭表演、小吃和比較舒服的溫度。
+      </p>
+
+      <div class="featured-meta">
+        晚上 7:00 ・ Kuching Waterfront
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Event Carousel -->
+  <section class="event-section">
+
+    <div class="section-head">
+
+      <div>
+        <small>Tonight</small>
+        <h2>今晚推薦</h2>
+      </div>
+
+    </div>
+
+    <div class="event-carousel" id="eventCarousel"></div>
+
+  </section>
+
+  <!-- AI Note -->
+  <section class="event-ai-note">
+
+    <small>AI Guide</small>
+
+    <p>
+      今天晚上比較適合河邊、市集和室外活動，
+      9 點後人潮會開始變多。
+    </p>
+
+  </section>
+
+</main>
+
+<div id="footer"></div>
+<div id="mobileMenu"></div>
+
+<script type="module" src="./js/components.js"></script>
+<script type="module" src="./js/pages/event.js"></script>
+
+</body>
+</html>
