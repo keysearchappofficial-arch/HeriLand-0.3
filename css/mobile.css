@@ -1504,4 +1504,136 @@
   line-height: 1.55;
 }
 
+.event-page {
+  padding-top: 0;
+  padding-bottom: 56px;
+  overflow-x: hidden;
+}
+
+  /* Hero */
+
+  .event-hero {
+    height: 500px;
+    border-radius: 0;
+  }
+
+  .event-hero-content {
+    left: 22px;
+    right: 22px;
+    bottom: 28px;
+  }
+
+  .event-hero-content h1 {
+    font-size: 42px;
+    line-height: 1.02;
+    letter-spacing: -1.8px;
+  }
+
+  .event-hero-content p {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* Tabs */
+
+  .event-tabs {
+    gap: 10px;
+
+    overflow-x: auto;
+
+    margin-top: 24px;
+
+    padding: 0 0 4px;
+
+    scrollbar-width: none;
+  }
+
+  .event-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .event-tabs button {
+    flex: 0 0 auto;
+
+    padding: 11px 16px;
+
+    font-size: 14px;
+  }
+
+  /* Chips */
+
+.event-chips {
+  margin-top: 14px;
+  padding: 0 0 4px;
+}
+
+  /* AI */
+
+  .event-ai-note {
+    margin: 28px 0 0;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .event-ai-note p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Section */
+
+  .event-list-section {
+    margin-top: 42px;
+  }
+
+.section-head {
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+  .section-head h2 {
+    font-size: 30px;
+  }
+
+  /* Grid */
+
+.event-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+  padding: 0 0 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+  .event-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Card */
+
+.event-card {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+  .event-card-image {
+    aspect-ratio: 1 / 1.04;
+    border-radius: 24px;
+  }
+
+  .event-card-body {
+    padding-top: 12px;
+  }
+
+  .event-card-body h3 {
+    font-size: 22px;
+  }
+
+  .event-card-body p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
 }
