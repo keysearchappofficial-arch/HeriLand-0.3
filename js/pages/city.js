@@ -238,16 +238,14 @@ let showAllSpots = false;
 ========================= */
 
 function init() {
-
   bindMobileMenu();
 
   renderCityTabs();
   renderCity(cities[0]);
-
   renderSpots();
 
   bindSpotMore();
-
+  bindSpotSheet();
 }
 
 /* =========================
@@ -397,25 +395,12 @@ function renderSpots() {
 }
 
 function bindSpotMore() {
-
-  const button =
-    document.getElementById("spotMoreBtn");
-
+  const button = document.getElementById("spotMoreBtn");
   if (!button) return;
 
   button.addEventListener("click", () => {
-
-    showAllSpots = !showAllSpots;
-
-    renderSpots();
-
-    button.textContent =
-      showAllSpots
-        ? "收起"
-        : "更多";
-
+    openSpotSheet();
   });
-
 }
 
 /* =========================
@@ -463,4 +448,61 @@ function bindMobileMenu() {
 
   });
 
+}
+
+function openSpotSheet() {
+  const sheet = document.getElementById("spotSheet");
+  if (!sheet) return;
+
+  renderSpotSheet();
+
+  sheet.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeSpotSheet() {
+  const sheet = document.getElementById("spotSheet");
+  if (!sheet) return;
+
+  sheet.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+function renderSpotSheet() {
+  const grid = document.getElementById("spotSheetGrid");
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  spots.forEach(spot => {
+    const card = document.createElement("article");
+    card.className = "spot-card";
+
+    card.innerHTML = `
+      <div class="spot-image">
+        <img src="${spot.image}" alt="${spot.title}">
+      </div>
+
+      <div class="spot-body">
+        <h3>${spot.title}</h3>
+        <p>${spot.desc}</p>
+        <div class="spot-meta">${spot.meta}</div>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function bindSpotSheet() {
+  const closeBtn = document.getElementById("spotSheetClose");
+  const backdrop = document.getElementById("spotSheetBackdrop");
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeSpotSheet);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener("click", closeSpotSheet);
+  }
 }
