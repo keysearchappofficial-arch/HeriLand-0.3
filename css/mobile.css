@@ -1624,7 +1624,7 @@
   }
 
   .event-card-body {
-    padding-top: 12px;
+    padding: 12px;
   }
 
   .event-card-body h3 {
@@ -1634,6 +1634,7 @@
   .event-card-body p {
     font-size: 13px;
     line-height: 1.65;
+    
   }
 
 }
