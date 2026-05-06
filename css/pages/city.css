@@ -118,16 +118,25 @@
    City Tabs
 ========================= */
 
+/* =========================
+   City Tabs
+========================= */
+
 .city-tabs {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+
   gap: 14px;
+
+  margin-top: 18px;
 }
 
 .city-tab {
   height: 56px;
-  border-radius: 18px;
+
   border: 1px solid rgba(0,0,0,.06);
+  border-radius: 18px;
+
   background: rgba(255,255,255,.72);
 
   display: flex;
@@ -136,11 +145,12 @@
 
   font-size: 15px;
   font-weight: 800;
+
   cursor: pointer;
 
   transition:
-    background .2s var(--ease),
     transform .2s var(--ease),
+    background .2s var(--ease),
     color .2s var(--ease);
 }
 
