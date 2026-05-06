@@ -395,9 +395,15 @@ const menu = document.querySelector(".mobile-menu");
 
 }
 
-window.addEventListener("componentsReady", () => {
+let appStarted = false;
+
+function startApp() {
+  if (appStarted) return;
+  appStarted = true;
   init();
-});
+}
+
+window.addEventListener("componentsReady", startApp);
 
 function truncateText(text, max) {
   if (text.length <= max) return text;
