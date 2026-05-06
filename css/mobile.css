@@ -1597,8 +1597,8 @@
   display: flex;
   overflow-x: auto;
   gap: 14px;
-  padding: 0 0 10px;
-  grid-template-columns: repeat(2, 1fr);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
   .event-grid::-webkit-scrollbar {
@@ -1610,6 +1610,7 @@
 .event-card {
   flex: 0 0 100%;
   scroll-snap-align: start;
+  grid-template-columns: repeat(2, 1fr);
 }
 
   .event-card-image {
