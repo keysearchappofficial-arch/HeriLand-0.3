@@ -203,42 +203,62 @@
     padding: 4px 6px;
   }
 
-  .mobile-bottom-nav {
-    position: fixed;
-    left: 50%;
-    bottom: 14px;
-    transform: translateX(-50%);
-    width: calc(100% - 36px);
-    max-width: 430px;
-    height: 62px;
-    border-radius: 24px;
-    background: rgba(255,255,255,.9);
-    border: 1px solid rgba(0,0,0,.08);
-    backdrop-filter: blur(18px);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    z-index: 150;
-  }
+/* Bottom Nav：iOS App-style */
+.mobile-bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
 
-  .mobile-bottom-nav button {
-    border: none;
-    background: transparent;
-    display: grid;
-    place-items: center;
-    gap: 2px;
-    color: #777;
-    font-size: 11px;
-  }
+  width: calc(100% - 36px);
+  max-width: 430px;
+  height: 62px;
 
-  .mobile-bottom-nav button.active {
-    color: #111;
-    font-weight: 850;
-  }
+  border-radius: 24px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.08);
+  backdrop-filter: blur(18px);
 
-  .mobile-bottom-nav svg {
-    width: 20px;
-    height: 20px;
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  z-index: 150;
+  transition:
+    transform .28s var(--ease),
+    opacity .28s var(--ease);
+}
+
+/* 滾動時收起 */
+.mobile-bottom-nav.is-hidden {
+  transform: translateX(-50%) translateY(calc(90px + env(safe-area-inset-bottom)));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-bottom-nav button {
+  border: none;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  color: #777;
+  font-size: 11px;
+}
+
+.mobile-bottom-nav button.active {
+  color: #111;
+  font-weight: 850;
+}
+
+.mobile-bottom-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 內容底部留白，避免最後卡片被底部導航擋住 */
+.main {
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+}
 
   .detail-gallery {
     height: 360px;
