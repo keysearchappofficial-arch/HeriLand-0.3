@@ -373,30 +373,6 @@ function renderCity(city) {
     aiText.textContent = city.ai;
   }
 
-  /* Spot */
-  const spotText =
-    document.getElementById("citySpotText");
-
-  if (spotText) {
-    spotText.textContent = city.spot;
-  }
-
-  /* Food */
-  const foodText =
-    document.getElementById("cityFoodText");
-
-  if (foodText) {
-    foodText.textContent = city.food;
-  }
-
-  /* Event */
-  const eventText =
-    document.getElementById("cityEventText");
-
-  if (eventText) {
-    eventText.textContent = city.event;
-  }
-
 }
 
 /* =========================
