@@ -192,8 +192,29 @@
 
 .desktop-top {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 24px;
   margin-bottom: 22px;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+}
+
+.desktop-nav a {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a.active {
+  color: #111;
 }
 
 .search-box {
