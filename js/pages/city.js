@@ -379,7 +379,9 @@ function renderCity(city) {
    Start
 ========================= */
 
-init();
+window.addEventListener("componentsReady", () => {
+  init();
+});
 
 function renderSpots() {
 
