@@ -603,8 +603,7 @@ function bindEventAutoSlide() {
 
 function bindMobileMenu() {
 
-  const menu =
-    document.getElementById("mobileMenu");
+const menu = document.querySelector(".mobile-menu");
 
   const openBtn =
     document.getElementById("mobileMenuBtn");
