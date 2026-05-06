@@ -1224,61 +1224,57 @@
    Spot Sheet - Mobile
 ========================= */
 
-/* 全部景點頁：手機版滿版 */
 .spot-sheet-panel {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: fixed;
+
+  inset: 0;
 
   width: 100%;
   height: 100vh;
 
   padding: 22px 18px 40px;
 
-  border-radius: 0;
   background: #f6f5f1;
 
-  transform: translateY(100%);
+  border-radius: 0;
+
   overflow-y: auto;
+
+  transform: translateY(100%);
 }
 
-  .spot-sheet.show .spot-sheet-panel {
+.spot-sheet.show .spot-sheet-panel {
   transform: translateY(0);
 }
+
+/* Header */
 
 .spot-sheet-head {
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 10;
 
   background: #f6f5f1;
+
   padding-bottom: 16px;
   margin-bottom: 18px;
 }
 
+/* Grid */
+
 .spot-sheet-grid {
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
+
   gap: 14px;
 }
 
+/* 卡片 */
+
 .spot-sheet-grid .spot-card {
-  flex: initial;
   width: 100%;
-  background: transparent;
-  border: none;
-}
-
-.spot-sheet-grid .spot-image {
-  aspect-ratio: 1 / 1.08;
-  height: auto;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.spot-sheet-grid .spot-body {
-  padding: 10px 0 0;
+  flex: initial;
 }
 
 }
