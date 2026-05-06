@@ -727,4 +727,69 @@
   color: #999;
   font-size: 12px;
 }
+
+  /* =========================
+   Footer - Mobile
+========================= */
+
+.site-footer {
+  margin-top: 54px;
+  padding: 42px 0 120px;
+}
+
+.footer-inner {
+  display: block;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  font-size: 20px;
+}
+
+.footer-brand h3 {
+  font-size: 22px;
+  letter-spacing: -0.6px;
+}
+
+.footer-brand p {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.footer-links {
+  margin-top: 22px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 13px;
+}
+
+.footer-bottom {
+  margin-top: 28px;
+  padding-top: 18px;
+
+  display: block;
+}
+
+.footer-cities {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.footer-bottom small {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+}
 }
