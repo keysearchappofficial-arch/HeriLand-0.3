@@ -689,7 +689,13 @@
   gap: 14px;
 }
 
+/* =========================
+   Event Section - Mobile Fix
+   手機版：圖片在上、文字在下
+========================= */
+
 .event-card {
+  display: block;
   overflow: hidden;
   border-radius: 22px;
   background: rgba(255,255,255,.76);
@@ -697,6 +703,7 @@
 }
 
 .event-image {
+  width: 100%;
   height: 120px;
 }
 
