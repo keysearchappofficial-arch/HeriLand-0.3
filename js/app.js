@@ -27,7 +27,38 @@ function init() {
   bindMoodButtons();
   bindSearch();
   initLocation();
+  bindBottomNavAutoHide();
   renderMood("relax");
+}
+
+function bindBottomNavAutoHide() {
+  const nav = document.querySelector(".mobile-bottom-nav");
+  if (!nav) return;
+
+  let lastScrollY = window.scrollY;
+  let scrollTimer = null;
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    const isScrollingDown = currentScrollY > lastScrollY;
+    const isNearTop = currentScrollY < 80;
+
+    if (isNearTop) {
+      nav.classList.remove("is-hidden");
+    } else if (isScrollingDown) {
+      nav.classList.add("is-hidden");
+    } else {
+      nav.classList.remove("is-hidden");
+    }
+
+    clearTimeout(scrollTimer);
+
+    scrollTimer = setTimeout(() => {
+      nav.classList.remove("is-hidden");
+    }, 420);
+
+    lastScrollY = currentScrollY;
+  }, { passive: true });
 }
 
 function renderMood(mood) {
