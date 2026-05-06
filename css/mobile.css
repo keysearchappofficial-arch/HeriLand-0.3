@@ -805,8 +805,6 @@
    City Page - Mobile
 ========================= */
 
-@media (max-width: 820px) {
-
   .city-page {
     width: calc(100% - 36px);
     padding: 28px 0 120px;
@@ -842,5 +840,32 @@
     white-space: nowrap;
   }
 
+  /* City Nav - Mobile */
+
+.city-nav {
+  display: block;
+  margin-bottom: 24px;
 }
+
+.city-logo {
+  margin-bottom: 16px;
+}
+
+.city-search {
+  max-width: none;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.city-nav-links {
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+
+.city-nav-links::-webkit-scrollbar {
+  display: none;
+}
+
 }
