@@ -1035,4 +1035,41 @@
   line-height: 1.55;
 }
 
+  /* =========================
+   Spot Sheet - Mobile
+========================= */
+
+.spot-sheet-panel {
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 86vh;
+
+  padding: 20px 18px 28px;
+
+  border-radius: 28px 28px 0 0;
+
+  transform: translateY(100%);
+}
+
+.spot-sheet.show .spot-sheet-panel {
+  transform: translateY(0);
+}
+
+.spot-sheet-head {
+  margin-bottom: 18px;
+}
+
+.spot-sheet-head h2 {
+  font-size: 26px;
+}
+
+.spot-sheet-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
 }
