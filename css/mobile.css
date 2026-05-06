@@ -994,53 +994,128 @@
   margin-top: 34px;
 }
 
-.section-head {
+.city-spot-section .section-head {
   margin-bottom: 16px;
 }
 
-.section-head h2 {
+.city-spot-section .section-head h2 {
   font-size: 24px;
+  letter-spacing: -0.6px;
 }
 
-/* 城市頁景點：手機保留橫向滑動 */
+.city-spot-section .more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-.spot-grid {
+  border: none;
+  background: transparent;
+
+  color: #777;
+  font-size: 14px;
+  font-weight: 850;
+
+  padding: 4px 0;
+}
+
+/* 城市頁景點：手機橫向滑動 */
+
+.city-spot-section .spot-grid {
   display: flex;
   overflow-x: auto;
   gap: 14px;
-  padding-bottom: 4px;
+
+  padding-bottom: 8px;
+
   scrollbar-width: none;
+  scroll-snap-type: x mandatory;
 }
 
-.spot-grid::-webkit-scrollbar {
+.city-spot-section .spot-grid::-webkit-scrollbar {
   display: none;
 }
 
-.spot-grid .spot-card {
-  flex: 0 0 calc(50vw - 28px);
+/* 卡片本體：不要太卡片感 */
+.city-spot-section .spot-card {
+  flex: 0 0 46%;
+  min-width: 0;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
+
+  overflow: visible;
+  scroll-snap-align: start;
 }
 
-.spot-image {
-  height: 170px;
+/* 圖片 */
+.city-spot-section .spot-image {
+  position: relative;
+  height: auto;
+  aspect-ratio: 1 / 1.08;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  background: #ddd;
 }
 
-.spot-image img {
+.city-spot-section .spot-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.16),
+    transparent 58%
+  );
+}
+
+.city-spot-section .spot-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.spot-body {
-  padding: 13px 0 0;
+/* 文字 */
+.city-spot-section .spot-body {
+  padding: 10px 0 0;
 }
 
-.spot-body h3 {
-  font-size: 15px;
+.city-spot-section .spot-body h3 {
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: -0.25px;
+  font-weight: 820;
+
+  margin-bottom: 6px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.spot-body p {
-  font-size: 13px;
-  line-height: 1.55;
+.city-spot-section .spot-body p {
+  color: #6f6f6f;
+  font-size: 12px;
+  line-height: 1.5;
+
+  min-height: 36px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.city-spot-section .spot-meta {
+  margin-top: 7px;
+
+  color: #999;
+  font-size: 11px;
+  font-weight: 650;
 }
 
   /* =========================
