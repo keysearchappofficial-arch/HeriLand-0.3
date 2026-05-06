@@ -1436,4 +1436,60 @@
   min-height: auto;
 }
 
+  /* =========================
+   City Event Section - Mobile
+========================= */
+
+.city-event-section {
+  margin-top: 42px;
+}
+
+.city-event-section .section-head {
+  padding-left: 18px;
+  padding-right: 18px;
+  margin-bottom: 16px;
+}
+
+.city-event-section .section-head h2 {
+  font-size: 24px;
+}
+
+.event-controls button {
+  width: 38px;
+  height: 38px;
+}
+
+.event-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+
+  padding: 0 18px 8px;
+
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.event-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.city-event-card {
+  flex: 0 0 78%;
+  scroll-snap-align: start;
+  border-radius: 22px;
+}
+
+.city-event-image {
+  height: 170px;
+}
+
+.city-event-body {
+  padding: 14px;
+}
+
+.city-event-body h3 {
+  font-size: 17px;
+}
+
 }
