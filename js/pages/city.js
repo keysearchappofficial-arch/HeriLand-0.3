@@ -258,6 +258,27 @@ const foods = [
   }
 ];
 
+const events = [
+  {
+    title: "Kuching Waterfront Night Walk",
+    date: "每週五・晚上 7:00",
+    desc: "適合晚上慢慢走，看河邊燈光和城市生活感。",
+    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    title: "Sarawak Food Weekend",
+    date: "本週末",
+    desc: "集合在地小吃、夜市攤位和輕鬆的週末氛圍。",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    title: "Miri Sunset Market",
+    date: "週六・下午 5:00",
+    desc: "傍晚開始的海邊市集，適合看夕陽和吃點東西。",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+  }
+];
+
 let showAllSpots = false;
 
 /* =========================
@@ -277,6 +298,9 @@ function init() {
   renderFoods();
   bindFoodMore();
   bindFoodSheet();
+
+  renderEvents();
+  bindEventControls();
 }
 
 /* =========================
@@ -524,6 +548,54 @@ function bindFoodSheet() {
   if (backdrop) {
     backdrop.addEventListener("click", closeFoodSheet);
   }
+}
+
+function renderEvents() {
+  const carousel = document.getElementById("eventCarousel");
+  if (!carousel) return;
+
+  carousel.innerHTML = "";
+
+  events.slice(0, 3).forEach(event => {
+    const card = document.createElement("article");
+    card.className = "city-event-card";
+
+    card.innerHTML = `
+      <div class="city-event-image">
+        <img src="${event.image}" alt="${event.title}">
+      </div>
+
+      <div class="city-event-body">
+        <small>${event.date}</small>
+        <h3>${event.title}</h3>
+        <p>${event.desc}</p>
+      </div>
+    `;
+
+    carousel.appendChild(card);
+  });
+}
+
+function bindEventControls() {
+  const carousel = document.getElementById("eventCarousel");
+  const prev = document.getElementById("eventPrevBtn");
+  const next = document.getElementById("eventNextBtn");
+
+  if (!carousel || !prev || !next) return;
+
+  prev.addEventListener("click", () => {
+    carousel.scrollBy({
+      left: -320,
+      behavior: "smooth"
+    });
+  });
+
+  next.addEventListener("click", () => {
+    carousel.scrollBy({
+      left: 320,
+      behavior: "smooth"
+    });
+  });
 }
 
 /* =========================
