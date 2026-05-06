@@ -465,7 +465,7 @@ function renderFoods() {
 
   grid.innerHTML = "";
 
-  foods.slice(0, 10).forEach(food => {
+  foods.forEach(food => {
     const card = document.createElement("article");
     card.className = "food-card";
 
@@ -557,7 +557,7 @@ function renderEvents() {
 
   carousel.innerHTML = "";
 
-  events.slice(0, 2).forEach(event => {
+  events.forEach(event => {
     const card = document.createElement("article");
     card.className = "city-event-card";
 
