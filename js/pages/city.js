@@ -231,19 +231,23 @@ const spots = [
 
 ];
 
-let currentSpotCount = 10;
+let showAllSpots = false;
 
 /* =========================
    Init
 ========================= */
 
 function init() {
-  bindMobileMenu()
-  
+
+  bindMobileMenu();
+
   renderCityTabs();
   renderCity(cities[0]);
-  renderSpots(10);
+
+  renderSpots();
+
   bindSpotMore();
+
 }
 
 /* =========================
@@ -347,7 +351,7 @@ function renderCity(city) {
 
 init();
 
-function renderSpots(limit = currentSpotCount) {
+function renderSpots() {
 
   const grid =
     document.getElementById("spotGrid");
@@ -356,36 +360,39 @@ function renderSpots(limit = currentSpotCount) {
 
   grid.innerHTML = "";
 
-  spots
-    .slice(0, limit)
-    .forEach(spot => {
+  const renderItems =
+    showAllSpots
+      ? spots
+      : spots.slice(0, 10);
 
-      const card =
-        document.createElement("article");
+  renderItems.forEach(spot => {
 
-      card.className = "spot-card";
+    const card =
+      document.createElement("article");
 
-      card.innerHTML = `
-        <div class="spot-image">
-          <img src="${spot.image}" alt="${spot.title}">
+    card.className = "spot-card";
+
+    card.innerHTML = `
+      <div class="spot-image">
+        <img src="${spot.image}" alt="${spot.title}">
+      </div>
+
+      <div class="spot-body">
+
+        <h3>${spot.title}</h3>
+
+        <p>${spot.desc}</p>
+
+        <div class="spot-meta">
+          ${spot.meta}
         </div>
 
-        <div class="spot-body">
+      </div>
+    `;
 
-          <h3>${spot.title}</h3>
+    grid.appendChild(card);
 
-          <p>${spot.desc}</p>
-
-          <div class="spot-meta">
-            ${spot.meta}
-          </div>
-
-        </div>
-      `;
-
-      grid.appendChild(card);
-
-    });
+  });
 
 }
 
@@ -398,13 +405,14 @@ function bindSpotMore() {
 
   button.addEventListener("click", () => {
 
-    currentSpotCount += 5;
+    showAllSpots = !showAllSpots;
 
-    renderSpots(currentSpotCount);
+    renderSpots();
 
-    if (currentSpotCount >= spots.length) {
-      button.style.display = "none";
-    }
+    button.textContent =
+      showAllSpots
+        ? "收起"
+        : "更多";
 
   });
 
