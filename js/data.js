@@ -184,6 +184,47 @@ export const reviews = [
   },
 
   {
+    title: "第一次來 Kuching，很適合晚上散步",
+    description: "河邊的風很舒服，晚上慢慢走會有種真的進入砂拉越的感覺。",
+    place: "Kuching Waterfront",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80"
+  },
+
+  {
+    title: "這間 Laksa 比觀光店自然很多",
+    description: "不是那種很商業化的味道，比較像在地人真的會吃的早餐店。",
+    place: "Sarawak Laksa Spot",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
+  },
+
+  {
+    title: "黃昏時真的超漂亮",
+    description: "原本只是想隨便停一下，結果夕陽出來後完全不想離開。",
+    place: "Miri Beach",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    title: "第一次來 Kuching，很適合晚上散步",
+    description: "河邊的風很舒服，晚上慢慢走會有種真的進入砂拉越的感覺。",
+    place: "Kuching Waterfront",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80"
+  },
+
+  {
+    title: "這間 Laksa 比觀光店自然很多",
+    description: "不是那種很商業化的味道，比較像在地人真的會吃的早餐店。",
+    place: "Sarawak Laksa Spot",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
+  },
+
+  {
+    title: "黃昏時真的超漂亮",
+    description: "原本只是想隨便停一下，結果夕陽出來後完全不想離開。",
+    place: "Miri Beach",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
+  },
+
+  {
     title: "很安靜，適合放空",
     description: "不像熱門景點那麼多人，反而比較能感受到當地節奏。",
     place: "Hidden River Walk",
