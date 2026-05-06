@@ -232,39 +232,30 @@ const spots = [
 ];
 
 const foods = [
-
   {
     title: "Sarawak Laksa",
-    desc: "第一次來 Kuching 很適合先吃這間。",
-    image:
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+    desc: "第一次來砂拉越，可以從這碗開始。",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80",
     meta: "Kuching"
   },
-
   {
-    title: "Kolo Mee Corner",
-    desc: "比較像當地人平常會吃的店。",
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
-    meta: "Local Food"
+    title: "Kolo Mee",
+    desc: "簡單但很有在地味道的乾麵。",
+    image: "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=1200&q=80",
+    meta: "Kuching"
   },
-
   {
-    title: "Night Food Street",
-    desc: "晚上比較熱鬧，適合慢慢吃。",
-    image:
-      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80",
-    meta: "Night Market"
+    title: "Midin Belacan",
+    desc: "砂拉越很有代表性的野菜料理。",
+    image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=1200&q=80",
+    meta: "Sarawak"
   },
-
   {
-    title: "Hidden Coffee Spot",
-    desc: "比較安靜的咖啡店。",
-    image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
-    meta: "Coffee"
+    title: "Manok Pansoh",
+    desc: "竹筒雞，適合想體驗傳統風味的人。",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    meta: "Sarawak"
   }
-
 ];
 
 let showAllSpots = false;
@@ -278,11 +269,14 @@ function init() {
 
   renderCityTabs();
   renderCity(cities[0]);
-  renderSpots();
-  renderFoods();
 
+  renderSpots();
   bindSpotMore();
   bindSpotSheet();
+
+  renderFoods();
+  bindFoodMore();
+  bindFoodSheet();
 }
 
 /* =========================
@@ -441,43 +435,95 @@ function bindSpotMore() {
 }
 
 function renderFoods() {
+  const grid = document.getElementById("foodGrid");
+  if (!grid) return;
 
-  const grid =
-    document.getElementById("foodGrid");
+  grid.innerHTML = "";
 
+  foods.slice(0, 10).forEach(food => {
+    const card = document.createElement("article");
+    card.className = "food-card";
+
+    card.innerHTML = `
+      <div class="food-image">
+        <img src="${food.image}" alt="${food.title}">
+      </div>
+
+      <div class="food-body">
+        <h3>${food.title}</h3>
+        <p>${food.desc}</p>
+        <div class="food-meta">${food.meta}</div>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function bindFoodMore() {
+  const button = document.getElementById("foodMoreBtn");
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    openFoodSheet();
+  });
+}
+
+function openFoodSheet() {
+  const sheet = document.getElementById("foodSheet");
+  if (!sheet) return;
+
+  renderFoodSheet();
+
+  sheet.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeFoodSheet() {
+  const sheet = document.getElementById("foodSheet");
+  if (!sheet) return;
+
+  sheet.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+function renderFoodSheet() {
+  const grid = document.getElementById("foodSheetGrid");
   if (!grid) return;
 
   grid.innerHTML = "";
 
   foods.forEach(food => {
-
-    const card =
-      document.createElement("article");
-
-    card.className = "spot-card";
+    const card = document.createElement("article");
+    card.className = "food-card";
 
     card.innerHTML = `
-      <div class="spot-image">
+      <div class="food-image">
         <img src="${food.image}" alt="${food.title}">
       </div>
 
-      <div class="spot-body">
-
+      <div class="food-body">
         <h3>${food.title}</h3>
-
         <p>${food.desc}</p>
-
-        <div class="spot-meta">
-          ${food.meta}
-        </div>
-
+        <div class="food-meta">${food.meta}</div>
       </div>
     `;
 
     grid.appendChild(card);
-
   });
+}
 
+function bindFoodSheet() {
+  const closeBtn = document.getElementById("foodSheetClose");
+  const backdrop = document.getElementById("foodSheetBackdrop");
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeFoodSheet);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener("click", closeFoodSheet);
+  }
 }
 
 /* =========================
