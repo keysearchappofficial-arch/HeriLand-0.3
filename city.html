@@ -13,6 +13,28 @@
 
 <main class="city-page">
 
+  <!-- Mobile Top -->
+<header class="mobile-top">
+
+  <div>
+    <small>Your Location</small>
+    <strong>Kuching, Sarawak</strong>
+  </div>
+
+  <button
+    class="icon-btn"
+    id="mobileMenuBtn"
+    aria-label="menu"
+  >
+    <svg viewBox="0 0 24 24">
+      <path d="M4 7h16"></path>
+      <path d="M4 12h16"></path>
+      <path d="M4 17h16"></path>
+    </svg>
+  </button>
+
+</header>
+
   <!-- Desktop / Page Top Nav -->
   <div id="navbar"></div>
 
@@ -77,8 +99,41 @@
 
 </main>
 
-<!-- Mobile Bottom Nav -->
-<div id="mobileNav"></div>
+  <!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+
+  <div class="mobile-menu-panel">
+
+    <div class="mobile-menu-head">
+
+      <strong>HeriLand</strong>
+
+      <button
+        id="mobileMenuClose"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <!-- 共用 Mobile Nav -->
+    <div id="mobileNav"></div>
+
+    <div class="mobile-menu-ai">
+
+      <small>AI Guide</small>
+
+      <p>
+        我會依照你現在的位置、時間和狀態，
+        幫你推薦現在適合探索的砂拉越城市。
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
 
 <script type="module" src="./js/pages/city.js"></script>
   <script type="module" src="./js/components.js"></script>
