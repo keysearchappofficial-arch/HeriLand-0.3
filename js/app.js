@@ -1,4 +1,4 @@
-import { places, moodConfig } from "./data.js";
+import { places, moodConfig, cities } from "./data.js";
 
 let currentMood = "relax";
 let currentPlaces = [];
