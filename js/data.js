@@ -306,6 +306,29 @@ export const spots = [
   // 之後最多放 20 個
 ];
 
+export const foods = [
+  {
+    name: "Sarawak Laksa",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Kolo Mee",
+    location: "Kuching",
+    image: "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Midin Belacan",
+    location: "Sarawak",
+    image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    name: "Manok Pansoh",
+    location: "Sarawak",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80"
+  }
+];
+
 export const moodConfig = {
   relax: {
     title: "適合放鬆的地方",
