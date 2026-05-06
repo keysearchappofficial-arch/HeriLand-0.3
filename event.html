@@ -17,107 +17,97 @@
 
 <main class="page-container event-page">
 
+  <!-- Mobile Top -->
+  <header class="mobile-top">
+    <div>
+      <small>Your Location</small>
+      <strong>Kuching, Sarawak</strong>
+    </div>
+
+    <button class="icon-btn" id="mobileMenuBtn" aria-label="menu">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7h16"></path>
+        <path d="M4 12h16"></path>
+        <path d="M4 17h16"></path>
+      </svg>
+    </button>
+  </header>
+
   <!-- Hero -->
   <section class="event-hero">
-
     <img
       src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1600&q=80"
-      alt=""
+      alt="Sarawak event"
     >
 
     <div class="event-hero-content">
-
-      <small>Tonight in Sarawak</small>
-
-      <h1>
-        今晚比較適合
-        <br>
-        慢慢逛。
-      </h1>
-
-      <p>
-        河邊、市集、夜晚燈光和比較有生活感的活動。
-      </p>
-
+      <small>This Week in Sarawak</small>
+      <h1>最近值得去的活動</h1>
+      <p>從今天、週末到近期活動，幫你快速找到現在適合參加的砂拉越體驗。</p>
     </div>
-
   </section>
 
-  <!-- Chips -->
-  <section class="event-chips">
-
-    <button class="active">全部</button>
-    <button>夜市</button>
-    <button>Live</button>
-    <button>市集</button>
-    <button>文化</button>
-    <button>戶外</button>
-
+  <!-- Time Tabs -->
+  <section class="event-tabs" id="eventTabs">
+    <button class="active" data-time="today">今天</button>
+    <button data-time="weekend">這週末</button>
+    <button data-time="recent">近期</button>
   </section>
 
-  <!-- Featured -->
-  <section class="featured-event">
-
-    <div class="featured-event-image">
-      <img
-        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80"
-        alt=""
-      >
-    </div>
-
-    <div class="featured-event-content">
-
-      <small>Tonight Highlight</small>
-
-      <h2>
-        Kuching Waterfront Night Walk
-      </h2>
-
-      <p>
-        比起白天，晚上更適合沿著河邊慢慢走。
-        有街頭表演、小吃和比較舒服的溫度。
-      </p>
-
-      <div class="featured-meta">
-        晚上 7:00 ・ Kuching Waterfront
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- Event Carousel -->
-  <section class="event-section">
-
-    <div class="section-head">
-
-      <div>
-        <small>Tonight</small>
-        <h2>今晚推薦</h2>
-      </div>
-
-    </div>
-
-    <div class="event-carousel" id="eventCarousel"></div>
-
+  <!-- Type Chips -->
+  <section class="event-chips" id="eventChips">
+    <button class="active" data-type="all">全部</button>
+    <button data-type="night">夜市</button>
+    <button data-type="culture">文化</button>
+    <button data-type="live">Live</button>
+    <button data-type="market">市集</button>
+    <button data-type="outdoor">戶外</button>
+    <button data-type="family">親子</button>
   </section>
 
   <!-- AI Note -->
   <section class="event-ai-note">
-
     <small>AI Guide</small>
+    <p id="eventAiText">今天比較適合夜市、河邊散步和輕鬆的晚間活動。</p>
+  </section>
 
-    <p>
-      今天晚上比較適合河邊、市集和室外活動，
-      9 點後人潮會開始變多。
-    </p>
+  <!-- Event List -->
+  <section class="event-list-section">
+    <div class="section-head">
+      <div>
+        <small>Events</small>
+        <h2 id="eventSectionTitle">今天推薦</h2>
+      </div>
+    </div>
 
+    <div class="event-grid" id="eventGrid"></div>
   </section>
 
 </main>
 
 <div id="footer"></div>
-<div id="mobileMenu"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+
+    <div class="mobile-menu-head">
+      <strong>HeriLand</strong>
+      <button id="mobileMenuClose" type="button">×</button>
+    </div>
+
+    <div id="mobileNav"></div>
+
+    <div class="mobile-menu-ai">
+      <small>AI Guide</small>
+      <p>
+        我會依照你現在的位置、時間和狀態，
+        幫你推薦現在適合的砂拉越體驗。
+      </p>
+    </div>
+
+  </div>
+</div>
 
 <script type="module" src="./js/components.js"></script>
 <script type="module" src="./js/pages/event.js"></script>
