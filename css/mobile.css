@@ -1121,6 +1121,7 @@
   gap: 14px;
 
   padding-bottom: 8px;
+  padding-left:10px;
 
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
