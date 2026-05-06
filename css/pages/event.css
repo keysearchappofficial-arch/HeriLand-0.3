@@ -302,5 +302,6 @@
   -webkit-box-orient: vertical;
 
   overflow: hidden;
+  padding: 0 18px;
 }
 
