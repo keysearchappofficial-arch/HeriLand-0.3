@@ -310,11 +310,11 @@
 
 @media (max-width: 820px) {
 
-  .event-page {
-    width: 100%;
-    padding-top: 0;
-    overflow-x: hidden;
-  }
+.event-page {
+  padding-top: 0;
+  padding-bottom: 56px;
+  overflow-x: hidden;
+}
 
   /* Hero */
 
@@ -350,7 +350,7 @@
 
     margin-top: 24px;
 
-    padding: 0 18px 4px;
+    padding: 0 0 4px;
 
     scrollbar-width: none;
   }
@@ -369,15 +369,15 @@
 
   /* Chips */
 
-  .event-chips {
-    margin-top: 14px;
-    padding: 0 18px 4px;
-  }
+.event-chips {
+  margin-top: 14px;
+  padding: 0 0 4px;
+}
 
   /* AI */
 
   .event-ai-note {
-    margin: 28px 18px 0;
+    margin: 28px 0 0;
     padding: 20px;
     border-radius: 24px;
   }
@@ -393,10 +393,10 @@
     margin-top: 42px;
   }
 
-  .section-head {
-    padding: 0 18px;
-    margin-bottom: 16px;
-  }
+.section-head {
+  padding: 0;
+  margin-bottom: 16px;
+}
 
   .section-head h2 {
     font-size: 30px;
@@ -404,18 +404,14 @@
 
   /* Grid */
 
-  .event-grid {
-    display: flex;
-    overflow-x: auto;
-
-    gap: 14px;
-
-    padding: 0 18px 10px;
-
-    scroll-snap-type: x mandatory;
-
-    scrollbar-width: none;
-  }
+.event-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+  padding: 0 0 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
 
   .event-grid::-webkit-scrollbar {
     display: none;
@@ -423,11 +419,10 @@
 
   /* Card */
 
-  .event-card {
-    flex: 0 0 calc(100vw - 36px);
-
-    scroll-snap-align: start;
-  }
+.event-card {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
 
   .event-card-image {
     aspect-ratio: 1 / 1.04;
