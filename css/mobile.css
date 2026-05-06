@@ -800,4 +800,47 @@
   margin-top: 10px;
   font-size: 11px;
 }
+
+  /* =========================
+   City Page - Mobile
+========================= */
+
+@media (max-width: 820px) {
+
+  .city-page {
+    width: calc(100% - 36px);
+    padding: 28px 0 120px;
+  }
+
+  .city-top-head h1 {
+    font-size: 36px;
+    letter-spacing: -1.4px;
+  }
+
+  .city-top-head p {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  .city-tabs {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .city-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .city-tab {
+    flex: 0 0 auto;
+    padding: 0 18px;
+    height: 52px;
+    border-radius: 16px;
+    white-space: nowrap;
+  }
+
+}
 }
