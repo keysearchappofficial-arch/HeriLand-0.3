@@ -1,4 +1,14 @@
 /* =========================
+   City Page
+========================= */
+
+.city-page {
+  width: min(1400px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 34px 0 120px;
+}
+
+/* =========================
    City Nav
 ========================= */
 
@@ -81,22 +91,19 @@
 }
 
 /* =========================
-   City Page
+   City Top
 ========================= */
 
-.city-page {
-  width: min(1400px, calc(100% - 64px));
-  margin: 0 auto;
-  padding: 46px 0 120px;
+.city-top {
+  margin-bottom: 30px;
 }
 
-/* 頂部 */
 .city-top-head {
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .city-top-head h1 {
-  font-size: 54px;
+  font-size: 52px;
   line-height: 1;
   letter-spacing: -2px;
 }
@@ -107,7 +114,10 @@
   font-size: 16px;
 }
 
-/* 城市按鈕 */
+/* =========================
+   City Tabs
+========================= */
+
 .city-tabs {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -115,10 +125,9 @@
 }
 
 .city-tab {
-  height: 58px;
+  height: 56px;
   border-radius: 18px;
   border: 1px solid rgba(0,0,0,.06);
-
   background: rgba(255,255,255,.72);
 
   display: flex;
@@ -127,19 +136,155 @@
 
   font-size: 15px;
   font-weight: 800;
-
   cursor: pointer;
 
   transition:
     background .2s var(--ease),
-    transform .2s var(--ease);
+    transform .2s var(--ease),
+    color .2s var(--ease);
 }
 
 .city-tab:hover {
   transform: translateY(-2px);
+  background: #fff;
 }
 
 .city-tab.active {
   background: #111;
   color: #fff;
+}
+
+/* =========================
+   City Hero
+========================= */
+
+.city-hero {
+  position: relative;
+  height: 420px;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #111;
+  margin-top: 34px;
+}
+
+.city-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.city-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,.7), rgba(0,0,0,.1) 62%);
+}
+
+.city-hero-content {
+  position: absolute;
+  left: 38px;
+  right: 38px;
+  bottom: 36px;
+  z-index: 2;
+  color: #fff;
+  max-width: 720px;
+}
+
+.city-hero-content small {
+  display: inline-flex;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.16);
+  backdrop-filter: blur(14px);
+  font-size: 12px;
+  margin-bottom: 13px;
+}
+
+.city-hero-content h2 {
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: .96;
+  letter-spacing: -2.5px;
+}
+
+.city-hero-content p {
+  margin-top: 14px;
+  max-width: 520px;
+  color: rgba(255,255,255,.82);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+/* =========================
+   AI Note
+========================= */
+
+.city-ai-note {
+  margin-top: 22px;
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.city-ai-note small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.city-ai-note p {
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.5px;
+}
+
+/* =========================
+   City Content Cards
+========================= */
+
+.city-content-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.city-content-card {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.city-content-card h3 {
+  font-size: 22px;
+  letter-spacing: -0.6px;
+  margin-bottom: 10px;
+}
+
+.city-content-card p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.city-content-card button {
+  margin-top: 18px;
+  border: none;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 850;
+}
+
+/* =========================
+   Footer Adjustment
+========================= */
+
+.city-footer {
+  margin-top: 70px;
 }
