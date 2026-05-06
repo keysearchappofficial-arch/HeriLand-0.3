@@ -753,49 +753,151 @@
    City Page - Mobile
 ========================= */
 
-  .city-page {
-    width: calc(100% - 36px);
-    padding: 28px 0 40px;
-  }
-
-  .city-top-head h1 {
-    font-size: 36px;
-    letter-spacing: -1.4px;
-  }
-
-  .city-top-head p {
-    margin-top: 8px;
-    font-size: 14px;
-  }
-
-  /* City Nav - Mobile */
-
-.city-nav {
-  display: block;
-  margin-bottom: 24px;
-}
-
-.city-logo {
-  margin-bottom: 16px;
-}
-
-.city-search {
-  max-width: none;
+.city-page {
   width: 100%;
-  margin-bottom: 14px;
+  padding: 20px 0 40px;
+  overflow-x: hidden;
 }
 
-.city-nav-links {
+/* 頂部內容保留左右距離 */
+
+.city-top,
+.city-ai-note,
+.city-content-grid,
+.city-spot-section .section-head,
+.city-top-head {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* Hero 滿版 */
+
+.city-hero {
+  width: 100%;
+  border-radius: 0;
+  margin-top: 18px;
+}
+
+/* Hero 圖片 */
+
+.city-hero img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+/* Hero 文字 */
+
+.city-hero-content {
+  left: 18px;
+  right: 18px;
+  bottom: 24px;
+}
+
+/* Tabs 滿版滑動 */
+
+.city-tabs {
+  display: flex;
   overflow-x: auto;
-  gap: 16px;
-  padding-bottom: 6px;
+
+  gap: 12px;
+
+  margin-top: 16px;
+
+  padding: 0 18px 6px;
+
   scrollbar-width: none;
 }
 
-.city-nav-links::-webkit-scrollbar {
+.city-tabs::-webkit-scrollbar {
   display: none;
 }
 
+/* 景點 section */
+
+.city-spot-section {
+  margin-top: 34px;
+}
+
+/* Header */
+
+.city-spot-section .section-head {
+  margin-bottom: 16px;
+}
+
+/* 橫滑區滿版 */
+
+.city-spot-section .spot-grid {
+  display: flex;
+  overflow-x: auto;
+
+  gap: 14px;
+
+  padding: 0 18px 10px;
+
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.city-spot-section .spot-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* 卡片 */
+
+.city-spot-section .spot-card {
+  flex: 0 0 calc(50vw - 22px);
+
+  min-width: 0;
+
+  background: transparent;
+  border: none;
+
+  overflow: visible;
+
+  scroll-snap-align: start;
+}
+
+/* 圖片 */
+
+.city-spot-section .spot-image {
+  position: relative;
+
+  aspect-ratio: 1 / 1.08;
+
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.city-spot-section .spot-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 文字 */
+
+.city-spot-section .spot-body {
+  padding-top: 10px;
+}
+
+.city-spot-section .spot-body h3 {
+  font-size: 14px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.city-spot-section .spot-body p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #6f6f6f;
+}
+
+.city-spot-section .spot-meta {
+  margin-top: 7px;
+  font-size: 11px;
+  color: #999;
+}
   /* =========================
    City Tabs Mobile
 ========================= */
