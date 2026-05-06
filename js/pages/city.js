@@ -231,6 +231,42 @@ const spots = [
 
 ];
 
+const foods = [
+
+  {
+    title: "Sarawak Laksa",
+    desc: "第一次來 Kuching 很適合先吃這間。",
+    image:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+    meta: "Kuching"
+  },
+
+  {
+    title: "Kolo Mee Corner",
+    desc: "比較像當地人平常會吃的店。",
+    image:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    meta: "Local Food"
+  },
+
+  {
+    title: "Night Food Street",
+    desc: "晚上比較熱鬧，適合慢慢吃。",
+    image:
+      "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80",
+    meta: "Night Market"
+  },
+
+  {
+    title: "Hidden Coffee Spot",
+    desc: "比較安靜的咖啡店。",
+    image:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
+    meta: "Coffee"
+  }
+
+];
+
 let showAllSpots = false;
 
 /* =========================
@@ -243,6 +279,7 @@ function init() {
   renderCityTabs();
   renderCity(cities[0]);
   renderSpots();
+  renderFoods();
 
   bindSpotMore();
   bindSpotSheet();
@@ -401,6 +438,46 @@ function bindSpotMore() {
   button.addEventListener("click", () => {
     openSpotSheet();
   });
+}
+
+function renderFoods() {
+
+  const grid =
+    document.getElementById("foodGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  foods.forEach(food => {
+
+    const card =
+      document.createElement("article");
+
+    card.className = "spot-card";
+
+    card.innerHTML = `
+      <div class="spot-image">
+        <img src="${food.image}" alt="${food.title}">
+      </div>
+
+      <div class="spot-body">
+
+        <h3>${food.title}</h3>
+
+        <p>${food.desc}</p>
+
+        <div class="spot-meta">
+          ${food.meta}
+        </div>
+
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+
 }
 
 /* =========================
