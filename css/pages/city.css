@@ -524,10 +524,17 @@
   position: fixed;
   inset: 0;
   z-index: 260;
+
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+
+  transition: opacity .28s var(--ease), visibility .28s var(--ease);
 }
 
 .spot-sheet.show {
+  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
