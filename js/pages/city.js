@@ -236,6 +236,8 @@ const spots = [
 ========================= */
 
 function init() {
+  bindMobileMenu()
+  
   renderCityTabs();
   renderCity(cities[0]);
   renderSpots();
@@ -377,6 +379,53 @@ function renderSpots() {
     `;
 
     grid.appendChild(card);
+
+  });
+
+}
+
+/* =========================
+   Mobile Menu
+========================= */
+
+function bindMobileMenu() {
+
+  const menu =
+    document.getElementById("mobileMenu");
+
+  const openBtn =
+    document.getElementById("mobileMenuBtn");
+
+  const closeBtn =
+    document.getElementById("mobileMenuClose");
+
+  if (!menu || !openBtn || !closeBtn) return;
+
+  openBtn.addEventListener("click", () => {
+
+    menu.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+  });
+
+  closeBtn.addEventListener("click", () => {
+
+    menu.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+  });
+
+  menu.addEventListener("click", e => {
+
+    if (e.target === menu) {
+
+      menu.classList.remove("show");
+
+      document.body.style.overflow = "";
+
+    }
 
   });
 
