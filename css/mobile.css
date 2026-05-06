@@ -235,7 +235,7 @@
   pointer-events: none;
 }
 
-.mobile-bottom-nav button {
+.mobile-bottom-nav a {
   border: none;
   background: transparent;
   display: grid;
@@ -246,7 +246,7 @@
   line-height: 1;
 }
 
-.mobile-bottom-nav button.active {
+.mobile-bottom-nav a.active {
   color: #111;
   font-weight: 850;
 }
