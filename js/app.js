@@ -1,4 +1,4 @@
-import { places, moodConfig, cities } from "./data.js";
+import { places, moodConfig } from "./data.js";
 
 let currentMood = "relax";
 let currentPlaces = [];
@@ -29,6 +29,7 @@ function init() {
   initLocation();
   bindBottomNavAutoHide();
   renderMood("relax");
+  renderCities();
 }
 
 function bindBottomNavAutoHide() {
@@ -87,9 +88,7 @@ function updateHero(place) {
 function renderPlaces(items) {
   els.placeGrid.innerHTML = "";
 
-  const displayItems = items.length < 8
-    ? [...items, ...items, ...items]
-    : items;
+  const displayItems = items.slice(0, 6);
 
   displayItems.forEach((place, index) => {
     const realIndex = index % items.length;
@@ -119,6 +118,26 @@ function renderPlaces(items) {
     `;
 
     els.placeGrid.appendChild(card);
+  });
+}
+
+function renderCities() {
+  const cityScroll = document.getElementById("cityScroll");
+  if (!cityScroll) return;
+
+  cityScroll.innerHTML = "";
+
+  cities.forEach(city => {
+    const card = document.createElement("article");
+    card.className = "city-card";
+
+    card.innerHTML = `
+      <div class="city-tag">${city.tag}</div>
+      <img src="${city.image}" alt="${city.name}">
+      <div class="city-name">${city.name}</div>
+    `;
+
+    cityScroll.appendChild(card);
   });
 }
 
