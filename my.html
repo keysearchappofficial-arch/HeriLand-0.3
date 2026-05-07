@@ -55,131 +55,72 @@
 
   </section>
 
-  <!-- Quick Stats -->
-  <section class="my-stats">
-
-    <article>
-      <small>收藏</small>
-      <strong id="savedCount">12</strong>
-      <span>Saved places</span>
-    </article>
-
-    <article>
-      <small>行程</small>
-      <strong id="tripCount">3</strong>
-      <span>Trip plans</span>
-    </article>
-
-    <article>
-      <small>最近看過</small>
-      <strong id="recentCount">8</strong>
-      <span>Recently viewed</span>
-    </article>
-
-  </section>
-
-  <!-- Saved Places -->
-  <section class="my-section">
-
-    <div class="section-head">
-      <div>
-        <small>Saved</small>
-        <h2>我的收藏</h2>
-      </div>
-
-      <button
-  class="my-more-btn"
-  type="button"
-  data-open-sheet="savedSheet"
->
-  查看全部
-</button>
-    </div>
-
-    <div class="my-card-grid" id="savedGrid"></div>
-
-  </section>
-
-  <!-- Trip Plans -->
-  <section class="my-section">
-
-    <div class="section-head">
-      <div>
-        <small>Trips</small>
-        <h2>我的行程</h2>
-      </div>
-
-      <button
-  class="my-more-btn"
-  type="button"
-  data-open-sheet="tripSheet"
->
-  查看全部
-</button>
-    </div>
-
-    <div class="trip-grid" id="tripGrid"></div>
-
-  </section>
-
-  <!-- AI Preference -->
-  <section class="my-ai-panel">
-
-    <div>
-      <small>AI Preference</small>
-      <h2>AI Guide 偏好</h2>
-      <p>
-        這些偏好可以讓 HeriLand 之後推薦更像你的旅行方式。
-      </p>
-    </div>
-
-    <div class="preference-list" id="preferenceList">
-      <span>慢旅</span>
-      <span>在地美食</span>
-      <span>河邊散步</span>
-      <span>低人潮</span>
-      <span>傍晚活動</span>
-    </div>
-
-  </section>
-
-  <!-- Recent Views + Settings -->
-  <section class="my-bottom-grid">
-
-    <div class="recent-panel">
-<div class="section-head compact">
+  <!-- Profile Summary -->
+<section class="my-ios-summary">
+  <div class="my-avatar">H</div>
 
   <div>
-    <small>History</small>
-    <h2>最近看過</h2>
+    <h1>我的 HeriLand</h1>
+    <p>慢旅探索中 · Kuching, Sarawak</p>
   </div>
+</section>
 
-  <button
-    class="my-more-btn"
-    type="button"
-    data-open-sheet="recentSheet"
-  >
-    查看全部
+<!-- iOS Setting List -->
+<section class="my-ios-list">
+
+  <button class="my-ios-row" type="button" data-open-sheet="savedSheet">
+    <div>
+      <span>我的收藏</span>
+      <small>12 個收藏地點</small>
+    </div>
+    <strong>›</strong>
   </button>
 
-</div>
-
-      <div class="recent-list" id="recentList"></div>
+  <button class="my-ios-row" type="button" data-open-sheet="tripSheet">
+    <div>
+      <span>我的行程</span>
+      <small>3 個旅行計畫</small>
     </div>
+    <strong>›</strong>
+  </button>
 
-    <div class="settings-panel">
-      <small>Settings</small>
-      <h2>帳號與設定</h2>
-
-      <div class="settings-list">
-        <button type="button">個人資料</button>
-        <button type="button">通知設定</button>
-        <button type="button">語言與地區</button>
-        <button type="button">登入 / 會員</button>
-      </div>
+  <button class="my-ios-row" type="button" data-open-sheet="recentSheet">
+    <div>
+      <span>最近看過</span>
+      <small>8 個瀏覽紀錄</small>
     </div>
+    <strong>›</strong>
+  </button>
 
-  </section>
+</section>
+
+<section class="my-ios-list">
+
+  <button class="my-ios-row" type="button">
+    <div>
+      <span>AI Guide 偏好</span>
+      <small>慢旅、美食、河邊、低人潮</small>
+    </div>
+    <strong>›</strong>
+  </button>
+
+  <button class="my-ios-row" type="button">
+    <div>
+      <span>語言與地區</span>
+      <small>繁體中文 · Sarawak</small>
+    </div>
+    <strong>›</strong>
+  </button>
+
+  <button class="my-ios-row" type="button">
+    <div>
+      <span>登入 / 會員</span>
+      <small>管理帳號與同步資料</small>
+    </div>
+    <strong>›</strong>
+  </button>
+
+</section>
 
   <!-- Saved Sheet -->
 <section class="my-sheet" id="savedSheet">
