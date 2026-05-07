@@ -290,6 +290,7 @@ function init() {
 
   renderCityTabs();
   renderCity(cities[0]);
+  renderCityList();
 
   renderSpots();
   bindSpotMore();
@@ -342,6 +343,49 @@ function renderCityTabs() {
 
     wrap.appendChild(button);
 
+  });
+}
+
+function renderCityList() {
+  const grid = document.getElementById("cityListGrid");
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  cities.forEach(city => {
+    const card = document.createElement("article");
+    card.className = "city-list-card";
+
+    card.innerHTML = `
+      <img src="${city.hero}" alt="${city.name}">
+
+      <div class="city-list-card-body">
+        <small>HeriLand City</small>
+        <h3>${city.name}</h3>
+        <p>${city.desc}</p>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      renderCity(city);
+
+      document.querySelectorAll(".city-tab")
+        .forEach(tab => tab.classList.remove("active"));
+
+      document.querySelectorAll(".city-tab")
+        .forEach(tab => {
+          if (tab.textContent === city.name) {
+            tab.classList.add("active");
+          }
+        });
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    grid.appendChild(card);
   });
 }
 
