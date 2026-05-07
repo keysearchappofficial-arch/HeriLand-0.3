@@ -142,13 +142,15 @@ async function initComponents() {
 
   await renderMobileMenu();
 
-  console.log(
-    "[components] READY"
-  );
+console.log(
+  "[components] READY"
+);
 
-  window.dispatchEvent(
-    new Event("componentsReady")
-  );
+window.componentsLoaded = true;
+
+window.dispatchEvent(
+  new Event("componentsReady")
+);
 
 }
 
