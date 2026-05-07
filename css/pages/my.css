@@ -670,6 +670,14 @@
 
 .my-settings-group {
   margin-bottom: 28px;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(0,0,0,.05);
+
+  background: rgba(255,255,255,.82);
 }
 
 .my-settings-group small {
@@ -696,6 +704,8 @@
   align-items: center;
   justify-content: space-between;
 
+  gap: 14px;
+
   padding: 0 18px;
 
   border: none;
@@ -705,18 +715,9 @@
   text-align: left;
 
   cursor: pointer;
-}
 
-.my-settings-row:first-of-type {
-  border-radius: 22px 22px 0 0;
-}
-
-.my-settings-row:last-of-type {
-  border-radius: 0 0 22px 22px;
-}
-
-.my-settings-row:only-of-type {
-  border-radius: 22px;
+  position: relative;
+  z-index: 1;
 }
 
 .my-settings-row + .my-settings-row {
