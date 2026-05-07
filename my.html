@@ -99,13 +99,18 @@
   <strong>›</strong>
 </button>
 
-      <button class="my-ios-row" type="button">
-        <div>
-          <span>登入 / 會員</span>
-          <small>管理帳號與同步資料</small>
-        </div>
-        <strong>›</strong>
-      </button>
+<button
+  class="my-ios-row"
+  type="button"
+  data-open-view="accountView"
+>
+  <div>
+    <span>登入 / 會員</span>
+    <small>管理帳號與同步資料</small>
+  </div>
+
+  <strong>›</strong>
+</button>
 
     </section>
 
@@ -214,6 +219,77 @@
 
     <button class="my-settings-row">
       <span>KRW</span>
+    </button>
+
+  </div>
+
+</section>
+
+<!-- Account / Member -->
+<section class="my-view my-view-sub" id="accountView">
+
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>登入 / 會員</h2>
+  </div>
+
+  <section class="account-card">
+
+    <div class="account-avatar">H</div>
+
+    <div>
+      <small>HeriLand Account</small>
+      <h3>尚未登入</h3>
+      <p>
+        登入後可以同步收藏、行程、最近看過的內容，
+        也能讓 AI Guide 更了解你的旅行節奏。
+      </p>
+    </div>
+
+    <button class="account-primary-btn" type="button">
+      登入 / 建立帳號
+    </button>
+
+  </section>
+
+  <div class="my-settings-group">
+
+    <small>Member Benefits</small>
+
+    <button class="my-settings-row">
+      <span>同步我的收藏</span>
+      <strong>›</strong>
+    </button>
+
+    <button class="my-settings-row">
+      <span>儲存旅行行程</span>
+      <strong>›</strong>
+    </button>
+
+    <button class="my-settings-row">
+      <span>AI Guide 個人化推薦</span>
+      <strong>›</strong>
+    </button>
+
+  </div>
+
+  <div class="my-settings-group">
+
+    <small>Account</small>
+
+    <button class="my-settings-row">
+      <span>Email 登入</span>
+      <strong>›</strong>
+    </button>
+
+    <button class="my-settings-row">
+      <span>Google 登入</span>
+      <strong>›</strong>
+    </button>
+
+    <button class="my-settings-row">
+      <span>Apple 登入</span>
+      <strong>›</strong>
     </button>
 
   </div>
