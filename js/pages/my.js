@@ -100,163 +100,38 @@ const recentViews = [
 function init() {
 
   bindMobileMenu();
-  bindMySheets();
 
-  renderSavedPlaces();
-  renderTripPlans();
-  renderRecentViews();
-
-}
-
-/* =========================
-   Saved Places
-========================= */
-
-function renderSavedPlaces() {
-
-  const grid =
-    document.getElementById(
-      "savedGrid"
-    );
-
-  if (!grid) return;
-
-  grid.innerHTML = "";
-
-  savedPlaces.forEach(place => {
-
-    const card =
-      document.createElement(
-        "article"
-      );
-
-    card.className =
-      "saved-card";
-
-    card.innerHTML = `
-      <img
-        src="${place.image}"
-        alt="${place.title}"
-      >
-
-      <div class="saved-card-body">
-
-        <h3>
-          ${place.title}
-        </h3>
-
-        <p>
-          ${place.desc}
-        </p>
-
-      </div>
-    `;
-
-    grid.appendChild(card);
-
-  });
+   renderSavedSheet()
+renderTripSheet()
+renderRecentSheet()
 
 }
 
-/* =========================
-   Trip Plans
-========================= */
+function bindMyViews() {
+  const mainView = document.getElementById("myMainView");
 
-function renderTripPlans() {
+  document.querySelectorAll("[data-open-view]").forEach(button => {
+    button.addEventListener("click", () => {
+      const viewId = button.dataset.openView;
+      const view = document.getElementById(viewId);
 
-  const grid =
-    document.getElementById(
-      "tripGrid"
-    );
+      if (!mainView || !view) return;
 
-  if (!grid) return;
-
-  grid.innerHTML = "";
-
-  tripPlans.forEach(plan => {
-
-    const card =
-      document.createElement(
-        "article"
-      );
-
-    card.className =
-      "trip-card";
-
-    card.innerHTML = `
-      <small>
-        HeriLand Trip
-      </small>
-
-      <h3>
-        ${plan.title}
-      </h3>
-
-      <p>
-        ${plan.desc}
-      </p>
-
-      <div class="trip-meta">
-        ${plan.meta.map(item => `
-          <span>${item}</span>
-        `).join("")}
-      </div>
-    `;
-
-    grid.appendChild(card);
-
+      mainView.classList.add("is-pushed");
+      view.classList.add("active");
+    });
   });
 
-}
+  document.querySelectorAll("[data-back-view]").forEach(button => {
+    button.addEventListener("click", () => {
+      const activeView = document.querySelector(".my-view-sub.active");
 
-/* =========================
-   Recent Views
-========================= */
+      if (!mainView || !activeView) return;
 
-function renderRecentViews() {
-
-  const list =
-    document.getElementById(
-      "recentList"
-    );
-
-  if (!list) return;
-
-  list.innerHTML = "";
-
-  recentViews.forEach(item => {
-
-    const row =
-      document.createElement(
-        "article"
-      );
-
-    row.className =
-      "recent-item";
-
-    row.innerHTML = `
-      <img
-        src="${item.image}"
-        alt="${item.title}"
-      >
-
-      <div>
-
-        <h3>
-          ${item.title}
-        </h3>
-
-        <p>
-          ${item.desc}
-        </p>
-
-      </div>
-    `;
-
-    list.appendChild(row);
-
+      activeView.classList.remove("active");
+      mainView.classList.remove("is-pushed");
+    });
   });
-
 }
 
 /* =========================
@@ -338,99 +213,13 @@ function bindMobileMenu() {
    My Sheet
 ========================= */
 
-function bindMySheets() {
-
-  /* Open */
-
-  document
-    .querySelectorAll("[data-open-sheet]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const id =
-            button.dataset.openSheet;
-
-          openSheet(id);
-
-        }
-      );
-
-    });
-
-  /* Close */
-
-  document
-    .querySelectorAll("[data-close-sheet]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const id =
-            button.dataset.closeSheet;
-
-          closeSheet(id);
-
-        }
-      );
-
-    });
-
-}
-
 /* =========================
    Open
 ========================= */
 
-function openSheet(id) {
-
-  const sheet =
-    document.getElementById(id);
-
-  if (!sheet) return;
-
-  /* Render */
-
-  if (id === "savedSheet") {
-    renderSavedSheet();
-  }
-
-  if (id === "tripSheet") {
-    renderTripSheet();
-  }
-
-  if (id === "recentSheet") {
-    renderRecentSheet();
-  }
-
-  sheet.classList.add("show");
-
-  document.body.style.overflow =
-    "hidden";
-
-}
-
 /* =========================
    Close
 ========================= */
-
-function closeSheet(id) {
-
-  const sheet =
-    document.getElementById(id);
-
-  if (!sheet) return;
-
-  sheet.classList.remove("show");
-
-  document.body.style.overflow =
-    "";
-
-}
 
 /* =========================
    Saved Sheet
