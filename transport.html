@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HeriLand Transport</title>
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/pages/transport.css" />
+  <link rel="stylesheet" href="./css/mobile.css" />
+</head>
+
+<body>
+
+<main class="page-container transport-page">
+
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Mobile Top -->
+  <header class="mobile-top">
+    <div>
+      <small>Your Location</small>
+      <strong>Kuching, Sarawak</strong>
+    </div>
+
+    <button class="icon-btn" id="mobileMenuBtn" aria-label="menu">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7h16"></path>
+        <path d="M4 12h16"></path>
+        <path d="M4 17h16"></path>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="transport-hero">
+    <img
+      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80"
+      alt="Sarawak transport"
+    >
+
+    <div class="transport-hero-content">
+      <small>Move around Sarawak</small>
+      <h1>今天你想去哪？</h1>
+      <p>
+        不用先查一堆資料。先看哪些路線適合 Grab、租車、長途巴士或飛機。
+      </p>
+    </div>
+  </section>
+
+  <!-- AI Note -->
+  <section class="transport-ai-note">
+    <small>AI Guide</small>
+    <p>
+      砂拉越目前比較適合用 Grab、租車、飛機和長途巴士移動。
+      部分市區巴士資訊不一定完整，所以 HeriLand 會先用旅遊情境幫你判斷怎麼走比較舒服。
+    </p>
+  </section>
+
+  <!-- Transport Modes -->
+  <section class="transport-mode-section">
+
+    <div class="section-head">
+      <div>
+        <small>Ways to move</small>
+        <h2>常見移動方式</h2>
+      </div>
+    </div>
+
+    <div class="transport-mode-grid" id="transportModeGrid">
+
+      <article class="transport-mode-card">
+        <div class="mode-icon">🚗</div>
+        <h3>Grab / 私人車</h3>
+        <p>適合市區、短距離、晚上移動，最簡單也最直覺。</p>
+      </article>
+
+      <article class="transport-mode-card">
+        <div class="mode-icon">🚙</div>
+        <h3>租車 / 自駕</h3>
+        <p>適合想去海邊、郊區、自然景點，不想一直等車的人。</p>
+      </article>
+
+      <article class="transport-mode-card">
+        <div class="mode-icon">🚌</div>
+        <h3>長途巴士</h3>
+        <p>適合城市之間移動，例如 Kuching、Sibu、Bintulu、Miri。</p>
+      </article>
+
+      <article class="transport-mode-card">
+        <div class="mode-icon">✈️</div>
+        <h3>飛機</h3>
+        <p>適合跨城市長距離移動，尤其時間有限的旅人。</p>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- Popular Routes -->
+  <section class="transport-route-section">
+
+    <div class="section-head">
+      <div>
+        <small>Popular routes</small>
+        <h2>熱門移動路線</h2>
+      </div>
+    </div>
+
+    <div class="route-card-grid" id="routeCardGrid">
+
+      <article class="route-card">
+        <div class="route-card-head">
+          <small>Kuching</small>
+          <h3>Kuching → Santubong</h3>
+        </div>
+
+        <div class="route-info">
+          <span>約 35–45 分鐘</span>
+          <span>適合下午出發</span>
+        </div>
+
+        <p>
+          比較推薦 Grab 或租車。去看夕陽可以晚一點出發，
+          但回程晚上叫車可能會比較慢。
+        </p>
+
+        <div class="route-methods">
+          <span>Grab</span>
+          <span>租車</span>
+        </div>
+      </article>
+
+      <article class="route-card">
+        <div class="route-card-head">
+          <small>Intercity</small>
+          <h3>Kuching → Sibu</h3>
+        </div>
+
+        <div class="route-info">
+          <span>飛機約 45 分鐘</span>
+          <span>巴士時間較長</span>
+        </div>
+
+        <p>
+          如果時間有限，飛機比較適合。想省預算可以考慮長途巴士，
+          但要預留更多時間。
+        </p>
+
+        <div class="route-methods">
+          <span>飛機</span>
+          <span>長途巴士</span>
+        </div>
+      </article>
+
+      <article class="route-card">
+        <div class="route-card-head">
+          <small>Miri</small>
+          <h3>Miri → Brunei</h3>
+        </div>
+
+        <div class="route-info">
+          <span>跨境路線</span>
+          <span>建議提前確認</span>
+        </div>
+
+        <p>
+          比較適合自駕或長途巴士。跨境移動要注意證件、
+          時間和交通公司安排。
+        </p>
+
+        <div class="route-methods">
+          <span>自駕</span>
+          <span>巴士</span>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- Route Planner Mock -->
+  <section class="transport-planner">
+
+    <div class="planner-head">
+      <small>Simple Planner</small>
+      <h2>先選你想去的地方</h2>
+      <p>
+        第一版先不做即時交通，而是幫你判斷哪種移動方式比較適合。
+      </p>
+    </div>
+
+    <div class="planner-box">
+
+      <label>
+        <span>From</span>
+        <input id="routeFrom" value="Kuching" />
+      </label>
+
+      <label>
+        <span>To</span>
+        <input id="routeTo" placeholder="例如 Santubong / Sibu / Miri" />
+      </label>
+
+      <button id="routeSuggestBtn" type="button">
+        看建議
+      </button>
+
+    </div>
+
+    <div class="planner-result" id="plannerResult">
+      <small>HeriLand 建議</small>
+      <p>
+        輸入目的地後，這裡可以顯示最適合的移動方式、預估時間和提醒。
+      </p>
+    </div>
+
+  </section>
+
+  <!-- Future ART -->
+  <section class="transport-future-note">
+
+    <small>Future Update</small>
+
+    <h2>未來可以接 ART 路線與時刻表</h2>
+
+    <p>
+      等 ART 正式通車、有明確路線與班次資料後，
+      HeriLand 可以把 ART 加進路線建議裡，例如下一班時間、路線名稱和轉乘建議。
+    </p>
+
+  </section>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+</main>
+
+<!-- Mobile Menu Component -->
+<div id="mobileMenu"></div>
+
+<script type="module" src="./js/components.js"></script>
+<script type="module" src="./js/pages/transport.js"></script>
+
+</body>
+</html>
