@@ -701,3 +701,16 @@ function bindSpotSheet() {
     backdrop.addEventListener("click", closeSpotSheet);
   }
 }
+
+window.addEventListener(
+  "componentsReady",
+  () => {
+
+    console.log(
+      "[city] componentsReady received"
+    );
+
+    init();
+
+  }
+);
