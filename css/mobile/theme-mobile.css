@@ -1,0 +1,106 @@
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 820px) {
+
+  .theme-hero {
+    height: 560px;
+
+    border-radius: 0;
+  }
+
+  .theme-hero-content {
+    left: 22px;
+    right: 22px;
+    bottom: 28px;
+  }
+
+  .theme-hero-content h1 {
+    font-size: 52px;
+    line-height: .95;
+
+    letter-spacing: -2px;
+  }
+
+  .theme-hero-content p {
+    margin-top: 14px;
+
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  /* AI */
+
+  .theme-ai {
+    margin-top: 26px;
+
+    padding: 24px;
+
+    border-radius: 26px;
+  }
+
+  .theme-ai p {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  /* Tags */
+
+  .theme-tags {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .theme-tags span {
+    padding: 10px 14px;
+
+    font-size: 12px;
+  }
+
+  /* Section */
+
+  .theme-section {
+    margin-top: 56px;
+  }
+
+  .theme-section-head {
+    margin-bottom: 18px;
+  }
+
+  .theme-section-head h2 {
+    font-size: 34px;
+
+    letter-spacing: -1.4px;
+  }
+
+  .theme-section-head p {
+    font-size: 14px;
+  }
+
+  /* Card */
+
+  .theme-scroll {
+    gap: 14px;
+  }
+
+  .theme-card {
+    flex: 0 0 82vw;
+
+    border-radius: 26px;
+  }
+
+  .theme-card-body {
+    padding: 18px;
+  }
+
+  .theme-card-body h3 {
+    font-size: 22px;
+  }
+
+  .theme-card-body p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+}
