@@ -94,30 +94,6 @@ export const cities = [
     image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "samarahan",
-    name: "Samarahan",
-    tag: "#學城生活",
-    image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "serian",
-    name: "Serian",
-    tag: "#市集小鎮",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "sri-aman",
-    name: "Sri Aman",
-    tag: "#河流小城",
-    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "betong",
-    name: "Betong",
-    tag: "#慢旅路線",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
-  },
-  {
     id: "sarikei",
     name: "Sarikei",
     tag: "#小城生活",
@@ -130,34 +106,16 @@ export const cities = [
     image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "mukah",
-    name: "Mukah",
-    tag: "#海岸文化",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
-  },
-  {
     id: "bintulu",
     name: "Bintulu",
     tag: "#自然慢旅",
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "kapit",
-    name: "Kapit",
-    tag: "#內陸探險",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
-  },
-  {
     id: "miri",
     name: "Miri",
     tag: "#海邊夕陽",
     image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "limbang",
-    name: "Limbang",
-    tag: "#邊境風景",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
