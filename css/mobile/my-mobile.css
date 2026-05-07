@@ -11,6 +11,7 @@
 
   .my-nav-stack {
     min-height: calc(100dvh - 120px);
+    overflow:hidden;
   }
 
   .my-view-main.is-pushed {
@@ -19,7 +20,7 @@
 
   .my-view-sub {
     max-height: calc(100dvh - 120px);
-    overflow-y: auto;
+    overflow-y: hidden;
     padding-top: 2px;
     padding-bottom: 120px;
   }
