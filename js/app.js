@@ -400,10 +400,17 @@ let appStarted = false;
 function startApp() {
   if (appStarted) return;
   appStarted = true;
+
+  console.log("[home] init");
+
   init();
 }
 
-window.addEventListener("componentsReady", startApp);
+if (window.componentsLoaded) {
+  startApp();
+} else {
+  window.addEventListener("componentsReady", startApp);
+}
 
 function truncateText(text, max) {
   if (text.length <= max) return text;
