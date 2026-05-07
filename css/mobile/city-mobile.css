@@ -724,4 +724,29 @@
     font-size: 12px;
     line-height: 1.5;
   }
+
+   .city-list-section {
+    margin-top: 24px;
+  }
+
+  .city-list-scroll {
+    gap: 14px;
+  }
+
+  .city-list-card {
+    flex: 0 0 220px;
+    height: 280px;
+
+    border-radius: 28px;
+  }
+
+  .city-list-overlay {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .city-list-overlay h3 {
+    font-size: 30px;
+  }
 }
