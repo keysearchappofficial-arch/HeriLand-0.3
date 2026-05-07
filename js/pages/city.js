@@ -369,19 +369,13 @@ function renderCityList() {
     card.addEventListener("click", () => {
       renderCity(city);
 
-      document.querySelectorAll(".city-tab")
-        .forEach(tab => tab.classList.remove("active"));
+      document.querySelectorAll(".city-tab").forEach(tab => {
+        tab.classList.toggle("active", tab.textContent === city.name);
+      });
 
-      document.querySelectorAll(".city-tab")
-        .forEach(tab => {
-          if (tab.textContent === city.name) {
-            tab.classList.add("active");
-          }
-        });
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+      document.querySelector(".city-hero")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
       });
     });
 
