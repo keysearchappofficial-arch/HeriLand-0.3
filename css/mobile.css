@@ -1329,6 +1329,7 @@
   overflow: visible;
 
   scroll-snap-align: start;
+  background: rgba(255,255,255,.76);
 }
 
 .city-food-section .food-image {
