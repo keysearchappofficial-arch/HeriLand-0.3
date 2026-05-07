@@ -1,49 +1,155 @@
 async function loadComponent(selector, file) {
-  const target = document.querySelector(selector);
-  if (!target) return;
 
-  const response = await fetch(file);
-  const html = await response.text();
+  console.log(
+    "[components] loading:",
+    selector,
+    file
+  );
 
-  target.innerHTML = html;
+  const target =
+    document.querySelector(selector);
+
+  if (!target) {
+
+    console.warn(
+      "[components] target not found:",
+      selector
+    );
+
+    return;
+
+  }
+
+  try {
+
+    const response =
+      await fetch(file);
+
+    console.log(
+      "[components] response:",
+      file,
+      response.status
+    );
+
+    const html =
+      await response.text();
+
+    target.innerHTML = html;
+
+    console.log(
+      "[components] loaded:",
+      file
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "[components] failed:",
+      file,
+      error
+    );
+
+  }
+
 }
 
+/* =========================
+   Mobile Menu
+========================= */
+
 async function renderMobileMenu() {
-  const target = document.querySelector("#mobileMenu");
-  if (!target) return;
+
+  console.log(
+    "[components] render mobile menu"
+  );
+
+  const target =
+    document.querySelector(
+      "#mobileMenu"
+    );
+
+  if (!target) {
+
+    console.warn(
+      "[components] mobileMenu target missing"
+    );
+
+    return;
+
+  }
 
   target.innerHTML = `
     <div class="mobile-menu">
+
       <div class="mobile-menu-panel">
 
         <div class="mobile-menu-head">
+
           <strong>HeriLand</strong>
-          <button id="mobileMenuClose" type="button">×</button>
+
+          <button
+            id="mobileMenuClose"
+            type="button"
+          >
+            ×
+          </button>
+
         </div>
 
         <div id="mobileNav"></div>
 
         <div class="mobile-menu-ai">
+
           <small>AI Guide</small>
+
           <p>
-            我會依照你現在的位置、時間和狀態，
+            我會依照你現在的位置、
+            時間和狀態，
             幫你推薦現在適合的砂拉越體驗。
           </p>
+
         </div>
 
       </div>
+
     </div>
   `;
 
-  await loadComponent("#mobileNav", "./components/mobile-nav.html");
+  await loadComponent(
+    "#mobileNav",
+    "./components/mobile-nav.html"
+  );
+
 }
 
 async function initComponents() {
-  await loadComponent("#navbar", "./components/navbar.html");
-  await loadComponent("#footer", "./components/footer.html");
+
+  console.log(
+    "[components] init start"
+  );
+
+  await loadComponent(
+    "#navbar",
+    "./components/navbar.html"
+  );
+
+  await loadComponent(
+    "#footer",
+    "./components/footer.html"
+  );
+
   await renderMobileMenu();
 
-  window.dispatchEvent(new Event("componentsReady"));
+  console.log(
+    "[components] READY"
+  );
+
+  window.dispatchEvent(
+    new Event("componentsReady")
+  );
+
 }
 
 initComponents();
