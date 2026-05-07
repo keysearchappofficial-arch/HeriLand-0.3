@@ -87,7 +87,13 @@
         <h2>我的收藏</h2>
       </div>
 
-      <button class="my-more-btn" type="button">查看全部</button>
+      <button
+  class="my-more-btn"
+  type="button"
+  data-open-sheet="savedSheet"
+>
+  查看全部
+</button>
     </div>
 
     <div class="my-card-grid" id="savedGrid"></div>
@@ -103,7 +109,13 @@
         <h2>我的行程</h2>
       </div>
 
-      <button class="my-more-btn" type="button">新增行程</button>
+      <button
+  class="my-more-btn"
+  type="button"
+  data-open-sheet="tripSheet"
+>
+  查看全部
+</button>
     </div>
 
     <div class="trip-grid" id="tripGrid"></div>
@@ -135,12 +147,22 @@
   <section class="my-bottom-grid">
 
     <div class="recent-panel">
-      <div class="section-head compact">
-        <div>
-          <small>History</small>
-          <h2>最近看過</h2>
-        </div>
-      </div>
+<div class="section-head compact">
+
+  <div>
+    <small>History</small>
+    <h2>最近看過</h2>
+  </div>
+
+  <button
+    class="my-more-btn"
+    type="button"
+    data-open-sheet="recentSheet"
+  >
+    查看全部
+  </button>
+
+</div>
 
       <div class="recent-list" id="recentList"></div>
     </div>
