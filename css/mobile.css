@@ -834,7 +834,7 @@
 
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  background: rgba(255,255,255,.76);
+  
 }
 
 .city-spot-section .spot-grid::-webkit-scrollbar {
@@ -854,6 +854,7 @@
   overflow: visible;
 
   scroll-snap-align: start;
+  background: rgba(255,255,255,.76);
 }
 
 /* 圖片 */
