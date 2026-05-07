@@ -86,13 +86,18 @@
         <strong>›</strong>
       </button>
 
-      <button class="my-ios-row" type="button">
-        <div>
-          <span>語言與地區</span>
-          <small>繁體中文 · Sarawak</small>
-        </div>
-        <strong>›</strong>
-      </button>
+<button
+  class="my-ios-row"
+  type="button"
+  data-open-view="languageView"
+>
+  <div>
+    <span>語言與地區</span>
+    <small>繁體中文 · Sarawak</small>
+  </div>
+
+  <strong>›</strong>
+</button>
 
       <button class="my-ios-row" type="button">
         <div>
@@ -135,6 +140,85 @@
 
     <div class="recent-sheet-list" id="recentSheetList"></div>
   </section>
+
+<!-- Language & Region -->
+<section class="my-view my-view-sub" id="languageView">
+
+  <div class="my-sub-head">
+
+    <button type="button" data-back-view>
+      ‹
+    </button>
+
+    <h2>語言與地區</h2>
+
+  </div>
+
+  <!-- Group -->
+  <div class="my-settings-group">
+
+    <small>Language</small>
+
+    <button class="my-settings-row active">
+      <span>繁體中文</span>
+      <strong>✓</strong>
+    </button>
+
+    <button class="my-settings-row">
+      <span>English</span>
+    </button>
+
+    <button class="my-settings-row">
+      <span>Bahasa Melayu</span>
+    </button>
+
+  </div>
+
+  <!-- Group -->
+  <div class="my-settings-group">
+
+    <small>Region</small>
+
+    <button class="my-settings-row active">
+      <span>Sarawak</span>
+      <strong>✓</strong>
+    </button>
+
+    <button class="my-settings-row">
+      <span>Taipei</span>
+    </button>
+
+    <button class="my-settings-row">
+      <span>Seoul</span>
+    </button>
+
+    <button class="my-settings-row">
+      <span>Tokyo</span>
+    </button>
+
+  </div>
+
+  <!-- Group -->
+  <div class="my-settings-group">
+
+    <small>Currency</small>
+
+    <button class="my-settings-row active">
+      <span>RM</span>
+      <strong>✓</strong>
+    </button>
+
+    <button class="my-settings-row">
+      <span>NTD</span>
+    </button>
+
+    <button class="my-settings-row">
+      <span>KRW</span>
+    </button>
+
+  </div>
+
+</section>
 
 </div>
 
