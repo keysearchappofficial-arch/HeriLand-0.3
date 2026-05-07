@@ -100,6 +100,7 @@ const recentViews = [
 function init() {
 
   bindMobileMenu();
+  bindMySheets();
 
   renderSavedPlaces();
   renderTripPlans();
@@ -330,6 +331,255 @@ function bindMobileMenu() {
 
     }
   );
+
+}
+
+/* =========================
+   My Sheet
+========================= */
+
+function bindMySheets() {
+
+  /* Open */
+
+  document
+    .querySelectorAll("[data-open-sheet]")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const id =
+            button.dataset.openSheet;
+
+          openSheet(id);
+
+        }
+      );
+
+    });
+
+  /* Close */
+
+  document
+    .querySelectorAll("[data-close-sheet]")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const id =
+            button.dataset.closeSheet;
+
+          closeSheet(id);
+
+        }
+      );
+
+    });
+
+}
+
+/* =========================
+   Open
+========================= */
+
+function openSheet(id) {
+
+  const sheet =
+    document.getElementById(id);
+
+  if (!sheet) return;
+
+  /* Render */
+
+  if (id === "savedSheet") {
+    renderSavedSheet();
+  }
+
+  if (id === "tripSheet") {
+    renderTripSheet();
+  }
+
+  if (id === "recentSheet") {
+    renderRecentSheet();
+  }
+
+  sheet.classList.add("show");
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+/* =========================
+   Close
+========================= */
+
+function closeSheet(id) {
+
+  const sheet =
+    document.getElementById(id);
+
+  if (!sheet) return;
+
+  sheet.classList.remove("show");
+
+  document.body.style.overflow =
+    "";
+
+}
+
+/* =========================
+   Saved Sheet
+========================= */
+
+function renderSavedSheet() {
+
+  const grid =
+    document.getElementById(
+      "savedSheetGrid"
+    );
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  savedPlaces.forEach(place => {
+
+    const card =
+      document.createElement(
+        "article"
+      );
+
+    card.className =
+      "saved-card";
+
+    card.innerHTML = `
+      <img
+        src="${place.image}"
+        alt="${place.title}"
+      >
+
+      <div class="saved-card-body">
+
+        <h3>
+          ${place.title}
+        </h3>
+
+        <p>
+          ${place.desc}
+        </p>
+
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+/* =========================
+   Trip Sheet
+========================= */
+
+function renderTripSheet() {
+
+  const grid =
+    document.getElementById(
+      "tripSheetGrid"
+    );
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  tripPlans.forEach(plan => {
+
+    const card =
+      document.createElement(
+        "article"
+      );
+
+    card.className =
+      "trip-card";
+
+    card.innerHTML = `
+      <small>
+        HeriLand Trip
+      </small>
+
+      <h3>
+        ${plan.title}
+      </h3>
+
+      <p>
+        ${plan.desc}
+      </p>
+
+      <div class="trip-meta">
+        ${plan.meta.map(item => `
+          <span>${item}</span>
+        `).join("")}
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+/* =========================
+   Recent Sheet
+========================= */
+
+function renderRecentSheet() {
+
+  const list =
+    document.getElementById(
+      "recentSheetList"
+    );
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  recentViews.forEach(item => {
+
+    const row =
+      document.createElement(
+        "article"
+      );
+
+    row.className =
+      "recent-item";
+
+    row.innerHTML = `
+      <img
+        src="${item.image}"
+        alt="${item.title}"
+      >
+
+      <div>
+
+        <h3>
+          ${item.title}
+        </h3>
+
+        <p>
+          ${item.desc}
+        </p>
+
+      </div>
+    `;
+
+    list.appendChild(row);
+
+  });
 
 }
 
