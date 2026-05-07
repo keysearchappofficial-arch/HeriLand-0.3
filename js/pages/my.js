@@ -98,13 +98,12 @@ const recentViews = [
 ========================= */
 
 function init() {
-
   bindMobileMenu();
+  bindMyViews();
 
-   renderSavedSheet()
-renderTripSheet()
-renderRecentSheet()
-
+  renderSavedSheet();
+  renderTripSheet();
+  renderRecentSheet();
 }
 
 function bindMyViews() {
