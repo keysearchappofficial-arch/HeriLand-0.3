@@ -593,15 +593,26 @@
 
   /* Stats */
 
-  .my-stats {
-    grid-template-columns: 1fr;
+.my-stats {
+  grid-template-columns: repeat(3, 1fr);
 
-    gap: 14px;
-  }
+  gap: 10px;
+}
 
-  .my-stats strong {
-    font-size: 34px;
-  }
+.my-stats article {
+  padding: 18px 14px;
+
+  border-radius: 22px;
+}
+
+.my-stats strong {
+  font-size: 28px;
+}
+
+.my-stats span {
+  font-size: 12px;
+  line-height: 1.4;
+}
 
   /* Sections */
 
