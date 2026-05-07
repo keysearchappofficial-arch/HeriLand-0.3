@@ -347,40 +347,75 @@ function renderCityTabs() {
 }
 
 function renderCityList() {
-  const grid = document.getElementById("cityListGrid");
-  if (!grid) return;
 
-  grid.innerHTML = "";
+  const scroll =
+    document.getElementById(
+      "cityListScroll"
+    );
+
+  if (!scroll) return;
+
+  scroll.innerHTML = "";
 
   cities.forEach(city => {
-    const card = document.createElement("article");
-    card.className = "city-list-card";
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      "city-list-card";
 
     card.innerHTML = `
-      <img src="${city.hero}" alt="${city.name}">
+      <img
+        src="${city.hero}"
+        alt="${city.name}"
+      >
 
-      <div class="city-list-card-body">
-        <small>HeriLand City</small>
-        <h3>${city.name}</h3>
-        <p>${city.desc}</p>
+      <div class="city-list-overlay">
+
+        <small>
+          HeriLand City
+        </small>
+
+        <h3>
+          ${city.name}
+        </h3>
+
       </div>
     `;
 
-    card.addEventListener("click", () => {
-      renderCity(city);
+    card.addEventListener(
+      "click",
+      () => {
 
-      document.querySelectorAll(".city-tab").forEach(tab => {
-        tab.classList.toggle("active", tab.textContent === city.name);
-      });
+        renderCity(city);
 
-      document.querySelector(".city-hero")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
+        document.querySelectorAll(
+          ".city-tab"
+        ).forEach(tab => {
 
-    grid.appendChild(card);
+          tab.classList.toggle(
+            "active",
+            tab.textContent === city.name
+          );
+
+        });
+
+        document.querySelector(
+          ".city-hero"
+        )?.scrollIntoView({
+
+          behavior: "smooth"
+
+        });
+
+      }
+    );
+
+    scroll.appendChild(card);
+
   });
+
 }
 
 /* =========================
