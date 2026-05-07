@@ -696,7 +696,7 @@
 ========================= */
 
 .info-page {
-  padding-top: 6px;
+  padding-top: 8px;
 }
 
 /* Section */
@@ -705,7 +705,7 @@
   margin-top: 42px;
 }
 
-/* Label */
+/* Small Label */
 
 .info-section small {
   display: block;
