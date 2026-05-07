@@ -1640,5 +1640,127 @@
 
   -webkit-line-clamp: 2;
 }
+
+  /* =========================
+   My Page - Mobile
+========================= */
+
+  .my-page {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .my-nav-stack {
+    min-height: calc(100dvh - 120px);
+  }
+
+  .my-view-main.is-pushed {
+    transform: translateX(-36%);
+  }
+
+  .my-view-sub {
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+    padding-bottom: 120px;
+  }
+
+  .my-sub-head {
+    margin-bottom: 20px;
+  }
+
+  .my-sub-head button {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 13px;
+
+    font-size: 28px;
+  }
+
+  .my-sub-head h2 {
+    font-size: 30px;
+  }
+
+  .my-ios-summary {
+    margin-top: 18px;
+    padding: 18px;
+
+    border-radius: 24px;
+  }
+
+  .my-avatar {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 18px;
+
+    font-size: 22px;
+  }
+
+  .my-ios-summary h1 {
+    font-size: 28px;
+  }
+
+  .my-ios-summary p {
+    font-size: 13px;
+  }
+
+  .my-ios-list {
+    margin-top: 16px;
+    border-radius: 22px;
+  }
+
+  .my-ios-row {
+    min-height: 70px;
+    padding: 14px 16px;
+  }
+
+  .my-ios-row span {
+    font-size: 16px;
+  }
+
+  .my-ios-row small {
+    font-size: 12px;
+  }
+
+  .my-sheet-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .trip-sheet-grid {
+    gap: 14px;
+  }
+
+  .recent-sheet-list {
+    gap: 14px;
+  }
+
+  .recent-item {
+    border-radius: 22px;
+  }
+
+  .recent-item img {
+    width: 72px;
+    height: 72px;
+
+    border-radius: 18px;
+  }
+
+  .account-card {
+    padding: 24px;
+    border-radius: 26px;
+  }
+
+  .account-card h3 {
+    font-size: 30px;
+  }
+
+  .account-avatar {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 22px;
+  }
   
 }
