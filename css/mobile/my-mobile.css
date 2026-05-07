@@ -512,5 +512,78 @@
   .my-signout-btn:hover {
     background: rgba(255,255,255,.72);
   }
+  
+  /* =========================
+   Language / Currency View
+========================= */
+
+#languageView .my-settings-group,
+#currencyView .my-settings-group {
+  margin-top: 4px;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.56);
+  border: 1px solid rgba(0,0,0,.045);
+
+  backdrop-filter: blur(18px);
+}
+
+#languageView .my-settings-group small,
+#currencyView .my-settings-group small {
+  display: none;
+}
+
+#languageView .my-settings-row,
+#currencyView .my-settings-row {
+  min-height: 56px;
+
+  padding: 0 16px;
+
+  background: transparent;
+  border: none;
+}
+
+#languageView .my-settings-row + .my-settings-row,
+#currencyView .my-settings-row + .my-settings-row {
+  border-top: none;
+}
+
+#languageView .my-settings-row + .my-settings-row::before,
+#currencyView .my-settings-row + .my-settings-row::before {
+  content: "";
+
+  position: absolute;
+
+  left: 16px;
+  right: 0;
+  top: 0;
+
+  height: 1px;
+
+  background: rgba(0,0,0,.055);
+}
+
+#languageView .my-settings-row span,
+#currencyView .my-settings-row span {
+  font-size: 15px;
+  font-weight: 720;
+  letter-spacing: -0.25px;
+}
+
+#languageView .my-settings-row strong,
+#currencyView .my-settings-row strong {
+  color: #111;
+
+  font-size: 16px;
+  font-weight: 850;
+}
+
+#languageView .my-settings-row.active span,
+#currencyView .my-settings-row.active span {
+  font-weight: 850;
+}
 
 }
