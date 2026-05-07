@@ -696,4 +696,32 @@
   font-weight: 850;
   letter-spacing: -0.8px;
 }
+
+  .city-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+    padding: 0 18px;
+  }
+
+  .city-list-card {
+    border-radius: 22px;
+  }
+
+  .city-list-card img {
+    height: 130px;
+  }
+
+  .city-list-card-body {
+    padding: 13px;
+  }
+
+  .city-list-card-body h3 {
+    font-size: 18px;
+  }
+
+  .city-list-card-body p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
 }
