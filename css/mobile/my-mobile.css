@@ -121,4 +121,163 @@
 
     border-radius: 22px;
   }
+  
+  /* =========================
+   My Page Premium Mobile
+========================= */
+
+.my-ios-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 18px;
+  padding: 16px;
+
+  border-radius: 26px;
+
+  background: rgba(255,255,255,.58);
+  border: 1px solid rgba(0,0,0,.045);
+
+  backdrop-filter: blur(20px);
+}
+
+.my-profile-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.my-ios-summary h1 {
+  font-size: 27px;
+  line-height: 1;
+  letter-spacing: -1.1px;
+}
+
+.my-ios-summary p {
+  margin-top: 6px;
+
+  color: #777;
+
+  font-size: 13px;
+}
+
+.my-level-badge {
+  flex-shrink: 0;
+
+  padding: 8px 11px;
+
+  border-radius: 999px;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 850;
+}
+
+/* List */
+
+.my-ios-list {
+  margin-top: 16px;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.58);
+  border: 1px solid rgba(0,0,0,.045);
+
+  backdrop-filter: blur(20px);
+}
+
+.my-ios-row {
+  position: relative;
+
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 14px;
+
+  background: transparent;
+}
+
+.my-ios-row + .my-ios-row {
+  border-top: none;
+}
+
+.my-ios-row + .my-ios-row::before {
+  content: "";
+
+  position: absolute;
+
+  left: 54px;
+  right: 0;
+  top: 0;
+
+  height: 1px;
+
+  background: rgba(0,0,0,.055);
+}
+
+.my-row-icon {
+  width: 28px;
+  height: 28px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: rgba(0,0,0,.055);
+  color: #111;
+
+  font-size: 16px;
+  font-weight: 800;
+
+  flex-shrink: 0;
+}
+
+.my-row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.my-row-main span {
+  display: block;
+
+  color: #111;
+
+  font-size: 15px;
+  font-weight: 760;
+
+  letter-spacing: -0.25px;
+}
+
+.my-row-side {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  flex-shrink: 0;
+}
+
+.my-row-side em {
+  color: #8a8a8a;
+
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 680;
+}
+
+.my-row-side strong {
+  color: #b0b0b0;
+
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+}
   }
