@@ -34,144 +34,109 @@
     </button>
   </header>
 
-  <!-- Profile Hero -->
-  <section class="my-hero">
+ <div class="my-nav-stack" id="myNavStack">
 
-    <div class="my-profile-card">
+  <!-- 主頁 -->
+  <section class="my-view my-view-main" id="myMainView">
+
+    <section class="my-ios-summary">
       <div class="my-avatar">H</div>
 
       <div>
-        <small>Traveler Profile</small>
         <h1>我的 HeriLand</h1>
-        <p>收藏你想去的地方、整理行程，讓 AI Guide 更懂你的旅行節奏。</p>
+        <p>慢旅探索中 · Kuching, Sarawak</p>
       </div>
-    </div>
+    </section>
 
-    <div class="my-status-card">
-      <small>Current Mode</small>
-      <strong>慢旅探索中</strong>
-      <p>偏好：美食、河邊、低人潮、傍晚活動</p>
-    </div>
+    <section class="my-ios-list">
+
+      <button class="my-ios-row" type="button" data-open-view="savedView">
+        <div>
+          <span>我的收藏</span>
+          <small>12 個收藏地點</small>
+        </div>
+        <strong>›</strong>
+      </button>
+
+      <button class="my-ios-row" type="button" data-open-view="tripView">
+        <div>
+          <span>我的行程</span>
+          <small>3 個旅行計畫</small>
+        </div>
+        <strong>›</strong>
+      </button>
+
+      <button class="my-ios-row" type="button" data-open-view="recentView">
+        <div>
+          <span>最近看過</span>
+          <small>8 個瀏覽紀錄</small>
+        </div>
+        <strong>›</strong>
+      </button>
+
+    </section>
+
+    <section class="my-ios-list">
+
+      <button class="my-ios-row" type="button">
+        <div>
+          <span>AI Guide 偏好</span>
+          <small>慢旅、美食、河邊、低人潮</small>
+        </div>
+        <strong>›</strong>
+      </button>
+
+      <button class="my-ios-row" type="button">
+        <div>
+          <span>語言與地區</span>
+          <small>繁體中文 · Sarawak</small>
+        </div>
+        <strong>›</strong>
+      </button>
+
+      <button class="my-ios-row" type="button">
+        <div>
+          <span>登入 / 會員</span>
+          <small>管理帳號與同步資料</small>
+        </div>
+        <strong>›</strong>
+      </button>
+
+    </section>
 
   </section>
 
-  <!-- Profile Summary -->
-<section class="my-ios-summary">
-  <div class="my-avatar">H</div>
-
-  <div>
-    <h1>我的 HeriLand</h1>
-    <p>慢旅探索中 · Kuching, Sarawak</p>
-  </div>
-</section>
-
-<!-- iOS Setting List -->
-<section class="my-ios-list">
-
-  <button class="my-ios-row" type="button" data-open-sheet="savedSheet">
-    <div>
-      <span>我的收藏</span>
-      <small>12 個收藏地點</small>
-    </div>
-    <strong>›</strong>
-  </button>
-
-  <button class="my-ios-row" type="button" data-open-sheet="tripSheet">
-    <div>
-      <span>我的行程</span>
-      <small>3 個旅行計畫</small>
-    </div>
-    <strong>›</strong>
-  </button>
-
-  <button class="my-ios-row" type="button" data-open-sheet="recentSheet">
-    <div>
-      <span>最近看過</span>
-      <small>8 個瀏覽紀錄</small>
-    </div>
-    <strong>›</strong>
-  </button>
-
-</section>
-
-<section class="my-ios-list">
-
-  <button class="my-ios-row" type="button">
-    <div>
-      <span>AI Guide 偏好</span>
-      <small>慢旅、美食、河邊、低人潮</small>
-    </div>
-    <strong>›</strong>
-  </button>
-
-  <button class="my-ios-row" type="button">
-    <div>
-      <span>語言與地區</span>
-      <small>繁體中文 · Sarawak</small>
-    </div>
-    <strong>›</strong>
-  </button>
-
-  <button class="my-ios-row" type="button">
-    <div>
-      <span>登入 / 會員</span>
-      <small>管理帳號與同步資料</small>
-    </div>
-    <strong>›</strong>
-  </button>
-
-</section>
-
-  <!-- Saved Sheet -->
-<section class="my-sheet" id="savedSheet">
-  <div class="my-sheet-backdrop" data-close-sheet="savedSheet"></div>
-
-  <div class="my-sheet-panel">
-    <div class="my-sheet-head">
-      <div>
-        <small>Saved Places</small>
-        <h2>我的收藏</h2>
-      </div>
-      <button type="button" data-close-sheet="savedSheet">×</button>
+  <!-- 收藏頁 -->
+  <section class="my-view my-view-sub" id="savedView">
+    <div class="my-sub-head">
+      <button type="button" data-back-view>‹</button>
+      <h2>我的收藏</h2>
     </div>
 
     <div class="my-sheet-grid" id="savedSheetGrid"></div>
-  </div>
-</section>
+  </section>
 
-<!-- Trip Sheet -->
-<section class="my-sheet" id="tripSheet">
-  <div class="my-sheet-backdrop" data-close-sheet="tripSheet"></div>
-
-  <div class="my-sheet-panel">
-    <div class="my-sheet-head">
-      <div>
-        <small>Trip Plans</small>
-        <h2>我的行程</h2>
-      </div>
-      <button type="button" data-close-sheet="tripSheet">×</button>
+  <!-- 行程頁 -->
+  <section class="my-view my-view-sub" id="tripView">
+    <div class="my-sub-head">
+      <button type="button" data-back-view>‹</button>
+      <h2>我的行程</h2>
     </div>
 
     <div class="trip-sheet-grid" id="tripSheetGrid"></div>
-  </div>
-</section>
+  </section>
 
-<!-- Recent Sheet -->
-<section class="my-sheet" id="recentSheet">
-  <div class="my-sheet-backdrop" data-close-sheet="recentSheet"></div>
-
-  <div class="my-sheet-panel">
-    <div class="my-sheet-head">
-      <div>
-        <small>Recently Viewed</small>
-        <h2>最近看過</h2>
-      </div>
-      <button type="button" data-close-sheet="recentSheet">×</button>
+  <!-- 最近看過頁 -->
+  <section class="my-view my-view-sub" id="recentView">
+    <div class="my-sub-head">
+      <button type="button" data-back-view>‹</button>
+      <h2>最近看過</h2>
     </div>
 
     <div class="recent-sheet-list" id="recentSheetList"></div>
-  </div>
-</section>
+  </section>
+
+</div>
 
   <!-- Footer -->
   <div id="footer"></div>
