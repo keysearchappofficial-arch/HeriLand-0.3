@@ -335,6 +335,24 @@ function bindMobileMenu() {
    Start
 ========================= */
 
-window.addEventListener("componentsReady", () => {
+let pageStarted = false;
+
+function startPage() {
+  if (pageStarted) return;
+
+  pageStarted = true;
+
+  console.log("[event] init");
+
   init();
-});
+}
+
+if (window.componentsLoaded) {
+  startPage();
+}
+else {
+  window.addEventListener(
+    "componentsReady",
+    startPage
+  );
+}
