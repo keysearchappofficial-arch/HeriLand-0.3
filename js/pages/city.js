@@ -362,27 +362,13 @@ function renderCityList() {
     const card =
       document.createElement("article");
 
-    card.className =
-      "city-list-card";
+    card.className = "city-card";
 
-    card.innerHTML = `
-      <img
-        src="${city.hero}"
-        alt="${city.name}"
-      >
-
-      <div class="city-list-overlay">
-
-        <small>
-          HeriLand City
-        </small>
-
-        <h3>
-          ${city.name}
-        </h3>
-
-      </div>
-    `;
+card.innerHTML = `
+  <div class="city-tag">HeriLand City</div>
+  <img src="${city.hero}" alt="${city.name}">
+  <div class="city-name">${city.name}</div>
+`;
 
     card.addEventListener(
       "click",
