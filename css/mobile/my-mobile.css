@@ -696,50 +696,49 @@
 ========================= */
 
 .info-page {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  padding-top: 6px;
 }
 
-.info-block {
-  padding: 22px 20px;
+/* Section */
 
-  border-radius: 26px;
-
-  background: rgba(255,255,255,.58);
-  border: 1px solid rgba(0,0,0,.045);
-
-  backdrop-filter: blur(18px);
+.info-section + .info-section {
+  margin-top: 42px;
 }
 
-.info-block small {
+/* Label */
+
+.info-section small {
   display: block;
 
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 
-  color: #8d8d8d;
+  color: #9a9a9a;
 
   font-size: 11px;
   font-weight: 800;
 
-  letter-spacing: .04em;
+  letter-spacing: .08em;
   text-transform: uppercase;
 }
 
-.info-block h3 {
-  font-size: 26px;
-  line-height: 1.12;
+/* Title */
 
-  letter-spacing: -1px;
+.info-section h3 {
+  font-size: 30px;
+  line-height: 1.08;
+
+  letter-spacing: -1.4px;
 }
 
-.info-block p {
-  margin-top: 14px;
+/* Paragraph */
+
+.info-section p {
+  margin-top: 18px;
 
   color: #666;
 
-  font-size: 14px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.95;
 }
 
 }
