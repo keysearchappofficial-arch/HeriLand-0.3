@@ -153,7 +153,7 @@ function renderSpots() {
 
   spotScroll.innerHTML = "";
 
-  spots.slice(0, 20).forEach(spot => {
+  spots.slice(0, 15).forEach(spot => {
     const card = document.createElement("article");
     card.className = "spot-card";
 
@@ -197,7 +197,7 @@ function renderFoods() {
 
   foodScroll.innerHTML = "";
 
-  foods.slice(0, 20).forEach(food => {
+  foods.slice(0, 15).forEach(food => {
     const card = document.createElement("article");
     card.className = "food-card";
 
