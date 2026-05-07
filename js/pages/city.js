@@ -1,11 +1,15 @@
 const cities = [
+
   {
     id: "kuching",
     name: "Kuching",
+
     hero:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80",
+
     desc:
       "從河邊散步、老街、美食和慢節奏開始探索砂拉越。",
+
     ai:
       "第一次來 Kuching？建議先從 Waterfront、老街和在地美食開始。",
 
@@ -22,8 +26,10 @@ const cities = [
   {
     id: "miri",
     name: "Miri",
+
     hero:
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+
     desc:
       "海邊、夕陽、自然和比較舒服的旅遊節奏。",
 
@@ -43,8 +49,10 @@ const cities = [
   {
     id: "sibu",
     name: "Sibu",
+
     hero:
       "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80",
+
     desc:
       "在地生活感、美食和比較少觀光感的小城。",
 
@@ -64,8 +72,10 @@ const cities = [
   {
     id: "bintulu",
     name: "Bintulu",
+
     hero:
       "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80",
+
     desc:
       "自然、海岸和比較安靜的旅遊方式。",
 
@@ -85,8 +95,10 @@ const cities = [
   {
     id: "sarikei",
     name: "Sarikei",
+
     hero:
       "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=80",
+
     desc:
       "小城生活感和比較慢的旅行節奏。",
 
@@ -106,8 +118,10 @@ const cities = [
   {
     id: "mukah",
     name: "Mukah",
+
     hero:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
+
     desc:
       "海岸文化和比較原始的砂拉越感。",
 
@@ -122,7 +136,123 @@ const cities = [
 
     event:
       "文化活動比觀光活動更有特色。"
+  },
+
+  {
+    id: "kapit",
+    name: "Kapit",
+
+    hero:
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
+
+    desc:
+      "比較深入內陸的砂拉越感，適合想看不同生活節奏的人。",
+
+    ai:
+      "Kapit 比較像真正進入砂拉越內陸的入口。",
+
+    spot:
+      "河流和內陸自然景色是重點。",
+
+    food:
+      "比較適合找在地家庭式餐廳。",
+
+    event:
+      "在地節慶和生活感比觀光更重要。"
+  },
+
+  {
+    id: "serian",
+    name: "Serian",
+
+    hero:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80",
+
+    desc:
+      "離 Kuching 不遠，但節奏已經慢很多。",
+
+    ai:
+      "Serian 很適合短途慢旅。",
+
+    spot:
+      "自然和小鎮感是這裡的重點。",
+
+    food:
+      "推薦找在地市場和小吃。",
+
+    event:
+      "偏向生活型和在地型活動。"
+  },
+
+  {
+    id: "sri-aman",
+    name: "Sri Aman",
+
+    hero:
+      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80",
+
+    desc:
+      "比較安靜的小城，適合放慢旅行節奏。",
+
+    ai:
+      "Sri Aman 比較適合想避開觀光感的人。",
+
+    spot:
+      "河邊和自然景色很舒服。",
+
+    food:
+      "適合慢慢找在地餐廳。",
+
+    event:
+      "比較偏地方型活動和文化節慶。"
+  },
+
+  {
+    id: "limbang",
+    name: "Limbang",
+
+    hero:
+      "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1600&q=80",
+
+    desc:
+      "靠近汶萊邊境，帶有比較特殊的跨境感。",
+
+    ai:
+      "Limbang 適合喜歡邊境城市氛圍的人。",
+
+    spot:
+      "推薦探索河邊和邊境區域。",
+
+    food:
+      "有些料理會混合不同文化風格。",
+
+    event:
+      "比較偏地方型和生活型活動。"
+  },
+
+  {
+    id: "betong",
+    name: "Betong",
+
+    hero:
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+
+    desc:
+      "比較深入自然和長屋文化的區域。",
+
+    ai:
+      "Betong 適合想體驗比較傳統砂拉越文化的人。",
+
+    spot:
+      "自然景點和長屋體驗值得慢慢探索。",
+
+    food:
+      "推薦在地料理和家庭式餐點。",
+
+    event:
+      "文化活動會比觀光活動更有特色。"
   }
+
 ];
 
 const spots = [
