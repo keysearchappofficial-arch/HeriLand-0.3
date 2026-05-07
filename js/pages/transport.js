@@ -259,12 +259,30 @@ function bindMobileMenu() {
 /* =========================
    Start
 ========================= */
+let pageStarted = false;
 
-window.addEventListener(
-  "componentsReady",
-  () => {
+function startPage() {
 
-    init();
+  if (pageStarted) return;
 
-  }
-);
+  pageStarted = true;
+
+  console.log("[transport] init");
+
+  init();
+
+}
+
+if (window.componentsLoaded) {
+
+  startPage();
+
+}
+else {
+
+  window.addEventListener(
+    "componentsReady",
+    startPage
+  );
+
+}
