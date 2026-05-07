@@ -121,7 +121,7 @@ function bindMyViews() {
   let viewStack = [];
 
   /* =========================
-     Open
+     Open View
   ========================= */
 
   document
@@ -163,17 +163,28 @@ function bindMyViews() {
             "is-pushed"
           );
 
-          /* Hide current */
+          /* Hide all */
 
           allViews.forEach(view => {
-            view.classList.remove("active");
+            view.classList.remove(
+              "active"
+            );
           });
 
           /* Show target */
 
-          target.classList.add("active");
+          target.classList.add(
+            "active"
+          );
 
-          window.scrollTo({
+          /* Lock body */
+
+          document.body.style.overflow =
+            "hidden";
+
+          /* Scroll top */
+
+          target.scrollTo({
             top: 0
           });
 
@@ -183,7 +194,7 @@ function bindMyViews() {
     });
 
   /* =========================
-     Back
+     Back View
   ========================= */
 
   document
@@ -195,13 +206,19 @@ function bindMyViews() {
         () => {
 
           const current =
-            button.closest(".my-view-sub");
+            button.closest(
+              ".my-view-sub"
+            );
 
           if (!current) return;
+
+          /* Hide current */
 
           current.classList.remove(
             "active"
           );
+
+          /* Previous */
 
           const prev =
             viewStack.pop();
@@ -216,6 +233,13 @@ function bindMyViews() {
             mainView.classList.remove(
               "is-pushed"
             );
+
+            document.body.style.overflow =
+              "";
+
+            window.scrollTo({
+              top: 0
+            });
 
             return;
 
@@ -233,6 +257,10 @@ function bindMyViews() {
             prevView.classList.add(
               "active"
             );
+
+            prevView.scrollTo({
+              top: 0
+            });
 
           }
 
