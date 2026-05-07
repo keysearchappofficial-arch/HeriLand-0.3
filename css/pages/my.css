@@ -832,3 +832,38 @@
     border-radius: 22px;
   }
 }
+
+/* =========================
+   Account Settings Polish
+========================= */
+
+.my-settings-row strong {
+  color: #9a9a9a;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.my-settings-group + .my-settings-group {
+  margin-top: 10px;
+}
+
+/* Badge Level */
+
+.my-settings-row strong:not(:empty) {
+  letter-spacing: -.2px;
+}
+
+/* Hover */
+
+.my-settings-row:hover {
+  background: rgba(0,0,0,.025);
+}
+
+/* Active */
+
+.my-settings-row:active {
+  transform: scale(.997);
+}
