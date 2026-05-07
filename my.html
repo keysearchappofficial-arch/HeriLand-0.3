@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HeriLand My Page</title>
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/pages/my.css" />
+  <link rel="stylesheet" href="./css/mobile.css" />
+</head>
+
+<body>
+
+<main class="page-container my-page">
+
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Mobile Top -->
+  <header class="mobile-top">
+    <div>
+      <small>Your Profile</small>
+      <strong>我的 HeriLand</strong>
+    </div>
+
+    <button class="icon-btn" id="mobileMenuBtn" aria-label="menu">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7h16"></path>
+        <path d="M4 12h16"></path>
+        <path d="M4 17h16"></path>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Profile Hero -->
+  <section class="my-hero">
+
+    <div class="my-profile-card">
+      <div class="my-avatar">H</div>
+
+      <div>
+        <small>Traveler Profile</small>
+        <h1>我的 HeriLand</h1>
+        <p>收藏你想去的地方、整理行程，讓 AI Guide 更懂你的旅行節奏。</p>
+      </div>
+    </div>
+
+    <div class="my-status-card">
+      <small>Current Mode</small>
+      <strong>慢旅探索中</strong>
+      <p>偏好：美食、河邊、低人潮、傍晚活動</p>
+    </div>
+
+  </section>
+
+  <!-- Quick Stats -->
+  <section class="my-stats">
+
+    <article>
+      <small>收藏</small>
+      <strong id="savedCount">12</strong>
+      <span>Saved places</span>
+    </article>
+
+    <article>
+      <small>行程</small>
+      <strong id="tripCount">3</strong>
+      <span>Trip plans</span>
+    </article>
+
+    <article>
+      <small>最近看過</small>
+      <strong id="recentCount">8</strong>
+      <span>Recently viewed</span>
+    </article>
+
+  </section>
+
+  <!-- Saved Places -->
+  <section class="my-section">
+
+    <div class="section-head">
+      <div>
+        <small>Saved</small>
+        <h2>我的收藏</h2>
+      </div>
+
+      <button class="my-more-btn" type="button">查看全部</button>
+    </div>
+
+    <div class="my-card-grid" id="savedGrid"></div>
+
+  </section>
+
+  <!-- Trip Plans -->
+  <section class="my-section">
+
+    <div class="section-head">
+      <div>
+        <small>Trips</small>
+        <h2>我的行程</h2>
+      </div>
+
+      <button class="my-more-btn" type="button">新增行程</button>
+    </div>
+
+    <div class="trip-grid" id="tripGrid"></div>
+
+  </section>
+
+  <!-- AI Preference -->
+  <section class="my-ai-panel">
+
+    <div>
+      <small>AI Preference</small>
+      <h2>AI Guide 偏好</h2>
+      <p>
+        這些偏好可以讓 HeriLand 之後推薦更像你的旅行方式。
+      </p>
+    </div>
+
+    <div class="preference-list" id="preferenceList">
+      <span>慢旅</span>
+      <span>在地美食</span>
+      <span>河邊散步</span>
+      <span>低人潮</span>
+      <span>傍晚活動</span>
+    </div>
+
+  </section>
+
+  <!-- Recent Views + Settings -->
+  <section class="my-bottom-grid">
+
+    <div class="recent-panel">
+      <div class="section-head compact">
+        <div>
+          <small>History</small>
+          <h2>最近看過</h2>
+        </div>
+      </div>
+
+      <div class="recent-list" id="recentList"></div>
+    </div>
+
+    <div class="settings-panel">
+      <small>Settings</small>
+      <h2>帳號與設定</h2>
+
+      <div class="settings-list">
+        <button type="button">個人資料</button>
+        <button type="button">通知設定</button>
+        <button type="button">語言與地區</button>
+        <button type="button">登入 / 會員</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+</main>
+
+<!-- Mobile Menu Component -->
+<div id="mobileMenu"></div>
+
+<script type="module" src="./js/components.js"></script>
+<script type="module" src="./js/pages/my.js"></script>
+
+</body>
+</html>
