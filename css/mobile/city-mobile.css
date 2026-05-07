@@ -749,4 +749,26 @@
   .city-list-overlay h3 {
     font-size: 30px;
   }
+
+  .city-list-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 2px 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.city-list-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.city-list-scroll .city-card {
+  position: relative;
+  flex: 0 0 145px;
+  height: 145px;
+  border-radius: 32px 32px 32px 8px;
+  overflow: visible;
+  scroll-snap-align: start;
+}
 }
