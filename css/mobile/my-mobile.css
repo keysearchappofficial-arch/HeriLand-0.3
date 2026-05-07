@@ -154,6 +154,7 @@
     font-weight: 800;
 
     flex-shrink: 0;
+    align-item:center;
   }
 
   .my-row-main {
