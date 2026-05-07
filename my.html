@@ -55,6 +55,7 @@
   </div>
 </section>
 
+<!-- Group 1: Main -->
 <section class="my-ios-list">
 
   <button class="my-ios-row" type="button" data-open-view="savedView">
@@ -98,9 +99,10 @@
 
 </section>
 
+<!-- Group 2: AI -->
 <section class="my-ios-list">
 
-  <button class="my-ios-row" type="button">
+  <button class="my-ios-row" type="button" data-open-view="aiObserveView">
     <span class="my-row-icon">✦</span>
 
     <div class="my-row-main">
@@ -113,11 +115,16 @@
     </div>
   </button>
 
+</section>
+
+<!-- Group 3: Settings -->
+<section class="my-ios-list">
+
   <button class="my-ios-row" type="button" data-open-view="languageView">
-    <span class="my-row-icon">⌂</span>
+    <span class="my-row-icon">文</span>
 
     <div class="my-row-main">
-      <span>語言與地區</span>
+      <span>語言</span>
     </div>
 
     <div class="my-row-side">
@@ -126,11 +133,24 @@
     </div>
   </button>
 
+  <button class="my-ios-row" type="button" data-open-view="currencyView">
+    <span class="my-row-icon">$</span>
+
+    <div class="my-row-main">
+      <span>貨幣</span>
+    </div>
+
+    <div class="my-row-side">
+      <em>RM</em>
+      <strong>›</strong>
+    </div>
+  </button>
+
   <button class="my-ios-row" type="button" data-open-view="accountView">
     <span class="my-row-icon">○</span>
 
     <div class="my-row-main">
-      <span>登入 / 會員</span>
+      <span>會員</span>
     </div>
 
     <div class="my-row-side">
@@ -141,6 +161,7 @@
 
 </section>
 
+<!-- Group 4: Info -->
 <section class="my-ios-list my-ios-list-secondary">
 
   <button class="my-ios-row" type="button">
@@ -173,17 +194,21 @@
     </div>
   </button>
 
+  <button class="my-ios-row" type="button">
+    <div class="my-row-main">
+      <span>Clear Cache</span>
+    </div>
+
+    <div class="my-row-side">
+      <strong>›</strong>
+    </div>
+  </button>
+
 </section>
 
 <div class="my-version">
   HeriLand v0.9
 </div>
-
-<button class="my-signout-btn" type="button">
-  Sign Out
-</button>
-
-  </section>
 
   <!-- 收藏頁 -->
   <section class="my-view my-view-sub" id="savedView">
@@ -224,7 +249,7 @@
       ‹
     </button>
 
-    <h2>語言與地區</h2>
+    <h2>語言</h2>
 
   </div>
 
@@ -248,34 +273,17 @@
 
   </div>
 
-  <!-- Group -->
-  <div class="my-settings-group">
+</section>
 
-    <small>Region</small>
+<!-- Currency -->
+<section class="my-view my-view-sub" id="currencyView">
 
-    <button class="my-settings-row active">
-      <span>Sarawak</span>
-      <strong>✓</strong>
-    </button>
-
-    <button class="my-settings-row">
-      <span>Taipei</span>
-    </button>
-
-    <button class="my-settings-row">
-      <span>Seoul</span>
-    </button>
-
-    <button class="my-settings-row">
-      <span>Tokyo</span>
-    </button>
-
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>貨幣</h2>
   </div>
 
-  <!-- Group -->
   <div class="my-settings-group">
-
-    <small>Currency</small>
 
     <button class="my-settings-row active">
       <span>RM</span>
@@ -290,7 +298,34 @@
       <span>KRW</span>
     </button>
 
+    <button class="my-settings-row">
+      <span>JPY</span>
+    </button>
+
+    <button class="my-settings-row">
+      <span>USD</span>
+    </button>
+
   </div>
+
+</section>
+
+<!-- AI Observation -->
+<section class="my-view my-view-sub" id="aiObserveView">
+
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>AI Guide 觀察</h2>
+  </div>
+
+  <section class="account-card">
+    <small>Travel Pattern</small>
+    <h3>慢旅探索型</h3>
+    <p>
+      你最近比較常查看河邊、低人潮、美食和傍晚活動。
+      HeriLand 會優先推薦比較舒服、不趕路的探索方向。
+    </p>
+  </section>
 
 </section>
 
