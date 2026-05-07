@@ -588,4 +588,90 @@
   font-weight: 850;
 }
 
+/* =========================
+   Badges View
+========================= */
+
+#badgesView .badge-wall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+/* Badge */
+
+.badge-item {
+  min-height: 138px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px 10px;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.5);
+  border: 1px solid rgba(0,0,0,.045);
+
+  backdrop-filter: blur(18px);
+
+  text-align: center;
+
+  opacity: .42;
+}
+
+.badge-item.unlocked {
+  opacity: 1;
+}
+
+/* Mark */
+
+.badge-mark {
+  width: 54px;
+  height: 54px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 18px;
+
+  background: rgba(0,0,0,.06);
+  color: #111;
+
+  font-size: 26px;
+  font-weight: 900;
+
+  margin-bottom: 12px;
+}
+
+.badge-item.unlocked .badge-mark {
+  background: #111;
+  color: #fff;
+}
+
+/* Text */
+
+.badge-item strong {
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+}
+
+.badge-item span {
+  margin-top: 6px;
+
+  color: #8a8a8a;
+
+  font-size: 11px;
+  font-weight: 760;
+}
+
+/* Locked */
+
+.badge-item:not(.unlocked) .badge-mark {
+  filter: grayscale(1);
+}
+
 }
