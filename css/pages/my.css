@@ -663,3 +663,73 @@
   }
 
 }
+
+/* =========================
+   Settings Group
+========================= */
+
+.my-settings-group {
+  margin-bottom: 28px;
+}
+
+.my-settings-group small {
+  display: block;
+
+  margin-bottom: 10px;
+  padding-left: 6px;
+
+  color: #888;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* =========================
+   Settings Row
+========================= */
+
+.my-settings-row {
+  width: 100%;
+  min-height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  border: none;
+
+  background: rgba(255,255,255,.82);
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.my-settings-row:first-of-type {
+  border-radius: 22px 22px 0 0;
+}
+
+.my-settings-row:last-of-type {
+  border-radius: 0 0 22px 22px;
+}
+
+.my-settings-row:only-of-type {
+  border-radius: 22px;
+}
+
+.my-settings-row + .my-settings-row {
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+
+.my-settings-row span {
+  font-size: 16px;
+  font-weight: 760;
+}
+
+.my-settings-row strong {
+  color: #111;
+
+  font-size: 18px;
+}
