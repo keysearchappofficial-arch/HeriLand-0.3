@@ -1762,5 +1762,130 @@
 
     border-radius: 22px;
   }
+
+  /* =========================
+   Transport Page - Mobile
+========================= */
+
+  .transport-page {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+
+  .transport-hero {
+    height: 500px;
+    border-radius: 0;
+  }
+
+  .transport-hero-content {
+    left: 22px;
+    right: 22px;
+    bottom: 30px;
+  }
+
+  .transport-hero-content h1 {
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .transport-hero-content p {
+    margin-top: 14px;
+
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* AI */
+
+  .transport-ai-note {
+    margin-top: 0;
+
+    border-radius: 0;
+
+    padding: 22px 18px;
+  }
+
+  .transport-ai-note p {
+    font-size: 15px;
+  }
+
+  /* Sections */
+
+  .transport-mode-section,
+  .transport-route-section,
+  .transport-planner,
+  .transport-future-note {
+    margin-top: 42px;
+  }
+
+  .section-head h2,
+  .planner-head h2,
+  .transport-future-note h2 {
+    font-size: 30px;
+    line-height: 1.08;
+  }
+
+  /* Modes */
+
+  .transport-mode-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 14px;
+  }
+
+  .transport-mode-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .transport-mode-card h3 {
+    font-size: 18px;
+  }
+
+  .transport-mode-card p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  /* Routes */
+
+  .route-card-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .route-card {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .route-card-head h3 {
+    font-size: 24px;
+  }
+
+  /* Planner */
+
+  .planner-box {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .planner-box button {
+    width: 100%;
+  }
+
+  .planner-result {
+    padding: 20px;
+  }
+
+  /* Future */
+
+  .transport-future-note {
+    padding: 24px;
+    border-radius: 26px;
+  }
   
 }
