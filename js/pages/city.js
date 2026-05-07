@@ -255,7 +255,11 @@ const foods = [
     desc: "竹筒雞，適合想體驗傳統風味的人。",
     image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
     meta: "Sarawak"
-  },
+  }
+  ];
+
+  const events = [
+    {
     title: "Kuching Waterfront Night Walk",
     date: "每週五・晚上 7:00",
     desc: "適合晚上慢慢走，看河邊燈光和城市生活感。",
