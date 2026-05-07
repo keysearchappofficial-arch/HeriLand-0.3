@@ -94,10 +94,10 @@ export const cities = [
     image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "sarikei",
-    name: "Sarikei",
-    tag: "#小城生活",
-    image: "https://images.unsplash.com/photo-1517821360905-7f294d4af577?auto=format&fit=crop&w=800&q=80"
+    id: "miri",
+    name: "Miri",
+    tag: "#海邊夕陽",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "sibu",
@@ -112,10 +112,10 @@ export const cities = [
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "miri",
-    name: "Miri",
-    tag: "#海邊夕陽",
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+    id: "sarikei",
+    name: "Sarikei",
+    tag: "#小城生活",
+    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
