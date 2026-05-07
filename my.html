@@ -360,7 +360,7 @@
   <div class="my-settings-group">
     <small>Profile</small>
 
-    <button class="my-settings-row">
+    <button class="my-settings-row" type="button" data-open-view="profileView">
       <span>個人資料</span>
       <strong>›</strong>
     </button>
@@ -369,17 +369,17 @@
   <div class="my-settings-group">
     <small>Travel</small>
 
-    <button class="my-settings-row">
+    <button class="my-settings-row" type="button" data-open-view="savedTripsView">
       <span>儲存旅行</span>
       <strong>›</strong>
     </button>
-
-    <button class="my-settings-row">
+    
+    <button class="my-settings-row" type="button" data-open-view="collectedRoutesView">
       <span>我收藏的推薦行程</span>
       <strong>›</strong>
     </button>
-
-    <button class="my-settings-row">
+    
+    <button class="my-settings-row" type="button" data-open-view="publishedRoutesView">
       <span>我發布的推薦</span>
       <strong>›</strong>
     </button>
@@ -398,6 +398,70 @@
     Sign Out
   </button>
 
+</section>
+
+<!-- Profile Detail -->
+<section class="my-view my-view-sub" id="profileView">
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>個人資料</h2>
+  </div>
+
+  <section class="account-card">
+    <div class="account-avatar">A</div>
+    <small>Traveler Profile</small>
+    <h3>Andy</h3>
+    <p>Kuching 慢旅探索中 · 偏好美食、河邊、低人潮</p>
+  </section>
+
+  <div class="my-settings-group">
+    <button class="my-settings-row">
+      <span>名字</span>
+      <strong>Andy</strong>
+    </button>
+    <button class="my-settings-row">
+      <span>Email</span>
+      <strong>未設定</strong>
+    </button>
+    <button class="my-settings-row">
+      <span>登入方式</span>
+      <strong>Guest</strong>
+    </button>
+  </div>
+</section>
+
+<!-- Saved Trips -->
+<section class="my-view my-view-sub" id="savedTripsView">
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>儲存旅行</h2>
+  </div>
+
+  <div class="trip-sheet-grid" id="savedTripsGrid"></div>
+</section>
+
+<!-- Collected Routes -->
+<section class="my-view my-view-sub" id="collectedRoutesView">
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>收藏行程</h2>
+  </div>
+
+  <div class="trip-sheet-grid" id="collectedRoutesGrid"></div>
+</section>
+
+<!-- Published Routes -->
+<section class="my-view my-view-sub" id="publishedRoutesView">
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>我發布的推薦</h2>
+  </div>
+
+  <section class="account-card">
+    <small>Coming Soon</small>
+    <h3>還沒有發布推薦</h3>
+    <p>之後可以把你的路線、景點組合分享給其他旅人儲存。</p>
+  </section>
 </section>
 
 <!-- Badges -->
