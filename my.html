@@ -337,7 +337,7 @@
 
   <div class="my-sub-head">
     <button type="button" data-back-view>‹</button>
-    <h2>登入 / 會員</h2>
+    <h2>會員</h2>
   </div>
 
   <section class="account-card">
@@ -347,7 +347,7 @@
       <small>HeriLand Account</small>
       <h3>尚未登入</h3>
       <p>
-        登入後可以修改個人資料、儲存旅行推薦，
+        登入後可以管理個人資料、儲存旅行推薦，
         並累積你的旅人徽章。
       </p>
     </div>
@@ -362,11 +362,6 @@
 
     <button class="my-settings-row">
       <span>個人資料</span>
-      <strong>›</strong>
-    </button>
-
-    <button class="my-settings-row">
-      <span>修改名字</span>
       <strong>›</strong>
     </button>
   </div>
@@ -391,23 +386,67 @@
   </div>
 
   <div class="my-settings-group">
-    <small>Badges</small>
+    <small>Growth</small>
 
-    <button class="my-settings-row">
-      <span>慢旅探索者</span>
-      <strong>Lv.1</strong>
-    </button>
-
-    <button class="my-settings-row">
-      <span>美食獵人</span>
-      <strong>Lv.1</strong>
-    </button>
-
-    <button class="my-settings-row">
-      <span>城市漫遊者</span>
-      <strong>Lv.1</strong>
+    <button class="my-settings-row" type="button" data-open-view="badgesView">
+      <span>旅人徽章</span>
+      <strong>12 枚 ›</strong>
     </button>
   </div>
+
+  <button class="my-signout-btn" type="button">
+    Sign Out
+  </button>
+
+</section>
+
+<!-- Badges -->
+<section class="my-view my-view-sub" id="badgesView">
+
+  <div class="my-sub-head">
+    <button type="button" data-back-view>‹</button>
+    <h2>旅人徽章</h2>
+  </div>
+
+  <section class="badge-wall">
+
+    <article class="badge-item unlocked">
+      <div class="badge-mark">✦</div>
+      <strong>慢旅探索者</strong>
+      <span>Lv.1</span>
+    </article>
+
+    <article class="badge-item unlocked">
+      <div class="badge-mark">◎</div>
+      <strong>美食獵人</strong>
+      <span>Lv.1</span>
+    </article>
+
+    <article class="badge-item unlocked">
+      <div class="badge-mark">◷</div>
+      <strong>城市漫遊者</strong>
+      <span>Lv.1</span>
+    </article>
+
+    <article class="badge-item">
+      <div class="badge-mark">⌁</div>
+      <strong>夕陽收藏家</strong>
+      <span>Locked</span>
+    </article>
+
+    <article class="badge-item">
+      <div class="badge-mark">⌂</div>
+      <strong>小城旅人</strong>
+      <span>Locked</span>
+    </article>
+
+    <article class="badge-item">
+      <div class="badge-mark">◇</div>
+      <strong>Hidden Spot</strong>
+      <span>Locked</span>
+    </article>
+
+  </section>
 
 </section>
 
