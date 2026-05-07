@@ -107,30 +107,140 @@ function init() {
 }
 
 function bindMyViews() {
-  const mainView = document.getElementById("myMainView");
 
-  document.querySelectorAll("[data-open-view]").forEach(button => {
-    button.addEventListener("click", () => {
-      const viewId = button.dataset.openView;
-      const view = document.getElementById(viewId);
+  const mainView =
+    document.getElementById(
+      "myMainView"
+    );
 
-      if (!mainView || !view) return;
+  const allViews =
+    document.querySelectorAll(
+      ".my-view-sub"
+    );
 
-      mainView.classList.add("is-pushed");
-      view.classList.add("active");
+  let viewStack = [];
+
+  /* =========================
+     Open
+  ========================= */
+
+  document
+    .querySelectorAll("[data-open-view]")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const targetId =
+            button.dataset.openView;
+
+          const target =
+            document.getElementById(
+              targetId
+            );
+
+          if (!target) return;
+
+          /* Current active */
+
+          const current =
+            document.querySelector(
+              ".my-view-sub.active"
+            );
+
+          if (current) {
+            viewStack.push(current.id);
+          }
+
+          else {
+            viewStack.push("main");
+          }
+
+          /* Push main */
+
+          mainView.classList.add(
+            "is-pushed"
+          );
+
+          /* Hide current */
+
+          allViews.forEach(view => {
+            view.classList.remove("active");
+          });
+
+          /* Show target */
+
+          target.classList.add("active");
+
+          window.scrollTo({
+            top: 0
+          });
+
+        }
+      );
+
     });
-  });
 
-  document.querySelectorAll("[data-back-view]").forEach(button => {
-    button.addEventListener("click", () => {
-      const activeView = document.querySelector(".my-view-sub.active");
+  /* =========================
+     Back
+  ========================= */
 
-      if (!mainView || !activeView) return;
+  document
+    .querySelectorAll("[data-back-view]")
+    .forEach(button => {
 
-      activeView.classList.remove("active");
-      mainView.classList.remove("is-pushed");
+      button.addEventListener(
+        "click",
+        () => {
+
+          const current =
+            button.closest(".my-view-sub");
+
+          if (!current) return;
+
+          current.classList.remove(
+            "active"
+          );
+
+          const prev =
+            viewStack.pop();
+
+          /* Back to main */
+
+          if (
+            !prev ||
+            prev === "main"
+          ) {
+
+            mainView.classList.remove(
+              "is-pushed"
+            );
+
+            return;
+
+          }
+
+          /* Back to previous sub */
+
+          const prevView =
+            document.getElementById(
+              prev
+            );
+
+          if (prevView) {
+
+            prevView.classList.add(
+              "active"
+            );
+
+          }
+
+        }
+      );
+
     });
-  });
+
 }
 
 /* =========================
