@@ -34,6 +34,14 @@
   background: #f6f5f1;
 }
 
+.my-view-sub:not(.active) {
+  pointer-events: none;
+}
+
+.my-view-sub.active {
+  pointer-events: auto;
+}
+
   /* =========================
      Main Summary
   ========================= */
