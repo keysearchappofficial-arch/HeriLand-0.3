@@ -379,10 +379,6 @@ function renderCity(city) {
    Start
 ========================= */
 
-window.addEventListener("componentsReady", () => {
-  init();
-});
-
 function renderSpots() {
 
   const grid =
@@ -739,15 +735,24 @@ function bindSpotSheet() {
   }
 }
 
-window.addEventListener(
-  "componentsReady",
-  () => {
+let pageStarted = false;
 
-    console.log(
-      "[city] componentsReady received"
-    );
+function startPage() {
+  if (pageStarted) return;
 
-    init();
+  pageStarted = true;
 
-  }
-);
+  console.log("[city] init");
+
+  init();
+}
+
+if (window.componentsLoaded) {
+  startPage();
+}
+else {
+  window.addEventListener(
+    "componentsReady",
+    startPage
+  );
+}
