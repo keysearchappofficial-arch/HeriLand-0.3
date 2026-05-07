@@ -258,8 +258,7 @@ const foods = [
   }
 ];
 
-const events = [
-  {
+
     title: "Kuching Waterfront Night Walk",
     date: "每週五・晚上 7:00",
     desc: "適合晚上慢慢走，看河邊燈光和城市生活感。",
@@ -605,43 +604,80 @@ function bindEventAutoSlide() {
 
 function bindMobileMenu() {
 
-const menu = document.querySelector(".mobile-menu");
+  console.log(
+    "[mobileMenu] binding..."
+  );
+
+  const menu =
+    document.querySelector(
+      ".mobile-menu"
+    );
 
   const openBtn =
-    document.getElementById("mobileMenuBtn");
+    document.getElementById(
+      "mobileMenuBtn"
+    );
 
   const closeBtn =
-    document.getElementById("mobileMenuClose");
+    document.getElementById(
+      "mobileMenuClose"
+    );
 
-  if (!menu || !openBtn || !closeBtn) return;
-
-  openBtn.addEventListener("click", () => {
-
-    menu.classList.add("show");
-
-    document.body.style.overflow = "hidden";
-
+  console.log({
+    menu,
+    openBtn,
+    closeBtn
   });
 
-  closeBtn.addEventListener("click", () => {
+  if (
+    !menu ||
+    !openBtn ||
+    !closeBtn
+  ) {
 
-    menu.classList.remove("show");
+    console.warn(
+      "[mobileMenu] bind failed"
+    );
 
-    document.body.style.overflow = "";
+    return;
 
-  });
+  }
 
-  menu.addEventListener("click", e => {
+  console.log(
+    "[mobileMenu] bind success"
+  );
 
-    if (e.target === menu) {
+  openBtn.addEventListener(
+    "click",
+    () => {
+
+      console.log(
+        "[mobileMenu] open"
+      );
+
+      menu.classList.add("show");
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+  );
+
+  closeBtn.addEventListener(
+    "click",
+    () => {
+
+      console.log(
+        "[mobileMenu] close"
+      );
 
       menu.classList.remove("show");
 
-      document.body.style.overflow = "";
+      document.body.style.overflow =
+        "";
 
     }
-
-  });
+  );
 
 }
 
