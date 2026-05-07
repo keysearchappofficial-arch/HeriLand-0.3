@@ -344,4 +344,108 @@
 .my-signout-btn:hover {
   background: rgba(255,255,255,.72);
 }
+
+/* =========================
+   My Sub Pages Premium
+========================= */
+
+.my-view-sub {
+  padding-top: 2px;
+}
+
+.my-sub-head {
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.my-sub-head button {
+  background: rgba(255,255,255,.62);
+  backdrop-filter: blur(18px);
+}
+
+.my-sub-head h2 {
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -1.3px;
+}
+
+/* Saved as refined list */
+
+#savedView .my-sheet-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#savedView .saved-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px;
+
+  border-radius: 22px;
+  background: rgba(255,255,255,.6);
+  backdrop-filter: blur(18px);
+}
+
+#savedView .saved-card img {
+  width: 76px;
+  height: 76px;
+  border-radius: 18px;
+  aspect-ratio: auto;
+}
+
+#savedView .saved-card-body {
+  padding: 0;
+}
+
+#savedView .saved-card-body h3 {
+  font-size: 16px;
+}
+
+#savedView .saved-card-body p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+/* Trip cards thinner */
+
+#tripView .trip-card {
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.6);
+  backdrop-filter: blur(18px);
+}
+
+#tripView .trip-card h3 {
+  font-size: 24px;
+}
+
+#tripView .trip-card p {
+  font-size: 13px;
+}
+
+/* Recent as history list */
+
+#recentView .recent-item {
+  background: rgba(255,255,255,.6);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+}
+
+#recentView .recent-item img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+}
+
+#recentView .recent-item h3 {
+  font-size: 15px;
+}
+
+#recentView .recent-item p {
+  font-size: 12px;
+}
   }
