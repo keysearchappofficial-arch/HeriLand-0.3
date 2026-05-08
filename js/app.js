@@ -82,37 +82,40 @@ function renderPlaces(items) {
 
   els.placeGrid.innerHTML = "";
 
-  const displayItems =
-    items.slice(0, 6);
+  const displayItems = items.slice(0, 6);
 
   displayItems.forEach((place, index) => {
-    const realIndex =
-      index % items.length;
+    const realIndex = index % items.length;
 
-    const card =
-      document.createElement("article");
+    const card = document.createElement("article");
 
-    card.className = "place-card";
-    card.onclick = () =>
-      openDetail(realIndex);
+    card.className = "business-card";
+    card.onclick = () => openDetail(realIndex);
 
     card.innerHTML = `
-      <div class="place-image">
+      <div class="business-card-image">
         <img src="${place.image}" alt="${place.name}">
-        <button class="save-btn" onclick="event.stopPropagation()">♡</button>
+
+        <button class="business-save-btn" onclick="event.stopPropagation()">
+          ♡
+        </button>
       </div>
 
-      <div class="place-body">
+      <div class="business-card-body">
+
         <h3>${place.name}</h3>
 
-        <div class="place-meta">
-          <span class="stars">★★★★★</span>
-          <span class="score">${place.score}</span>
+        <div class="business-card-meta">
+          <span class="business-stars">★★★★★</span>
+          <span>${place.score || "4.8"}</span>
+          <span>・</span>
+          <span>${place.reviewCount || "128"} 則評論</span>
         </div>
 
-        <div class="place-tags">
-          ${place.tags.map(tag => `<span>${tag}</span>`).join("")}
+        <div class="business-card-type">
+          ${(place.tags?.[0]) || place.type || "推薦地點"}
         </div>
+
       </div>
     `;
 
@@ -186,15 +189,36 @@ function renderSpots() {
     const card =
       document.createElement("article");
 
-    card.className = "spot-card";
+    card.className = "business-card";
 
     card.innerHTML = `
-      <img src="${spot.image}" alt="${spot.name}">
-      <div class="spot-body">
-        <h3>${spot.name}</h3>
-        <p>${spot.location}</p>
-      </div>
-    `;
+  <div class="business-card-image">
+    <img src="${place.image}" alt="${place.name}">
+
+    <button class="business-save-btn" onclick="event.stopPropagation()">
+      ♡
+    </button>
+  </div>
+
+  <div class="business-card-body">
+
+    <div class="business-card-top">
+      <h3>${place.name}</h3>
+    </div>
+
+    <div class="business-card-meta">
+      <span class="business-stars">★★★★★</span>
+      <span>${place.score || "4.8"}</span>
+      <span>・</span>
+      <span>${place.reviewCount || "128"} 則評論</span>
+    </div>
+
+    <div class="business-card-type">
+      ${(place.tags?.[0]) || place.type || "推薦地點"}
+    </div>
+
+  </div>
+`;
 
     spotScroll.appendChild(card);
   });
@@ -239,15 +263,36 @@ function renderFoods() {
     const card =
       document.createElement("article");
 
-    card.className = "food-card";
+    card.className = "business-card";
 
     card.innerHTML = `
-      <img src="${food.image}" alt="${food.name}">
-      <div class="food-body">
-        <h3>${food.name}</h3>
-        <p>${food.location}</p>
-      </div>
-    `;
+  <div class="business-card-image">
+    <img src="${place.image}" alt="${place.name}">
+
+    <button class="business-save-btn" onclick="event.stopPropagation()">
+      ♡
+    </button>
+  </div>
+
+  <div class="business-card-body">
+
+    <div class="business-card-top">
+      <h3>${place.name}</h3>
+    </div>
+
+    <div class="business-card-meta">
+      <span class="business-stars">★★★★★</span>
+      <span>${place.score || "4.8"}</span>
+      <span>・</span>
+      <span>${place.reviewCount || "128"} 則評論</span>
+    </div>
+
+    <div class="business-card-type">
+      ${(place.tags?.[0]) || place.type || "推薦地點"}
+    </div>
+
+  </div>
+`;
 
     foodScroll.appendChild(card);
   });
