@@ -35,7 +35,7 @@
   position: fixed;
   inset: 0;
 
-  z-index: 600;
+  z-index: 1200;
 
   opacity: 0;
   visibility: hidden;
@@ -282,5 +282,25 @@
 
     opacity: 1;
   }
+  
+  .ai-guide-fab {
+
+    right: 18px;
+
+    bottom: calc(92px + env(safe-area-inset-bottom));
+
+    width: 54px;
+
+    height: 54px;
+
+    z-index: 1200;
+
+  }
+
+  .ai-guide-sheet {
+
+    z-index: 1300;
+
+  
 
 }
