@@ -143,15 +143,6 @@
   gap: 18px;
 }
 
-.place-card {
-  background: rgba(255,255,255,.72);
-  border: 1px solid rgba(0,0,0,.05);
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .25s var(--ease), background .25s var(--ease);
-}
-
 /* =========================
    Business Card
 ========================= */
@@ -283,23 +274,6 @@
   font-weight: 750;
 }
 
-.place-card:hover {
-  transform: translateY(-4px);
-  background: #fff;
-}
-
-.place-image {
-  position: relative;
-  height: 145px;
-  background: #ddd;
-}
-
-.place-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .save-btn {
   position: absolute;
   top: 10px;
@@ -311,24 +285,6 @@
   background: rgba(255,255,255,.9);
 }
 
-.place-body {
-  padding: 13px;
-}
-
-.place-body h3 {
-  font-size: 15px;
-  line-height: 1.35;
-  margin-bottom: 8px;
-  letter-spacing: -0.2px;
-}
-
-.place-meta {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
 .stars {
   font-size: 12px;
   letter-spacing: -1px;
@@ -337,26 +293,6 @@
 .score {
   font-size: 12px;
   color: var(--muted);
-}
-
-.place-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.place-tags span {
-  font-size: 11px;
-  padding: 4px 7px;
-  border-radius: 999px;
-  background: rgba(0,0,0,.06);
-  color: #444;
-}
-
-.place-tags span:first-child {
-  background: rgba(0,0,0,.08);
-  color: #333;
-  font-weight: 700;
 }
 
 /* =========================
@@ -592,36 +528,6 @@
   display: none;
 }
 
-.spot-card {
-  flex: 0 0 260px;
-  border-radius: 22px;
-  overflow: hidden;
-  background: rgba(255,255,255,.72);
-  border: 1px solid rgba(0,0,0,.05);
-}
-
-.spot-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-
-.spot-body {
-  padding: 13px;
-}
-
-.spot-body h3 {
-  font-size: 16px;
-  line-height: 1.35;
-  letter-spacing: -0.3px;
-}
-
-.spot-body p {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
 .spot-head {
   display: flex;
   align-items: end;
@@ -688,36 +594,6 @@
 
 .food-scroll::-webkit-scrollbar {
   display: none;
-}
-
-.food-card {
-  flex: 0 0 260px;
-  border-radius: 22px;
-  overflow: hidden;
-  background: rgba(255,255,255,.72);
-  border: 1px solid rgba(0,0,0,.05);
-}
-
-.food-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-
-.food-body {
-  padding: 13px;
-}
-
-.food-body h3 {
-  font-size: 16px;
-  line-height: 1.35;
-  letter-spacing: -0.3px;
-}
-
-.food-body p {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 13px;
 }
 
 .food-head {
