@@ -128,15 +128,6 @@
   font-weight: 500;
 }
 
-  .route-arrow svg {
-    width: 17px;
-    height: 17px;
-  }
-
-  .transport-route-row strong {
-    font-size: 26px;
-  }
-
   .transport-recent-tags {
     gap: 10px;
   }
