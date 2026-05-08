@@ -343,19 +343,26 @@ function renderEvents() {
     const card =
       document.createElement("article");
 
-    card.className = "event-card";
+card.className = "event-card";
 
-    card.innerHTML = `
-      <div class="event-image">
-        <img src="${event.image}" alt="${event.title}">
-      </div>
+card.innerHTML = `
+  <div class="event-card-image">
+    <img src="${event.image}" alt="${event.title}">
+  </div>
 
-      <div class="event-body">
-        <h3>${event.title}</h3>
-        <p>${event.date}</p>
-        <small>${event.location}</small>
-      </div>
-    `;
+  <div class="event-card-body">
+    <div class="event-card-meta">
+      <span>${event.day || event.date || "近期"}</span>
+      <span>${event.timeText || event.hour || "時間未定"}</span>
+    </div>
+
+    <h3 class="event-card-title">${event.title}</h3>
+
+    <p class="event-card-desc">
+      ${event.desc || event.location || "適合慢慢探索的活動。"}
+    </p>
+  </div>
+`;
 
     eventGrid.appendChild(card);
   });
