@@ -32,7 +32,12 @@ export function initAiGuide() {
 
   }
 
-  function closeGuide() {
+function toggleGuide() {
+
+  const isOpen =
+    sheet.classList.contains("show");
+
+  if (isOpen) {
 
     sheet.classList.remove("show");
 
@@ -41,10 +46,21 @@ export function initAiGuide() {
 
   }
 
-  fab?.addEventListener(
-    "click",
-    openGuide
-  );
+  else {
+
+    sheet.classList.add("show");
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+}
+
+fab?.addEventListener(
+  "click",
+  toggleGuide
+);
 
   closeBtn?.addEventListener(
     "click",
