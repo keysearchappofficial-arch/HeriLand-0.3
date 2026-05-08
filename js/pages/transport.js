@@ -203,15 +203,26 @@ function bindRouteRows() {
       "click",
       () => {
 
+        const routeText =
+          row.querySelector(
+            ".route-main span"
+          )?.textContent.trim();
+
+        const regionText =
+          row.querySelector(
+            ".route-main small"
+          )?.textContent.trim();
+
+        if (!routeText) return;
+
+        const parts =
+          routeText.split("-");
+
         const from =
-          row.querySelectorAll(
-            ".route-place"
-          )[0]?.textContent;
+          parts[0]?.trim();
 
         const to =
-          row.querySelectorAll(
-            ".route-place"
-          )[1]?.textContent;
+          parts[1]?.trim();
 
         const matched =
           routes.find(route =>
@@ -220,6 +231,11 @@ function bindRouteRows() {
           );
 
         if (!matched) return;
+
+        const region =
+          document.getElementById(
+            "routeDetailRegion"
+          );
 
         const title =
           document.getElementById(
@@ -246,9 +262,13 @@ function bindRouteRows() {
             "routeDetailNote"
           );
 
+        if (region)
+          region.textContent =
+            regionText || "";
+
         if (title)
           title.textContent =
-            matched.title;
+            matched.title.replace("→", "-");
 
         if (desc)
           desc.textContent =
@@ -280,8 +300,23 @@ function bindRouteRows() {
 
     detail.classList.remove("show");
 
-    document.body.style.overflow =
-      "";
+    const allRoutesView =
+      document.getElementById(
+        "allRoutesView"
+      );
+
+    if (
+      allRoutesView &&
+      allRoutesView.classList.contains("show")
+    ) {
+      document.body.style.overflow =
+        "hidden";
+    }
+
+    else {
+      document.body.style.overflow =
+        "";
+    }
 
   }
 
