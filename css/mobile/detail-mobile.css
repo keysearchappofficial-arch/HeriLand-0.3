@@ -1,23 +1,374 @@
 @media (max-width: 820px) {
-    .detail-gallery {
-    height: 360px;
+
+  .detail-page {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .detail-panel {
+  /* =========================
+     Gallery
+  ========================= */
+
+  .detail-gallery {
+    position: relative;
+    height: 320px;
+  }
+
+  .detail-gallery img {
     width: 100%;
-    padding: 22px 20px 120px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .detail-back,
+  .detail-save {
+    top: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 14px;
+
+    backdrop-filter: blur(14px);
+  }
+
+  .detail-back {
+    left: 18px;
+  }
+
+  .detail-save {
+    right: 18px;
+  }
+
+  /* =========================
+     Panel
+  ========================= */
+
+  .detail-panel {
+    position: relative;
+
+    margin-top: -22px;
+
+    width: 100%;
+
+    padding: 24px 20px 130px;
+
+    border-radius: 28px 28px 0 0;
+
+    background: #f6f5f1;
+
+    z-index: 2;
+  }
+
+  /* =========================
+     Head
+  ========================= */
+
+  .detail-head {
+    margin-bottom: 20px;
+  }
+
+  .detail-kicker {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #777;
+
+    font-size: 12px;
+    font-weight: 750;
   }
 
   .detail-head h1 {
-    font-size: 24px;
+    margin-top: 10px;
+
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -1px;
   }
 
+  .detail-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-top: 12px;
+
+    color: #666;
+
+    font-size: 13px;
+  }
+
+  .detail-stars {
+    letter-spacing: -1px;
+  }
+
+  .detail-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 14px;
+
+    color: #666;
+
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .detail-line svg {
+    width: 18px;
+    height: 18px;
+
+    stroke: currentColor;
+    stroke-width: 2;
+
+    fill: none;
+
+    flex-shrink: 0;
+  }
+
+  /* =========================
+     Info Row
+  ========================= */
+
   .detail-info-row {
-    grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-top: 18px;
+  }
+
+  .detail-info-row div {
+    padding: 14px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,.72);
+
+    border: 1px solid rgba(0,0,0,.05);
+  }
+
+  .detail-info-row small {
+    display: block;
+
+    color: #888;
+
+    font-size: 11px;
+
+    margin-bottom: 6px;
+  }
+
+  .detail-info-row strong {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* =========================
+     AI Box
+  ========================= */
+
+  .detail-ai-box {
+    margin-top: 22px;
+
+    padding: 18px;
+
+    border-radius: 24px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,255,255,.92),
+        rgba(255,255,255,.72)
+      );
+
+    border: 1px solid rgba(0,0,0,.05);
+  }
+
+  .detail-ai-box small {
+    display: block;
+
+    color: #888;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .detail-ai-box h2 {
+    margin-top: 10px;
+
+    font-size: 18px;
+    letter-spacing: -0.4px;
+  }
+
+  .detail-ai-box p {
+    margin-top: 10px;
+
+    color: #555;
+
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .detail-ai-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 14px;
+  }
+
+  .detail-ai-tags span {
+    padding: 7px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(0,0,0,.06);
+
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* =========================
+     Contact
+  ========================= */
+
+  .detail-contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 24px;
+
+    padding: 14px;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,.72);
+
+    border: 1px solid rgba(0,0,0,.05);
+  }
+
+  .detail-contact img {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 16px;
+
+    object-fit: cover;
+  }
+
+  .detail-contact strong {
+    display: block;
+
+    font-size: 14px;
+  }
+
+  .detail-contact small {
+    color: #888;
+    font-size: 12px;
   }
 
   .detail-contact button {
-    padding: 8px 10px;
+    margin-left: auto;
+
+    height: 40px;
+
+    padding: 0 14px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: #111;
+    color: #fff;
+
     font-size: 12px;
+    font-weight: 800;
   }
+
+  /* =========================
+     Section
+  ========================= */
+
+  .detail-section {
+    margin-top: 28px;
   }
+
+  .detail-section h2 {
+    font-size: 18px;
+    letter-spacing: -0.4px;
+  }
+
+  .detail-section p,
+  .detail-section li {
+    margin-top: 12px;
+
+    color: #555;
+
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .detail-section ul {
+    padding-left: 18px;
+  }
+
+  /* =========================
+     CTA
+  ========================= */
+
+  .detail-cta {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    padding:
+      14px
+      18px
+      calc(14px + env(safe-area-inset-bottom));
+
+    background:
+      rgba(246,245,241,.92);
+
+    backdrop-filter: blur(18px);
+
+    border-top:
+      1px solid rgba(0,0,0,.05);
+
+    z-index: 20;
+  }
+
+  .detail-cta button {
+    height: 52px;
+
+    border: none;
+    border-radius: 18px;
+
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .secondary-btn {
+    background: rgba(255,255,255,.92);
+    color: #111;
+  }
+
+  .primary-cta {
+    background: #111;
+    color: #fff;
+  }
+
+}
