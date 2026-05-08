@@ -469,3 +469,193 @@
 
   font-size: 18px;
 }
+
+/* =========================
+   Desktop All Routes View
+========================= */
+
+  .transport-sub-view {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: min(640px, 46vw);
+    height: 100vh;
+
+    z-index: 260;
+
+    background: #f6f5f1;
+
+    overflow-y: auto;
+
+    padding:
+      34px
+      34px
+      140px;
+
+    border-left:
+      1px solid rgba(0,0,0,.06);
+
+    box-shadow:
+      -20px 0 60px rgba(0,0,0,.08);
+
+    transform: translateX(100%);
+    transition: transform .34s var(--ease);
+  }
+
+  .transport-sub-view.show {
+    transform: translateX(0);
+  }
+
+  /* =========================
+     Head
+  ========================= */
+
+  .transport-sub-head {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 16px;
+
+    margin-bottom: 30px;
+  }
+
+  .transport-sub-head button {
+    width: 44px;
+    height: 44px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.82);
+
+    font-size: 30px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+  }
+
+  .transport-sub-head small {
+    display: block;
+
+    color: #8d8d8d;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .transport-sub-head h2 {
+    margin-top: 8px;
+
+    font-size: 44px;
+    line-height: .95;
+
+    letter-spacing: -1.8px;
+  }
+
+  /* =========================
+     Search
+  ========================= */
+
+  .transport-sub-search {
+    margin-bottom: 36px;
+  }
+
+  .transport-sub-search input {
+    width: 100%;
+    height: 64px;
+
+    border: none;
+    outline: none;
+
+    padding: 0 22px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.88);
+
+    font-size: 16px;
+
+    box-shadow:
+      0 4px 24px rgba(0,0,0,.04);
+  }
+
+  .transport-sub-search input::placeholder {
+    color: #999;
+  }
+
+  /* =========================
+     Alpha Group
+  ========================= */
+
+  .route-alpha-group + .route-alpha-group {
+    margin-top: 42px;
+  }
+
+  .route-alpha-group h3 {
+    margin-bottom: 14px;
+
+    color: #9a9a9a;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     Route List
+  ========================= */
+
+  .all-route-list {
+    padding-right: 38px;
+  }
+
+  /* =========================
+     Alpha Index
+  ========================= */
+
+  .route-alpha-index {
+    position: fixed;
+
+    top: 50%;
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+  }
+
+  .route-alpha-index button {
+    width: 24px;
+    height: 18px;
+
+    border: none;
+    background: transparent;
+
+    color: #999;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: color .18s ease;
+  }
+
+  .route-alpha-index button:hover {
+    color: #111;
+  }
+
