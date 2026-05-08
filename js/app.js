@@ -365,35 +365,73 @@ function openDetail(place) {
 
   if (!place || !els.detailPage) return;
 
-  setText("detailTitle", place.name);
-  setText("detailAddress", place.address);
-  setText("detailPhone", place.phone);
-  setText("detailHours", place.hours);
-  setText("detailContactName", place.contactName);
-  setText("detailIntro", place.intro);
+  const normalized = {
+    ...place,
+    name: place.name || place.title || "未命名地點",
+    address: place.address || place.location || place.meta || "Sarawak",
+    phone: place.phone || "尚未提供",
+    hours: place.hours || "建議出發前確認",
+    contactName: place.contactName || "HeriLand Guide",
+    contactImage: place.contactImage || place.image || "",
+    intro:
+      place.intro ||
+      place.desc ||
+      place.reason ||
+      place.guide ||
+      "這是一個值得慢慢停留的地方。",
+    type: place.type || place.tags?.[0] || "推薦地點",
+    area: place.area || place.location || place.meta || "Sarawak",
+    score: place.score || "4.8",
+    reviewCount: place.reviewCount || "128",
+    tags: place.tags || ["慢旅", "拍照", "推薦"],
+    services: place.services || [
+      "適合拍照與停留",
+      "可加入個人行程",
+      "可直接導航前往"
+    ]
+  };
 
-  const image =
-    document.getElementById("detailImage");
+  setText("detailTitle", normalized.name);
+  setText("detailAddress", normalized.address);
+  setText("detailPhone", normalized.phone);
+  setText("detailHours", normalized.hours);
+  setText("detailContactName", normalized.contactName);
+  setText("detailIntro", normalized.intro);
 
-  const contactImage =
-    document.getElementById("detailContactImage");
+  setText("detailType", normalized.type);
+  setText("detailArea", normalized.area);
+  setText("detailScore", normalized.score);
+  setText("detailReviewCount", `${normalized.reviewCount} 則評論`);
+  setText("detailAiNote", normalized.intro);
+
+  const image = document.getElementById("detailImage");
+  const contactImage = document.getElementById("detailContactImage");
 
   if (image) {
-    image.src = place.image;
+    image.src = normalized.image || "";
+    image.alt = normalized.name;
   }
 
   if (contactImage) {
-    contactImage.src = place.contactImage;
+    contactImage.src = normalized.contactImage;
+    contactImage.alt = normalized.contactName;
   }
 
-  const list =
-    document.getElementById("detailServices");
+  const list = document.getElementById("detailServices");
 
   if (list) {
-    list.innerHTML =
-      place.services
-        .map(service => `<li>${service}</li>`)
-        .join("");
+    list.innerHTML = normalized.services
+      .map(service => `<li>${service}</li>`)
+      .join("");
+  }
+
+  const aiTags = document.getElementById("detailAiTags");
+
+  if (aiTags) {
+    aiTags.innerHTML = normalized.tags
+      .slice(0, 5)
+      .map(tag => `<span>${tag}</span>`)
+      .join("");
   }
 
   els.detailPage.classList.add("show");
