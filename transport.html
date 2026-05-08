@@ -92,10 +92,10 @@
     <div class="transport-section-head">
       <h2>常見路線</h2>
 
-      <button type="button">
-        查看全部
-        <span>›</span>
-      </button>
+      <button id="openAllRoutesBtn" type="button">
+  查看全部
+  <span>›</span>
+</button>
     </div>
 
     <div class="transport-route-list" id="commonRouteList">
@@ -182,6 +182,81 @@
     </div>
 
   </section>
+  
+  <!-- All Routes View -->
+<section class="transport-sub-view" id="allRoutesView">
+
+  <div class="transport-sub-head">
+    <button type="button" id="allRoutesBack">‹</button>
+
+    <div>
+      <small>Routes</small>
+      <h2>全部路線</h2>
+    </div>
+  </div>
+
+  <div class="transport-sub-search">
+    <input
+      id="allRouteSearchInput"
+      type="text"
+      placeholder="搜尋城市或目的地"
+    >
+  </div>
+
+  <div class="all-route-list" id="allRouteList">
+
+    <section class="route-alpha-group" data-alpha="B">
+      <h3>B</h3>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-place">Bintulu</span>
+        <span class="route-arrow">↗</span>
+        <span class="route-place">Miri</span>
+        <strong>›</strong>
+      </button>
+    </section>
+
+    <section class="route-alpha-group" data-alpha="K">
+      <h3>K</h3>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-place">Kuching</span>
+        <span class="route-arrow">↗</span>
+        <span class="route-place">Santubong</span>
+        <strong>›</strong>
+      </button>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-place">Kuching</span>
+        <span class="route-arrow">↗</span>
+        <span class="route-place">Sibu</span>
+        <strong>›</strong>
+      </button>
+    </section>
+
+    <section class="route-alpha-group" data-alpha="M">
+      <h3>M</h3>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-place">Miri</span>
+        <span class="route-arrow">↗</span>
+        <span class="route-place">Brunei</span>
+        <strong>›</strong>
+      </button>
+    </section>
+
+  </div>
+
+  <div class="route-alpha-index">
+    <button data-jump-alpha="A">A</button>
+    <button data-jump-alpha="B">B</button>
+    <button data-jump-alpha="C">C</button>
+    <button data-jump-alpha="K">K</button>
+    <button data-jump-alpha="M">M</button>
+    <button data-jump-alpha="S">S</button>
+  </div>
+
+</section>
 
   <!-- Route Detail Sheet -->
   <section class="transport-route-detail" id="routeDetail">
