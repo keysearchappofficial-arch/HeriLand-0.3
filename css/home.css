@@ -276,27 +276,6 @@
   font-weight: 750;
 }
 
-.save-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255,255,255,.9);
-}
-
-.stars {
-  font-size: 12px;
-  letter-spacing: -1px;
-}
-
-.score {
-  font-size: 12px;
-  color: var(--muted);
-}
-
 /* =========================
    Desktop City Row
 ========================= */
@@ -513,19 +492,6 @@
   font-size: 14px;
 }
 
-.spot-scroll-wrap {
-  overflow: hidden;
-}
-
-.spot-scroll {
-  display: flex;
-  gap: 18px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  padding-bottom: 8px;
-}
-
 .spot-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -561,6 +527,16 @@
    Food Section - Desktop
 ========================= */
 
+.spot-scroll,
+.food-scroll {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+
+  overflow: visible;
+  padding: 0;
+}
+
 .food-section {
   margin-top: 46px;
 }
@@ -581,17 +557,9 @@
   font-size: 14px;
 }
 
+.spot-scroll-wrap,
 .food-scroll-wrap {
-  overflow: hidden;
-}
-
-.food-scroll {
-  display: flex;
-  gap: 18px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  padding-bottom: 8px;
+  overflow: visible;
 }
 
 .food-scroll::-webkit-scrollbar {
