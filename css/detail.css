@@ -493,6 +493,34 @@
 }
 
 /* =========================
+   Inline Info
+========================= */
+
+.detail-inline-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 16px;
+
+  color: #666;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.detail-inline-info strong {
+  color: #222;
+  font-weight: 750;
+}
+
+.detail-inline-info .dot {
+  color: #bbb;
+}
+
+/* =========================
    Review Actions
 ========================= */
 
