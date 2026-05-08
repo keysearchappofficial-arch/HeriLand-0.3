@@ -910,19 +910,27 @@ function renderEvents() {
 
   events.forEach(event => {
     const card = document.createElement("article");
-    card.className = "city-event-card";
 
-    card.innerHTML = `
-      <div class="city-event-image">
-        <img src="${event.image}" alt="${event.title}">
-      </div>
+card.className = "event-card";
 
-      <div class="city-event-body">
-        <small>${event.date}</small>
-        <h3>${event.title}</h3>
-        <p>${event.desc}</p>
-      </div>
-    `;
+card.innerHTML = `
+  <div class="event-card-image">
+    <img src="${event.image}" alt="${event.title}">
+  </div>
+
+  <div class="event-card-body">
+    <div class="event-card-meta">
+      <span>${event.day || event.date || "近期"}</span>
+      <span>${event.timeText || event.hour || "時間未定"}</span>
+    </div>
+
+    <h3 class="event-card-title">${event.title}</h3>
+
+    <p class="event-card-desc">
+      ${event.desc || "適合慢慢探索的活動。"}
+    </p>
+  </div>
+`;
 
     carousel.appendChild(card);
   });
