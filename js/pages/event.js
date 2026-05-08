@@ -201,29 +201,26 @@ function renderEvents() {
     const card =
       document.createElement("article");
 
-    card.className = "event-card";
+card.className = "event-card";
 
-    card.innerHTML = `
-      <div class="event-card-image">
-        <img src="${event.image}" alt="${event.title}">
-      </div>
+card.innerHTML = `
+  <div class="event-card-image">
+    <img src="${event.image}" alt="${event.title}">
+  </div>
 
-      <div class="event-card-body">
+  <div class="event-card-body">
+    <div class="event-card-meta">
+      <span>${event.day || event.date || "近期"}</span>
+      <span>${event.timeText || event.hour || event.location || "時間未定"}</span>
+    </div>
 
-        <small>
-          ${event.date} ・ ${event.location}
-        </small>
+    <h3 class="event-card-title">${event.title}</h3>
 
-        <h3>
-          ${event.title}
-        </h3>
-
-        <p>
-          ${event.desc}
-        </p>
-
-      </div>
-    `;
+    <p class="event-card-desc">
+      ${event.desc || "適合慢慢探索的活動。"}
+    </p>
+  </div>
+`;
 
     grid.appendChild(card);
 
