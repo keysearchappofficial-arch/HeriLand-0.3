@@ -374,6 +374,146 @@
 }
 
 /* =========================
+   Detail Head
+========================= */
+
+.route-detail-head {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 16px;
+
+  margin-bottom: 42px;
+}
+
+.route-detail-head button {
+  width: 46px;
+  height: 46px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.82);
+
+  font-size: 30px;
+  line-height: 1;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+}
+
+.route-detail-head small {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #8a8a8a;
+
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.route-detail-head h2 {
+  font-size: 54px;
+  line-height: .94;
+
+  letter-spacing: -2.4px;
+}
+
+/* =========================
+   Guide
+========================= */
+
+.route-detail-guide {
+  margin-bottom: 42px;
+}
+
+.route-detail-guide small {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: #8d8d8d;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.route-detail-guide p {
+  max-width: 520px;
+
+  color: #444;
+
+  font-size: 18px;
+  line-height: 1.95;
+
+  letter-spacing: -0.2px;
+}
+
+/* =========================
+   Info List
+========================= */
+
+.route-detail-list {
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.05);
+
+  backdrop-filter: blur(20px);
+}
+
+.route-detail-row {
+  position: relative;
+
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 0 22px;
+}
+
+.route-detail-row + .route-detail-row::before {
+  content: "";
+
+  position: absolute;
+
+  left: 22px;
+  right: 0;
+  top: 0;
+
+  height: 1px;
+
+  background: rgba(0,0,0,.055);
+}
+
+.route-detail-row span {
+  color: #777;
+
+  font-size: 15px;
+  font-weight: 720;
+}
+
+.route-detail-row strong {
+  color: #111;
+
+  font-size: 16px;
+  font-weight: 780;
+
+  text-align: right;
+}
+
+/* =========================
    All Routes View
 ========================= */
 /* =========================
