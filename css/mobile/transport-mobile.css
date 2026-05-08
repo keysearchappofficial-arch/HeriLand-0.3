@@ -252,32 +252,153 @@
     font-weight: 800;
   }
 
-  .transport-route-detail {
-    z-index: 310;
-  }
+/* =========================
+   Route Detail
+========================= */
 
-  .route-detail-panel {
-    inset: 0;
-    width: 100%;
-    height: 100dvh;
-    padding: 24px 18px 110px;
-    transform: translateX(100%);
-  }
+.transport-route-detail {
+  z-index: 310;
+}
 
-  .route-detail-head {
-    gap: 12px;
-    margin-bottom: 26px;
-  }
+.route-detail-panel {
+  inset: 0;
 
-  .route-detail-head button {
-    width: 40px;
-    height: 40px;
-    border-radius: 13px;
-    font-size: 28px;
-  }
+  width: 100%;
+  height: 100dvh;
 
-  .route-detail-head h2 {
-    font-size: 32px;
-    letter-spacing: -1.2px;
-  }
+  padding: 24px 18px 110px;
+
+  background: #f6f5f1;
+
+  transform: translateX(100%);
+}
+
+.route-detail-head {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 34px;
+}
+
+.route-detail-head button {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 13px;
+
+  background: rgba(255,255,255,.82);
+
+  font-size: 28px;
+  line-height: 1;
+
+  flex-shrink: 0;
+}
+
+.route-detail-head small {
+  display: block;
+
+  color: #8a8a8a;
+
+  font-size: 13px;
+  font-weight: 760;
+
+  margin-bottom: 8px;
+}
+
+.route-detail-head h2 {
+  font-size: 36px;
+  line-height: .96;
+
+  letter-spacing: -1.6px;
+}
+
+/* Guide Text */
+
+.route-detail-guide {
+  margin-top: 10px;
+  margin-bottom: 34px;
+}
+
+.route-detail-guide small {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #8d8d8d;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.route-detail-guide p {
+  color: #444;
+
+  font-size: 16px;
+  line-height: 1.9;
+
+  letter-spacing: -0.2px;
+}
+
+/* Info List */
+
+.route-detail-list {
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(0,0,0,.045);
+
+  backdrop-filter: blur(18px);
+}
+
+.route-detail-row {
+  position: relative;
+
+  min-height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 0 16px;
+}
+
+.route-detail-row + .route-detail-row::before {
+  content: "";
+
+  position: absolute;
+
+  left: 16px;
+  right: 0;
+  top: 0;
+
+  height: 1px;
+
+  background: rgba(0,0,0,.055);
+}
+
+.route-detail-row span {
+  color: #777;
+
+  font-size: 14px;
+  font-weight: 720;
+}
+
+.route-detail-row strong {
+  color: #111;
+
+  font-size: 15px;
+  font-weight: 780;
+
+  text-align: right;
+}
 }
