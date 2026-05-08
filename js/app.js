@@ -339,7 +339,7 @@ function renderEvents() {
 
   eventGrid.innerHTML = "";
 
-  events.forEach(event => {
+  events.slice(0, 4).forEach(event => {
     const card =
       document.createElement("article");
 
