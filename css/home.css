@@ -593,6 +593,11 @@
   padding-bottom: 8px;
 }
 
+.spot-scroll .business-card,
+.food-scroll .business-card {
+  flex: 0 0 260px;
+}
+
 .food-scroll::-webkit-scrollbar {
   display: none;
 }
