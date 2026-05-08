@@ -377,49 +377,56 @@
 /* =========================
    All Routes View
 ========================= */
+/* =========================
+   All Routes View - Desktop
+========================= */
 
-.transport-sub-view {
-  position: fixed;
+@media (min-width: 821px) {
 
-  top: 0;
-  right: 0;
+  .transport-sub-view {
+    position: fixed;
 
-  width: min(680px, 48vw);
-  height: 100vh;
+    top: 0;
+    right: 0;
 
-  z-index: 290;
+    width: min(680px, 48vw);
+    height: 100vh;
 
-  background: #f6f5f1;
+    z-index: 290;
 
-  overflow-y: auto;
+    background: #f6f5f1;
 
-  padding:
-    34px
-    34px
-    140px;
+    overflow-y: auto;
 
-  border-left:
-    1px solid rgba(0,0,0,.06);
+    padding:
+      34px
+      34px
+      140px;
 
-  box-shadow:
-    -20px 0 60px rgba(0,0,0,.08);
+    border-left:
+      1px solid rgba(0,0,0,.06);
 
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+    box-shadow:
+      -20px 0 60px rgba(0,0,0,.08);
 
-  transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 
-  transition:
-    transform .34s var(--ease),
-    opacity .22s ease,
-    visibility .22s ease;
-}
+    transform: translateX(100%);
 
-.transport-sub-view.show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+    transition:
+      transform .34s var(--ease),
+      opacity .22s ease,
+      visibility .22s ease;
+  }
 
-  transform: translateX(0);
+  .transport-sub-view.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateX(0);
+  }
+
 }
