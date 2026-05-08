@@ -1,5 +1,5 @@
 /* =========================
-   Route Data
+   Routes Data
 ========================= */
 
 const routes = [
@@ -8,26 +8,45 @@ const routes = [
     from: "Kuching",
     to: "Santubong",
 
-    type: "grab",
-
     title:
       "Kuching → Santubong",
 
     duration:
       "約 35–45 分鐘",
 
-    note:
-      "比較推薦 Grab 或租車，傍晚去看夕陽會比較舒服。",
+    method:
+      "Grab / 租車",
 
-    ai:
-      "晚上回程叫車可能會稍微慢一點。"
+    note:
+      "晚上叫車可能較慢",
+
+    desc:
+      "這條路線比較適合 Grab 或租車，傍晚出發會比較舒服。"
+  },
+
+  {
+    from: "Kuching",
+    to: "Serian",
+
+    title:
+      "Kuching → Serian",
+
+    duration:
+      "約 1 小時",
+
+    method:
+      "自駕 / 巴士",
+
+    note:
+      "適合白天出發",
+
+    desc:
+      "如果想慢慢看沿途風景，可以選擇白天開車過去。"
   },
 
   {
     from: "Kuching",
     to: "Sibu",
-
-    type: "flight",
 
     title:
       "Kuching → Sibu",
@@ -35,18 +54,19 @@ const routes = [
     duration:
       "飛機約 45 分鐘",
 
-    note:
-      "如果時間有限，飛機會比長途巴士舒服很多。",
+    method:
+      "飛機 / 巴士",
 
-    ai:
-      "長途巴士適合比較不趕時間的人。"
+    note:
+      "長途巴士時間較長",
+
+    desc:
+      "如果時間有限，飛機會比較舒服。"
   },
 
   {
     from: "Miri",
     to: "Brunei",
-
-    type: "bus",
 
     title:
       "Miri → Brunei",
@@ -54,11 +74,14 @@ const routes = [
     duration:
       "跨境路線",
 
-    note:
-      "比較適合長途巴士或自駕。",
+    method:
+      "巴士 / 自駕",
 
-    ai:
-      "跨境移動建議提前確認時間與證件。"
+    note:
+      "記得確認證件",
+
+    desc:
+      "跨境移動建議提前確認時間與交通安排。"
   }
 
 ];
@@ -71,119 +94,11 @@ function init() {
 
   bindMobileMenu();
 
-  bindPlanner();
+  bindRouteRows();
 
-}
+  bindAllRoutesView();
 
-/* =========================
-   Planner
-========================= */
-
-function bindPlanner() {
-
-  const button =
-    document.getElementById(
-      "routeSuggestBtn"
-    );
-
-  if (!button) return;
-
-  button.addEventListener(
-    "click",
-    suggestRoute
-  );
-
-}
-
-/* =========================
-   Suggest Route
-========================= */
-
-function suggestRoute() {
-
-  const fromInput =
-    document.getElementById(
-      "routeFrom"
-    );
-
-  const toInput =
-    document.getElementById(
-      "routeTo"
-    );
-
-  const result =
-    document.getElementById(
-      "plannerResult"
-    );
-
-  if (
-    !fromInput ||
-    !toInput ||
-    !result
-  ) return;
-
-  const from =
-    fromInput.value
-      .trim()
-      .toLowerCase();
-
-  const to =
-    toInput.value
-      .trim()
-      .toLowerCase();
-
-  if (!to) {
-
-    result.innerHTML = `
-      <small>HeriLand Guide</small>
-
-      <p>
-        先輸入你想去的地方，
-        我再幫你看看怎麼移動比較舒服。
-      </p>
-    `;
-
-    return;
-
-  }
-
-  const matched =
-    routes.find(route =>
-
-      route.from.toLowerCase() === from &&
-      route.to.toLowerCase() === to
-
-    );
-
-  if (!matched) {
-
-    result.innerHTML = `
-      <small>HeriLand Guide</small>
-
-      <p>
-        目前還沒有這條路線的建議，
-        不過在砂拉越大部分地方，
-        Grab、租車和飛機通常會比較方便。
-      </p>
-    `;
-
-    return;
-
-  }
-
-  result.innerHTML = `
-    <small>HeriLand Guide</small>
-
-    <p>
-      <strong>${matched.title}</strong><br><br>
-
-      ${matched.note}<br><br>
-
-      ${matched.duration}<br><br>
-
-      AI 小提醒：${matched.ai}
-    </p>
-  `;
+  bindAlphaIndex();
 
 }
 
@@ -194,9 +109,7 @@ function suggestRoute() {
 function bindMobileMenu() {
 
   const menu =
-    document.querySelector(
-      ".mobile-menu"
-    );
+    document.querySelector(".mobile-menu");
 
   const openBtn =
     document.getElementById(
@@ -257,8 +170,229 @@ function bindMobileMenu() {
 }
 
 /* =========================
+   Route Detail
+========================= */
+
+function bindRouteRows() {
+
+  const rows =
+    document.querySelectorAll(
+      ".transport-route-row"
+    );
+
+  const detail =
+    document.getElementById(
+      "routeDetail"
+    );
+
+  const closeBtn =
+    document.getElementById(
+      "routeDetailClose"
+    );
+
+  const backdrop =
+    document.getElementById(
+      "routeDetailBackdrop"
+    );
+
+  if (!detail) return;
+
+  rows.forEach(row => {
+
+    row.addEventListener(
+      "click",
+      () => {
+
+        const from =
+          row.querySelectorAll(
+            ".route-place"
+          )[0]?.textContent;
+
+        const to =
+          row.querySelectorAll(
+            ".route-place"
+          )[1]?.textContent;
+
+        const matched =
+          routes.find(route =>
+            route.from === from &&
+            route.to === to
+          );
+
+        if (!matched) return;
+
+        const title =
+          document.getElementById(
+            "routeDetailTitle"
+          );
+
+        const desc =
+          document.getElementById(
+            "routeDetailDesc"
+          );
+
+        const time =
+          document.getElementById(
+            "routeDetailTime"
+          );
+
+        const method =
+          document.getElementById(
+            "routeDetailMethod"
+          );
+
+        const note =
+          document.getElementById(
+            "routeDetailNote"
+          );
+
+        if (title)
+          title.textContent =
+            matched.title;
+
+        if (desc)
+          desc.textContent =
+            matched.desc;
+
+        if (time)
+          time.textContent =
+            matched.duration;
+
+        if (method)
+          method.textContent =
+            matched.method;
+
+        if (note)
+          note.textContent =
+            matched.note;
+
+        detail.classList.add("show");
+
+        document.body.style.overflow =
+          "hidden";
+
+      }
+    );
+
+  });
+
+  function closeDetail() {
+
+    detail.classList.remove("show");
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+  closeBtn?.addEventListener(
+    "click",
+    closeDetail
+  );
+
+  backdrop?.addEventListener(
+    "click",
+    closeDetail
+  );
+
+}
+
+/* =========================
+   All Routes View
+========================= */
+
+function bindAllRoutesView() {
+
+  const openBtn =
+    document.getElementById(
+      "openAllRoutesBtn"
+    );
+
+  const view =
+    document.getElementById(
+      "allRoutesView"
+    );
+
+  const backBtn =
+    document.getElementById(
+      "allRoutesBack"
+    );
+
+  if (
+    !openBtn ||
+    !view ||
+    !backBtn
+  ) return;
+
+  openBtn.addEventListener(
+    "click",
+    () => {
+
+      view.classList.add("show");
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+  );
+
+  backBtn.addEventListener(
+    "click",
+    () => {
+
+      view.classList.remove("show");
+
+      document.body.style.overflow =
+        "";
+
+    }
+  );
+
+}
+
+/* =========================
+   Alpha Index
+========================= */
+
+function bindAlphaIndex() {
+
+  const buttons =
+    document.querySelectorAll(
+      "[data-jump-alpha]"
+    );
+
+  buttons.forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        const alpha =
+          button.dataset.jumpAlpha;
+
+        const target =
+          document.querySelector(
+            `.route-alpha-group[data-alpha="${alpha}"]`
+          );
+
+        if (!target) return;
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+    );
+
+  });
+
+}
+
+/* =========================
    Start
 ========================= */
+
 let pageStarted = false;
 
 function startPage() {
@@ -278,6 +412,7 @@ if (window.componentsLoaded) {
   startPage();
 
 }
+
 else {
 
   window.addEventListener(
