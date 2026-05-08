@@ -18,26 +18,49 @@ export function initAiGuide() {
     document.body.appendChild(sheet);
 
   const closeBtn =
-    document.getElementById("aiGuideClose");
+    document.getElementById(
+      "aiGuideClose"
+    );
 
   const backdrop =
-    document.getElementById("aiGuideBackdrop");
+    document.getElementById(
+      "aiGuideBackdrop"
+    );
 
-  function openGuide() {
+  /* =========================
+     Toggle
+  ========================= */
 
-    sheet.classList.add("show");
+  function toggleGuide() {
 
-    document.body.style.overflow =
-      "hidden";
+    const isOpen =
+      sheet.classList.contains("show");
+
+    if (isOpen) {
+
+      sheet.classList.remove("show");
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+    else {
+
+      sheet.classList.add("show");
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
 
   }
 
-function toggleGuide() {
+  /* =========================
+     Close
+  ========================= */
 
-  const isOpen =
-    sheet.classList.contains("show");
-
-  if (isOpen) {
+  function closeGuide() {
 
     sheet.classList.remove("show");
 
@@ -46,21 +69,14 @@ function toggleGuide() {
 
   }
 
-  else {
+  /* =========================
+     Events
+  ========================= */
 
-    sheet.classList.add("show");
-
-    document.body.style.overflow =
-      "hidden";
-
-  }
-
-}
-
-fab?.addEventListener(
-  "click",
-  toggleGuide
-);
+  fab?.addEventListener(
+    "click",
+    toggleGuide
+  );
 
   closeBtn?.addEventListener(
     "click",
