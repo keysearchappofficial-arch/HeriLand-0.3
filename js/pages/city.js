@@ -568,60 +568,94 @@ function renderCity(city) {
    Start
 ========================= */
 
+function normalizeSpot(spot) {
+  return {
+    ...spot,
+    name: spot.name || spot.title,
+    intro: spot.intro || spot.desc || "這是一個值得慢慢停留的景點。",
+    location: spot.location || spot.meta || "Sarawak",
+    type: spot.type || "景點推薦",
+    address: spot.address || spot.meta || "Sarawak",
+    phone: spot.phone || "尚未提供",
+    hours: spot.hours || "建議白天前往",
+    contactName: spot.contactName || "HeriLand Guide",
+    contactImage: spot.contactImage || spot.image,
+    score: spot.score || "4.8",
+    reviewCount: spot.reviewCount || "128",
+    tags: spot.tags || ["景點", "慢旅", "拍照"],
+    services: spot.services || [
+      "適合拍照與停留",
+      "可加入個人行程",
+      "可直接導航前往"
+    ]
+  };
+}
+
+function normalizeFood(food) {
+  return {
+    ...food,
+    name: food.name || food.title,
+    intro: food.intro || food.desc || "這是一個值得體驗的在地美食。",
+    location: food.location || food.meta || "Sarawak",
+    type: food.type || "美食推薦",
+    address: food.address || food.meta || "Sarawak",
+    phone: food.phone || "尚未提供",
+    hours: food.hours || "建議用餐前確認",
+    contactName: food.contactName || "HeriLand Guide",
+    contactImage: food.contactImage || food.image,
+    score: food.score || "4.8",
+    reviewCount: food.reviewCount || "128",
+    tags: food.tags || ["美食", "在地", "推薦"],
+    services: food.services || [
+      "在地美食推薦",
+      "適合加入行程",
+      "可直接導航前往"
+    ]
+  };
+}
+
 function renderSpots() {
-
-  const grid =
-    document.getElementById("spotGrid");
-
+  const grid = document.getElementById("spotGrid");
   if (!grid) return;
 
   grid.innerHTML = "";
 
-  const renderItems =
-    showAllSpots
-      ? spots
-      : spots.slice(0, 10);
+  const renderItems = showAllSpots ? spots : spots.slice(0, 10);
 
-  renderItems.forEach(spot => {
+  renderItems.forEach(rawSpot => {
+    const spot = normalizeSpot(rawSpot);
 
-    const card =
-      document.createElement("article");
-
+    const card = document.createElement("article");
     card.className = "business-card";
+    card.onclick = () => openDetail(spot);
 
-card.innerHTML = `
-  <div class="business-card-image">
-    <img src="${spot.image}" alt="${spot.name}">
+    card.innerHTML = `
+      <div class="business-card-image">
+        <img src="${spot.image}" alt="${spot.name}">
 
-    <button class="business-save-btn" onclick="event.stopPropagation()">
-      ♡
-    </button>
-  </div>
+        <button class="business-save-btn" onclick="event.stopPropagation()">
+          ♡
+        </button>
+      </div>
 
-  <div class="business-card-body">
+      <div class="business-card-body">
+        <h3>${spot.name}</h3>
 
-    <div class="business-card-top">
-      <h3>${spot.name}</h3>
-    </div>
+        <div class="business-card-meta">
+          <span class="business-stars">★★★★★</span>
+          <span>${spot.score}</span>
+          <span>・</span>
+          <span>${spot.reviewCount} 則評論</span>
+        </div>
 
-    <div class="business-card-meta">
-      <span class="business-stars">★★★★★</span>
-      <span>${spot.score || "4.8"}</span>
-      <span>・</span>
-      <span>${spot.reviewCount || "128"} 則評論</span>
-    </div>
-
-<div class="business-card-type">
-  ${(spot.tags?.[0]) || spot.type || spot.location || "景點推薦"}
-</div>
-
-  </div>
-`;
+        <div class="business-card-type">
+          ${spot.tags?.[0] || spot.type}
+        </div>
+      </div>
+    `;
 
     grid.appendChild(card);
-
   });
-
 }
 
 function bindSpotMore() {
@@ -639,38 +673,37 @@ function renderFoods() {
 
   grid.innerHTML = "";
 
-  foods.forEach(food => {
+  foods.forEach(rawFood => {
+    const food = normalizeFood(rawFood);
+
     const card = document.createElement("article");
     card.className = "business-card";
+    card.onclick = () => openDetail(food);
 
     card.innerHTML = `
-  <div class="business-card-image">
-    <img src="${food.image}" alt="${food.name}">
+      <div class="business-card-image">
+        <img src="${food.image}" alt="${food.name}">
 
-    <button class="business-save-btn" onclick="event.stopPropagation()">
-      ♡
-    </button>
-  </div>
+        <button class="business-save-btn" onclick="event.stopPropagation()">
+          ♡
+        </button>
+      </div>
 
-  <div class="business-card-body">
+      <div class="business-card-body">
+        <h3>${food.name}</h3>
 
-    <div class="business-card-top">
-      <h3>${food.name}</h3>
-    </div>
+        <div class="business-card-meta">
+          <span class="business-stars">★★★★★</span>
+          <span>${food.score}</span>
+          <span>・</span>
+          <span>${food.reviewCount} 則評論</span>
+        </div>
 
-    <div class="business-card-meta">
-      <span class="business-stars">★★★★★</span>
-      <span>${food.score || "4.8"}</span>
-      <span>・</span>
-      <span>${food.reviewCount || "128"} 則評論</span>
-    </div>
-
-<div class="business-card-type">
-  ${(food.tags?.[0]) || food.type || food.location || "景點推薦"}
-</div>
-
-  </div>
-`;
+        <div class="business-card-type">
+          ${food.tags?.[0] || food.type}
+        </div>
+      </div>
+    `;
 
     grid.appendChild(card);
   });
@@ -709,38 +742,37 @@ function renderFoodSheet() {
 
   grid.innerHTML = "";
 
-  foods.forEach(food => {
+  foods.forEach(rawFood => {
+    const food = normalizeFood(rawFood);
+
     const card = document.createElement("article");
-    card.className = "food-card";
+    card.className = "business-card";
+    card.onclick = () => openDetail(food);
 
- card.innerHTML = `
-  <div class="business-card-image">
-    <img src="${food.image}" alt="${food.name}">
+    card.innerHTML = `
+      <div class="business-card-image">
+        <img src="${food.image}" alt="${food.name}">
 
-    <button class="business-save-btn" onclick="event.stopPropagation()">
-      ♡
-    </button>
-  </div>
+        <button class="business-save-btn" onclick="event.stopPropagation()">
+          ♡
+        </button>
+      </div>
 
-  <div class="business-card-body">
+      <div class="business-card-body">
+        <h3>${food.name}</h3>
 
-    <div class="business-card-top">
-      <h3>${food.name}</h3>
-    </div>
+        <div class="business-card-meta">
+          <span class="business-stars">★★★★★</span>
+          <span>${food.score}</span>
+          <span>・</span>
+          <span>${food.reviewCount} 則評論</span>
+        </div>
 
-    <div class="business-card-meta">
-      <span class="business-stars">★★★★★</span>
-      <span>${food.score || "4.8"}</span>
-      <span>・</span>
-      <span>${food.reviewCount || "128"} 則評論</span>
-    </div>
-
-<div class="business-card-type">
-  ${(food.tags?.[0]) || food.type || food.location || "景點推薦"}
-</div>
-
-  </div>
-`;
+        <div class="business-card-type">
+          ${food.tags?.[0] || food.type}
+        </div>
+      </div>
+    `;
 
     grid.appendChild(card);
   });
@@ -936,38 +968,37 @@ function renderSpotSheet() {
 
   grid.innerHTML = "";
 
-  spots.forEach(spot => {
+  spots.forEach(rawSpot => {
+    const spot = normalizeSpot(rawSpot);
+
     const card = document.createElement("article");
-    card.className = "spot-card";
+    card.className = "business-card";
+    card.onclick = () => openDetail(spot);
 
-card.innerHTML = `
-  <div class="business-card-image">
-    <img src="${spot.image}" alt="${spot.name}">
+    card.innerHTML = `
+      <div class="business-card-image">
+        <img src="${spot.image}" alt="${spot.name}">
 
-    <button class="business-save-btn" onclick="event.stopPropagation()">
-      ♡
-    </button>
-  </div>
+        <button class="business-save-btn" onclick="event.stopPropagation()">
+          ♡
+        </button>
+      </div>
 
-  <div class="business-card-body">
+      <div class="business-card-body">
+        <h3>${spot.name}</h3>
 
-    <div class="business-card-top">
-      <h3>${spot.name}</h3>
-    </div>
+        <div class="business-card-meta">
+          <span class="business-stars">★★★★★</span>
+          <span>${spot.score}</span>
+          <span>・</span>
+          <span>${spot.reviewCount} 則評論</span>
+        </div>
 
-    <div class="business-card-meta">
-      <span class="business-stars">★★★★★</span>
-      <span>${spot.score || "4.8"}</span>
-      <span>・</span>
-      <span>${spot.reviewCount || "128"} 則評論</span>
-    </div>
-
-<div class="business-card-type">
-  ${(spot.tags?.[0]) || spot.type || spot.location || "景點推薦"}
-</div>
-
-  </div>
-`;
+        <div class="business-card-type">
+          ${spot.tags?.[0] || spot.type}
+        </div>
+      </div>
+    `;
 
     grid.appendChild(card);
   });
