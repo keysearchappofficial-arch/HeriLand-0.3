@@ -1,61 +1,29 @@
-import { initAiGuide }
-from "./ai-guide.js";
+import { initAiGuide } from "./ai-guide.js";
 
 async function loadComponent(selector, file) {
+  console.log("[components] loading:", selector, file);
 
-  console.log(
-    "[components] loading:",
-    selector,
-    file
-  );
-
-  const target =
-    document.querySelector(selector);
+  const target = document.querySelector(selector);
 
   if (!target) {
-
-    console.warn(
-      "[components] target not found:",
-      selector
-    );
-
+    console.warn("[components] target not found:", selector);
     return;
-
   }
 
   try {
+    const response = await fetch(file);
 
-    const response =
-      await fetch(file);
+    console.log("[components] response:", file, response.status);
 
-    console.log(
-      "[components] response:",
-      file,
-      response.status
-    );
-
-    const html =
-      await response.text();
+    const html = await response.text();
 
     target.innerHTML = html;
 
-    console.log(
-      "[components] loaded:",
-      file
-    );
-
+    console.log("[components] loaded:", file);
   }
-
   catch (error) {
-
-    console.error(
-      "[components] failed:",
-      file,
-      error
-    );
-
+    console.error("[components] failed:", file, error);
   }
-
 }
 
 /* =========================
@@ -63,33 +31,20 @@ async function loadComponent(selector, file) {
 ========================= */
 
 async function renderMobileMenu() {
+  console.log("[components] render mobile menu");
 
-  console.log(
-    "[components] render mobile menu"
-  );
-
-  const target =
-    document.querySelector(
-      "#mobileMenu"
-    );
+  const target = document.querySelector("#mobileMenu");
 
   if (!target) {
-
-    console.warn(
-      "[components] mobileMenu target missing"
-    );
-
+    console.warn("[components] mobileMenu target missing");
     return;
-
   }
 
   target.innerHTML = `
     <div class="mobile-menu">
-
       <div class="mobile-menu-panel">
 
         <div class="mobile-menu-head">
-
           <strong>HeriLand</strong>
 
           <button
@@ -98,25 +53,11 @@ async function renderMobileMenu() {
           >
             ×
           </button>
-
         </div>
 
         <div id="mobileNav"></div>
 
-        <div class="mobile-menu-ai">
-
-          <small>AI Guide</small>
-
-          <p>
-            我會依照你現在的位置、
-            時間和狀態，
-            幫你推薦現在適合的砂拉越體驗。
-          </p>
-
-        </div>
-
       </div>
-
     </div>
   `;
 
@@ -124,14 +65,14 @@ async function renderMobileMenu() {
     "#mobileNav",
     "./components/mobile-nav.html"
   );
-
 }
 
-async function initComponents() {
+/* =========================
+   Init Components
+========================= */
 
-  console.log(
-    "[components] init start"
-  );
+async function initComponents() {
+  console.log("[components] init start");
 
   await loadComponent(
     "#navbar",
@@ -142,25 +83,23 @@ async function initComponents() {
     "#footer",
     "./components/footer.html"
   );
-  
+
   await loadComponent(
-  "#aiGuide",
-  "./components/ai-guide.html"
-);
+    "#aiGuide",
+    "./components/ai-guide.html"
+  );
 
   await renderMobileMenu();
 
-console.log(
-  "[components] READY"
-);
+  initAiGuide();
 
-window.componentsLoaded = true;
+  console.log("[components] READY");
 
-window.dispatchEvent(
-  new Event("componentsReady")
-);
+  window.componentsLoaded = true;
 
+  window.dispatchEvent(
+    new Event("componentsReady")
+  );
 }
 
 initComponents();
-initAiGuide();
