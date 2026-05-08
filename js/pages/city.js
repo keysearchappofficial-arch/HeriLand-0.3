@@ -713,17 +713,34 @@ function renderFoodSheet() {
     const card = document.createElement("article");
     card.className = "food-card";
 
-    card.innerHTML = `
-      <div class="food-image">
-        <img src="${food.image}" alt="${food.title}">
-      </div>
+ card.innerHTML = `
+  <div class="business-card-image">
+    <img src="${food.image}" alt="${food.name}">
 
-      <div class="food-body">
-        <h3>${food.title}</h3>
-        <p>${food.desc}</p>
-        <div class="food-meta">${food.meta}</div>
-      </div>
-    `;
+    <button class="business-save-btn" onclick="event.stopPropagation()">
+      ♡
+    </button>
+  </div>
+
+  <div class="business-card-body">
+
+    <div class="business-card-top">
+      <h3>${food.name}</h3>
+    </div>
+
+    <div class="business-card-meta">
+      <span class="business-stars">★★★★★</span>
+      <span>${food.score || "4.8"}</span>
+      <span>・</span>
+      <span>${food.reviewCount || "128"} 則評論</span>
+    </div>
+
+<div class="business-card-type">
+  ${(food.tags?.[0]) || food.type || food.location || "景點推薦"}
+</div>
+
+  </div>
+`;
 
     grid.appendChild(card);
   });
@@ -923,17 +940,34 @@ function renderSpotSheet() {
     const card = document.createElement("article");
     card.className = "spot-card";
 
-    card.innerHTML = `
-      <div class="spot-image">
-        <img src="${spot.image}" alt="${spot.title}">
-      </div>
+card.innerHTML = `
+  <div class="business-card-image">
+    <img src="${spot.image}" alt="${spot.name}">
 
-      <div class="spot-body">
-        <h3>${spot.title}</h3>
-        <p>${spot.desc}</p>
-        <div class="spot-meta">${spot.meta}</div>
-      </div>
-    `;
+    <button class="business-save-btn" onclick="event.stopPropagation()">
+      ♡
+    </button>
+  </div>
+
+  <div class="business-card-body">
+
+    <div class="business-card-top">
+      <h3>${spot.name}</h3>
+    </div>
+
+    <div class="business-card-meta">
+      <span class="business-stars">★★★★★</span>
+      <span>${spot.score || "4.8"}</span>
+      <span>・</span>
+      <span>${spot.reviewCount || "128"} 則評論</span>
+    </div>
+
+<div class="business-card-type">
+  ${(spot.tags?.[0]) || spot.type || spot.location || "景點推薦"}
+</div>
+
+  </div>
+`;
 
     grid.appendChild(card);
   });
