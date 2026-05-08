@@ -152,6 +152,137 @@
   transition: transform .25s var(--ease), background .25s var(--ease);
 }
 
+/* =========================
+   Business Card
+========================= */
+
+.business-card {
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  background: rgba(255,255,255,.74);
+  border: 1px solid rgba(0,0,0,.05);
+
+  cursor: pointer;
+
+  transition:
+    transform .24s var(--ease),
+    background .24s var(--ease),
+    box-shadow .24s var(--ease);
+}
+
+.business-card:hover {
+  transform: translateY(-4px);
+
+  background: #fff;
+
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.06);
+}
+
+/* image */
+
+.business-card-image {
+  position: relative;
+
+  height: 170px;
+
+  overflow: hidden;
+
+  background: #ddd;
+}
+
+.business-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform .5s ease;
+}
+
+.business-card:hover
+.business-card-image img {
+  transform: scale(1.04);
+}
+
+/* save */
+
+.business-save-btn {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.92);
+
+  backdrop-filter: blur(14px);
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+/* body */
+
+.business-card-body {
+  padding: 16px;
+}
+
+.business-card-body h3 {
+  font-size: 17px;
+  line-height: 1.35;
+
+  letter-spacing: -0.4px;
+}
+
+/* meta */
+
+.business-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 10px;
+
+  color: #666;
+
+  font-size: 13px;
+}
+
+.business-stars {
+  color: #111;
+
+  letter-spacing: -1px;
+}
+
+/* type */
+
+.business-card-type {
+  margin-top: 12px;
+
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(0,0,0,.06);
+
+  color: #444;
+
+  font-size: 12px;
+  font-weight: 750;
+}
+
 .place-card:hover {
   transform: translateY(-4px);
   background: #fff;
