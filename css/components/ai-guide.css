@@ -3,13 +3,17 @@
 ========================= */
 
 .ai-guide-fab {
-  position: fixed;
+  position: fixed !important;
 
-  right: 20px;
-  bottom: 24px;
+  right: 18px;
+  bottom: calc(92px + env(safe-area-inset-bottom));
 
   width: 58px;
   height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   border: none;
   border-radius: 999px;
@@ -22,9 +26,11 @@
   box-shadow:
     0 12px 30px rgba(0,0,0,.18);
 
-  z-index: 999;
+  z-index: 99999;
 
   cursor: pointer;
+
+  transform: none !important;
 }
 
 /* =========================
@@ -257,6 +263,14 @@
 
 @media (min-width: 821px) {
 
+  .ai-guide-fab {
+    right: 24px;
+    bottom: 24px;
+
+    width: 60px;
+    height: 60px;
+  }
+
   .ai-guide-panel {
     left: auto;
 
@@ -282,25 +296,26 @@
 
     opacity: 1;
   }
-  
-  .ai-guide-fab {
 
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 820px) {
+
+  .ai-guide-fab {
     right: 18px;
 
-    bottom: calc(92px + env(safe-area-inset-bottom));
+    bottom:
+      calc(
+        92px +
+        env(safe-area-inset-bottom)
+      );
 
-    width: 54px;
-
-    height: 54px;
-
-    z-index: 1200;
-
+    width: 56px;
+    height: 56px;
   }
-
-  .ai-guide-sheet {
-
-    z-index: 1300;
-
-  
 
 }
