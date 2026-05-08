@@ -324,4 +324,74 @@
     border-radius: 17px;
 
   }
+  
+
+  /* =========================
+     Mobile Bottom CTA
+  ========================= */
+
+  .detail-cta {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 2020;
+
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+
+    gap: 10px;
+
+    padding:
+      12px
+      16px
+      calc(12px + env(safe-area-inset-bottom));
+
+    background:
+      rgba(246,245,241,.94);
+
+    backdrop-filter: blur(20px);
+
+    border-top:
+      1px solid rgba(0,0,0,.05);
+
+    box-shadow:
+      0 -10px 30px rgba(0,0,0,.04);
+  }
+
+  .detail-cta button {
+    height: 52px;
+
+    border: none;
+    border-radius: 16px;
+
+    font-size: 14px;
+    font-weight: 850;
+
+    cursor: pointer;
+  }
+
+  .secondary-btn {
+    background: rgba(255,255,255,.96);
+
+    border: 1px solid rgba(0,0,0,.06);
+
+    color: #111;
+  }
+
+  .primary-cta {
+    background: #111;
+    color: #fff;
+
+    box-shadow:
+      0 8px 24px rgba(0,0,0,.18);
+  }
+
+  /* 避免內容被底部 CTA 擋住 */
+
+  .detail-panel {
+    padding-bottom: 120px;
+  }
 }
