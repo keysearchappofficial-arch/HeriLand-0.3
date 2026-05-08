@@ -203,21 +203,34 @@
 <!-- Business Detail Page -->
 <section class="detail-page" id="detailPage">
 
+  <!-- Hero -->
   <div class="detail-gallery">
-    <button class="detail-back" type="button" onclick="closeDetail()">
+
+    <button
+      class="detail-back"
+      type="button"
+      onclick="closeDetail()">
       ‹
     </button>
 
-    <button class="detail-save" type="button">
+    <button
+      class="detail-save"
+      type="button">
       ♡
     </button>
 
-    <img id="detailImage" src="" alt="">
+    <img
+      id="detailImage"
+      src=""
+      alt="">
   </div>
 
+  <!-- Content -->
   <div class="detail-panel">
 
+    <!-- Head -->
     <section class="detail-head">
+
       <div class="detail-kicker">
         <span id="detailType">推薦地點</span>
         <span>・</span>
@@ -228,59 +241,152 @@
 
       <div class="detail-rating-row">
         <span class="detail-stars">★★★★★</span>
-        <strong id="detailScore">4.8</strong>
+
+        <strong id="detailScore">
+          4.8
+        </strong>
+
         <span>・</span>
-        <span id="detailReviewCount">128 則評論</span>
+
+        <span id="detailReviewCount">
+          128 則評論
+        </span>
       </div>
 
       <div class="detail-line">
         <span id="detailAddress"></span>
       </div>
+
+      <!-- mini info -->
+      <div class="detail-mini-info">
+
+        <div class="detail-mini-pill">
+          <small>電話</small>
+          <strong id="detailPhone">
+            尚未提供
+          </strong>
+        </div>
+
+        <div class="detail-mini-pill">
+          <small>營業時間</small>
+          <strong id="detailHours">
+            建議出發前確認
+          </strong>
+        </div>
+
+      </div>
+
     </section>
 
+    <!-- AI Guide -->
     <section class="detail-guide">
+
       <small>HeriLand Guide</small>
+
       <p id="detailAiNote">
         這裡適合慢慢停留，不用趕行程。
       </p>
+
     </section>
 
+    <!-- Intro -->
     <section class="detail-section">
+
       <h2>簡介</h2>
+
       <p id="detailIntro"></p>
+
     </section>
 
+    <!-- Features -->
     <section class="detail-section">
+
       <h2>特色</h2>
+
       <ul id="detailServices"></ul>
+
     </section>
 
+    <!-- Reviews -->
     <section class="detail-reviews">
+
       <div class="detail-review-head">
+
         <h2>旅人怎麼說</h2>
-        <span>View all</span>
+
+        <button
+          class="detail-review-more"
+          type="button">
+          查看全部
+        </button>
+
       </div>
 
+      <!-- write review -->
+      <button
+        class="detail-write-review"
+        type="button">
+
+        ✍️ 寫下你的體驗
+
+      </button>
+
+      <!-- review list -->
       <div class="detail-review-list">
+
         <article class="detail-review-card">
+
           <strong>Mei Lin</strong>
+
           <span>★★★★★</span>
-          <p>很適合傍晚來，節奏很舒服，也很好拍照。</p>
+
+          <p>
+            很適合傍晚來，
+            節奏很舒服，
+            也很好拍照。
+          </p>
+
         </article>
 
         <article class="detail-review-card">
+
           <strong>Daniel</strong>
+
           <span>★★★★★</span>
-          <p>不會太吵，適合慢慢走、慢慢看。</p>
+
+          <p>
+            不會太吵，
+            適合慢慢走、
+            慢慢看。
+          </p>
+
         </article>
+
       </div>
+
     </section>
 
   </div>
 
+  <!-- CTA -->
   <div class="detail-cta">
-    <button class="secondary-btn" type="button">加入行程</button>
-    <button class="primary-cta" type="button">帶我去</button>
+
+    <button
+      class="secondary-btn"
+      type="button">
+
+      加入行程
+
+    </button>
+
+    <button
+      class="primary-cta"
+      type="button">
+
+      帶我去
+
+    </button>
+
   </div>
 
 </section>
