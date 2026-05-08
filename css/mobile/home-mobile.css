@@ -120,6 +120,14 @@
     overflow: visible;
     padding: 0;
   }
+  
+  .spot-scroll .business-card,
+
+  .food-scroll .business-card {
+
+    flex: 0 0 220px;
+
+  
 
   .spot-scroll-wrap,
   .food-scroll-wrap {
