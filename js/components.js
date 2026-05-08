@@ -1,3 +1,6 @@
+import { initAiGuide }
+from "./ai-guide.js";
+
 async function loadComponent(selector, file) {
 
   console.log(
@@ -139,6 +142,11 @@ async function initComponents() {
     "#footer",
     "./components/footer.html"
   );
+  
+  await loadComponent(
+  "#aiGuide",
+  "./components/ai-guide.html"
+);
 
   await renderMobileMenu();
 
@@ -155,3 +163,4 @@ window.dispatchEvent(
 }
 
 initComponents();
+initAiGuide();
