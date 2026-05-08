@@ -193,7 +193,7 @@ function renderSpots() {
 
     card.innerHTML = `
   <div class="business-card-image">
-    <img src="${place.image}" alt="${place.name}">
+    <img src="${spot.image}" alt="${spot.name}">
 
     <button class="business-save-btn" onclick="event.stopPropagation()">
       ♡
@@ -203,18 +203,18 @@ function renderSpots() {
   <div class="business-card-body">
 
     <div class="business-card-top">
-      <h3>${place.name}</h3>
+      <h3>${spot.name}</h3>
     </div>
 
     <div class="business-card-meta">
       <span class="business-stars">★★★★★</span>
-      <span>${place.score || "4.8"}</span>
+      <span>${spot.score || "4.8"}</span>
       <span>・</span>
-      <span>${place.reviewCount || "128"} 則評論</span>
+      <span>${spot.reviewCount || "128"} 則評論</span>
     </div>
 
     <div class="business-card-type">
-      ${(place.tags?.[0]) || place.type || "推薦地點"}
+      ${(spot.tags?.[0]) || place.type || "推薦地點"}
     </div>
 
   </div>
@@ -267,7 +267,7 @@ function renderFoods() {
 
     card.innerHTML = `
   <div class="business-card-image">
-    <img src="${place.image}" alt="${place.name}">
+    <img src="${food.image}" alt="${food.name}">
 
     <button class="business-save-btn" onclick="event.stopPropagation()">
       ♡
@@ -277,18 +277,18 @@ function renderFoods() {
   <div class="business-card-body">
 
     <div class="business-card-top">
-      <h3>${place.name}</h3>
+      <h3>${food.name}</h3>
     </div>
 
     <div class="business-card-meta">
       <span class="business-stars">★★★★★</span>
-      <span>${place.score || "4.8"}</span>
+      <span>${food.score || "4.8"}</span>
       <span>・</span>
-      <span>${place.reviewCount || "128"} 則評論</span>
+      <span>${food.reviewCount || "128"} 則評論</span>
     </div>
 
     <div class="business-card-type">
-      ${(place.tags?.[0]) || place.type || "推薦地點"}
+      ${(food.tags?.[0]) || place.type || "推薦地點"}
     </div>
 
   </div>
