@@ -301,6 +301,12 @@ export const events = [
     image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
   },
   {
+    title: "Sarawak Food Weekend",
+    date: "本週末",
+    location: "Kuching City Center",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
+  },
+  {
     title: "Miri Sunset Market",
     date: "週六・下午 5:00",
     location: "Miri",
