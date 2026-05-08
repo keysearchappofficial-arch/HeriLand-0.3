@@ -764,6 +764,38 @@
   display: none;
 }
 
+/* =========================
+   City Event Carousel Fix
+========================= */
+
+.event-carousel {
+  display: flex;
+  gap: 18px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+
+  scroll-snap-type: x mandatory;
+
+  padding-bottom: 8px;
+}
+
+.event-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.event-carousel .event-card {
+  flex: 0 0 360px;
+  scroll-snap-align: start;
+}
+
+.event-carousel .event-card-image {
+  height: 210px;
+}
+
 /* 卡片 */
 
 .city-list-grid {
