@@ -213,9 +213,9 @@ function renderSpots() {
       <span>${spot.reviewCount || "128"} 則評論</span>
     </div>
 
-    <div class="business-card-type">
-      ${(spot.tags?.[0]) || place.type || "推薦地點"}
-    </div>
+<div class="business-card-type">
+  ${(spot.tags?.[0]) || spot.type || spot.location || "景點推薦"}
+</div>
 
   </div>
 `;
@@ -287,9 +287,9 @@ function renderFoods() {
       <span>${food.reviewCount || "128"} 則評論</span>
     </div>
 
-    <div class="business-card-type">
-      ${(food.tags?.[0]) || place.type || "推薦地點"}
-    </div>
+<div class="business-card-type">
+  ${(food.tags?.[0]) || food.type || food.location || "美食推薦"}
+</div>
 
   </div>
 `;
