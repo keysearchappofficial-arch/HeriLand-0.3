@@ -135,17 +135,19 @@
   font-weight: 750;
 }
 
-/* Place Grid */
 
-.place-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
 
 /* =========================
    Business Card
 ========================= */
+
+.place-grid,
+.spot-grid,
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
 
 .business-card {
   overflow: hidden;
