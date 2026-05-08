@@ -3,3 +3,12 @@
 @import url("./home.css");
 @import url("./detail.css");
 @import url("./mobile.css");
+
+@media (min-width: 821px) {
+  .main {
+    width: auto;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 38px 80px;
+  }
+}
