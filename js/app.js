@@ -90,7 +90,7 @@ function renderPlaces(items) {
     const card = document.createElement("article");
 
     card.className = "business-card";
-    card.onclick = () => openDetail(realIndex);
+    card.onclick = () =>   openDetail(place);
 
     card.innerHTML = `
       <div class="business-card-image">
@@ -220,6 +220,9 @@ function renderSpots() {
   </div>
 `;
 
+card.onclick = () =>
+  openDetail(spot);
+
     spotScroll.appendChild(card);
   });
 }
@@ -294,6 +297,9 @@ function renderFoods() {
   </div>
 `;
 
+card.onclick = () =>
+  openDetail(food);
+
     foodScroll.appendChild(card);
   });
 }
@@ -355,9 +361,7 @@ function renderEvents() {
   });
 }
 
-function openDetail(index) {
-  const place =
-    currentPlaces[index];
+function openDetail(place) {
 
   if (!place || !els.detailPage) return;
 
