@@ -1,1 +1,286 @@
-3216546
+/* =========================
+   Floating Button
+========================= */
+
+.ai-guide-fab {
+  position: fixed;
+
+  right: 20px;
+  bottom: 24px;
+
+  width: 58px;
+  height: 58px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #111;
+  color: white;
+
+  font-size: 22px;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.18);
+
+  z-index: 500;
+
+  cursor: pointer;
+}
+
+/* =========================
+   Sheet
+========================= */
+
+.ai-guide-sheet {
+  position: fixed;
+  inset: 0;
+
+  z-index: 600;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity .24s ease,
+    visibility .24s ease;
+}
+
+.ai-guide-sheet.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.ai-guide-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0,0,0,.28);
+}
+
+/* =========================
+   Panel
+========================= */
+
+.ai-guide-panel {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: min(78dvh, 720px);
+
+  background: #f6f5f1;
+
+  border-radius: 30px 30px 0 0;
+
+  padding: 14px 18px 26px;
+
+  transform: translateY(100%);
+
+  transition:
+    transform .34s var(--ease);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-guide-sheet.show .ai-guide-panel {
+  transform: translateY(0);
+}
+
+/* =========================
+   Handle
+========================= */
+
+.ai-guide-handle {
+  width: 42px;
+  height: 5px;
+
+  border-radius: 999px;
+
+  background: rgba(0,0,0,.14);
+
+  margin: 0 auto 18px;
+}
+
+/* =========================
+   Head
+========================= */
+
+.ai-guide-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.ai-guide-head small {
+  color: #888;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.ai-guide-head h2 {
+  margin-top: 6px;
+
+  font-size: 34px;
+  line-height: 1;
+
+  letter-spacing: -1.4px;
+}
+
+.ai-guide-head button {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: rgba(255,255,255,.78);
+
+  font-size: 26px;
+
+  cursor: pointer;
+}
+
+/* =========================
+   Chat
+========================= */
+
+.ai-guide-chat {
+  flex: 1;
+
+  overflow-y: auto;
+}
+
+.guide-message {
+  display: inline-flex;
+
+  max-width: 82%;
+
+  padding: 14px 16px;
+
+  border-radius: 20px 20px 20px 6px;
+
+  background: rgba(255,255,255,.82);
+
+  color: #222;
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* =========================
+   Chips
+========================= */
+
+.guide-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.guide-chip-group button {
+  border: none;
+  border-radius: 999px;
+
+  padding: 12px 14px;
+
+  background: rgba(255,255,255,.78);
+
+  color: #333;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* =========================
+   Input
+========================= */
+
+.ai-guide-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.ai-guide-input input {
+  flex: 1;
+
+  height: 56px;
+
+  border: none;
+  outline: none;
+
+  padding: 0 18px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.84);
+
+  font-size: 15px;
+}
+
+.ai-guide-input button {
+  width: 52px;
+  height: 52px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #111;
+  color: white;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+/* =========================
+   Desktop
+========================= */
+
+@media (min-width: 821px) {
+
+  .ai-guide-panel {
+    left: auto;
+
+    width: 430px;
+    height: 720px;
+
+    right: 22px;
+    bottom: 22px;
+
+    border-radius: 30px;
+
+    transform:
+      translateY(20px)
+      scale(.96);
+
+    opacity: 0;
+  }
+
+  .ai-guide-sheet.show .ai-guide-panel {
+    transform:
+      translateY(0)
+      scale(1);
+
+    opacity: 1;
+  }
+
+}
