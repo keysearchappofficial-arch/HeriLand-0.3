@@ -333,26 +333,40 @@
    CTA
 ========================= */
 
+/* =========================
+   Bottom CTA
+========================= */
+
 .detail-cta {
   position: fixed;
 
-  left: 50%;
-  bottom: 18px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-  transform: translateX(-50%);
-
-  width: min(460px, calc(100% - 36px));
+  z-index: 2020;
 
   display: grid;
   grid-template-columns: 1fr 1.4fr;
 
   gap: 12px;
 
-  z-index: 2020;
+  padding:
+    14px
+    18px
+    calc(14px + env(safe-area-inset-bottom));
+
+  background:
+    rgba(246,245,241,.94);
+
+  backdrop-filter: blur(18px);
+
+  border-top:
+    1px solid rgba(0,0,0,.06);
 }
 
 .detail-cta button {
-  height: 56px;
+  height: 54px;
 
   border: none;
   border-radius: 18px;
@@ -364,7 +378,8 @@
 }
 
 .secondary-btn {
-  background: rgba(255,255,255,.94);
+  background: rgba(255,255,255,.92);
+
   border: 1px solid rgba(0,0,0,.08);
 
   color: #111;
