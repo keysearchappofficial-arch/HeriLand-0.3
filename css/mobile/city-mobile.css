@@ -282,6 +282,26 @@
     font-size: 13px;
     line-height: 1.55;
   }
+  
+  .event-carousel {
+
+    gap: 14px;
+
+    padding: 0 18px 10px;
+
+  }
+
+  .event-carousel .event-card {
+
+    flex: 0 0 86%;
+
+  }
+
+  .event-carousel .event-card-image {
+
+    height: 190px;
+
+  }
 
   /* =========================
      City List
