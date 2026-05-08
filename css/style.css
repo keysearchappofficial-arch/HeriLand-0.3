@@ -5,10 +5,22 @@
 @import url("./mobile.css");
 
 @media (min-width: 821px) {
-  .main {
-    width: auto;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 24px 38px 80px;
+
+  .app {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
+
+  .main {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 24px 38px 80px;
+
+    box-sizing: border-box;
+  }
+
 }
