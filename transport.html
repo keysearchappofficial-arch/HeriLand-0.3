@@ -18,10 +18,8 @@
 
 <main class="page-container transport-page">
 
-  <!-- Navbar -->
   <div id="navbar"></div>
 
-  <!-- Mobile Top -->
   <header class="mobile-top">
     <div>
       <small>Move around</small>
@@ -37,7 +35,6 @@
     </button>
   </header>
 
-  <!-- Search Hero -->
   <section class="transport-search-hero">
 
     <div class="transport-search-bg">
@@ -76,7 +73,6 @@
 
   </section>
 
-  <!-- Search Results -->
   <section class="transport-result-section" id="transportResultSection">
     <div class="transport-section-head">
       <h2>搜尋結果</h2>
@@ -86,77 +82,48 @@
     <div class="transport-route-list" id="searchResultList"></div>
   </section>
 
-  <!-- Common Routes -->
   <section class="transport-route-section">
 
     <div class="transport-section-head">
       <h2>常見路線</h2>
 
       <button id="openAllRoutesBtn" type="button">
-  查看全部
-  <span>›</span>
-</button>
+        查看全部
+        <span>›</span>
+      </button>
     </div>
 
     <div class="transport-route-list" id="commonRouteList">
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Kuching</span>
-
-        <span class="route-arrow">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 7h10v10"></path>
-            <path d="M17 7L7 17"></path>
-          </svg>
+        <span class="route-main">
+          <small>南區 - 西區</small>
+          <span>Kuching - Santubong</span>
         </span>
-
-        <span class="route-place">Santubong</span>
-
         <strong>›</strong>
       </button>
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Kuching</span>
-
-        <span class="route-arrow">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 7h10v10"></path>
-            <path d="M17 7L7 17"></path>
-          </svg>
+        <span class="route-main">
+          <small>南區 - 南區</small>
+          <span>Kuching - Serian</span>
         </span>
-
-        <span class="route-place">Serian</span>
-
         <strong>›</strong>
       </button>
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Kuching</span>
-
-        <span class="route-arrow">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 7h10v10"></path>
-            <path d="M17 7L7 17"></path>
-          </svg>
+        <span class="route-main">
+          <small>南區 - 中區</small>
+          <span>Kuching - Sibu</span>
         </span>
-
-        <span class="route-place">Sibu</span>
-
         <strong>›</strong>
       </button>
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Miri</span>
-
-        <span class="route-arrow">
-          <svg viewBox="0 0 24 24">
-            <path d="M7 7h10v10"></path>
-            <path d="M17 7L7 17"></path>
-          </svg>
+        <span class="route-main">
+          <small>砂拉越 - 汶萊</small>
+          <span>Miri - Brunei</span>
         </span>
-
-        <span class="route-place">Brunei</span>
-
         <strong>›</strong>
       </button>
 
@@ -164,7 +131,6 @@
 
   </section>
 
-  <!-- Recent Searches -->
   <section class="transport-recent-section">
 
     <div class="transport-section-head">
@@ -176,19 +142,17 @@
     </div>
 
     <div class="transport-recent-tags">
-      <button type="button">Kuching → Santubong <span>×</span></button>
-      <button type="button">Kuching → Sibu <span>×</span></button>
-      <button type="button">機場 → Kuching <span>×</span></button>
+      <button type="button">Kuching - Santubong <span>×</span></button>
+      <button type="button">Kuching - Sibu <span>×</span></button>
+      <button type="button">機場 - Kuching <span>×</span></button>
     </div>
 
   </section>
 
-  <!-- Footer -->
   <div id="footer"></div>
 
 </main>
 
-  <!-- All Routes View -->
 <section class="transport-sub-view" id="allRoutesView">
 
   <div class="transport-sub-head">
@@ -214,9 +178,10 @@
       <h3>B</h3>
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Bintulu</span>
-        <span class="route-arrow">↗</span>
-        <span class="route-place">Miri</span>
+        <span class="route-main">
+          <small>中區 - 北區</small>
+          <span>Bintulu - Miri</span>
+        </span>
         <strong>›</strong>
       </button>
     </section>
@@ -225,16 +190,42 @@
       <h3>K</h3>
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Kuching</span>
-        <span class="route-arrow">↗</span>
-        <span class="route-place">Santubong</span>
+        <span class="route-main">
+          <small>南區 - 西區</small>
+          <span>Kuching - Santubong</span>
+        </span>
         <strong>›</strong>
       </button>
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Kuching</span>
-        <span class="route-arrow">↗</span>
-        <span class="route-place">Sibu</span>
+        <span class="route-main">
+          <small>南區 - 南區</small>
+          <span>Kuching - Serian</span>
+        </span>
+        <strong>›</strong>
+      </button>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-main">
+          <small>南區 - 中區</small>
+          <span>Kuching - Sibu</span>
+        </span>
+        <strong>›</strong>
+      </button>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-main">
+          <small>南區 - 西區</small>
+          <span>Kuching - Bau</span>
+        </span>
+        <strong>›</strong>
+      </button>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-main">
+          <small>南區 - 南區</small>
+          <span>Kuching - Sri Aman</span>
+        </span>
         <strong>›</strong>
       </button>
     </section>
@@ -243,9 +234,22 @@
       <h3>M</h3>
 
       <button class="transport-route-row" type="button">
-        <span class="route-place">Miri</span>
-        <span class="route-arrow">↗</span>
-        <span class="route-place">Brunei</span>
+        <span class="route-main">
+          <small>砂拉越 - 汶萊</small>
+          <span>Miri - Brunei</span>
+        </span>
+        <strong>›</strong>
+      </button>
+    </section>
+
+    <section class="route-alpha-group" data-alpha="S">
+      <h3>S</h3>
+
+      <button class="transport-route-row" type="button">
+        <span class="route-main">
+          <small>中區 - 北區</small>
+          <span>Sibu - Bintulu</span>
+        </span>
         <strong>›</strong>
       </button>
     </section>
@@ -253,9 +257,7 @@
   </div>
 
   <div class="route-alpha-index">
-    <button data-jump-alpha="A">A</button>
     <button data-jump-alpha="B">B</button>
-    <button data-jump-alpha="C">C</button>
     <button data-jump-alpha="K">K</button>
     <button data-jump-alpha="M">M</button>
     <button data-jump-alpha="S">S</button>
@@ -263,50 +265,48 @@
 
 </section>
 
-  <!-- Route Detail Sheet -->
-  <section class="transport-route-detail" id="routeDetail">
-    <div class="route-detail-backdrop" id="routeDetailBackdrop"></div>
+<section class="transport-route-detail" id="routeDetail">
+  <div class="route-detail-backdrop" id="routeDetailBackdrop"></div>
 
-    <div class="route-detail-panel">
+  <div class="route-detail-panel">
 
-      <div class="route-detail-head">
-        <button id="routeDetailClose" type="button">‹</button>
+    <div class="route-detail-head">
+      <button id="routeDetailClose" type="button">‹</button>
 
-        <div>
-          <small>Route Guide</small>
-          <h2 id="routeDetailTitle">Kuching → Santubong</h2>
-        </div>
+      <div>
+        <small>Route Guide</small>
+        <h2 id="routeDetailTitle">Kuching - Santubong</h2>
       </div>
-
-      <div class="route-detail-summary">
-        <small>HeriLand 建議</small>
-
-        <p id="routeDetailDesc">
-          這條路線比較適合 Grab 或租車，傍晚出發會比較舒服。
-        </p>
-      </div>
-
-      <div class="route-detail-info">
-        <div>
-          <small>時間</small>
-          <strong id="routeDetailTime">約 35–45 分鐘</strong>
-        </div>
-
-        <div>
-          <small>方式</small>
-          <strong id="routeDetailMethod">Grab / 租車</strong>
-        </div>
-
-        <div>
-          <small>提醒</small>
-          <strong id="routeDetailNote">晚上叫車可能較慢</strong>
-        </div>
-      </div>
-
     </div>
-  </section>
 
-<!-- Mobile Menu Component -->
+    <div class="route-detail-summary">
+      <small>HeriLand 建議</small>
+
+      <p id="routeDetailDesc">
+        這條路線比較適合 Grab 或租車，傍晚出發會比較舒服。
+      </p>
+    </div>
+
+    <div class="route-detail-info">
+      <div>
+        <small>時間</small>
+        <strong id="routeDetailTime">約 35–45 分鐘</strong>
+      </div>
+
+      <div>
+        <small>方式</small>
+        <strong id="routeDetailMethod">Grab / 租車</strong>
+      </div>
+
+      <div>
+        <small>提醒</small>
+        <strong id="routeDetailNote">晚上叫車可能較慢</strong>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <div id="mobileMenu"></div>
 
 <script type="module" src="./js/components.js"></script>
