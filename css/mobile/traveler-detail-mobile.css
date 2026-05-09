@@ -95,4 +95,18 @@
 
     font-size: 14px;
   }
+  
+  .traveler-detail-thumbs {
+    left: 22px;
+    right: 22px;
+    bottom: 120px;
+    gap: 8px;
+  }
+
+  .traveler-thumb {
+    flex-basis: 58px;
+    width: 58px;
+    height: 44px;
+    border-radius: 12px;
+  }
 }
