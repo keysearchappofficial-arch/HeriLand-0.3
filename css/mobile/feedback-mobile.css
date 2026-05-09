@@ -1,0 +1,128 @@
+/* =========================
+   Feedback Mobile
+========================= */
+
+@media (max-width: 820px) {
+
+  /* =========================
+     Hero
+  ========================= */
+
+  .feedback-hero {
+    padding:
+      96px
+      18px
+      24px;
+  }
+
+  .feedback-hero h1 {
+    font-size: 34px;
+
+    line-height: 1.02;
+
+    letter-spacing: -1.4px;
+  }
+
+  .feedback-hero p {
+    margin-top: 14px;
+
+    font-size: 14px;
+    line-height: 1.75;
+
+    color: #666;
+  }
+
+  /* =========================
+     Form Section
+  ========================= */
+
+  .feedback-form-section {
+    padding:
+      0
+      18px
+      120px;
+  }
+
+  /* =========================
+     Card
+  ========================= */
+
+  .feedback-form-card {
+    padding: 22px;
+
+    border-radius: 24px;
+  }
+
+  /* =========================
+     Fields
+  ========================= */
+
+  .feedback-field + .feedback-field {
+    margin-top: 20px;
+  }
+
+  .feedback-field label {
+    margin-bottom: 8px;
+
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  /* =========================
+     Select / Input
+  ========================= */
+
+  .feedback-field select,
+  .feedback-field input {
+    height: 50px;
+
+    padding:
+      0
+      14px;
+
+    border-radius: 15px;
+
+    font-size: 14px;
+  }
+
+  /* =========================
+     Textarea
+  ========================= */
+
+  .feedback-field textarea {
+    min-height: 150px;
+
+    padding: 14px;
+
+    border-radius: 16px;
+
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  /* =========================
+     Submit
+  ========================= */
+
+  .feedback-submit-btn {
+    height: 54px;
+
+    margin-top: 24px;
+
+    border-radius: 16px;
+
+    font-size: 14px;
+  }
+
+  /* =========================
+     Note
+  ========================= */
+
+  .feedback-note {
+    margin-top: 16px;
+
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+}
