@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Emergency Support｜HeriLand</title>
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/mobile.css" />
+  <link rel="stylesheet" href="./css/pages/emergency.css" />
+  <link rel="stylesheet" href="./css/mobile/emergency-mobile.css" />
+</head>
+
+<body>
+
+  <main class="page-container emergency-page">
+
+    <header class="emergency-top">
+      <a class="emergency-back-link" href="./index.html">
+        ‹
+      </a>
+
+      <div>
+        <small>HeriLand Support</small>
+        <h1>緊急聯絡</h1>
+      </div>
+    </header>
+
+    <section class="emergency-intro">
+      <h2>Important Numbers</h2>
+      <p>
+        旅途中以防萬一，可以快速查找當地常用官方聯絡電話。
+      </p>
+    </section>
+
+    <section class="emergency-filter-card">
+
+      <label>
+        城市
+        <select id="emergencyCity">
+          <option value="Kuching">Kuching</option>
+          <option value="Sibu">Sibu</option>
+          <option value="Miri">Miri</option>
+          <option value="Bintulu">Bintulu</option>
+        </select>
+      </label>
+
+      <label>
+        類別
+        <select id="emergencyCategory">
+          <option value="all">全部</option>
+          <option value="Emergency">緊急</option>
+          <option value="Police">警察</option>
+          <option value="Fire">消防</option>
+          <option value="Hospital">醫院</option>
+        </select>
+      </label>
+
+    </section>
+
+    <section class="emergency-primary">
+      <div>
+        <small>Malaysia Emergency</small>
+        <strong>999</strong>
+        <p>全國緊急電話</p>
+      </div>
+
+      <a href="tel:999">撥打</a>
+    </section>
+
+    <section class="emergency-list" id="emergencyList">
+      <!-- JS render -->
+    </section>
+
+    <p class="emergency-note">
+      HeriLand 整理當地常用緊急聯絡資訊，實際情況請以官方單位為準。
+    </p>
+
+  </main>
+
+  <div id="mobileMenu"></div>
+
+  <script type="module" src="./js/components.js"></script>
+  <script type="module" src="./js/emergency.js"></script>
+
+</body>
+</html>
