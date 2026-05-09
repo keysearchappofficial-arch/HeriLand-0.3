@@ -70,6 +70,10 @@ const emergencyData = [
   }
 ];
 
+/* =========================
+   Elements
+========================= */
+
 const citySelect =
   document.getElementById("citySelect");
 
@@ -173,7 +177,7 @@ function renderEmergencyList() {
 }
 
 /* =========================
-   Bind
+   Filters
 ========================= */
 
 function bindFilters() {
@@ -189,24 +193,6 @@ function bindFilters() {
   );
 
 }
-
-/* =========================
-   Init
-========================= */
-
-function initEmergencyPage() {
-
-  bindFilters();
-  bindMobileMenu();
-
-  renderEmergencyList();
-
-}
-
-window.addEventListener(
-  "DOMContentLoaded",
-  initEmergencyPage
-);
 
 /* =========================
    Mobile Menu
@@ -226,21 +212,49 @@ function bindMobileMenu() {
   if (!menu || !openBtn || !closeBtn) return;
 
   openBtn.addEventListener("click", () => {
+
     menu.classList.add("show");
-    document.body.style.overflow = "hidden";
+
+    document.body.style.overflow =
+      "hidden";
+
   });
 
   closeBtn.addEventListener("click", () => {
+
     menu.classList.remove("show");
-    document.body.style.overflow = "";
+
+    document.body.style.overflow =
+      "";
+
   });
 
   menu.addEventListener("click", e => {
+
     if (e.target === menu) {
+
       menu.classList.remove("show");
-      document.body.style.overflow = "";
+
+      document.body.style.overflow =
+        "";
+
     }
+
   });
+
+}
+
+/* =========================
+   Init
+========================= */
+
+function initEmergencyPage() {
+
+  bindFilters();
+
+  bindMobileMenu();
+
+  renderEmergencyList();
 
 }
 
@@ -251,21 +265,27 @@ function bindMobileMenu() {
 let pageStarted = false;
 
 function startPage() {
+
   if (pageStarted) return;
 
   pageStarted = true;
 
-  console.log("[event] init");
+  console.log("[emergency] init");
 
-  init();
+  initEmergencyPage();
+
 }
 
 if (window.componentsLoaded) {
+
   startPage();
+
 }
 else {
+
   window.addEventListener(
     "componentsReady",
     startPage
   );
+
 }
