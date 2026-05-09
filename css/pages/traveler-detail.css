@@ -244,3 +244,50 @@
   background: #111;
   color: #fff;
 }
+
+.traveler-detail-thumbs {
+  position: absolute;
+  left: 42px;
+  right: 42px;
+  bottom: 150px;
+  z-index: 4;
+
+  display: flex;
+  gap: 10px;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.traveler-detail-thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.traveler-thumb {
+  flex: 0 0 72px;
+
+  width: 72px;
+  height: 54px;
+
+  padding: 0;
+
+  border: 2px solid transparent;
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  background: rgba(255,255,255,.35);
+
+  cursor: pointer;
+}
+
+.traveler-thumb.active {
+  border-color: #fff;
+}
+
+.traveler-thumb img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
