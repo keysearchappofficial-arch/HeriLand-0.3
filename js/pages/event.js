@@ -209,10 +209,10 @@ card.innerHTML = `
   </div>
 
   <div class="event-card-body">
-    <div class="event-card-meta">
-      <span>${event.day || event.date || "近期"}</span>
-      <span>${event.timeText || event.hour || event.location || "時間未定"}</span>
-    </div>
+<div class="event-card-meta">
+  <span>${event.day || event.date || "近期"}</span>
+  <span>${event.hour || event.location || "時間未定"}</span>
+</div>
 
     <h3 class="event-card-title">${event.title}</h3>
 
