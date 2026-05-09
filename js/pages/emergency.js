@@ -1,116 +1,119 @@
-const emergencyData = {
-  Kuching: [
-    {
-      category: "Police",
-      title: "Kuching Police Station",
-      phone: "082-244444"
-    },
-    {
-      category: "Fire",
-      title: "Kuching Fire Department",
-      phone: "082-222999"
-    },
-    {
-      category: "Hospital",
-      title: "Sarawak General Hospital",
-      phone: "082-276666"
-    }
-  ],
+const emergencyData = [
+  {
+    city: "kuching",
+    cityLabel: "Kuching",
+    type: "police",
+    typeLabel: "警察局",
+    name: "Kuching Central Police Station",
+    phone: "082-244444",
+    desc: "旅途中若遇到遺失、報案或突發事件，可聯絡當地警察局。"
+  },
 
-  Sibu: [
-    {
-      category: "Police",
-      title: "Sibu Police Station",
-      phone: "084-333222"
-    },
-    {
-      category: "Fire",
-      title: "Sibu Fire Department",
-      phone: "084-312999"
-    },
-    {
-      category: "Hospital",
-      title: "Sibu Hospital",
-      phone: "084-343333"
-    }
-  ],
+  {
+    city: "kuching",
+    cityLabel: "Kuching",
+    type: "fire",
+    typeLabel: "消防局",
+    name: "Kuching Fire & Rescue",
+    phone: "082-123456",
+    desc: "緊急火災、救援或事故支援。"
+  },
 
-  Miri: [
-    {
-      category: "Police",
-      title: "Miri Police Station",
-      phone: "085-432111"
-    },
-    {
-      category: "Fire",
-      title: "Miri Fire Department",
-      phone: "085-424999"
-    },
-    {
-      category: "Hospital",
-      title: "Miri Hospital",
-      phone: "085-420033"
-    }
-  ],
+  {
+    city: "kuching",
+    cityLabel: "Kuching",
+    type: "hospital",
+    typeLabel: "醫院",
+    name: "Sarawak General Hospital",
+    phone: "082-276666",
+    desc: "主要大型醫療中心。"
+  },
 
-  Bintulu: [
-    {
-      category: "Police",
-      title: "Bintulu Police Station",
-      phone: "086-333111"
-    },
-    {
-      category: "Fire",
-      title: "Bintulu Fire Department",
-      phone: "086-338999"
-    },
-    {
-      category: "Hospital",
-      title: "Bintulu Hospital",
-      phone: "086-255533"
-    }
-  ]
-};
+  {
+    city: "sibu",
+    cityLabel: "Sibu",
+    type: "fire",
+    typeLabel: "消防局",
+    name: "Sibu Fire Station",
+    phone: "084-123456",
+    desc: "提供當地緊急救援服務。"
+  },
+
+  {
+    city: "sibu",
+    cityLabel: "Sibu",
+    type: "hospital",
+    typeLabel: "醫院",
+    name: "Sibu Hospital",
+    phone: "084-343333",
+    desc: "24 小時醫療支援。"
+  },
+
+  {
+    city: "miri",
+    cityLabel: "Miri",
+    type: "tourism",
+    typeLabel: "旅遊中心",
+    name: "Miri Visitor Info Center",
+    phone: "085-434343",
+    desc: "旅遊協助、活動資訊與在地交通。"
+  },
+
+  {
+    city: "bintulu",
+    cityLabel: "Bintulu",
+    type: "police",
+    typeLabel: "警察局",
+    name: "Bintulu Police HQ",
+    phone: "086-333222",
+    desc: "緊急協助與安全支援。"
+  }
+];
 
 const citySelect =
-  document.getElementById("emergencyCity");
+  document.getElementById("citySelect");
 
-const categorySelect =
-  document.getElementById("emergencyCategory");
+const typeSelect =
+  document.getElementById("typeSelect");
 
 const emergencyList =
   document.getElementById("emergencyList");
 
+/* =========================
+   Render
+========================= */
+
 function renderEmergencyList() {
 
-  if (!citySelect || !emergencyList) return;
+  if (!emergencyList) return;
 
   const city =
-    citySelect.value;
+    citySelect?.value || "all";
 
-  const category =
-    categorySelect.value;
-
-  const data =
-    emergencyData[city] || [];
+  const type =
+    typeSelect?.value || "all";
 
   const filtered =
-    category === "all"
-      ? data
-      : data.filter(item =>
-          item.category === category
-        );
+    emergencyData.filter(item => {
+
+      const cityMatch =
+        city === "all" ||
+        item.city === city;
+
+      const typeMatch =
+        type === "all" ||
+        item.type === type;
+
+      return cityMatch && typeMatch;
+    });
 
   emergencyList.innerHTML = "";
 
   if (!filtered.length) {
 
     emergencyList.innerHTML = `
-      <div class="emergency-card">
-        <div>
-          <h3>沒有資料</h3>
-          <p>目前沒有相關聯絡資訊。</p>
-        </div>
+      <div class="emergency-empty">
+        沒有找到相關資訊
       </div>
     `;
 
@@ -126,17 +129,41 @@ function renderEmergencyList() {
       "emergency-card";
 
     card.innerHTML = `
-      <div>
-        <small>${item.category}</small>
+      <div class="emergency-card-top">
 
-        <h3>${item.title}</h3>
+        <div class="emergency-card-type">
+          <span></span>
+          ${item.typeLabel}
+        </div>
 
-        <p>${item.phone}</p>
+        <div class="emergency-card-city">
+          ${item.cityLabel}
+        </div>
+
       </div>
 
-      <a href="tel:${item.phone}">
-        撥打
-      </a>
+      <h2>
+        ${item.name}
+      </h2>
+
+      <p>
+        ${item.desc}
+      </p>
+
+      <div class="emergency-phone">
+
+        <strong>
+          ${item.phone}
+        </strong>
+
+        <a
+          class="emergency-call-btn"
+          href="tel:${item.phone}"
+        >
+          撥打電話
+        </a>
+
+      </div>
     `;
 
     emergencyList.appendChild(card);
@@ -145,14 +172,37 @@ function renderEmergencyList() {
 
 }
 
-citySelect?.addEventListener(
-  "change",
-  renderEmergencyList
-);
+/* =========================
+   Bind
+========================= */
 
-categorySelect?.addEventListener(
-  "change",
-  renderEmergencyList
-);
+function bindFilters() {
 
-renderEmergencyList();
+  citySelect?.addEventListener(
+    "change",
+    renderEmergencyList
+  );
+
+  typeSelect?.addEventListener(
+    "change",
+    renderEmergencyList
+  );
+
+}
+
+/* =========================
+   Init
+========================= */
+
+function initEmergencyPage() {
+
+  bindFilters();
+
+  renderEmergencyList();
+
+}
+
+window.addEventListener(
+  "DOMContentLoaded",
+  initEmergencyPage
+);
