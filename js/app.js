@@ -677,10 +677,10 @@ function openEventDetail(event) {
   const image =
     document.getElementById("eventDetailImage");
 
-  if (image) {
-    image.src = normalized.image;
-    image.alt = normalized.title;
-  }
+renderEventDetailSlider(
+  normalized.images || [normalized.image].filter(Boolean),
+  normalized.title
+);
 
   setText("eventDetailTitle", normalized.title);
   setText("eventDetailType", normalized.type);
@@ -765,10 +765,10 @@ function openDetail(place) {
   const image = document.getElementById("detailImage");
   const contactImage = document.getElementById("detailContactImage");
 
-  if (image) {
-    image.src = normalized.image || "";
-    image.alt = normalized.name;
-  }
+renderDetailSlider(
+  normalized.images || [normalized.image].filter(Boolean),
+  normalized.name
+);
 
   if (contactImage) {
     contactImage.src = normalized.contactImage;
@@ -794,6 +794,40 @@ function openDetail(place) {
 
   els.detailPage.classList.add("show");
   document.body.style.overflow = "hidden";
+}
+
+function renderDetailSlider(images, altText) {
+  const slider = document.getElementById("detailSlider");
+  const dots = document.getElementById("detailDots");
+  if (!slider || !dots) return;
+
+  slider.innerHTML = "";
+  dots.innerHTML = "";
+
+  images.forEach((src, index) => {
+    const slide = document.createElement("div");
+    slide.className = "detail-slide";
+    slide.innerHTML = `<img src="${src}" alt="${altText}">`;
+    slider.appendChild(slide);
+
+    const dot = document.createElement("button");
+    dot.className = `detail-dot ${index === 0 ? "active" : ""}`;
+    dot.type = "button";
+    dot.onclick = () => {
+      slider.scrollTo({
+        left: slider.clientWidth * index,
+        behavior: "smooth"
+      });
+    };
+    dots.appendChild(dot);
+  });
+
+  slider.onscroll = () => {
+    const current = Math.round(slider.scrollLeft / slider.clientWidth);
+    dots.querySelectorAll(".detail-dot").forEach((dot, i) => {
+      dot.classList.toggle("active", i === current);
+    });
+  };
 }
 
 function closeDetail() {
