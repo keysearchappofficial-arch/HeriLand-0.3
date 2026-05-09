@@ -133,26 +133,20 @@ function renderEmergencyList() {
   "emergency-row";
 
 card.innerHTML = `
-  <div class="emergency-name">
+
+  <div class="emergency-row-top">
 
     <small>
-      ${item.typeLabel} ・ ${item.cityLabel}
+      ${item.typeLabel}
     </small>
 
-    <strong>
-      ${item.name}
-    </strong>
+    <span>・</span>
 
-  </div>
+    <small>
+      ${item.cityLabel}
+    </small>
 
-  <div class="emergency-actions">
-
-    <a
-      class="emergency-phone-link"
-      href="tel:${item.phone}"
-    >
-      ${item.phone}
-    </a>
+    <span>・</span>
 
     <a
       class="emergency-map-link"
@@ -163,6 +157,22 @@ card.innerHTML = `
     </a>
 
   </div>
+
+  <div class="emergency-row-bottom">
+
+    <strong>
+      ${item.name}
+    </strong>
+
+    <a
+      class="emergency-phone-link"
+      href="tel:${item.phone}"
+    >
+      ${item.phone}
+    </a>
+
+  </div>
+
 `;
 
     emergencyList.appendChild(card);
