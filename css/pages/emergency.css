@@ -1,0 +1,301 @@
+/* =========================
+   Emergency Page
+========================= */
+
+.emergency-page {
+  min-height: 100vh;
+
+  padding:
+    42px
+    22px
+    120px;
+
+  background: #f6f5f1;
+}
+
+/* =========================
+   Top
+========================= */
+
+.emergency-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.emergency-back-link {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.85);
+
+  display: grid;
+  place-items: center;
+
+  color: #111;
+
+  text-decoration: none;
+
+  font-size: 28px;
+  line-height: 1;
+
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.emergency-top small {
+  display: block;
+
+  color: #888;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.emergency-top h1 {
+  margin-top: 10px;
+
+  font-size: 42px;
+  line-height: 1;
+
+  letter-spacing: -1.8px;
+
+  color: #111;
+}
+
+/* =========================
+   Intro
+========================= */
+
+.emergency-intro {
+  margin-top: 34px;
+}
+
+.emergency-intro h2 {
+  font-size: 22px;
+  letter-spacing: -0.8px;
+}
+
+.emergency-intro p {
+  margin-top: 12px;
+
+  color: #666;
+
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* =========================
+   Filter
+========================= */
+
+.emergency-filter-card {
+  margin-top: 28px;
+
+  padding: 20px;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.76);
+
+  border: 1px solid rgba(0,0,0,.05);
+
+  display: grid;
+  gap: 18px;
+}
+
+.emergency-filter-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  color: #333;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.emergency-filter-card select {
+  width: 100%;
+  height: 52px;
+
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 16px;
+
+  padding: 0 16px;
+
+  background: #fff;
+
+  font-size: 15px;
+  color: #111;
+
+  outline: none;
+}
+
+/* =========================
+   Main Emergency
+========================= */
+
+.emergency-primary {
+  margin-top: 28px;
+
+  padding: 22px;
+
+  border-radius: 28px;
+
+  background: #111;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+.emergency-primary small {
+  display: block;
+
+  color: rgba(255,255,255,.6);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.emergency-primary strong {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 42px;
+  line-height: 1;
+
+  letter-spacing: -2px;
+}
+
+.emergency-primary p {
+  margin-top: 10px;
+
+  color: rgba(255,255,255,.75);
+
+  font-size: 14px;
+}
+
+.emergency-primary a {
+  flex-shrink: 0;
+
+  height: 48px;
+  padding: 0 22px;
+
+  border-radius: 999px;
+
+  background: #fff;
+  color: #111;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* =========================
+   List
+========================= */
+
+.emergency-list {
+  margin-top: 26px;
+
+  display: grid;
+  gap: 14px;
+}
+
+.emergency-card {
+  padding: 18px;
+
+  border-radius: 22px;
+
+  background: rgba(255,255,255,.78);
+
+  border: 1px solid rgba(0,0,0,.05);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+}
+
+.emergency-card small {
+  display: block;
+
+  color: #888;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.emergency-card h3 {
+  margin-top: 8px;
+
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+.emergency-card p {
+  margin-top: 8px;
+
+  color: #555;
+
+  font-size: 14px;
+}
+
+.emergency-card a {
+  flex-shrink: 0;
+
+  min-width: 88px;
+  height: 44px;
+
+  padding: 0 16px;
+
+  border-radius: 999px;
+
+  background: #111;
+  color: #fff;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* =========================
+   Note
+========================= */
+
+.emergency-note {
+  margin-top: 26px;
+
+  color: #888;
+
+  font-size: 12px;
+  line-height: 1.8;
+}
+
