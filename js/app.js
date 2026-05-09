@@ -460,13 +460,10 @@ images:
       ]
   };
 
-  const image =
-    document.getElementById("travelerDetailImage");
-
-  if (image) {
-    image.src = normalized.image;
-    image.alt = normalized.name;
-  }
+renderTravelerSlider(
+  normalized.images,
+  normalized.name
+);
   
   renderTravelerThumbs(normalized.images, normalized.name);
 
@@ -510,6 +507,79 @@ images:
 
   document.body.style.overflow =
     "hidden";
+}
+
+function renderTravelerSlider(images, altText) {
+
+  const slider =
+    document.getElementById("travelerDetailSlider");
+
+  const dots =
+    document.getElementById("travelerDetailDots");
+
+  if (!slider || !dots) return;
+
+  const list =
+    images && images.length
+      ? images
+      : [];
+
+  slider.innerHTML = "";
+  dots.innerHTML = "";
+
+  list.forEach((src, index) => {
+
+    const slide =
+      document.createElement("div");
+
+    slide.className =
+      "traveler-detail-slide";
+
+    slide.innerHTML = `
+      <img src="${src}" alt="${altText}">
+    `;
+
+    slider.appendChild(slide);
+
+    const dot =
+      document.createElement("button");
+
+    dot.className =
+      `traveler-dot ${index === 0 ? "active" : ""}`;
+
+    dot.type = "button";
+
+    dot.addEventListener("click", () => {
+
+      slider.scrollTo({
+        left: slider.clientWidth * index,
+        behavior: "smooth"
+      });
+
+    });
+
+    dots.appendChild(dot);
+  });
+
+  slider.addEventListener("scroll", () => {
+
+    const current =
+      Math.round(
+        slider.scrollLeft /
+        slider.clientWidth
+      );
+
+    dots
+      .querySelectorAll(".traveler-dot")
+      .forEach((dot, i) => {
+        dot.classList.toggle(
+          "active",
+          i === current
+        );
+      });
+
+  });
+
 }
 
 function renderTravelerThumbs(images, altText) {
