@@ -36,7 +36,7 @@
     padding:
       24px
       20px
-      130px;
+      32px;
 
     border-radius: 28px 28px 0 0;
   }
@@ -68,18 +68,33 @@
   ========================= */
 
   .event-detail-guide {
-    margin-top: 22px;
+    margin-top: 26px;
 
-    padding: 20px;
+    padding: 0 0 26px;
 
-    border-radius: 24px;
+    border-radius: 0;
+
+    background: transparent;
+    border: none;
+
+    border-bottom:
+      1px solid rgba(0,0,0,.06);
+  }
+
+  .event-detail-guide small {
+    font-size: 11px;
+    letter-spacing: .12em;
   }
 
   .event-detail-guide p {
-    margin-top: 8px;
+    margin-top: 10px;
 
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 20px;
+    line-height: 1.8;
+
+    color: #222;
+
+    letter-spacing: -0.4px;
   }
 
   /* =========================
@@ -89,21 +104,25 @@
   .event-detail-section,
   .event-detail-timeline,
   .event-detail-nearby {
-    margin-top: 34px;
+    margin-top: 36px;
   }
 
   .event-detail-section h2,
   .event-detail-timeline h2,
   .event-detail-nearby h2 {
-    font-size: 21px;
+    font-size: 22px;
 
     margin-bottom: 14px;
+
+    letter-spacing: -0.5px;
   }
 
   .event-detail-section p,
   .event-detail-nearby p {
-    font-size: 14px;
-    line-height: 1.8;
+    font-size: 15px;
+    line-height: 1.95;
+
+    color: #444;
   }
 
   /* =========================
@@ -118,6 +137,13 @@
     padding: 9px 14px;
 
     font-size: 13px;
+
+    background: transparent;
+
+    border:
+      1px solid rgba(0,0,0,.12);
+
+    color: #333;
   }
 
   /* =========================
@@ -125,70 +151,87 @@
   ========================= */
 
   .event-timeline-list {
-    gap: 14px;
+    display: grid;
+
+    gap: 22px;
+
+    border-left:
+      1px solid rgba(0,0,0,.12);
+
+    padding-left: 18px;
   }
 
   .event-timeline-list div {
-    padding: 16px 16px;
+    padding: 0;
 
-    border-radius: 20px;
+    border-radius: 0;
+
+    background: transparent;
+    border: none;
+  }
+
+  .event-timeline-list strong {
+    font-size: 14px;
+    letter-spacing: -.2px;
   }
 
   .event-timeline-list p {
-    margin-top: 8px;
+    margin-top: 7px;
 
     font-size: 14px;
-    line-height: 1.7;
+    line-height: 1.85;
+
+    color: #444;
   }
 
-/* =========================
-   CTA
-========================= */
+  /* =========================
+     CTA
+  ========================= */
 
-.event-detail-cta {
-  position: sticky;
+  .event-detail-cta {
+    position: sticky;
 
-  left: 0;
-  right: 0;
-  bottom: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  z-index: 2020;
+    z-index: 2020;
 
-  width: auto;
+    width: auto;
 
-  display: grid;
-  grid-template-columns: 1fr 1.25fr;
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
 
-  gap: 10px;
+    gap: 10px;
 
-  margin-left: -20px;
-  margin-right: -20px;
-  margin-bottom: -32px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -32px;
 
-  padding:
-    14px
-    18px
-    calc(14px + env(safe-area-inset-bottom));
+    padding:
+      14px
+      18px
+      calc(14px + env(safe-area-inset-bottom));
 
-  background:
-    rgba(246,245,241,.94);
+    background:
+      rgba(246,245,241,.94);
 
-  backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 
-  border-top:
-    1px solid rgba(0,0,0,.05);
+    border-top:
+      1px solid rgba(0,0,0,.05);
 
-  box-shadow:
-    0 -10px 30px rgba(0,0,0,.04);
-}
+    box-shadow:
+      0 -10px 30px rgba(0,0,0,.04);
+  }
 
-.event-detail-cta .secondary-btn,
-.event-detail-cta .primary-cta {
-  height: 52px;
+  .event-detail-cta .secondary-btn,
+  .event-detail-cta .primary-cta {
+    height: 52px;
 
-  border-radius: 16px;
+    border-radius: 16px;
 
-  font-size: 14px;
-}
+    font-size: 14px;
+  }
 
 }
