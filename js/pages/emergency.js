@@ -136,7 +136,7 @@ card.innerHTML = `
   <div class="emergency-name">
 
     <small>
-      ${item.typeLabel}・${item.cityLabel}
+      ${item.typeLabel} ・ ${item.cityLabel}
     </small>
 
     <strong>
@@ -156,10 +156,10 @@ card.innerHTML = `
 
     <a
       class="emergency-map-link"
-      href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}"
+      href="${item.map}"
       target="_blank"
     >
-      導航
+      Map
     </a>
 
   </div>
