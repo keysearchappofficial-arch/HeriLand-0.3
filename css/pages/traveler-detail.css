@@ -291,3 +291,83 @@
 
   object-fit: cover;
 }
+
+/* =========================
+   Slider
+========================= */
+
+.traveler-detail-slider {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+}
+
+.traveler-detail-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.traveler-detail-slide {
+  flex: 0 0 100%;
+
+  width: 100%;
+  height: 100%;
+
+  scroll-snap-align: start;
+}
+
+.traveler-detail-slide img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+/* =========================
+   Dots
+========================= */
+
+.traveler-detail-dots {
+  position: absolute;
+
+  right: 24px;
+  bottom: 24px;
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.traveler-dot {
+  width: 7px;
+  height: 7px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.42);
+
+  transition:
+    width .25s ease,
+    background .25s ease;
+
+  cursor: pointer;
+}
+
+.traveler-dot.active {
+  width: 20px;
+  background: #fff;
+}
