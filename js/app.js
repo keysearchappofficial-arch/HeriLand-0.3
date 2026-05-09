@@ -161,6 +161,9 @@ function renderReviews() {
       document.createElement("article");
 
     card.className = "traveler-card";
+    
+card.onclick = () =>
+  openTravelerDetail(review);
 
     card.innerHTML = `
       <div class="traveler-card-image">
@@ -358,9 +361,6 @@ function renderEvents() {
       document.createElement("article");
 
 card.className = "event-card";
-
-card.onclick = () =>
-  openTravelerDetail(review);
 
 card.onclick = () =>
   openEventDetail(event);
