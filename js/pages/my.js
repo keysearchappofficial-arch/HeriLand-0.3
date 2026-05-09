@@ -100,6 +100,7 @@ const recentViews = [
 function init() {
   bindMobileMenu();
   bindMyViews();
+  bindFeedbackButton();
 
   renderSavedSheet();
   renderTripSheet();
@@ -457,6 +458,17 @@ function renderTripSheet() {
 
   });
 
+}
+
+function bindFeedbackButton() {
+  const button =
+    document.getElementById("feedbackBtn");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    window.location.href = "./feedback.html";
+  });
 }
 
 /* =========================
