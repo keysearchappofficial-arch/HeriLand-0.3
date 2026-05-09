@@ -4,7 +4,6 @@
 
 .emergency-page {
   min-height: 100vh;
-
   background: #f6f5f1;
 }
 
@@ -14,45 +13,31 @@
 
 .emergency-hero {
   max-width: 920px;
-
   margin: 0 auto;
-
-  padding:
-    120px
-    40px
-    34px;
+  padding: 120px 40px 34px;
 }
 
 .emergency-hero small {
   display: inline-block;
-
   color: #888;
-
   font-size: 12px;
   font-weight: 850;
-
   letter-spacing: .12em;
   text-transform: uppercase;
 }
 
 .emergency-hero h1 {
   margin-top: 18px;
-
   color: #111;
-
   font-size: 68px;
   line-height: .95;
-
   letter-spacing: -3px;
 }
 
 .emergency-hero p {
   margin-top: 20px;
-
   max-width: 680px;
-
   color: #555;
-
   font-size: 18px;
   line-height: 1.9;
 }
@@ -64,26 +49,16 @@
 .emergency-filter {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-
   gap: 18px;
-
   max-width: 920px;
-
   margin: 0 auto;
-
-  padding:
-    0
-    40px
-    26px;
+  padding: 0 40px 26px;
 }
 
 .emergency-select-wrap label {
   display: block;
-
   margin-bottom: 10px;
-
   color: #666;
-
   font-size: 13px;
   font-weight: 800;
 }
@@ -91,25 +66,14 @@
 .emergency-select-wrap select {
   width: 100%;
   height: 56px;
-
-  padding:
-    0
-    18px;
-
-  border:
-    1px solid rgba(0,0,0,.08);
-
+  padding: 0 18px;
+  border: 1px solid rgba(0,0,0,.08);
   border-radius: 18px;
-
   background: rgba(255,255,255,.96);
-
   color: #111;
-
   font-size: 15px;
   font-weight: 750;
-
   outline: none;
-
   appearance: none;
 }
 
@@ -119,39 +83,21 @@
 
 .emergency-table {
   max-width: 920px;
-
-  margin:
-    0 auto
-    120px;
-
+  margin: 0 auto 120px;
   overflow: hidden;
-
   border-radius: 24px;
-
   background: rgba(255,255,255,.92);
-
-  border:
-    1px solid rgba(0,0,0,.06);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,.04);
 }
 
 .emergency-table-head {
   display: grid;
   grid-template-columns: 1fr auto;
-
   gap: 12px;
-
-  padding:
-    16px
-    24px;
-
-  background:
-    rgba(0,0,0,.035);
-
+  padding: 16px 24px;
+  background: rgba(0,0,0,.035);
   color: #777;
-
   font-size: 13px;
   font-weight: 850;
 }
@@ -169,76 +115,52 @@
 ========================= */
 
 .emergency-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-
-  gap: 18px;
-
-  align-items: center;
-
-  padding:
-    20px
-    24px;
-
-  border-top:
-    1px solid rgba(0,0,0,.06);
-
-  transition:
-    background .2s ease;
+  padding: 18px 22px;
+  border-top: 1px solid rgba(0,0,0,.06);
+  transition: background .2s ease;
 }
 
 .emergency-row:hover {
-  background:
-    rgba(0,0,0,.018);
+  background: rgba(0,0,0,.018);
 }
 
-.emergency-name {
-  min-width: 0;
-}
-
-.emergency-name small {
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: #888;
-
-  font-size: 11px;
-  font-weight: 850;
-
-  letter-spacing: .02em;
-}
-
-.emergency-name strong {
-  display: block;
-
-  color: #111;
-
-  font-size: 17px;
-  font-weight: 760;
-
-  line-height: 1.4;
-}
-
-/* =========================
-   Actions
-========================= */
-
-.emergency-actions {
+.emergency-row-top {
   display: flex;
   align-items: center;
+  gap: 7px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 800;
+}
 
-  gap: 18px;
+.emergency-row-top span {
+  opacity: .5;
+}
 
+.emergency-row-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.emergency-row-bottom strong {
+  min-width: 0;
+  flex: 1;
+  color: #111;
+  font-size: 16px;
+  font-weight: 760;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .emergency-phone-link {
+  flex-shrink: 0;
   color: #111;
-
   font-size: 15px;
   font-weight: 850;
-
   text-decoration: none;
 }
 
@@ -248,10 +170,8 @@
 
 .emergency-map-link {
   color: #2b6fff;
-
   font-size: 14px;
   font-weight: 850;
-
   text-decoration: none;
 }
 
@@ -264,14 +184,9 @@
 ========================= */
 
 .emergency-empty {
-  padding:
-    34px
-    24px;
-
+  padding: 34px 24px;
   text-align: center;
-
   color: #888;
-
   font-size: 14px;
   font-weight: 750;
 }
