@@ -17,19 +17,17 @@
 
   .emergency-hero h1 {
     font-size: 32px;
-
     line-height: 1;
-
     letter-spacing: -1.2px;
   }
 
   .emergency-hero p {
     margin-top: 12px;
 
+    color: #666;
+
     font-size: 14px;
     line-height: 1.65;
-
-    color: #666;
   }
 
   /* =========================
@@ -117,9 +115,12 @@
     font-weight: 850;
   }
 
+  /* =========================
+     List
+  ========================= */
+
   .emergency-list {
     display: block;
-
     padding: 0;
   }
 
@@ -128,79 +129,87 @@
   ========================= */
 
   .emergency-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-
-    gap: 14px;
-
-    align-items: center;
-
-    padding: 15px 16px;
+    padding:
+      16px
+      16px;
 
     border-top:
       1px solid rgba(0,0,0,.06);
   }
 
-  .emergency-name {
-    min-width: 0;
-  }
+  /* 上方資訊 */
 
-  .emergency-name small {
-    display: block;
-
-    margin-bottom: 5px;
-
-    color: #888;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .emergency-name strong {
-    display: block;
-
-    color: #111;
-
-    font-size: 14px;
-    font-weight: 750;
-
-    line-height: 1.35;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* =========================
-     Actions
-  ========================= */
-
-  .emergency-actions {
+  .emergency-row-top {
     display: flex;
     align-items: center;
 
-    gap: 12px;
+    gap: 6px;
+
+    color: #888;
+
+    font-size: 11px;
+    font-weight: 800;
 
     white-space: nowrap;
+    overflow-x: auto;
+
+    scrollbar-width: none;
   }
 
-  .emergency-phone-link {
-    color: #111;
+  .emergency-row-top::-webkit-scrollbar {
+    display: none;
+  }
 
-    font-size: 14px;
-    font-weight: 850;
-
-    text-decoration: none;
+  .emergency-row-top span {
+    opacity: .45;
   }
 
   .emergency-map-link {
     color: #2b6fff;
 
-    font-size: 13px;
+    font-size: 11px;
+    font-weight: 850;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+  }
+
+  /* 下方名稱 + 電話 */
+
+  .emergency-row-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 9px;
+  }
+
+  .emergency-row-bottom strong {
+    min-width: 0;
+
+    flex: 1;
+
+    color: #111;
+
+    font-size: 14px;
+    font-weight: 760;
+
+    line-height: 1.4;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .emergency-phone-link {
+    flex-shrink: 0;
+
+    color: #111;
+
+    font-size: 14px;
     font-weight: 850;
 
     text-decoration: none;
