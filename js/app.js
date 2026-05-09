@@ -427,6 +427,15 @@ function openTravelerDetail(review) {
     image:
       review.image ||
       "",
+      
+images:
+  review.images ||
+  [
+    review.image,
+    review.image2,
+    review.image3,
+    review.image4
+  ].filter(Boolean),
 
     achievement:
       review.achievement ||
@@ -458,6 +467,8 @@ function openTravelerDetail(review) {
     image.src = normalized.image;
     image.alt = normalized.name;
   }
+  
+  renderTravelerThumbs(normalized.images, normalized.name);
 
   setText(
     "travelerDetailName",
@@ -499,6 +510,51 @@ function openTravelerDetail(review) {
 
   document.body.style.overflow =
     "hidden";
+}
+
+function renderTravelerThumbs(images, altText) {
+  const wrap =
+    document.getElementById("travelerDetailThumbs");
+
+  const mainImage =
+    document.getElementById("travelerDetailImage");
+
+  if (!wrap || !mainImage) return;
+
+  const list =
+    images && images.length
+      ? images
+      : [mainImage.src].filter(Boolean);
+
+  wrap.innerHTML = "";
+
+  list.forEach((src, index) => {
+    const button =
+      document.createElement("button");
+
+    button.className =
+      `traveler-thumb ${index === 0 ? "active" : ""}`;
+
+    button.type = "button";
+
+    button.innerHTML = `
+      <img src="${src}" alt="${altText}">
+    `;
+
+    button.addEventListener("click", () => {
+      mainImage.src = src;
+
+      wrap
+        .querySelectorAll(".traveler-thumb")
+        .forEach(item =>
+          item.classList.remove("active")
+        );
+
+      button.classList.add("active");
+    });
+
+    wrap.appendChild(button);
+  });
 }
 
 function closeTravelerDetail() {
