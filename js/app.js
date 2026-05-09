@@ -465,8 +465,7 @@ renderTravelerSlider(
   normalized.name
 );
   
-  renderTravelerThumbs(normalized.images, normalized.name);
-
+  
   setText(
     "travelerDetailName",
     normalized.name
@@ -519,10 +518,10 @@ function renderTravelerSlider(images, altText) {
 
   if (!slider || !dots) return;
 
-  const list =
-    images && images.length
-      ? images
-      : [];
+const list =
+  images && images.length
+    ? images
+    : ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"];
 
   slider.innerHTML = "";
   dots.innerHTML = "";
@@ -582,50 +581,6 @@ function renderTravelerSlider(images, altText) {
 
 }
 
-function renderTravelerThumbs(images, altText) {
-  const wrap =
-    document.getElementById("travelerDetailThumbs");
-
-  const mainImage =
-    document.getElementById("travelerDetailImage");
-
-  if (!wrap || !mainImage) return;
-
-  const list =
-    images && images.length
-      ? images
-      : [mainImage.src].filter(Boolean);
-
-  wrap.innerHTML = "";
-
-  list.forEach((src, index) => {
-    const button =
-      document.createElement("button");
-
-    button.className =
-      `traveler-thumb ${index === 0 ? "active" : ""}`;
-
-    button.type = "button";
-
-    button.innerHTML = `
-      <img src="${src}" alt="${altText}">
-    `;
-
-    button.addEventListener("click", () => {
-      mainImage.src = src;
-
-      wrap
-        .querySelectorAll(".traveler-thumb")
-        .forEach(item =>
-          item.classList.remove("active")
-        );
-
-      button.classList.add("active");
-    });
-
-    wrap.appendChild(button);
-  });
-}
 
 function closeTravelerDetail() {
   const detail =
@@ -655,6 +610,15 @@ function openEventDetail(event) {
     ...event,
     title: event.title || "未命名活動",
     image: event.image || "",
+    
+    images:
+  event.images ||
+  [
+    event.image,
+    event.image2,
+    event.image3,
+    event.image4
+  ].filter(Boolean),
     location: event.location || "Sarawak",
     date: event.date || "近期活動",
     timeText: event.timeText || event.hour || "",
@@ -673,9 +637,6 @@ function openEventDetail(event) {
       event.nearby ||
       "活動結束後，可以順路安排附近餐廳、河邊或夜市。"
   };
-
-  const image =
-    document.getElementById("eventDetailImage");
 
 renderEventDetailSlider(
   normalized.images || [normalized.image].filter(Boolean),
@@ -716,6 +677,77 @@ function closeEventDetail() {
   document.body.style.overflow = "";
 }
 
+function renderEventDetailSlider(images, altText) {
+
+  const slider =
+    document.getElementById("eventDetailSlider");
+
+  const dots =
+    document.getElementById("eventDetailDots");
+
+  if (!slider || !dots) return;
+
+  slider.innerHTML = "";
+  dots.innerHTML = "";
+
+  list.forEach((src, index) => {
+
+    const slide =
+      document.createElement("div");
+
+    slide.className =
+      "event-detail-slide";
+
+    slide.innerHTML = `
+      <img src="${src}" alt="${altText}">
+    `;
+
+    slider.appendChild(slide);
+
+    const dot =
+      document.createElement("button");
+
+    dot.className =
+      `event-dot ${index === 0 ? "active" : ""}`;
+
+    dot.type = "button";
+
+    dot.onclick = () => {
+
+      slider.scrollTo({
+        left: slider.clientWidth * index,
+        behavior: "smooth"
+      });
+
+    };
+
+    dots.appendChild(dot);
+
+  });
+
+  slider.onscroll = () => {
+
+    const current =
+      Math.round(
+        slider.scrollLeft /
+        slider.clientWidth
+      );
+
+    dots
+      .querySelectorAll(".event-dot")
+      .forEach((dot, i) => {
+
+        dot.classList.toggle(
+          "active",
+          i === current
+        );
+
+      });
+
+  };
+
+}
+
 window.openEventDetail = openEventDetail;
 window.closeEventDetail = closeEventDetail;
 
@@ -726,11 +758,20 @@ function openDetail(place) {
   const normalized = {
     ...place,
     name: place.name || place.title || "未命名地點",
+    image: place.image || "",
     address: place.address || place.location || place.meta || "Sarawak",
     phone: place.phone || "尚未提供",
     hours: place.hours || "建議出發前確認",
     contactName: place.contactName || "HeriLand Guide",
     contactImage: place.contactImage || place.image || "",
+    images:
+  place.images ||
+  [
+    place.image,
+    place.image2,
+    place.image3,
+    place.image4
+  ].filter(Boolean),
     intro:
       place.intro ||
       place.desc ||
@@ -762,7 +803,7 @@ function openDetail(place) {
   setText("detailReviewCount", `${normalized.reviewCount} 則評論`);
   setText("detailAiNote", normalized.intro);
 
-  const image = document.getElementById("detailImage");
+  
   const contactImage = document.getElementById("detailContactImage");
 
 renderDetailSlider(
@@ -804,7 +845,7 @@ function renderDetailSlider(images, altText) {
   slider.innerHTML = "";
   dots.innerHTML = "";
 
-  images.forEach((src, index) => {
+  list.forEach((src, index) => {
     const slide = document.createElement("div");
     slide.className = "detail-slide";
     slide.innerHTML = `<img src="${src}" alt="${altText}">`;
