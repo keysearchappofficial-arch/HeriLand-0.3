@@ -107,7 +107,7 @@
 .event-detail-dots {
   position: absolute;
   right: 24px;
-  bottom: 40px;
+  bottom: 70px;
   z-index: 6;
 
   display: flex;
