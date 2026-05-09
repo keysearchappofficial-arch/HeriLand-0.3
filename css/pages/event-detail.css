@@ -1,0 +1,328 @@
+/* =========================
+   Event Detail Page
+========================= */
+
+.event-detail-page {
+  position: fixed;
+  inset: 0;
+
+  background: #f6f5f1;
+
+  z-index: 400;
+
+  overflow-y: auto;
+
+  transform: translateY(100%);
+
+  transition: transform .34s var(--ease);
+}
+
+.event-detail-page.show {
+  transform: translateY(0);
+}
+
+/* =========================
+   Hero
+========================= */
+
+.event-detail-hero {
+  position: relative;
+
+  height: 520px;
+
+  overflow: hidden;
+
+  background: #111;
+}
+
+.event-detail-hero img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.event-detail-hero::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.52),
+      rgba(0,0,0,.12) 45%,
+      transparent
+    );
+}
+
+/* =========================
+   Top Buttons
+========================= */
+
+.event-detail-back,
+.event-detail-save {
+  position: absolute;
+  top: 24px;
+  z-index: 5;
+
+  width: 46px;
+  height: 46px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.92);
+
+  display: grid;
+  place-items: center;
+
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.event-detail-back {
+  left: 24px;
+}
+
+.event-detail-save {
+  right: 24px;
+}
+
+/* =========================
+   Panel
+========================= */
+
+.event-detail-panel {
+  position: relative;
+
+  margin-top: -34px;
+
+  width: min(760px, 100%);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 28px 24px 140px;
+
+  border-radius: 32px 32px 0 0;
+
+  background: #f6f5f1;
+}
+
+/* =========================
+   Head
+========================= */
+
+.event-detail-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #777;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.event-detail-head h1 {
+  margin-top: 14px;
+
+  font-size: 52px;
+  line-height: .96;
+  letter-spacing: -2px;
+}
+
+.event-detail-meta {
+  margin-top: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #666;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* =========================
+   AI Guide
+========================= */
+
+.event-detail-guide {
+  margin-top: 28px;
+
+  padding: 24px;
+
+  border-radius: 28px;
+
+  background: rgba(255,255,255,.76);
+
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.event-detail-guide small {
+  color: #777;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.event-detail-guide p {
+  margin-top: 10px;
+
+  font-size: 20px;
+  line-height: 1.7;
+
+  letter-spacing: -0.4px;
+}
+
+/* =========================
+   Sections
+========================= */
+
+.event-detail-section,
+.event-detail-timeline,
+.event-detail-nearby {
+  margin-top: 42px;
+}
+
+.event-detail-section h2,
+.event-detail-timeline h2,
+.event-detail-nearby h2 {
+  font-size: 24px;
+  letter-spacing: -0.8px;
+
+  margin-bottom: 16px;
+}
+
+.event-detail-section p,
+.event-detail-nearby p {
+  color: #666;
+
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* =========================
+   Tags
+========================= */
+
+.event-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.event-detail-tags span {
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.76);
+
+  border: 1px solid rgba(0,0,0,.06);
+
+  font-size: 14px;
+  font-weight: 760;
+}
+
+/* =========================
+   Timeline
+========================= */
+
+.event-timeline-list {
+  display: grid;
+  gap: 18px;
+}
+
+.event-timeline-list div {
+  padding: 18px 20px;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.72);
+
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.event-timeline-list small {
+  color: #777;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.event-timeline-list p {
+  margin-top: 10px;
+
+  font-size: 15px;
+  line-height: 1.75;
+
+  color: #444;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.event-detail-cta {
+  position: fixed;
+
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  width: min(760px, 100%);
+
+  padding: 18px 24px calc(18px + env(safe-area-inset-bottom));
+
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+
+  gap: 12px;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(246,245,241,.96),
+      rgba(246,245,241,.78)
+    );
+
+  backdrop-filter: blur(18px);
+
+  z-index: 30;
+}
+
+.event-detail-cta .secondary-btn,
+.event-detail-cta .primary-cta {
+  height: 56px;
+
+  border: none;
+  border-radius: 18px;
+
+  font-size: 15px;
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.event-detail-cta .secondary-btn {
+  background: rgba(255,255,255,.94);
+
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.event-detail-cta .primary-cta {
+  background: #111;
+  color: white;
+}
