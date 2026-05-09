@@ -678,7 +678,6 @@ function closeEventDetail() {
 }
 
 function renderEventDetailSlider(images, altText) {
-
   const slider =
     document.getElementById("eventDetailSlider");
 
@@ -687,11 +686,17 @@ function renderEventDetailSlider(images, altText) {
 
   if (!slider || !dots) return;
 
+  const list =
+    images && images.length
+      ? images
+      : [
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+        ];
+
   slider.innerHTML = "";
   dots.innerHTML = "";
 
   list.forEach((src, index) => {
-
     const slide =
       document.createElement("div");
 
@@ -713,20 +718,16 @@ function renderEventDetailSlider(images, altText) {
     dot.type = "button";
 
     dot.onclick = () => {
-
       slider.scrollTo({
         left: slider.clientWidth * index,
         behavior: "smooth"
       });
-
     };
 
     dots.appendChild(dot);
-
   });
 
   slider.onscroll = () => {
-
     const current =
       Math.round(
         slider.scrollLeft /
@@ -736,16 +737,12 @@ function renderEventDetailSlider(images, altText) {
     dots
       .querySelectorAll(".event-dot")
       .forEach((dot, i) => {
-
         dot.classList.toggle(
           "active",
           i === current
         );
-
       });
-
   };
-
 }
 
 window.openEventDetail = openEventDetail;
@@ -838,36 +835,69 @@ renderDetailSlider(
 }
 
 function renderDetailSlider(images, altText) {
-  const slider = document.getElementById("detailSlider");
-  const dots = document.getElementById("detailDots");
+  const slider =
+    document.getElementById("detailSlider");
+
+  const dots =
+    document.getElementById("detailDots");
+
   if (!slider || !dots) return;
+
+  const list =
+    images && images.length
+      ? images
+      : [
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+        ];
 
   slider.innerHTML = "";
   dots.innerHTML = "";
 
   list.forEach((src, index) => {
-    const slide = document.createElement("div");
+    const slide =
+      document.createElement("div");
+
     slide.className = "detail-slide";
-    slide.innerHTML = `<img src="${src}" alt="${altText}">`;
+
+    slide.innerHTML = `
+      <img src="${src}" alt="${altText}">
+    `;
+
     slider.appendChild(slide);
 
-    const dot = document.createElement("button");
-    dot.className = `detail-dot ${index === 0 ? "active" : ""}`;
+    const dot =
+      document.createElement("button");
+
+    dot.className =
+      `detail-dot ${index === 0 ? "active" : ""}`;
+
     dot.type = "button";
+
     dot.onclick = () => {
       slider.scrollTo({
         left: slider.clientWidth * index,
         behavior: "smooth"
       });
     };
+
     dots.appendChild(dot);
   });
 
   slider.onscroll = () => {
-    const current = Math.round(slider.scrollLeft / slider.clientWidth);
-    dots.querySelectorAll(".detail-dot").forEach((dot, i) => {
-      dot.classList.toggle("active", i === current);
-    });
+    const current =
+      Math.round(
+        slider.scrollLeft /
+        slider.clientWidth
+      );
+
+    dots
+      .querySelectorAll(".detail-dot")
+      .forEach((dot, i) => {
+        dot.classList.toggle(
+          "active",
+          i === current
+        );
+      });
   };
 }
 
