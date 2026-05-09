@@ -913,6 +913,9 @@ function renderEvents() {
 
 card.className = "event-card";
 
+card.onclick = () =>
+  openEventDetail(event);
+
 card.innerHTML = `
   <div class="event-card-image">
     <img src="${event.image}" alt="${event.title}">
