@@ -30,10 +30,6 @@ async function loadComponent(selector, file) {
    Mobile Menu
 ========================= */
 
-/* =========================
-   Mobile Menu
-========================= */
-
 async function renderMobileMenu() {
 
   console.log("[components] render mobile menu");
