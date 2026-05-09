@@ -1,0 +1,304 @@
+/* =========================
+   Government Page
+========================= */
+
+.government-page {
+  min-height: 100vh;
+
+  background: #f6f5f1;
+}
+
+/* =========================
+   Hero
+========================= */
+
+.government-hero {
+  max-width: 920px;
+
+  margin: 0 auto;
+
+  padding:
+    120px
+    40px
+    34px;
+}
+
+.government-hero small {
+  display: inline-block;
+
+  color: #888;
+
+  font-size: 12px;
+  font-weight: 850;
+
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.government-hero h1 {
+  margin-top: 18px;
+
+  color: #111;
+
+  font-size: 68px;
+  line-height: .95;
+
+  letter-spacing: -3px;
+}
+
+.government-hero p {
+  margin-top: 20px;
+
+  max-width: 680px;
+
+  color: #555;
+
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+/* =========================
+   Filters
+========================= */
+
+.government-filter {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+
+  max-width: 920px;
+
+  margin: 0 auto;
+
+  padding:
+    0
+    40px
+    26px;
+}
+
+.government-select-wrap label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #666;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.government-select-wrap select {
+  width: 100%;
+  height: 56px;
+
+  padding:
+    0
+    18px;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,.96);
+
+  color: #111;
+
+  font-size: 15px;
+  font-weight: 750;
+
+  outline: none;
+
+  appearance: none;
+}
+
+/* =========================
+   Table
+========================= */
+
+.government-table {
+  max-width: 920px;
+
+  margin:
+    0 auto
+    120px;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.92);
+
+  border:
+    1px solid rgba(0,0,0,.06);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.04);
+}
+
+.government-table-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+
+  gap: 12px;
+
+  padding:
+    16px
+    24px;
+
+  background:
+    rgba(0,0,0,.035);
+
+  color: #777;
+
+  font-size: 13px;
+  font-weight: 850;
+}
+
+/* =========================
+   List
+========================= */
+
+.government-list {
+  display: block;
+}
+
+/* =========================
+   Row
+========================= */
+
+.government-row {
+  padding:
+    18px
+    22px;
+
+  border-top:
+    1px solid rgba(0,0,0,.06);
+
+  transition:
+    background .2s ease;
+}
+
+.government-row:hover {
+  background:
+    rgba(0,0,0,.018);
+}
+
+/* =========================
+   Row Top
+========================= */
+
+.government-row-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #888;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.government-row-top span {
+  opacity: .5;
+}
+
+/* =========================
+   Links
+========================= */
+
+.government-map-link,
+.government-website-link {
+  color: #2b6fff;
+
+  text-decoration: none;
+}
+
+.government-map-link:hover,
+.government-website-link:hover {
+  opacity: .72;
+}
+
+/* =========================
+   Row Bottom
+========================= */
+
+.government-row-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-top: 10px;
+}
+
+.government-row-bottom strong {
+  min-width: 0;
+
+  flex: 1;
+
+  color: #111;
+
+  font-size: 16px;
+  font-weight: 760;
+
+  line-height: 1.45;
+}
+
+/* =========================
+   Meta
+========================= */
+
+.government-meta {
+  margin-top: 6px;
+
+  color: #777;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* =========================
+   Actions
+========================= */
+
+.government-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  flex-shrink: 0;
+}
+
+.government-phone-link {
+  color: #111;
+
+  font-size: 15px;
+  font-weight: 850;
+
+  text-decoration: none;
+}
+
+.government-phone-link:hover {
+  opacity: .72;
+}
+
+/* =========================
+   Empty
+========================= */
+
+.government-empty {
+  padding:
+    34px
+    24px;
+
+  text-align: center;
+
+  color: #888;
+
+  font-size: 14px;
+  font-weight: 750;
+}
