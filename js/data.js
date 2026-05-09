@@ -1,21 +1,29 @@
 export const places = [
   {
-    mood: "relax",
-    title: "這裡適合一個人待到傍晚",
-    name: "Santubong View Point",
-    address: "Santubong, Kuching, Sarawak",
-    phone: "+60 12-345 6789",
-    hours: "10:00 AM – 9:00 PM",
-    contactName: "HeriLand Guide",
-    contactImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
-    distance: "1.2km",
-    moodLabel: "安靜",
-    score: "4.8",
-    tags: ["系統推薦", "放空"],
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
-    intro: "這裡適合剛到 Kuching 時放慢節奏，不急著跑景點，先用一段安靜的時間進入砂拉越。",
-    services: ["AI 推薦附近路線", "適合拍照與停留", "可加入個人行程", "可直接導航前往"]
-  },
+  mood: "relax",
+  title: "這裡適合一個人待到傍晚",
+  name: "Santubong View Point",
+  address: "Santubong, Kuching, Sarawak",
+  phone: "+60 12-345 6789",
+  hours: "10:00 AM – 9:00 PM",
+  contactName: "HeriLand Guide",
+  contactImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+  distance: "1.2km",
+  moodLabel: "安靜",
+  score: "4.8",
+  tags: ["系統推薦", "放空"],
+
+  image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
+
+  images: [
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=80"
+  ],
+
+  intro: "這裡適合剛到 Kuching 時放慢節奏，不急著跑景點，先用一段安靜的時間進入砂拉越。",
+  services: ["AI 推薦附近路線", "適合拍照與停留", "可加入個人行程", "可直接導航前往"]
+},
   {
     mood: "relax",
     title: "午後太熱的時候，這裡剛剛好",
@@ -318,12 +326,19 @@ export const foods = [
 ];
 
 export const events = [
-  {
-    title: "Kuching Waterfront Night Walk",
-    date: "每週五・晚上 7:00",
-    location: "Kuching Waterfront",
-    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80"
-  },
+{
+  title: "Kuching Waterfront Night Walk",
+  date: "每週五・晚上 7:00",
+  location: "Kuching Waterfront",
+
+  image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80",
+
+  images: [
+    "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80"
+  ]
+},
   {
     title: "Sarawak Food Weekend",
     date: "本週末",
