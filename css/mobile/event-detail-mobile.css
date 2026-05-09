@@ -188,50 +188,47 @@
      CTA
   ========================= */
 
-  .event-detail-cta {
-    position: sticky;
+.event-detail-cta {
+  position: sticky;
 
-    left: 0;
-    right: 0;
-    bottom: 0;
+  bottom: 0;
 
-    z-index: 2020;
+  z-index: 2020;
 
-    width: auto;
+  width: 100%;
 
-    display: grid;
-    grid-template-columns: 1fr 1.25fr;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
 
-    gap: 10px;
+  gap: 10px;
 
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-bottom: -32px;
+  margin-top: 28px;
 
-    padding:
-      14px
-      18px
-      calc(14px + env(safe-area-inset-bottom));
+  padding:
+    14px
+    0
+    calc(14px + env(safe-area-inset-bottom));
 
-    background:
-      rgba(246,245,241,.94);
+  background:
+    rgba(246,245,241,.94);
 
-    backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 
-    border-top:
-      1px solid rgba(0,0,0,.05);
-
-    box-shadow:
-      0 -10px 30px rgba(0,0,0,.04);
-  }
+  border-top:
+    1px solid rgba(0,0,0,.05);
+}
 
   .event-detail-cta .secondary-btn,
   .event-detail-cta .primary-cta {
     height: 52px;
 
     border-radius: 16px;
-
+    width: 100%;
     font-size: 14px;
   }
+  
+  .event-detail-page {
+  overflow-x: hidden;
+}
 
 }
