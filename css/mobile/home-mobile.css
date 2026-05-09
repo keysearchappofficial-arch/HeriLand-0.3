@@ -434,12 +434,32 @@
     padding: 4px 0;
   }
 
-  .event-grid {
+.event-grid {
+
     display: grid;
+
     grid-template-columns: repeat(2, 1fr);
+
     gap: 14px;
+
+    overflow: visible;
+
+    padding-bottom: 0;
+
+  }
+  
+  .event-grid .event-card {
+
+    flex: initial;
+
   }
 
+  .event-grid .event-card-image {
+
+    height: 120px;
+
+  }
+  
   .event-card {
     display: block;
     overflow: hidden;
