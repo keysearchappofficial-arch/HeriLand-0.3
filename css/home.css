@@ -668,9 +668,33 @@
 }
 
 .event-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 18px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+}
+
+.event-grid::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+.event-grid .event-card {
+
+  flex: 0 0 calc((100% - 18px) / 2);
+
+  scroll-snap-align: start;
+
+}
+
+.event-grid .event-card-image {
+
+  height: 220px;
+
 }
 
 .event-card {
