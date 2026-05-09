@@ -394,6 +394,80 @@ function bindHomeEventAutoSlide() {
   }, 3800);
 }
 
+function openEventDetail(event) {
+  const detail =
+    document.getElementById("eventDetailPage");
+
+  if (!detail) return;
+
+  const normalized = {
+    ...event,
+    title: event.title || "未命名活動",
+    image: event.image || "",
+    location: event.location || "Sarawak",
+    date: event.date || "近期活動",
+    timeText: event.timeText || event.hour || "",
+    desc:
+      event.desc ||
+      "這是一個適合慢慢探索的活動。",
+    type: event.type || "活動",
+    aiNote:
+      event.aiNote ||
+      event.guide ||
+      "這個活動適合想慢慢感受城市氛圍的人。",
+    tags:
+      event.tags ||
+      ["放鬆", "在地感", "適合拍照"],
+    nearby:
+      event.nearby ||
+      "活動結束後，可以順路安排附近餐廳、河邊或夜市。"
+  };
+
+  const image =
+    document.getElementById("eventDetailImage");
+
+  if (image) {
+    image.src = normalized.image;
+    image.alt = normalized.title;
+  }
+
+  setText("eventDetailTitle", normalized.title);
+  setText("eventDetailType", normalized.type);
+  setText("eventDetailLocation", normalized.location);
+  setText("eventDetailDate", normalized.date);
+  setText("eventDetailTime", normalized.timeText || normalized.location);
+  setText("eventDetailDesc", normalized.desc);
+  setText("eventDetailAiNote", normalized.aiNote);
+  setText("eventDetailNearby", normalized.nearby);
+
+  const tags =
+    document.getElementById("eventDetailTags");
+
+  if (tags) {
+    tags.innerHTML =
+      normalized.tags
+        .slice(0, 5)
+        .map(tag => `<span>${tag}</span>`)
+        .join("");
+  }
+
+  detail.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeEventDetail() {
+  const detail =
+    document.getElementById("eventDetailPage");
+
+  if (!detail) return;
+
+  detail.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+window.openEventDetail = openEventDetail;
+window.closeEventDetail = closeEventDetail;
+
 function openDetail(place) {
 
   if (!place || !els.detailPage) return;
