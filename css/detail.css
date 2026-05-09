@@ -5,6 +5,7 @@
 .detail-page {
   position: fixed;
   inset: 0;
+
   z-index: 2000;
 
   background: #f6f5f1;
@@ -35,13 +36,6 @@
   overflow: hidden;
 }
 
-.detail-gallery img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-}
-
 .detail-gallery::after {
   content: "";
   position: absolute;
@@ -53,6 +47,100 @@
       rgba(0,0,0,.42),
       rgba(0,0,0,.04) 55%
     );
+
+  pointer-events: none;
+}
+
+/* =========================
+   Slider
+========================= */
+
+.detail-slider {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+
+  touch-action: pan-x;
+
+  scroll-behavior: smooth;
+}
+
+.detail-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.detail-slide {
+  flex: 0 0 100%;
+
+  width: 100%;
+  height: 100%;
+
+  scroll-snap-align: start;
+
+  user-select: none;
+}
+
+.detail-slide img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =========================
+   Dots
+========================= */
+
+.detail-dots {
+  position: absolute;
+
+  right: 24px;
+  bottom: 24px;
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.detail-dot {
+  width: 7px;
+  height: 7px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.42);
+
+  transition:
+    width .25s ease,
+    background .25s ease;
+
+  cursor: pointer;
+}
+
+.detail-dot.active {
+  width: 20px;
+  background: #fff;
 }
 
 /* =========================
@@ -63,7 +151,8 @@
 .detail-save {
   position: absolute;
   top: 22px;
-  z-index: 4;
+
+  z-index: 6;
 
   width: 46px;
   height: 46px;
@@ -91,7 +180,6 @@
 
 .detail-save {
   right: 22px;
-
   font-size: 22px;
 }
 
@@ -170,6 +258,34 @@
 
   font-size: 14px;
   line-height: 1.6;
+}
+
+/* =========================
+   Inline Info
+========================= */
+
+.detail-inline-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 16px;
+
+  color: #666;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.detail-inline-info strong {
+  color: #222;
+  font-weight: 750;
+}
+
+.detail-inline-info .dot {
+  color: #bbb;
 }
 
 /* =========================
@@ -280,11 +396,35 @@
   letter-spacing: -0.6px;
 }
 
-.detail-review-head span {
+.detail-review-more {
+  border: none;
+  background: transparent;
+
   color: #777;
 
   font-size: 13px;
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.detail-write-review {
+  width: 100%;
+
+  margin-bottom: 16px;
+  padding: 14px 16px;
+
+  border: 1px dashed rgba(0,0,0,.16);
+  border-radius: 18px;
+
+  background: rgba(255,255,255,.58);
+
+  color: #222;
+
+  font-size: 14px;
   font-weight: 800;
+
+  cursor: pointer;
 }
 
 .detail-review-list {
@@ -331,10 +471,6 @@
 
 /* =========================
    CTA
-========================= */
-
-/* =========================
-   Bottom CTA
 ========================= */
 
 .detail-cta {
@@ -441,193 +577,18 @@
   }
 
   .detail-cta {
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    transform: none;
-
-    width: 100%;
-
     padding:
       14px
       18px
       calc(14px + env(safe-area-inset-bottom));
-
-    background: rgba(246,245,241,.92);
-
-    backdrop-filter: blur(18px);
-
-    border-top: 1px solid rgba(0,0,0,.05);
   }
 
   .detail-cta button {
     height: 52px;
   }
-}
 
-/* =========================
-   Mini Info
-========================= */
-
-.detail-mini-info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-
-  margin-top: 18px;
-}
-
-.detail-mini-pill {
-  padding: 14px 15px;
-
-  border-radius: 18px;
-
-  background: rgba(255,255,255,.72);
-  border: 1px solid rgba(0,0,0,.05);
-}
-
-.detail-mini-pill small {
-  display: block;
-
-  color: #888;
-
-  font-size: 11px;
-  font-weight: 750;
-
-  margin-bottom: 6px;
-}
-
-.detail-mini-pill strong {
-  display: block;
-
-  color: #222;
-
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-/* =========================
-   Inline Info
-========================= */
-
-.detail-inline-info {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  gap: 10px;
-
-  margin-top: 16px;
-
-  color: #666;
-
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.detail-inline-info strong {
-  color: #222;
-  font-weight: 750;
-}
-
-.detail-inline-info .dot {
-  color: #bbb;
-}
-
-/* =========================
-   Review Actions
-========================= */
-
-.detail-review-more {
-  border: none;
-  background: transparent;
-
-  color: #777;
-
-  font-size: 13px;
-  font-weight: 850;
-
-  cursor: pointer;
-}
-
-.detail-write-review {
-  width: 100%;
-
-  margin-bottom: 16px;
-  padding: 14px 16px;
-
-  border: 1px dashed rgba(0,0,0,.16);
-  border-radius: 18px;
-
-  background: rgba(255,255,255,.58);
-
-  color: #222;
-
-  font-size: 14px;
-  font-weight: 800;
-
-  cursor: pointer;
-}
-
-.detail-gallery::after,
-.detail-content,
-.detail-overlay {
-  pointer-events: none;
-}
-
-.detail-slider {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
-}
-
-.detail-slider::-webkit-scrollbar {
-  display: none;
-}
-
-.detail-slide {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  scroll-snap-align: start;
-}
-
-.detail-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  user-select: none;
-}
-
-.detail-dots {
-  position: absolute;
-  right: 24px;
-  bottom: 24px;
-  z-index: 5;
-  display: flex;
-  gap: 7px;
-}
-
-.detail-dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  border: none;
-  border-radius: 999px;
-  background: rgba(255,255,255,.42);
-}
-
-.detail-dot.active {
-  width: 20px;
-  background: #fff;
+  .detail-dots {
+    right: 18px;
+    bottom: 18px;
+  }
 }
