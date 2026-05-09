@@ -326,45 +326,88 @@
     padding: 4px 0;
   }
 
-  .review-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
+/* =========================
+   Traveler Cards - Mobile
+========================= */
 
-  .review-card {
-    overflow: hidden;
-    border-radius: 22px;
-    background: rgba(255,255,255,.76);
-    border: 1px solid rgba(0,0,0,.05);
-  }
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
 
-  .review-image {
-    height: 130px;
-  }
+.traveler-card {
+  overflow: hidden;
+  border-radius: 22px;
+  background: rgba(255,255,255,.76);
+  border: 1px solid rgba(0,0,0,.05);
+}
 
-  .review-body {
-    padding: 12px;
-  }
+.traveler-card-image {
+  aspect-ratio: 1 / 1.05;
+  overflow: hidden;
+  background: #ddd;
+}
 
-  .review-body h3 {
-    font-size: 14px;
-    line-height: 1.35;
-    letter-spacing: -0.2px;
-    margin-bottom: 8px;
-  }
+.traveler-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  .review-body p {
-    color: #666;
-    font-size: 13px;
-    line-height: 1.55;
-    margin-bottom: 10px;
-  }
+.traveler-card-body {
+  padding: 13px;
+}
 
-  .review-body small {
-    color: #999;
-    font-size: 12px;
-  }
+.traveler-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.traveler-card-top strong {
+  font-size: 12px;
+  font-weight: 820;
+}
+
+.traveler-card-top span {
+  font-size: 10px;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+.traveler-card-body h3 {
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.45px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.traveler-card-body p {
+  margin-top: 8px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.6;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.traveler-card-body small {
+  display: inline-flex;
+  margin-top: 10px;
+  color: #888;
+  font-size: 11px;
+  font-weight: 760;
+}
 
   /* =========================
      Spot / Food Section
