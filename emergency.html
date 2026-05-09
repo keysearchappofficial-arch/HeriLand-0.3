@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0" />
 
-  <title>Emergency Support｜HeriLand</title>
+  <title>HeriLand Emergency</title>
 
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/mobile.css" />
@@ -14,75 +17,137 @@
 
 <body>
 
-  <main class="page-container emergency-page">
+<main class="page-container emergency-page">
 
-    <header class="emergency-top">
-      <a class="emergency-back-link" href="./index.html">
-        ‹
-      </a>
+  <!-- Mobile Top -->
+  <header class="mobile-top">
 
-      <div>
-        <small>HeriLand Support</small>
-        <h1>緊急聯絡</h1>
-      </div>
-    </header>
+    <div>
+      <small>Your Location</small>
+      <strong>Kuching, Sarawak</strong>
+    </div>
 
-    <section class="emergency-intro">
-      <h2>Important Numbers</h2>
-      <p>
-        旅途中以防萬一，可以快速查找當地常用官方聯絡電話。
-      </p>
-    </section>
+    <button
+      class="icon-btn"
+      id="mobileMenuBtn"
+      aria-label="menu"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7h16"></path>
+        <path d="M4 12h16"></path>
+        <path d="M4 17h16"></path>
+      </svg>
+    </button>
 
-    <section class="emergency-filter-card">
+  </header>
+
+  <!-- Desktop Nav -->
+  <div id="navbar"></div>
+
+  <!-- Hero -->
+  <section class="emergency-hero">
+
+    <small>Emergency Support</small>
+
+    <h1>
+      緊急聯絡資訊
+    </h1>
+
+    <p>
+      如果旅途中遇到突發狀況，
+      可以快速找到當地官方單位電話。
+    </p>
+
+  </section>
+
+  <!-- Filters -->
+  <section class="emergency-filter">
+
+    <div class="emergency-select-wrap">
 
       <label>
         城市
-        <select id="emergencyCity">
-          <option value="Kuching">Kuching</option>
-          <option value="Sibu">Sibu</option>
-          <option value="Miri">Miri</option>
-          <option value="Bintulu">Bintulu</option>
-        </select>
       </label>
+
+      <select id="citySelect">
+
+        <option value="all">
+          全部城市
+        </option>
+
+        <option value="kuching">
+          Kuching
+        </option>
+
+        <option value="sibu">
+          Sibu
+        </option>
+
+        <option value="miri">
+          Miri
+        </option>
+
+        <option value="bintulu">
+          Bintulu
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="emergency-select-wrap">
 
       <label>
         類別
-        <select id="emergencyCategory">
-          <option value="all">全部</option>
-          <option value="Emergency">緊急</option>
-          <option value="Police">警察</option>
-          <option value="Fire">消防</option>
-          <option value="Hospital">醫院</option>
-        </select>
       </label>
 
-    </section>
+      <select id="typeSelect">
 
-    <section class="emergency-primary">
-      <div>
-        <small>Malaysia Emergency</small>
-        <strong>999</strong>
-        <p>全國緊急電話</p>
-      </div>
+        <option value="all">
+          全部類別
+        </option>
 
-      <a href="tel:999">撥打</a>
-    </section>
+        <option value="police">
+          警察局
+        </option>
 
-    <section class="emergency-list" id="emergencyList">
-      <!-- JS render -->
-    </section>
+        <option value="hospital">
+          醫院
+        </option>
 
-    <p class="emergency-note">
-      HeriLand 整理當地常用緊急聯絡資訊，實際情況請以官方單位為準。
-    </p>
+        <option value="fire">
+          消防局
+        </option>
 
-  </main>
+        <option value="tourism">
+          旅遊中心
+        </option>
 
-  <div id="mobileMenu"></div>
+      </select>
 
-  <script type="module" src="./js/components.js"></script>
-  <script type="module" src="./js/pages/emergency.js"></script>
+    </div>
+
+  </section>
+
+  <!-- List -->
+  <section
+    class="emergency-list"
+    id="emergencyList">
+
+    <!-- JS Render -->
+
+  </section>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+</main>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu"></div>
+
+<script type="module" src="./js/components.js"></script>
+<script type="module" src="./js/emergency.js"></script>
 
 </body>
 </html>
