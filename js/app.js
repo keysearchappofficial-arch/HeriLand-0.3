@@ -38,6 +38,7 @@ function init() {
   bindSpotControls();
   bindFoodControls();
   bindMobileMenu();
+  bindHomeEventAutoSlide();
 
   renderMood("relax");
   renderCities();
@@ -366,6 +367,28 @@ card.innerHTML = `
 
     eventGrid.appendChild(card);
   });
+}
+
+function bindHomeEventAutoSlide() {
+  const grid = document.getElementById("eventGrid");
+  if (!grid) return;
+
+  const isDesktop = window.matchMedia("(min-width: 821px)").matches;
+  if (!isDesktop) return;
+
+  let index = 0;
+
+  setInterval(() => {
+    const cards = grid.querySelectorAll(".event-card");
+    if (!cards.length) return;
+
+    index = (index + 1) % cards.length;
+
+    grid.scrollTo({
+      left: cards[index].offsetLeft,
+      behavior: "smooth"
+    });
+  }, 3800);
 }
 
 function openDetail(place) {
