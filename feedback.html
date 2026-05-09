@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>HeriLand Feedback</title>
+
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <link
+    rel="stylesheet"
+    href="./css/pages/feedback.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./css/mobile.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./css/mobile/feedback-mobile.css"
+  />
+
+</head>
+
+<body>
+
+<main class="feedback-page">
+
+  <!-- Mobile Top -->
+  <header class="mobile-top">
+
+    <div>
+      <small>HeriLand</small>
+      <strong>Feedback</strong>
+    </div>
+
+    <button
+      class="icon-btn"
+      id="mobileMenuBtn"
+      aria-label="menu"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7h16"></path>
+        <path d="M4 12h16"></path>
+        <path d="M4 17h16"></path>
+      </svg>
+    </button>
+
+  </header>
+
+  <!-- Desktop Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Hero -->
+  <section class="feedback-hero">
+
+    <small>Feedback</small>
+
+    <h1>
+      幫助 HeriLand
+      <br>
+      變得更好
+    </h1>
+
+    <p>
+      如果你發現錯誤資訊、
+      想推薦地方，
+      或有功能建議，
+      都可以告訴我們。
+    </p>
+
+  </section>
+
+  <!-- Form -->
+  <section class="feedback-form-section">
+
+    <div class="feedback-form-card">
+
+      <!-- Type -->
+      <div class="feedback-field">
+
+        <label for="feedbackType">
+          類型
+        </label>
+
+        <select id="feedbackType">
+
+          <option value="issue">
+            問題回報
+          </option>
+
+          <option value="place">
+            推薦地點
+          </option>
+
+          <option value="event">
+            活動推薦
+          </option>
+
+          <option value="feature">
+            功能建議
+          </option>
+
+          <option value="other">
+            其他
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Content -->
+      <div class="feedback-field">
+
+        <label for="feedbackMessage">
+          內容
+        </label>
+
+        <textarea
+          id="feedbackMessage"
+          placeholder="例如：這個地點的電話已失效、希望新增某個城市、活動資訊不正確..."
+        ></textarea>
+
+      </div>
+
+      <!-- Email -->
+      <div class="feedback-field">
+
+        <label for="feedbackEmail">
+          Email（選填）
+        </label>
+
+        <input
+          id="feedbackEmail"
+          type="email"
+          placeholder="your@email.com"
+        />
+
+      </div>
+
+      <!-- Submit -->
+      <button
+        class="feedback-submit-btn"
+        id="feedbackSubmitBtn"
+        type="button"
+      >
+        送出 Feedback
+      </button>
+
+      <!-- Note -->
+      <p class="feedback-note">
+        HeriLand 目前仍在持續更新中，
+        感謝你的回饋。
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+</main>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu"></div>
+
+<script type="module" src="./js/components.js"></script>
+
+<script
+  type="module"
+  src="./js/pages/feedback.js"
+></script>
+
+</body>
+</html>
