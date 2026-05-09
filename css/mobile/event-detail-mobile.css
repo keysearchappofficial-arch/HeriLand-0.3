@@ -1,0 +1,170 @@
+@media (max-width: 820px) {
+
+  /* =========================
+     Event Detail Hero
+  ========================= */
+
+  .event-detail-hero {
+    height: 420px;
+  }
+
+  .event-detail-back,
+  .event-detail-save {
+    top: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 22px;
+  }
+
+  .event-detail-back {
+    left: 18px;
+  }
+
+  .event-detail-save {
+    right: 18px;
+  }
+
+  /* =========================
+     Panel
+  ========================= */
+
+  .event-detail-panel {
+    margin-top: -24px;
+
+    padding:
+      24px
+      20px
+      130px;
+
+    border-radius: 28px 28px 0 0;
+  }
+
+  /* =========================
+     Head
+  ========================= */
+
+  .event-detail-head h1 {
+    margin-top: 12px;
+
+    font-size: 38px;
+    line-height: 1.02;
+
+    letter-spacing: -1.6px;
+  }
+
+  .event-detail-meta {
+    margin-top: 14px;
+
+    flex-wrap: wrap;
+    gap: 8px;
+
+    font-size: 13px;
+  }
+
+  /* =========================
+     AI Guide
+  ========================= */
+
+  .event-detail-guide {
+    margin-top: 22px;
+
+    padding: 20px;
+
+    border-radius: 24px;
+  }
+
+  .event-detail-guide p {
+    margin-top: 8px;
+
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* =========================
+     Sections
+  ========================= */
+
+  .event-detail-section,
+  .event-detail-timeline,
+  .event-detail-nearby {
+    margin-top: 34px;
+  }
+
+  .event-detail-section h2,
+  .event-detail-timeline h2,
+  .event-detail-nearby h2 {
+    font-size: 21px;
+
+    margin-bottom: 14px;
+  }
+
+  .event-detail-section p,
+  .event-detail-nearby p {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* =========================
+     Tags
+  ========================= */
+
+  .event-detail-tags {
+    gap: 8px;
+  }
+
+  .event-detail-tags span {
+    padding: 9px 14px;
+
+    font-size: 13px;
+  }
+
+  /* =========================
+     Timeline
+  ========================= */
+
+  .event-timeline-list {
+    gap: 14px;
+  }
+
+  .event-timeline-list div {
+    padding: 16px 16px;
+
+    border-radius: 20px;
+  }
+
+  .event-timeline-list p {
+    margin-top: 8px;
+
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* =========================
+     CTA
+  ========================= */
+
+  .event-detail-cta {
+    width: 100%;
+
+    padding:
+      14px
+      18px
+      calc(14px + env(safe-area-inset-bottom));
+
+    grid-template-columns: 1fr 1.25fr;
+
+    gap: 10px;
+  }
+
+  .event-detail-cta .secondary-btn,
+  .event-detail-cta .primary-cta {
+    height: 52px;
+
+    border-radius: 16px;
+
+    font-size: 14px;
+  }
+
+}
