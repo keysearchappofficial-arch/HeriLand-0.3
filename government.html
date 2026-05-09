@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Government Services | HeriLand</title>
+
+  <!-- Core -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/mobile.css" />
+
+  <!-- Page -->
+  <link rel="stylesheet" href="./css/pages/government.css" />
+  <link rel="stylesheet" href="./css/mobile/government-mobile.css" />
+
+</head>
+
+<body>
+
+  <main class="government-page">
+
+    <!-- Mobile Top -->
+    <header class="mobile-top">
+
+      <div>
+        <small>Official Services</small>
+        <strong>Sarawak Government</strong>
+      </div>
+
+      <button
+        class="icon-btn"
+        id="mobileMenuBtn"
+        aria-label="menu"
+      >
+        <svg viewBox="0 0 24 24">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+
+    </header>
+
+    <!-- Desktop Nav -->
+    <div id="navbar"></div>
+
+    <!-- Hero -->
+    <section class="government-hero">
+
+      <small>Official</small>
+
+      <h1>
+        Government Services
+      </h1>
+
+      <p>
+        查詢砂拉越官方單位、
+        聯絡方式與辦事資訊。
+      </p>
+
+    </section>
+
+    <!-- Filters -->
+    <section class="government-filter">
+
+      <!-- City -->
+      <div class="government-select-wrap">
+
+        <label for="governmentCitySelect">
+          城市
+        </label>
+
+        <select id="governmentCitySelect">
+
+          <option value="all">
+            全部城市
+          </option>
+
+          <option value="kuching">
+            Kuching
+          </option>
+
+          <option value="sibu">
+            Sibu
+          </option>
+
+          <option value="miri">
+            Miri
+          </option>
+
+          <option value="bintulu">
+            Bintulu
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Type -->
+      <div class="government-select-wrap">
+
+        <label for="governmentTypeSelect">
+          類別
+        </label>
+
+        <select id="governmentTypeSelect">
+
+          <option value="all">
+            全部類別
+          </option>
+
+          <option value="immigration">
+            Immigration
+          </option>
+
+          <option value="jpj">
+            JPJ
+          </option>
+
+          <option value="hospital">
+            Hospital
+          </option>
+
+          <option value="police">
+            Police
+          </option>
+
+          <option value="tourism">
+            Tourism
+          </option>
+
+          <option value="utility">
+            Utility
+          </option>
+
+        </select>
+
+      </div>
+
+    </section>
+
+    <!-- Table -->
+    <section class="government-table">
+
+      <!-- Head -->
+      <div class="government-table-head">
+
+        <div>
+          官方單位
+        </div>
+
+        <div>
+          聯絡資訊
+        </div>
+
+      </div>
+
+      <!-- List -->
+      <div
+        class="government-list"
+        id="governmentList"
+      ></div>
+
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+  </main>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu"></div>
+
+  <!-- Scripts -->
+  <script
+    type="module"
+    src="./js/components.js"
+  ></script>
+
+  <script
+    type="module"
+    src="./js/pages/government.js"
+  ></script>
+
+</body>
+
+</html>
