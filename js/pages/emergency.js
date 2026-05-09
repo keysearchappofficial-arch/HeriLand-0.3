@@ -134,6 +134,7 @@ function renderEmergencyList() {
 
 card.innerHTML = `
   <div class="emergency-name">
+
     <small>
       ${item.typeLabel}・${item.cityLabel}
     </small>
@@ -141,14 +142,27 @@ card.innerHTML = `
     <strong>
       ${item.name}
     </strong>
+
   </div>
 
-  <a
-    class="emergency-phone-link"
-    href="tel:${item.phone}"
-  >
-    ${item.phone}
-  </a>
+  <div class="emergency-actions">
+
+    <a
+      class="emergency-phone-link"
+      href="tel:${item.phone}"
+    >
+      ${item.phone}
+    </a>
+
+    <a
+      class="emergency-map-link"
+      href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}"
+      target="_blank"
+    >
+      導航
+    </a>
+
+  </div>
 `;
 
     emergencyList.appendChild(card);
