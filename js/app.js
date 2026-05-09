@@ -360,6 +360,9 @@ function renderEvents() {
 card.className = "event-card";
 
 card.onclick = () =>
+  openTravelerDetail(review);
+
+card.onclick = () =>
   openEventDetail(event);
 
 card.innerHTML = `
@@ -406,6 +409,115 @@ function bindHomeEventAutoSlide() {
     });
   }, 3800);
 }
+
+function openTravelerDetail(review) {
+  const detail =
+    document.getElementById("travelerDetailPage");
+
+  if (!detail) return;
+
+  const normalized = {
+    ...review,
+
+    name:
+      review.name ||
+      review.author ||
+      "HeriLand Traveler",
+
+    image:
+      review.image ||
+      "",
+
+    achievement:
+      review.achievement ||
+      `探索了 ${review.cityCount || 12} 個城市 ・ ${review.storyCount || 28} 篇旅程`,
+
+    title:
+      review.title ||
+      "一段慢慢走出來的旅程",
+
+    story:
+      review.story ||
+      review.description ||
+      review.desc ||
+      "這段旅程不是為了趕景點，而是慢慢感受城市的節奏。",
+
+    tags:
+      review.tags ||
+      [
+        "SlowTravel",
+        "Sarawak",
+        "RiverWalk"
+      ]
+  };
+
+  const image =
+    document.getElementById("travelerDetailImage");
+
+  if (image) {
+    image.src = normalized.image;
+    image.alt = normalized.name;
+  }
+
+  setText(
+    "travelerDetailName",
+    normalized.name
+  );
+
+  setText(
+    "travelerDetailAchievement",
+    normalized.achievement
+  );
+
+  setText(
+    "travelerDetailTitle",
+    normalized.title
+  );
+
+  setText(
+    "travelerDetailStory",
+    normalized.story
+  );
+
+  const tagWrap =
+    document.getElementById("travelerDetailTags");
+
+  if (tagWrap) {
+    tagWrap.innerHTML =
+      normalized.tags
+        .slice(0, 6)
+        .map(tag => {
+          const cleanTag =
+            String(tag).replace(/^#/, "");
+
+          return `<span>#${cleanTag}</span>`;
+        })
+        .join("");
+  }
+
+  detail.classList.add("show");
+
+  document.body.style.overflow =
+    "hidden";
+}
+
+function closeTravelerDetail() {
+  const detail =
+    document.getElementById("travelerDetailPage");
+
+  if (!detail) return;
+
+  detail.classList.remove("show");
+
+  document.body.style.overflow =
+    "";
+}
+
+window.openTravelerDetail =
+  openTravelerDetail;
+
+window.closeTravelerDetail =
+  closeTravelerDetail;
 
 function openEventDetail(event) {
   const detail =
