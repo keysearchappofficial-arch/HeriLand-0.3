@@ -120,74 +120,104 @@ export const cities = [
 ];
 
 export const reviews = [
+
   {
+    name: "Alicia",
+    achievement: "探索了 18 個城市 ・ 42 篇旅程",
+
     title: "第一次來 Kuching，很適合晚上散步",
-    description: "河邊的風很舒服，晚上慢慢走會有種真的進入砂拉越的感覺。",
+
+    description:
+      "河邊的風很舒服，晚上慢慢走會有種真的進入砂拉越的感覺。",
+
+    story:
+      "那天其實沒有特別安排，只是想沿著河邊慢慢走。結果越走越安靜，晚風、燈光、街頭聲音混在一起，有種很難形容的舒服感。後來我才發現，Kuching 很適合不用趕行程地旅行。",
+
     place: "Kuching Waterfront",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80"
+
+    tags: [
+      "SlowTravel",
+      "Kuching",
+      "RiverWalk",
+      "NightWalk"
+    ],
+
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
+
+    images: [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
+
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80",
+
+      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1000&q=80"
+    ]
   },
 
   {
+    name: "Marcus",
+    achievement: "收藏了 64 間在地早餐店",
+
     title: "這間 Laksa 比觀光店自然很多",
-    description: "不是那種很商業化的味道，比較像在地人真的會吃的早餐店。",
+
+    description:
+      "不是那種很商業化的味道，比較像在地人真的會吃的早餐店。",
+
+    story:
+      "我很喜歡找那種沒有很多裝潢、但早上會很多當地人的店。這間 Laksa 不像熱門名店那麼重口味，反而更順、更耐吃。坐在裡面慢慢吃早餐的感覺很好。",
+
     place: "Sarawak Laksa Spot",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
+
+    tags: [
+      "Laksa",
+      "Breakfast",
+      "LocalFood"
+    ],
+
+    image:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+
+    images: [
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+
+      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1000&q=80",
+
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80"
+    ]
   },
 
   {
+    name: "Emily",
+    achievement: "拍攝了 120+ 張海邊日落",
+
     title: "黃昏時真的超漂亮",
-    description: "原本只是想隨便停一下，結果夕陽出來後完全不想離開。",
+
+    description:
+      "原本只是想隨便停一下，結果夕陽出來後完全不想離開。",
+
+    story:
+      "有些地方白天普通，但黃昏會完全變成另一個世界。這裡的海風很慢，天空顏色變化也很漂亮。最後我在那裡待到晚上才離開。",
+
     place: "Miri Beach",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
-  },
 
-  {
-    title: "第一次來 Kuching，很適合晚上散步",
-    description: "河邊的風很舒服，晚上慢慢走會有種真的進入砂拉越的感覺。",
-    place: "Kuching Waterfront",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80"
-  },
+    tags: [
+      "Sunset",
+      "Beach",
+      "Relax"
+    ],
 
-  {
-    title: "這間 Laksa 比觀光店自然很多",
-    description: "不是那種很商業化的味道，比較像在地人真的會吃的早餐店。",
-    place: "Sarawak Laksa Spot",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
-  },
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80",
 
-  {
-    title: "黃昏時真的超漂亮",
-    description: "原本只是想隨便停一下，結果夕陽出來後完全不想離開。",
-    place: "Miri Beach",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    title: "第一次來 Kuching，很適合晚上散步",
-    description: "河邊的風很舒服，晚上慢慢走會有種真的進入砂拉越的感覺。",
-    place: "Kuching Waterfront",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80"
-  },
+    images: [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80",
 
-  {
-    title: "這間 Laksa 比觀光店自然很多",
-    description: "不是那種很商業化的味道，比較像在地人真的會吃的早餐店。",
-    place: "Sarawak Laksa Spot",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80"
-  },
+      "https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1000&q=80",
 
-  {
-    title: "黃昏時真的超漂亮",
-    description: "原本只是想隨便停一下，結果夕陽出來後完全不想離開。",
-    place: "Miri Beach",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
-  },
-
-  {
-    title: "很安靜，適合放空",
-    description: "不像熱門景點那麼多人，反而比較能感受到當地節奏。",
-    place: "Hidden River Walk",
-    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000&q=80"
+    ]
   }
+
 ];
 
 export const spots = [
