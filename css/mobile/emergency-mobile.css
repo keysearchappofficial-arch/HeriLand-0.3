@@ -1,0 +1,36 @@
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 820px) {
+
+  .emergency-page {
+    padding:
+      34px
+      18px
+      120px;
+  }
+
+  .emergency-top h1 {
+    font-size: 34px;
+  }
+
+  .emergency-primary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .emergency-primary a {
+    width: 100%;
+  }
+
+  .emergency-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .emergency-card a {
+    width: 100%;
+  }
+
+}
