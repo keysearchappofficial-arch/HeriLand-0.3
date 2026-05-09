@@ -13,14 +13,14 @@
 ========================= */
 
 .emergency-hero {
+  max-width: 920px;
+
+  margin: 0 auto;
+
   padding:
     120px
     40px
-    40px;
-
-  max-width: 860px;
-
-  margin: 0 auto;
+    34px;
 }
 
 .emergency-hero small {
@@ -29,27 +29,27 @@
   color: #888;
 
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 850;
 
   letter-spacing: .12em;
   text-transform: uppercase;
 }
 
 .emergency-hero h1 {
-  margin-top: 16px;
-
-  font-size: 64px;
-  line-height: .95;
-
-  letter-spacing: -2.8px;
+  margin-top: 18px;
 
   color: #111;
+
+  font-size: 68px;
+  line-height: .95;
+
+  letter-spacing: -3px;
 }
 
 .emergency-hero p {
   margin-top: 20px;
 
-  max-width: 620px;
+  max-width: 680px;
 
   color: #555;
 
@@ -58,7 +58,7 @@
 }
 
 /* =========================
-   Filter
+   Filters
 ========================= */
 
 .emergency-filter {
@@ -67,14 +67,14 @@
 
   gap: 18px;
 
-  max-width: 860px;
+  max-width: 920px;
 
   margin: 0 auto;
 
   padding:
     0
     40px
-    20px;
+    26px;
 }
 
 .emergency-select-wrap label {
@@ -85,7 +85,7 @@
   color: #666;
 
   font-size: 13px;
-  font-weight: 750;
+  font-weight: 800;
 }
 
 .emergency-select-wrap select {
@@ -101,12 +101,12 @@
 
   border-radius: 18px;
 
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.96);
 
   color: #111;
 
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 750;
 
   outline: none;
 
@@ -114,142 +114,164 @@
 }
 
 /* =========================
-   List
+   Table
 ========================= */
 
-.emergency-list {
-  max-width: 860px;
+.emergency-table {
+  max-width: 920px;
 
-  margin: 0 auto;
-
-  padding:
-    10px
-    40px
+  margin:
+    0 auto
     120px;
 
-  display: grid;
-  gap: 18px;
-}
+  overflow: hidden;
 
-/* =========================
-   Card
-========================= */
+  border-radius: 24px;
 
-.emergency-card {
-  padding: 24px;
-
-  border-radius: 28px;
-
-  background: rgba(255,255,255,.82);
+  background: rgba(255,255,255,.92);
 
   border:
-    1px solid rgba(0,0,0,.05);
+    1px solid rgba(0,0,0,.06);
 
   box-shadow:
     0 10px 30px rgba(0,0,0,.04);
 }
 
-.emergency-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.emergency-table-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
 
-  gap: 14px;
-}
+  gap: 12px;
 
-.emergency-card-type {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  padding:
+    16px
+    24px;
 
-  color: #666;
+  background:
+    rgba(0,0,0,.035);
 
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.emergency-card-type span {
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-
-  background: #111;
-}
-
-.emergency-card-city {
-  color: #999;
+  color: #777;
 
   font-size: 13px;
-  font-weight: 700;
-}
-
-.emergency-card h2 {
-  margin-top: 16px;
-
-  font-size: 28px;
-  line-height: 1.1;
-
-  letter-spacing: -1px;
-
-  color: #111;
-}
-
-.emergency-card p {
-  margin-top: 10px;
-
-  color: #666;
-
-  font-size: 15px;
-  line-height: 1.8;
+  font-weight: 850;
 }
 
 /* =========================
-   Phone
+   List
 ========================= */
 
-.emergency-phone {
-  display: flex;
+.emergency-list {
+  display: block;
+}
+
+/* =========================
+   Row
+========================= */
+
+.emergency-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+
+  gap: 18px;
+
   align-items: center;
-  justify-content: space-between;
-
-  gap: 14px;
-
-  margin-top: 24px;
-}
-
-.emergency-phone strong {
-  color: #111;
-
-  font-size: 22px;
-
-  letter-spacing: -.5px;
-}
-
-.emergency-call-btn {
-  height: 50px;
 
   padding:
-    0
-    22px;
+    20px
+    24px;
 
-  border: none;
-  border-radius: 16px;
+  border-top:
+    1px solid rgba(0,0,0,.06);
 
-  background: #111;
+  transition:
+    background .2s ease;
+}
 
-  color: #fff;
+.emergency-row:hover {
+  background:
+    rgba(0,0,0,.018);
+}
+
+.emergency-name {
+  min-width: 0;
+}
+
+.emergency-name small {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #888;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  letter-spacing: .02em;
+}
+
+.emergency-name strong {
+  display: block;
+
+  color: #111;
+
+  font-size: 17px;
+  font-weight: 760;
+
+  line-height: 1.4;
+}
+
+/* =========================
+   Actions
+========================= */
+
+.emergency-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  white-space: nowrap;
+}
+
+.emergency-phone-link {
+  color: #111;
+
+  font-size: 15px;
+  font-weight: 850;
+
+  text-decoration: none;
+}
+
+.emergency-phone-link:hover {
+  opacity: .72;
+}
+
+.emergency-map-link {
+  color: #2b6fff;
 
   font-size: 14px;
   font-weight: 850;
 
-  cursor: pointer;
-
-  transition:
-    transform .2s ease,
-    opacity .2s ease;
+  text-decoration: none;
 }
 
-.emergency-call-btn:hover {
-  transform: translateY(-1px);
+.emergency-map-link:hover {
+  opacity: .72;
+}
+
+/* =========================
+   Empty
+========================= */
+
+.emergency-empty {
+  padding:
+    34px
+    24px;
+
+  text-align: center;
+
+  color: #888;
+
+  font-size: 14px;
+  font-weight: 750;
 }
