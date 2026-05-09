@@ -130,45 +130,26 @@ function renderEmergencyList() {
       document.createElement("article");
 
     card.className =
-      "emergency-card";
+  "emergency-row";
 
-    card.innerHTML = `
-      <div class="emergency-card-top">
+card.innerHTML = `
+  <div class="emergency-name">
+    <small>
+      ${item.typeLabel}・${item.cityLabel}
+    </small>
 
-        <div class="emergency-card-type">
-          <span></span>
-          ${item.typeLabel}
-        </div>
+    <strong>
+      ${item.name}
+    </strong>
+  </div>
 
-        <div class="emergency-card-city">
-          ${item.cityLabel}
-        </div>
-
-      </div>
-
-      <h2>
-        ${item.name}
-      </h2>
-
-      <p>
-        ${item.desc}
-      </p>
-
-      <div class="emergency-phone">
-
-        <strong>
-          ${item.phone}
-        </strong>
-
-        <a
-          class="emergency-call-btn"
-          href="tel:${item.phone}"
-        >
-          撥打電話
-        </a>
-
-      </div>
-    `;
+  <a
+    class="emergency-phone-link"
+    href="tel:${item.phone}"
+  >
+    ${item.phone}
+  </a>
+`;
 
     emergencyList.appendChild(card);
 
