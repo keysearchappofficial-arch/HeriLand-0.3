@@ -160,17 +160,30 @@ function renderReviews() {
     const card =
       document.createElement("article");
 
-    card.className = "review-card";
+    card.className = "traveler-card";
 
     card.innerHTML = `
-      <div class="review-image">
+      <div class="traveler-card-image">
         <img src="${review.image}" alt="${review.title}">
       </div>
 
-      <div class="review-body">
+      <div class="traveler-card-body">
+
+        <div class="traveler-card-top">
+          <strong>${review.name || review.author || "HeriLand Traveler"}</strong>
+          <span>★★★★★</span>
+        </div>
+
         <h3>${review.title}</h3>
-        <p>${truncateText(review.description, 20)}</p>
-        <small>${review.place}</small>
+
+        <p>
+          ${truncateText(review.description || review.desc || "", 42)}
+        </p>
+
+        <small>
+          ${review.area || review.place || "Sarawak"}
+        </small>
+
       </div>
     `;
 
