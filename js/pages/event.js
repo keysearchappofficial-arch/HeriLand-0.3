@@ -296,6 +296,162 @@ function bindTypeChips() {
 }
 
 /* =========================
+   Event Detail
+========================= */
+
+function openEventDetail(event) {
+
+  const detail =
+    document.getElementById(
+      "eventDetailPage"
+    );
+
+  if (!detail) return;
+
+  /* Hero */
+
+  const hero =
+    document.getElementById(
+      "eventDetailImage"
+    );
+
+  if (hero) {
+    hero.src = event.image;
+  }
+
+  /* Basic */
+
+  setText(
+    "eventDetailTitle",
+    event.title
+  );
+
+  setText(
+    "eventDetailDate",
+    event.date || "近期活動"
+  );
+
+  setText(
+    "eventDetailLocation",
+    event.location || "Sarawak"
+  );
+
+  setText(
+    "eventDetailDesc",
+    event.desc || "活動介紹"
+  );
+
+  /* AI Guide */
+
+  setText(
+    "eventDetailGuide",
+    event.guide ||
+    "建議提早 20 分鐘到場，晚上氣氛會更舒服。"
+  );
+
+  /* Timeline */
+
+  const timeline =
+    document.getElementById(
+      "eventTimeline"
+    );
+
+  if (timeline) {
+
+    const items =
+      event.timeline || [
+        {
+          time: "6:30 PM",
+          text: "開始入場"
+        },
+        {
+          time: "7:00 PM",
+          text: "活動開始"
+        },
+        {
+          time: "9:00 PM",
+          text: "自由活動"
+        }
+      ];
+
+    timeline.innerHTML =
+      items.map(item => `
+        <div>
+          <strong>${item.time}</strong>
+          <p>${item.text}</p>
+        </div>
+      `).join("");
+
+  }
+
+  /* Tags */
+
+  const tags =
+    document.getElementById(
+      "eventDetailTags"
+    );
+
+  if (tags) {
+
+    const tagList =
+      event.tags || [
+        "夜生活",
+        "推薦活動",
+        "熱門"
+      ];
+
+    tags.innerHTML =
+      tagList.map(tag => `
+        <span>${tag}</span>
+      `).join("");
+
+  }
+
+  detail.classList.add("show");
+
+  document.body.style.overflow =
+    "hidden";
+}
+
+function closeEventDetail() {
+
+  const detail =
+    document.getElementById(
+      "eventDetailPage"
+    );
+
+  if (!detail) return;
+
+  detail.classList.remove("show");
+
+  document.body.style.overflow =
+    "";
+}
+
+/* =========================
+   Helpers
+========================= */
+
+function setText(id, value) {
+
+  const el =
+    document.getElementById(id);
+
+  if (el) {
+    el.textContent = value || "";
+  }
+
+}
+
+/* Global */
+
+window.openEventDetail =
+  openEventDetail;
+
+window.closeEventDetail =
+  closeEventDetail;
+
+/* =========================
    Mobile Menu
 ========================= */
 
