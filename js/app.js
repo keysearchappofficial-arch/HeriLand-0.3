@@ -4,7 +4,7 @@ import {
   cities,
   reviews,
   spots,
-  foods,
+  restaurants,
   events
 } from "./data.js";
 
@@ -36,7 +36,7 @@ function init() {
   bindSearch();
   initLocation();
   bindSpotControls();
-  bindFoodControls();
+  bindrestaurantControls();
   bindMobileMenu();
   bindHomeEventAutoSlide();
 
@@ -44,7 +44,7 @@ function init() {
   renderCities();
   renderReviews();
   renderSpots();
-  renderFoods();
+  renderrestaurants();
   renderEvents();
 }
 
@@ -271,15 +271,15 @@ function bindSpotControls() {
   });
 }
 
-function renderFoods() {
-  const foodScroll =
-    document.getElementById("foodScroll");
+function renderrestaurants() {
+  const restaurantScroll =
+    document.getElementById("restaurantScroll");
 
-  if (!foodScroll) return;
+  if (!restaurantScroll) return;
 
-  foodScroll.innerHTML = "";
+  restaurantScroll.innerHTML = "";
 
-  foods.slice(0, 15).forEach(food => {
+  restaurants.slice(0, 15).forEach(restaurant => {
     const card =
       document.createElement("article");
 
@@ -287,7 +287,7 @@ function renderFoods() {
 
     card.innerHTML = `
   <div class="business-card-image">
-    <img src="${food.image}" alt="${food.name}">
+    <img src="${restaurant.image}" alt="${restaurant.name}">
 
     <button class="business-save-btn" onclick="event.stopPropagation()">
       ♡
@@ -297,39 +297,39 @@ function renderFoods() {
   <div class="business-card-body">
 
     <div class="business-card-top">
-      <h3>${food.name}</h3>
+      <h3>${restaurant.name}</h3>
     </div>
 
     <div class="business-card-meta">
       <span class="business-stars">★★★★★</span>
-      <span>${food.score || "4.8"}</span>
+      <span>${restaurant.score || "4.8"}</span>
       <span>・</span>
-      <span>${food.reviewCount || "128"} 則評論</span>
+      <span>${restaurant.reviewCount || "128"} 則評論</span>
     </div>
 
 <div class="business-card-type">
-  ${(food.tags?.[0]) || food.type || food.location || "美食推薦"}
+  ${(restaurant.tags?.[0]) || restaurant.type || restaurant.location || "美食推薦"}
 </div>
 
   </div>
 `;
 
 card.onclick = () =>
-  openDetail(food);
+  openDetail(restaurant);
 
-    foodScroll.appendChild(card);
+    restaurantScroll.appendChild(card);
   });
 }
 
-function bindFoodControls() {
+function bindrestaurantControls() {
   const scroll =
-    document.getElementById("foodScroll");
+    document.getElementById("restaurantScroll");
 
   const prev =
-    document.getElementById("foodPrevBtn");
+    document.getElementById("restaurantPrevBtn");
 
   const next =
-    document.getElementById("foodNextBtn");
+    document.getElementById("restaurantNextBtn");
 
   if (!scroll || !prev || !next) return;
 
