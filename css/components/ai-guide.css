@@ -344,7 +344,7 @@
 
 .ai-guide-result-card {
   flex: 0 0 78%;
-  max-width: 300px;
+  max-width: 180px;
 
   display: flex;
   flex-direction: column;
