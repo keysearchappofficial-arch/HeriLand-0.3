@@ -34,7 +34,6 @@
 
 <main class="page-container feedback-page">
 
-  <!-- Mobile Top -->
   <header class="mobile-top">
 
     <div>
@@ -56,10 +55,8 @@
 
   </header>
 
-  <!-- Desktop Navbar -->
   <div id="navbar"></div>
 
-  <!-- Hero -->
   <section class="feedback-hero">
 
     <small>Feedback</small>
@@ -71,20 +68,16 @@
     </h1>
 
     <p>
-      如果你發現錯誤資訊、
-      想推薦地方，
-      或有功能建議，
-      都可以告訴我們。
+      你可以回報問題、推薦景點或餐廳，
+      也可以提供優化建議與商家合作資訊。
     </p>
 
   </section>
 
-  <!-- Form -->
   <section class="feedback-form-section">
 
     <div class="feedback-form-card">
 
-      <!-- Type -->
       <div class="feedback-field">
 
         <label for="feedbackType">
@@ -93,20 +86,24 @@
 
         <select id="feedbackType">
 
-          <option value="issue">
+          <option value="problem">
             問題回報
           </option>
 
           <option value="place">
-            推薦地點
+            景點推薦
           </option>
 
-          <option value="event">
-            活動推薦
+          <option value="restaurant">
+            餐廳推薦
           </option>
 
-          <option value="feature">
-            功能建議
+          <option value="suggestion">
+            優化建議
+          </option>
+
+          <option value="business">
+            商家合作
           </option>
 
           <option value="other">
@@ -117,36 +114,108 @@
 
       </div>
 
-      <!-- Content -->
       <div class="feedback-field">
 
-        <label for="feedbackMessage">
-          內容
-        </label>
-
-        <textarea
-          id="feedbackMessage"
-          placeholder="例如：這個地點的電話已失效、希望新增某個城市、活動資訊不正確..."
-        ></textarea>
-
-      </div>
-
-      <!-- Email -->
-      <div class="feedback-field">
-
-        <label for="feedbackEmail">
-          Email（選填）
+        <label for="feedbackTitle">
+          標題
         </label>
 
         <input
-          id="feedbackEmail"
-          type="email"
-          placeholder="your@email.com"
+          id="feedbackTitle"
+          type="text"
+          placeholder="例如：推薦一間 Sibu 早餐店"
         />
 
       </div>
 
-      <!-- Submit -->
+      <div class="feedback-field">
+
+        <label for="feedbackMessage">
+          說明
+        </label>
+
+        <textarea
+          id="feedbackMessage"
+          placeholder="請簡單說明你想回報或推薦的內容"
+        ></textarea>
+
+      </div>
+
+      <div class="feedback-field">
+
+        <label for="feedbackAddress">
+          地址
+        </label>
+
+        <input
+          id="feedbackAddress"
+          type="text"
+          placeholder="可填寫地址、區域或 Google Maps 名稱"
+        />
+
+      </div>
+
+      <div class="feedback-field">
+
+        <label for="feedbackHours">
+          營業時間
+        </label>
+
+        <input
+          id="feedbackHours"
+          type="text"
+          placeholder="例如：早上至中午 / 10:00 AM – 9:00 PM"
+        />
+
+      </div>
+
+      <div class="feedback-field">
+
+        <label for="feedbackTags">
+          特色
+        </label>
+
+        <input
+          id="feedbackTags"
+          type="text"
+          placeholder="例如：Kampua Mee、早餐、在地小店"
+        />
+
+      </div>
+
+      <div class="feedback-field">
+
+        <label for="feedbackContact">
+          聯絡方式（選填）
+        </label>
+
+        <input
+          id="feedbackContact"
+          type="text"
+          placeholder="你的 Email / WhatsApp / IG"
+        />
+
+      </div>
+
+      <div class="feedback-field">
+
+        <label for="feedbackImages">
+          上傳圖片
+        </label>
+
+        <input
+          id="feedbackImages"
+          type="file"
+          accept="image/*"
+          multiple
+        />
+
+        <small class="feedback-help-text">
+          可上傳景點、餐廳、菜單、招牌或錯誤資訊截圖。
+        </small>
+
+      </div>
+
       <button
         class="feedback-submit-btn"
         id="feedbackSubmitBtn"
@@ -155,22 +224,19 @@
         送出 Feedback
       </button>
 
-      <!-- Note -->
       <p class="feedback-note">
         HeriLand 目前仍在持續更新中，
-        感謝你的回饋。
+        感謝你一起讓 Sarawak 的探索資料更完整。
       </p>
 
     </div>
 
   </section>
 
-  <!-- Footer -->
   <div id="footer"></div>
 
 </main>
 
-<!-- Mobile Menu -->
 <div id="mobileMenu"></div>
 
 <script type="module" src="./js/components.js"></script>
