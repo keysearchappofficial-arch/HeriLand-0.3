@@ -1,6 +1,6 @@
 import { img } from "./shared.js";
 
-export const siburestaurants = [
+export const sibuRestaurants = [
 {
     id: "sibu-kampua-mee",
     city: "sibu",
