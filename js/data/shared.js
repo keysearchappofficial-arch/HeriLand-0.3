@@ -14,7 +14,7 @@ export const img = {
   nature:
     "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80",
 
-  food:
+  restaurant:
     "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=1600&q=80",
 
   night:
@@ -37,7 +37,7 @@ export function gallery(main) {
 
 export const guide = {
   default: "HeriLand Guide",
-  food: "Food Guide",
+  restaurant: "restaurant Guide",
   culture: "Culture Guide",
   nature: "Nature Guide",
   local: "Local Guide"
