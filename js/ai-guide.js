@@ -1,7 +1,7 @@
 import {
   places,
   restaurants
-} from "../data.js";
+} from "./data.js";
 
 export function initAiGuide() {
 
