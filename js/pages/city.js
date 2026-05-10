@@ -7,7 +7,8 @@ import {
   reviews
 } from "../data.js";
 
-let activeCityId = "sibu";
+const params =   new URLSearchParams(window.location.search); 
+let activeCityId =   params.get("city") || "sibu";
 let showAllSpots = false;
 
 function getCityImage(city) {
