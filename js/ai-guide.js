@@ -1,3 +1,8 @@
+import {
+  places,
+  restaurants
+} from "../data.js";
+
 export function initAiGuide() {
 
   const host =
@@ -27,6 +32,21 @@ export function initAiGuide() {
       "aiGuideBackdrop"
     );
 
+  const content =
+    document.getElementById(
+      "aiGuideContent"
+    );
+
+  const resultWrap =
+    document.getElementById(
+      "aiGuideResults"
+    );
+
+  const chips =
+    document.querySelectorAll(
+      ".guide-chip-group button"
+    );
+
   /* =========================
      Toggle
   ========================= */
@@ -52,6 +72,8 @@ export function initAiGuide() {
       document.body.style.overflow =
         "hidden";
 
+      renderGuide("restaurant");
+
     }
 
   }
@@ -68,6 +90,156 @@ export function initAiGuide() {
       "";
 
   }
+
+  /* =========================
+     Render
+  ========================= */
+
+  function renderGuide(type) {
+
+    if (!resultWrap) return;
+
+    chips.forEach(chip => {
+
+      chip.classList.toggle(
+        "active",
+        chip.dataset.guide === type
+      );
+
+    });
+
+    let items = [];
+
+    if (type === "restaurant") {
+
+      items =
+        shuffleArray(restaurants)
+          .slice(0, 3);
+
+    }
+
+    else if (type === "view") {
+
+      items =
+        shuffleArray(
+          places.filter(place =>
+            place.mood === "view"
+          )
+        ).slice(0, 3);
+
+    }
+
+    else if (type === "relax") {
+
+      items =
+        shuffleArray(
+          places.filter(place =>
+            place.mood === "relax"
+          )
+        ).slice(0, 3);
+
+    }
+
+    else if (type === "culture") {
+
+      items =
+        shuffleArray(
+          places.filter(place =>
+            place.category === "culture"
+          )
+        ).slice(0, 3);
+
+    }
+
+    resultWrap.innerHTML = "";
+
+    if (!items.length) {
+
+      resultWrap.innerHTML = `
+        <div class="guide-message">
+          目前還沒有推薦內容。
+        </div>
+      `;
+
+      return;
+
+    }
+
+    items.forEach(item => {
+
+      const card =
+        document.createElement("article");
+
+      card.className =
+        "ai-guide-result-card";
+
+      card.innerHTML = `
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+        >
+
+        <div>
+
+          <small>
+            ${item.city || "Sarawak"}
+          </small>
+
+          <h3>
+            ${item.name}
+          </h3>
+
+          <p>
+            ${
+              truncateText(
+                item.intro ||
+                item.desc ||
+                "適合慢慢探索的地方。",
+                52
+              )
+            }
+          </p>
+
+        </div>
+      `;
+
+      card.addEventListener(
+        "click",
+        () => {
+
+          if (window.openDetail) {
+
+            window.openDetail(item);
+
+          }
+
+        }
+      );
+
+      resultWrap.appendChild(card);
+
+    });
+
+  }
+
+  /* =========================
+     Chips
+  ========================= */
+
+  chips.forEach(chip => {
+
+    chip.addEventListener(
+      "click",
+      () => {
+
+        renderGuide(
+          chip.dataset.guide
+        );
+
+      }
+    );
+
+  });
 
   /* =========================
      Events
@@ -89,5 +261,28 @@ export function initAiGuide() {
   );
 
   console.log("[ai-guide] ready");
+
+}
+
+/* =========================
+   Utils
+========================= */
+
+function truncateText(text, max) {
+
+  if (!text) return "";
+
+  if (text.length <= max)
+    return text;
+
+  return text.slice(0, max) + "...";
+
+}
+
+function shuffleArray(array) {
+
+  return [...array].sort(
+    () => Math.random() - 0.5
+  );
 
 }
