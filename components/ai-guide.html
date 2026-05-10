@@ -38,36 +38,47 @@
 
     </div>
 
-    <div class="ai-guide-chat">
+<div class="ai-guide-chat" id="aiGuideContent">
 
-      <div class="guide-message">
-        想去哪裡？
-      </div>
+  <div class="guide-message">
+    今天想怎麼探索砂拉越？
+  </div>
 
-      <div class="guide-chip-group">
+  <div class="guide-chip-group">
 
-        <button>Kuching → Sibu</button>
+    <button type="button" data-guide="restaurant">
+      🍜 找餐廳
+    </button>
 
-        <button>機場 → 市區</button>
+    <button type="button" data-guide="view">
+      🌆 看夕陽
+    </button>
 
-        <button>哪裡適合看夕陽？</button>
+    <button type="button" data-guide="relax">
+      🌿 放鬆散步
+    </button>
 
-        <button>適合自駕嗎？</button>
+    <button type="button" data-guide="culture">
+      🏮 看文化
+    </button>
 
-      </div>
+  </div>
 
-    </div>
+  <div class="ai-guide-results" id="aiGuideResults"></div>
+
+</div>
 
     <div class="ai-guide-input">
 
-      <input
-        type="text"
-        placeholder="問 HeriLand..."
-      >
+<input
+  id="aiGuideInput"
+  type="text"
+  placeholder="例如：今晚適合去哪裡？"
+>
 
-      <button type="button">
-        ↗
-      </button>
+<button id="aiGuideSend" type="button">
+  ↗
+</button>
 
     </div>
 
