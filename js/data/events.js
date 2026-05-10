@@ -1,3 +1,5 @@
+import { img } from "./shared.js";
+
 export const events = [
   {
     id: "sibu-night-market-walk",
