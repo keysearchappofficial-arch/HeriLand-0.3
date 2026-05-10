@@ -53,20 +53,20 @@
   ========================= */
 
   .city-spot-section,
-  .city-food-section {
+  .city-restaurant-section {
     margin-top: 34px;
     padding-bottom: 18px;
   }
 
   .city-spot-section .section-head,
-  .city-food-section .section-head {
+  .city-restaurant-section .section-head {
     padding-left: 18px;
     padding-right: 18px;
     margin-bottom: 16px;
   }
 
   .city-spot-section .section-head h2,
-  .city-food-section .section-head h2 {
+  .city-restaurant-section .section-head h2 {
     font-size: 24px;
     letter-spacing: -0.6px;
   }
@@ -82,12 +82,12 @@
   }
 
   /* =========================
-     City Spot / Food Row
+     City Spot / restaurant Row
      橫向滑動
   ========================= */
 
   .city-spot-section .spot-grid,
-  .city-food-section .food-grid {
+  .city-restaurant-section .restaurant-grid {
     display: flex;
     gap: 14px;
     overflow-x: auto;
@@ -98,12 +98,12 @@
   }
 
   .city-spot-section .spot-grid::-webkit-scrollbar,
-  .city-food-section .food-grid::-webkit-scrollbar {
+  .city-restaurant-section .restaurant-grid::-webkit-scrollbar {
     display: none;
   }
 
   .city-spot-section .business-card,
-  .city-food-section .business-card {
+  .city-restaurant-section .business-card {
     flex: 0 0 calc(50vw - 22px);
     min-width: 0;
     scroll-snap-align: start;
@@ -173,11 +173,11 @@
   }
 
   /* =========================
-     Spot / Food Sheet
+     Spot / restaurant Sheet
   ========================= */
 
   .spot-sheet-panel,
-  .food-sheet-panel {
+  .restaurant-sheet-panel {
     position: fixed;
     inset: 0;
     width: 100vw;
@@ -190,12 +190,12 @@
   }
 
   .spot-sheet.show .spot-sheet-panel,
-  .food-sheet.show .food-sheet-panel {
+  .restaurant-sheet.show .restaurant-sheet-panel {
     transform: translateY(0);
   }
 
   .spot-sheet-head,
-  .food-sheet-head {
+  .restaurant-sheet-head {
     position: sticky;
     top: 0;
     z-index: 10;
@@ -205,14 +205,14 @@
   }
 
   .spot-sheet-grid,
-  .food-sheet-grid {
+  .restaurant-sheet-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 
   .spot-sheet-grid .business-card,
-  .food-sheet-grid .business-card {
+  .restaurant-sheet-grid .business-card {
     width: 100%;
     flex: initial;
   }
