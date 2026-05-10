@@ -78,13 +78,18 @@ card.innerHTML = `
 
     <span>・</span>
 
-    <a
-      class="emergency-map-link"
-      href="${item.map}"
-      target="_blank"
-    >
-      Map
-    </a>
+<a
+  class="emergency-map-link"
+  href="${
+    item.map ||
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      item.name + " " + item.cityLabel
+    )}`
+  }"
+  target="_blank"
+>
+  Map
+</a>
 
   </div>
 
