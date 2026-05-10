@@ -12,7 +12,7 @@ export const reviews = [
     place: "Sibu Central Market",
     tags: ["Sibu", "Market", "Breakfast", "LocalLife"],
     image: img.market,
-    images: gallery(img.market, img.food, img.street)
+    images: gallery(img.market, img.restaurant, img.street)
   },
   {
     id: "review-sibu-night-market",
@@ -23,9 +23,9 @@ export const reviews = [
     description: "不用特別安排很複雜的行程，慢慢吃、慢慢走就很好。",
     story: "我喜歡那種不用想太多的地方。晚上到了 Sibu Night Market，看到攤位和人潮，就知道這裡很適合當作一天的結尾。吃一點小東西，再沿著附近走走，很舒服。",
     place: "Sibu Night Market",
-    tags: ["Sibu", "NightMarket", "Food", "SlowTravel"],
+    tags: ["Sibu", "NightMarket", "restaurant", "SlowTravel"],
     image: img.night,
-    images: gallery(img.night, img.market, img.food)
+    images: gallery(img.night, img.market, img.restaurant)
   },
   {
     id: "review-sibu-culture",
