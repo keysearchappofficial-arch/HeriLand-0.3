@@ -36,7 +36,7 @@ function init() {
   bindSearch();
   initLocation();
   bindSpotControls();
-  bindrestaurantControls();
+  bindRestaurantControls();
   bindMobileMenu();
   bindHomeEventAutoSlide();
 
@@ -44,7 +44,7 @@ function init() {
   renderCities();
   renderReviews();
   renderSpots();
-  renderrestaurants();
+  renderRestaurants();
   renderEvents();
 }
 
@@ -271,7 +271,7 @@ function bindSpotControls() {
   });
 }
 
-function renderrestaurants() {
+function renderRestaurants() {
   const restaurantScroll =
     document.getElementById("restaurantScroll");
 
@@ -308,7 +308,7 @@ function renderrestaurants() {
     </div>
 
 <div class="business-card-type">
-  ${(restaurant.tags?.[0]) || restaurant.type || restaurant.location || "美食推薦"}
+  ${restaurant.food || restaurant.tags?.[0] || restaurant.type || "餐廳推薦"}
 </div>
 
   </div>
@@ -321,7 +321,7 @@ card.onclick = () =>
   });
 }
 
-function bindrestaurantControls() {
+function bindRestaurantControls() {
   const scroll =
     document.getElementById("restaurantScroll");
 
@@ -947,15 +947,21 @@ function bindSearch() {
         return;
       }
 
-      const result =
-        places.filter(place =>
-          place.name.toLowerCase().includes(keyword) ||
-          place.title.toLowerCase().includes(keyword) ||
-          place.moodLabel.toLowerCase().includes(keyword) ||
-          place.tags.some(tag =>
-            tag.toLowerCase().includes(keyword)
-          )
-        );
+const searchableItems = [
+  ...places,
+  ...restaurants
+];
+
+const result =
+  searchableItems.filter(item =>
+    item.name?.toLowerCase().includes(keyword) ||
+    item.title?.toLowerCase().includes(keyword) ||
+    item.food?.toLowerCase().includes(keyword) ||
+    item.moodLabel?.toLowerCase().includes(keyword) ||
+    item.tags?.some(tag =>
+      tag.toLowerCase().includes(keyword)
+    )
+  );
 
       currentPlaces = result;
 
