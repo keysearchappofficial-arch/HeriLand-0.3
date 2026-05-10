@@ -135,6 +135,11 @@ function renderCities() {
   cities.forEach(city => {
     const card =
       document.createElement("article");
+      
+    card.addEventListener("click", () => {
+  window.location.href =
+    `./city.html?city=${city.id}`;
+});
 
     card.className = "city-card";
 
