@@ -68,6 +68,37 @@ export const places = [
     services: ["夕陽路線", "慢走建議", "拍照角度", "附近景點推薦"]
   },
   {
+  id: "sibu-lake-garden",
+  city: "sibu",
+  category: "nature",
+  mood: "relax",
+  title: "想找一個不用趕時間的地方，可以來這裡",
+  name: "Sibu Lake Garden",
+  address: "Sibu Lake Garden, Sibu, Sarawak",
+  phone: "",
+  hours: "全天開放",
+  contactName: "Nature Guide",
+  contactImage: contactImage,
+  distance: "市區周邊",
+  moodLabel: "公園",
+  score: "4.5",
+  tags: ["Sibu", "公園", "散步", "慢旅"],
+  image: img.nature,
+  images: gallery(
+    img.nature,
+    img.river,
+    img.street
+  ),
+  intro:
+    "Sibu Lake Garden 比較像當地人散步、運動和放空的地方。沒有很強的觀光感，但很適合慢慢待一下。",
+  services: [
+    "散步建議",
+    "親子路線",
+    "放鬆停留",
+    "晨間推薦"
+  ]
+},
+  {
     id: "sibu-town-square",
     city: "sibu",
     category: "city",
