@@ -1,3 +1,5 @@
+import { img } from "./shared.js";
+
 export const reviews = [
   {
     id: "review-sibu-market",
