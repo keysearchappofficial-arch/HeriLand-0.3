@@ -33,7 +33,7 @@ function getCitySpots() {
   return spots.filter(item => item.city === activeCityId);
 }
 
-function getCityrestaurants() {
+function getCityRestaurants() {
   return restaurants.filter(item => item.city === activeCityId);
 }
 
@@ -59,8 +59,8 @@ function init() {
   bindSpotMore();
   bindSpotSheet();
 
-  bindrestaurantMore();
-  bindrestaurantSheet();
+bindRestaurantMore();
+bindRestaurantSheet();
 
   bindEventControls();
   bindEventAutoSlide();
@@ -155,7 +155,7 @@ function renderCity(city) {
   if (aiText) aiText.textContent = getCityAi(city);
 
   renderSpots();
-  renderrestaurants();
+  renderRestaurants();
   renderEvents();
 }
 
@@ -186,13 +186,16 @@ function normalizeSpot(spot) {
   };
 }
 
-function normalizerestaurant(restaurant) {
+function normalizeRestaurant(restaurant) {
   return {
     ...restaurant,
     name: restaurant.name || restaurant.title,
-    intro: restaurant.intro || restaurant.desc || "這是一個值得體驗的在地美食。",
+    intro:
+      restaurant.intro ||
+      restaurant.desc ||
+      "這是一間值得體驗的在地餐廳。",
     location: restaurant.location || restaurant.meta || "Sarawak",
-    type: restaurant.type || "美食推薦",
+    type: restaurant.type || restaurant.food || "餐廳推薦",
     address: restaurant.address || restaurant.meta || "Sarawak",
     phone: restaurant.phone || "尚未提供",
     hours: restaurant.hours || "建議用餐前確認",
@@ -200,9 +203,9 @@ function normalizerestaurant(restaurant) {
     contactImage: restaurant.contactImage || restaurant.image,
     score: restaurant.score || "4.8",
     reviewCount: restaurant.reviewCount || "128",
-    tags: restaurant.tags || ["美食", "在地", "推薦"],
+    tags: restaurant.tags || ["餐廳", "在地", "推薦"],
     services: restaurant.services || [
-      "在地美食推薦",
+      "在地餐廳推薦",
       "適合加入行程",
       "可直接導航前往"
     ]
@@ -447,14 +450,14 @@ function bindSpotMore() {
   });
 }
 
-function renderrestaurants() {
+function renderRestaurants() {
   const grid = document.getElementById("restaurantGrid");
   if (!grid) return;
 
   grid.innerHTML = "";
 
-  getCityrestaurants().forEach(rawrestaurant => {
-    const restaurant = normalizerestaurant(rawrestaurant);
+  getCityRestaurants().forEach(rawRestaurant => {
+    const restaurant = normalizeRestaurant(rawRestaurant);
 
     const card = document.createElement("article");
     card.className = "business-card";
@@ -480,7 +483,7 @@ function renderrestaurants() {
         </div>
 
         <div class="business-card-type">
-          ${restaurant.tags?.[0] || restaurant.type}
+          ${restaurant.food || restaurant.tags?.[0] || restaurant.type}
         </div>
       </div>
     `;
@@ -489,26 +492,26 @@ function renderrestaurants() {
   });
 }
 
-function bindrestaurantMore() {
+function bindRestaurantMore() {
   const button = document.getElementById("restaurantMoreBtn");
   if (!button) return;
 
   button.addEventListener("click", () => {
-    openrestaurantSheet();
+    openRestaurantSheet();
   });
 }
 
-function openrestaurantSheet() {
+function openRestaurantSheet() {
   const sheet = document.getElementById("restaurantSheet");
   if (!sheet) return;
 
-  renderrestaurantSheet();
+  renderRestaurantSheet();
 
   sheet.classList.add("show");
   document.body.style.overflow = "hidden";
 }
 
-function closerestaurantSheet() {
+function closeRestaurantSheet() {
   const sheet = document.getElementById("restaurantSheet");
   if (!sheet) return;
 
@@ -516,14 +519,14 @@ function closerestaurantSheet() {
   document.body.style.overflow = "";
 }
 
-function renderrestaurantSheet() {
+function renderRestaurantSheet() {
   const grid = document.getElementById("restaurantSheetGrid");
   if (!grid) return;
 
   grid.innerHTML = "";
 
-  getCityrestaurants().forEach(rawrestaurant => {
-    const restaurant = normalizerestaurant(rawrestaurant);
+  getCityRestaurants().forEach(rawRestaurant => {
+    const restaurant = normalizeRestaurant(rawRestaurant);
 
     const card = document.createElement("article");
     card.className = "business-card";
@@ -549,7 +552,7 @@ function renderrestaurantSheet() {
         </div>
 
         <div class="business-card-type">
-          ${restaurant.tags?.[0] || restaurant.type}
+          ${restaurant.food || restaurant.tags?.[0] || restaurant.type}
         </div>
       </div>
     `;
@@ -558,16 +561,16 @@ function renderrestaurantSheet() {
   });
 }
 
-function bindrestaurantSheet() {
+function bindRestaurantSheet() {
   const closeBtn = document.getElementById("restaurantSheetClose");
   const backdrop = document.getElementById("restaurantSheetBackdrop");
 
   if (closeBtn) {
-    closeBtn.addEventListener("click", closerestaurantSheet);
+    closeBtn.addEventListener("click", closeRestaurantSheet);
   }
 
   if (backdrop) {
-    backdrop.addEventListener("click", closerestaurantSheet);
+    backdrop.addEventListener("click", closeRestaurantSheet);
   }
 }
 
