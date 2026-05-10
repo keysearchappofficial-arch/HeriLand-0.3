@@ -1,7 +1,8 @@
 import {
   img,
   gallery,
-  contactImage
+  contactImage,
+  guide
 } from "./shared.js";
 
 export const sibuPlaces = [
