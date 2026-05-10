@@ -1,6 +1,6 @@
 import { img } from "./shared.js";
 
-export const sibuFoods = [
+export const siburestaurants = [
 {
     id: "sibu-kampua-mee",
     city: "sibu",
@@ -8,7 +8,7 @@ export const sibuFoods = [
     location: "Sibu",
     tag: "#詩巫代表美食",
     desc: "Sibu 最具代表性的乾麵之一，簡單、直接，很適合當作認識詩巫早餐的第一口。",
-    image: img.food
+    image: img.restaurant
   },
   {
     id: "sibu-kompia",
@@ -107,7 +107,7 @@ export const sibuFoods = [
     location: "Sibu",
     tag: "#福州味",
     desc: "可以和 Kampua Mee 放在同一條美食脈絡裡，強化 Sibu 的福州文化感。",
-    image: img.food
+    image: img.restaurant
   },
   {
     id: "night-market-grilled-skewers",
