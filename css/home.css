@@ -143,7 +143,7 @@
 
 .place-grid,
 .spot-grid,
-.food-grid {
+.restaurant-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
@@ -589,34 +589,34 @@
 }
 
 /* =========================
-   Food Section - Desktop
+   restaurant Section - Desktop
 ========================= */
 
-.food-section {
+.restaurant-section {
   margin-top: 46px;
 }
 
-.food-head {
+.restaurant-head {
   margin-bottom: 18px;
 }
 
-.food-head h2 {
+.restaurant-head h2 {
   font-size: 28px;
   letter-spacing: -1px;
   line-height: 1.1;
 }
 
-.food-head p {
+.restaurant-head p {
   margin-top: 6px;
   color: var(--muted);
   font-size: 14px;
 }
 
-.food-scroll-wrap {
+.restaurant-scroll-wrap {
   overflow: hidden;
 }
 
-.food-scroll {
+.restaurant-scroll {
   display: flex;
   gap: 18px;
   overflow-x: auto;
@@ -626,15 +626,15 @@
 }
 
 .spot-scroll .business-card,
-.food-scroll .business-card {
+.restaurant-scroll .business-card {
   flex: 0 0 260px;
 }
 
-.food-scroll::-webkit-scrollbar {
+.restaurant-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.food-head {
+.restaurant-head {
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -642,12 +642,12 @@
   margin-bottom: 18px;
 }
 
-.food-inline-controls {
+.restaurant-inline-controls {
   display: flex;
   gap: 10px;
 }
 
-.food-inline-controls button {
+.restaurant-inline-controls button {
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -657,7 +657,7 @@
   transition: background .2s var(--ease);
 }
 
-.food-inline-controls button:hover {
+.restaurant-inline-controls button:hover {
   background: #fff;
 }
 
