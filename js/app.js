@@ -10,6 +10,7 @@ import {
 
 let currentMood = "relax";
 let currentPlaces = [];
+let activeCityId = "sarawak";
 
 const els = {
   desktopLocation: document.getElementById("desktopLocation"),
@@ -28,7 +29,10 @@ const els = {
   placeGrid: document.getElementById("placeGrid"),
   mobileMoods: document.getElementById("mobileMoods"),
 
-  detailPage: document.getElementById("detailPage")
+  detailPage: document.getElementById("detailPage"),
+  
+  desktopCitySelect: document.getElementById("desktopCitySelect"),
+mobileCitySelect: document.getElementById("mobileCitySelect")
 };
 
 function init() {
@@ -39,6 +43,7 @@ function init() {
   bindRestaurantControls();
   bindMobileMenu();
   bindHomeEventAutoSlide();
+  bindCitySelects();
 
   renderMood("relax");
   renderCities();
@@ -51,9 +56,9 @@ function init() {
 function renderMood(mood) {
   currentMood = mood;
 
-  currentPlaces = places.filter(place =>
-    place.mood === mood
-  );
+currentPlaces = getFilteredPlaces().filter(place =>
+  place.mood === mood
+);
 
   const config =
     moodConfig[mood] || moodConfig.relax;
@@ -207,7 +212,7 @@ function renderSpots() {
 
   spotScroll.innerHTML = "";
 
-  spots.slice(0, 15).forEach(spot => {
+  getFilteredPlaces().slice(0, 15).forEach(spot => {
     const card =
       document.createElement("article");
 
@@ -284,7 +289,7 @@ function renderRestaurants() {
 
   restaurantScroll.innerHTML = "";
 
-  restaurants.slice(0, 15).forEach(restaurant => {
+  getFilteredRestaurants().slice(0, 15).forEach(restaurant => {
     const card =
       document.createElement("article");
 
@@ -1187,4 +1192,45 @@ function truncateText(text, max) {
   if (text.length <= max) return text;
 
   return text.slice(0, max) + "...";
+}
+
+function getFilteredPlaces() {
+  if (activeCityId === "sarawak") {
+    return places;
+  }
+
+  return places.filter(item => item.city === activeCityId);
+}
+
+function getFilteredRestaurants() {
+  if (activeCityId === "sarawak") {
+    return restaurants;
+  }
+
+  return restaurants.filter(item => item.city === activeCityId);
+}
+
+function bindCitySelects() {
+  [
+    els.desktopCitySelect,
+    els.mobileCitySelect
+  ].forEach(select => {
+    if (!select) return;
+
+    select.addEventListener("change", e => {
+      activeCityId = e.target.value;
+
+      if (els.desktopCitySelect) {
+        els.desktopCitySelect.value = activeCityId;
+      }
+
+      if (els.mobileCitySelect) {
+        els.mobileCitySelect.value = activeCityId;
+      }
+
+      renderMood(currentMood);
+      renderSpots();
+      renderRestaurants();
+    });
+  });
 }
