@@ -548,25 +548,25 @@
 }
 
 /* =========================
-   City Food Section
+   City restaurant Section
 ========================= */
 
-.city-food-section {
+.city-restaurant-section {
   margin-top: 56px;
 }
 
-.food-grid {
+.restaurant-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 18px;
 }
 
-.food-card {
+.restaurant-card {
   cursor: pointer;
   min-width: 0;
 }
 
-.food-image {
+.restaurant-image {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
@@ -574,7 +574,7 @@
   background: #ddd;
 }
 
-.food-image::after {
+.restaurant-image::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -583,26 +583,26 @@
   transition: opacity .28s var(--ease);
 }
 
-.food-image img {
+.restaurant-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform .65s var(--ease);
 }
 
-.food-card:hover .food-image img {
+.restaurant-card:hover .restaurant-image img {
   transform: scale(1.035);
 }
 
-.food-card:hover .food-image::after {
+.restaurant-card:hover .restaurant-image::after {
   opacity: 1;
 }
 
-.food-body {
+.restaurant-body {
   padding-top: 12px;
 }
 
-.food-body h3 {
+.restaurant-body h3 {
   font-size: 16px;
   line-height: 1.28;
   letter-spacing: -0.35px;
@@ -615,7 +615,7 @@
   overflow: hidden;
 }
 
-.food-body p {
+.restaurant-body p {
   color: #6f6f6f;
   font-size: 13px;
   line-height: 1.55;
@@ -627,7 +627,7 @@
   overflow: hidden;
 }
 
-.food-meta {
+.restaurant-meta {
   margin-top: 9px;
   color: #999;
   font-size: 12px;
@@ -635,10 +635,10 @@
 }
 
 /* =========================
-   Food Sheet / Drawer
+   restaurant Sheet / Drawer
 ========================= */
 
-.food-sheet {
+.restaurant-sheet {
   position: fixed;
   inset: 0;
   z-index: 260;
@@ -650,13 +650,13 @@
   transition: opacity .28s var(--ease), visibility .28s var(--ease);
 }
 
-.food-sheet.show {
+.restaurant-sheet.show {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
 
-.food-sheet-backdrop {
+.restaurant-sheet-backdrop {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,.28);
@@ -664,11 +664,11 @@
   transition: opacity .28s var(--ease);
 }
 
-.food-sheet.show .food-sheet-backdrop {
+.restaurant-sheet.show .restaurant-sheet-backdrop {
   opacity: 1;
 }
 
-.food-sheet-panel {
+.restaurant-sheet-panel {
   position: absolute;
   top: 0;
   right: 0;
@@ -684,11 +684,11 @@
   transition: transform .34s var(--ease);
 }
 
-.food-sheet.show .food-sheet-panel {
+.restaurant-sheet.show .restaurant-sheet-panel {
   transform: translateX(0);
 }
 
-.food-sheet-head {
+.restaurant-sheet-head {
   display: flex;
   align-items: start;
   justify-content: space-between;
@@ -696,19 +696,19 @@
   margin-bottom: 24px;
 }
 
-.food-sheet-head small {
+.restaurant-sheet-head small {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
 }
 
-.food-sheet-head h2 {
+.restaurant-sheet-head h2 {
   margin-top: 6px;
   font-size: 34px;
   letter-spacing: -1.2px;
 }
 
-.food-sheet-head button {
+.restaurant-sheet-head button {
   width: 42px;
   height: 42px;
   border: none;
@@ -717,7 +717,7 @@
   font-size: 24px;
 }
 
-.food-sheet-grid {
+.restaurant-sheet-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
