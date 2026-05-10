@@ -1,4 +1,4 @@
-import { img } from "./shared.js";
+import { img, gallery }from "./shared.js";
 
 export const reviews = [
   {
