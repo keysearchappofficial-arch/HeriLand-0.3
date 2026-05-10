@@ -1,6 +1,6 @@
 import { img } from "./shared.js";
 
-export const kuchingrestaurants = [
+export const kuchingRestaurants = [
   {
   id: "kuching-sarawak-laksa",
   city: "kuching",
