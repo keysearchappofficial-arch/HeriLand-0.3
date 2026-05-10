@@ -49,18 +49,19 @@ function init() {
   bindMobileMenu();
 
   renderCityTabs();
-  const defaultCity =   cities.find(city => city.id === activeCityId) || cities[0];  renderCity(defaultCity);
+
+  const defaultCity =
+    cities.find(city => city.id === activeCityId) || cities[0];
+
+  renderCity(defaultCity);
   renderCityList();
 
-  renderSpots();
   bindSpotMore();
   bindSpotSheet();
 
-  renderFoods();
   bindFoodMore();
   bindFoodSheet();
 
-  renderEvents();
   bindEventControls();
   bindEventAutoSlide();
 }
@@ -71,22 +72,19 @@ function init() {
 
 function renderCityTabs() {
   const wrap = document.getElementById("cityTabs");
-
   if (!wrap) return;
 
   wrap.innerHTML = "";
 
-  cities.forEach((city, index) => {
-
+  cities.forEach(city => {
     const button = document.createElement("button");
 
     button.className =
-      `city-tab ${index === 0 ? "active" : ""}`;
+      `city-tab ${city.id === activeCityId ? "active" : ""}`;
 
     button.textContent = city.name;
 
     button.addEventListener("click", () => {
-
       document.querySelectorAll(".city-tab")
         .forEach(tab => tab.classList.remove("active"));
 
@@ -98,70 +96,45 @@ function renderCityTabs() {
         top: 0,
         behavior: "smooth"
       });
-
     });
 
     wrap.appendChild(button);
-
   });
 }
 
 function renderCityList() {
-
-  const scroll =
-    document.getElementById(
-      "cityListScroll"
-    );
-
+  const scroll = document.getElementById("cityListScroll");
   if (!scroll) return;
 
   scroll.innerHTML = "";
 
   cities.forEach(city => {
-
-    const card =
-      document.createElement("article");
-
+    const card = document.createElement("article");
     card.className = "city-card";
 
-card.innerHTML = `
-  <div class="city-tag">HeriLand City</div>
-  <img src="${city.hero}" alt="${city.name}">
-  <div class="city-name">${city.name}</div>
-`;
+    card.innerHTML = `
+      <div class="city-tag">${city.tag || "HeriLand City"}</div>
+      <img src="${getCityImage(city)}" alt="${city.name}">
+      <div class="city-name">${city.name}</div>
+    `;
 
-    card.addEventListener(
-      "click",
-      () => {
+    card.addEventListener("click", () => {
+      renderCity(city);
 
-        renderCity(city);
+      document.querySelectorAll(".city-tab").forEach(tab => {
+        tab.classList.toggle(
+          "active",
+          tab.textContent === city.name
+        );
+      });
 
-        document.querySelectorAll(
-          ".city-tab"
-        ).forEach(tab => {
-
-          tab.classList.toggle(
-            "active",
-            tab.textContent === city.name
-          );
-
-        });
-
-        document.querySelector(
-          ".city-hero"
-        )?.scrollIntoView({
-
-          behavior: "smooth"
-
-        });
-
-      }
-    );
+      document.querySelector(".city-hero")?.scrollIntoView({
+        behavior: "smooth"
+      });
+    });
 
     scroll.appendChild(card);
-
   });
-
 }
 
 /* =========================
@@ -667,7 +640,7 @@ function bindEventAutoSlide() {
   let index = 0;
 
   setInterval(() => {
-    const cards = carousel.querySelectorAll(".city-event-card");
+    const cards = carousel.querySelectorAll(".event-card");
     if (!cards.length) return;
 
     index = (index + 1) % cards.length;
