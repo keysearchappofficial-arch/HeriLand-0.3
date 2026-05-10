@@ -1,94 +1,4 @@
-const governmentData = [
-
-  {
-    city: "kuching",
-    cityLabel: "Kuching",
-
-    type: "immigration",
-    typeLabel: "Immigration",
-
-    name: "Sarawak Immigration Office",
-
-    hours:
-      "Mon – Fri · 8:00 AM – 5:00 PM",
-
-    phone:
-      "082-242133",
-
-    website:
-      "https://imi.gov.my",
-
-    map:
-      "https://maps.google.com/?q=Sarawak+Immigration+Office+Kuching"
-  },
-
-  {
-    city: "kuching",
-    cityLabel: "Kuching",
-
-    type: "jpj",
-    typeLabel: "JPJ",
-
-    name: "JPJ Kuching",
-
-    hours:
-      "Mon – Fri · 8:00 AM – 4:30 PM",
-
-    phone:
-      "082-259900",
-
-    website:
-      "https://www.jpj.gov.my",
-
-    map:
-      "https://maps.google.com/?q=JPJ+Kuching"
-  },
-
-  {
-    city: "sibu",
-    cityLabel: "Sibu",
-
-    type: "hospital",
-    typeLabel: "Hospital",
-
-    name: "Sibu Hospital",
-
-    hours:
-      "24 Hours",
-
-    phone:
-      "084-343333",
-
-    website:
-      "",
-
-    map:
-      "https://maps.google.com/?q=Sibu+Hospital"
-  },
-
-  {
-    city: "miri",
-    cityLabel: "Miri",
-
-    type: "tourism",
-    typeLabel: "Tourism",
-
-    name: "Miri Visitor Information Centre",
-
-    hours:
-      "Daily · 9:00 AM – 5:00 PM",
-
-    phone:
-      "085-434343",
-
-    website:
-      "https://sarawaktourism.com",
-
-    map:
-      "https://maps.google.com/?q=Miri+Visitor+Information+Centre"
-  }
-
-];
+import { governmentData } from "../data/government.js";
 
 /* =========================
    Elements
@@ -176,29 +86,35 @@ function renderGovernmentList() {
 
         <span>•</span>
 
-        <a
-          class="government-map-link"
-          href="${item.map}"
-          target="_blank"
-        >
-          Map
-        </a>
+<a
+  class="government-map-link"
+  href="${
+    item.map ||
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      item.name + " " + item.cityLabel
+    )}`
+  }"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Map
+</a>
 
-        ${
-          item.website
-            ? `
-              <span>•</span>
-
-              <a
-                class="government-website-link"
-                href="${item.website}"
-                target="_blank"
-              >
-                Website
-              </a>
-            `
-            : ""
-        }
+${
+  item.website
+    ? `
+      <span>•</span>
+      <a
+        class="government-website-link"
+        href="${item.website}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Website
+      </a>
+    `
+    : ""
+}
 
       </div>
 
@@ -340,15 +256,24 @@ function initGovernmentPage() {
    Start
 ========================= */
 
-window.addEventListener(
-  "componentsReady",
-  () => {
+let pageStarted = false;
 
-    console.log(
-      "[government] init"
-    );
+function startPage() {
+  if (pageStarted) return;
 
-    initGovernmentPage();
+  pageStarted = true;
 
-  }
-);
+  console.log("[government] init");
+
+  initGovernmentPage();
+}
+
+if (window.componentsLoaded) {
+  startPage();
+}
+else {
+  window.addEventListener(
+    "componentsReady",
+    startPage
+  );
+}
