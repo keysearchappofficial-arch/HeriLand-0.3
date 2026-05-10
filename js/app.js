@@ -981,8 +981,7 @@ const result =
 }
 
 function initLocation() {
-  const fallback =
-    "Kuching, Sarawak";
+  const fallback = "正在探索 Sarawak";
 
   function updateLocationText(text) {
     setElText(els.desktopLocation, text);
@@ -991,22 +990,26 @@ function initLocation() {
 
   updateLocationText(fallback);
 
-  if (!navigator.geolocation) return;
+  if (!navigator.geolocation) {
+    updateLocationText("正在探索 Sarawak");
+    return;
+  }
 
   navigator.geolocation.getCurrentPosition(
     pos => {
-      const lat =
-        pos.coords.latitude.toFixed(3);
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
 
-      const lng =
-        pos.coords.longitude.toFixed(3);
+      const nearestCity = getNearestCityByCoords(lat, lng);
 
       updateLocationText(
-        `目前座標 ${lat}, ${lng}`
+        nearestCity
+          ? `正在探索 ${nearestCity.name}`
+          : "正在探索 Sarawak"
       );
     },
     () => {
-      updateLocationText(fallback);
+      updateLocationText("正在探索 Sarawak");
     },
     {
       timeout: 8000,
@@ -1014,6 +1017,91 @@ function initLocation() {
       enableHighAccuracy: false
     }
   );
+}
+
+function getNearestCityByCoords(lat, lng) {
+  const cityCoords = [
+    {
+      id: "kuching",
+      name: "Kuching",
+      lat: 1.5533,
+      lng: 110.3592
+    },
+    {
+      id: "sibu",
+      name: "Sibu",
+      lat: 2.2876,
+      lng: 111.8305
+    },
+    {
+      id: "miri",
+      name: "Miri",
+      lat: 4.3995,
+      lng: 113.9914
+    },
+    {
+      id: "bintulu",
+      name: "Bintulu",
+      lat: 3.1700,
+      lng: 113.0419
+    },
+    {
+      id: "sarikei",
+      name: "Sarikei",
+      lat: 2.1167,
+      lng: 111.5167
+    }
+  ];
+
+  let nearest = null;
+  let minDistance = Infinity;
+
+  cityCoords.forEach(city => {
+    const distance = getDistanceKm(
+      lat,
+      lng,
+      city.lat,
+      city.lng
+    );
+
+    if (distance < minDistance) {
+      minDistance = distance;
+      nearest = city;
+    }
+  });
+
+  if (!nearest) return null;
+
+  return {
+    ...nearest,
+    distanceKm: minDistance
+  };
+}
+
+function getDistanceKm(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+
+  const c =
+    2 * Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    );
+
+  return R * c;
+}
+
+function toRad(value) {
+  return value * Math.PI / 180;
 }
 
 function toggleMobileMood() {
