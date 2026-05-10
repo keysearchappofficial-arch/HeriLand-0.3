@@ -112,7 +112,7 @@
 
 .place-grid,
 .spot-grid,
-.food-grid {
+.restaurant-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
@@ -121,7 +121,7 @@
 /* 橫向 scroll 類 */
 
 .spot-scroll,
-.food-scroll {
+.restaurant-scroll {
   display: flex;
   gap: 14px;
 
@@ -135,14 +135,14 @@
 }
 
 .spot-scroll::-webkit-scrollbar,
-.food-scroll::-webkit-scrollbar {
+.restaurant-scroll::-webkit-scrollbar {
   display: none;
 }
 
 /* 卡片寬度 */
 
 .spot-scroll .business-card,
-.food-scroll .business-card {
+.restaurant-scroll .business-card {
   flex: 0 0 220px;
   scroll-snap-align: start;
 }
@@ -150,7 +150,7 @@
 /* wrapper */
 
 .spot-scroll-wrap,
-.food-scroll-wrap {
+.restaurant-scroll-wrap {
   margin-left: -18px;
   margin-right: -18px;
 
@@ -158,7 +158,7 @@
 }
 
 .spot-scroll,
-.food-scroll {
+.restaurant-scroll {
   padding-left: 18px;
   padding-right: 18px;
 }
@@ -226,7 +226,7 @@
   
 
   .spot-scroll-wrap,
-  .food-scroll-wrap {
+  .restaurant-scroll-wrap {
     margin-left: 0;
     margin-right: 0;
     overflow: visible;
@@ -283,7 +283,7 @@
   }
 
   .spot-inline-controls,
-  .food-inline-controls {
+  .restaurant-inline-controls {
     display: none;
   }
 
@@ -410,29 +410,29 @@
 }
 
   /* =========================
-     Spot / Food Section
+     Spot / restaurant Section
   ========================= */
 
   .spot-section,
-  .food-section {
+  .restaurant-section {
     margin-top: 36px;
     padding-bottom: 16px;
   }
 
   .spot-head,
-  .food-head {
+  .restaurant-head {
     margin-bottom: 16px;
   }
 
   .spot-head h2,
-  .food-head h2 {
+  .restaurant-head h2 {
     font-size: 22px;
     letter-spacing: -0.6px;
     line-height: 1.15;
   }
 
   .spot-head p,
-  .food-head p {
+  .restaurant-head p {
     margin-top: 4px;
     color: var(--muted);
     font-size: 14px;
