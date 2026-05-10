@@ -1,49 +1,115 @@
-const feedbackType =
-  document.getElementById("feedbackType");
+function initFeedbackPage() {
 
-const feedbackMessage =
-  document.getElementById("feedbackMessage");
+  bindMobileMenu();
 
-const feedbackEmail =
-  document.getElementById("feedbackEmail");
+  bindFeedbackSubmit();
 
-const feedbackSubmitBtn =
-  document.getElementById("feedbackSubmitBtn");
+}
 
 /* =========================
    Submit
 ========================= */
 
-function submitFeedback() {
+function bindFeedbackSubmit() {
+
+  const submitBtn =
+    document.getElementById(
+      "feedbackSubmitBtn"
+    );
+
+  if (!submitBtn) return;
+
+  submitBtn.addEventListener(
+    "click",
+    handleFeedbackSubmit
+  );
+
+}
+
+function handleFeedbackSubmit() {
 
   const type =
-    feedbackType?.value || "other";
+    document.getElementById(
+      "feedbackType"
+    )?.value || "";
+
+  const title =
+    document.getElementById(
+      "feedbackTitle"
+    )?.value.trim() || "";
 
   const message =
-    feedbackMessage?.value.trim();
+    document.getElementById(
+      "feedbackMessage"
+    )?.value.trim() || "";
 
-  const email =
-    feedbackEmail?.value.trim();
+  const address =
+    document.getElementById(
+      "feedbackAddress"
+    )?.value.trim() || "";
+
+  const hours =
+    document.getElementById(
+      "feedbackHours"
+    )?.value.trim() || "";
+
+  const tags =
+    document.getElementById(
+      "feedbackTags"
+    )?.value.trim() || "";
+
+  const contact =
+    document.getElementById(
+      "feedbackContact"
+    )?.value.trim() || "";
+
+  const imageInput =
+    document.getElementById(
+      "feedbackImages"
+    );
+
+  const files =
+    imageInput?.files || [];
+
+  /* =========================
+     Validation
+  ========================= */
+
+  if (!title) {
+
+    alert("請輸入標題");
+
+    return;
+
+  }
 
   if (!message) {
 
-    alert("請輸入 feedback 內容");
-
-    feedbackMessage?.focus();
+    alert("請輸入內容說明");
 
     return;
+
   }
 
   /* =========================
-     Demo Payload
+     Preview Data
   ========================= */
 
   const payload = {
+
     type,
+    title,
     message,
-    email,
-    createdAt:
-      new Date().toISOString()
+    address,
+    hours,
+    tags,
+    contact,
+
+    images:
+      Array.from(files).map(
+        file => file.name
+      )
+
   };
 
   console.log(
@@ -55,34 +121,51 @@ function submitFeedback() {
      Success
   ========================= */
 
-  alert("感謝你的 feedback！");
+  alert(
+    "感謝你的回饋，HeriLand 已收到你的提交。"
+  );
 
-  if (feedbackMessage) {
-    feedbackMessage.value = "";
-  }
-
-  if (feedbackEmail) {
-    feedbackEmail.value = "";
-  }
-
-  if (feedbackType) {
-    feedbackType.value = "issue";
-  }
+  resetFeedbackForm();
 
 }
 
 /* =========================
-   Bind
+   Reset
 ========================= */
 
-function bindFeedback() {
+function resetFeedbackForm() {
 
-  if (!feedbackSubmitBtn) return;
+  document.getElementById(
+    "feedbackType"
+  ).value = "problem";
 
-  feedbackSubmitBtn.addEventListener(
-    "click",
-    submitFeedback
-  );
+  document.getElementById(
+    "feedbackTitle"
+  ).value = "";
+
+  document.getElementById(
+    "feedbackMessage"
+  ).value = "";
+
+  document.getElementById(
+    "feedbackAddress"
+  ).value = "";
+
+  document.getElementById(
+    "feedbackHours"
+  ).value = "";
+
+  document.getElementById(
+    "feedbackTags"
+  ).value = "";
+
+  document.getElementById(
+    "feedbackContact"
+  ).value = "";
+
+  document.getElementById(
+    "feedbackImages"
+  ).value = "";
 
 }
 
@@ -93,37 +176,41 @@ function bindFeedback() {
 function bindMobileMenu() {
 
   const menu =
-    document.querySelector(".mobile-menu");
+    document.querySelector(
+      ".mobile-menu"
+    );
 
   const openBtn =
-    document.getElementById("mobileMenuBtn");
+    document.getElementById(
+      "mobileMenuBtn"
+    );
 
   const closeBtn =
-    document.getElementById("mobileMenuClose");
+    document.getElementById(
+      "mobileMenuClose"
+    );
 
-  if (!menu || !openBtn || !closeBtn) return;
+  if (
+    !menu ||
+    !openBtn ||
+    !closeBtn
+  ) return;
 
-  openBtn.addEventListener("click", () => {
+  openBtn.addEventListener(
+    "click",
+    () => {
 
-    menu.classList.add("show");
+      menu.classList.add("show");
 
-    document.body.style.overflow =
-      "hidden";
+      document.body.style.overflow =
+        "hidden";
 
-  });
+    }
+  );
 
-  closeBtn.addEventListener("click", () => {
-
-    menu.classList.remove("show");
-
-    document.body.style.overflow =
-      "";
-
-  });
-
-  menu.addEventListener("click", e => {
-
-    if (e.target === menu) {
+  closeBtn.addEventListener(
+    "click",
+    () => {
 
       menu.classList.remove("show");
 
@@ -131,24 +218,28 @@ function bindMobileMenu() {
         "";
 
     }
+  );
 
-  });
+  menu.addEventListener(
+    "click",
+    e => {
+
+      if (e.target === menu) {
+
+        menu.classList.remove("show");
+
+        document.body.style.overflow =
+          "";
+
+      }
+
+    }
+  );
 
 }
 
 /* =========================
    Init
-========================= */
-
-function initFeedbackPage() {
-
-  bindFeedback();
-  bindMobileMenu();
-
-}
-
-/* =========================
-   Start
 ========================= */
 
 let pageStarted = false;
@@ -159,7 +250,9 @@ function startPage() {
 
   pageStarted = true;
 
-  console.log("[feedback] init");
+  console.log(
+    "[feedback] init"
+  );
 
   initFeedbackPage();
 
