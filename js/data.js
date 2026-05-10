@@ -60,7 +60,7 @@ export const moodConfig = {
     note: "今天適合先找一個安靜的地方。"
   },
 
-  food: {
+  restaurant: {
     title: "現在適合吃的地方",
     note: "先吃一頓穩的，比急著跑景點更重要。"
   },
