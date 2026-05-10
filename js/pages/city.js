@@ -5,7 +5,7 @@ import {
   foods,
   events,
   reviews
-} from "./data.js";
+} from "../data.js";
 
 let activeCityId = "sibu";
 let showAllSpots = false;
