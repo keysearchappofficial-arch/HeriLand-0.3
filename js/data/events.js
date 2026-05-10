@@ -9,7 +9,7 @@ export const events = [
     location: "Sibu Night Market",
     desc: "適合晚上慢慢逛，吃小吃、看攤位，也感受 Sibu 的夜間生活感。",
     image: img.night,
-    images: gallery(img.night, img.market, img.food)
+    images: gallery(img.night, img.market, img.restaurant)
   },
   {
     id: "sibu-market-morning",
@@ -19,7 +19,7 @@ export const events = [
     location: "Sibu Central Market",
     desc: "從市場早餐開始，比直接跑景點更能進入 Sibu 的日常。",
     image: img.market,
-    images: gallery(img.market, img.food, img.street)
+    images: gallery(img.market, img.restaurant, img.street)
   },
   {
     id: "sibu-river-evening",
