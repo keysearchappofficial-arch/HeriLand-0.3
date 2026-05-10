@@ -3,22 +3,34 @@ import { cities } from "./data/cities.js";
 import { sibuPlaces } from "./data/places-sibu.js";
 import { kuchingPlaces } from "./data/places-kuching.js";
 
-import { sibuFoods } from "./data/foods-sibu.js";
-import { kuchingFoods } from "./data/foods-kuching.js";
+import { sibuRestaurants } from "./data/restaurants-sibu.js";
+import { kuchingRestaurants } from "./data/restaurants-kuching.js";
 
 import { events } from "./data/events.js";
 
 import { reviews } from "./data/reviews.js";
+
+/* =========================
+   Places
+========================= */
 
 export const places = [
   ...sibuPlaces,
   ...kuchingPlaces
 ];
 
-export const foods = [
-  ...sibuFoods,
-  ...kuchingFoods
+/* =========================
+   Restaurants
+========================= */
+
+export const restaurants = [
+  ...sibuRestaurants,
+  ...kuchingRestaurants
 ];
+
+/* =========================
+   Spot Cards
+========================= */
 
 export const spots = places.map(place => ({
   id: place.id,
@@ -28,11 +40,19 @@ export const spots = places.map(place => ({
   image: place.image
 }));
 
+/* =========================
+   Shared
+========================= */
+
 export {
   cities,
   events,
   reviews
 };
+
+/* =========================
+   Mood
+========================= */
 
 export const moodConfig = {
   relax: {
