@@ -1,6 +1,6 @@
 import { img } from "./shared.js";
 
-export const kuchingFoods = [
+export const kuchingrestaurants = [
   {
   id: "kuching-sarawak-laksa",
   city: "kuching",
@@ -17,7 +17,7 @@ export const kuchingFoods = [
   location: "Kuching",
   tag: "#古晉乾麵",
   desc: "Kolo Mee 簡單但很有在地味道，適合放在早餐或午餐路線。",
-  image: img.food
+  image: img.restaurant
 },
 {
   id: "kuching-midin-belacan",
@@ -80,7 +80,7 @@ export const kuchingFoods = [
   location: "Kuching",
   tag: "#乾麵早餐",
   desc: "雖然 Kampua 更常和 Sibu 連在一起，但在 Kuching 也能找到類似乾麵早餐的生活感。",
-  image: img.food
+  image: img.restaurant
 },
 {
   id: "kuching-curry-rice",
@@ -101,12 +101,12 @@ export const kuchingFoods = [
   image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80"
 },
 {
-  id: "kuching-bbq-seafood",
+  id: "kuching-bbq-searestaurant",
   city: "kuching",
-  name: "BBQ Seafood",
+  name: "BBQ Searestaurant",
   location: "Kuching",
   tag: "#晚餐海鮮",
-  desc: "BBQ Seafood 適合搭配 Topspot 或晚餐路線，是 Kuching 晚上很容易出現的選擇。",
+  desc: "BBQ Searestaurant 適合搭配 Topspot 或晚餐路線，是 Kuching 晚上很容易出現的選擇。",
   image: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=900&q=80"
 },
 {
