@@ -2,7 +2,7 @@ import {
   cities,
   places,
   spots,
-  foods,
+  restaurants,
   events,
   reviews
 } from "../data.js";
@@ -33,8 +33,8 @@ function getCitySpots() {
   return spots.filter(item => item.city === activeCityId);
 }
 
-function getCityFoods() {
-  return foods.filter(item => item.city === activeCityId);
+function getCityrestaurants() {
+  return restaurants.filter(item => item.city === activeCityId);
 }
 
 function getCityEvents() {
@@ -59,8 +59,8 @@ function init() {
   bindSpotMore();
   bindSpotSheet();
 
-  bindFoodMore();
-  bindFoodSheet();
+  bindrestaurantMore();
+  bindrestaurantSheet();
 
   bindEventControls();
   bindEventAutoSlide();
@@ -155,7 +155,7 @@ function renderCity(city) {
   if (aiText) aiText.textContent = getCityAi(city);
 
   renderSpots();
-  renderFoods();
+  renderrestaurants();
   renderEvents();
 }
 
@@ -186,22 +186,22 @@ function normalizeSpot(spot) {
   };
 }
 
-function normalizeFood(food) {
+function normalizerestaurant(restaurant) {
   return {
-    ...food,
-    name: food.name || food.title,
-    intro: food.intro || food.desc || "這是一個值得體驗的在地美食。",
-    location: food.location || food.meta || "Sarawak",
-    type: food.type || "美食推薦",
-    address: food.address || food.meta || "Sarawak",
-    phone: food.phone || "尚未提供",
-    hours: food.hours || "建議用餐前確認",
-    contactName: food.contactName || "HeriLand Guide",
-    contactImage: food.contactImage || food.image,
-    score: food.score || "4.8",
-    reviewCount: food.reviewCount || "128",
-    tags: food.tags || ["美食", "在地", "推薦"],
-    services: food.services || [
+    ...restaurant,
+    name: restaurant.name || restaurant.title,
+    intro: restaurant.intro || restaurant.desc || "這是一個值得體驗的在地美食。",
+    location: restaurant.location || restaurant.meta || "Sarawak",
+    type: restaurant.type || "美食推薦",
+    address: restaurant.address || restaurant.meta || "Sarawak",
+    phone: restaurant.phone || "尚未提供",
+    hours: restaurant.hours || "建議用餐前確認",
+    contactName: restaurant.contactName || "HeriLand Guide",
+    contactImage: restaurant.contactImage || restaurant.image,
+    score: restaurant.score || "4.8",
+    reviewCount: restaurant.reviewCount || "128",
+    tags: restaurant.tags || ["美食", "在地", "推薦"],
+    services: restaurant.services || [
       "在地美食推薦",
       "適合加入行程",
       "可直接導航前往"
@@ -447,22 +447,22 @@ function bindSpotMore() {
   });
 }
 
-function renderFoods() {
-  const grid = document.getElementById("foodGrid");
+function renderrestaurants() {
+  const grid = document.getElementById("restaurantGrid");
   if (!grid) return;
 
   grid.innerHTML = "";
 
-  getCityFoods().forEach(rawFood => {
-    const food = normalizeFood(rawFood);
+  getCityrestaurants().forEach(rawrestaurant => {
+    const restaurant = normalizerestaurant(rawrestaurant);
 
     const card = document.createElement("article");
     card.className = "business-card";
-    card.onclick = () => openDetail(food);
+    card.onclick = () => openDetail(restaurant);
 
     card.innerHTML = `
       <div class="business-card-image">
-        <img src="${food.image}" alt="${food.name}">
+        <img src="${restaurant.image}" alt="${restaurant.name}">
 
         <button class="business-save-btn" onclick="event.stopPropagation()">
           ♡
@@ -470,17 +470,17 @@ function renderFoods() {
       </div>
 
       <div class="business-card-body">
-        <h3>${food.name}</h3>
+        <h3>${restaurant.name}</h3>
 
         <div class="business-card-meta">
           <span class="business-stars">★★★★★</span>
-          <span>${food.score}</span>
+          <span>${restaurant.score}</span>
           <span>・</span>
-          <span>${food.reviewCount} 則評論</span>
+          <span>${restaurant.reviewCount} 則評論</span>
         </div>
 
         <div class="business-card-type">
-          ${food.tags?.[0] || food.type}
+          ${restaurant.tags?.[0] || restaurant.type}
         </div>
       </div>
     `;
@@ -489,49 +489,49 @@ function renderFoods() {
   });
 }
 
-function bindFoodMore() {
-  const button = document.getElementById("foodMoreBtn");
+function bindrestaurantMore() {
+  const button = document.getElementById("restaurantMoreBtn");
   if (!button) return;
 
   button.addEventListener("click", () => {
-    openFoodSheet();
+    openrestaurantSheet();
   });
 }
 
-function openFoodSheet() {
-  const sheet = document.getElementById("foodSheet");
+function openrestaurantSheet() {
+  const sheet = document.getElementById("restaurantSheet");
   if (!sheet) return;
 
-  renderFoodSheet();
+  renderrestaurantSheet();
 
   sheet.classList.add("show");
   document.body.style.overflow = "hidden";
 }
 
-function closeFoodSheet() {
-  const sheet = document.getElementById("foodSheet");
+function closerestaurantSheet() {
+  const sheet = document.getElementById("restaurantSheet");
   if (!sheet) return;
 
   sheet.classList.remove("show");
   document.body.style.overflow = "";
 }
 
-function renderFoodSheet() {
-  const grid = document.getElementById("foodSheetGrid");
+function renderrestaurantSheet() {
+  const grid = document.getElementById("restaurantSheetGrid");
   if (!grid) return;
 
   grid.innerHTML = "";
 
-  getCityFoods().forEach(rawFood => {
-    const food = normalizeFood(rawFood);
+  getCityrestaurants().forEach(rawrestaurant => {
+    const restaurant = normalizerestaurant(rawrestaurant);
 
     const card = document.createElement("article");
     card.className = "business-card";
-    card.onclick = () => openDetail(food);
+    card.onclick = () => openDetail(restaurant);
 
     card.innerHTML = `
       <div class="business-card-image">
-        <img src="${food.image}" alt="${food.name}">
+        <img src="${restaurant.image}" alt="${restaurant.name}">
 
         <button class="business-save-btn" onclick="event.stopPropagation()">
           ♡
@@ -539,17 +539,17 @@ function renderFoodSheet() {
       </div>
 
       <div class="business-card-body">
-        <h3>${food.name}</h3>
+        <h3>${restaurant.name}</h3>
 
         <div class="business-card-meta">
           <span class="business-stars">★★★★★</span>
-          <span>${food.score}</span>
+          <span>${restaurant.score}</span>
           <span>・</span>
-          <span>${food.reviewCount} 則評論</span>
+          <span>${restaurant.reviewCount} 則評論</span>
         </div>
 
         <div class="business-card-type">
-          ${food.tags?.[0] || food.type}
+          ${restaurant.tags?.[0] || restaurant.type}
         </div>
       </div>
     `;
@@ -558,16 +558,16 @@ function renderFoodSheet() {
   });
 }
 
-function bindFoodSheet() {
-  const closeBtn = document.getElementById("foodSheetClose");
-  const backdrop = document.getElementById("foodSheetBackdrop");
+function bindrestaurantSheet() {
+  const closeBtn = document.getElementById("restaurantSheetClose");
+  const backdrop = document.getElementById("restaurantSheetBackdrop");
 
   if (closeBtn) {
-    closeBtn.addEventListener("click", closeFoodSheet);
+    closeBtn.addEventListener("click", closerestaurantSheet);
   }
 
   if (backdrop) {
-    backdrop.addEventListener("click", closeFoodSheet);
+    backdrop.addEventListener("click", closerestaurantSheet);
   }
 }
 
