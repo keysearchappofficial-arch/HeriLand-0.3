@@ -34,3 +34,11 @@ export function gallery(main) {
     img.nature
   ];
 }
+
+export const guide = {
+  default: "HeriLand Guide",
+  food: "Food Guide",
+  culture: "Culture Guide",
+  nature: "Nature Guide",
+  local: "Local Guide"
+};
