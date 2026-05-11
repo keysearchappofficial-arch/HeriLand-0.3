@@ -6,6 +6,36 @@ const savedPlaces = getItems("saved");
 const myTrip = getItems("trip");
 const recentlyViewed = getItems("recent");
 
+function getSavedPlaces() {
+  return getItems("saved");
+}
+
+function getMyTrip() {
+  return getItems("trip");
+}
+
+function getRecentlyViewed() {
+  return getItems("recent");
+}
+
+function updateMyCounts() {
+  const savedCount = getSavedPlaces().length;
+  const tripCount = getMyTrip().length;
+  const recentCount = getRecentlyViewed().length;
+
+  setText("savedCount", savedCount);
+  setText("tripCount", tripCount);
+  setText("recentCount", recentCount);
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+
+  if (el) {
+    el.textContent = value;
+  }
+}
+
 /* =========================
    Init
 ========================= */
@@ -18,6 +48,8 @@ function init() {
   renderSavedSheet();
   renderTripSheet();
   renderRecentSheet();
+
+  updateMyCounts();
 }
 
 function bindMyViews() {
