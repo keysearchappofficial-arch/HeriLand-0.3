@@ -45,8 +45,8 @@ async function renderMobileMenu() {
         <div class="mobile-menu-top">
 
           <div>
-            <small>HeriLand</small>
-            <h2>Menu</h2>
+            <small>Explore</small>
+            <h2>HeriLand</h2>
           </div>
 
           <button
