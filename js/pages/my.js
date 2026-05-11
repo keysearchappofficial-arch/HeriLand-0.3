@@ -2,6 +2,34 @@ import {
   getItems
 } from "../storage.js";
 
+import {
+  places,
+  restaurants
+} from "../data.js";
+
+function findFullItem(item) {
+  const allItems = [
+    ...places,
+    ...restaurants
+  ];
+
+  return (
+    allItems.find(source => source.id === item.id) ||
+    item
+  );
+}
+
+function openStoredItem(item) {
+  const fullItem = findFullItem(item);
+
+  localStorage.setItem(
+    "heriland_open_detail_item",
+    JSON.stringify(fullItem)
+  );
+
+  window.location.href = "./index.html?openDetail=1";
+}
+
 function getSavedPlaces() {
   return getItems("saved");
 }
@@ -46,6 +74,8 @@ function init() {
   renderRecentSheet();
 
   updateMyCounts();
+
+  openPendingDetail();
 }
 
 function bindMyViews() {
@@ -356,6 +386,10 @@ function renderSavedSheet() {
       </div>
     `;
 
+    card.addEventListener("click", () => {
+  openStoredItem(place);
+});
+
     grid.appendChild(card);
   });
 }
@@ -406,6 +440,10 @@ function renderTripSheet() {
         ${plan.address || plan.type || ""}
       </p>
     `;
+
+    card.addEventListener("click", () => {
+  openStoredItem(plan);
+});
 
     grid.appendChild(card);
   });
@@ -476,6 +514,10 @@ function renderRecentSheet() {
       </div>
     `;
 
+    row.addEventListener("click", () => {
+  openStoredItem(item);
+});
+
     list.appendChild(row);
   });
 }
@@ -497,6 +539,30 @@ function getItemLabel(item) {
 
   return "Place";
 
+}
+
+function openPendingDetail() {
+  const params =
+    new URLSearchParams(window.location.search);
+
+  if (params.get("openDetail") !== "1") return;
+
+  const raw =
+    localStorage.getItem("heriland_open_detail_item");
+
+  if (!raw) return;
+
+  try {
+    const item = JSON.parse(raw);
+
+    setTimeout(() => {
+      openDetail(item);
+      localStorage.removeItem("heriland_open_detail_item");
+    }, 300);
+  }
+  catch {
+    localStorage.removeItem("heriland_open_detail_item");
+  }
 }
 
 /* =========================
