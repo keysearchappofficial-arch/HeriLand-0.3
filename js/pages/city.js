@@ -294,6 +294,7 @@ window.closeEventDetail = closeEventDetail;
 
 function openDetail(place) {
   addRecent(place);
+
   if (!place) return;
 
   const detailPage =
@@ -306,26 +307,39 @@ function openDetail(place) {
     name: place.name || place.title || "Untitled Place",
     image: place.image || "",
     address: place.address || place.location || place.meta || "Sarawak",
-phone: place.phone || "Not Available",
-hours: place.hours || "Check Before Visiting",
+    phone: place.phone || "Not Available",
+    hours: place.hours || "Check Before Visiting",
     contactName: place.contactName || "HeriLand Guide",
     contactImage: place.contactImage || place.image || "",
-intro:
-  place.intro ||
-  place.desc ||
-  place.reason ||
-  place.guide ||
-  "A place worth staying awhile.",
-type: place.type || place.tags?.[0] || "Recommended Place",
-    area: place.area || place.location || place.meta || "Sarawak",
+    intro:
+      place.intro ||
+      place.desc ||
+      place.reason ||
+      place.guide ||
+      "A place worth staying awhile.",
+    type:
+      place.type ||
+      place.food ||
+      place.tags?.[0] ||
+      "Recommended Place",
+    area:
+      place.area ||
+      place.city ||
+      place.location ||
+      place.meta ||
+      "Sarawak",
     score: place.score || "4.8",
     reviewCount: place.reviewCount || "128",
-tags: place.tags || ["Slow Travel", "Photo Friendly", "Recommended"],
-services: place.services || [
-  "Good for photos and slow visits",
-  "Can be added to your trip",
-  "Navigation available"
-]
+    tags:
+      place.tags ||
+      ["Slow Travel", "Photo Friendly", "Recommended"],
+    services:
+      place.services ||
+      [
+        "Good for photos and slow visits",
+        "Can be added to your trip",
+        "Navigation available"
+      ]
   };
 
   setText("detailTitle", normalized.name);
@@ -338,10 +352,7 @@ services: place.services || [
   setText("detailType", normalized.type);
   setText("detailArea", normalized.area);
   setText("detailScore", normalized.score);
-  setText(
-    "detailReviewCount",
-    `${normalized.reviewCount} Reviews`
-  );
+  setText("detailReviewCount", `${normalized.reviewCount} Reviews`);
   setText("detailAiNote", normalized.intro);
 
   const image =
@@ -364,23 +375,64 @@ services: place.services || [
     document.getElementById("detailServices");
 
   if (list) {
-    list.innerHTML = normalized.services
-      .map(service => `<li>${service}</li>`)
-      .join("");
+    list.innerHTML =
+      normalized.services
+        .map(service => `<li>${service}</li>`)
+        .join("");
   }
 
   const aiTags =
     document.getElementById("detailAiTags");
 
   if (aiTags) {
-    aiTags.innerHTML = normalized.tags
-      .slice(0, 5)
-      .map(tag => `<span>${tag}</span>`)
-      .join("");
+    aiTags.innerHTML =
+      normalized.tags
+        .slice(0, 5)
+        .map(tag => `<span>${tag}</span>`)
+        .join("");
   }
+
+  bindDetailActions(normalized);
 
   detailPage.classList.add("show");
   document.body.style.overflow = "hidden";
+}
+
+function bindDetailActions(item) {
+  const saveBtn =
+    document.getElementById("detailSaveBtn");
+
+  const addTripBtn =
+    document.getElementById("addTripBtn");
+
+  if (saveBtn) {
+    saveBtn.textContent =
+      isSaved("saved", item.id) ? "♥" : "♡";
+
+    saveBtn.onclick = () => {
+      if (isSaved("saved", item.id)) {
+        removeItem("saved", item.id);
+      }
+      else {
+        saveItem("saved", item);
+      }
+
+      saveBtn.textContent =
+        isSaved("saved", item.id) ? "♥" : "♡";
+
+      renderSpots();
+      renderRestaurants();
+      renderSpotSheet();
+      renderRestaurantSheet();
+    };
+  }
+
+  if (addTripBtn) {
+    addTripBtn.onclick = () => {
+      saveItem("trip", item);
+      alert("Added to My Trip");
+    };
+  }
 }
 
 function closeDetail() {
@@ -423,9 +475,12 @@ function renderSpots() {
       <div class="business-card-image">
         <img src="${spot.image}" alt="${spot.name}">
 
-        <button class="business-save-btn" onclick="event.stopPropagation()">
-          ♡
-        </button>
+<button
+  class="business-save-btn"
+  onclick="event.stopPropagation(); window.toggleCitySaveItem('${spot.id}')"
+>
+  ${isSaved("saved", spot.id) ? "♥" : "♡"}
+</button>
       </div>
 
       <div class="business-card-body">
@@ -476,9 +531,12 @@ getCityRestaurants()
       <div class="business-card-image">
         <img src="${restaurant.image}" alt="${restaurant.name}">
 
-        <button class="business-save-btn" onclick="event.stopPropagation()">
-          ♡
-        </button>
+<button
+  class="business-save-btn"
+  onclick="event.stopPropagation(); window.toggleCitySaveItem('${restaurant.id}')"
+>
+  ${isSaved("saved", restaurant.id) ? "♥" : "♡"}
+</button>
       </div>
 
       <div class="business-card-body">
@@ -819,6 +877,28 @@ function bindSpotSheet() {
     backdrop.addEventListener("click", closeSpotSheet);
   }
 }
+
+const allCityItems = [
+  ...places,
+  ...restaurants
+];
+
+window.toggleCitySaveItem = function(id) {
+  const item =
+    allCityItems.find(x => x.id === id);
+
+  if (!item) return;
+
+  if (isSaved("saved", id)) {
+    removeItem("saved", id);
+  }
+  else {
+    saveItem("saved", item);
+  }
+
+  renderSpots();
+  renderRestaurants();
+};
 
 let pageStarted = false;
 
