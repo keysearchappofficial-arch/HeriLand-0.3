@@ -176,3 +176,16 @@
 .nav-dropdown-menu a:hover {
   background: rgba(0,0,0,.05);
 }
+
+/* =========================
+   Hide Mobile Top On Desktop
+========================= */
+
+@media (min-width: 821px) {
+
+  .mobile-top,
+  .mobile-menu {
+    display: none !important;
+  }
+
+}
