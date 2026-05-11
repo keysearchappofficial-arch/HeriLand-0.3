@@ -15,16 +15,22 @@
   align-items: center;
   justify-content: center;
 
-  border: none;
+  border: 1px solid rgba(255,255,255,.26);
   border-radius: 999px;
 
-  background: #111;
-  color: white;
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+
+  color: #FFFFFF;
 
   font-size: 22px;
 
   box-shadow:
-    0 12px 30px rgba(0,0,0,.18);
+    0 18px 42px rgba(15,30,26,.22);
 
   z-index: 2000;
 
@@ -62,7 +68,7 @@
   position: absolute;
   inset: 0;
 
-  background: rgba(0,0,0,.28);
+  background: rgba(15,30,26,.28);
 }
 
 /* =========================
@@ -78,7 +84,7 @@
 
   height: min(78dvh, 720px);
 
-  background: #f6f5f1;
+  background: var(--bg);
 
   border-radius: 30px 30px 0 0;
 
@@ -109,7 +115,7 @@
 
   border-radius: 999px;
 
-  background: rgba(0,0,0,.14);
+  background: rgba(29,92,79,.2);
 
   margin: 0 auto 18px;
 }
@@ -127,7 +133,7 @@
 }
 
 .ai-guide-head small {
-  color: #888;
+  color: var(--primary);
 
   font-size: 11px;
   font-weight: 800;
@@ -139,6 +145,8 @@
 .ai-guide-head h2 {
   margin-top: 6px;
 
+  color: var(--text);
+
   font-size: 34px;
   line-height: 1;
 
@@ -149,10 +157,12 @@
   width: 40px;
   height: 40px;
 
-  border: none;
+  border: 1px solid var(--line);
   border-radius: 12px;
 
   background: rgba(255,255,255,.78);
+
+  color: var(--primary-dark);
 
   font-size: 26px;
 
@@ -186,9 +196,10 @@
 
   border-radius: 20px 20px 20px 6px;
 
-  background: rgba(255,255,255,.82);
+  background: rgba(255,255,255,.84);
+  border: 1px solid var(--line);
 
-  color: #222;
+  color: var(--text);
 
   font-size: 15px;
   line-height: 1.7;
@@ -208,14 +219,14 @@
 }
 
 .guide-chip-group button {
-  border: none;
+  border: 1px solid var(--line);
   border-radius: 999px;
 
   padding: 12px 14px;
 
   background: rgba(255,255,255,.78);
 
-  color: #333;
+  color: var(--primary-dark);
 
   font-size: 13px;
   font-weight: 700;
@@ -225,16 +236,20 @@
   transition:
     background .18s ease,
     color .18s ease,
+    border-color .18s ease,
     transform .18s ease;
 }
 
 .guide-chip-group button:hover {
   transform: translateY(-1px);
+  border-color: rgba(29,92,79,.24);
+  color: var(--primary);
 }
 
 .guide-chip-group button.active {
-  background: #111;
-  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #FFFFFF;
 }
 
 /* =========================
@@ -270,8 +285,8 @@
   background:
     linear-gradient(
       to right,
-      #f6f5f1,
-      rgba(246,245,241,0)
+      var(--bg),
+      rgba(243,246,244,0)
     );
 }
 
@@ -281,8 +296,8 @@
   background:
     linear-gradient(
       to left,
-      #f6f5f1,
-      rgba(246,245,241,0)
+      var(--bg),
+      rgba(243,246,244,0)
     );
 }
 
@@ -323,24 +338,28 @@
   overflow: hidden;
 
   background: rgba(255,255,255,.9);
+  border: 1px solid var(--line);
 
   scroll-snap-align: start;
 
   cursor: pointer;
 
   box-shadow:
-    0 12px 28px rgba(0,0,0,.08);
+    0 14px 32px rgba(15,30,26,.08);
 
   transition:
     transform .18s ease,
+    border-color .18s ease,
     box-shadow .18s ease;
 }
 
 .ai-guide-result-card:hover {
   transform: translateY(-2px);
 
+  border-color: rgba(29,92,79,.22);
+
   box-shadow:
-    0 18px 34px rgba(0,0,0,.12);
+    0 20px 42px rgba(15,30,26,.12);
 }
 
 .ai-guide-result-card img {
@@ -359,7 +378,7 @@
 
   margin-bottom: 7px;
 
-  color: #888;
+  color: var(--primary);
 
   font-size: 11px;
   font-weight: 800;
@@ -371,6 +390,8 @@
 .ai-guide-result-card h3 {
   margin: 0 0 8px;
 
+  color: var(--text);
+
   font-size: 17px;
   line-height: 1.25;
 }
@@ -378,7 +399,7 @@
 .ai-guide-result-card p {
   margin: 0;
 
-  color: #666;
+  color: var(--muted);
 
   font-size: 13px;
   line-height: 1.55;
@@ -400,11 +421,11 @@
   align-items: center;
   justify-content: center;
 
-  border: none;
+  border: 1px solid rgba(255,255,255,.28);
   border-radius: 999px;
 
-  background: rgba(17,17,17,.92);
-  color: #fff;
+  background: rgba(22,70,60,.94);
+  color: #FFFFFF;
 
   font-size: 16px;
   font-weight: 900;
@@ -414,17 +435,20 @@
   transform: translateY(-50%);
 
   box-shadow:
-    0 10px 24px rgba(0,0,0,.18);
+    0 12px 26px rgba(15,30,26,.2);
 
   transition:
     transform .18s ease,
-    opacity .18s ease;
+    opacity .18s ease,
+    background .18s ease;
 }
 
 .ai-guide-result-arrow:hover {
   transform:
     translateY(-50%)
     scale(1.04);
+
+  background: var(--primary);
 }
 
 .ai-guide-result-arrow.left {
@@ -452,7 +476,7 @@
 
   height: 56px;
 
-  border: none;
+  border: 1px solid var(--line);
   outline: none;
 
   padding: 0 18px;
@@ -461,7 +485,19 @@
 
   background: rgba(255,255,255,.84);
 
+  color: var(--text);
+
   font-size: 15px;
+
+  box-shadow:
+    0 8px 24px rgba(15,30,26,.04);
+}
+
+.ai-guide-input input:focus {
+  border-color: var(--primary-hover);
+
+  box-shadow:
+    0 0 0 4px rgba(42,117,101,.12);
 }
 
 .ai-guide-input button {
@@ -471,12 +507,19 @@
   border: none;
   border-radius: 999px;
 
-  background: #111;
-  color: white;
+  background: var(--primary);
+  color: #FFFFFF;
 
   font-size: 20px;
 
   cursor: pointer;
+
+  box-shadow:
+    0 12px 28px rgba(15,30,26,.16);
+}
+
+.ai-guide-input button:hover {
+  background: var(--primary-hover);
 }
 
 /* =========================
@@ -503,6 +546,11 @@
     bottom: 22px;
 
     border-radius: 30px;
+
+    border: 1px solid rgba(220,231,226,.9);
+
+    box-shadow:
+      0 24px 70px rgba(15,30,26,.16);
 
     transform:
       translateY(20px)
