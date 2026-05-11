@@ -1,3 +1,12 @@
+import {
+  getItems
+} from "../storage.js";
+
+const savedPlaces = getItems("saved");
+const myTrip = getItems("trip");
+const recentlyViewed = getItems("recent");
+
+
 /* =========================
    Mock Data
 ========================= */
