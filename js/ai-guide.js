@@ -76,7 +76,7 @@ export function initAiGuide() {
       ).slice(0, 8);
     }
 
-    renderCards(items, "目前還沒有推薦內容。");
+    renderCards(items, "No recommendations yet.");
   }
 
   function searchGuide(keyword) {
@@ -107,10 +107,10 @@ export function initAiGuide() {
       );
     });
 
-    renderCards(
-      results.slice(0, 10),
-      `找不到「${keyword}」相關推薦。`
-    );
+renderCards(
+  results.slice(0, 10),
+  `No recommendations found for “${keyword}”.`
+);
   }
 
   function renderCards(items, emptyText) {
@@ -143,15 +143,15 @@ export function initAiGuide() {
           </small>
 
           <h3>
-            ${item.name || "未命名推薦"}
+            ${item.name || "Untitled Recommendation"}
           </h3>
 
           <p>
             ${truncateText(
-              item.intro ||
-              item.desc ||
-              item.title ||
-              "適合慢慢探索的地方。",
+item.intro ||
+item.desc ||
+item.title ||
+"A place worth exploring slowly.",
               58
             )}
           </p>
@@ -208,12 +208,12 @@ export function initAiGuide() {
 
 function formatMeta(item) {
   const city = item.city || "Sarawak";
-  const type =
-    item.food ||
-    item.moodLabel ||
-    item.category ||
-    item.tags?.[0] ||
-    "推薦";
+const type =
+  item.food ||
+  item.moodLabel ||
+  item.category ||
+  item.tags?.[0] ||
+  "Recommended";
 
   return `${city} · ${type}`;
 }
