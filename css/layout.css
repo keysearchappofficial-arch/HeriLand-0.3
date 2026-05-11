@@ -189,3 +189,60 @@
   }
 
 }
+
+/* =========================
+   Fixed Top Navigation
+========================= */
+
+.desktop-top,
+.mobile-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1500;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  background: rgba(246, 245, 241, .82);
+
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* Desktop spacing */
+@media (min-width: 821px) {
+
+  .desktop-top {
+    height: 74px;
+  }
+
+  .page-container {
+    padding-top: 74px;
+  }
+
+  .mobile-top {
+    display: none !important;
+  }
+
+}
+
+/* Mobile spacing */
+@media (max-width: 820px) {
+
+  .mobile-top {
+    height: calc(68px + env(safe-area-inset-top));
+
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .page-container {
+    padding-top: calc(68px + env(safe-area-inset-top));
+  }
+
+  .desktop-top {
+    display: none !important;
+  }
+
+}
