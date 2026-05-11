@@ -789,29 +789,42 @@ function openDetail(place) {
     contactName: place.contactName || "HeriLand Guide",
     contactImage: place.contactImage || place.image || "",
     images:
-  place.images ||
-  [
-    place.image,
-    place.image2,
-    place.image3,
-    place.image4
-  ].filter(Boolean),
-intro:
-  place.intro ||
-  place.desc ||
-  place.reason ||
-  place.guide ||
-  "A place worth staying awhile.",
-type: place.type || place.tags?.[0] || "Recommended Place",
-    area: place.area || place.location || place.meta || "Sarawak",
+      place.images ||
+      [
+        place.image,
+        place.image2,
+        place.image3,
+        place.image4
+      ].filter(Boolean),
+    intro:
+      place.intro ||
+      place.desc ||
+      place.reason ||
+      place.guide ||
+      "A place worth staying awhile.",
+    type:
+      place.type ||
+      place.food ||
+      place.tags?.[0] ||
+      "Recommended Place",
+    area:
+      place.area ||
+      place.city ||
+      place.location ||
+      place.meta ||
+      "Sarawak",
     score: place.score || "4.8",
     reviewCount: place.reviewCount || "128",
-tags: place.tags || ["Slow Travel", "Photo Friendly", "Recommended"],
-services: place.services || [
-  "Good for photos and slow visits",
-  "Can be added to your trip",
-  "Navigation available"
-]
+    tags:
+      place.tags ||
+      ["Slow Travel", "Photo Friendly", "Recommended"],
+    services:
+      place.services ||
+      [
+        "Good for photos and slow visits",
+        "Can be added to your trip",
+        "Navigation available"
+      ]
   };
 
   setText("detailTitle", normalized.name);
@@ -827,18 +840,10 @@ services: place.services || [
   setText("detailReviewCount", `${normalized.reviewCount} Reviews`);
   setText("detailAiNote", normalized.intro);
 
-  
-  const contactImage = document.getElementById("detailContactImage");
-
-renderDetailSlider(
-  normalized.images || [normalized.image].filter(Boolean),
-  normalized.name
-);
-
-  if (contactImage) {
-    contactImage.src = normalized.contactImage;
-    contactImage.alt = normalized.contactName;
-  }
+  renderDetailSlider(
+    normalized.images || [normalized.image].filter(Boolean),
+    normalized.name
+  );
 
   const list = document.getElementById("detailServices");
 
@@ -857,57 +862,35 @@ renderDetailSlider(
       .join("");
   }
 
-const addTripBtn = document.getElementById("addTripBtn");
+  const addTripBtn = document.getElementById("addTripBtn");
 
-  const detailSaveBtn =
-  document.getElementById("detailSaveBtn");
+  if (addTripBtn) {
+    addTripBtn.onclick = () => {
+      saveItem("trip", normalized);
+      alert("Added to My Trip");
+    };
+  }
 
-if (detailSaveBtn) {
+  const detailSaveBtn = document.getElementById("detailSaveBtn");
 
-  detailSaveBtn.textContent =
-    isSaved("saved", normalized.id)
-      ? "♥"
-      : "♡";
-
-  detailSaveBtn.onclick = () => {
-
-    if (isSaved("saved", normalized.id)) {
-
-      removeItem(
-        "saved",
-        normalized.id
-      );
-
-    }
-
-    else {
-
-      saveItem(
-        "saved",
-        normalized
-      );
-
-    }
-
+  if (detailSaveBtn) {
     detailSaveBtn.textContent =
-      isSaved("saved", normalized.id)
-        ? "♥"
-        : "♡";
+      isSaved("saved", normalized.id) ? "♥" : "♡";
 
-    renderMood(currentMood);
-    renderSpots();
-    renderRestaurants();
+    detailSaveBtn.onclick = () => {
+      if (isSaved("saved", normalized.id)) {
+        removeItem("saved", normalized.id);
+      }
+      else {
+        saveItem("saved", normalized);
+      }
 
-  };
+      detailSaveBtn.textContent =
+        isSaved("saved", normalized.id) ? "♥" : "♡";
 
-}
-
-if (addTripBtn) {
-  addTripBtn.onclick = () => {
-    saveItem("trip", normalized);
-    alert("已加入 My Trip");
-  };
-}
+      updateSaveButtons(normalized.id);
+    };
+  }
 
   els.detailPage.classList.add("show");
   document.body.style.overflow = "hidden";
@@ -1027,8 +1010,8 @@ function bindSearch() {
       }
 
 const searchableItems = [
-  ...places,
-  ...restaurants
+  ...getFilteredPlaces(),
+  ...getFilteredRestaurants()
 ];
 
 const result =
@@ -1297,6 +1280,19 @@ function bindCitySelects() {
         els.mobileCitySelect.value = activeCityId;
       }
 
+      const city =
+        cities.find(item => item.id === activeCityId);
+
+      if (city) {
+        if (els.heroImage) {
+          els.heroImage.src = city.image;
+        }
+
+        if (els.heroTitle) {
+          els.heroTitle.textContent = city.name;
+        }
+      }
+
       renderMood(currentMood);
       renderSpots();
       renderRestaurants();
@@ -1358,7 +1354,19 @@ window.toggleSaveItem = function(id) {
     saveItem("saved", item);
   }
 
-  renderMood?.(currentMood);
-  renderSpots?.();
-  renderRestaurants?.();
+  updateSaveButtons(id);
 };
+
+function updateSaveButtons(id) {
+  document
+    .querySelectorAll(".business-save-btn")
+    .forEach(btn => {
+      const onclick =
+        btn.getAttribute("onclick") || "";
+
+      if (!onclick.includes(id)) return;
+
+      btn.textContent =
+        isSaved("saved", id) ? "♥" : "♡";
+    });
+}
