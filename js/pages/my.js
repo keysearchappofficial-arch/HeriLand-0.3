@@ -1,4 +1,8 @@
 import {
+  loadMarkdownContent
+} from "../md-loader.js";
+
+import {
   getItems,
   saveItem,
   removeItem,
@@ -72,6 +76,8 @@ function init() {
   renderRecentSheet();
 
   updateMyCounts();
+  
+  loadMarkdownContent();
 
 }
 
