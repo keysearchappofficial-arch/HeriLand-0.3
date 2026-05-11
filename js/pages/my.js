@@ -1,5 +1,9 @@
 import {
-  getItems
+  getItems,
+  saveItem,
+  removeItem,
+  isSaved,
+  addRecent
 } from "../storage.js";
 
 import {
@@ -21,13 +25,7 @@ function findFullItem(item) {
 
 function openStoredItem(item) {
   const fullItem = findFullItem(item);
-
-  localStorage.setItem(
-    "heriland_open_detail_item",
-    JSON.stringify(fullItem)
-  );
-
-  window.location.href = "./index.html?openDetail=1";
+  openDetail(fullItem);
 }
 
 function getSavedPlaces() {
@@ -539,6 +537,258 @@ function getItemLabel(item) {
   return "Place";
 
 }
+
+function openDetail(place) {
+  addRecent(place);
+
+  const detailPage =
+    document.getElementById("detailPage");
+
+  if (!place || !detailPage) return;
+
+  const normalized = {
+    ...place,
+
+    name:
+      place.name ||
+      place.title ||
+      "Untitled Place",
+
+    image:
+      place.image ||
+      "",
+
+    address:
+      place.address ||
+      place.location ||
+      place.meta ||
+      "Sarawak",
+
+    phone:
+      place.phone ||
+      "Not Available",
+
+    hours:
+      place.hours ||
+      "Check Before Visiting",
+
+    contactName:
+      place.contactName ||
+      "HeriLand Guide",
+
+    contactImage:
+      place.contactImage ||
+      place.image ||
+      "",
+
+    images:
+      place.images ||
+      [
+        place.image,
+        place.image2,
+        place.image3,
+        place.image4
+      ].filter(Boolean),
+
+    intro:
+      place.intro ||
+      place.desc ||
+      place.reason ||
+      place.guide ||
+      "A place worth staying awhile.",
+
+    type:
+      place.type ||
+      place.food ||
+      place.tags?.[0] ||
+      "Recommended Place",
+
+    area:
+      place.area ||
+      place.city ||
+      place.location ||
+      place.meta ||
+      "Sarawak",
+
+    score:
+      place.score ||
+      "4.8",
+
+    reviewCount:
+      place.reviewCount ||
+      "128",
+
+    tags:
+      place.tags ||
+      [
+        "Slow Travel",
+        "Photo Friendly",
+        "Recommended"
+      ],
+
+    services:
+      place.services ||
+      [
+        "Good for photos and slow visits",
+        "Can be added to your trip",
+        "Navigation available"
+      ]
+  };
+
+  setText("detailTitle", normalized.name);
+  setText("detailAddress", normalized.address);
+  setText("detailPhone", normalized.phone);
+  setText("detailHours", normalized.hours);
+  setText("detailIntro", normalized.intro);
+
+  setText("detailType", normalized.type);
+  setText("detailArea", normalized.area);
+  setText("detailScore", normalized.score);
+  setText(
+    "detailReviewCount",
+    `${normalized.reviewCount} Reviews`
+  );
+  setText("detailAiNote", normalized.intro);
+
+  renderDetailSlider(
+    normalized.images ||
+    [normalized.image].filter(Boolean),
+    normalized.name
+  );
+
+  const list =
+    document.getElementById("detailServices");
+
+  if (list) {
+    list.innerHTML =
+      normalized.services
+        .map(service => `<li>${service}</li>`)
+        .join("");
+  }
+
+  bindDetailActions(normalized);
+
+  detailPage.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeDetail() {
+  const detailPage =
+    document.getElementById("detailPage");
+
+  if (!detailPage) return;
+
+  detailPage.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+function renderDetailSlider(images, altText) {
+  const slider =
+    document.getElementById("detailSlider");
+
+  const dots =
+    document.getElementById("detailDots");
+
+  if (!slider || !dots) return;
+
+  const list =
+    images && images.length
+      ? images
+      : [
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+        ];
+
+  slider.innerHTML = "";
+  dots.innerHTML = "";
+
+  list.forEach((src, index) => {
+    const slide =
+      document.createElement("div");
+
+    slide.className = "detail-slide";
+
+    slide.innerHTML = `
+      <img src="${src}" alt="${altText}">
+    `;
+
+    slider.appendChild(slide);
+
+    const dot =
+      document.createElement("button");
+
+    dot.className =
+      `detail-dot ${index === 0 ? "active" : ""}`;
+
+    dot.type = "button";
+
+    dot.onclick = () => {
+      slider.scrollTo({
+        left: slider.clientWidth * index,
+        behavior: "smooth"
+      });
+    };
+
+    dots.appendChild(dot);
+  });
+
+  slider.onscroll = () => {
+    const current =
+      Math.round(
+        slider.scrollLeft /
+        slider.clientWidth
+      );
+
+    dots
+      .querySelectorAll(".detail-dot")
+      .forEach((dot, i) => {
+        dot.classList.toggle(
+          "active",
+          i === current
+        );
+      });
+  };
+}
+
+function bindDetailActions(item) {
+  const saveBtn =
+    document.getElementById("detailSaveBtn");
+
+  const addTripBtn =
+    document.getElementById("addTripBtn");
+
+  if (saveBtn) {
+    saveBtn.textContent =
+      isSaved("saved", item.id) ? "♥" : "♡";
+
+    saveBtn.onclick = () => {
+      if (isSaved("saved", item.id)) {
+        removeItem("saved", item.id);
+      }
+      else {
+        saveItem("saved", item);
+      }
+
+      saveBtn.textContent =
+        isSaved("saved", item.id) ? "♥" : "♡";
+
+      renderSavedSheet();
+      updateMyCounts();
+    };
+  }
+
+  if (addTripBtn) {
+    addTripBtn.onclick = () => {
+      saveItem("trip", item);
+
+      renderTripSheet();
+      updateMyCounts();
+
+      alert("Added to My Trip");
+    };
+  }
+}
+
+window.closeDetail = closeDetail;
 
 /* =========================
    Start
