@@ -6,28 +6,28 @@ const savedPlaces = [
 
   {
     title: "Kuching Waterfront",
-    desc: "適合傍晚慢慢散步和看河景。",
+    desc: "A good place for an evening walk and river views.",
     image:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
   },
 
   {
     title: "Santubong Beach",
-    desc: "比較安靜的海邊，很適合放空。",
+    desc: "A quieter beach, perfect for slowing down.",
     image:
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
   },
 
   {
     title: "Old Town Street",
-    desc: "適合慢慢逛和拍照的老街。",
+    desc: "An old street for slow walks and photos.",
     image:
       "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
   },
 
   {
     title: "Sarawak River",
-    desc: "晚上氣氛很舒服的河邊。",
+    desc: "A riverside spot with a relaxing night atmosphere.",
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
   }
@@ -38,8 +38,8 @@ const tripPlans = [
 
   {
     title: "Kuching Weekend",
-    desc:
-      "河邊散步、美食和比較慢的週末節奏。",
+desc:
+  "River walks, local food, and a slower weekend rhythm.",
 
     meta:
       ["2 Days", "Food", "Relax"]
@@ -47,8 +47,8 @@ const tripPlans = [
 
   {
     title: "Miri Sunset Trip",
-    desc:
-      "看海、夕陽和比較自然的旅行方式。",
+desc:
+  "Sea views, sunsets, and a more natural way to travel.",
 
     meta:
       ["3 Days", "Beach", "Sunset"]
@@ -56,8 +56,8 @@ const tripPlans = [
 
   {
     title: "Sarawak Food Route",
-    desc:
-      "專門找 Laksa、Kolo Mee 和在地早餐。",
+desc:
+  "A route for Laksa, Kolo Mee, and local breakfast spots.",
 
     meta:
       ["Food", "Local", "Cafe"]
