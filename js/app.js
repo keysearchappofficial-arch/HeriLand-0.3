@@ -115,11 +115,11 @@ function renderPlaces(items) {
           <span class="business-stars">★★★★★</span>
           <span>${place.score || "4.8"}</span>
           <span>・</span>
-          <span>${place.reviewCount || "128"} 則評論</span>
+          <span>${place.reviewCount || "128"} Reviews</span>
         </div>
 
         <div class="business-card-type">
-          ${(place.tags?.[0]) || place.type || "推薦地點"}
+          ${(place.tags?.[0]) || place.type || "Recommended Place"}
         </div>
 
       </div>
@@ -237,11 +237,11 @@ function renderSpots() {
       <span class="business-stars">★★★★★</span>
       <span>${spot.score || "4.8"}</span>
       <span>・</span>
-      <span>${spot.reviewCount || "128"} 則評論</span>
+      <span>${spot.reviewCount || "128"} Reviews</span>
     </div>
 
 <div class="business-card-type">
-  ${(spot.tags?.[0]) || spot.type || spot.location || "景點推薦"}
+  ${(spot.tags?.[0]) || spot.type || spot.location || "Attraction"}
 </div>
 
   </div>
@@ -314,11 +314,11 @@ function renderRestaurants() {
       <span class="business-stars">★★★★★</span>
       <span>${restaurant.score || "4.8"}</span>
       <span>・</span>
-      <span>${restaurant.reviewCount || "128"} 則評論</span>
+      <span>${restaurant.reviewCount || "128"} Reviews</span>
     </div>
 
 <div class="business-card-type">
-  ${restaurant.food || restaurant.tags?.[0] || restaurant.type || "餐廳推薦"}
+  ${restaurant.food || restaurant.tags?.[0] || restaurant.type || "Restaurant"}
 </div>
 
   </div>
@@ -382,14 +382,14 @@ card.innerHTML = `
 
   <div class="event-card-body">
     <div class="event-card-meta">
-      <span>${event.day || event.date || "近期"}</span>
-      <span>${event.timeText || event.hour || "時間未定"}</span>
+<span>${event.day || event.date || "Upcoming"}</span>
+<span>${event.timeText || event.hour || "Time TBC"}</span>
     </div>
 
     <h3 class="event-card-title">${event.title}</h3>
 
     <p class="event-card-desc">
-      ${event.desc || event.location || "適合慢慢探索的活動。"}
+      ${event.desc || event.location || "An event worth exploring slowly."}
     </p>
   </div>
 `;
@@ -447,19 +447,19 @@ images:
     review.image4
   ].filter(Boolean),
 
-    achievement:
-      review.achievement ||
-      `探索了 ${review.cityCount || 12} 個城市 ・ ${review.storyCount || 28} 篇旅程`,
+achievement:
+  review.achievement ||
+  `Explored ${review.cityCount || 12} Cities ・ ${review.storyCount || 28} Stories`,
 
-    title:
-      review.title ||
-      "一段慢慢走出來的旅程",
+title:
+  review.title ||
+  "A Journey Taken Slowly",
 
-    story:
-      review.story ||
-      review.description ||
-      review.desc ||
-      "這段旅程不是為了趕景點，而是慢慢感受城市的節奏。",
+story:
+  review.story ||
+  review.description ||
+  review.desc ||
+  "This journey was never about rushing through attractions, but about feeling the rhythm of the city.",
 
     tags:
       review.tags ||
@@ -618,7 +618,7 @@ function openEventDetail(event) {
 
   const normalized = {
     ...event,
-    title: event.title || "未命名活動",
+    title: event.title || "Untitled Event",
     image: event.image || "",
     
     images:
@@ -629,23 +629,21 @@ function openEventDetail(event) {
     event.image3,
     event.image4
   ].filter(Boolean),
-    location: event.location || "Sarawak",
-    date: event.date || "近期活動",
+location: event.location || "Sarawak",
+date: event.date || "Upcoming Event",
     timeText: event.timeText || event.hour || "",
-    desc:
-      event.desc ||
-      "這是一個適合慢慢探索的活動。",
-    type: event.type || "活動",
-    aiNote:
-      event.aiNote ||
-      event.guide ||
-      "這個活動適合想慢慢感受城市氛圍的人。",
-    tags:
-      event.tags ||
-      ["放鬆", "在地感", "適合拍照"],
-    nearby:
-      event.nearby ||
-      "活動結束後，可以順路安排附近餐廳、河邊或夜市。"
+desc: event.desc || "An event worth exploring slowly.",
+type: event.type || "Event",
+aiNote:
+  event.aiNote ||
+  event.guide ||
+  "Perfect for anyone who wants to experience the city atmosphere slowly.",
+tags:
+  event.tags ||
+  ["Relaxing", "Local Vibes", "Photo Friendly"],
+nearby:
+  event.nearby ||
+  "Explore nearby restaurants, river walks, or night markets."
   };
 
 renderEventDetailSlider(
@@ -764,11 +762,11 @@ function openDetail(place) {
 
   const normalized = {
     ...place,
-    name: place.name || place.title || "未命名地點",
+    name: place.name || place.title || "Untitled Place",
     image: place.image || "",
     address: place.address || place.location || place.meta || "Sarawak",
-    phone: place.phone || "尚未提供",
-    hours: place.hours || "建議出發前確認",
+phone: place.phone || "Not Available",
+hours: place.hours || "Check Before Visiting",
     contactName: place.contactName || "HeriLand Guide",
     contactImage: place.contactImage || place.image || "",
     images:
@@ -779,22 +777,22 @@ function openDetail(place) {
     place.image3,
     place.image4
   ].filter(Boolean),
-    intro:
-      place.intro ||
-      place.desc ||
-      place.reason ||
-      place.guide ||
-      "這是一個值得慢慢停留的地方。",
-    type: place.type || place.tags?.[0] || "推薦地點",
+intro:
+  place.intro ||
+  place.desc ||
+  place.reason ||
+  place.guide ||
+  "A place worth staying awhile.",
+type: place.type || place.tags?.[0] || "Recommended Place",
     area: place.area || place.location || place.meta || "Sarawak",
     score: place.score || "4.8",
     reviewCount: place.reviewCount || "128",
-    tags: place.tags || ["慢旅", "拍照", "推薦"],
-    services: place.services || [
-      "適合拍照與停留",
-      "可加入個人行程",
-      "可直接導航前往"
-    ]
+tags: place.tags || ["Slow Travel", "Photo Friendly", "Recommended"],
+services: place.services || [
+  "Good for photos and slow visits",
+  "Can be added to your trip",
+  "Navigation available"
+]
   };
 
   setText("detailTitle", normalized.name);
@@ -807,7 +805,7 @@ function openDetail(place) {
   setText("detailType", normalized.type);
   setText("detailArea", normalized.area);
   setText("detailScore", normalized.score);
-  setText("detailReviewCount", `${normalized.reviewCount} 則評論`);
+  setText("detailReviewCount", `${normalized.reviewCount} Reviews`);
   setText("detailAiNote", normalized.intro);
 
   
@@ -975,10 +973,10 @@ const result =
 
       currentPlaces = result;
 
-      setElText(
-        els.sectionTitle,
-        result.length ? "搜尋結果" : "沒有找到地點"
-      );
+setElText(
+  els.sectionTitle,
+  result.length ? "Search Results" : "No Places Found"
+);
 
       renderPlaces(result);
     });
@@ -986,7 +984,7 @@ const result =
 }
 
 function initLocation() {
-  const fallback = "正在探索 Sarawak";
+  const fallback = "Exploring Sarawak";
 
   function updateLocationText(text) {
     setElText(els.desktopLocation, text);
@@ -996,7 +994,7 @@ function initLocation() {
   updateLocationText(fallback);
 
   if (!navigator.geolocation) {
-    updateLocationText("正在探索 Sarawak");
+    updateLocationText("Exploring Sarawak");
     return;
   }
 
@@ -1008,13 +1006,13 @@ function initLocation() {
       const nearestCity = getNearestCityByCoords(lat, lng);
 
       updateLocationText(
-        nearestCity
-          ? `正在探索 ${nearestCity.name}`
-          : "正在探索 Sarawak"
+nearestCity
+  ? `Exploring ${nearestCity.name}`
+  : "Exploring Sarawak"
       );
     },
     () => {
-      updateLocationText("正在探索 Sarawak");
+      updateLocationText("Exploring Sarawak");
     },
     {
       timeout: 8000,
