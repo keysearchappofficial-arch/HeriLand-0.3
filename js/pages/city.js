@@ -1,4 +1,11 @@
 import {
+  saveItem,
+  removeItem,
+  isSaved,
+  addRecent
+} from "../storage.js";
+
+import {
   cities,
   places,
   spots,
