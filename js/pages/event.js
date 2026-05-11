@@ -7,8 +7,8 @@ const events = [
 
     title: "Kuching Waterfront Night Walk",
 
-    desc:
-      "晚上比較適合沿著河邊慢慢走，有街頭表演和小吃。",
+desc:
+  "Best for a slow night walk along the river, with street performances and light snacks.",
 
     location:
       "Kuching Waterfront",
@@ -27,8 +27,8 @@ const events = [
 
     title: "River Side Live Music",
 
-    desc:
-      "比較輕鬆的 live 音樂和夜晚河邊氛圍。",
+desc:
+  "Easy live music with a relaxed riverside night atmosphere.",
 
     location:
       "Kuching River Side",
@@ -47,8 +47,8 @@ const events = [
 
     title: "Weekend Street Food Market",
 
-    desc:
-      "集合比較在地的小吃和週末夜市氣氛。",
+desc:
+  "Local snacks and a weekend night market atmosphere.",
 
     location:
       "Padungan",
@@ -67,8 +67,8 @@ const events = [
 
     title: "Sarawak Culture Night",
 
-    desc:
-      "傳統舞蹈、音樂和比較文化型的夜間活動。",
+desc:
+  "Traditional dance, music, and a more cultural evening experience.",
 
     location:
       "Cultural Village",
@@ -87,8 +87,8 @@ const events = [
 
     title: "Sunset Riverside Picnic",
 
-    desc:
-      "比較適合放鬆和看夕陽的戶外活動。",
+desc:
+  "A relaxing outdoor activity for sunset views.",
 
     location:
       "Santubong",
@@ -107,8 +107,8 @@ const events = [
 
     title: "Family Fun Weekend",
 
-    desc:
-      "適合親子和比較輕鬆的週末活動。",
+desc:
+  "A light weekend activity for families.",
 
     location:
       "City Mall",
@@ -162,17 +162,17 @@ function renderEvents() {
 
   if (title) {
 
-    if (currentTime === "today") {
-      title.textContent = "今天推薦";
-    }
+if (currentTime === "today") {
+  title.textContent = "Today’s Picks";
+}
 
-    if (currentTime === "weekend") {
-      title.textContent = "這週末推薦";
-    }
+if (currentTime === "weekend") {
+  title.textContent = "This Weekend’s Picks";
+}
 
-    if (currentTime === "recent") {
-      title.textContent = "近期推薦";
-    }
+if (currentTime === "recent") {
+  title.textContent = "Upcoming Picks";
+}
 
   }
 
@@ -213,14 +213,14 @@ card.innerHTML = `
 
   <div class="event-card-body">
 <div class="event-card-meta">
-  <span>${event.day || event.date || "近期"}</span>
-  <span>${event.hour || event.location || "時間未定"}</span>
+<span>${event.day || event.date || "Upcoming"}</span>
+<span>${event.hour || event.location || "Time TBC"}</span>
 </div>
 
     <h3 class="event-card-title">${event.title}</h3>
 
     <p class="event-card-desc">
-      ${event.desc || "適合慢慢探索的活動。"}
+      ${event.desc || "An event worth exploring slowly."}
     </p>
   </div>
 `;
@@ -326,28 +326,28 @@ function openEventDetail(event) {
     event.title
   );
 
-  setText(
-    "eventDetailDate",
-    event.date || "近期活動"
-  );
+setText(
+  "eventDetailDate",
+  event.date || "Upcoming Event"
+);
 
   setText(
     "eventDetailLocation",
     event.location || "Sarawak"
   );
 
-  setText(
-    "eventDetailDesc",
-    event.desc || "活動介紹"
-  );
+setText(
+  "eventDetailDesc",
+  event.desc || "About this event"
+);
 
   /* AI Guide */
 
-  setText(
-    "eventDetailGuide",
-    event.guide ||
-    "建議提早 20 分鐘到場，晚上氣氛會更舒服。"
-  );
+setText(
+  "eventDetailGuide",
+  event.guide ||
+  "Arrive around 20 minutes early. The evening atmosphere feels more relaxed."
+);
 
   /* Timeline */
 
@@ -358,21 +358,21 @@ function openEventDetail(event) {
 
   if (timeline) {
 
-    const items =
-      event.timeline || [
-        {
-          time: "6:30 PM",
-          text: "開始入場"
-        },
-        {
-          time: "7:00 PM",
-          text: "活動開始"
-        },
-        {
-          time: "9:00 PM",
-          text: "自由活動"
-        }
-      ];
+const items =
+  event.timeline || [
+    {
+      time: "6:30 PM",
+      text: "Arrival begins"
+    },
+    {
+      time: "7:00 PM",
+      text: "Event starts"
+    },
+    {
+      time: "9:00 PM",
+      text: "Free time"
+    }
+  ];
 
     timeline.innerHTML =
       items.map(item => `
@@ -393,12 +393,12 @@ function openEventDetail(event) {
 
   if (tags) {
 
-    const tagList =
-      event.tags || [
-        "夜生活",
-        "推薦活動",
-        "熱門"
-      ];
+const tagList =
+  event.tags || [
+    "Nightlife",
+    "Recommended",
+    "Popular"
+  ];
 
     tags.innerHTML =
       tagList.map(tag => `
