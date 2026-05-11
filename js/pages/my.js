@@ -2,10 +2,6 @@ import {
   getItems
 } from "../storage.js";
 
-const savedPlaces = getItems("saved");
-const myTrip = getItems("trip");
-const recentlyViewed = getItems("recent");
-
 function getSavedPlaces() {
   return getItems("saved");
 }
@@ -482,6 +478,25 @@ function renderRecentSheet() {
 
     list.appendChild(row);
   });
+}
+
+function getItemLabel(item) {
+
+  if (
+    item.food ||
+    item.category === "restaurant"
+  ) {
+    return "Restaurant";
+  }
+
+  if (
+    item.type
+  ) {
+    return item.type;
+  }
+
+  return "Place";
+
 }
 
 /* =========================
