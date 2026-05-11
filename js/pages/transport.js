@@ -11,17 +11,10 @@ const routes = [
     title:
       "Kuching → Santubong",
 
-    duration:
-      "約 35–45 分鐘",
-
-    method:
-      "Grab / 租車",
-
-    note:
-      "晚上叫車可能較慢",
-
-    desc:
-      "這條路線比較適合 Grab 或租車，傍晚出發會比較舒服。"
+duration: "Around 35–45 minutes",
+method: "Grab / Rental Car",
+note: "Getting a ride may take longer at night",
+desc: "This route is best by Grab or rental car. An evening departure feels more comfortable."
   },
 
   {
@@ -31,17 +24,10 @@ const routes = [
     title:
       "Kuching → Serian",
 
-    duration:
-      "約 1 小時",
-
-    method:
-      "自駕 / 巴士",
-
-    note:
-      "適合白天出發",
-
-    desc:
-      "如果想慢慢看沿途風景，可以選擇白天開車過去。"
+duration: "Around 1 hour",
+method: "Self-drive / Bus",
+note: "Best to leave during the day",
+desc: "For a slower view of the journey, consider driving during the day."
   },
 
   {
@@ -51,17 +37,10 @@ const routes = [
     title:
       "Kuching → Sibu",
 
-    duration:
-      "飛機約 45 分鐘",
-
-    method:
-      "飛機 / 巴士",
-
-    note:
-      "長途巴士時間較長",
-
-    desc:
-      "如果時間有限，飛機會比較舒服。"
+duration: "Flight around 45 minutes",
+method: "Flight / Bus",
+note: "Long-distance buses take more time",
+desc: "Flying is more comfortable if time is limited."
   },
 
   {
@@ -71,17 +50,10 @@ const routes = [
     title:
       "Miri → Brunei",
 
-    duration:
-      "跨境路線",
-
-    method:
-      "巴士 / 自駕",
-
-    note:
-      "記得確認證件",
-
-    desc:
-      "跨境移動建議提前確認時間與交通安排。"
+duration: "Cross-border route",
+method: "Bus / Self-drive",
+note: "Remember to check your documents",
+desc: "For cross-border travel, check the schedule and transport arrangements in advance."
   }
 
 ];
