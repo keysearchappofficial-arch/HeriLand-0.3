@@ -56,22 +56,22 @@ export {
 
 export const moodConfig = {
   relax: {
-    title: "適合放鬆的地方",
-    note: "今天適合先找一個安靜的地方。"
+    title: "Relaxing Places",
+    note: "A good day to start somewhere quiet."
   },
 
   restaurant: {
-    title: "現在適合吃的地方",
-    note: "先吃一頓穩的，比急著跑景點更重要。"
+    title: "Places to Eat Now",
+    note: "A good meal first, then the journey feels easier."
   },
 
   view: {
-    title: "適合看風景的地方",
-    note: "適合黃昏、散步與拍照。"
+    title: "Scenic Places",
+    note: "Best for sunset, slow walks, and photos."
   },
 
   hidden: {
-    title: "比較小眾的地方",
-    note: "避開熱門觀光路線。"
+    title: "Hidden Places",
+    note: "Step away from the usual tourist route."
   }
 };
