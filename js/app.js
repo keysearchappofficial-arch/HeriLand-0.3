@@ -859,6 +859,49 @@ renderDetailSlider(
 
 const addTripBtn = document.getElementById("addTripBtn");
 
+  const detailSaveBtn =
+  document.getElementById("detailSaveBtn");
+
+if (detailSaveBtn) {
+
+  detailSaveBtn.textContent =
+    isSaved("saved", normalized.id)
+      ? "♥"
+      : "♡";
+
+  detailSaveBtn.onclick = () => {
+
+    if (isSaved("saved", normalized.id)) {
+
+      removeItem(
+        "saved",
+        normalized.id
+      );
+
+    }
+
+    else {
+
+      saveItem(
+        "saved",
+        normalized
+      );
+
+    }
+
+    detailSaveBtn.textContent =
+      isSaved("saved", normalized.id)
+        ? "♥"
+        : "♡";
+
+    renderMood(currentMood);
+    renderSpots();
+    renderRestaurants();
+
+  };
+
+}
+
 if (addTripBtn) {
   addTripBtn.onclick = () => {
     saveItem("trip", normalized);
