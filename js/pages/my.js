@@ -287,6 +287,26 @@ function renderSavedSheet() {
 
   grid.innerHTML = "";
 
+  if (!savedPlaces.length) {
+
+    grid.innerHTML = `
+      <div class="empty-state">
+
+        <h3>
+          No Saved Places Yet
+        </h3>
+
+        <p>
+          Start exploring Sarawak
+          and save places you love.
+        </p>
+
+      </div>
+    `;
+
+    return;
+  }
+
   savedPlaces.forEach(place => {
 
     const card =
@@ -300,17 +320,17 @@ function renderSavedSheet() {
     card.innerHTML = `
       <img
         src="${place.image}"
-        alt="${place.title}"
+        alt="${place.title || place.name}"
       >
 
       <div class="saved-card-body">
 
         <h3>
-          ${place.title}
+          ${place.title || place.name}
         </h3>
 
         <p>
-          ${place.desc}
+          ${place.desc || place.intro || ""}
         </p>
 
       </div>
@@ -337,6 +357,26 @@ function renderTripSheet() {
 
   grid.innerHTML = "";
 
+  if (!myTrip.length) {
+
+    grid.innerHTML = `
+      <div class="empty-state">
+
+        <h3>
+          No Trip Plans Yet
+        </h3>
+
+        <p>
+          Add places into My Trip
+          to build your Sarawak journey.
+        </p>
+
+      </div>
+    `;
+
+    return;
+  }
+
   myTrip.forEach(plan => {
 
     const card =
@@ -353,18 +393,12 @@ function renderTripSheet() {
       </small>
 
       <h3>
-        ${plan.title}
+        ${plan.title || plan.name}
       </h3>
 
       <p>
-        ${plan.desc}
+        ${plan.desc || plan.intro || ""}
       </p>
-
-      <div class="trip-meta">
-        ${plan.meta.map(item => `
-          <span>${item}</span>
-        `).join("")}
-      </div>
     `;
 
     grid.appendChild(card);
@@ -399,6 +433,26 @@ function renderRecentSheet() {
 
   list.innerHTML = "";
 
+  if (!recentlyViewed.length) {
+
+    list.innerHTML = `
+      <div class="empty-state">
+
+        <h3>
+          No Recently Viewed Places
+        </h3>
+
+        <p>
+          Places you open will
+          appear here automatically.
+        </p>
+
+      </div>
+    `;
+
+    return;
+  }
+
   recentlyViewed.forEach(item => {
 
     const row =
@@ -412,17 +466,17 @@ function renderRecentSheet() {
     row.innerHTML = `
       <img
         src="${item.image}"
-        alt="${item.title}"
+        alt="${item.title || item.name}"
       >
 
       <div>
 
         <h3>
-          ${item.title}
+          ${item.title || item.name}
         </h3>
 
         <p>
-          ${item.desc}
+          ${item.desc || item.location || ""}
         </p>
 
       </div>
