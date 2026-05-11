@@ -52,11 +52,11 @@ function renderGovernmentList() {
 
   if (!filtered.length) {
 
-    governmentList.innerHTML = `
-      <div class="government-empty">
-        沒有找到相關資訊
-      </div>
-    `;
+governmentList.innerHTML = `
+  <div class="government-empty">
+    No information found.
+  </div>
+`;
 
     return;
   }
