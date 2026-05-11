@@ -293,6 +293,7 @@ window.openEventDetail = openEventDetail;
 window.closeEventDetail = closeEventDetail;
 
 function openDetail(place) {
+  addRecent(place);
   if (!place) return;
 
   const detailPage =
