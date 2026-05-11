@@ -455,7 +455,9 @@ function renderRestaurants() {
 
   grid.innerHTML = "";
 
-  getCityRestaurants().forEach(rawRestaurant => {
+getCityRestaurants()
+  .slice(0, 10)
+  .forEach(rawRestaurant => {
     const restaurant = normalizeRestaurant(rawRestaurant);
 
     const card = document.createElement("article");
