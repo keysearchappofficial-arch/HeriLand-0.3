@@ -309,30 +309,22 @@ function bindMobileMenu() {
 ========================= */
 
 function renderSavedSheet() {
-
   const grid =
-    document.getElementById(
-      "savedSheetGrid"
-    );
+    document.getElementById("savedSheetGrid");
 
   if (!grid) return;
+
+  const savedPlaces = getSavedPlaces();
 
   grid.innerHTML = "";
 
   if (!savedPlaces.length) {
-
     grid.innerHTML = `
       <div class="empty-state">
-
-        <h3>
-          No Saved Places Yet
-        </h3>
-
+        <h3>No Saved Places Yet</h3>
         <p>
-          Start exploring Sarawak
-          and save places you love.
+          Start exploring Sarawak and save places or restaurants you love.
         </p>
-
       </div>
     `;
 
@@ -340,14 +332,10 @@ function renderSavedSheet() {
   }
 
   savedPlaces.forEach(place => {
-
     const card =
-      document.createElement(
-        "article"
-      );
+      document.createElement("article");
 
-    card.className =
-      "saved-card";
+    card.className = "saved-card";
 
     card.innerHTML = `
       <img
@@ -357,21 +345,23 @@ function renderSavedSheet() {
 
       <div class="saved-card-body">
 
+        <small>
+          ${getItemLabel(place)}
+        </small>
+
         <h3>
           ${place.title || place.name}
         </h3>
 
         <p>
-          ${place.desc || place.intro || ""}
+          ${place.address || place.type || ""}
         </p>
 
       </div>
     `;
 
     grid.appendChild(card);
-
   });
-
 }
 
 /* =========================
@@ -379,30 +369,22 @@ function renderSavedSheet() {
 ========================= */
 
 function renderTripSheet() {
-
   const grid =
-    document.getElementById(
-      "tripSheetGrid"
-    );
+    document.getElementById("tripSheetGrid");
 
   if (!grid) return;
+
+  const myTrip = getMyTrip();
 
   grid.innerHTML = "";
 
   if (!myTrip.length) {
-
     grid.innerHTML = `
       <div class="empty-state">
-
-        <h3>
-          No Trip Plans Yet
-        </h3>
-
+        <h3>No Trip Plans Yet</h3>
         <p>
-          Add places into My Trip
-          to build your Sarawak journey.
+          Add places or restaurants into My Trip to build your Sarawak journey.
         </p>
-
       </div>
     `;
 
@@ -410,18 +392,14 @@ function renderTripSheet() {
   }
 
   myTrip.forEach(plan => {
-
     const card =
-      document.createElement(
-        "article"
-      );
+      document.createElement("article");
 
-    card.className =
-      "trip-card";
+    card.className = "trip-card";
 
     card.innerHTML = `
       <small>
-        HeriLand Trip
+        ${getItemLabel(plan)}
       </small>
 
       <h3>
@@ -429,14 +407,12 @@ function renderTripSheet() {
       </h3>
 
       <p>
-        ${plan.desc || plan.intro || ""}
+        ${plan.address || plan.type || ""}
       </p>
     `;
 
     grid.appendChild(card);
-
   });
-
 }
 
 function bindFeedbackButton() {
@@ -455,30 +431,22 @@ function bindFeedbackButton() {
 ========================= */
 
 function renderRecentSheet() {
-
   const list =
-    document.getElementById(
-      "recentSheetList"
-    );
+    document.getElementById("recentSheetList");
 
   if (!list) return;
+
+  const recentlyViewed = getRecentlyViewed();
 
   list.innerHTML = "";
 
   if (!recentlyViewed.length) {
-
     list.innerHTML = `
       <div class="empty-state">
-
-        <h3>
-          No Recently Viewed Places
-        </h3>
-
+        <h3>No Recently Viewed</h3>
         <p>
-          Places you open will
-          appear here automatically.
+          Places and restaurants you open will appear here.
         </p>
-
       </div>
     `;
 
@@ -486,14 +454,10 @@ function renderRecentSheet() {
   }
 
   recentlyViewed.forEach(item => {
-
     const row =
-      document.createElement(
-        "article"
-      );
+      document.createElement("article");
 
-    row.className =
-      "recent-item";
+    row.className = "recent-item";
 
     row.innerHTML = `
       <img
@@ -502,22 +466,22 @@ function renderRecentSheet() {
       >
 
       <div>
+        <small>
+          ${getItemLabel(item)}
+        </small>
 
         <h3>
           ${item.title || item.name}
         </h3>
 
         <p>
-          ${item.desc || item.location || ""}
+          ${item.address || item.type || ""}
         </p>
-
       </div>
     `;
 
     list.appendChild(row);
-
   });
-
 }
 
 /* =========================
