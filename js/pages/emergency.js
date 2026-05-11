@@ -45,11 +45,11 @@ function renderEmergencyList() {
 
   if (!filtered.length) {
 
-    emergencyList.innerHTML = `
-      <div class="emergency-empty">
-        沒有找到相關資訊
-      </div>
-    `;
+emergencyList.innerHTML = `
+  <div class="emergency-empty">
+    No information found.
+  </div>
+`;
 
     return;
   }
