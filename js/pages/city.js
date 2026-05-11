@@ -16,13 +16,13 @@ function getCityImage(city) {
 }
 
 function getCityDesc(city) {
-  return city.desc || city.intro || "這是一個適合慢慢探索的砂拉越城市。";
+  return city.desc || city.intro || "A Sarawak city worth exploring slowly.";
 }
 
 function getCityAi(city) {
   return (
     city.ai ||
-    `${city.name} 適合用慢旅方式探索，先從在地美食、文化與生活感開始。`
+    `${city.name} is best explored slowly — start with local food, culture, and everyday life.`
   );
 }
 
@@ -168,22 +168,22 @@ function normalizeSpot(spot) {
   return {
     ...spot,
     name: spot.name || spot.title,
-    intro: spot.intro || spot.desc || "這是一個值得慢慢停留的景點。",
+    intro: spot.intro || spot.desc || "An attraction worth staying awhile.",
     location: spot.location || spot.meta || "Sarawak",
-    type: spot.type || "景點推薦",
+    type: spot.type || "Attraction",
     address: spot.address || spot.meta || "Sarawak",
-    phone: spot.phone || "尚未提供",
-    hours: spot.hours || "建議白天前往",
+    phone: spot.phone || "Not Available",
+    hours: spot.hours || "Best visited during the day",
     contactName: spot.contactName || "HeriLand Guide",
     contactImage: spot.contactImage || spot.image,
     score: spot.score || "4.8",
     reviewCount: spot.reviewCount || "128",
-    tags: spot.tags || ["景點", "慢旅", "拍照"],
-    services: spot.services || [
-      "適合拍照與停留",
-      "可加入個人行程",
-      "可直接導航前往"
-    ]
+tags: spot.tags || ["Attraction", "Slow Travel", "Photo Friendly"],
+services: spot.services || [
+  "Good for photos and slow visits",
+  "Can be added to your trip",
+  "Navigation available"
+]
   };
 }
 
@@ -191,25 +191,25 @@ function normalizeRestaurant(restaurant) {
   return {
     ...restaurant,
     name: restaurant.name || restaurant.title,
-    intro:
-      restaurant.intro ||
-      restaurant.desc ||
-      "這是一間值得體驗的在地餐廳。",
+intro:
+  restaurant.intro ||
+  restaurant.desc ||
+  "A local restaurant worth trying.",
     location: restaurant.location || restaurant.meta || "Sarawak",
-    type: restaurant.type || restaurant.food || "餐廳推薦",
+    type: restaurant.type || restaurant.food || "Restaurant",
     address: restaurant.address || restaurant.meta || "Sarawak",
-    phone: restaurant.phone || "尚未提供",
-    hours: restaurant.hours || "建議用餐前確認",
+phone: restaurant.phone || "Not Available",
+hours: restaurant.hours || "Check before dining",
     contactName: restaurant.contactName || "HeriLand Guide",
     contactImage: restaurant.contactImage || restaurant.image,
     score: restaurant.score || "4.8",
     reviewCount: restaurant.reviewCount || "128",
-    tags: restaurant.tags || ["餐廳", "在地", "推薦"],
-    services: restaurant.services || [
-      "在地餐廳推薦",
-      "適合加入行程",
-      "可直接導航前往"
-    ]
+tags: restaurant.tags || ["Restaurant", "Local", "Recommended"],
+services: restaurant.services || [
+  "Local restaurant recommendation",
+  "Can be added to your trip",
+  "Navigation available"
+]
   };
 }
 
@@ -221,25 +221,23 @@ function openEventDetail(event) {
 
   const normalized = {
     ...event,
-    title: event.title || "未命名活動",
+    title: event.title || "Untitled Event",
     image: event.image || "",
     location: event.location || "Sarawak",
-    date: event.date || "近期活動",
+    date: event.date || "Upcoming Event",
     timeText: event.timeText || event.hour || "",
-    desc:
-      event.desc ||
-      "這是一個適合慢慢探索的活動。",
-    type: event.type || "活動",
-    aiNote:
-      event.aiNote ||
-      event.guide ||
-      "這個活動適合想慢慢感受城市氛圍的人。",
-    tags:
-      event.tags ||
-      ["放鬆", "在地感", "適合拍照"],
-    nearby:
-      event.nearby ||
-      "活動結束後，可以順路安排附近餐廳、河邊或夜市。"
+desc: event.desc || "An event worth exploring slowly.",
+type: event.type || "Event",
+aiNote:
+  event.aiNote ||
+  event.guide ||
+  "Perfect for anyone who wants to experience the city atmosphere slowly.",
+tags:
+  event.tags ||
+  ["Relaxing", "Local Vibes", "Photo Friendly"],
+nearby:
+  event.nearby ||
+  "Explore nearby restaurants, river walks, or night markets."
   };
 
   const image =
@@ -297,29 +295,29 @@ function openDetail(place) {
 
   const normalized = {
     ...place,
-    name: place.name || place.title || "未命名地點",
+    name: place.name || place.title || "Untitled Place",
     image: place.image || "",
     address: place.address || place.location || place.meta || "Sarawak",
-    phone: place.phone || "尚未提供",
-    hours: place.hours || "建議出發前確認",
+phone: place.phone || "Not Available",
+hours: place.hours || "Check Before Visiting",
     contactName: place.contactName || "HeriLand Guide",
     contactImage: place.contactImage || place.image || "",
-    intro:
-      place.intro ||
-      place.desc ||
-      place.reason ||
-      place.guide ||
-      "這是一個值得慢慢停留的地方。",
-    type: place.type || place.tags?.[0] || "推薦地點",
+intro:
+  place.intro ||
+  place.desc ||
+  place.reason ||
+  place.guide ||
+  "A place worth staying awhile.",
+type: place.type || place.tags?.[0] || "Recommended Place",
     area: place.area || place.location || place.meta || "Sarawak",
     score: place.score || "4.8",
     reviewCount: place.reviewCount || "128",
-    tags: place.tags || ["慢旅", "拍照", "推薦"],
-    services: place.services || [
-      "適合拍照與停留",
-      "可加入個人行程",
-      "可直接導航前往"
-    ]
+tags: place.tags || ["Slow Travel", "Photo Friendly", "Recommended"],
+services: place.services || [
+  "Good for photos and slow visits",
+  "Can be added to your trip",
+  "Navigation available"
+]
   };
 
   setText("detailTitle", normalized.name);
@@ -334,7 +332,7 @@ function openDetail(place) {
   setText("detailScore", normalized.score);
   setText(
     "detailReviewCount",
-    `${normalized.reviewCount} 則評論`
+    `${normalized.reviewCount} Reviews`
   );
   setText("detailAiNote", normalized.intro);
 
@@ -429,7 +427,7 @@ function renderSpots() {
           <span class="business-stars">★★★★★</span>
           <span>${spot.score}</span>
           <span>・</span>
-          <span>${spot.reviewCount} 則評論</span>
+          <span>${spot.reviewCount} Reviews</span>
         </div>
 
         <div class="business-card-type">
@@ -596,14 +594,14 @@ card.innerHTML = `
 
   <div class="event-card-body">
     <div class="event-card-meta">
-      <span>${event.day || event.date || "近期"}</span>
-      <span>${event.timeText || event.hour || "時間未定"}</span>
+<span>${event.day || event.date || "Upcoming"}</span>
+<span>${event.timeText || event.hour || "Time TBC"}</span>
     </div>
 
     <h3 class="event-card-title">${event.title}</h3>
 
     <p class="event-card-desc">
-      ${event.desc || "適合慢慢探索的活動。"}
+      ${event.desc || "An event worth exploring slowly."}
     </p>
   </div>
 `;
