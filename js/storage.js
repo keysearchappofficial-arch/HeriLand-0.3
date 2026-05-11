@@ -64,22 +64,24 @@ export function getItems(type) {
 }
 
 export function addRecent(item) {
-  if (!item?.id) return;
 
-  const list = getList(KEYS.recent)
-    .filter(x => x.id !== item.id);
+  const key = "heriland_recent";
 
-  list.unshift({
-    id: item.id,
-    city: item.city,
-    category: item.category,
-    name: item.name || item.title,
-    title: item.title || item.name,
-    image: item.image,
-    address: item.address || item.location || "",
-    type: item.type || item.food || item.tags?.[0] || "",
-    viewedAt: new Date().toISOString()
-  });
+  const current =
+    getItems("recent");
 
-  setList(KEYS.recent, list.slice(0, 20));
+  const filtered =
+    current.filter(
+      x => x.id !== item.id
+    );
+
+  filtered.unshift(item);
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(
+      filtered.slice(0, 20)
+    )
+  );
+
 }
