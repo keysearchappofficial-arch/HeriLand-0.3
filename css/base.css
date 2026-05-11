@@ -1,11 +1,30 @@
 :root {
-  --bg: #f6f5f1;
-  --paper: #ffffff;
-  --text: #111111;
-  --muted: #777777;
-  --line: rgba(0,0,0,.08);
-  --dark: #111111;
-  --radius: 20px;
+  /* Brand */
+  --primary: #1D5C4F;
+  --primary-hover: #2A7565;
+  --primary-dark: #16463C;
+
+  /* Background */
+  --bg: #F3F6F4;
+  --section: #EDF4F1;
+  --paper: #FFFFFF;
+  --card: #FFFFFF;
+
+  /* Text */
+  --text: #1D1D1D;
+  --muted: #5F6B66;
+  --text-light: #8A9691;
+
+  /* Line */
+  --line: #DCE7E2;
+
+  /* Accent */
+  --accent: #C8A96B;
+
+  /* Legacy / Shared */
+  --dark: #16463C;
+  --radius: 24px;
+  --shadow: 0 10px 30px rgba(0,0,0,.06);
   --ease: cubic-bezier(.2,.8,.2,1);
 }
 
