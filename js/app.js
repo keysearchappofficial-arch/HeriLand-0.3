@@ -111,9 +111,9 @@ function renderPlaces(items) {
 
 <button
   class="business-save-btn"
-  onclick="event.stopPropagation(); window.toggleSaveItem('${spot.id}')"
+  onclick="event.stopPropagation(); window.toggleSaveItem('${place.id}')"
 >
-  ${isSaved("saved", spot.id) ? "♥" : "♡"}
+  ${isSaved("saved", place.id) ? "♥" : "♡"}
 </button>
       </div>
 
@@ -232,9 +232,12 @@ function renderSpots() {
   <div class="business-card-image">
     <img src="${spot.image}" alt="${spot.name}">
 
-    <button class="business-save-btn" onclick="event.stopPropagation()">
-      ♡
-    </button>
+<button
+  class="business-save-btn"
+  onclick="event.stopPropagation(); window.toggleSaveItem('${spot.id}')"
+>
+  ${isSaved("saved", spot.id) ? "♥" : "♡"}
+</button>
   </div>
 
   <div class="business-card-body">
@@ -309,9 +312,12 @@ function renderRestaurants() {
   <div class="business-card-image">
     <img src="${restaurant.image}" alt="${restaurant.name}">
 
-    <button class="business-save-btn" onclick="event.stopPropagation()">
-      ♡
-    </button>
+<button
+  class="business-save-btn"
+  onclick="event.stopPropagation(); window.toggleSaveItem('${restaurant.id}')"
+>
+  ${isSaved("saved", restaurant.id) ? "♥" : "♡"}
+</button>
   </div>
 
   <div class="business-card-body">
