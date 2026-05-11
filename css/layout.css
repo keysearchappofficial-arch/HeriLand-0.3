@@ -7,10 +7,15 @@
 .sidebar {
   position: sticky;
   top: 0;
+
   height: 100vh;
+
   padding: 28px;
+
   border-right: 1px solid var(--line);
+
   background: rgba(246,245,241,.96);
+
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -18,9 +23,12 @@
 
 .main {
   min-width: 0;
+
   padding: 24px 38px 80px;
+
   max-width: 1180px;
   width: 100%;
+
   margin: 0 auto;
 }
 
@@ -34,36 +42,43 @@
 
 /* =========================
    Shared Page Container
-   給 city / event / transport 這種內頁使用
 ========================= */
 
 .page-container {
   width: min(1320px, calc(100% - 64px));
   margin: 0 auto;
-  padding-top: 32px;
+
+  padding-top: 96px;
   padding-bottom: 0;
 }
 
-/* 內頁 Footer 統一距離 */
+/* Inner Footer Spacing */
+
 .page-container + #footer,
 .page-container ~ #footer {
   margin-top: 90px;
 }
 
 /* =========================
-   Mobile
+   Desktop Fixed Top
 ========================= */
 
-@media (max-width: 820px) {
-  .page-container {
-    width: 100%;
-    padding: 0 18px 0;
-  }
+.desktop-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
-  .page-container + #footer,
-  .page-container ~ #footer {
-    margin-top: 56px;
-  }
+  z-index: 1600;
+
+  height: 74px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  background: rgba(246,245,241,.86);
+
+  border-bottom: 1px solid rgba(0,0,0,.06);
 }
 
 /* =========================
@@ -106,8 +121,6 @@
   opacity: .7;
 }
 
-/* Dropdown */
-
 .nav-dropdown {
   position: relative;
 }
@@ -127,6 +140,7 @@
   background: rgba(255,255,255,.96);
 
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 
   box-shadow:
     0 18px 40px rgba(0,0,0,.12);
@@ -143,7 +157,7 @@
     transform .18s ease,
     visibility .18s ease;
 
-  z-index: 50;
+  z-index: 1700;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu {
@@ -178,7 +192,7 @@
 }
 
 /* =========================
-   Hide Mobile Top On Desktop
+   Desktop Only
 ========================= */
 
 @media (min-width: 821px) {
@@ -191,56 +205,41 @@
 }
 
 /* =========================
-   Fixed Top Navigation
+   Mobile
 ========================= */
 
-.desktop-top,
-.mobile-top {
-  position: fixed;
-  top: 0;
-
-  z-index: 1000;
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  background: rgba(246, 245, 241, .82);
-
-  border-bottom: 1px solid rgba(0,0,0,.06);
-}
-
-/* Desktop spacing */
-@media (min-width: 821px) {
-
-  .desktop-top {
-    height: 74px;
-  }
-
-  .page-container {
-    padding-top: 74px;
-  }
-
-  .mobile-top {
-    display: none !important;
-  }
-
-}
-
-/* Mobile spacing */
 @media (max-width: 820px) {
 
-  .mobile-top {
-    height: calc(68px + env(safe-area-inset-top));
+  .app {
+    display: block;
+  }
 
-    padding-top: env(safe-area-inset-top);
+  .sidebar,
+  .desktop-top {
+    display: none !important;
+  }
+
+  .main {
+    max-width: none;
+
+    padding:
+      calc(76px + env(safe-area-inset-top))
+      18px
+      40px;
   }
 
   .page-container {
-    padding-top: calc(68px + env(safe-area-inset-top));
+    width: 100%;
+
+    padding:
+      calc(76px + env(safe-area-inset-top))
+      18px
+      0;
   }
 
-  .desktop-top {
-    display: none !important;
+  .page-container + #footer,
+  .page-container ~ #footer {
+    margin-top: 56px;
   }
 
 }
