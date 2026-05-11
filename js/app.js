@@ -58,6 +58,8 @@ function init() {
   renderSpots();
   renderRestaurants();
   renderEvents();
+
+  openPendingDetail();
 }
 
 function renderMood(mood) {
@@ -1257,6 +1259,44 @@ function bindCitySelects() {
       renderRestaurants();
     });
   });
+}
+
+function openPendingDetail() {
+  const params =
+    new URLSearchParams(window.location.search);
+
+  if (params.get("openDetail") !== "1") return;
+
+  const raw =
+    localStorage.getItem(
+      "heriland_open_detail_item"
+    );
+
+  if (!raw) return;
+
+  try {
+
+    const item = JSON.parse(raw);
+
+    setTimeout(() => {
+
+      openDetail(item);
+
+      localStorage.removeItem(
+        "heriland_open_detail_item"
+      );
+
+    }, 300);
+
+  }
+
+  catch {
+
+    localStorage.removeItem(
+      "heriland_open_detail_item"
+    );
+
+  }
 }
 
 const allItems = [
