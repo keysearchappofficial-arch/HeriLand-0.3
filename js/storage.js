@@ -64,24 +64,25 @@ export function getItems(type) {
 }
 
 export function addRecent(item) {
+  if (!item?.id) return;
 
-  const key = "heriland_recent";
+  const list = getItems("recent")
+    .filter(x => x.id !== item.id);
 
-  const current =
-    getItems("recent");
-
-  const filtered =
-    current.filter(
-      x => x.id !== item.id
-    );
-
-  filtered.unshift(item);
+  list.unshift({
+    id: item.id,
+    city: item.city,
+    category: item.category,
+    name: item.name || item.title,
+    title: item.title || item.name,
+    image: item.image,
+    address: item.address || item.location || "",
+    type: item.type || item.food || item.tags?.[0] || "",
+    viewedAt: new Date().toISOString()
+  });
 
   localStorage.setItem(
-    key,
-    JSON.stringify(
-      filtered.slice(0, 20)
-    )
+    "heriland_recently_viewed",
+    JSON.stringify(list.slice(0, 20))
   );
-
 }
