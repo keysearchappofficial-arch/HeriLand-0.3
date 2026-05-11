@@ -6,102 +6,6 @@ const savedPlaces = getItems("saved");
 const myTrip = getItems("trip");
 const recentlyViewed = getItems("recent");
 
-
-/* =========================
-   Mock Data
-========================= */
-
-const savedPlaces = [
-
-  {
-    title: "Kuching Waterfront",
-    desc: "A good place for an evening walk and river views.",
-    image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-  },
-
-  {
-    title: "Santubong Beach",
-    desc: "A quieter beach, perfect for slowing down.",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-  },
-
-  {
-    title: "Old Town Street",
-    desc: "An old street for slow walks and photos.",
-    image:
-      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
-  },
-
-  {
-    title: "Sarawak River",
-    desc: "A riverside spot with a relaxing night atmosphere.",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
-  }
-
-];
-
-const tripPlans = [
-
-  {
-    title: "Kuching Weekend",
-desc:
-  "River walks, local food, and a slower weekend rhythm.",
-
-    meta:
-      ["2 Days", "Food", "Relax"]
-  },
-
-  {
-    title: "Miri Sunset Trip",
-desc:
-  "Sea views, sunsets, and a more natural way to travel.",
-
-    meta:
-      ["3 Days", "Beach", "Sunset"]
-  },
-
-  {
-    title: "Sarawak Food Route",
-desc:
-  "A route for Laksa, Kolo Mee, and local breakfast spots.",
-
-    meta:
-      ["Food", "Local", "Cafe"]
-  }
-
-];
-
-const recentViews = [
-
-  {
-    title: "Borneo Cultures Museum",
-    desc: "Kuching",
-
-    image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80"
-  },
-
-  {
-    title: "Satok Weekend Market",
-    desc: "Local Market",
-
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80"
-  },
-
-  {
-    title: "Damai Beach",
-    desc: "Santubong",
-
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-  }
-
-];
-
 /* =========================
    Init
 ========================= */
@@ -433,7 +337,7 @@ function renderTripSheet() {
 
   grid.innerHTML = "";
 
-  tripPlans.forEach(plan => {
+  myTrip.forEach(plan => {
 
     const card =
       document.createElement(
@@ -495,7 +399,7 @@ function renderRecentSheet() {
 
   list.innerHTML = "";
 
-  recentViews.forEach(item => {
+  recentlyViewed.forEach(item => {
 
     const row =
       document.createElement(
