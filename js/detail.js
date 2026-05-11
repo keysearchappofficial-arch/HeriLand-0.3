@@ -24,10 +24,10 @@ export function openDetail(index) {
      Basic Info
   ========================= */
 
-  setText(
-    "detailTitle",
-    place.name || "未命名地點"
-  );
+setText(
+  "detailTitle",
+  place.name || "Untitled Place"
+);
 
   setText(
     "detailAddress",
@@ -75,26 +75,27 @@ export function openDetail(index) {
      Intro
   ========================= */
 
-  setText(
-    "detailIntro",
-    place.intro ||
-    place.reason ||
-    place.guide ||
-    place.desc ||
-    "這是一個值得慢慢停留的地方。"
-  );
+setText(
+  "detailIntro",
+  place.intro ||
+  place.reason ||
+  place.guide ||
+  place.desc ||
+  "A place worth staying awhile."
+);
 
   /* =========================
      Services
   ========================= */
 
   const services =
-    place.services || [
-      "AI 推薦附近路線",
-      "適合拍照與停留",
-      "可加入個人行程",
-      "可直接導航前往"
-    ];
+const services =
+  place.services || [
+    "Nearby route recommendations",
+    "Good for photos and slow visits",
+    "Can be added to your trip",
+    "Navigation available"
+  ];
 
   const serviceList =
     document.getElementById(
@@ -115,11 +116,11 @@ export function openDetail(index) {
      AI Box
   ========================= */
 
-  setText(
-    "detailReason",
-    place.reason ||
-    "這個地方很適合慢慢探索。"
-  );
+setText(
+  "detailReason",
+  place.reason ||
+  "A place worth exploring slowly."
+);
 
   const aiTags =
     document.getElementById(
@@ -128,12 +129,12 @@ export function openDetail(index) {
 
   if (aiTags) {
 
-    const tags =
-      place.tags || [
-        "慢旅",
-        "推薦",
-        "在地"
-      ];
+const tags =
+  place.tags || [
+    "Slow Travel",
+    "Recommended",
+    "Local"
+  ];
 
     aiTags.innerHTML =
       tags
