@@ -16,6 +16,8 @@ export function initAiGuide() {
   const closeBtn = document.getElementById("aiGuideClose");
   const backdrop = document.getElementById("aiGuideBackdrop");
   const resultWrap = document.getElementById("aiGuideResults");
+  const prevBtn = document.getElementById("aiGuidePrev");
+  const nextBtn = document.getElementById("aiGuideNext");
   const chips = document.querySelectorAll(".guide-chip-group button");
   const input = document.getElementById("aiGuideInput");
   const sendBtn = document.getElementById("aiGuideSend");
@@ -202,6 +204,20 @@ item.title ||
   fab?.addEventListener("click", toggleGuide);
   closeBtn?.addEventListener("click", closeGuide);
   backdrop?.addEventListener("click", closeGuide);
+
+prevBtn?.addEventListener("click", () => {
+  resultWrap?.scrollBy({
+    left: -280,
+    behavior: "smooth"
+  });
+});
+
+nextBtn?.addEventListener("click", () => {
+  resultWrap?.scrollBy({
+    left: 280,
+    behavior: "smooth"
+  });
+});
 
   console.log("[ai-guide] ready");
 }
