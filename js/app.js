@@ -109,9 +109,12 @@ function renderPlaces(items) {
       <div class="business-card-image">
         <img src="${place.image}" alt="${place.name}">
 
-        <button class="business-save-btn" onclick="event.stopPropagation()">
-          ♡
-        </button>
+<button
+  class="business-save-btn"
+  onclick="event.stopPropagation(); window.toggleSaveItem('${spot.id}')"
+>
+  ${isSaved("saved", spot.id) ? "♥" : "♡"}
+</button>
       </div>
 
       <div class="business-card-body">
@@ -773,8 +776,8 @@ function openDetail(place) {
     name: place.name || place.title || "Untitled Place",
     image: place.image || "",
     address: place.address || place.location || place.meta || "Sarawak",
-phone: place.phone || "Not Available",
-hours: place.hours || "Check Before Visiting",
+    phone: place.phone || "Not Available",
+    hours: place.hours || "Check Before Visiting",
     contactName: place.contactName || "HeriLand Guide",
     contactImage: place.contactImage || place.image || "",
     images:
@@ -845,6 +848,15 @@ renderDetailSlider(
       .map(tag => `<span>${tag}</span>`)
       .join("");
   }
+
+const addTripBtn = document.getElementById("addTripBtn");
+
+if (addTripBtn) {
+  addTripBtn.onclick = () => {
+    saveItem("trip", normalized);
+    alert("已加入 My Trip");
+  };
+}
 
   els.detailPage.classList.add("show");
   document.body.style.overflow = "hidden";
@@ -1240,3 +1252,24 @@ function bindCitySelects() {
     });
   });
 }
+
+const allItems = [
+  ...places,
+  ...restaurants
+];
+
+window.toggleSaveItem = function(id) {
+  const item = allItems.find(x => x.id === id);
+  if (!item) return;
+
+  if (isSaved("saved", id)) {
+    removeItem("saved", id);
+  }
+  else {
+    saveItem("saved", item);
+  }
+
+  renderMood?.(currentMood);
+  renderSpots?.();
+  renderRestaurants?.();
+};
