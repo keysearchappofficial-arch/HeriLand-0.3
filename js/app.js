@@ -764,6 +764,7 @@ window.openEventDetail = openEventDetail;
 window.closeEventDetail = closeEventDetail;
 
 function openDetail(place) {
+  addRecent(place);
 
   if (!place || !els.detailPage) return;
 
