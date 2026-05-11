@@ -55,48 +55,48 @@ function updateFeedbackLabels(type) {
     document.querySelector('[data-field="tags"] label');
 
   const labelMap = {
-    problem: {
-      title: "問題標題",
-      message: "問題說明",
-      address: "相關頁面 / 地點",
-      hours: "時間",
-      tags: "相關特色"
-    },
-    place: {
-      title: "景點名稱",
-      message: "景點說明",
-      address: "景點地址",
-      hours: "開放時間",
-      tags: "特色"
-    },
-    restaurant: {
-      title: "餐廳名稱",
-      message: "餐廳說明",
-      address: "餐廳地址",
-      hours: "營業時間",
-      tags: "特色 / 主打料理"
-    },
-    suggestion: {
-      title: "建議標題",
-      message: "優化建議",
-      address: "相關頁面",
-      hours: "時間",
-      tags: "相關特色"
-    },
-    business: {
-      title: "商家名稱",
-      message: "合作說明",
-      address: "商家地址",
-      hours: "營業時間",
-      tags: "商家特色"
-    },
-    other: {
-      title: "標題",
-      message: "內容說明",
-      address: "相關位置",
-      hours: "時間",
-      tags: "特色"
-    }
+problem: {
+  title: "Issue Title",
+  message: "Issue Details",
+  address: "Related Page / Place",
+  hours: "Time",
+  tags: "Related Highlights"
+},
+place: {
+  title: "Place Name",
+  message: "Place Details",
+  address: "Place Address",
+  hours: "Opening Hours",
+  tags: "Highlights"
+},
+restaurant: {
+  title: "Restaurant Name",
+  message: "Restaurant Details",
+  address: "Restaurant Address",
+  hours: "Opening Hours",
+  tags: "Highlights / Signature Dishes"
+},
+suggestion: {
+  title: "Suggestion Title",
+  message: "Suggestion Details",
+  address: "Related Page",
+  hours: "Time",
+  tags: "Related Highlights"
+},
+business: {
+  title: "Business Name",
+  message: "Partnership Details",
+  address: "Business Address",
+  hours: "Opening Hours",
+  tags: "Business Highlights"
+},
+other: {
+  title: "Title",
+  message: "Details",
+  address: "Related Location",
+  hours: "Time",
+  tags: "Highlights"
+}
   };
 
   const current = labelMap[type] || labelMap.problem;
@@ -128,52 +128,52 @@ function updateFeedbackPlaceholders(type) {
     document.getElementById("feedbackContact");
 
   const map = {
-    problem: {
-      title: "例如：Sibu 餐廳電話錯誤",
-      message: "請描述你遇到的問題，例如資訊錯誤、圖片不對、連結失效等",
-      address: "相關頁面、地點名稱或網址",
-      hours: "",
-      tags: "",
-      contact: "你的 Email / WhatsApp / IG，可選填"
-    },
-    place: {
-      title: "例如：Sibu Lake Garden",
-      message: "為什麼推薦這個景點？適合什麼時候去？",
-      address: "景點地址、區域或 Google Maps 名稱",
-      hours: "例如：全天開放 / 早上至傍晚",
-      tags: "例如：公園、散步、親子、河邊"
-    },
-    restaurant: {
-      title: "例如：Rasa Sayang Cafe",
-      message: "推薦原因、主打料理或用餐感受",
-      address: "餐廳地址、區域或 Google Maps 名稱",
-      hours: "例如：早上至中午 / 10:00 AM – 9:00 PM",
-      tags: "例如：Kampua Mee、早餐、在地小店"
-    },
-    suggestion: {
-      title: "例如：城市頁希望可以加入篩選",
-      message: "請描述你希望 HeriLand 怎麼優化",
-      address: "",
-      hours: "",
-      tags: "",
-      contact: "你的 Email / WhatsApp / IG，可選填"
-    },
-    business: {
-      title: "例如：某某餐廳 / 某某旅遊服務",
-      message: "請簡單介紹商家與合作方式",
-      address: "商家地址或服務區域",
-      hours: "營業時間或可聯絡時間",
-      tags: "例如：餐廳、咖啡、活動、旅遊服務",
-      contact: "請留下 Email / WhatsApp / IG"
-    },
-    other: {
-      title: "請簡單描述主題",
-      message: "請留下你的想法",
-      address: "",
-      hours: "",
-      tags: "",
-      contact: "你的 Email / WhatsApp / IG，可選填"
-    }
+problem: {
+  title: "Example: Wrong phone number for a Sibu restaurant",
+  message: "Tell us what went wrong, such as incorrect information, wrong images, or broken links.",
+  address: "Related page, place name, or URL",
+  hours: "",
+  tags: "",
+  contact: "Your Email / WhatsApp / IG Optional"
+},
+place: {
+  title: "Example: Sibu Lake Garden",
+  message: "Why do you recommend this place? When is the best time to visit?",
+  address: "Place address, area, or Google Maps name",
+  hours: "Example: Open all day / Morning to evening",
+  tags: "Example: Park, walking, family, riverside"
+},
+restaurant: {
+  title: "Example: Rasa Sayang Cafe",
+  message: "Why do you recommend it? Signature dishes or dining experience",
+  address: "Restaurant address, area, or Google Maps name",
+  hours: "Example: Morning to noon / 10:00 AM – 9:00 PM",
+  tags: "Example: Kampua Mee, breakfast, local shop"
+},
+suggestion: {
+  title: "Example: Add filters to the city page",
+  message: "Tell us how HeriLand could be improved",
+  address: "",
+  hours: "",
+  tags: "",
+  contact: "Your Email / WhatsApp / IG Optional"
+},
+business: {
+  title: "Example: A restaurant / travel service",
+  message: "Briefly introduce your business and partnership idea",
+  address: "Business address or service area",
+  hours: "Opening hours or contact hours",
+  tags: "Example: Restaurant, coffee, events, travel service",
+  contact: "Please leave your Email / WhatsApp / IG"
+},
+other: {
+  title: "Briefly describe the topic",
+  message: "Share your thoughts",
+  address: "",
+  hours: "",
+  tags: "",
+  contact: "Your Email / WhatsApp / IG Optional"
+}
   };
 
   const current = map[type] || map.problem;
@@ -183,7 +183,7 @@ function updateFeedbackPlaceholders(type) {
   if (address) address.placeholder = current.address || "";
   if (hours) hours.placeholder = current.hours || "";
   if (tags) tags.placeholder = current.tags || "";
-  if (contact) contact.placeholder = current.contact || "你的 Email / WhatsApp / IG，可選填";
+  if (contact) contact.placeholder = current.contact || "Your Email / WhatsApp / IG Optional";
 }
 
 function bindFeedbackSubmit() {
@@ -209,27 +209,27 @@ function handleFeedbackSubmit() {
     imageInput?.files || [];
 
   if (!title) {
-    alert("請輸入標題");
+    alert("Please enter a title.");
     return;
   }
 
   if (!message) {
-    alert("請輸入內容說明");
+    alert("Please enter the details.");
     return;
   }
 
   if (type === "restaurant" && !address) {
-    alert("請輸入餐廳地址或 Google Maps 名稱");
+    alert("Please enter the restaurant address or Google Maps name.");
     return;
   }
 
   if (type === "place" && !address) {
-    alert("請輸入景點地址或 Google Maps 名稱");
+    alert("Please enter the place address or Google Maps name.");
     return;
   }
 
   if (type === "business" && !contact) {
-    alert("商家合作請留下聯絡方式");
+    alert("Please leave your contact details for business partnerships.");
     return;
   }
 
@@ -247,7 +247,7 @@ function handleFeedbackSubmit() {
 
   console.log("[feedback]", payload);
 
-  alert("感謝你的回饋，HeriLand 已收到你的提交。");
+  alert("Thank you. HeriLand has received your feedback.");
 
   resetFeedbackForm();
 }
