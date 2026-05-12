@@ -234,76 +234,27 @@
   </button>
 
   <!-- Right Actions -->
-  <div class="detail-actions">
+<div class="detail-actions">
 
-    <!-- Save -->
-    <button
-      class="detail-action-btn detail-save"
-      id="detailSaveBtn"
-      type="button"
-      aria-label="Save place"
-    >
-      ♡
-    </button>
+  <button
+    class="detail-action-btn detail-save"
+    id="detailSaveBtn"
+    type="button"
+    aria-label="Save place"
+  >
+    ♡
+  </button>
 
-    <!-- More -->
-    <div class="detail-more-wrap">
+  <button
+    class="detail-action-btn detail-more"
+    id="detailMoreBtn"
+    type="button"
+    aria-label="More actions"
+  >
+    ⋯
+  </button>
 
-      <button
-        class="detail-action-btn detail-more"
-        id="detailMoreBtn"
-        type="button"
-        aria-label="More actions"
-      >
-        ⋯
-      </button>
-
-      <!-- Dropdown -->
-      <div
-        class="detail-more-menu"
-        id="detailMoreMenu"
-      >
-
-        <button
-          type="button"
-          onclick="window.addPlaceToTrip()"
-        >
-          ⊞ Add to Trip
-        </button>
-
-        <button
-          type="button"
-          onclick="window.openPlaceMap()"
-        >
-          ↗ Open in Maps
-        </button>
-
-        <button
-          type="button"
-          onclick="window.sharePlace()"
-        >
-          ⤴ Share Place
-        </button>
-
-        <button
-          type="button"
-          onclick="window.showNearbyPlaces()"
-        >
-          ◎ Nearby Places
-        </button>
-
-        <button
-          type="button"
-          onclick="window.continueWithAiGuide()"
-        >
-          ✨ Continue with AI Guide
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
   <!-- Slider -->
   <div
@@ -458,6 +409,46 @@
     </section>
 
   </div>
+  
+<!-- Detail More Sheet -->
+<div
+  class="detail-more-layer"
+  id="detailMoreLayer"
+>
+  <div
+    class="detail-more-backdrop"
+    id="detailMoreBackdrop"
+  ></div>
+
+  <div class="detail-more-menu" id="detailMoreMenu">
+
+    <button type="button" onclick="window.addPlaceToTrip()">
+      <span>⊞</span>
+      Add to Trip
+    </button>
+
+    <button type="button" onclick="window.openPlaceMap()">
+      <span>↗</span>
+      Open in Maps
+    </button>
+
+    <button type="button" onclick="window.sharePlace()">
+      <span>⤴</span>
+      Share Place
+    </button>
+
+    <button type="button" onclick="window.showNearbyPlaces()">
+      <span>◎</span>
+      Nearby Places
+    </button>
+
+    <button type="button" onclick="window.continueWithAiGuide()">
+      <span>✨</span>
+      Continue with AI Guide
+    </button>
+
+  </div>
+</div>
 
 </section>
 
