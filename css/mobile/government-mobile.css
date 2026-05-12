@@ -1,8 +1,8 @@
-/* =========================
-   Government Mobile
-========================= */
-
 @media (max-width: 820px) {
+
+  .government-page {
+    background: var(--bg);
+  }
 
   /* =========================
      Hero
@@ -10,12 +10,22 @@
 
   .government-hero {
     padding:
-      96px
+      calc(96px + env(safe-area-inset-top))
       18px
       20px;
   }
 
+  .government-hero small {
+    color: var(--text-light);
+
+    font-size: 11px;
+
+    letter-spacing: .12em;
+  }
+
   .government-hero h1 {
+    color: var(--text);
+
     font-size: 32px;
 
     line-height: 1;
@@ -26,10 +36,10 @@
   .government-hero p {
     margin-top: 12px;
 
+    color: var(--muted);
+
     font-size: 14px;
     line-height: 1.65;
-
-    color: #666;
   }
 
   /* =========================
@@ -53,7 +63,7 @@
 
     margin-bottom: 7px;
 
-    color: #777;
+    color: var(--text-light);
 
     font-size: 12px;
     font-weight: 800;
@@ -65,14 +75,13 @@
 
     padding: 0 12px;
 
-    border:
-      1px solid rgba(0,0,0,.06);
+    border: 1px solid var(--line);
 
     border-radius: 14px;
 
     background: rgba(255,255,255,.96);
 
-    color: #111;
+    color: var(--text);
 
     font-size: 13px;
     font-weight: 750;
@@ -92,12 +101,14 @@
 
     overflow: hidden;
 
-    border-radius: 18px;
+    border-radius: 20px;
 
-    background: rgba(255,255,255,.92);
+    background: rgba(255,255,255,.9);
 
-    border:
-      1px solid rgba(0,0,0,.06);
+    border: 1px solid var(--line);
+
+    box-shadow:
+      0 8px 24px rgba(0,0,0,.04);
   }
 
   .government-table-head {
@@ -108,10 +119,9 @@
 
     padding: 13px 16px;
 
-    background:
-      rgba(0,0,0,.035);
+    background: var(--section);
 
-    color: #777;
+    color: var(--primary-dark);
 
     font-size: 12px;
     font-weight: 850;
@@ -137,7 +147,7 @@
       16px;
 
     border-top:
-      1px solid rgba(0,0,0,.06);
+      1px solid var(--line);
   }
 
   /* =========================
@@ -147,14 +157,15 @@
   .government-row-top {
     display: flex;
     align-items: center;
+
     gap: 7px;
 
-    color: #888;
+    flex-wrap: wrap;
+
+    color: var(--text-light);
 
     font-size: 11px;
     font-weight: 800;
-
-    flex-wrap: wrap;
   }
 
   .government-row-top span {
@@ -167,7 +178,7 @@
 
   .government-map-link,
   .government-website-link {
-    color: #2b6fff;
+    color: var(--primary);
 
     text-decoration: none;
 
@@ -194,12 +205,12 @@
 
     flex: 1;
 
-    color: #111;
+    color: var(--text);
 
     font-size: 14px;
     font-weight: 760;
 
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
   /* =========================
@@ -209,7 +220,7 @@
   .government-meta {
     margin-top: 6px;
 
-    color: #777;
+    color: var(--muted);
 
     font-size: 12px;
     line-height: 1.65;
@@ -229,7 +240,7 @@
   }
 
   .government-phone-link {
-    color: #111;
+    color: var(--primary-dark);
 
     font-size: 14px;
     font-weight: 850;
@@ -246,7 +257,7 @@
 
     text-align: center;
 
-    color: #888;
+    color: var(--text-light);
 
     font-size: 13px;
     font-weight: 700;
