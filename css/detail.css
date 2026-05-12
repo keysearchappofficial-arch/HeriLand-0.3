@@ -610,21 +610,31 @@
     height: 320px;
   }
 
-  .detail-back,
-  .detail-save {
-    top: 18px;
+.detail-back {
+  top: 18px;
+  left: 18px;
 
-    width: 42px;
-    height: 42px;
-  }
+  width: 42px;
+  height: 42px;
+}
 
-  .detail-back {
-    left: 18px;
-  }
+.detail-actions {
+  top: 18px;
+  right: 18px;
 
-  .detail-save {
-    right: 18px;
-  }
+  gap: 9px;
+}
+
+.detail-action-btn {
+  width: 42px;
+  height: 42px;
+
+  font-size: 20px;
+}
+
+.detail-trip {
+  font-size: 21px;
+}
 
   .detail-panel {
     width: 100%;
