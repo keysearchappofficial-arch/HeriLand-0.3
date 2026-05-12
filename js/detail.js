@@ -403,16 +403,22 @@ function bindReviewSheet() {
 
   if (!openBtn || !layer) return;
 
-  openBtn.addEventListener("click", () => {
-    selectedReviewRating = 5;
+openBtn.addEventListener("click", () => {
 
-    updateReviewStars();
+  selectedReviewRating = 5;
 
-    layer.classList.add("show");
+  updateReviewStars();
 
-    document.documentElement.classList.add("modal-lock");
-    document.body.classList.add("modal-lock");
-  });
+  layer.classList.add("show");
+
+  const detailPage =
+    document.getElementById("detailPage");
+
+  detailPage?.classList.add("sheet-open");
+
+  document.documentElement.classList.add("modal-lock");
+  document.body.classList.add("modal-lock");
+});
 
   backdrop?.addEventListener("click", closeReviewSheet);
   closeBtn?.addEventListener("click", closeReviewSheet);
@@ -430,17 +436,18 @@ function bindReviewSheet() {
 }
 
 function closeReviewSheet() {
+
   const layer =
     document.getElementById("reviewSheetLayer");
 
-  layer?.classList.remove("show");
+  const detailPage =
+    document.getElementById("detailPage");
 
-  const comment =
-    document.getElementById("reviewComment");
+  if (!layer) return;
 
-  if (comment) {
-    comment.value = "";
-  }
+  layer.classList.remove("show");
+
+  detailPage?.classList.remove("sheet-open");
 
   document.documentElement.classList.remove("modal-lock");
   document.body.classList.remove("modal-lock");
