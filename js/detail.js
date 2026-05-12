@@ -403,22 +403,26 @@ function bindReviewSheet() {
 
   if (!openBtn || !layer) return;
 
-openBtn.addEventListener("click", () => {
+  /* 關鍵：把 sheet 移到 body，避免被 detailPage scroll 影響 */
+  if (layer.parentElement !== document.body) {
+    document.body.appendChild(layer);
+  }
 
-  selectedReviewRating = 5;
+  openBtn.addEventListener("click", () => {
+    selectedReviewRating = 5;
 
-  updateReviewStars();
+    updateReviewStars();
 
-  layer.classList.add("show");
+    layer.classList.add("show");
 
-  const detailPage =
-    document.getElementById("detailPage");
+    const detailPage =
+      document.getElementById("detailPage");
 
-  detailPage?.classList.add("sheet-open");
+    detailPage?.classList.add("sheet-open");
 
-  document.documentElement.classList.add("modal-lock");
-  document.body.classList.add("modal-lock");
-});
+    document.documentElement.classList.add("modal-lock");
+    document.body.classList.add("modal-lock");
+  });
 
   backdrop?.addEventListener("click", closeReviewSheet);
   closeBtn?.addEventListener("click", closeReviewSheet);
