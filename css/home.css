@@ -852,3 +852,73 @@
 .footer-links a:hover {
   opacity: .5;
 }
+
+/* =========================
+   Detail Top Actions
+========================= */
+
+.detail-actions {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 8;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-action-btn {
+  width: 46px;
+  height: 46px;
+
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+
+  background: rgba(17,17,17,.52);
+  color: #fff;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  font-weight: 750;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.16);
+
+  transition:
+    transform .18s var(--ease),
+    background .18s var(--ease),
+    border-color .18s var(--ease);
+}
+
+.detail-action-btn:hover {
+  transform: scale(1.05);
+
+  background: rgba(17,17,17,.76);
+  border-color: rgba(255,255,255,.34);
+}
+
+.detail-action-btn.active,
+.detail-save.active,
+.detail-trip.active {
+  background: rgba(17,17,17,.92);
+  color: #fff;
+}
+
+.detail-trip {
+  font-size: 24px;
+}
+
+/* 避免舊版單顆 detail-save 樣式干擾 */
+.detail-gallery > .detail-save:not(.detail-action-btn) {
+  display: none;
+}
