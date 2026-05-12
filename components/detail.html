@@ -130,62 +130,104 @@
 
     </section>
 
-    <!-- Reviews -->
-    <section class="detail-reviews">
+<!-- Reviews -->
+<section class="detail-reviews">
 
-      <div class="detail-review-head">
+  <div class="detail-review-head">
 
-        <h2>Traveler</h2>
+    <h2>Traveler</h2>
 
-        <button
-          class="detail-review-more"
-          type="button">
-          more
-        </button>
+    <button
+      class="detail-review-more"
+      type="button">
+      more
+    </button>
 
+  </div>
+
+  <button
+    class="detail-write-review"
+    id="detailWriteReviewBtn"
+    type="button">
+    share your experience
+  </button>
+
+  <div
+    class="detail-review-list"
+    id="detailReviewList">
+
+    <article class="detail-review-card">
+      <strong>Mei Lin</strong>
+      <span>★★★★★</span>
+      <p>
+        Best enjoyed in the evening,
+        easygoing, relaxing, and great for photos.
+      </p>
+    </article>
+
+    <article class="detail-review-card">
+      <strong>Daniel</strong>
+      <span>★★★★★</span>
+      <p>
+        Quiet and peaceful,
+        perfect for a slow walk.
+      </p>
+    </article>
+
+  </div>
+
+</section>
+
+<!-- Review Sheet -->
+<div
+  class="review-sheet-layer"
+  id="reviewSheetLayer">
+
+  <div
+    class="review-sheet-backdrop"
+    id="reviewSheetBackdrop">
+  </div>
+
+  <div class="review-sheet-panel">
+
+    <div class="review-sheet-handle"></div>
+
+    <div class="review-sheet-head">
+      <div>
+        <small>Traveler Review</small>
+        <h2>Share your experience</h2>
       </div>
 
-      <!-- write review -->
       <button
-        class="detail-write-review"
+        id="reviewSheetClose"
         type="button">
-
-        share your experience
-
+        ×
       </button>
+    </div>
 
-      <!-- review list -->
-      <div class="detail-review-list">
+    <div class="review-rating" id="reviewRating">
+      <button type="button" data-rate="1">★</button>
+      <button type="button" data-rate="2">★</button>
+      <button type="button" data-rate="3">★</button>
+      <button type="button" data-rate="4">★</button>
+      <button type="button" data-rate="5">★</button>
+    </div>
 
-        <article class="detail-review-card">
+    <textarea
+      id="reviewComment"
+      placeholder="What did you feel about this place?"
+    ></textarea>
 
-          <strong>Mei Lin</strong>
+    <button
+      class="review-submit-btn"
+      id="reviewSubmitBtn"
+      type="button">
+      Submit Review
+    </button>
 
-          <span>★★★★★</span>
+  </div>
 
-          <p>
-           Best enjoyed in the evening
-           easygoing, relaxing, and great for photos.
-          </p>
-
-        </article>
-
-        <article class="detail-review-card">
-
-          <strong>Daniel</strong>
-
-          <span>★★★★★</span>
-
-          <p>
-            Quiet and peaceful,
-            perfect for a slow walk.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
+</div>
 
   </div>
   
