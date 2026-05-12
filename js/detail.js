@@ -9,8 +9,10 @@ let currentDetailItem = null;
 let selectedReviewRating = 5;
 
 export function initDetail() {
+
   bindDetailMoreMenu();
   bindReviewSheet();
+  bindReviewMore();
 
   window.openDetail = openDetail;
   window.closeDetail = closeDetail;
@@ -514,4 +516,107 @@ function escapeHtml(text) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function bindReviewMore() {
+
+  const moreBtn =
+    document.querySelector(".detail-review-more");
+
+  const layer =
+    document.getElementById("reviewListLayer");
+
+  const backdrop =
+    document.getElementById("reviewListBackdrop");
+
+  const closeBtn =
+    document.getElementById("reviewListClose");
+
+  if (!moreBtn || !layer) return;
+
+  if (layer.parentElement !== document.body) {
+    document.body.appendChild(layer);
+  }
+
+  moreBtn.addEventListener("click", () => {
+
+    renderReviewList();
+
+    layer.classList.add("show");
+
+    document.documentElement.classList.add("modal-lock");
+    document.body.classList.add("modal-lock");
+
+  });
+
+  backdrop?.addEventListener(
+    "click",
+    closeReviewList
+  );
+
+  closeBtn?.addEventListener(
+    "click",
+    closeReviewList
+  );
+}
+
+function closeReviewList() {
+
+  const layer =
+    document.getElementById("reviewListLayer");
+
+  layer?.classList.remove("show");
+
+  document.documentElement.classList.remove("modal-lock");
+  document.body.classList.remove("modal-lock");
+}
+
+function renderReviewList() {
+
+  const content =
+    document.getElementById("reviewListContent");
+
+  if (!content) return;
+
+  const reviews = [
+    {
+      name: "Mei Lin",
+      stars: 5,
+      text: "Best enjoyed in the evening, easygoing and relaxing."
+    },
+    {
+      name: "Daniel",
+      stars: 5,
+      text: "Quiet and peaceful, perfect for a slow walk."
+    },
+    {
+      name: "Sarah",
+      stars: 4,
+      text: "Loved the atmosphere and local food nearby."
+    },
+    {
+      name: "Jason",
+      stars: 5,
+      text: "Felt calm immediately after arriving here."
+    }
+  ];
+
+  content.innerHTML =
+    reviews.map(review => `
+      <article class="review-list-card">
+
+        <div class="review-list-top">
+
+          <strong>${review.name}</strong>
+
+          <span>
+            ${"★".repeat(review.stars)}
+          </span>
+
+        </div>
+
+        <p>${review.text}</p>
+
+      </article>
+    `).join("");
 }
