@@ -1,9 +1,5 @@
 @media (max-width: 820px) {
 
-  /* =========================
-     My Page - Mobile Base
-  ========================= */
-
   .my-page {
     width: 100%;
     overflow-x: hidden;
@@ -11,40 +7,47 @@
 
   .my-nav-stack {
     min-height: calc(100dvh - 120px);
-    overflow:hidden;
+    overflow: hidden;
   }
 
   .my-view-main.is-pushed {
     transform: translateX(-36%);
   }
 
-.my-view-sub {
-  position: fixed;
-  inset: 0;
+  .my-view-sub {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
 
-  z-index: 500;
+    max-height: none;
+    height: 100dvh;
 
-  max-height: none;
-  height: 100dvh;
+    overflow-y: auto;
 
-  overflow-y: auto;
+    padding: 72px 18px 120px;
 
-  padding: 72px 18px 120px;
+    background: var(--bg);
+  }
 
-  background: #f6f5f1;
-}
+  .my-view-sub:not(.active) {
+    pointer-events: none;
+  }
 
-.my-view-sub:not(.active) {
-  pointer-events: none;
-}
+  .my-view-sub.active {
+    pointer-events: auto;
+  }
 
-.my-view-sub.active {
-  pointer-events: auto;
-}
-
-  /* =========================
-     Main Summary
-  ========================= */
+  .my-ios-summary,
+  .my-ios-list,
+  #savedView .my-sheet-grid,
+  #recentView .recent-sheet-list,
+  #languageView .my-settings-group,
+  #currencyView .my-settings-group {
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 
   .my-ios-summary {
     display: flex;
@@ -55,19 +58,18 @@
     padding: 16px;
 
     border-radius: 26px;
+  }
 
-    background: rgba(255,255,255,.58);
-    border: 1px solid rgba(0,0,0,.045);
-
-    backdrop-filter: blur(20px);
+  .my-avatar,
+  .account-avatar {
+    background: var(--primary-dark);
+    color: #fff;
   }
 
   .my-avatar {
     width: 58px;
     height: 58px;
-
     border-radius: 18px;
-
     font-size: 22px;
   }
 
@@ -77,6 +79,7 @@
   }
 
   .my-ios-summary h1 {
+    color: var(--text);
     font-size: 27px;
     line-height: 1;
     letter-spacing: -1.1px;
@@ -84,41 +87,24 @@
 
   .my-ios-summary p {
     margin-top: 6px;
-
-    color: #777;
-
+    color: var(--muted);
     font-size: 13px;
   }
 
   .my-level-badge {
     flex-shrink: 0;
-
     padding: 8px 11px;
-
     border-radius: 999px;
-
-    background: #111;
+    background: var(--primary);
     color: #fff;
-
     font-size: 12px;
     font-weight: 850;
   }
 
-  /* =========================
-     iOS Lists
-  ========================= */
-
   .my-ios-list {
     margin-top: 16px;
-
     overflow: hidden;
-
     border-radius: 24px;
-
-    background: rgba(255,255,255,.58);
-    border: 1px solid rgba(0,0,0,.045);
-
-    backdrop-filter: blur(20px);
   }
 
   .my-ios-list-secondary {
@@ -127,7 +113,6 @@
 
   .my-ios-row {
     position: relative;
-
     min-height: 58px;
 
     display: flex;
@@ -146,14 +131,11 @@
   .my-ios-row + .my-ios-row::before {
     content: "";
     position: absolute;
-
     left: 54px;
     right: 0;
     top: 0;
-
     height: 1px;
-
-    background: rgba(0,0,0,.055);
+    background: var(--line);
   }
 
   .my-row-icon {
@@ -165,14 +147,13 @@
 
     border-radius: 10px;
 
-    background: rgba(0,0,0,.055);
-    color: #111;
+    background: rgba(29,92,79,.08);
+    color: var(--primary-dark);
 
     font-size: 16px;
     font-weight: 800;
 
     flex-shrink: 0;
-    align-item:center;
   }
 
   .my-row-main {
@@ -182,12 +163,9 @@
 
   .my-row-main span {
     display: block;
-
-    color: #111;
-
+    color: var(--text);
     font-size: 15px;
     font-weight: 760;
-
     letter-spacing: -0.25px;
   }
 
@@ -195,34 +173,26 @@
     display: flex;
     align-items: center;
     gap: 6px;
-
     flex-shrink: 0;
   }
 
   .my-row-side em {
-    color: #8a8a8a;
-
+    color: var(--muted);
     font-size: 13px;
     font-style: normal;
     font-weight: 680;
   }
 
   .my-row-side strong {
-    color: #b0b0b0;
-
+    color: var(--text-light);
     font-size: 22px;
     font-weight: 500;
     line-height: 1;
   }
 
-  /* =========================
-     Sub Page Header
-  ========================= */
-
   .my-sub-head {
     align-items: flex-start;
     gap: 12px;
-
     margin-bottom: 24px;
   }
 
@@ -230,23 +200,24 @@
     width: 40px;
     height: 40px;
 
+    border: 1px solid var(--line);
     border-radius: 13px;
 
-    background: rgba(255,255,255,.62);
+    background: rgba(255,255,255,.72);
+    color: var(--primary-dark);
+
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     font-size: 28px;
   }
 
   .my-sub-head h2 {
+    color: var(--text);
     font-size: 32px;
     line-height: 1;
     letter-spacing: -1.3px;
   }
-
-  /* =========================
-     Saved View
-  ========================= */
 
   #savedView .my-sheet-grid {
     display: flex;
@@ -256,11 +227,6 @@
     overflow: hidden;
 
     border-radius: 26px;
-
-    background: rgba(255,255,255,.58);
-    border: 1px solid rgba(0,0,0,.045);
-
-    backdrop-filter: blur(18px);
   }
 
   #savedView .saved-card {
@@ -283,22 +249,17 @@
   #savedView .saved-card + .saved-card::before {
     content: "";
     position: absolute;
-
     left: 100px;
     right: 0;
     top: 0;
-
     height: 1px;
-
-    background: rgba(0,0,0,.055);
+    background: var(--line);
   }
 
   #savedView .saved-card img {
     width: 76px;
     height: 76px;
-
     border-radius: 18px;
-
     object-fit: cover;
     flex-shrink: 0;
   }
@@ -310,6 +271,7 @@
   }
 
   #savedView .saved-card-body h3 {
+    color: var(--text);
     font-size: 16px;
     line-height: 1.28;
     letter-spacing: -0.3px;
@@ -317,9 +279,7 @@
 
   #savedView .saved-card-body p {
     margin-top: 5px;
-
-    color: #777;
-
+    color: var(--muted);
     font-size: 12px;
     line-height: 1.55;
 
@@ -330,21 +290,15 @@
     overflow: hidden;
   }
 
-  #savedView .saved-card::after {
+  #savedView .saved-card::after,
+  #recentView .recent-item::after {
     content: "›";
-
     margin-left: auto;
-
-    color: #b0b0b0;
-
+    color: var(--text-light);
     font-size: 24px;
     font-weight: 500;
     line-height: 1;
   }
-
-  /* =========================
-     Trip View
-  ========================= */
 
   .trip-sheet-grid {
     gap: 14px;
@@ -352,11 +306,11 @@
 
   #tripView .trip-card {
     padding: 20px;
-
     border-radius: 24px;
-
-    background: rgba(255,255,255,.6);
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--line);
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   #tripView .trip-card h3 {
@@ -364,12 +318,9 @@
   }
 
   #tripView .trip-card p {
+    color: var(--muted);
     font-size: 13px;
   }
-
-  /* =========================
-     Recent View
-  ========================= */
 
   #recentView .recent-sheet-list {
     display: flex;
@@ -379,11 +330,6 @@
     overflow: hidden;
 
     border-radius: 26px;
-
-    background: rgba(255,255,255,.58);
-    border: 1px solid rgba(0,0,0,.045);
-
-    backdrop-filter: blur(18px);
   }
 
   #recentView .recent-item {
@@ -406,27 +352,23 @@
   #recentView .recent-item + .recent-item::before {
     content: "";
     position: absolute;
-
     left: 88px;
     right: 0;
     top: 0;
-
     height: 1px;
-
-    background: rgba(0,0,0,.055);
+    background: var(--line);
   }
 
   #recentView .recent-item img {
     width: 64px;
     height: 64px;
-
     border-radius: 16px;
-
     object-fit: cover;
     flex-shrink: 0;
   }
 
   #recentView .recent-item h3 {
+    color: var(--text);
     font-size: 15px;
     line-height: 1.3;
     letter-spacing: -0.25px;
@@ -434,9 +376,7 @@
 
   #recentView .recent-item p {
     margin-top: 4px;
-
-    color: #777;
-
+    color: var(--muted);
     font-size: 12px;
     line-height: 1.5;
 
@@ -447,25 +387,8 @@
     overflow: hidden;
   }
 
-  #recentView .recent-item::after {
-    content: "›";
-
-    margin-left: auto;
-
-    color: #b0b0b0;
-
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 1;
-  }
-
-  /* =========================
-     Account / AI / Settings Cards
-  ========================= */
-
   .account-card {
     padding: 24px;
-
     border-radius: 26px;
   }
 
@@ -476,24 +399,15 @@
   .account-avatar {
     width: 68px;
     height: 68px;
-
     border-radius: 22px;
   }
 
-  /* =========================
-     Version / Sign Out
-  ========================= */
-
   .my-version {
     margin-top: 22px;
-
     text-align: center;
-
-    color: #9a9a9a;
-
+    color: var(--text-light);
     font-size: 12px;
     font-weight: 700;
-
     letter-spacing: .04em;
   }
 
@@ -504,15 +418,15 @@
     margin-top: 18px;
     margin-bottom: 60px;
 
-    border: none;
     border-radius: 20px;
 
-    background: rgba(255,255,255,.58);
-    border: 1px solid rgba(0,0,0,.05);
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--line);
 
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
-    color: #d11f1f;
+    color: #b83b3b;
 
     font-size: 15px;
     font-weight: 820;
@@ -529,216 +443,169 @@
   }
 
   .my-signout-btn:hover {
-    background: rgba(255,255,255,.72);
+    background: rgba(255,255,255,.86);
   }
-  
-  /* =========================
-   Language / Currency View
-========================= */
 
-#languageView .my-settings-group,
-#currencyView .my-settings-group {
-  margin-top: 4px;
+  #languageView .my-settings-group,
+  #currencyView .my-settings-group {
+    margin-top: 4px;
+    overflow: hidden;
+    border-radius: 24px;
+  }
 
-  overflow: hidden;
+  #languageView .my-settings-group small,
+  #currencyView .my-settings-group small {
+    display: none;
+  }
 
-  border-radius: 24px;
+  #languageView .my-settings-row,
+  #currencyView .my-settings-row {
+    min-height: 56px;
+    padding: 0 16px;
+    background: transparent;
+    border: none;
+  }
 
-  background: rgba(255,255,255,.56);
-  border: 1px solid rgba(0,0,0,.045);
+  #languageView .my-settings-row + .my-settings-row,
+  #currencyView .my-settings-row + .my-settings-row {
+    border-top: none;
+  }
 
-  backdrop-filter: blur(18px);
-}
+  #languageView .my-settings-row + .my-settings-row::before,
+  #currencyView .my-settings-row + .my-settings-row::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: var(--line);
+  }
 
-#languageView .my-settings-group small,
-#currencyView .my-settings-group small {
-  display: none;
-}
+  #languageView .my-settings-row span,
+  #currencyView .my-settings-row span {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 720;
+    letter-spacing: -0.25px;
+  }
 
-#languageView .my-settings-row,
-#currencyView .my-settings-row {
-  min-height: 56px;
+  #languageView .my-settings-row strong,
+  #currencyView .my-settings-row strong {
+    color: var(--primary-dark);
+    font-size: 16px;
+    font-weight: 850;
+  }
 
-  padding: 0 16px;
+  #languageView .my-settings-row.active span,
+  #currencyView .my-settings-row.active span {
+    font-weight: 850;
+  }
 
-  background: transparent;
-  border: none;
-}
+  #badgesView .badge-wall {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
 
-#languageView .my-settings-row + .my-settings-row,
-#currencyView .my-settings-row + .my-settings-row {
-  border-top: none;
-}
+  .badge-item {
+    min-height: 138px;
 
-#languageView .my-settings-row + .my-settings-row::before,
-#currencyView .my-settings-row + .my-settings-row::before {
-  content: "";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  position: absolute;
+    padding: 16px 10px;
 
-  left: 16px;
-  right: 0;
-  top: 0;
+    border-radius: 24px;
 
-  height: 1px;
+    background: rgba(255,255,255,.68);
+    border: 1px solid var(--line);
 
-  background: rgba(0,0,0,.055);
-}
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-#languageView .my-settings-row span,
-#currencyView .my-settings-row span {
-  font-size: 15px;
-  font-weight: 720;
-  letter-spacing: -0.25px;
-}
+    text-align: center;
 
-#languageView .my-settings-row strong,
-#currencyView .my-settings-row strong {
-  color: #111;
+    opacity: .42;
+  }
 
-  font-size: 16px;
-  font-weight: 850;
-}
+  .badge-item.unlocked {
+    opacity: 1;
+  }
 
-#languageView .my-settings-row.active span,
-#currencyView .my-settings-row.active span {
-  font-weight: 850;
-}
+  .badge-mark {
+    width: 54px;
+    height: 54px;
 
-/* =========================
-   Badges View
-========================= */
+    display: grid;
+    place-items: center;
 
-#badgesView .badge-wall {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
+    border-radius: 18px;
 
-/* Badge */
+    background: rgba(29,92,79,.08);
+    color: var(--primary-dark);
 
-.badge-item {
-  min-height: 138px;
+    font-size: 26px;
+    font-weight: 900;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    margin-bottom: 12px;
+  }
 
-  padding: 16px 10px;
+  .badge-item.unlocked .badge-mark {
+    background: var(--primary);
+    color: #fff;
+  }
 
-  border-radius: 24px;
+  .badge-item strong {
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+  }
 
-  background: rgba(255,255,255,.5);
-  border: 1px solid rgba(0,0,0,.045);
+  .badge-item span {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 760;
+  }
 
-  backdrop-filter: blur(18px);
+  .badge-item:not(.unlocked) .badge-mark {
+    filter: grayscale(1);
+  }
 
-  text-align: center;
+  .info-page {
+    padding-top: 8px;
+  }
 
-  opacity: .42;
-}
+  .info-section + .info-section {
+    margin-top: 42px;
+  }
 
-.badge-item.unlocked {
-  opacity: 1;
-}
+  .info-section small {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--text-light);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
 
-/* Mark */
+  .info-section h3 {
+    color: var(--text);
+    font-size: 30px;
+    line-height: 1.08;
+    letter-spacing: -1.4px;
+  }
 
-.badge-mark {
-  width: 54px;
-  height: 54px;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 18px;
-
-  background: rgba(0,0,0,.06);
-  color: #111;
-
-  font-size: 26px;
-  font-weight: 900;
-
-  margin-bottom: 12px;
-}
-
-.badge-item.unlocked .badge-mark {
-  background: #111;
-  color: #fff;
-}
-
-/* Text */
-
-.badge-item strong {
-  font-size: 13px;
-  line-height: 1.25;
-  letter-spacing: -0.2px;
-}
-
-.badge-item span {
-  margin-top: 6px;
-
-  color: #8a8a8a;
-
-  font-size: 11px;
-  font-weight: 760;
-}
-
-/* Locked */
-
-.badge-item:not(.unlocked) .badge-mark {
-  filter: grayscale(1);
-}
-
-/* =========================
-   Info Pages
-========================= */
-
-.info-page {
-  padding-top: 8px;
-}
-
-/* Section */
-
-.info-section + .info-section {
-  margin-top: 42px;
-}
-
-/* Small Label */
-
-.info-section small {
-  display: block;
-
-  margin-bottom: 12px;
-
-  color: #9a9a9a;
-
-  font-size: 11px;
-  font-weight: 800;
-
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-/* Title */
-
-.info-section h3 {
-  font-size: 30px;
-  line-height: 1.08;
-
-  letter-spacing: -1.4px;
-}
-
-/* Paragraph */
-
-.info-section p {
-  margin-top: 18px;
-
-  color: #666;
-
-  font-size: 15px;
-  line-height: 1.95;
-}
+  .info-section p {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.95;
+  }
 
 }
