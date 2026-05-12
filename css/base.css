@@ -67,3 +67,9 @@ svg {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+html.modal-lock,
+body.modal-lock {
+  overflow: hidden;
+  height: 100%;
+}
