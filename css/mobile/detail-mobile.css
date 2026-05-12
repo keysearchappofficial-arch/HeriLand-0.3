@@ -527,15 +527,21 @@
 
   .review-sheet-panel {
 
+    position: fixed;
+
     left: 0;
 
     right: 0;
+
+    top: 0;
 
     bottom: 0;
 
     width: 100%;
 
-    min-height: 100dvh;
+    height: 100dvh;
+
+    min-height: 0;
 
     padding:
 
@@ -545,7 +551,7 @@
 
       calc(18px + env(safe-area-inset-bottom));
 
-    border-radius: 28px 28px 0 0;
+    border-radius: 0;
 
     background: rgba(255,255,255,.98);
 
