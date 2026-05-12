@@ -862,18 +862,6 @@ function openDetail(place) {
       .join("");
   }
 
-const tripBtn =
-  document.getElementById("detailTripBtn");
-
-if (tripBtn) {
-  tripBtn.classList.remove("active");
-
-  tripBtn.onclick = () => {
-    saveItem("trip", normalized);
-    tripBtn.classList.add("active");
-  };
-}
-
 const detailSaveBtn =
   document.getElementById("detailSaveBtn");
 
@@ -910,6 +898,11 @@ if (detailSaveBtn) {
 
     updateSaveButtons(normalized.id);
   };
+}
+
+els.detailPage.classList.add("show");
+document.body.style.overflow = "hidden";
+
 }
 
 function renderDetailSlider(images, altText) {
