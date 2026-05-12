@@ -1013,13 +1013,6 @@ function closeDetailMoreMenu() {
   layer?.classList.remove("show");
 }
 
-function closeDetailMoreMenu() {
-  const moreWrap =
-    document.querySelector(".detail-more-wrap");
-
-  moreWrap?.classList.remove("show");
-}
-
 function bindMoodButtons() {
   document
     .querySelectorAll(".mood-btn, .mood-chip")
