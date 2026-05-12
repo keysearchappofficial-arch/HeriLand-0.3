@@ -685,7 +685,7 @@
   position: fixed;
   inset: 0;
 
-  z-index: 2600;
+  z-index: 5000;
 
   pointer-events: none;
 }
@@ -835,4 +835,8 @@
     font-size: 15px;
   }
 
+}
+
+.detail-page.sheet-open {
+  overflow: hidden;
 }
