@@ -6,7 +6,6 @@
 
   .detail-page {
     background: var(--bg);
-
     overscroll-behavior-y: contain;
   }
 
@@ -29,7 +28,6 @@
   .detail-gallery img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
   }
 
@@ -45,6 +43,8 @@
         rgba(0,0,0,.46),
         rgba(0,0,0,.08) 60%
       );
+
+    pointer-events: none;
   }
 
   /* =========================
@@ -53,9 +53,7 @@
 
   .detail-slider {
     scroll-snap-type: x mandatory;
-
     -webkit-overflow-scrolling: touch;
-
     scrollbar-width: none;
   }
 
@@ -75,7 +73,6 @@
   .detail-dots {
     right: 18px;
     bottom: 18px;
-
     gap: 6px;
   }
 
@@ -92,10 +89,11 @@
      Top Buttons
   ========================= */
 
-  .detail-back{
+  .detail-back {
     position: absolute;
 
     top: calc(18px + env(safe-area-inset-top));
+    left: 18px;
 
     width: 42px;
     height: 42px;
@@ -104,6 +102,7 @@
     border-radius: 999px;
 
     background: rgba(255,255,255,.92);
+    color: var(--primary-dark);
 
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -111,11 +110,146 @@
     box-shadow:
       0 8px 22px rgba(0,0,0,.08);
 
-    z-index: 8;
+    display: grid;
+    place-items: center;
+
+    font-size: 28px;
+    line-height: 1;
+
+    z-index: 10;
   }
 
-  .detail-back {
-    left: 18px;
+  .detail-actions {
+    position: absolute;
+
+    top: calc(18px + env(safe-area-inset-top));
+    right: 16px;
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .detail-action-btn {
+    position: static;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.92);
+    color: var(--primary-dark);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow:
+      0 8px 22px rgba(0,0,0,.08);
+
+    display: grid;
+    place-items: center;
+
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+
+    cursor: pointer;
+  }
+
+  .detail-action-btn.active {
+    background: var(--primary-dark);
+    color: #fff;
+  }
+
+  .detail-save {
+    font-size: 20px;
+  }
+
+  .detail-more {
+    font-size: 25px;
+    padding-bottom: 4px;
+  }
+
+  /* =========================
+     More Menu
+  ========================= */
+
+  .detail-more-wrap {
+    position: relative;
+  }
+
+  .detail-more-menu {
+    position: absolute;
+
+    top: calc(100% + 10px);
+    right: 0;
+
+    width: 230px;
+
+    padding: 10px;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,.97);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,.7);
+
+    box-shadow:
+      0 18px 40px rgba(0,0,0,.14);
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-6px);
+
+    transition:
+      opacity .2s ease,
+      transform .2s ease,
+      visibility .2s ease;
+
+    z-index: 30;
+  }
+
+  .detail-more-wrap.show .detail-more-menu {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+  }
+
+  .detail-more-menu button {
+    width: 100%;
+
+    border: none;
+    border-radius: 15px;
+
+    background: transparent;
+
+    padding: 13px 14px;
+
+    color: var(--text);
+
+    font-size: 14px;
+    font-weight: 760;
+
+    text-align: left;
+
+    cursor: pointer;
+  }
+
+  .detail-more-menu button:active {
+    background: var(--section);
   }
 
   /* =========================
@@ -198,13 +332,11 @@
 
   .detail-guide {
     margin-top: 24px;
-
     padding-bottom: 24px;
   }
 
   .detail-guide small {
     font-size: 10px;
-
     letter-spacing: .12em;
   }
 
@@ -244,13 +376,8 @@
     line-height: 1.82;
   }
 
-  /* =========================
-     Pills
-  ========================= */
-
   .detail-section ul {
     gap: 8px;
-
     margin-top: 14px;
   }
 
@@ -344,116 +471,7 @@
   ========================= */
 
   .detail-cta {
-    position: sticky;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    z-index: 2020;
-
-    display: grid;
-    grid-template-columns: 1fr;
-
-    gap: 10px;
-
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-bottom: -34px;
-
-    padding:
-      12px
-      16px
-      calc(12px + env(safe-area-inset-bottom));
-
-    background: rgba(243,246,244,.94);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    border-top: 1px solid var(--line);
-
-    box-shadow:
-      0 -10px 30px rgba(0,0,0,.04);
+    display: none;
   }
-
-  .detail-cta button {
-    height: 52px;
-
-    border: none;
-    border-radius: 16px;
-
-    font-size: 14px;
-    font-weight: 850;
-
-    cursor: pointer;
-  }
-
-  .detail-cta .secondary-btn {
-    background: rgba(255,255,255,.96);
-
-    border: 1px solid var(--line);
-
-    color: var(--text);
-  }
-
-  .detail-cta .primary-cta {
-    background: var(--primary-dark);
-
-    color: #fff;
-
-    box-shadow:
-      0 8px 24px rgba(0,0,0,.18);
-  }
-  
-  /* =========================
-   Detail Top Actions
-========================= */
-
-.detail-actions {
-  position: absolute;
-
-  top: calc(18px + env(safe-area-inset-top));
-  right: 16px;
-
-  z-index: 9;
-
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.detail-action-btn {
-  width: 42px;
-  height: 42px;
-
-  border: none;
-  border-radius: 999px;
-
-  background: rgba(255,255,255,.92);
-  color: var(--primary-dark);
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.08);
-
-  display: grid;
-  place-items: center;
-
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.detail-action-btn.active {
-  background: var(--primary-dark);
-  color: #fff;
-}
-
-.detail-trip {
-  font-size: 21px;
-}
 
 }
