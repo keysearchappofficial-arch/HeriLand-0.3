@@ -94,6 +94,11 @@ async function initComponents() {
     "#aiGuide",
     "./components/ai-guide.html"
   );
+  
+await loadComponent(
+  "#detailContainer",
+  "./components/detail.html"
+);
 
   await renderMobileMenu();
 
