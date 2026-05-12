@@ -442,10 +442,8 @@ function closeReviewSheet() {
     comment.value = "";
   }
 
-  if (!document.getElementById("detailMoreLayer")?.classList.contains("show")) {
-    document.documentElement.classList.remove("modal-lock");
-    document.body.classList.remove("modal-lock");
-  }
+  document.documentElement.classList.remove("modal-lock");
+  document.body.classList.remove("modal-lock");
 }
 
 function updateReviewStars() {
