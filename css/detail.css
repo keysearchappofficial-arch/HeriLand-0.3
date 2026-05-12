@@ -724,6 +724,7 @@
     opacity .22s ease,
     transform .22s ease,
     visibility .22s ease;
+  z-index:800px;
 }
 
 .detail-more-wrap.show .detail-more-menu {
