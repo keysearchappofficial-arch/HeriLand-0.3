@@ -1,8 +1,9 @@
+import { initDetail } from "../detail.js";
+
 import {
   saveItem,
   removeItem,
-  isSaved,
-  addRecent
+  isSaved
 } from "../storage.js";
 
 import {
@@ -72,6 +73,7 @@ bindRestaurantSheet();
 
   bindEventControls();
   bindEventAutoSlide();
+  initDetail();
 }
 
 /* =========================
@@ -292,159 +294,6 @@ function closeEventDetail() {
 window.openEventDetail = openEventDetail;
 window.closeEventDetail = closeEventDetail;
 
-function openDetail(place) {
-  addRecent(place);
-
-  if (!place) return;
-
-  const detailPage =
-    document.getElementById("detailPage");
-
-  if (!detailPage) return;
-
-  const normalized = {
-    ...place,
-    name: place.name || place.title || "Untitled Place",
-    image: place.image || "",
-    address: place.address || place.location || place.meta || "Sarawak",
-    phone: place.phone || "Not Available",
-    hours: place.hours || "Check Before Visiting",
-    contactName: place.contactName || "HeriLand Guide",
-    contactImage: place.contactImage || place.image || "",
-    intro:
-      place.intro ||
-      place.desc ||
-      place.reason ||
-      place.guide ||
-      "A place worth staying awhile.",
-    type:
-      place.type ||
-      place.food ||
-      place.tags?.[0] ||
-      "Recommended Place",
-    area:
-      place.area ||
-      place.city ||
-      place.location ||
-      place.meta ||
-      "Sarawak",
-    score: place.score || "4.8",
-    reviewCount: place.reviewCount || "128",
-    tags:
-      place.tags ||
-      ["Slow Travel", "Photo Friendly", "Recommended"],
-    services:
-      place.services ||
-      [
-        "Good for photos and slow visits",
-        "Can be added to your trip",
-        "Navigation available"
-      ]
-  };
-
-  setText("detailTitle", normalized.name);
-  setText("detailAddress", normalized.address);
-  setText("detailPhone", normalized.phone);
-  setText("detailHours", normalized.hours);
-  setText("detailContactName", normalized.contactName);
-  setText("detailIntro", normalized.intro);
-
-  setText("detailType", normalized.type);
-  setText("detailArea", normalized.area);
-  setText("detailScore", normalized.score);
-  setText("detailReviewCount", `${normalized.reviewCount} Reviews`);
-  setText("detailAiNote", normalized.intro);
-
-  const image =
-    document.getElementById("detailImage");
-
-  const contactImage =
-    document.getElementById("detailContactImage");
-
-  if (image) {
-    image.src = normalized.image;
-    image.alt = normalized.name;
-  }
-
-  if (contactImage) {
-    contactImage.src = normalized.contactImage;
-    contactImage.alt = normalized.contactName;
-  }
-
-  const list =
-    document.getElementById("detailServices");
-
-  if (list) {
-    list.innerHTML =
-      normalized.services
-        .map(service => `<li>${service}</li>`)
-        .join("");
-  }
-
-  const aiTags =
-    document.getElementById("detailAiTags");
-
-  if (aiTags) {
-    aiTags.innerHTML =
-      normalized.tags
-        .slice(0, 5)
-        .map(tag => `<span>${tag}</span>`)
-        .join("");
-  }
-
-  bindDetailActions(normalized);
-
-  detailPage.classList.add("show");
-  document.body.style.overflow = "hidden";
-}
-
-function bindDetailActions(item) {
-  const saveBtn =
-    document.getElementById("detailSaveBtn");
-
-  const addTripBtn =
-    document.getElementById("addTripBtn");
-
-  if (saveBtn) {
-    saveBtn.textContent =
-      isSaved("saved", item.id) ? "♥" : "♡";
-
-    saveBtn.onclick = () => {
-      if (isSaved("saved", item.id)) {
-        removeItem("saved", item.id);
-      }
-      else {
-        saveItem("saved", item);
-      }
-
-      saveBtn.textContent =
-        isSaved("saved", item.id) ? "♥" : "♡";
-
-      renderSpots();
-      renderRestaurants();
-      renderSpotSheet();
-      renderRestaurantSheet();
-    };
-  }
-
-  if (addTripBtn) {
-    addTripBtn.onclick = () => {
-      saveItem("trip", item);
-      alert("Added to My Trip");
-    };
-  }
-}
-
-function closeDetail() {
-  const detailPage =
-    document.getElementById("detailPage");
-
-  if (!detailPage) return;
-
-  detailPage.classList.remove("show");
-  document.body.style.overflow = "";
-}
-
 function setText(id, value) {
   const el =
     document.getElementById(id);
@@ -453,8 +302,6 @@ function setText(id, value) {
     el.textContent = value || "";
   }
 }
-
-window.closeDetail = closeDetail;
 
 function renderSpots() {
   const grid = document.getElementById("spotGrid");
@@ -469,7 +316,7 @@ function renderSpots() {
 
     const card = document.createElement("article");
     card.className = "business-card";
-    card.onclick = () => openDetail(spot);
+    card.onclick = () => window.openDetail(spot);
 
     card.innerHTML = `
       <div class="business-card-image">
@@ -834,7 +681,7 @@ function renderSpotSheet() {
 
     const card = document.createElement("article");
     card.className = "business-card";
-    card.onclick = () => openDetail(spot);
+    card.onclick = () => window.openDetail(spot);
 
     card.innerHTML = `
       <div class="business-card-image">
