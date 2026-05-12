@@ -9,19 +9,19 @@
     overscroll-behavior-y: contain;
   }
 
+  .detail-page.sheet-open {
+    overflow: hidden;
+  }
+
   /* =========================
      Hero
   ========================= */
 
   .detail-gallery {
     position: relative;
-
     height: 300px;
-
     border-radius: 0;
-
     overflow: hidden;
-
     background: var(--primary-dark);
   }
 
@@ -33,17 +33,14 @@
 
   .detail-gallery::after {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background:
       linear-gradient(
         to top,
         rgba(0,0,0,.46),
         rgba(0,0,0,.08) 60%
       );
-
     pointer-events: none;
   }
 
@@ -91,7 +88,6 @@
 
   .detail-back {
     position: absolute;
-
     top: calc(18px + env(safe-area-inset-top));
     left: 18px;
 
@@ -121,7 +117,6 @@
 
   .detail-actions {
     position: absolute;
-
     top: calc(18px + env(safe-area-inset-top));
     right: 16px;
 
@@ -223,28 +218,21 @@
 
   .detail-rating-row {
     margin-top: 12px;
-
     gap: 6px;
-
     font-size: 13px;
   }
 
   .detail-line {
     margin-top: 12px;
-
     color: var(--muted);
-
     font-size: 13px;
     line-height: 1.6;
   }
 
   .detail-inline-info {
     gap: 8px;
-
     color: var(--muted);
-
     font-size: 12px;
-
     line-height: 1.55;
   }
 
@@ -283,9 +271,7 @@
 
   .detail-section h2 {
     color: var(--text);
-
     font-size: 20px;
-
     letter-spacing: -0.5px;
   }
 
@@ -305,9 +291,7 @@
 
   .detail-section li {
     padding: 8px 11px;
-
     border-radius: 999px;
-
     font-size: 12px;
     font-weight: 780;
   }
@@ -334,9 +318,7 @@
 
   .detail-write-review {
     padding: 13px 14px;
-
     border-radius: 17px;
-
     font-size: 13px;
   }
 
@@ -347,13 +329,10 @@
     overflow-y: hidden;
 
     gap: 12px;
-
     padding-bottom: 6px;
 
     scroll-snap-type: x mandatory;
-
     -webkit-overflow-scrolling: touch;
-
     scrollbar-width: none;
   }
 
@@ -365,7 +344,6 @@
     flex: 0 0 82%;
 
     padding: 16px;
-
     border-radius: 22px;
 
     scroll-snap-align: start;
@@ -377,13 +355,11 @@
 
   .detail-review-card span {
     margin-top: 7px;
-
     font-size: 11px;
   }
 
   .detail-review-card p {
     margin-top: 9px;
-
     font-size: 13px;
     line-height: 1.72;
   }
@@ -395,201 +371,208 @@
   .detail-cta {
     display: none;
   }
-  
+
   /* =========================
-   More Bottom Sheet
-========================= */
+     More Bottom Sheet
+  ========================= */
 
-.detail-more-layer {
-  position: fixed;
-  inset: 0;
+  .detail-more-layer {
+    position: fixed;
+    inset: 0;
 
-  z-index: 5000;
+    z-index: 5000;
 
-  pointer-events: none;
-}
+    pointer-events: none;
+  }
 
-.detail-more-layer.show {
-  pointer-events: auto;
-}
+  .detail-more-layer.show {
+    pointer-events: auto;
+  }
 
-.detail-more-backdrop {
-  position: absolute;
-  inset: 0;
+  .detail-more-backdrop {
+    position: fixed;
+    inset: 0;
 
-  background: rgba(0,0,0,.28);
+    background: rgba(0,0,0,.28);
 
-  opacity: 0;
+    opacity: 0;
 
-  transition:
-    opacity .22s ease;
-}
+    transition:
+      opacity .22s ease;
+  }
 
-.detail-more-layer.show .detail-more-backdrop {
-  opacity: 1;
-}
+  .detail-more-layer.show .detail-more-backdrop {
+    opacity: 1;
+  }
 
-.detail-more-menu {
-  position: absolute;
+  .detail-more-menu {
+    position: fixed;
 
-  left: 0;
-  right: 0;
-  bottom: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  width: 100%;
+    width: 100%;
 
-  padding:
-    14px
-    14px
-    calc(18px + env(safe-area-inset-bottom));
+    padding:
+      14px
+      14px
+      calc(18px + env(safe-area-inset-bottom));
 
-  border-radius: 28px 28px 0 0;
+    border-radius: 28px 28px 0 0;
 
-  background: rgba(255,255,255,.97);
+    background: rgba(255,255,255,.97);
 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
-  box-shadow:
-    0 -18px 40px rgba(0,0,0,.14);
+    box-shadow:
+      0 -18px 40px rgba(0,0,0,.14);
 
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 
-  transform: translateY(100%);
+    transform: translateY(100%);
 
-  transition:
-    transform .26s var(--ease);
-}
+    transition:
+      transform .26s var(--ease);
+  }
 
-.detail-more-layer.show .detail-more-menu {
-  transform: translateY(0);
-}
+  .detail-more-layer.show .detail-more-menu {
+    transform: translateY(0);
+  }
 
-.detail-more-menu::before {
-  content: "";
+  .detail-more-menu::before {
+    content: "";
 
-  width: 42px;
-  height: 5px;
+    width: 42px;
+    height: 5px;
 
-  border-radius: 999px;
+    border-radius: 999px;
 
-  background: rgba(0,0,0,.14);
+    background: rgba(0,0,0,.14);
 
-  margin: 0 auto 12px;
-}
+    margin: 0 auto 12px;
+  }
 
-.detail-more-menu button {
-  width: 100%;
+  .detail-more-menu button {
+    width: 100%;
 
-  border: none;
-  border-radius: 16px;
+    border: none;
+    border-radius: 16px;
 
-  background: transparent;
+    background: transparent;
 
-  padding: 15px 14px;
+    padding: 15px 14px;
 
-  color: var(--text);
+    color: var(--text);
 
-  font-size: 15px;
-  font-weight: 760;
+    font-size: 15px;
+    font-weight: 760;
 
-  text-align: left;
+    text-align: left;
 
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
-  cursor: pointer;
-}
+    cursor: pointer;
+  }
 
-.detail-more-menu button:active {
-  background: var(--section);
-}
+  .detail-more-menu button:active {
+    background: var(--section);
+  }
 
-.detail-more-menu span {
-  width: 22px;
+  .detail-more-menu span {
+    width: 22px;
 
-  display: inline-flex;
-  justify-content: center;
-}
+    display: inline-flex;
+    justify-content: center;
+  }
 
-/* =========================
-   Review Bottom Sheet
-========================= */
+  /* =========================
+     Review Full Sheet
+  ========================= */
 
-.review-sheet-layer {
-  position: fixed;
-  inset: 0;
+  .review-sheet-layer {
+    position: fixed;
+    inset: 0;
 
-  z-index: 5200;
+    z-index: 5200;
 
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 
-  transition:
-    opacity .22s ease,
-    visibility .22s ease;
-}
+    touch-action: none;
 
-.review-sheet-layer.show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
+    transition:
+      opacity .22s ease,
+      visibility .22s ease;
+  }
 
-.review-sheet-backdrop {
-  position: fixed;
-  inset: 0;
+  .review-sheet-layer.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
 
-  background: rgba(0,0,0,.28);
-}
+  .review-sheet-backdrop {
+    position: fixed;
+    inset: 0;
 
-.review-sheet-panel {
-  position: fixed;
+    background: rgba(0,0,0,.32);
+  }
 
-  left: 0;
-  right: 0;
-  bottom: 0;
+  .review-sheet-panel {
+    position: fixed;
 
-  width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  padding:
-    14px
-    18px
-    calc(18px + env(safe-area-inset-bottom));
+    width: 100%;
+    min-height: calc(100dvh - env(safe-area-inset-top));
 
-  border-radius: 28px 28px 0 0;
+    padding:
+      14px
+      18px
+      calc(18px + env(safe-area-inset-bottom));
 
-  background: rgba(255,255,255,.97);
+    border-radius: 28px 28px 0 0;
 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+    background: rgba(255,255,255,.98);
 
-  box-shadow:
-    0 -18px 40px rgba(0,0,0,.14);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
-  transform: translateY(110%);
+    box-shadow:
+      0 -18px 40px rgba(0,0,0,.14);
 
-  transition:
-    transform .26s var(--ease);
-}
+    transform: translateY(110%);
 
-.review-sheet-layer.show .review-sheet-panel {
-  transform: translateY(0);
-}
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 
-.review-sheet-handle {
-  width: 42px;
-  height: 5px;
+    transition:
+      transform .26s var(--ease);
+  }
 
-  margin: 0 auto 16px;
+  .review-sheet-layer.show .review-sheet-panel {
+    transform: translateY(0);
+  }
 
-  border-radius: 999px;
+  .review-sheet-handle {
+    width: 42px;
+    height: 5px;
 
-  background: rgba(0,0,0,.14);
-}
+    margin: 0 auto 16px;
+
+    border-radius: 999px;
+
+    background: rgba(0,0,0,.14);
+  }
 
 }
