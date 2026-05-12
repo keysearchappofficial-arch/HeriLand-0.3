@@ -5,10 +5,9 @@
 .traveler-detail-page {
   position: fixed;
   inset: 0;
-
   z-index: 2100;
 
-  background: #f6f5f1;
+  background: var(--bg);
 
   overflow-y: auto;
   overflow-x: hidden;
@@ -23,20 +22,16 @@
   transform: translateY(0);
 }
 
-/* Hero */
+/* =========================
+   Hero
+========================= */
 
 .traveler-detail-hero {
   position: relative;
   height: 520px;
 
   overflow: hidden;
-  background: #111;
-}
-
-.traveler-detail-hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background: var(--primary-dark);
 }
 
 .traveler-detail-hero::after {
@@ -47,15 +42,66 @@
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,.66),
-      rgba(0,0,0,.1) 58%,
-      transparent
+      rgba(15,30,26,.76),
+      rgba(15,30,26,.14) 58%,
+      rgba(15,30,26,.04)
     );
 
   pointer-events: none;
 }
 
-/* Buttons */
+/* =========================
+   Slider
+========================= */
+
+.traveler-detail-slider {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+
+  scroll-behavior: smooth;
+}
+
+.traveler-detail-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.traveler-detail-slide {
+  flex: 0 0 100%;
+
+  width: 100%;
+  height: 100%;
+
+  scroll-snap-align: start;
+  user-select: none;
+}
+
+.traveler-detail-slide img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =========================
+   Buttons
+========================= */
 
 .traveler-detail-back,
 .traveler-detail-save {
@@ -66,15 +112,19 @@
   width: 46px;
   height: 46px;
 
-  border: none;
+  border: 1px solid rgba(255,255,255,.42);
   border-radius: 999px;
 
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.9);
+  color: var(--primary-dark);
 
   display: grid;
   place-items: center;
 
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: 0 10px 28px rgba(15,30,26,.12);
 
   font-size: 24px;
   cursor: pointer;
@@ -88,7 +138,9 @@
   right: 24px;
 }
 
-/* Overlay */
+/* =========================
+   Overlay
+========================= */
 
 .traveler-detail-overlay {
   position: absolute;
@@ -99,28 +151,35 @@
 
   z-index: 3;
 
-  color: #fff;
+  color: #FFFFFF;
 
   pointer-events: none;
 }
 
-.traveler-detail-slider {
-  position: relative;
-  z-index: 1;
-}
-
 .traveler-detail-overlay small {
+  display: inline-flex;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.18);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
   font-size: 12px;
   font-weight: 850;
 
   letter-spacing: .14em;
   text-transform: uppercase;
 
-  opacity: .86;
+  opacity: .95;
 }
 
 .traveler-detail-overlay h1 {
-  margin-top: 12px;
+  margin-top: 14px;
 
   font-size: 64px;
   line-height: .95;
@@ -137,122 +196,9 @@
   font-weight: 700;
 }
 
-/* Panel */
-
-.traveler-detail-panel {
-  position: relative;
-
-  width: min(760px, 100%);
-
-  margin: -34px auto 0;
-
-  padding: 38px 24px 36px;
-
-  border-radius: 34px 34px 0 0;
-
-  background: #f6f5f1;
-
-  z-index: 4;
-}
-
-/* Story */
-
-.traveler-story h2 {
-  font-size: 38px;
-  line-height: 1.08;
-
-  letter-spacing: -1.5px;
-}
-
-.traveler-story p {
-  margin-top: 24px;
-
-  color: #333;
-
-  font-size: 18px;
-  line-height: 2.05;
-
-  letter-spacing: -0.15px;
-  white-space: pre-line;
-}
-
-/* Tags */
-
-.traveler-detail-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  margin-top: 34px;
-}
-
-.traveler-detail-tags span {
-  padding: 9px 14px;
-
-  border-radius: 999px;
-
-  background: rgba(255,255,255,.72);
-  border: 1px solid rgba(0,0,0,.06);
-
-  color: #444;
-
-  font-size: 13px;
-  font-weight: 760;
-}
-
-/* CTA */
-
-.traveler-detail-cta {
-  position: sticky;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  z-index: 30;
-
-  width: min(760px, 100%);
-
-  margin: 0 auto;
-
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 12px;
-
-  padding:
-    16px
-    24px
-    calc(16px + env(safe-area-inset-bottom));
-
-  background: rgba(246,245,241,.94);
-
-  backdrop-filter: blur(18px);
-
-  border-top: 1px solid rgba(0,0,0,.06);
-}
-
-.traveler-detail-cta button {
-  height: 56px;
-
-  border: none;
-  border-radius: 18px;
-
-  font-size: 15px;
-  font-weight: 850;
-
-  cursor: pointer;
-}
-
-.traveler-detail-cta .secondary-btn {
-  background: rgba(255,255,255,.96);
-  border: 1px solid rgba(0,0,0,.06);
-  color: #111;
-}
-
-.traveler-detail-cta .primary-cta {
-  background: #111;
-  color: #fff;
-}
+/* =========================
+   Thumbs
+========================= */
 
 .traveler-detail-thumbs {
   position: absolute;
@@ -291,81 +237,12 @@
 }
 
 .traveler-thumb.active {
-  border-color: #fff;
+  border-color: var(--accent);
 }
 
 .traveler-thumb img {
   width: 100%;
   height: 100%;
-
-  object-fit: cover;
-}
-
-/* =========================
-   Slider
-========================= */
-
-.traveler-detail-slider {
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  scroll-snap-type: x mandatory;
-
-  scrollbar-width: none;
-
-  -webkit-overflow-scrolling: touch;
-
-  touch-action: pan-x;
-
-  scroll-behavior: smooth;
-}
-
-.traveler-detail-slide {
-  flex: 0 0 100%;
-
-  width: 100%;
-  height: 100%;
-
-  scroll-snap-align: start;
-
-  user-select: none;
-}
-
-.traveler-detail-slide img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  pointer-events: none;
-
-  user-select: none;
-}
-
-.traveler-detail-slider::-webkit-scrollbar {
-  display: none;
-}
-
-.traveler-detail-slide {
-  flex: 0 0 100%;
-
-  width: 100%;
-  height: 100%;
-
-  scroll-snap-align: start;
-}
-
-.traveler-detail-slide img {
-  width: 100%;
-  height: 100%;
-
   object-fit: cover;
 }
 
@@ -406,5 +283,138 @@
 
 .traveler-dot.active {
   width: 20px;
-  background: #fff;
+  background: #FFFFFF;
 }
+
+/* =========================
+   Panel
+========================= */
+
+.traveler-detail-panel {
+  position: relative;
+  z-index: 4;
+
+  width: min(760px, 100%);
+
+  margin: -34px auto 0;
+
+  padding: 38px 24px 36px;
+
+  border-radius: 34px 34px 0 0;
+
+  background: var(--bg);
+}
+
+/* =========================
+   Story
+========================= */
+
+.traveler-story h2 {
+  color: var(--text);
+
+  font-size: 38px;
+  line-height: 1.08;
+
+  letter-spacing: -1.5px;
+}
+
+.traveler-story p {
+  margin-top: 24px;
+
+  color: var(--muted);
+
+  font-size: 18px;
+  line-height: 2.05;
+
+  letter-spacing: -0.15px;
+  white-space: pre-line;
+}
+
+/* =========================
+   Tags
+========================= */
+
+.traveler-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 34px;
+}
+
+.traveler-detail-tags span {
+  padding: 9px 14px;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.78);
+  border: 1px solid var(--line);
+
+  color: var(--primary-dark);
+
+  font-size: 13px;
+  font-weight: 760;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.traveler-detail-cta {
+  position: sticky;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 30;
+
+  width: min(760px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 12px;
+
+  padding:
+    16px
+    24px
+    calc(16px + env(safe-area-inset-bottom));
+
+  background: rgba(243,246,244,.92);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-top: 1px solid var(--line);
+}
+
+.traveler-detail-cta button {
+  height: 56px;
+
+  border-radius: 18px;
+
+  font-size: 15px;
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.traveler-detail-cta .secondary-btn {
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.traveler-detail-cta .primary-cta {
+  border: none;
+  background: var(--primary);
+  color: #FFFFFF;
+  box-shadow: 0 12px 28px rgba(15,30,26,.16);
+}
+
+.traveler-detail-cta .primary-cta:hover {
+  background: var(--primary-hover);
+}
+
