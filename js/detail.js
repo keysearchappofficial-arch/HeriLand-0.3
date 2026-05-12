@@ -1,6 +1,3 @@
-import { state } from "./state.js";
-import { dom } from "./dom.js";
-
 import {
   saveItem,
   removeItem,
