@@ -57,6 +57,8 @@ function getCityEvents() {
 function init() {
   bindMobileMenu();
 
+  initDetail();
+
   renderCityTabs();
 
   const defaultCity =
@@ -68,12 +70,11 @@ function init() {
   bindSpotMore();
   bindSpotSheet();
 
-bindRestaurantMore();
-bindRestaurantSheet();
+  bindRestaurantMore();
+  bindRestaurantSheet();
 
   bindEventControls();
   bindEventAutoSlide();
-  initDetail();
 }
 
 /* =========================
@@ -372,7 +373,7 @@ getCityRestaurants()
 
     const card = document.createElement("article");
     card.className = "business-card";
-    card.onclick = () => openDetail(restaurant);
+    card.onclick = () => window.openDetail(restaurant);
 
     card.innerHTML = `
       <div class="business-card-image">
@@ -444,7 +445,7 @@ function renderRestaurantSheet() {
 
     const card = document.createElement("article");
     card.className = "business-card";
-    card.onclick = () => openDetail(restaurant);
+    card.onclick = () => window.openDetail(restaurant);
 
     card.innerHTML = `
       <div class="business-card-image">
