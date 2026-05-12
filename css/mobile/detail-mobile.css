@@ -1,11 +1,13 @@
-/* =========================
-   Detail Mobile Only
-========================= */
-
 @media (max-width: 820px) {
 
+  /* =========================
+     Detail Page
+  ========================= */
+
   .detail-page {
-    background: #f6f5f1;
+    background: var(--bg);
+
+    overscroll-behavior-y: contain;
   }
 
   /* =========================
@@ -13,23 +15,77 @@
   ========================= */
 
   .detail-gallery {
+    position: relative;
+
     height: 300px;
+
     border-radius: 0;
+
+    overflow: hidden;
+
+    background: var(--primary-dark);
   }
 
   .detail-gallery img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
   }
 
   .detail-gallery::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
     background:
       linear-gradient(
         to top,
-        rgba(0,0,0,.42),
-        rgba(0,0,0,.06) 60%
+        rgba(0,0,0,.46),
+        rgba(0,0,0,.08) 60%
       );
+  }
+
+  /* =========================
+     Slider
+  ========================= */
+
+  .detail-slider {
+    scroll-snap-type: x mandatory;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  .detail-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detail-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  /* =========================
+     Dots
+  ========================= */
+
+  .detail-dots {
+    right: 18px;
+    bottom: 18px;
+
+    gap: 6px;
+  }
+
+  .detail-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .detail-dot.active {
+    width: 18px;
   }
 
   /* =========================
@@ -38,19 +94,25 @@
 
   .detail-back,
   .detail-save {
-    top: 18px;
+    position: absolute;
+
+    top: calc(18px + env(safe-area-inset-top));
 
     width: 42px;
     height: 42px;
 
-    border-radius: 50%;
+    border: none;
+    border-radius: 999px;
 
     background: rgba(255,255,255,.92);
 
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
     box-shadow:
       0 8px 22px rgba(0,0,0,.08);
+
+    z-index: 8;
   }
 
   .detail-back {
@@ -66,6 +128,8 @@
   ========================= */
 
   .detail-panel {
+    position: relative;
+
     width: 100%;
 
     margin-top: -24px;
@@ -73,16 +137,22 @@
     padding:
       24px
       20px
-      120px;
+      34px;
 
     border-radius: 30px 30px 0 0;
 
-    background: #f6f5f1;
+    background: var(--bg);
+
+    z-index: 3;
   }
 
   /* =========================
      Header
   ========================= */
+
+  .detail-head {
+    padding-bottom: 22px;
+  }
 
   .detail-kicker {
     font-size: 11px;
@@ -91,6 +161,8 @@
 
   .detail-head h1 {
     margin-top: 10px;
+
+    color: var(--text);
 
     font-size: 30px;
     line-height: 1.08;
@@ -109,8 +181,20 @@
   .detail-line {
     margin-top: 12px;
 
+    color: var(--muted);
+
     font-size: 13px;
     line-height: 1.6;
+  }
+
+  .detail-inline-info {
+    gap: 8px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.55;
   }
 
   /* =========================
@@ -119,19 +203,23 @@
 
   .detail-guide {
     margin-top: 24px;
+
     padding-bottom: 24px;
   }
 
   .detail-guide small {
     font-size: 10px;
+
     letter-spacing: .12em;
   }
 
   .detail-guide p {
     margin-top: 10px;
 
+    color: var(--text);
+
     font-size: 18px;
-    line-height: 1.7;
+    line-height: 1.72;
 
     letter-spacing: -0.3px;
   }
@@ -145,23 +233,29 @@
   }
 
   .detail-section h2 {
+    color: var(--text);
+
     font-size: 20px;
+
     letter-spacing: -0.5px;
   }
 
   .detail-section p {
     margin-top: 12px;
 
+    color: var(--muted);
+
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.82;
   }
 
   /* =========================
-     Service Pills
+     Pills
   ========================= */
 
   .detail-section ul {
     gap: 8px;
+
     margin-top: 14px;
   }
 
@@ -190,19 +284,32 @@
     font-size: 20px;
   }
 
-  .detail-review-head span {
+  .detail-review-more {
     font-size: 12px;
+  }
+
+  .detail-write-review {
+    padding: 13px 14px;
+
+    border-radius: 17px;
+
+    font-size: 13px;
   }
 
   .detail-review-list {
     display: flex;
+
     overflow-x: auto;
+    overflow-y: hidden;
 
     gap: 12px;
 
     padding-bottom: 6px;
 
     scroll-snap-type: x mandatory;
+
+    -webkit-overflow-scrolling: touch;
+
     scrollbar-width: none;
   }
 
@@ -234,88 +341,74 @@
     margin-top: 9px;
 
     font-size: 13px;
-    line-height: 1.7;
+    line-height: 1.72;
   }
 
-  .detail-inline-info {
+  /* =========================
+     CTA
+  ========================= */
 
-    gap: 8px;
+  .detail-cta {
+    position: sticky;
 
-    font-size: 12px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-    line-height: 1.5;
+    z-index: 2020;
 
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+
+    gap: 10px;
+
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -34px;
+
+    padding:
+      12px
+      16px
+      calc(12px + env(safe-area-inset-bottom));
+
+    background: rgba(243,246,244,.94);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-top: 1px solid var(--line);
+
+    box-shadow:
+      0 -10px 30px rgba(0,0,0,.04);
   }
 
-  .detail-write-review {
+  .detail-cta button {
+    height: 52px;
 
-    padding: 13px 14px;
+    border: none;
+    border-radius: 16px;
 
-    border-radius: 17px;
+    font-size: 14px;
+    font-weight: 850;
 
+    cursor: pointer;
   }
-  
 
-/* =========================
-   Mobile Bottom CTA
-========================= */
+  .detail-cta .secondary-btn {
+    background: rgba(255,255,255,.96);
 
-.detail-cta {
-  position: sticky;
+    border: 1px solid var(--line);
 
-  left: 0;
-  right: 0;
-  bottom: 0;
+    color: var(--text);
+  }
 
-  z-index: 2020;
+  .detail-cta .primary-cta {
+    background: var(--primary-dark);
 
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 10px;
+    color: #fff;
 
-  margin-left: -20px;
-  margin-right: -20px;
-  margin-bottom: -120px;
+    box-shadow:
+      0 8px 24px rgba(0,0,0,.18);
+  }
 
-  padding:
-    12px
-    16px
-    calc(12px + env(safe-area-inset-bottom));
-
-  background: rgba(246,245,241,.94);
-  backdrop-filter: blur(20px);
-
-  border-top: 1px solid rgba(0,0,0,.05);
-
-  box-shadow: 0 -10px 30px rgba(0,0,0,.04);
-}
-
-.detail-cta button {
-  height: 52px;
-
-  border: none;
-  border-radius: 16px;
-
-  font-size: 14px;
-  font-weight: 850;
-
-  cursor: pointer;
-}
-
-.secondary-btn {
-  background: rgba(255,255,255,.96);
-  border: 1px solid rgba(0,0,0,.06);
-  color: #111;
-}
-
-.primary-cta {
-  background: #111;
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(0,0,0,.18);
-}
-
-/* 內容底部留一點空間就好，不要 120px */
-.detail-panel {
-  padding-bottom: 32px;
-}
 }
