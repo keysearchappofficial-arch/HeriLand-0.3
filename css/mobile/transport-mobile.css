@@ -3,14 +3,22 @@
   .transport-search-hero {
     margin-left: -18px;
     margin-right: -18px;
+
     min-height: 440px;
+
     border-radius: 0;
+
+    background: var(--primary-dark);
   }
 
   .transport-search-content {
     min-height: 440px;
+
     justify-content: flex-end;
+
     padding: 0 18px 28px;
+
+    color: #fff;
   }
 
   .transport-search-content small {
@@ -26,20 +34,35 @@
 
   .transport-search-content p {
     margin: 14px auto 0;
+
     max-width: 310px;
+
+    color: rgba(255,255,255,.84);
+
     text-align: center;
+
     font-size: 15px;
     line-height: 1.7;
   }
 
   .transport-search-box {
     height: 58px;
+
     margin-top: 30px;
     padding: 0 16px;
+
     border-radius: 999px;
+
+    background: rgba(255,255,255,.92);
+
+    border: 1px solid rgba(255,255,255,.28);
+
+    box-shadow:
+      0 16px 38px rgba(15,30,26,.16);
   }
 
   .transport-search-box input {
+    color: var(--text);
     font-size: 15px;
   }
 
@@ -54,74 +77,83 @@
   }
 
   .transport-section-head h2 {
+    color: var(--text);
+
     font-size: 28px;
     letter-spacing: -1px;
   }
 
   .transport-section-head button {
+    color: var(--primary);
+
     font-size: 14px;
   }
 
   .transport-route-list {
     border-radius: 0;
+
     background: transparent;
+
     border: none;
+    box-shadow: none;
+  }
+
+  .transport-route-row {
+    min-height: 72px;
+
+    display: grid;
+    grid-template-columns: 1fr 20px;
+    align-items: center;
+
+    gap: 10px;
+    padding: 0;
   }
 
   .transport-route-row + .transport-route-row::before {
     left: 0;
     right: 0;
+
+    background: var(--line);
   }
 
-.transport-route-row {
-  min-height: 72px;
+  .route-main {
+    min-width: 0;
+  }
 
-  display: grid;
-  grid-template-columns: 1fr 20px;
-  align-items: center;
+  .route-main small {
+    display: block;
 
-  gap: 10px;
-  padding: 0;
-}
+    margin-bottom: 6px;
 
-.route-main {
-  min-width: 0;
-}
+    color: var(--text-light);
 
-.route-main small {
-  display: block;
+    font-size: 13px;
+    font-weight: 760;
+    letter-spacing: -0.1px;
+  }
 
-  margin-bottom: 6px;
+  .route-main span {
+    display: block;
 
-  color: #8a8a8a;
+    color: var(--text);
 
-  font-size: 13px;
-  font-weight: 760;
-  letter-spacing: -0.1px;
-}
+    font-size: 23px;
+    font-weight: 760;
 
-.route-main span {
-  display: block;
+    letter-spacing: -0.8px;
+    line-height: 1.05;
 
-  color: #111;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-  font-size: 23px;
-  font-weight: 760;
+  .transport-route-row strong {
+    color: var(--text-light);
 
-  letter-spacing: -0.8px;
-  line-height: 1.05;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.transport-route-row strong {
-  color: #aaa;
-
-  font-size: 26px;
-  font-weight: 500;
-}
+    font-size: 26px;
+    font-weight: 500;
+  }
 
   .transport-recent-tags {
     gap: 10px;
@@ -129,23 +161,35 @@
 
   .transport-recent-tags button {
     padding: 11px 14px;
-    background: rgba(255,255,255,.62);
+
+    background: rgba(255,255,255,.76);
+
+    border: 1px solid var(--line);
+
+    color: var(--primary-dark);
+
     font-size: 13px;
   }
 
   .transport-sub-view {
     position: fixed;
     inset: 0;
+
     z-index: 290;
 
-    background: #f6f5f1;
+    width: 100%;
+    height: 100dvh;
+
+    background: var(--bg);
+
     overflow-y: auto;
 
-    padding: 18px 18px 120px;
+    padding: 28px 22px 120px;
 
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+
     transform: translateX(100%);
 
     transition:
@@ -158,6 +202,7 @@
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+
     transform: translateX(0);
   }
 
@@ -165,33 +210,47 @@
     display: flex;
     align-items: flex-start;
     gap: 14px;
+
     margin-bottom: 24px;
   }
 
   .transport-sub-head button {
     width: 40px;
     height: 40px;
-    border: none;
+
+    border: 1px solid var(--line);
     border-radius: 13px;
+
     background: rgba(255,255,255,.82);
+
+    color: var(--primary-dark);
+
     font-size: 28px;
     line-height: 1;
+
     flex-shrink: 0;
   }
 
   .transport-sub-head small {
     display: block;
-    color: #8d8d8d;
+
+    color: var(--primary);
+
     font-size: 11px;
     font-weight: 800;
+
     letter-spacing: .08em;
     text-transform: uppercase;
   }
 
   .transport-sub-head h2 {
     margin-top: 6px;
+
+    color: var(--text);
+
     font-size: 34px;
     line-height: 1;
+
     letter-spacing: -1.2px;
   }
 
@@ -202,12 +261,26 @@
   .transport-sub-search input {
     width: 100%;
     height: 58px;
-    border: none;
+
+    border: 1px solid var(--line);
     outline: none;
+
     padding: 0 18px;
+
     border-radius: 999px;
+
     background: rgba(255,255,255,.82);
+
+    color: var(--text);
+
     font-size: 15px;
+  }
+
+  .transport-sub-search input:focus {
+    border-color: var(--primary-hover);
+
+    box-shadow:
+      0 0 0 4px rgba(42,117,101,.12);
   }
 
   .all-route-list {
@@ -220,18 +293,25 @@
 
   .route-alpha-group h3 {
     margin-bottom: 10px;
-    color: #9a9a9a;
+
+    color: var(--text-light);
+
     font-size: 13px;
     font-weight: 800;
+
     letter-spacing: .08em;
   }
 
   .route-alpha-index {
     position: fixed;
+
     top: 50%;
     right: 8px;
+
     transform: translateY(-50%);
+
     z-index: 300;
+
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -240,212 +320,166 @@
   .route-alpha-index button {
     width: 22px;
     height: 18px;
+
     border: none;
     background: transparent;
-    color: #999;
+
+    color: var(--text-light);
+
     font-size: 11px;
     font-weight: 800;
   }
 
-/* =========================
-   Route Detail
-========================= */
+  /* =========================
+     Route Detail
+  ========================= */
 
-.transport-route-detail {
-  z-index: 310;
-}
-
-.route-detail-panel {
-  inset: 0;
-
-  width: 100%;
-  height: 100dvh;
-
-  padding: 24px 18px 110px;
-
-  background: #f6f5f1;
-
-  transform: translateX(100%);
-}
-
-.route-detail-head {
-  display: flex;
-  align-items: flex-start;
-
-  gap: 12px;
-
-  margin-bottom: 34px;
-}
-
-.route-detail-head button {
-  width: 40px;
-  height: 40px;
-
-  border: none;
-  border-radius: 13px;
-
-  background: rgba(255,255,255,.82);
-
-  font-size: 28px;
-  line-height: 1;
-
-  flex-shrink: 0;
-}
-
-.route-detail-head small {
-  display: block;
-
-  color: #8a8a8a;
-
-  font-size: 13px;
-  font-weight: 760;
-
-  margin-bottom: 8px;
-}
-
-.route-detail-head h2 {
-  font-size: 36px;
-  line-height: .96;
-
-  letter-spacing: -1.6px;
-}
-
-/* Guide Text */
-
-.route-detail-guide {
-  margin-top: 10px;
-  margin-bottom: 34px;
-}
-
-.route-detail-guide small {
-  display: block;
-
-  margin-bottom: 12px;
-
-  color: #8d8d8d;
-
-  font-size: 11px;
-  font-weight: 800;
-
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.route-detail-guide p {
-  color: #444;
-
-  font-size: 16px;
-  line-height: 1.9;
-
-  letter-spacing: -0.2px;
-}
-
-/* Info List */
-
-.route-detail-list {
-  overflow: hidden;
-
-  border-radius: 24px;
-
-  background: rgba(255,255,255,.62);
-  border: 1px solid rgba(0,0,0,.045);
-
-  backdrop-filter: blur(18px);
-}
-
-.route-detail-row {
-  position: relative;
-
-  min-height: 62px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 18px;
-
-  padding: 0 16px;
-}
-
-.route-detail-row + .route-detail-row::before {
-  content: "";
-
-  position: absolute;
-
-  left: 16px;
-  right: 0;
-  top: 0;
-
-  height: 1px;
-
-  background: rgba(0,0,0,.055);
-}
-
-.route-detail-row span {
-  color: #777;
-
-  font-size: 14px;
-  font-weight: 720;
-}
-
-.route-detail-row strong {
-  color: #111;
-
-  font-size: 15px;
-  font-weight: 780;
-
-  text-align: right;
-}
-}
-
-/* =========================
-   Mobile
-========================= */
-
-@media (max-width: 820px) {
-
-  .transport-search-hero {
-    min-height: 520px;
-    border-radius: 30px;
+  .transport-route-detail {
+    z-index: 310;
   }
 
-  .transport-search-content {
-    min-height: 520px;
-    padding: 34px 24px;
-  }
+  .route-detail-panel {
+    position: absolute;
+    inset: 0;
 
-  .transport-search-content h1 {
-    font-size: 48px;
-    letter-spacing: -2px;
-  }
-
-  .transport-search-content p {
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  .transport-search-box {
-    height: 58px;
-    padding: 0 16px;
-  }
-
-  .transport-section-head h2 {
-    font-size: 30px;
-  }
-
-  .route-main span {
-    font-size: 22px;
-  }
-
-  .route-detail-panel,
-  .transport-sub-view {
     width: 100%;
+    height: 100dvh;
+
     padding: 28px 22px 120px;
+
+    background: var(--bg);
+
+    transform: translateX(100%);
+  }
+
+  .route-detail-head {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 34px;
+  }
+
+  .route-detail-head button {
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--line);
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.82);
+
+    color: var(--primary-dark);
+
+    font-size: 28px;
+    line-height: 1;
+
+    flex-shrink: 0;
+  }
+
+  .route-detail-head small {
+    display: block;
+
+    color: var(--primary);
+
+    font-size: 13px;
+    font-weight: 760;
+
+    margin-bottom: 8px;
   }
 
   .route-detail-head h2 {
+    color: var(--text);
+
     font-size: 38px;
+    line-height: .96;
+
     letter-spacing: -1.5px;
+  }
+
+  .route-detail-guide {
+    margin-top: 10px;
+    margin-bottom: 34px;
+  }
+
+  .route-detail-guide small {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .route-detail-guide p {
+    color: var(--muted);
+
+    font-size: 16px;
+    line-height: 1.9;
+
+    letter-spacing: -0.2px;
+  }
+
+  .route-detail-list {
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--line);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .route-detail-row {
+    position: relative;
+
+    min-height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    padding: 0 16px;
+  }
+
+  .route-detail-row + .route-detail-row::before {
+    content: "";
+
+    position: absolute;
+
+    left: 16px;
+    right: 0;
+    top: 0;
+
+    height: 1px;
+
+    background: var(--line);
+  }
+
+  .route-detail-row span {
+    color: var(--muted);
+
+    font-size: 14px;
+    font-weight: 720;
+  }
+
+  .route-detail-row strong {
+    color: var(--text);
+
+    font-size: 15px;
+    font-weight: 780;
+
+    text-align: right;
   }
 
 }
