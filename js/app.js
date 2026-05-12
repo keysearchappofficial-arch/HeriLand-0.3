@@ -862,38 +862,55 @@ function openDetail(place) {
       .join("");
   }
 
-  const addTripBtn = document.getElementById("addTripBtn");
+const tripBtn =
+  document.getElementById("detailTripBtn");
 
-  if (addTripBtn) {
-    addTripBtn.onclick = () => {
-      saveItem("trip", normalized);
-      alert("Added to My Trip");
-    };
-  }
+if (tripBtn) {
+  tripBtn.classList.remove("active");
 
-  const detailSaveBtn = document.getElementById("detailSaveBtn");
+  tripBtn.onclick = () => {
+    saveItem("trip", normalized);
 
-  if (detailSaveBtn) {
+    tripBtn.classList.add("active");
+  };
+}
+
+const detailSaveBtn =
+  document.getElementById("detailSaveBtn");
+
+if (detailSaveBtn) {
+  const saved =
+    isSaved("saved", normalized.id);
+
+  detailSaveBtn.textContent =
+    saved ? "♥" : "♡";
+
+  detailSaveBtn.classList.toggle(
+    "active",
+    saved
+  );
+
+  detailSaveBtn.onclick = () => {
+    if (isSaved("saved", normalized.id)) {
+      removeItem("saved", normalized.id);
+    }
+    else {
+      saveItem("saved", normalized);
+    }
+
+    const nowSaved =
+      isSaved("saved", normalized.id);
+
     detailSaveBtn.textContent =
-      isSaved("saved", normalized.id) ? "♥" : "♡";
+      nowSaved ? "♥" : "♡";
 
-    detailSaveBtn.onclick = () => {
-      if (isSaved("saved", normalized.id)) {
-        removeItem("saved", normalized.id);
-      }
-      else {
-        saveItem("saved", normalized);
-      }
+    detailSaveBtn.classList.toggle(
+      "active",
+      nowSaved
+    );
 
-      detailSaveBtn.textContent =
-        isSaved("saved", normalized.id) ? "♥" : "♡";
-
-      updateSaveButtons(normalized.id);
-    };
-  }
-
-  els.detailPage.classList.add("show");
-  document.body.style.overflow = "hidden";
+    updateSaveButtons(normalized.id);
+  };
 }
 
 function renderDetailSlider(images, altText) {
