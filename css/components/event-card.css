@@ -5,14 +5,15 @@
 .event-card {
   overflow: hidden;
 
-  border-radius: 26px;
+  border-radius: 28px;
 
-  background: rgba(255,255,255,.76);
-  border: 1px solid rgba(0,0,0,.05);
+  background: rgba(255,255,255,.82);
+  border: 1px solid var(--line);
 
   transition:
     transform .26s var(--ease),
     box-shadow .26s var(--ease),
+    border-color .26s var(--ease),
     background .26s var(--ease);
 
   cursor: pointer;
@@ -21,10 +22,12 @@
 .event-card:hover {
   transform: translateY(-4px);
 
-  background: #fff;
+  background: #FFFFFF;
+
+  border-color: rgba(29,92,79,.18);
 
   box-shadow:
-    0 14px 34px rgba(0,0,0,.06);
+    0 18px 42px rgba(15,30,26,.08);
 }
 
 /* =========================
@@ -38,7 +41,7 @@
 
   overflow: hidden;
 
-  background: #ddd;
+  background: var(--primary-dark);
 }
 
 .event-card-image img {
@@ -64,8 +67,8 @@
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,.18),
-      transparent 58%
+      rgba(15,30,26,.28),
+      rgba(15,30,26,.04) 58%
     );
 }
 
@@ -87,7 +90,7 @@
   gap: 8px;
   flex-wrap: wrap;
 
-  color: #777;
+  color: var(--primary);
 
   font-size: 12px;
   font-weight: 750;
@@ -104,7 +107,7 @@
 
   margin-right: 8px;
 
-  color: #bbb;
+  color: var(--text-light);
 }
 
 /* =========================
@@ -112,6 +115,8 @@
 ========================= */
 
 .event-card-title {
+  color: var(--text);
+
   font-size: 19px;
   line-height: 1.25;
 
@@ -125,10 +130,10 @@
 ========================= */
 
 .event-card-desc {
-  color: #666;
+  color: var(--muted);
 
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.7;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -170,7 +175,7 @@
 
   .event-card-desc {
     font-size: 13px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
 }
