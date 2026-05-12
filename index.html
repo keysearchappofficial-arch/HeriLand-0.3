@@ -232,12 +232,27 @@
       ‹
     </button>
 
-<button
-  class="detail-save"
-  id="detailSaveBtn"
-  type="button">
-  ♡
-</button>
+<div class="detail-actions">
+
+  <button
+    class="detail-action-btn detail-save"
+    id="detailSaveBtn"
+    type="button"
+    aria-label="Save place"
+  >
+    ♡
+  </button>
+
+  <button
+    class="detail-action-btn detail-trip"
+    id="detailTripBtn"
+    type="button"
+    aria-label="Add to trip"
+  >
+    ⊞
+  </button>
+
+</div>
 
 <div class="detail-slider" id="detailSlider"></div>
 <div class="detail-dots" id="detailDots"></div>
@@ -387,13 +402,6 @@
 
   <!-- CTA -->
   <div class="detail-cta">
-
-<button
-  class="secondary-btn"
-  id="addTripBtn"
-  type="button">
-  Add to Trip
-</button>
 
     <button
       class="primary-cta"
