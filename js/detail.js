@@ -134,8 +134,26 @@ export function closeDetail() {
 
   closeDetailMoreMenu();
 
+const reviewSheet =
+  document.getElementById("reviewSheetLayer");
+
+const reviewList =
+  document.getElementById("reviewListLayer");
+
+const moreSheet =
+  document.getElementById("detailMoreLayer");
+
+const stillLocked =
+  reviewSheet?.classList.contains("show") ||
+  reviewList?.classList.contains("show") ||
+  moreSheet?.classList.contains("show");
+
+if (!stillLocked) {
+
   document.documentElement.classList.remove("modal-lock");
   document.body.classList.remove("modal-lock");
+
+}
 }
 
 function renderDetailSlider(images, altText) {
@@ -449,14 +467,29 @@ function closeReviewSheet() {
   const detailPage =
     document.getElementById("detailPage");
 
+  const moreSheet =
+    document.getElementById("detailMoreLayer");
+
+  const reviewList =
+    document.getElementById("reviewListLayer");
+
   if (!layer) return;
 
   layer.classList.remove("show");
 
   detailPage?.classList.remove("sheet-open");
 
-  document.documentElement.classList.remove("modal-lock");
-  document.body.classList.remove("modal-lock");
+  const stillLocked =
+    detailPage?.classList.contains("show") ||
+    moreSheet?.classList.contains("show") ||
+    reviewList?.classList.contains("show");
+
+  if (!stillLocked) {
+
+    document.documentElement.classList.remove("modal-lock");
+    document.body.classList.remove("modal-lock");
+
+  }
 }
 
 function updateReviewStars() {
@@ -567,8 +600,26 @@ function closeReviewList() {
 
   layer?.classList.remove("show");
 
-  document.documentElement.classList.remove("modal-lock");
-  document.body.classList.remove("modal-lock");
+  const reviewSheet =
+    document.getElementById("reviewSheetLayer");
+
+  const moreSheet =
+    document.getElementById("detailMoreLayer");
+
+  const detailPage =
+    document.getElementById("detailPage");
+
+  const stillLocked =
+    detailPage?.classList.contains("show") ||
+    reviewSheet?.classList.contains("show") ||
+    moreSheet?.classList.contains("show");
+
+  if (!stillLocked) {
+
+    document.documentElement.classList.remove("modal-lock");
+    document.body.classList.remove("modal-lock");
+
+  }
 }
 
 function renderReviewList() {
