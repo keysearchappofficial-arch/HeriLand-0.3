@@ -1094,9 +1094,11 @@ window.continueWithAiGuide = function() {
   const fab =
     document.getElementById("aiGuideFab");
 
-  if (fab) {
-    fab.click();
-  }
+  setTimeout(() => {
+    if (fab) {
+      fab.click();
+    }
+  }, 120);
 };
 
 function bindMoodButtons() {
