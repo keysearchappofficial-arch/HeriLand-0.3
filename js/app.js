@@ -999,6 +999,10 @@ function bindDetailMoreMenu() {
     e.stopPropagation();
 
     layer.classList.add("show");
+
+    if (els.detailPage) {
+      els.detailPage.classList.add("sheet-open");
+    }
   });
 
   backdrop?.addEventListener("click", () => {
@@ -1011,6 +1015,10 @@ function closeDetailMoreMenu() {
     document.getElementById("detailMoreLayer");
 
   layer?.classList.remove("show");
+
+  if (els.detailPage) {
+    els.detailPage.classList.remove("sheet-open");
+  }
 }
 
 window.addPlaceToTrip = function() {
