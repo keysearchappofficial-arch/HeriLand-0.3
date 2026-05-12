@@ -222,196 +222,101 @@
 <!-- Business Detail Page -->
 <section class="detail-page" id="detailPage">
 
-  <!-- Hero -->
-  <div class="detail-gallery">
+<!-- Hero -->
+<div class="detail-gallery">
 
+  <!-- Back -->
+  <button
+    class="detail-back"
+    type="button"
+    onclick="closeDetail()">
+    ‹
+  </button>
+
+  <!-- Right Actions -->
+  <div class="detail-actions">
+
+    <!-- Save -->
     <button
-      class="detail-back"
+      class="detail-action-btn detail-save"
+      id="detailSaveBtn"
       type="button"
-      onclick="closeDetail()">
-      ‹
+      aria-label="Save place"
+    >
+      ♡
     </button>
 
-<div class="detail-actions">
+    <!-- More -->
+    <div class="detail-more-wrap">
 
-  <button
-    class="detail-action-btn detail-save"
-    id="detailSaveBtn"
-    type="button"
-    aria-label="Save place"
-  >
-    ♡
-  </button>
+      <button
+        class="detail-action-btn detail-more"
+        id="detailMoreBtn"
+        type="button"
+        aria-label="More actions"
+      >
+        ⋯
+      </button>
 
-  <button
-    class="detail-action-btn detail-trip"
-    id="detailTripBtn"
-    type="button"
-    aria-label="Add to trip"
-  >
-    ⊞
-  </button>
-
-</div>
-
-<div class="detail-slider" id="detailSlider"></div>
-<div class="detail-dots" id="detailDots"></div>
-
-</div>
-
-  <!-- Content -->
-  <div class="detail-panel">
-
-    <!-- Head -->
-    <section class="detail-head">
-
-      <div class="detail-kicker">
-        <span id="detailType">Recommended Place</span>
-        <span>・</span>
-        <span id="detailArea">Sarawak</span>
-      </div>
-
-      <h1 id="detailTitle"></h1>
-
-      <div class="detail-rating-row">
-        <span class="detail-stars">★★★★★</span>
-
-        <strong id="detailScore">
-          4.8
-        </strong>
-
-        <span>・</span>
-
-        <span id="detailReviewCount">
-          128 Reviews
-        </span>
-      </div>
-
-      <div class="detail-line">
-        <span id="detailAddress"></span>
-      </div>
-
-      <!-- mini info -->
-<div class="detail-inline-info">
-
-  <span>
-    ☎ <strong id="detailPhone">
-      Not Available
-    </strong>
-  </span>
-
-  <span class="dot">｜</span>
-
-  <span>
-    🕒 <strong id="detailHours">
-      Check Before Visiting
-    </strong>
-  </span>
-
-</div>
-
-    </section>
-
-    <!-- AI Guide -->
-    <section class="detail-guide">
-
-      <small>HeriLand Guide</small>
-
-      <p id="detailAiNote">
-       A place made for slowing down and staying awhile.
-      </p>
-
-    </section>
-
-    <!-- Intro -->
-    <section class="detail-section">
-
-      <h2>Intro</h2>
-
-      <p id="detailIntro"></p>
-
-    </section>
-
-    <!-- Features -->
-    <section class="detail-section">
-
-      <h2>Features</h2>
-
-      <ul id="detailServices"></ul>
-
-    </section>
-
-    <!-- Reviews -->
-    <section class="detail-reviews">
-
-      <div class="detail-review-head">
-
-        <h2>Traveler</h2>
+      <!-- Dropdown -->
+      <div
+        class="detail-more-menu"
+        id="detailMoreMenu"
+      >
 
         <button
-          class="detail-review-more"
-          type="button">
-          more
+          type="button"
+          onclick="window.addPlaceToTrip()"
+        >
+          ⊞ Add to Trip
+        </button>
+
+        <button
+          type="button"
+          onclick="window.openPlaceMap()"
+        >
+          ↗ Open in Maps
+        </button>
+
+        <button
+          type="button"
+          onclick="window.sharePlace()"
+        >
+          ⤴ Share Place
+        </button>
+
+        <button
+          type="button"
+          onclick="window.showNearbyPlaces()"
+        >
+          ◎ Nearby Places
+        </button>
+
+        <button
+          type="button"
+          onclick="window.continueWithAiGuide()"
+        >
+          ✨ Continue with AI Guide
         </button>
 
       </div>
 
-      <!-- write review -->
-      <button
-        class="detail-write-review"
-        type="button">
-
-        share your experience
-
-      </button>
-
-      <!-- review list -->
-      <div class="detail-review-list">
-
-        <article class="detail-review-card">
-
-          <strong>Mei Lin</strong>
-
-          <span>★★★★★</span>
-
-          <p>
-           Best enjoyed in the evening
-           easygoing, relaxing, and great for photos.
-          </p>
-
-        </article>
-
-        <article class="detail-review-card">
-
-          <strong>Daniel</strong>
-
-          <span>★★★★★</span>
-
-          <p>
-            Quiet and peaceful,
-            perfect for a slow walk.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
+    </div>
 
   </div>
 
-  <!-- CTA -->
-  <div class="detail-cta">
+  <!-- Slider -->
+  <div
+    class="detail-slider"
+    id="detailSlider"
+  ></div>
 
-    <button
-      class="primary-cta"
-      type="button">
+  <div
+    class="detail-dots"
+    id="detailDots"
+  ></div>
 
-      Take Me There
-
-    </button>
-
-  </div>
+</div>
 
 </section>
 
