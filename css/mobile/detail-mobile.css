@@ -525,10 +525,18 @@
 
   z-index: 5200;
 
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+
+  transition:
+    opacity .22s ease,
+    visibility .22s ease;
 }
 
 .review-sheet-layer.show {
+  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
@@ -537,15 +545,6 @@
   inset: 0;
 
   background: rgba(0,0,0,.28);
-
-  opacity: 0;
-
-  transition:
-    opacity .22s ease;
-}
-
-.review-sheet-layer.show .review-sheet-backdrop {
-  opacity: 1;
 }
 
 .review-sheet-panel {
