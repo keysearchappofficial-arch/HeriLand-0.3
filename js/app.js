@@ -870,7 +870,6 @@ if (tripBtn) {
 
   tripBtn.onclick = () => {
     saveItem("trip", normalized);
-
     tripBtn.classList.add("active");
   };
 }
