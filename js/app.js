@@ -1013,6 +1013,84 @@ function closeDetailMoreMenu() {
   layer?.classList.remove("show");
 }
 
+window.addPlaceToTrip = function() {
+  if (!currentDetailItem) return;
+
+  saveItem("trip", currentDetailItem);
+
+  closeDetailMoreMenu();
+
+  alert("Added to My Trip");
+};
+
+window.openPlaceMap = function() {
+  if (!currentDetailItem) return;
+
+  const query =
+    currentDetailItem.address ||
+    currentDetailItem.name ||
+    currentDetailItem.title ||
+    "Sarawak";
+
+  const url =
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+
+  window.open(url, "_blank");
+
+  closeDetailMoreMenu();
+};
+
+window.sharePlace = async function() {
+  if (!currentDetailItem) return;
+
+  const title =
+    currentDetailItem.name ||
+    currentDetailItem.title ||
+    "HeriLand Place";
+
+  const text =
+    currentDetailItem.intro ||
+    currentDetailItem.desc ||
+    "Found this place on HeriLand.";
+
+  const url =
+    window.location.href;
+
+  if (navigator.share) {
+    await navigator.share({
+      title,
+      text,
+      url
+    });
+  }
+  else {
+    await navigator.clipboard.writeText(
+      `${title}\n${url}`
+    );
+
+    alert("Link copied");
+  }
+
+  closeDetailMoreMenu();
+};
+
+window.showNearbyPlaces = function() {
+  closeDetailMoreMenu();
+
+  alert("Nearby Places is coming soon");
+};
+
+window.continueWithAiGuide = function() {
+  closeDetailMoreMenu();
+
+  const fab =
+    document.getElementById("aiGuideFab");
+
+  if (fab) {
+    fab.click();
+  }
+};
+
 function bindMoodButtons() {
   document
     .querySelectorAll(".mood-btn, .mood-chip")
