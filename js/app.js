@@ -995,15 +995,18 @@ function bindDetailMoreMenu() {
 
   if (!moreBtn || !layer) return;
 
-  moreBtn.addEventListener("click", e => {
-    e.stopPropagation();
+moreBtn.addEventListener("click", e => {
+  e.stopPropagation();
 
-    layer.classList.add("show");
+  layer.classList.add("show");
 
-    if (els.detailPage) {
-      els.detailPage.classList.add("sheet-open");
-    }
-  });
+  if (els.detailPage) {
+    els.detailPage.classList.add("sheet-open");
+  }
+
+  document.documentElement.classList.add("modal-lock");
+  document.body.classList.add("modal-lock");
+});
 
   backdrop?.addEventListener("click", () => {
     closeDetailMoreMenu();
@@ -1019,6 +1022,9 @@ function closeDetailMoreMenu() {
   if (els.detailPage) {
     els.detailPage.classList.remove("sheet-open");
   }
+
+  document.documentElement.classList.remove("modal-lock");
+  document.body.classList.remove("modal-lock");
 }
 
 window.addPlaceToTrip = function() {
