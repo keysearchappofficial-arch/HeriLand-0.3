@@ -136,10 +136,11 @@
    Top Buttons
 ========================= */
 
-.detail-save {
+.detail-back {
   position: absolute;
   top: 22px;
-  z-index: 6;
+  left: 22px;
+  z-index: 7;
 
   width: 46px;
   height: 46px;
@@ -164,8 +165,51 @@
   cursor: pointer;
 }
 
-.detail-back {
-  left: 22px;
+.detail-actions {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 7;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-action-btn {
+  position: static;
+
+  width: 46px;
+  height: 46px;
+
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.9);
+  color: var(--primary-dark);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: 0 10px 28px rgba(15,30,26,.12);
+
+  display: grid;
+  place-items: center;
+
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.detail-action-btn.active {
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+.detail-trip {
+  font-size: 23px;
 }
 
 .detail-actions {
