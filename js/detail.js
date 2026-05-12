@@ -6,9 +6,11 @@ import {
 } from "./storage.js";
 
 let currentDetailItem = null;
+let selectedReviewRating = 5;
 
 export function initDetail() {
   bindDetailMoreMenu();
+  bindReviewSheet();
 
   window.openDetail = openDetail;
   window.closeDetail = closeDetail;
@@ -378,4 +380,129 @@ function setText(id, value) {
   if (el) {
     el.textContent = value || "";
   }
+}
+
+function bindReviewSheet() {
+  const openBtn =
+    document.getElementById("detailWriteReviewBtn");
+
+  const layer =
+    document.getElementById("reviewSheetLayer");
+
+  const backdrop =
+    document.getElementById("reviewSheetBackdrop");
+
+  const closeBtn =
+    document.getElementById("reviewSheetClose");
+
+  const submitBtn =
+    document.getElementById("reviewSubmitBtn");
+
+  const ratingButtons =
+    document.querySelectorAll("#reviewRating button");
+
+  if (!openBtn || !layer) return;
+
+  openBtn.addEventListener("click", () => {
+    selectedReviewRating = 5;
+
+    updateReviewStars();
+
+    layer.classList.add("show");
+
+    document.documentElement.classList.add("modal-lock");
+    document.body.classList.add("modal-lock");
+  });
+
+  backdrop?.addEventListener("click", closeReviewSheet);
+  closeBtn?.addEventListener("click", closeReviewSheet);
+
+  ratingButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      selectedReviewRating =
+        Number(button.dataset.rate) || 5;
+
+      updateReviewStars();
+    });
+  });
+
+  submitBtn?.addEventListener("click", submitReview);
+}
+
+function closeReviewSheet() {
+  const layer =
+    document.getElementById("reviewSheetLayer");
+
+  layer?.classList.remove("show");
+
+  const comment =
+    document.getElementById("reviewComment");
+
+  if (comment) {
+    comment.value = "";
+  }
+
+  if (!document.getElementById("detailMoreLayer")?.classList.contains("show")) {
+    document.documentElement.classList.remove("modal-lock");
+    document.body.classList.remove("modal-lock");
+  }
+}
+
+function updateReviewStars() {
+  document
+    .querySelectorAll("#reviewRating button")
+    .forEach(button => {
+      const rate =
+        Number(button.dataset.rate);
+
+      button.classList.toggle(
+        "active",
+        rate <= selectedReviewRating
+      );
+    });
+}
+
+function submitReview() {
+  const comment =
+    document.getElementById("reviewComment");
+
+  const list =
+    document.getElementById("detailReviewList");
+
+  if (!comment || !list) return;
+
+  const text =
+    comment.value.trim();
+
+  if (!text) {
+    alert("Please write a short comment.");
+    return;
+  }
+
+  const card =
+    document.createElement("article");
+
+  card.className =
+    "detail-review-card";
+
+  card.innerHTML = `
+    <strong>You</strong>
+    <span>${"★".repeat(selectedReviewRating)}</span>
+    <p>${escapeHtml(text)}</p>
+  `;
+
+  list.prepend(card);
+
+  closeReviewSheet();
+
+  alert("Thanks for sharing your experience.");
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
