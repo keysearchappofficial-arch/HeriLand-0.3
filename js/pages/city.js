@@ -52,6 +52,22 @@ function getCityEvents() {
   return events.filter(item => item.city === activeCityId);
 }
 
+function getCityReviews() {
+  return reviews.filter(item =>
+    item.city === activeCityId ||
+    item.location === activeCityId ||
+    item.area?.toLowerCase() === activeCityId
+  );
+}
+
+function truncateText(text, max) {
+  if (!text) return "";
+
+  if (text.length <= max) return text;
+
+  return text.slice(0, max) + "...";
+}
+
 /* =========================
    Init
 ========================= */
