@@ -1,4 +1,6 @@
 import { initDetail } from "../detail.js";
+import { initEventDetail } from "../event-detail.js";
+import { initTravelerDetail } from "../traveler-detail.js";
 
 import {
   loadMarkdownContent
@@ -73,7 +75,9 @@ function setText(id, value) {
 
 function init() {
 
-  initDetail();
+initDetail();
+initEventDetail();
+initTravelerDetail();
 
   bindMobileMenu();
   bindMyViews();
