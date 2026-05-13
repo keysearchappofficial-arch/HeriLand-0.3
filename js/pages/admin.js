@@ -1,4 +1,6 @@
-
+import {
+  loadComponent
+} from "../components.js";
 
 // admin-studio.js
 
@@ -358,7 +360,23 @@ const formTemplates = {
    Init
 ========================= */
 
-function initStudio() {
+async function loadPreviewComponents() {
+
+  await loadComponent(
+    "#detailComponent",
+    "./components/detail.html"
+  );
+
+  await loadComponent(
+    "#eventDetailComponent",
+    "./components/event-detail.html"
+  );
+
+}
+
+async function initStudio() {
+
+  await loadPreviewComponents();
 
   renderForm(
     formType.value
