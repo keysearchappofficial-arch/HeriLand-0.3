@@ -81,7 +81,12 @@ export function openDetail(place) {
   setText("detailTitle", normalized.name);
   setText("detailAddress", normalized.address);
   setText("detailPhone", normalized.phone);
-  setText("detailHours", normalized.hours);
+setText(
+  "detailHours",
+  getPrimaryHoursText(normalized)
+);
+
+renderWeeklyHours(normalized.hoursData);
   setText("detailContactName", normalized.contactName);
   setText("detailIntro", normalized.intro);
   setText("detailType", normalized.type);
@@ -95,15 +100,21 @@ export function openDetail(place) {
     normalized.name
   );
 
-  const serviceList =
-    document.getElementById("detailServices");
+const serviceList =
+  document.getElementById("detailServices");
 
-  if (serviceList) {
-    serviceList.innerHTML =
-      normalized.services
-        .map(service => `<li>${service}</li>`)
-        .join("");
-  }
+if (serviceList) {
+  const featureList =
+    normalized.services?.length
+      ? normalized.services
+      : normalized.tags;
+
+  serviceList.innerHTML =
+    featureList
+      .slice(0, 8)
+      .map(service => `<li>${escapeHtml(service)}</li>`)
+      .join("");
+}
 
   const aiTags =
     document.getElementById("detailAiTags");
@@ -154,6 +165,128 @@ if (!stillLocked) {
   document.body.classList.remove("modal-lock");
 
 }
+}
+
+function getPrimaryHoursText(place) {
+
+  if (
+    place.hoursData &&
+    Array.isArray(place.hoursData)
+  ) {
+    const today =
+      getTodayOpeningHours(place.hoursData);
+
+    if (today) return today;
+  }
+
+  return place.hours || "Check Before Visiting";
+}
+
+function getTodayOpeningHours(hoursData) {
+
+  const dayKeys = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
+  ];
+
+  const todayKey =
+    dayKeys[new Date().getDay()];
+
+  const today =
+    hoursData.find(item =>
+      item.key === todayKey
+    );
+
+  if (!today) return "";
+
+  if (today.closed) {
+    return `${today.key} Closed`;
+  }
+
+  if (today.open && today.close) {
+    return `${today.key} ${today.open}-${today.close}`;
+  }
+
+  return "";
+}
+
+function renderWeeklyHours(hoursData) {
+
+  const wrap =
+    document.getElementById("detailWeekHours");
+
+  if (!wrap) return;
+
+  if (
+    !hoursData ||
+    !Array.isArray(hoursData) ||
+    !hoursData.length
+  ) {
+    wrap.innerHTML = "";
+    return;
+  }
+
+  const rows =
+    hoursData
+      .filter(day =>
+        day.closed ||
+        day.open ||
+        day.close
+      )
+      .map(day => {
+        const timeText =
+          day.closed
+            ? "Closed"
+            : `${day.open || "--:--"} - ${day.close || "--:--"}`;
+
+        return `
+          <div class="detail-week-row">
+            <span>${day.label || day.key}</span>
+            <strong>${timeText}</strong>
+          </div>
+        `;
+      })
+      .join("");
+
+  if (!rows) {
+    wrap.innerHTML = "";
+    return;
+  }
+
+  wrap.innerHTML = `
+    <button
+      class="detail-week-toggle"
+      type="button"
+      id="detailWeekToggle">
+      View weekly hours
+    </button>
+
+    <div
+      class="detail-week-panel"
+      id="detailWeekPanel">
+      ${rows}
+    </div>
+  `;
+
+  const toggle =
+    document.getElementById("detailWeekToggle");
+
+  const panel =
+    document.getElementById("detailWeekPanel");
+
+  toggle?.addEventListener("click", () => {
+    panel?.classList.toggle("show");
+
+    toggle.textContent =
+      panel?.classList.contains("show")
+        ? "Hide weekly hours"
+        : "View weekly hours";
+  });
 }
 
 function renderDetailSlider(images, altText) {
