@@ -52,6 +52,60 @@ const previewBtn =
 let uploadedImages = [];
 let featureTags = [];
 
+function weeklyHoursTemplate(prefix) {
+
+  const days = [
+    ["Mon", "Monday"],
+    ["Tue", "Tuesday"],
+    ["Wed", "Wednesday"],
+    ["Thu", "Thursday"],
+    ["Fri", "Friday"],
+    ["Sat", "Saturday"],
+    ["Sun", "Sunday"]
+  ];
+
+  return `
+    <div class="studio-field studio-hours-field">
+      <span>Opening Hours</span>
+
+      <div class="studio-week-hours">
+
+        ${days.map(([key, label]) => `
+          <div class="studio-day-row">
+
+            <label class="studio-day-check">
+              <input
+                type="checkbox"
+                id="${prefix}${key}Closed"
+              >
+              <span>${label}</span>
+            </label>
+
+            <input
+              type="time"
+              id="${prefix}${key}Open"
+            >
+
+            <span class="studio-time-separator">-</span>
+
+            <input
+              type="time"
+              id="${prefix}${key}Close"
+            >
+
+          </div>
+        `).join("")}
+
+      </div>
+
+      <small>
+        Tick the day if closed.
+      </small>
+    </div>
+  `;
+
+}
+
 /* =========================
    Templates
 ========================= */
@@ -110,23 +164,7 @@ const formTemplates = {
   </small>
 </div>
 
-<label class="studio-field">
-  <span>Open Time</span>
-
-  <input
-    type="time"
-    id="restaurantOpenTime"
-  >
-</label>
-
-<label class="studio-field">
-  <span>Close Time</span>
-
-  <input
-    type="time"
-    id="placeCloseTime"
-  >
-</label>
+${weeklyHoursTemplate("place")}
         
 <label class="studio-field">
   <span>Phone</span>
@@ -209,23 +247,7 @@ const formTemplates = {
   </small>
 </div>
 
-<label class="studio-field">
-  <span>Open Time</span>
-
-  <input
-    type="time"
-    id="restaurantOpenTime"
-  >
-</label>
-
-<label class="studio-field">
-  <span>Close Time</span>
-
-  <input
-    type="time"
-    id="placeCloseTime"
-  >
-</label>
+${weeklyHoursTemplate("restaurant")}
         
 <label class="studio-field">
   <span>Phone</span>
@@ -832,19 +854,14 @@ timeText:
 
   const isRestaurant =
     type === "restaurant";
-
-  const openTime =
+    
+const hoursData =
   isRestaurant
-    ? getValue("restaurantOpenTime")
-    : getValue("placeOpenTime");
-
-const closeTime =
-  isRestaurant
-    ? getValue("restaurantCloseTime")
-    : getValue("placeCloseTime");
+    ? getWeeklyHours("restaurant")
+    : getWeeklyHours("place");
 
 const hoursText =
-  formatTimeRange(openTime, closeTime);
+  formatWeeklyHoursPreview(hoursData);
 
 const data = {
 
@@ -1050,12 +1067,10 @@ if (type === "attraction") {
     name: getValue("placeName"),
     city: getValue("placeCity"),
     category: getValue("placeCategory"),
-    openTime: getValue("placeOpenTime"),
-    closeTime: getValue("placeCloseTime"),
-    hours: formatTimeRange(
-      getValue("placeOpenTime"),
-      getValue("placeCloseTime")
-    ),
+hoursData: getWeeklyHours("place"),
+hours: formatWeeklyHoursPreview(
+  getWeeklyHours("place")
+),
     phone: getValue("placePhone"),
     address: getValue("placeAddress"),
     description: getValue("placeDescription"),
@@ -1068,12 +1083,10 @@ if (type === "restaurant") {
     name: getValue("restaurantName"),
     city: getValue("restaurantCity"),
     food: getValue("restaurantFood"),
-    openTime: getValue("restaurantOpenTime"),
-    closeTime: getValue("restaurantCloseTime"),
-    hours: formatTimeRange(
-      getValue("restaurantOpenTime"),
-      getValue("restaurantCloseTime")
-    ),
+hoursData: getWeeklyHours("restaurant"),
+hours: formatWeeklyHoursPreview(
+  getWeeklyHours("restaurant")
+),
     phone: getValue("restaurantPhone"),
     address: getValue("restaurantAddress"),
     description: getValue("restaurantDescription"),
@@ -1127,6 +1140,72 @@ if (type === "event") {
 /* =========================
    Helpers
 ========================= */
+
+function getWeeklyHours(prefix) {
+
+  const days = [
+    ["Mon", "Monday"],
+    ["Tue", "Tuesday"],
+    ["Wed", "Wednesday"],
+    ["Thu", "Thursday"],
+    ["Fri", "Friday"],
+    ["Sat", "Saturday"],
+    ["Sun", "Sunday"]
+  ];
+
+  return days.map(([key, label]) => {
+
+    const isClosed =
+      document.getElementById(
+        `${prefix}${key}Closed`
+      )?.checked || false;
+
+    return {
+      key,
+      label,
+      closed: isClosed,
+      open: getValue(`${prefix}${key}Open`),
+      close: getValue(`${prefix}${key}Close`)
+    };
+
+  });
+
+}
+
+function formatWeeklyHoursPreview(hoursData) {
+
+  if (!hoursData || !hoursData.length) {
+    return "";
+  }
+
+  const filled =
+    hoursData.filter(day =>
+      day.closed ||
+      day.open ||
+      day.close
+    );
+
+  if (!filled.length) {
+    return "";
+  }
+
+  return filled
+    .map(day => {
+
+      if (day.closed) {
+        return `${day.key} Closed`;
+      }
+
+      if (day.open && day.close) {
+        return `${day.key} ${day.open}-${day.close}`;
+      }
+
+      return `${day.key} ${day.open || day.close}`;
+
+    })
+    .join(" · ");
+
+}
 
 function getValue(id) {
 
