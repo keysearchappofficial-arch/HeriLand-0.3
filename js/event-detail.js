@@ -59,6 +59,7 @@ export function openEventDetail(event) {
 
     desc:
       event.desc ||
+      event.description ||
       "An event worth exploring slowly.",
 
     type:
@@ -72,11 +73,24 @@ export function openEventDetail(event) {
 
     tags:
       event.tags ||
+      event.featureTags ||
       [
         "Relaxing",
         "Local Vibes",
         "Photo Friendly"
       ],
+
+    suggestedExperience:
+      event.suggestedExperience || {
+        before:
+          "Grab a bite before heading over.",
+
+        during:
+          "Take your time and explore slowly.",
+
+        after:
+          "Take a walk nearby after the event."
+      },
 
     nearby:
       event.nearby ||
@@ -99,16 +113,22 @@ export function openEventDetail(event) {
   setText("eventDetailAiNote", normalized.aiNote);
   setText("eventDetailNearby", normalized.nearby);
 
-  const tags =
-    document.getElementById("eventDetailTags");
+  setText(
+    "eventBeforeText",
+    normalized.suggestedExperience.before
+  );
 
-  if (tags) {
-    tags.innerHTML =
-      normalized.tags
-        .slice(0, 5)
-        .map(tag => `<span>${tag}</span>`)
-        .join("");
-  }
+  setText(
+    "eventDuringText",
+    normalized.suggestedExperience.during
+  );
+
+  setText(
+    "eventAfterText",
+    normalized.suggestedExperience.after
+  );
+
+  renderEventTags(normalized.tags);
 
   bindEventSaveButton(normalized);
 
@@ -130,6 +150,24 @@ export function closeEventDetail() {
 
   document.documentElement.classList.remove("modal-lock");
   document.body.classList.remove("modal-lock");
+}
+
+function renderEventTags(tags) {
+  const tagWrap =
+    document.getElementById("eventDetailTags");
+
+  if (!tagWrap) return;
+
+  const safeTags =
+    Array.isArray(tags)
+      ? tags
+      : [];
+
+  tagWrap.innerHTML =
+    safeTags
+      .slice(0, 5)
+      .map(tag => `<span>${escapeHtml(tag)}</span>`)
+      .join("");
 }
 
 function renderEventDetailSlider(images, altText) {
@@ -160,7 +198,7 @@ function renderEventDetailSlider(images, altText) {
       "event-detail-slide";
 
     slide.innerHTML = `
-      <img src="${src}" alt="${altText}">
+      <img src="${src}" alt="${escapeHtml(altText)}">
     `;
 
     slider.appendChild(slide);
@@ -372,4 +410,13 @@ function setText(id, value) {
   if (el) {
     el.textContent = value || "";
   }
+}
+
+function escapeHtml(text) {
+  return String(text || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
