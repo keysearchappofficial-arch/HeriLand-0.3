@@ -810,8 +810,9 @@ function handlePreview() {
         getValue("eventLocation"),
 
 date:
-  formatDateTimeDate(
-    getValue("eventStart")
+  formatEventDateRange(
+    getValue("eventStart"),
+    getValue("eventEnd")
   ),
 
 timeText:
@@ -834,11 +835,12 @@ timeText:
       aiNote:
         "Perfect for anyone who wants to experience the city slowly.",
 
-      tags: [
-        "Relaxing",
-        "Night",
-        "Local Vibes"
-      ]
+tags:
+  featureTags.length
+    ? featureTags
+    : ["Relaxing", "Local Vibes"],
+    
+    suggestedExperience: getSuggestedExperience()
 
     };
 
