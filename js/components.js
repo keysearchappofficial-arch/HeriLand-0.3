@@ -100,6 +100,11 @@ await loadComponent(
   "./components/detail.html"
 );
 
+await loadComponent(
+  "#travelerDetailComponent",
+  "./components/traveler-detail.html"
+);
+
   await renderMobileMenu();
 
   initAiGuide();
