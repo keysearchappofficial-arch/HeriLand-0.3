@@ -1,3 +1,8 @@
+import {
+  initEventDetail,
+  openEventDetail
+} from "./event-detail.js";
+
 const events = [
 
   {
@@ -139,6 +144,8 @@ function init() {
 
   bindTimeTabs();
   bindTypeChips();
+
+  initEventDetail();
 
   renderEvents();
 
@@ -294,162 +301,6 @@ function bindTypeChips() {
   });
 
 }
-
-/* =========================
-   Event Detail
-========================= */
-
-function openEventDetail(event) {
-
-  const detail =
-    document.getElementById(
-      "eventDetailPage"
-    );
-
-  if (!detail) return;
-
-  /* Hero */
-
-  const hero =
-    document.getElementById(
-      "eventDetailImage"
-    );
-
-  if (hero) {
-    hero.src = event.image;
-  }
-
-  /* Basic */
-
-  setText(
-    "eventDetailTitle",
-    event.title
-  );
-
-setText(
-  "eventDetailDate",
-  event.date || "Upcoming Event"
-);
-
-  setText(
-    "eventDetailLocation",
-    event.location || "Sarawak"
-  );
-
-setText(
-  "eventDetailDesc",
-  event.desc || "About this event"
-);
-
-  /* AI Guide */
-
-setText(
-  "eventDetailGuide",
-  event.guide ||
-  "Arrive around 20 minutes early. The evening atmosphere feels more relaxed."
-);
-
-  /* Timeline */
-
-  const timeline =
-    document.getElementById(
-      "eventTimeline"
-    );
-
-  if (timeline) {
-
-const items =
-  event.timeline || [
-    {
-      time: "6:30 PM",
-      text: "Arrival begins"
-    },
-    {
-      time: "7:00 PM",
-      text: "Event starts"
-    },
-    {
-      time: "9:00 PM",
-      text: "Free time"
-    }
-  ];
-
-    timeline.innerHTML =
-      items.map(item => `
-        <div>
-          <strong>${item.time}</strong>
-          <p>${item.text}</p>
-        </div>
-      `).join("");
-
-  }
-
-  /* Tags */
-
-  const tags =
-    document.getElementById(
-      "eventDetailTags"
-    );
-
-  if (tags) {
-
-const tagList =
-  event.tags || [
-    "Nightlife",
-    "Recommended",
-    "Popular"
-  ];
-
-    tags.innerHTML =
-      tagList.map(tag => `
-        <span>${tag}</span>
-      `).join("");
-
-  }
-
-  detail.classList.add("show");
-
-  document.body.style.overflow =
-    "hidden";
-}
-
-function closeEventDetail() {
-
-  const detail =
-    document.getElementById(
-      "eventDetailPage"
-    );
-
-  if (!detail) return;
-
-  detail.classList.remove("show");
-
-  document.body.style.overflow =
-    "";
-}
-
-/* =========================
-   Helpers
-========================= */
-
-function setText(id, value) {
-
-  const el =
-    document.getElementById(id);
-
-  if (el) {
-    el.textContent = value || "";
-  }
-
-}
-
-/* Global */
-
-window.openEventDetail =
-  openEventDetail;
-
-window.closeEventDetail =
-  closeEventDetail;
 
 /* =========================
    Mobile Menu
