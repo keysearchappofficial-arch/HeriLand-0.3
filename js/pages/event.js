@@ -1,7 +1,7 @@
 import {
   initEventDetail,
   openEventDetail
-} from "./event-detail.js";
+} from "../event-detail.js";
 
 const events = [
 
