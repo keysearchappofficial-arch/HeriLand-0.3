@@ -476,31 +476,50 @@ function renderStorySheet() {
     const card =
       document.createElement("article");
 
-    card.className =
-      "saved-story-card";
+card.className = "saved-story-card";
 
-    card.innerHTML = `
-      <img
-        src="${story.image}"
-        alt="${story.title || story.name}"
-      >
+card.innerHTML = `
+  <div class="saved-story-image">
 
-      <div class="saved-story-body">
+    <img
+      src="${story.image}"
+      alt="${story.title}"
+    >
 
-        <small>
-          Traveler Story
-        </small>
+    <div class="saved-story-overlay">
 
-        <h3>
-          ${story.title || story.name}
-        </h3>
+      <small>
+        Traveler Story
+      </small>
 
-        <p>
-          ${story.story || ""}
-        </p>
+      <h3>
+        ${story.title}
+      </h3>
 
-      </div>
-    `;
+    </div>
+
+  </div>
+
+  <div class="saved-story-body">
+
+    <p>
+      ${truncateText(
+        story.story ||
+        story.description ||
+        "",
+        120
+      )}
+    </p>
+
+    <div class="saved-story-tags">
+      ${(story.tags || [])
+        .slice(0, 3)
+        .map(tag => `<span>#${tag}</span>`)
+        .join("")}
+    </div>
+
+  </div>
+`;
 
     card.addEventListener(
       "click",
