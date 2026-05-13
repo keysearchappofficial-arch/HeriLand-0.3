@@ -6,6 +6,10 @@ import {
   initEventDetail
 } from "../event-detail.js";
 
+/* =========================
+   Local Component Loader
+========================= */
+
 async function loadComponent(selector, file) {
 
   const target =
