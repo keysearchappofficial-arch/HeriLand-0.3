@@ -17,6 +17,7 @@ import {
 
 import { initDetail } from "./detail.js";
 import { initTravelerDetail } from "./traveler-detail.js";
+import { initEventDetail } from "./event-detail.js";
 
 let currentMood = "relax";
 let currentPlaces = [];
@@ -57,6 +58,7 @@ function init() {
 
   initDetail();
   initTravelerDetail();
+  initEventDetail();
 
   renderMood("relax");
   renderCities();
@@ -443,152 +445,6 @@ function bindHomeEventAutoSlide() {
     });
   }, 3800);
 }
-
-function openEventDetail(event) {
-  const detail =
-    document.getElementById("eventDetailPage");
-
-  if (!detail) return;
-
-  const normalized = {
-    ...event,
-    title: event.title || "Untitled Event",
-    image: event.image || "",
-    
-    images:
-  event.images ||
-  [
-    event.image,
-    event.image2,
-    event.image3,
-    event.image4
-  ].filter(Boolean),
-location: event.location || "Sarawak",
-date: event.date || "Upcoming Event",
-    timeText: event.timeText || event.hour || "",
-desc: event.desc || "An event worth exploring slowly.",
-type: event.type || "Event",
-aiNote:
-  event.aiNote ||
-  event.guide ||
-  "Perfect for anyone who wants to experience the city atmosphere slowly.",
-tags:
-  event.tags ||
-  ["Relaxing", "Local Vibes", "Photo Friendly"],
-nearby:
-  event.nearby ||
-  "Explore nearby restaurants, river walks, or night markets."
-  };
-
-renderEventDetailSlider(
-  normalized.images || [normalized.image].filter(Boolean),
-  normalized.title
-);
-
-  setText("eventDetailTitle", normalized.title);
-  setText("eventDetailType", normalized.type);
-  setText("eventDetailLocation", normalized.location);
-  setText("eventDetailDate", normalized.date);
-  setText("eventDetailTime", normalized.timeText || normalized.location);
-  setText("eventDetailDesc", normalized.desc);
-  setText("eventDetailAiNote", normalized.aiNote);
-  setText("eventDetailNearby", normalized.nearby);
-
-  const tags =
-    document.getElementById("eventDetailTags");
-
-  if (tags) {
-    tags.innerHTML =
-      normalized.tags
-        .slice(0, 5)
-        .map(tag => `<span>${tag}</span>`)
-        .join("");
-  }
-
-  detail.classList.add("show");
-  document.body.style.overflow = "hidden";
-}
-
-function closeEventDetail() {
-  const detail =
-    document.getElementById("eventDetailPage");
-
-  if (!detail) return;
-
-  detail.classList.remove("show");
-  document.body.style.overflow = "";
-}
-
-function renderEventDetailSlider(images, altText) {
-  const slider =
-    document.getElementById("eventDetailSlider");
-
-  const dots =
-    document.getElementById("eventDetailDots");
-
-  if (!slider || !dots) return;
-
-  const list =
-    images && images.length
-      ? images
-      : [
-          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-        ];
-
-  slider.innerHTML = "";
-  dots.innerHTML = "";
-
-  list.forEach((src, index) => {
-    const slide =
-      document.createElement("div");
-
-    slide.className =
-      "event-detail-slide";
-
-    slide.innerHTML = `
-      <img src="${src}" alt="${altText}">
-    `;
-
-    slider.appendChild(slide);
-
-    const dot =
-      document.createElement("button");
-
-    dot.className =
-      `event-dot ${index === 0 ? "active" : ""}`;
-
-    dot.type = "button";
-
-    dot.onclick = () => {
-      slider.scrollTo({
-        left: slider.clientWidth * index,
-        behavior: "smooth"
-      });
-    };
-
-    dots.appendChild(dot);
-  });
-
-  slider.onscroll = () => {
-    const current =
-      Math.round(
-        slider.scrollLeft /
-        slider.clientWidth
-      );
-
-    dots
-      .querySelectorAll(".event-dot")
-      .forEach((dot, i) => {
-        dot.classList.toggle(
-          "active",
-          i === current
-        );
-      });
-  };
-}
-
-window.openEventDetail = openEventDetail;
-window.closeEventDetail = closeEventDetail;
 
 function bindMoodButtons() {
   document
