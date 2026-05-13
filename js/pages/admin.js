@@ -23,6 +23,10 @@ let uploadedImages = [];
 
 const formTemplates = {
 
+  /* =========================
+     Attraction
+  ========================= */
+
   attraction: `
     <div class="studio-card">
 
@@ -77,6 +81,10 @@ const formTemplates = {
 
     </div>
   `,
+
+  /* =========================
+     Restaurant
+  ========================= */
 
   restaurant: `
     <div class="studio-card">
@@ -133,6 +141,10 @@ const formTemplates = {
     </div>
   `,
 
+  /* =========================
+     Event
+  ========================= */
+
   event: `
     <div class="studio-card">
 
@@ -186,6 +198,153 @@ const formTemplates = {
       </div>
 
     </div>
+  `,
+
+  /* =========================
+     Emergency Contact
+  ========================= */
+
+  emergency: `
+    <div class="studio-card">
+
+      <div class="studio-card-head">
+        <small>Emergency Contact</small>
+        <h2>Emergency Unit</h2>
+      </div>
+
+      <div class="studio-grid two">
+
+        <label class="studio-field">
+          <span>Unit Type</span>
+
+          <select id="emergencyType">
+            <option value="hospital">
+              Hospital
+            </option>
+
+            <option value="police">
+              Police
+            </option>
+
+            <option value="fire">
+              Fire Department
+            </option>
+
+            <option value="embassy">
+              Embassy
+            </option>
+          </select>
+        </label>
+
+        <label class="studio-field">
+          <span>Area</span>
+
+          <select id="emergencyArea">
+            <option value="kuching">Kuching</option>
+            <option value="sibu">Sibu</option>
+            <option value="miri">Miri</option>
+            <option value="bintulu">Bintulu</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="studio-grid one">
+
+        <label class="studio-field">
+          <span>Unit Name</span>
+          <input type="text" id="emergencyName">
+        </label>
+
+        <label class="studio-field">
+          <span>Address</span>
+          <input type="text" id="emergencyAddress">
+        </label>
+
+        <label class="studio-field">
+          <span>Phone</span>
+          <input type="text" id="emergencyPhone">
+        </label>
+
+      </div>
+
+    </div>
+  `,
+
+  /* =========================
+     Government Contact
+  ========================= */
+
+  government: `
+    <div class="studio-card">
+
+      <div class="studio-card-head">
+        <small>Government Contact</small>
+        <h2>Government Unit</h2>
+      </div>
+
+      <div class="studio-grid two">
+
+        <label class="studio-field">
+          <span>Unit Type</span>
+
+          <select id="governmentType">
+            <option value="tourism">
+              Tourism Office
+            </option>
+
+            <option value="immigration">
+              Immigration
+            </option>
+
+            <option value="cityhall">
+              City Hall
+            </option>
+
+            <option value="transport">
+              Transport Office
+            </option>
+          </select>
+        </label>
+
+        <label class="studio-field">
+          <span>Area</span>
+
+          <select id="governmentArea">
+            <option value="kuching">Kuching</option>
+            <option value="sibu">Sibu</option>
+            <option value="miri">Miri</option>
+            <option value="bintulu">Bintulu</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="studio-grid one">
+
+        <label class="studio-field">
+          <span>Unit Name</span>
+          <input type="text" id="governmentName">
+        </label>
+
+        <label class="studio-field">
+          <span>Address</span>
+          <input type="text" id="governmentAddress">
+        </label>
+
+        <label class="studio-field">
+          <span>Phone</span>
+          <input type="text" id="governmentPhone">
+        </label>
+
+        <label class="studio-field">
+          <span>Website</span>
+          <input type="text" id="governmentWebsite">
+        </label>
+
+      </div>
+
+    </div>
   `
 
 };
@@ -220,6 +379,8 @@ function bindEvents() {
         e.target.value
       );
 
+      resetImages();
+
     }
   );
 
@@ -244,6 +405,31 @@ function renderForm(type) {
   formArea.innerHTML =
     formTemplates[type] || "";
 
+  toggleImageSection(type);
+
+}
+
+/* =========================
+   Toggle Image Upload
+========================= */
+
+function toggleImageSection(type) {
+
+  const imageSection =
+    document.getElementById("studioImageSection");
+
+  if (!imageSection) return;
+
+  const noImageTypes = [
+    "emergency",
+    "government"
+  ];
+
+  imageSection.style.display =
+    noImageTypes.includes(type)
+      ? "none"
+      : "block";
+
 }
 
 /* =========================
@@ -253,7 +439,9 @@ function renderForm(type) {
 function handleImageUpload(e) {
 
   const files =
-    Array.from(e.target.files || []);
+    Array.from(
+      e.target.files || []
+    );
 
   files.forEach(file => {
 
@@ -366,22 +554,22 @@ function renderImages() {
    Submit
 ========================= */
 
-async function handleSubmit() {
+function handleSubmit() {
 
   const type =
     formType.value;
 
-  const data =
-    collectFormData(type);
-
   const payload = {
     type,
-    ...data,
+    ...collectFormData(type),
 
     images:
       uploadedImages.map(image => ({
-        name: image.file.name,
-        thumbnail: image.thumbnail
+        name:
+          image.file.name,
+
+        thumbnail:
+          image.thumbnail
       }))
   };
 
@@ -391,28 +579,20 @@ async function handleSubmit() {
   );
 
   alert(
-    "Ready to submit to backend"
+    "Ready to send backend"
   );
-
-  /*
-    next step:
-
-    POST /api/admin/upload
-
-    backend:
-    - resize image
-    - generate thumbnail
-    - upload NAS
-    - save URL to Supabase
-  */
 
 }
 
 /* =========================
-   Collect Form
+   Collect Form Data
 ========================= */
 
 function collectFormData(type) {
+
+  /* =========================
+     Attraction
+  ========================= */
 
   if (type === "attraction") {
 
@@ -438,6 +618,10 @@ function collectFormData(type) {
 
   }
 
+  /* =========================
+     Restaurant
+  ========================= */
+
   if (type === "restaurant") {
 
     return {
@@ -461,6 +645,10 @@ function collectFormData(type) {
     };
 
   }
+
+  /* =========================
+     Event
+  ========================= */
 
   if (type === "event") {
 
@@ -486,6 +674,59 @@ function collectFormData(type) {
 
   }
 
+  /* =========================
+     Emergency
+  ========================= */
+
+  if (type === "emergency") {
+
+    return {
+      unitType:
+        getValue("emergencyType"),
+
+      area:
+        getValue("emergencyArea"),
+
+      name:
+        getValue("emergencyName"),
+
+      address:
+        getValue("emergencyAddress"),
+
+      phone:
+        getValue("emergencyPhone")
+    };
+
+  }
+
+  /* =========================
+     Government
+  ========================= */
+
+  if (type === "government") {
+
+    return {
+      unitType:
+        getValue("governmentType"),
+
+      area:
+        getValue("governmentArea"),
+
+      name:
+        getValue("governmentName"),
+
+      address:
+        getValue("governmentAddress"),
+
+      phone:
+        getValue("governmentPhone"),
+
+      website:
+        getValue("governmentWebsite")
+    };
+
+  }
+
   return {};
 
 }
@@ -500,5 +741,13 @@ function getValue(id) {
     document.getElementById(id);
 
   return el?.value?.trim() || "";
+
+}
+
+function resetImages() {
+
+  uploadedImages = [];
+
+  renderImages();
 
 }
