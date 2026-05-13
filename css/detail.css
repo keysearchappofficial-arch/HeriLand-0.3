@@ -1333,3 +1333,59 @@
   font-size: 12px;
   font-weight: 700;
 }
+
+.review-place-name {
+  margin-top: 6px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.review-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 18px;
+
+  padding: 12px 16px;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.78);
+  border: 1px dashed var(--line);
+
+  color: var(--text);
+
+  font-size: 13px;
+  font-weight: 760;
+
+  cursor: pointer;
+}
+
+.review-upload-preview {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 14px;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.review-upload-preview::-webkit-scrollbar {
+  display: none;
+}
+
+.review-upload-preview img {
+  width: 92px;
+  height: 92px;
+
+  border-radius: 16px;
+
+  object-fit: cover;
+
+  flex-shrink: 0;
+}
