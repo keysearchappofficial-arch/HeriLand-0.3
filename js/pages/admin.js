@@ -898,6 +898,8 @@ const data = {
 
   hours:
     hoursText || "Check Before Visiting",
+    
+  hoursData,
 
   phone:
     isRestaurant
@@ -1236,20 +1238,6 @@ function getPreviewImages() {
   return uploadedImages.map(
     image => image.url
   );
-
-}
-
-function formatTimeRange(open, close) {
-
-  if (!open && !close) {
-    return "";
-  }
-
-  if (open && close) {
-    return `${open} - ${close}`;
-  }
-
-  return open || close || "";
 
 }
 
