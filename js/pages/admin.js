@@ -1,10 +1,4 @@
-import {
-  openDetail
-} from "../detail.js";
 
-import {
-  openEventDetail
-} from "../event-detail.js";
 
 // admin-studio.js
 
@@ -528,7 +522,7 @@ function handlePreview() {
       ]
     };
 
-    openEventDetail(data);
+    window.openEventDetail(data);
 
     return;
 
@@ -600,7 +594,7 @@ function handlePreview() {
       "A place made for slowing down and staying awhile."
   };
 
-  openDetail(data);
+  window.openDetail(data);
 
 }
 
