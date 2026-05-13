@@ -35,6 +35,7 @@ export function openDetail(place) {
     address: place.address || place.location || place.meta || "Sarawak",
     phone: place.phone || "Not Available",
     hours: place.hours || "Check Before Visiting",
+    hoursData:place.hoursData || [],
     contactName: place.contactName || "HeriLand Guide",
     contactImage: place.contactImage || place.image || "",
     images:
