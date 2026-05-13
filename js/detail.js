@@ -420,6 +420,12 @@ function bindReviewSheet() {
 
   const ratingButtons =
     document.querySelectorAll("#reviewRating button");
+    
+const imageInput =
+  document.getElementById("reviewImageInput");
+
+const imagePreview =
+  document.getElementById("reviewUploadPreview");
 
   if (!openBtn || !layer) return;
 
@@ -455,6 +461,28 @@ function bindReviewSheet() {
       updateReviewStars();
     });
   });
+  
+imageInput?.addEventListener("change", () => {
+  if (!imagePreview) return;
+
+  imagePreview.innerHTML = "";
+
+  [...imageInput.files].forEach(file => {
+    const reader =
+      new FileReader();
+
+    reader.onload = e => {
+      const img =
+        document.createElement("img");
+
+      img.src = e.target.result;
+
+      imagePreview.appendChild(img);
+    };
+
+    reader.readAsDataURL(file);
+  });
+});
 
   submitBtn?.addEventListener("click", submitReview);
 }
@@ -525,19 +553,92 @@ function submitReview() {
 
   const card =
     document.createElement("article");
+    
+const imagePreview =
+
+  document.getElementById("reviewUploadPreview");
+
+const imageHtml =
+
+  imagePreview?.innerHTML
+
+    ? `<div class="review-images">${imagePreview.innerHTML}</div>`
+
+    : "";
 
   card.className =
     "detail-review-card";
 
-  card.innerHTML = `
-    <strong>You</strong>
-    <span>${"★".repeat(selectedReviewRating)}</span>
-    <p>${escapeHtml(text)}</p>
-  `;
+card.innerHTML = `
+
+  <div class="detail-review-user">
+
+    <img
+
+      src="https://i.pravatar.cc/120?img=45"
+
+      alt="You"
+
+    >
+
+    <div>
+
+      <strong>You</strong>
+
+      <div class="detail-review-meta">
+
+        <span class="review-stars">
+
+          ${"★".repeat(selectedReviewRating)}
+
+        </span>
+
+        <span class="review-time">
+
+          Just now
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <p>${escapeHtml(text)}</p>
+
+  ${imageHtml}
+
+  <div class="review-helpful">
+
+    <button type="button">
+
+      👍 Helpful
+
+    </button>
+
+    <span>0</span>
+
+  </div>
+
+`;
 
   list.prepend(card);
 
   closeReviewSheet();
+  
+comment.value = "";
+
+if (imagePreview) {
+  imagePreview.innerHTML = "";
+}
+
+const imageInput =
+  document.getElementById("reviewImageInput");
+
+if (imageInput) {
+  imageInput.value = "";
+}
 
   alert("Thanks for sharing your experience.");
 }
