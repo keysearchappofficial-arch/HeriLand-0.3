@@ -1,4 +1,5 @@
 import { initDetail } from "../detail.js";
+import { initEventDetail } from "../event-detail.js";
 
 import {
   saveItem,
@@ -58,6 +59,7 @@ function init() {
   bindMobileMenu();
 
   initDetail();
+  initEventDetail();
 
   renderCityTabs();
 
@@ -222,78 +224,6 @@ services: restaurant.services || [
 ]
   };
 }
-
-function openEventDetail(event) {
-  const detail =
-    document.getElementById("eventDetailPage");
-
-  if (!detail) return;
-
-  const normalized = {
-    ...event,
-    title: event.title || "Untitled Event",
-    image: event.image || "",
-    location: event.location || "Sarawak",
-    date: event.date || "Upcoming Event",
-    timeText: event.timeText || event.hour || "",
-desc: event.desc || "An event worth exploring slowly.",
-type: event.type || "Event",
-aiNote:
-  event.aiNote ||
-  event.guide ||
-  "Perfect for anyone who wants to experience the city atmosphere slowly.",
-tags:
-  event.tags ||
-  ["Relaxing", "Local Vibes", "Photo Friendly"],
-nearby:
-  event.nearby ||
-  "Explore nearby restaurants, river walks, or night markets."
-  };
-
-  const image =
-    document.getElementById("eventDetailImage");
-
-  if (image) {
-    image.src = normalized.image;
-    image.alt = normalized.title;
-  }
-
-  setText("eventDetailTitle", normalized.title);
-  setText("eventDetailType", normalized.type);
-  setText("eventDetailLocation", normalized.location);
-  setText("eventDetailDate", normalized.date);
-  setText("eventDetailTime", normalized.timeText || normalized.location);
-  setText("eventDetailDesc", normalized.desc);
-  setText("eventDetailAiNote", normalized.aiNote);
-  setText("eventDetailNearby", normalized.nearby);
-
-  const tags =
-    document.getElementById("eventDetailTags");
-
-  if (tags) {
-    tags.innerHTML =
-      normalized.tags
-        .slice(0, 5)
-        .map(tag => `<span>${tag}</span>`)
-        .join("");
-  }
-
-  detail.classList.add("show");
-  document.body.style.overflow = "hidden";
-}
-
-function closeEventDetail() {
-  const detail =
-    document.getElementById("eventDetailPage");
-
-  if (!detail) return;
-
-  detail.classList.remove("show");
-  document.body.style.overflow = "";
-}
-
-window.openEventDetail = openEventDetail;
-window.closeEventDetail = closeEventDetail;
 
 function setText(id, value) {
   const el =
