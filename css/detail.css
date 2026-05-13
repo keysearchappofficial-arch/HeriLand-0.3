@@ -1215,3 +1215,121 @@
   }
 
 }
+
+/* =========================
+   Review User
+========================= */
+
+.detail-review-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-review-user img {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 999px;
+
+  object-fit: cover;
+}
+
+.detail-review-user strong {
+  display: block;
+
+  color: var(--text);
+
+  font-size: 15px;
+  font-weight: 820;
+}
+
+.detail-review-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 4px;
+}
+
+.review-stars {
+  color: var(--accent);
+
+  font-size: 12px;
+  letter-spacing: -1px;
+}
+
+.review-time {
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+/* =========================
+   Review Images
+========================= */
+
+.review-images {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 14px;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.review-images::-webkit-scrollbar {
+  display: none;
+}
+
+.review-images img {
+  width: 120px;
+  height: 92px;
+
+  border-radius: 16px;
+
+  object-fit: cover;
+
+  flex-shrink: 0;
+}
+
+/* =========================
+   Helpful
+========================= */
+
+.review-helpful {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 14px;
+}
+
+.review-helpful button {
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.78);
+  border: 1px solid var(--line);
+
+  padding: 8px 12px;
+
+  color: var(--text);
+
+  font-size: 12px;
+  font-weight: 760;
+
+  cursor: pointer;
+}
+
+.review-helpful button:active {
+  transform: scale(.96);
+}
+
+.review-helpful span {
+  color: var(--muted);
+
+  font-size: 12px;
+  font-weight: 700;
+}
