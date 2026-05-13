@@ -1,0 +1,206 @@
+<!-- Event Detail Page -->
+<section
+  class="event-detail-page"
+  id="eventDetailPage">
+
+  <!-- Hero -->
+  <div class="event-detail-hero">
+
+    <!-- Back -->
+    <button
+      class="event-detail-back"
+      type="button"
+      onclick="closeEventDetail()">
+      ‹
+    </button>
+
+    <!-- Actions -->
+    <div class="event-detail-actions">
+
+      <button
+        class="event-detail-action event-detail-save"
+        id="eventDetailSaveBtn"
+        type="button"
+        aria-label="Save event">
+        ♡
+      </button>
+
+      <button
+        class="event-detail-action event-detail-more"
+        id="eventDetailMoreBtn"
+        type="button"
+        aria-label="More actions">
+        ⋯
+      </button>
+
+    </div>
+
+    <!-- Slider -->
+    <div
+      class="event-detail-slider"
+      id="eventDetailSlider">
+    </div>
+
+    <div
+      class="event-detail-dots"
+      id="eventDetailDots">
+    </div>
+
+  </div>
+
+  <!-- Content -->
+  <div class="event-detail-panel">
+
+    <section class="event-detail-head">
+
+      <div class="event-detail-kicker">
+        <span id="eventDetailType">Event</span>
+        <span>・</span>
+        <span id="eventDetailLocation">Sarawak</span>
+      </div>
+
+      <h1 id="eventDetailTitle"></h1>
+
+      <div class="event-detail-meta">
+        <span id="eventDetailDate">Tonight</span>
+        <span>｜</span>
+        <span id="eventDetailTime">7:00 PM</span>
+      </div>
+
+    </section>
+
+    <section class="event-detail-guide">
+
+      <small>HeriLand Guide</small>
+
+      <p id="eventDetailAiNote">
+        Perfect for anyone who wants to experience the city at night, slowly.
+      </p>
+
+    </section>
+
+    <section class="event-detail-section">
+
+      <h2>Event Detail</h2>
+
+      <p id="eventDetailDesc"></p>
+
+    </section>
+
+    <section class="event-detail-section">
+
+      <h2>Atmosphere</h2>
+
+      <div
+        class="event-detail-tags"
+        id="eventDetailTags">
+
+        <span>Night</span>
+        <span>Relaxing</span>
+        <span>Local Vibes</span>
+
+      </div>
+
+    </section>
+
+    <section class="event-detail-timeline">
+
+      <h2>Suggested Experience</h2>
+
+      <div class="event-timeline-list">
+
+        <div>
+          <small>Before</small>
+          <p>Grab a bite before heading over.</p>
+        </div>
+
+        <div>
+          <small>During</small>
+          <p>Take your time and explore slowly.</p>
+        </div>
+
+        <div>
+          <small>After</small>
+          <p>Take a walk nearby after the event.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="event-detail-nearby">
+
+      <h2>Nearby Places to Explore</h2>
+
+      <p id="eventDetailNearby">
+        Explore nearby restaurants, river walks, or night markets.
+      </p>
+
+    </section>
+
+  </div>
+
+</section>
+
+<!-- Event More Sheet -->
+<div
+  class="event-more-layer"
+  id="eventMoreLayer">
+
+  <div
+    class="event-more-backdrop"
+    id="eventMoreBackdrop">
+  </div>
+
+  <div
+    class="event-more-menu"
+    id="eventMoreMenu">
+
+    <button
+      type="button"
+      onclick="window.addEventToTrip()">
+
+      <span>⊞</span>
+      Add to Trip
+
+    </button>
+
+    <button
+      type="button"
+      onclick="window.openEventMap()">
+
+      <span>↗</span>
+      Open in Maps
+
+    </button>
+
+    <button
+      type="button"
+      onclick="window.shareEvent()">
+
+      <span>⤴</span>
+      Share Event
+
+    </button>
+
+    <button
+      type="button"
+      onclick="window.saveEventReminder()">
+
+      <span>⏰</span>
+      Save Reminder
+
+    </button>
+
+    <button
+      type="button"
+      onclick="window.continueEventAiGuide()">
+
+      <span>✨</span>
+      Continue with AI Guide
+
+    </button>
+
+  </div>
+
+</div>
