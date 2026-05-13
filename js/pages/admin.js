@@ -833,72 +833,93 @@ timeText:
   const isRestaurant =
     type === "restaurant";
 
-  const data = {
-
-    name:
-      isRestaurant
-        ? getValue("restaurantName")
-        : getValue("placeName"),
-
-    title:
-      isRestaurant
-        ? getValue("restaurantName")
-        : getValue("placeName"),
-
-    address:
-      isRestaurant
-        ? getValue("restaurantAddress")
-        : getValue("placeAddress"),
-
-    intro:
-      isRestaurant
-        ? getValue("restaurantDescription")
-        : getValue("placeDescription"),
-
-    description:
-      isRestaurant
-        ? getValue("restaurantDescription")
-        : getValue("placeDescription"),
-
-    image:
-      getPreviewImage(),
-
-    images:
-      getPreviewImages(),
-
-hours:
+  const openTime =
   isRestaurant
-    ? formatTimeRange(
-        getValue("restaurantOpenTime"),
-        getValue("restaurantCloseTime")
-      )
-    : formatTimeRange(
-        getValue("placeOpenTime"),
-        getValue("placeCloseTime")
-      ),
+    ? getValue("restaurantOpenTime")
+    : getValue("placeOpenTime");
 
-phone:
+const closeTime =
   isRestaurant
-    ? getValue("restaurantPhone")
-    : getValue("placePhone"),
+    ? getValue("restaurantCloseTime")
+    : getValue("placeCloseTime");
 
-    type:
-      isRestaurant
-        ? "Restaurant"
-        : "Attraction",
+const hoursText =
+  formatTimeRange(openTime, closeTime);
 
-    score: "4.8",
+const data = {
 
-    reviewCount: "128",
+  name:
+    isRestaurant
+      ? getValue("restaurantName")
+      : getValue("placeName"),
 
-tags: featureTags,
+  title:
+    isRestaurant
+      ? getValue("restaurantName")
+      : getValue("placeName"),
 
-    aiNote:
-      "A place made for slowing down and staying awhile."
+  address:
+    isRestaurant
+      ? getValue("restaurantAddress")
+      : getValue("placeAddress"),
 
-  };
+  intro:
+    isRestaurant
+      ? getValue("restaurantDescription")
+      : getValue("placeDescription"),
 
-  window.openDetail(data);
+  description:
+    isRestaurant
+      ? getValue("restaurantDescription")
+      : getValue("placeDescription"),
+
+  image:
+    getPreviewImage(),
+
+  images:
+    getPreviewImages(),
+
+  hours:
+    hoursText || "Check Before Visiting",
+
+  phone:
+    isRestaurant
+      ? getValue("restaurantPhone")
+      : getValue("placePhone"),
+
+  type:
+    isRestaurant
+      ? "Restaurant"
+      : "Attraction",
+
+  score: "4.8",
+
+  reviewCount: "128",
+
+  tags:
+    featureTags.length
+      ? featureTags
+      : [
+          isRestaurant
+            ? getValue("restaurantFood")
+            : getValue("placeCategory")
+        ].filter(Boolean),
+
+  services:
+    featureTags.length
+      ? featureTags
+      : [
+          isRestaurant
+            ? getValue("restaurantFood")
+            : getValue("placeCategory")
+        ].filter(Boolean),
+
+  aiNote:
+    "A place made for slowing down and staying awhile."
+
+};
+
+window.openDetail(data);
 
 }
 
