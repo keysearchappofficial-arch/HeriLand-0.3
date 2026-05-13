@@ -305,7 +305,7 @@
 
   .city-review-section {
     margin-top: 42px;
-    padding: 18px 18px;
+    padding: 0 18px 18px;
   }
 
   .city-review-section .review-head {
@@ -340,7 +340,7 @@
   }
 
   .city-review-section .traveler-card-body {
-    padding: 10px 2px 0;
+    padding: 18px;
   }
 
   .city-review-section .traveler-card-top strong {
