@@ -202,28 +202,49 @@ function renderTravelerSlider(images, altText) {
 }
 
 function bindTravelerSaveButton(traveler) {
+
   const saveBtn =
     document.getElementById("travelerDetailSaveBtn");
 
   if (!saveBtn) return;
 
-  updateTravelerSaveButton(saveBtn, traveler.id);
+  updateTravelerSaveButton(
+    saveBtn,
+    traveler.id
+  );
 
   saveBtn.onclick = () => {
-    if (isSaved("savedTravelers", traveler.id)) {
-      removeItem("savedTravelers", traveler.id);
-    }
-    else {
-      saveItem("savedTravelers", traveler);
+
+    if (isSaved("stories", traveler.id)) {
+
+      removeItem(
+        "stories",
+        traveler.id
+      );
+
     }
 
-    updateTravelerSaveButton(saveBtn, traveler.id);
+    else {
+
+      saveItem(
+        "stories",
+        traveler
+      );
+
+    }
+
+    updateTravelerSaveButton(
+      saveBtn,
+      traveler.id
+    );
+
   };
 }
 
 function updateTravelerSaveButton(button, id) {
+
   const saved =
-    isSaved("savedTravelers", id);
+    isSaved("stories", id);
 
   button.textContent =
     saved ? "♥" : "♡";
@@ -281,9 +302,13 @@ function closeTravelerMoreMenu() {
 }
 
 window.saveTravelerStory = function() {
+
   if (!currentTraveler) return;
 
-  saveItem("savedTravelers", currentTraveler);
+  saveItem(
+    "stories",
+    currentTraveler
+  );
 
   closeTravelerMoreMenu();
 
@@ -291,9 +316,13 @@ window.saveTravelerStory = function() {
 };
 
 window.saveTravelerRoute = function() {
+
   if (!currentTraveler) return;
 
-  saveItem("travelerRoutes", currentTraveler);
+  saveItem(
+    "trip",
+    currentTraveler
+  );
 
   closeTravelerMoreMenu();
 
