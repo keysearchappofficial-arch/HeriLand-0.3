@@ -1,5 +1,6 @@
 import { initDetail } from "../detail.js";
 import { initEventDetail } from "../event-detail.js";
+import { initTravelerDetail } from "../traveler-detail.js";
 
 import {
   saveItem,
@@ -60,6 +61,7 @@ function init() {
 
   initDetail();
   initEventDetail();
+  initTravelerDetail();
 
   renderCityTabs();
 
@@ -170,6 +172,7 @@ function renderCity(city) {
   renderSpots();
   renderRestaurants();
   renderEvents();
+  renderCityReviews();
 }
 
 /* =========================
@@ -654,6 +657,55 @@ function bindSpotSheet() {
   if (backdrop) {
     backdrop.addEventListener("click", closeSpotSheet);
   }
+}
+
+function renderCityReviews() {
+  const grid =
+    document.getElementById("cityReviewGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  const cityReviews =
+    getCityReviews();
+
+  cityReviews
+    .slice(0, 6)
+    .forEach(review => {
+      const card =
+        document.createElement("article");
+
+      card.className = "traveler-card";
+
+      card.onclick = () =>
+        window.openTravelerDetail(review);
+
+      card.innerHTML = `
+        <div class="traveler-card-image">
+          <img src="${review.image}" alt="${review.title}">
+        </div>
+
+        <div class="traveler-card-body">
+          <div class="traveler-card-top">
+            <strong>${review.name || review.author || "HeriLand Traveler"}</strong>
+            <span>★★★★★</span>
+          </div>
+
+          <h3>${review.title}</h3>
+
+          <p>
+            ${truncateText(review.description || review.desc || "", 42)}
+          </p>
+
+          <small>
+            ${review.area || review.place || activeCityId}
+          </small>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
 }
 
 const allCityItems = [
