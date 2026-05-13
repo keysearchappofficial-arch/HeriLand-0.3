@@ -299,6 +299,85 @@
     line-height: 1.55;
   }
 
+    /* =========================
+     City Traveler Stories
+  ========================= */
+
+  .city-review-section {
+    margin-top: 42px;
+    padding: 0 18px 18px;
+  }
+
+  .city-review-section .review-head {
+    margin-bottom: 16px;
+  }
+
+  .city-review-section .review-head h2 {
+    font-size: 24px;
+    letter-spacing: -0.6px;
+  }
+
+  .city-review-section .review-head p {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .city-review-section .review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .city-review-section .traveler-card {
+    min-width: 0;
+  }
+
+  .city-review-section .traveler-card-image {
+    aspect-ratio: 1 / 1.12;
+    border-radius: 22px;
+    overflow: hidden;
+  }
+
+  .city-review-section .traveler-card-body {
+    padding: 10px 2px 0;
+  }
+
+  .city-review-section .traveler-card-top strong {
+    font-size: 11px;
+  }
+
+  .city-review-section .traveler-card-top span {
+    font-size: 10px;
+  }
+
+  .city-review-section .traveler-card-body h3 {
+    margin-top: 7px;
+    font-size: 15px;
+    line-height: 1.25;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .city-review-section .traveler-card-body p {
+    margin-top: 7px;
+    font-size: 12px;
+    line-height: 1.45;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .city-review-section .traveler-card-body small {
+    margin-top: 8px;
+    font-size: 11px;
+  }
+
   /* =========================
      City List
   ========================= */
