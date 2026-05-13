@@ -87,6 +87,31 @@ const formTemplates = {
           <span>Category</span>
           <input type="text" id="placeCategory">
         </label>
+        
+<div class="studio-field">
+
+  <span>Feature Tags</span>
+
+  <div class="studio-tag-box">
+
+    <div
+      class="studio-tag-list"
+      id="featureTagList"
+    ></div>
+
+    <input
+      type="text"
+      id="featureTagInput"
+      placeholder="Type and press Enter"
+    >
+
+  </div>
+
+  <small>
+    Max 5 tags
+  </small>
+
+</div>
 
 <label class="studio-field">
   <span>Open Time</span>
