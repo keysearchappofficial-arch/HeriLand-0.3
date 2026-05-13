@@ -211,7 +211,7 @@ if (currentTime === "recent") {
 card.className = "event-card";
 
 card.onclick = () =>
-  openEventDetail(event);
+  window.openEventDetail(event);
 
 card.innerHTML = `
   <div class="event-card-image">
