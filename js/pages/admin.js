@@ -240,6 +240,32 @@ async function loadPreviewComponents() {
     "./components/event-detail.html"
   );
 
+  /* =========================
+     Move Preview To Body
+  ========================= */
+
+  const detailPage =
+    document.getElementById("detailPage");
+
+  const eventDetailPage =
+    document.getElementById("eventDetailPage");
+
+  if (detailPage) {
+    document.body.appendChild(
+      detailPage
+    );
+  }
+
+  if (eventDetailPage) {
+    document.body.appendChild(
+      eventDetailPage
+    );
+  }
+
+  /* =========================
+     Init Detail
+  ========================= */
+
   initDetail();
   initEventDetail();
 
