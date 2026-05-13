@@ -47,18 +47,47 @@ function getMyTrip() {
   return getItems("trip");
 }
 
+function getSavedStories() {
+  return getItems("stories");
+}
+
 function getRecentlyViewed() {
   return getItems("recent");
 }
 
 function updateMyCounts() {
-  const savedCount = getSavedPlaces().length;
-  const tripCount = getMyTrip().length;
-  const recentCount = getRecentlyViewed().length;
 
-  setText("savedCount", savedCount);
-  setText("tripCount", tripCount);
-  setText("recentCount", recentCount);
+  const savedCount =
+    getSavedPlaces().length;
+
+  const storyCount =
+    getSavedStories().length;
+
+  const tripCount =
+    getMyTrip().length;
+
+  const recentCount =
+    getRecentlyViewed().length;
+
+  setText(
+    "savedCount",
+    savedCount
+  );
+
+  setText(
+    "storyCount",
+    storyCount
+  );
+
+  setText(
+    "tripCount",
+    tripCount
+  );
+
+  setText(
+    "recentCount",
+    recentCount
+  );
 }
 
 function setText(id, value) {
@@ -84,6 +113,7 @@ initTravelerDetail();
   bindFeedbackButton();
 
   renderSavedSheet();
+  renderStorySheet();
   renderTripSheet();
   renderRecentSheet();
 
@@ -406,6 +436,87 @@ function renderSavedSheet() {
 
     grid.appendChild(card);
   });
+}
+
+function renderStorySheet() {
+
+  const grid =
+    document.getElementById(
+      "storySheetGrid"
+    );
+
+  if (!grid) return;
+
+  const stories =
+    getSavedStories();
+
+  grid.innerHTML = "";
+
+  if (!stories.length) {
+
+    grid.innerHTML = `
+      <div class="empty-state">
+
+        <h3>
+          No Saved Stories Yet
+        </h3>
+
+        <p>
+          Traveler stories you save will appear here.
+        </p>
+
+      </div>
+    `;
+
+    return;
+  }
+
+  stories.forEach(story => {
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      "saved-story-card";
+
+    card.innerHTML = `
+      <img
+        src="${story.image}"
+        alt="${story.title || story.name}"
+      >
+
+      <div class="saved-story-body">
+
+        <small>
+          Traveler Story
+        </small>
+
+        <h3>
+          ${story.title || story.name}
+        </h3>
+
+        <p>
+          ${story.story || ""}
+        </p>
+
+      </div>
+    `;
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        window.openTravelerDetail(
+          story
+        );
+
+      }
+    );
+
+    grid.appendChild(card);
+
+  });
+
 }
 
 /* =========================
