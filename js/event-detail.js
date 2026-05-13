@@ -86,7 +86,7 @@ export function openEventDetail(event) {
   currentEventItem = normalized;
 
   renderEventDetailSlider(
-    normalized.images || [normalized.image].filter(Boolean),
+    normalized.images,
     normalized.title
   );
 
@@ -141,12 +141,13 @@ function renderEventDetailSlider(images, altText) {
 
   if (!slider || !dots) return;
 
+  const fallback =
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80";
+
   const list =
     images && images.length
       ? images
-      : [
-          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-        ];
+      : [fallback];
 
   slider.innerHTML = "";
   dots.innerHTML = "";
@@ -278,6 +279,11 @@ function closeEventMoreMenu() {
 
   layer?.classList.remove("show");
   detail?.classList.remove("sheet-open");
+
+  if (detail?.classList.contains("show")) {
+    document.documentElement.classList.add("modal-lock");
+    document.body.classList.add("modal-lock");
+  }
 }
 
 window.addEventToTrip = function() {
