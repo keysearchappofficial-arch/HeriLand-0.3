@@ -635,21 +635,31 @@ const reviews = [
     stars: 5,
     time: "2 days ago",
     helpful: 12,
-    text: "Best enjoyed in the evening, easygoing and relaxing."
+    text: "Best enjoyed in the evening, easygoing and relaxing.",
+    images: [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=900&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop"
+    ]
   },
+
   {
     name: "Daniel",
     stars: 5,
     time: "1 week ago",
     helpful: 5,
-    text: "Quiet and peaceful, perfect for a slow walk."
+    text: "Quiet and peaceful, perfect for a slow walk.",
+    images: [
+      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=900&auto=format&fit=crop"
+    ]
   },
+
   {
     name: "Sarah",
     stars: 4,
     time: "3 days ago",
     helpful: 8,
-    text: "Loved the atmosphere and local food nearby."
+    text: "Loved the atmosphere and local food nearby.",
+    images: []
   }
 ];
 
@@ -684,8 +694,25 @@ const reviews = [
 
 </div>
 
-        <p>${review.text}</p>
-        
+<p>${review.text}</p>
+
+${review.images?.length ? `
+
+  <div class="review-images">
+
+    ${review.images.map(image => `
+
+      <img
+        src="${image}"
+        alt="${review.name}"
+      >
+
+    `).join("")}
+
+  </div>
+
+` : ""}
+
 <div class="review-helpful">
 
   <button type="button">
