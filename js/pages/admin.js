@@ -220,6 +220,157 @@ const formTemplates = {
       </div>
 
     </div>
+  `,
+
+  emergency: `
+    <div class="studio-card">
+
+      <div class="studio-card-head">
+        <small>Emergency Contact</small>
+        <h2>Emergency Unit</h2>
+      </div>
+
+      <div class="studio-grid two">
+
+        <label class="studio-field">
+          <span>Unit Type</span>
+
+          <select id="emergencyType">
+            <option value="hospital">Hospital</option>
+            <option value="police">Police</option>
+            <option value="fire">Fire Department</option>
+            <option value="embassy">Embassy</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+
+        <label class="studio-field">
+          <span>Area</span>
+
+          <select id="emergencyArea">
+            <option value="kuching">Kuching</option>
+            <option value="sibu">Sibu</option>
+            <option value="miri">Miri</option>
+            <option value="bintulu">Bintulu</option>
+            <option value="sarikei">Sarikei</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="studio-grid one">
+
+        <label class="studio-field">
+          <span>Unit Name</span>
+          <input
+            type="text"
+            id="emergencyName"
+            placeholder="Sibu Hospital"
+          >
+        </label>
+
+        <label class="studio-field">
+          <span>Address</span>
+          <input
+            type="text"
+            id="emergencyAddress"
+            placeholder="Full address"
+          >
+        </label>
+
+        <label class="studio-field">
+          <span>Phone</span>
+          <input
+            type="text"
+            id="emergencyPhone"
+            placeholder="084-343333"
+          >
+        </label>
+
+      </div>
+
+    </div>
+  `,
+
+  government: `
+    <div class="studio-card">
+
+      <div class="studio-card-head">
+        <small>Government Contact</small>
+        <h2>Government Unit</h2>
+      </div>
+
+      <div class="studio-grid two">
+
+        <label class="studio-field">
+          <span>Unit Type</span>
+
+          <select id="governmentType">
+            <option value="tourism">Tourism Office</option>
+            <option value="immigration">Immigration</option>
+            <option value="cityhall">City Hall</option>
+            <option value="transport">Transport Office</option>
+            <option value="police">Police</option>
+            <option value="health">Health Department</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+
+        <label class="studio-field">
+          <span>Area</span>
+
+          <select id="governmentArea">
+            <option value="kuching">Kuching</option>
+            <option value="sibu">Sibu</option>
+            <option value="miri">Miri</option>
+            <option value="bintulu">Bintulu</option>
+            <option value="sarikei">Sarikei</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="studio-grid one">
+
+        <label class="studio-field">
+          <span>Unit Name</span>
+          <input
+            type="text"
+            id="governmentName"
+            placeholder="Sarawak Tourism Board"
+          >
+        </label>
+
+        <label class="studio-field">
+          <span>Address</span>
+          <input
+            type="text"
+            id="governmentAddress"
+            placeholder="Full address"
+          >
+        </label>
+
+        <label class="studio-field">
+          <span>Phone</span>
+          <input
+            type="text"
+            id="governmentPhone"
+            placeholder="+60..."
+          >
+        </label>
+
+        <label class="studio-field">
+          <span>Website</span>
+          <input
+            type="url"
+            id="governmentWebsite"
+            placeholder="https://..."
+          >
+        </label>
+
+      </div>
+
+    </div>
   `
 
 };
@@ -638,13 +789,64 @@ function handleSubmit() {
 
 function collectFormData() {
 
-  return {
-    title:
-      getValue("placeName") ||
-      getValue("restaurantName") ||
-      getValue("eventTitle")
-  };
+  const type =
+    formType.value;
 
+  if (type === "attraction") {
+    return {
+      name: getValue("placeName"),
+      city: getValue("placeCity"),
+      category: getValue("placeCategory"),
+      hours: getValue("placeHours"),
+      address: getValue("placeAddress"),
+      description: getValue("placeDescription")
+    };
+  }
+
+  if (type === "restaurant") {
+    return {
+      name: getValue("restaurantName"),
+      city: getValue("restaurantCity"),
+      food: getValue("restaurantFood"),
+      hours: getValue("restaurantHours"),
+      address: getValue("restaurantAddress"),
+      description: getValue("restaurantDescription")
+    };
+  }
+
+  if (type === "event") {
+    return {
+      title: getValue("eventTitle"),
+      city: getValue("eventCity"),
+      date: getValue("eventDate"),
+      time: getValue("eventTime"),
+      location: getValue("eventLocation"),
+      description: getValue("eventDescription")
+    };
+  }
+
+  if (type === "emergency") {
+    return {
+      unitType: getValue("emergencyType"),
+      area: getValue("emergencyArea"),
+      name: getValue("emergencyName"),
+      address: getValue("emergencyAddress"),
+      phone: getValue("emergencyPhone")
+    };
+  }
+
+  if (type === "government") {
+    return {
+      unitType: getValue("governmentType"),
+      area: getValue("governmentArea"),
+      name: getValue("governmentName"),
+      address: getValue("governmentAddress"),
+      phone: getValue("governmentPhone"),
+      website: getValue("governmentWebsite")
+    };
+  }
+
+  return {};
 }
 
 /* =========================
