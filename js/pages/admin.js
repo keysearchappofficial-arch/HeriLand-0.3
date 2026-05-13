@@ -356,6 +356,37 @@ ${weeklyHoursTemplate("restaurant")}
           <span>Description</span>
           <textarea id="eventDescription"></textarea>
         </label>
+        
+<div class="studio-grid one">
+
+  <label class="studio-field">
+    <span>Before Event</span>
+    <input
+      type="text"
+      id="eventBefore"
+      placeholder="Grab a bite before heading over."
+    >
+  </label>
+
+  <label class="studio-field">
+    <span>During Event</span>
+    <input
+      type="text"
+      id="eventDuring"
+      placeholder="Take your time and explore slowly."
+    >
+  </label>
+
+  <label class="studio-field">
+    <span>After Event</span>
+    <input
+      type="text"
+      id="eventAfter"
+      placeholder="Take a walk nearby after the event."
+    >
+  </label>
+
+</div>
 
       </div>
 
@@ -1144,6 +1175,43 @@ if (type === "event") {
 /* =========================
    Helpers
 ========================= */
+
+function formatEventDateRange(start, end) {
+
+  const startText =
+    formatDateTimeDate(start);
+
+  const endText =
+    formatDateTimeDate(end);
+
+  if (
+    startText &&
+    endText &&
+    startText !== endText
+  ) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+}
+
+function getSuggestedExperience() {
+
+  return {
+    before:
+      getValue("eventBefore") ||
+      "Grab a bite before heading over.",
+
+    during:
+      getValue("eventDuring") ||
+      "Take your time and explore slowly.",
+
+    after:
+      getValue("eventAfter") ||
+      "Take a walk nearby after the event."
+  };
+
+}
 
 function getWeeklyHours(prefix) {
 
