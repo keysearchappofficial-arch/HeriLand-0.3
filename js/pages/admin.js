@@ -27,7 +27,9 @@ async function loadComponent(selector, file) {
 
 }
 
-// admin-studio.js
+/* =========================
+   Elements
+========================= */
 
 const formType =
   document.getElementById("contentType");
@@ -54,10 +56,6 @@ let uploadedImages = [];
 ========================= */
 
 const formTemplates = {
-
-  /* =========================
-     Attraction
-  ========================= */
 
   attraction: `
     <div class="studio-card">
@@ -260,3 +258,409 @@ async function initStudio() {
 }
 
 initStudio();
+
+/* =========================
+   Events
+========================= */
+
+function bindEvents() {
+
+  formType?.addEventListener(
+    "change",
+    e => {
+
+      renderForm(
+        e.target.value
+      );
+
+      resetImages();
+
+    }
+  );
+
+  uploadInput?.addEventListener(
+    "change",
+    handleImageUpload
+  );
+
+  submitBtn?.addEventListener(
+    "click",
+    handleSubmit
+  );
+
+  previewBtn?.addEventListener(
+    "click",
+    handlePreview
+  );
+
+}
+
+/* =========================
+   Render Form
+========================= */
+
+function renderForm(type) {
+
+  formArea.innerHTML =
+    formTemplates[type] || "";
+
+  toggleImageSection(type);
+
+}
+
+/* =========================
+   Toggle Image
+========================= */
+
+function toggleImageSection(type) {
+
+  const imageSection =
+    document.getElementById(
+      "studioImageSection"
+    );
+
+  if (!imageSection) return;
+
+  imageSection.style.display =
+    type === "event" ||
+    type === "restaurant" ||
+    type === "attraction"
+      ? "block"
+      : "none";
+
+}
+
+/* =========================
+   Upload Images
+========================= */
+
+function handleImageUpload(e) {
+
+  const files =
+    Array.from(
+      e.target.files || []
+    );
+
+  files.forEach(file => {
+
+    const reader =
+      new FileReader();
+
+    reader.onload = event => {
+
+      uploadedImages.push({
+        id: crypto.randomUUID(),
+        file,
+        url: event.target.result,
+        thumbnail: false
+      });
+
+      renderImages();
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+/* =========================
+   Preview
+========================= */
+
+function handlePreview() {
+
+  const type =
+    formType.value;
+
+  /* =========================
+     Event
+  ========================= */
+
+  if (type === "event") {
+
+    const data = {
+
+      title:
+        getValue("eventTitle"),
+
+      location:
+        getValue("eventLocation"),
+
+      date:
+        getValue("eventDate"),
+
+      timeText:
+        getValue("eventTime"),
+
+      desc:
+        getValue("eventDescription"),
+
+      image:
+        getPreviewImage(),
+
+      images:
+        getPreviewImages(),
+
+      type: "Event",
+
+      aiNote:
+        "Perfect for anyone who wants to experience the city slowly.",
+
+      tags: [
+        "Relaxing",
+        "Night",
+        "Local Vibes"
+      ]
+
+    };
+
+    window.openEventDetail(data);
+
+    return;
+
+  }
+
+  /* =========================
+     Attraction / Restaurant
+  ========================= */
+
+  const isRestaurant =
+    type === "restaurant";
+
+  const data = {
+
+    name:
+      isRestaurant
+        ? getValue("restaurantName")
+        : getValue("placeName"),
+
+    title:
+      isRestaurant
+        ? getValue("restaurantName")
+        : getValue("placeName"),
+
+    address:
+      isRestaurant
+        ? getValue("restaurantAddress")
+        : getValue("placeAddress"),
+
+    intro:
+      isRestaurant
+        ? getValue("restaurantDescription")
+        : getValue("placeDescription"),
+
+    description:
+      isRestaurant
+        ? getValue("restaurantDescription")
+        : getValue("placeDescription"),
+
+    image:
+      getPreviewImage(),
+
+    images:
+      getPreviewImages(),
+
+    hours:
+      isRestaurant
+        ? getValue("restaurantHours")
+        : getValue("placeHours"),
+
+    phone:
+      "+60 12-345 6789",
+
+    type:
+      isRestaurant
+        ? "Restaurant"
+        : "Attraction",
+
+    score: "4.8",
+
+    reviewCount: "128",
+
+    tags:
+      isRestaurant
+        ? [getValue("restaurantFood")]
+        : [getValue("placeCategory")],
+
+    aiNote:
+      "A place made for slowing down and staying awhile."
+
+  };
+
+  window.openDetail(data);
+
+}
+
+/* =========================
+   Render Images
+========================= */
+
+function renderImages() {
+
+  if (!imageGrid) return;
+
+  imageGrid.innerHTML = "";
+
+  uploadedImages.forEach(image => {
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      `
+      studio-image-card
+      ${image.thumbnail ? "selected" : ""}
+      `;
+
+    card.innerHTML = `
+      <div class="studio-image-preview">
+        <img src="${image.url}" alt="">
+      </div>
+
+      <label>
+        <input
+          type="radio"
+          name="thumbnail"
+          ${image.thumbnail ? "checked" : ""}
+        >
+
+        Use as Thumbnail
+      </label>
+
+      <button type="button">
+        Remove
+      </button>
+    `;
+
+    const radio =
+      card.querySelector("input");
+
+    radio?.addEventListener(
+      "change",
+      () => {
+
+        uploadedImages =
+          uploadedImages.map(item => ({
+            ...item,
+            thumbnail:
+              item.id === image.id
+          }));
+
+        renderImages();
+
+      }
+    );
+
+    const removeBtn =
+      card.querySelector("button");
+
+    removeBtn?.addEventListener(
+      "click",
+      () => {
+
+        uploadedImages =
+          uploadedImages.filter(
+            item => item.id !== image.id
+          );
+
+        renderImages();
+
+      }
+    );
+
+    imageGrid.appendChild(card);
+
+  });
+
+}
+
+/* =========================
+   Submit
+========================= */
+
+function handleSubmit() {
+
+  const payload = {
+
+    type:
+      formType.value,
+
+    data:
+      collectFormData(),
+
+    images:
+      uploadedImages
+
+  };
+
+  console.log(
+    "[submit]",
+    payload
+  );
+
+  alert(
+    "Ready to send backend"
+  );
+
+}
+
+/* =========================
+   Collect Data
+========================= */
+
+function collectFormData() {
+
+  return {
+    title:
+      getValue("placeName") ||
+      getValue("restaurantName") ||
+      getValue("eventTitle")
+  };
+
+}
+
+/* =========================
+   Helpers
+========================= */
+
+function getValue(id) {
+
+  const el =
+    document.getElementById(id);
+
+  return el?.value?.trim() || "";
+
+}
+
+function getPreviewImage() {
+
+  const thumb =
+    uploadedImages.find(
+      image => image.thumbnail
+    );
+
+  if (thumb) {
+    return thumb.url;
+  }
+
+  return uploadedImages[0]?.url || "";
+
+}
+
+function getPreviewImages() {
+
+  return uploadedImages.map(
+    image => image.url
+  );
+
+}
+
+function resetImages() {
+
+  uploadedImages = [];
+
+  renderImages();
+
+}
