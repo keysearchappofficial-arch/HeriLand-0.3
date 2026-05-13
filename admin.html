@@ -24,7 +24,7 @@
       <small>HeriLand Studio</small>
       <h1>Content Uploader</h1>
       <p>
-        Upload attractions, restaurants, events, traveler stories, and city content.
+        Upload attractions, restaurants, events, emergency contacts, and government contacts.
       </p>
     </div>
 
@@ -53,9 +53,8 @@
           <option value="attraction">Attraction</option>
           <option value="restaurant">Restaurant</option>
           <option value="event">Event</option>
-          <option value="traveler">Traveler Story</option>
-          <option value="city">City</option>
           <option value="emergency">Emergency Contact</option>
+          <option value="government">Government Contact</option>
         </select>
 
       </div>
@@ -97,209 +96,14 @@
     <!-- Main Form -->
     <form class="studio-form" id="studioForm">
 
-      <!-- Basic Info -->
-      <section class="studio-card">
-
-        <div class="studio-card-head">
-          <small>Basic Info</small>
-          <h2>Main Details</h2>
-        </div>
-
-        <div class="studio-grid two">
-
-          <label class="studio-field">
-            <span>Title / Name</span>
-            <input
-              id="titleInput"
-              type="text"
-              placeholder="Bako National Park"
-            />
-          </label>
-
-          <label class="studio-field">
-            <span>City</span>
-            <select id="cityInput">
-              <option value="kuching">Kuching</option>
-              <option value="sibu">Sibu</option>
-              <option value="miri">Miri</option>
-              <option value="bintulu">Bintulu</option>
-              <option value="sarikei">Sarikei</option>
-            </select>
-          </label>
-
-          <label class="studio-field type-field attraction-field restaurant-field">
-            <span>Category / Type</span>
-            <input
-              id="typeInput"
-              type="text"
-              placeholder="Nature, Museum, Local Food..."
-            />
-          </label>
-
-          <label class="studio-field restaurant-field">
-            <span>Food Type</span>
-            <input
-              id="foodInput"
-              type="text"
-              placeholder="Kampua, Seafood, Coffee..."
-            />
-          </label>
-
-          <label class="studio-field event-field">
-            <span>Event Date</span>
-            <input
-              id="eventDateInput"
-              type="date"
-            />
-          </label>
-
-          <label class="studio-field event-field">
-            <span>Event Time</span>
-            <input
-              id="eventTimeInput"
-              type="text"
-              placeholder="7:00 PM"
-            />
-          </label>
-
-          <label class="studio-field traveler-field">
-            <span>Author / Traveler Name</span>
-            <input
-              id="authorInput"
-              type="text"
-              placeholder="Mei Lin"
-            />
-          </label>
-
-          <label class="studio-field traveler-field">
-            <span>Achievement</span>
-            <input
-              id="achievementInput"
-              type="text"
-              placeholder="Explored 12 Cities ・ 28 Stories"
-            />
-          </label>
-
-        </div>
-
-      </section>
-
-      <!-- Location / Contact -->
-      <section class="studio-card attraction-field restaurant-field event-field emergency-field">
-
-        <div class="studio-card-head">
-          <small>Location</small>
-          <h2>Address & Contact</h2>
-        </div>
-
-        <div class="studio-grid two">
-
-          <label class="studio-field">
-            <span>Address / Location</span>
-            <input
-              id="addressInput"
-              type="text"
-              placeholder="Kuching, Sarawak"
-            />
-          </label>
-
-          <label class="studio-field attraction-field restaurant-field emergency-field">
-            <span>Phone</span>
-            <input
-              id="phoneInput"
-              type="text"
-              placeholder="+60 12-345 6789"
-            />
-          </label>
-
-          <label class="studio-field attraction-field restaurant-field">
-            <span>Opening Hours</span>
-            <input
-              id="hoursInput"
-              type="text"
-              placeholder="10:00 AM – 9:00 PM"
-            />
-          </label>
-
-          <label class="studio-field emergency-field">
-            <span>Emergency Unit</span>
-            <input
-              id="unitInput"
-              type="text"
-              placeholder="Police Station / Hospital"
-            />
-          </label>
-
-        </div>
-
-      </section>
-
-      <!-- Description -->
-      <section class="studio-card">
-
-        <div class="studio-card-head">
-          <small>Content</small>
-          <h2>Description</h2>
-        </div>
-
-        <div class="studio-grid one">
-
-          <label class="studio-field attraction-field restaurant-field event-field city-field">
-            <span>Intro / Description</span>
-            <textarea
-              id="introInput"
-              rows="5"
-              placeholder="Write a short description..."
-            ></textarea>
-          </label>
-
-          <label class="studio-field traveler-field">
-            <span>Traveler Story</span>
-            <textarea
-              id="storyInput"
-              rows="8"
-              placeholder="Write the full traveler story..."
-            ></textarea>
-          </label>
-
-          <label class="studio-field attraction-field restaurant-field event-field city-field traveler-field">
-            <span>HeriLand AI Note</span>
-            <textarea
-              id="aiNoteInput"
-              rows="4"
-              placeholder="A place made for slowing down and staying awhile."
-            ></textarea>
-          </label>
-
-        </div>
-
-      </section>
-
-      <!-- Tags -->
-      <section class="studio-card attraction-field restaurant-field event-field traveler-field city-field">
-
-        <div class="studio-card-head">
-          <small>Discovery</small>
-          <h2>Tags</h2>
-        </div>
-
-        <label class="studio-field">
-          <span>Tags</span>
-          <input
-            id="tagsInput"
-            type="text"
-            placeholder="SlowTravel, Photo Friendly, Local Food"
-          />
-        </label>
-
-        <p class="studio-help">
-          Use comma separated tags. Example: SlowTravel, Nature, Photography
-        </p>
-
-      </section>
+      <!-- Dynamic Form -->
+      <div id="dynamicFormArea"></div>
 
       <!-- Image Upload -->
-      <section class="studio-card attraction-field restaurant-field event-field traveler-field city-field">
+      <section
+        class="studio-card"
+        id="studioImageSection"
+      >
 
         <div class="studio-card-head">
           <small>Media</small>
@@ -312,7 +116,7 @@
         <div class="studio-upload-box">
 
           <input
-            id="imageUploadInput"
+            id="studioImageUpload"
             type="file"
             accept="image/*"
             multiple
@@ -322,7 +126,7 @@
           <button
             class="studio-upload-btn"
             type="button"
-            onclick="document.getElementById('imageUploadInput').click()"
+            onclick="document.getElementById('studioImageUpload').click()"
           >
             + Upload Images
           </button>
@@ -333,58 +137,18 @@
 
         </div>
 
-        <!-- Preview Grid -->
-        <div class="studio-image-grid" id="studioImageGrid">
-
-          <article class="studio-image-card selected">
-            <div class="studio-image-preview">
-              <img
-                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
-                alt=""
-              />
-            </div>
-
-            <label>
-              <input
-                type="radio"
-                name="thumbnailImage"
-                checked
-              />
-              Use as Thumbnail
-            </label>
-
-            <button type="button">
-              Remove
-            </button>
-          </article>
-
-          <article class="studio-image-card">
-            <div class="studio-image-preview">
-              <img
-                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
-                alt=""
-              />
-            </div>
-
-            <label>
-              <input
-                type="radio"
-                name="thumbnailImage"
-              />
-              Use as Thumbnail
-            </label>
-
-            <button type="button">
-              Remove
-            </button>
-          </article>
-
-        </div>
+        <div
+          class="studio-image-grid"
+          id="studioImageGrid"
+        ></div>
 
       </section>
 
       <!-- Generated Sizes Preview -->
-      <section class="studio-card attraction-field restaurant-field event-field traveler-field city-field">
+      <section
+        class="studio-card"
+        id="studioOutputSection"
+      >
 
         <div class="studio-card-head">
           <small>Auto Output</small>
@@ -429,7 +193,8 @@
 
         <button
           class="studio-primary-btn"
-          type="submit"
+          id="studioSubmitBtn"
+          type="button"
         >
           Submit Content
         </button>
