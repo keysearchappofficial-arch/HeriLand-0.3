@@ -1,14 +1,27 @@
 import {
-  loadComponent
-} from "../components.js";
-
-import {
   initDetail
 } from "../detail.js";
 
 import {
   initEventDetail
 } from "../event-detail.js";
+
+async function loadComponent(selector, file) {
+
+  const target =
+    document.querySelector(selector);
+
+  if (!target) return;
+
+  const response =
+    await fetch(file);
+
+  const html =
+    await response.text();
+
+  target.innerHTML = html;
+
+}
 
 // admin-studio.js
 
