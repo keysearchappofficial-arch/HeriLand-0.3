@@ -629,44 +629,72 @@ function renderReviewList() {
 
   if (!content) return;
 
-  const reviews = [
-    {
-      name: "Mei Lin",
-      stars: 5,
-      text: "Best enjoyed in the evening, easygoing and relaxing."
-    },
-    {
-      name: "Daniel",
-      stars: 5,
-      text: "Quiet and peaceful, perfect for a slow walk."
-    },
-    {
-      name: "Sarah",
-      stars: 4,
-      text: "Loved the atmosphere and local food nearby."
-    },
-    {
-      name: "Jason",
-      stars: 5,
-      text: "Felt calm immediately after arriving here."
-    }
-  ];
+const reviews = [
+  {
+    name: "Mei Lin",
+    stars: 5,
+    time: "2 days ago",
+    helpful: 12,
+    text: "Best enjoyed in the evening, easygoing and relaxing."
+  },
+  {
+    name: "Daniel",
+    stars: 5,
+    time: "1 week ago",
+    helpful: 5,
+    text: "Quiet and peaceful, perfect for a slow walk."
+  },
+  {
+    name: "Sarah",
+    stars: 4,
+    time: "3 days ago",
+    helpful: 8,
+    text: "Loved the atmosphere and local food nearby."
+  }
+];
 
   content.innerHTML =
     reviews.map(review => `
       <article class="review-list-card">
 
-        <div class="review-list-top">
+<div class="detail-review-user">
 
-          <strong>${review.name}</strong>
+  <img
+    src="https://i.pravatar.cc/120?img=${Math.floor(Math.random() * 60)}"
+    alt="${review.name}"
+  >
 
-          <span>
-            ${"★".repeat(review.stars)}
-          </span>
+  <div>
 
-        </div>
+    <strong>${review.name}</strong>
+
+    <div class="detail-review-meta">
+
+      <span class="review-stars">
+        ${"★".repeat(review.stars)}
+      </span>
+
+      <span class="review-time">
+        ${review.time || "2 days ago"}
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
 
         <p>${review.text}</p>
+        
+<div class="review-helpful">
+
+  <button type="button">
+    👍 Helpful
+  </button>
+
+  <span>${review.helpful || 0}</span>
+
+</div>
 
       </article>
     `).join("");
