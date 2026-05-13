@@ -130,15 +130,12 @@
   border-radius: 18px;
   background: rgba(255,255,255,.76);
   color: var(--primary-dark);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-
   transition:
     transform .2s var(--ease),
     background .2s var(--ease),
@@ -310,7 +307,8 @@
 
 .city-section,
 .city-spot-section,
-.city-restaurant-section {
+.city-restaurant-section,
+.city-review-section {
   margin-top: 56px;
 }
 
@@ -318,24 +316,34 @@
   margin-top: 64px;
 }
 
-.section-head {
+.section-head,
+.review-head {
   display: flex;
   align-items: end;
   justify-content: space-between;
   margin-bottom: 22px;
 }
 
-.section-head small {
+.section-head small,
+.review-head small {
   display: block;
   color: var(--muted);
   font-size: 12px;
   margin-bottom: 6px;
 }
 
-.section-head h2 {
+.section-head h2,
+.review-head h2 {
   color: var(--text);
   font-size: 34px;
   letter-spacing: -1.4px;
+}
+
+.review-head p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .section-more-btn,
@@ -357,6 +365,95 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 18px;
+}
+
+/* =========================
+   City Traveler Stories
+========================= */
+
+.city-review-section .review-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.city-review-section .traveler-card {
+  min-width: 0;
+  cursor: pointer;
+}
+
+.city-review-section .traveler-card-image {
+  aspect-ratio: 1 / 1.12;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--primary-dark);
+}
+
+.city-review-section .traveler-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .65s var(--ease);
+}
+
+.city-review-section .traveler-card:hover .traveler-card-image img {
+  transform: scale(1.035);
+}
+
+.city-review-section .traveler-card-body {
+  padding-top: 12px;
+}
+
+.city-review-section .traveler-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.city-review-section .traveler-card-top strong {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 820;
+}
+
+.city-review-section .traveler-card-top span {
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: -1px;
+}
+
+.city-review-section .traveler-card-body h3 {
+  margin-top: 8px;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.28;
+  letter-spacing: -0.4px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.city-review-section .traveler-card-body p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.city-review-section .traveler-card-body small {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-light);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* =========================
@@ -466,7 +563,9 @@
   visibility: hidden;
   pointer-events: none;
 
-  transition: opacity .28s var(--ease), visibility .28s var(--ease);
+  transition:
+    opacity .28s var(--ease),
+    visibility .28s var(--ease);
 }
 
 .spot-sheet.show,
@@ -708,77 +807,35 @@
 }
 
 /* =========================
-   Mobile
+   Desktop / Tablet Responsive
 ========================= */
 
-@media (max-width: 820px) {
+@media (max-width: 1180px) {
 
-  .city-nav {
-    display: none;
+  .spot-grid,
+  .restaurant-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  .city-top-head h1 {
-    font-size: 38px;
-    letter-spacing: -1.4px;
+  .city-review-section .review-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
+
+}
+
+@media (max-width: 980px) {
 
   .city-tabs {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .city-tab {
-    height: 50px;
-    border-radius: 16px;
-    font-size: 14px;
-  }
-
-  .city-hero {
-    height: 320px;
-    border-radius: 26px;
-  }
-
-  .city-hero-content {
-    left: 22px;
-    right: 22px;
-    bottom: 24px;
-  }
-
-  .city-hero-content h2 {
-    font-size: 42px;
-    letter-spacing: -1.6px;
-  }
-
-  .city-hero-content p {
-    font-size: 15px;
-  }
-
-  .city-content-grid,
-  .spot-grid,
-  .restaurant-grid,
-  .spot-sheet-grid,
-  .restaurant-sheet-grid,
-  .city-list-grid {
+  .city-content-grid {
     grid-template-columns: 1fr;
   }
 
-  .spot-sheet-panel,
-  .restaurant-sheet-panel {
-    width: 100%;
-    padding: 24px 20px;
-  }
-
-  .event-carousel .event-card {
-    flex: 0 0 82%;
-  }
-
-  .city-list-card {
-    flex: 0 0 78%;
-    height: 340px;
-  }
-
-  .city-list-overlay h3 {
-    font-size: 34px;
+  .spot-grid,
+  .restaurant-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
 }
