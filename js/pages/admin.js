@@ -50,6 +50,7 @@ const previewBtn =
   document.getElementById("studioPreviewBtn");
 
 let uploadedImages = [];
+let featureTags = [];
 
 /* =========================
    Templates
@@ -89,11 +90,9 @@ const formTemplates = {
         </label>
         
 <div class="studio-field">
-
   <span>Feature Tags</span>
 
   <div class="studio-tag-box">
-
     <div
       class="studio-tag-list"
       id="featureTagList"
@@ -102,15 +101,13 @@ const formTemplates = {
     <input
       type="text"
       id="featureTagInput"
-      placeholder="Type and press Enter"
+      placeholder="Type tag and press Enter"
     >
-
   </div>
 
   <small>
-    Max 5 tags
+    Max 5 tags. Press Enter or comma to add.
   </small>
-
 </div>
 
 <label class="studio-field">
@@ -118,7 +115,7 @@ const formTemplates = {
 
   <input
     type="time"
-    id="placeOpenTime"
+    id="restaurantOpenTime"
   >
 </label>
 
@@ -190,13 +187,34 @@ const formTemplates = {
           <span>Food Type</span>
           <input type="text" id="restaurantFood">
         </label>
+        
+<div class="studio-field">
+  <span>Feature Tags</span>
+
+  <div class="studio-tag-box">
+    <div
+      class="studio-tag-list"
+      id="featureTagList"
+    ></div>
+
+    <input
+      type="text"
+      id="featureTagInput"
+      placeholder="Type tag and press Enter"
+    >
+  </div>
+
+  <small>
+    Max 5 tags. Press Enter or comma to add.
+  </small>
+</div>
 
 <label class="studio-field">
   <span>Open Time</span>
 
   <input
     type="time"
-    id="placeOpenTime"
+    id="restaurantOpenTime"
   >
 </label>
 
@@ -263,6 +281,27 @@ const formTemplates = {
             <option value="bintulu">Bintulu</option>
           </select>
         </label>
+        
+<div class="studio-field">
+  <span>Feature Tags</span>
+
+  <div class="studio-tag-box">
+    <div
+      class="studio-tag-list"
+      id="featureTagList"
+    ></div>
+
+    <input
+      type="text"
+      id="featureTagInput"
+      placeholder="Type tag and press Enter"
+    >
+  </div>
+
+  <small>
+    Max 5 tags. Press Enter or comma to add.
+  </small>
+</div>
 
  <label class="studio-field">
   <span>Start Time</span>
@@ -562,6 +601,110 @@ function renderForm(type) {
 
   toggleImageSection(type);
 
+  featureTags = [];
+
+  renderFeatureTags();
+
+  bindFeatureTags();
+
+}
+
+function bindFeatureTags() {
+
+  const input =
+    document.getElementById(
+      "featureTagInput"
+    );
+
+  if (!input) return;
+
+  input.addEventListener(
+    "keydown",
+    e => {
+
+      const value =
+        input.value.trim();
+
+      const isCreateKey =
+        e.key === "Enter" ||
+        e.key === ",";
+
+      if (!isCreateKey) return;
+
+      e.preventDefault();
+
+      if (!value) return;
+
+      if (featureTags.length >= 5) {
+        alert("Maximum 5 tags");
+        return;
+      }
+
+      if (
+        featureTags.includes(value)
+      ) {
+        input.value = "";
+        return;
+      }
+
+      featureTags.push(value);
+
+      input.value = "";
+
+      renderFeatureTags();
+
+    }
+  );
+
+}
+
+function renderFeatureTags() {
+
+  const list =
+    document.getElementById(
+      "featureTagList"
+    );
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  featureTags.forEach(tag => {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "studio-tag-item";
+
+    item.innerHTML = `
+      <span>${tag}</span>
+
+      <button type="button">
+        ×
+      </button>
+    `;
+
+    item
+      .querySelector("button")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          featureTags =
+            featureTags.filter(
+              t => t !== tag
+            );
+
+          renderFeatureTags();
+
+        }
+      );
+
+    list.appendChild(item);
+
+  });
+
 }
 
 /* =========================
@@ -644,11 +787,16 @@ function handlePreview() {
       location:
         getValue("eventLocation"),
 
-      date:
-        getValue("eventDate"),
+date:
+  formatDateTimeDate(
+    getValue("eventStart")
+  ),
 
-      timeText:
-        getValue("eventTime"),
+timeText:
+  formatEventTimeRange(
+    getValue("eventStart"),
+    getValue("eventEnd")
+  ),
 
       desc:
         getValue("eventDescription"),
@@ -718,10 +866,16 @@ function handlePreview() {
     images:
       getPreviewImages(),
 
-    hours:
-      isRestaurant
-        ? getValue("restaurantHours")
-        : getValue("placeHours"),
+hours:
+  isRestaurant
+    ? formatTimeRange(
+        getValue("restaurantOpenTime"),
+        getValue("restaurantCloseTime")
+      )
+    : formatTimeRange(
+        getValue("placeOpenTime"),
+        getValue("placeCloseTime")
+      ),
 
 phone:
   isRestaurant
@@ -737,10 +891,7 @@ phone:
 
     reviewCount: "128",
 
-    tags:
-      isRestaurant
-        ? [getValue("restaurantFood")]
-        : [getValue("placeCategory")],
+tags: featureTags,
 
     aiNote:
       "A place made for slowing down and staying awhile."
@@ -873,38 +1024,60 @@ function collectFormData() {
   const type =
     formType.value;
 
-  if (type === "attraction") {
-    return {
-      name: getValue("placeName"),
-      city: getValue("placeCity"),
-      category: getValue("placeCategory"),
-      hours: getValue("placeHours"),
-      address: getValue("placeAddress"),
-      description: getValue("placeDescription")
-    };
-  }
+if (type === "attraction") {
+  return {
+    name: getValue("placeName"),
+    city: getValue("placeCity"),
+    category: getValue("placeCategory"),
+    openTime: getValue("placeOpenTime"),
+    closeTime: getValue("placeCloseTime"),
+    hours: formatTimeRange(
+      getValue("placeOpenTime"),
+      getValue("placeCloseTime")
+    ),
+    phone: getValue("placePhone"),
+    address: getValue("placeAddress"),
+    description: getValue("placeDescription"),
+    featureTags
+  };
+}
 
-  if (type === "restaurant") {
-    return {
-      name: getValue("restaurantName"),
-      city: getValue("restaurantCity"),
-      food: getValue("restaurantFood"),
-      hours: getValue("restaurantHours"),
-      address: getValue("restaurantAddress"),
-      description: getValue("restaurantDescription")
-    };
-  }
+if (type === "restaurant") {
+  return {
+    name: getValue("restaurantName"),
+    city: getValue("restaurantCity"),
+    food: getValue("restaurantFood"),
+    openTime: getValue("restaurantOpenTime"),
+    closeTime: getValue("restaurantCloseTime"),
+    hours: formatTimeRange(
+      getValue("restaurantOpenTime"),
+      getValue("restaurantCloseTime")
+    ),
+    phone: getValue("restaurantPhone"),
+    address: getValue("restaurantAddress"),
+    description: getValue("restaurantDescription"),
+    featureTags
+  };
+}
 
-  if (type === "event") {
-    return {
-      title: getValue("eventTitle"),
-      city: getValue("eventCity"),
-      date: getValue("eventDate"),
-      time: getValue("eventTime"),
-      location: getValue("eventLocation"),
-      description: getValue("eventDescription")
-    };
-  }
+if (type === "event") {
+  return {
+    title: getValue("eventTitle"),
+    city: getValue("eventCity"),
+    start: getValue("eventStart"),
+    end: getValue("eventEnd"),
+    date: formatDateTimeDate(
+      getValue("eventStart")
+    ),
+    timeText: formatEventTimeRange(
+      getValue("eventStart"),
+      getValue("eventEnd")
+    ),
+    location: getValue("eventLocation"),
+    description: getValue("eventDescription"),
+    featureTags
+  };
+}
 
   if (type === "emergency") {
     return {
@@ -962,6 +1135,81 @@ function getPreviewImages() {
 
   return uploadedImages.map(
     image => image.url
+  );
+
+}
+
+function formatTimeRange(open, close) {
+
+  if (!open && !close) {
+    return "";
+  }
+
+  if (open && close) {
+    return `${open} - ${close}`;
+  }
+
+  return open || close || "";
+
+}
+
+function formatDateTimeDate(value) {
+
+  if (!value) return "";
+
+  const date =
+    new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleDateString(
+    "en-MY",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    }
+  );
+
+}
+
+function formatEventTimeRange(start, end) {
+
+  if (!start && !end) return "";
+
+  const startText =
+    formatDateTimeTime(start);
+
+  const endText =
+    formatDateTimeTime(end);
+
+  if (startText && endText) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+
+}
+
+function formatDateTimeTime(value) {
+
+  if (!value) return "";
+
+  const date =
+    new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleTimeString(
+    "en-MY",
+    {
+      hour: "2-digit",
+      minute: "2-digit"
+    }
   );
 
 }
