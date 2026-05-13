@@ -1,3 +1,11 @@
+import {
+  openDetail
+} from "../detail.js";
+
+import {
+  openEventDetail
+} from "../event-detail.js";
+
 // admin-studio.js
 
 const formType =
@@ -14,6 +22,9 @@ const uploadInput =
 
 const submitBtn =
   document.getElementById("studioSubmitBtn");
+  
+const previewBtn =
+  document.getElementById("studioPreviewBtn");
 
 let uploadedImages = [];
 
@@ -393,6 +404,11 @@ function bindEvents() {
     "click",
     handleSubmit
   );
+  
+  previewBtn?.addEventListener(
+  "click",
+  handlePreview
+);
 
 }
 
@@ -464,6 +480,127 @@ function handleImageUpload(e) {
     reader.readAsDataURL(file);
 
   });
+
+}
+
+function handlePreview() {
+
+  const type =
+    formType.value;
+
+  /* =========================
+     Event Preview
+  ========================= */
+
+  if (type === "event") {
+
+    const data = {
+      title:
+        getValue("eventTitle"),
+
+      location:
+        getValue("eventLocation"),
+
+      date:
+        getValue("eventDate"),
+
+      timeText:
+        getValue("eventTime"),
+
+      desc:
+        getValue("eventDescription"),
+
+      image:
+        getPreviewImage(),
+
+      images:
+        getPreviewImages(),
+
+      type: "Event",
+
+      aiNote:
+        "Perfect for anyone who wants to experience the city slowly.",
+
+      tags: [
+        "Relaxing",
+        "Night",
+        "Local Vibes"
+      ]
+    };
+
+    openEventDetail(data);
+
+    return;
+
+  }
+
+  /* =========================
+     Attraction / Restaurant
+  ========================= */
+
+  const isRestaurant =
+    type === "restaurant";
+
+  const data = {
+
+    name:
+      isRestaurant
+        ? getValue("restaurantName")
+        : getValue("placeName"),
+
+    title:
+      isRestaurant
+        ? getValue("restaurantName")
+        : getValue("placeName"),
+
+    address:
+      isRestaurant
+        ? getValue("restaurantAddress")
+        : getValue("placeAddress"),
+
+    intro:
+      isRestaurant
+        ? getValue("restaurantDescription")
+        : getValue("placeDescription"),
+
+    description:
+      isRestaurant
+        ? getValue("restaurantDescription")
+        : getValue("placeDescription"),
+
+    image:
+      getPreviewImage(),
+
+    images:
+      getPreviewImages(),
+
+    hours:
+      isRestaurant
+        ? getValue("restaurantHours")
+        : getValue("placeHours"),
+
+    phone:
+      "+60 12-345 6789",
+
+    type:
+      isRestaurant
+        ? "Restaurant"
+        : "Attraction",
+
+    score: "4.8",
+
+    reviewCount: "128",
+
+    tags:
+      isRestaurant
+        ? [getValue("restaurantFood")]
+        : [getValue("placeCategory")],
+
+    aiNote:
+      "A place made for slowing down and staying awhile."
+  };
+
+  openDetail(data);
 
 }
 
@@ -741,6 +878,28 @@ function getValue(id) {
     document.getElementById(id);
 
   return el?.value?.trim() || "";
+
+}
+
+function getPreviewImage() {
+
+  const thumb =
+    uploadedImages.find(
+      image => image.thumbnail
+    );
+
+  if (thumb) {
+    return thumb.url;
+  }
+
+  return uploadedImages[0]?.url || "";
+}
+
+function getPreviewImages() {
+
+  return uploadedImages.map(
+    image => image.url
+  );
 
 }
 
