@@ -745,5 +745,21 @@
     font-size: 14px;
     line-height: 1.72;
   }
+  
+  .detail-review-user img {
+
+    width: 42px;
+
+    height: 42px;
+
+  }
+
+  .review-images img {
+
+    width: 110px;
+
+    height: 84px;
+
+  }
 
 }
