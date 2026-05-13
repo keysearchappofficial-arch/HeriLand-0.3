@@ -305,10 +305,29 @@
       <button type="button" data-rate="5">★</button>
     </div>
 
-    <textarea
-      id="reviewComment"
-      placeholder="What did you feel about this place?"
-    ></textarea>
+  <label class="review-upload">
+
+  <input
+    type="file"
+    id="reviewImageInput"
+    accept="image/*"
+    multiple
+    hidden
+  >
+
+  <span>＋ Add Photos</span>
+
+</label>
+
+<div
+  class="review-upload-preview"
+  id="reviewUploadPreview">
+</div>
+
+<textarea
+  id="reviewComment"
+  placeholder="What did you feel about this place?"
+></textarea>
 
     <button
       class="review-submit-btn"
