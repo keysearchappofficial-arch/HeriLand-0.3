@@ -16,6 +16,7 @@ import {
 } from "./data.js";
 
 import { initDetail } from "./detail.js";
+import { initTravelerDetail } from "./traveler-detail.js";
 
 let currentMood = "relax";
 let currentPlaces = [];
@@ -53,7 +54,9 @@ function init() {
   bindMobileMenu();
   bindHomeEventAutoSlide();
   bindCitySelects();
+
   initDetail();
+  initTravelerDetail();
 
   renderMood("relax");
   renderCities();
