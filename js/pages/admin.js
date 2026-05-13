@@ -88,10 +88,33 @@ const formTemplates = {
           <input type="text" id="placeCategory">
         </label>
 
-        <label class="studio-field">
-          <span>Opening Hours</span>
-          <input type="text" id="placeHours">
-        </label>
+<label class="studio-field">
+  <span>Open Time</span>
+
+  <input
+    type="time"
+    id="placeOpenTime"
+  >
+</label>
+
+<label class="studio-field">
+  <span>Close Time</span>
+
+  <input
+    type="time"
+    id="placeCloseTime"
+  >
+</label>
+        
+<label class="studio-field">
+  <span>Phone</span>
+
+  <input
+    type="text"
+    id="placePhone"
+    placeholder="+60 12-345 6789"
+  >
+</label>
 
       </div>
 
@@ -143,10 +166,33 @@ const formTemplates = {
           <input type="text" id="restaurantFood">
         </label>
 
-        <label class="studio-field">
-          <span>Opening Hours</span>
-          <input type="text" id="restaurantHours">
-        </label>
+<label class="studio-field">
+  <span>Open Time</span>
+
+  <input
+    type="time"
+    id="placeOpenTime"
+  >
+</label>
+
+<label class="studio-field">
+  <span>Close Time</span>
+
+  <input
+    type="time"
+    id="placeCloseTime"
+  >
+</label>
+        
+<label class="studio-field">
+  <span>Phone</span>
+
+  <input
+    type="text"
+    id="restaurantPhone"
+    placeholder="+60 12-345 6789"
+  >
+</label>
 
       </div>
 
@@ -193,15 +239,23 @@ const formTemplates = {
           </select>
         </label>
 
-        <label class="studio-field">
-          <span>Date</span>
-          <input type="date" id="eventDate">
-        </label>
+ <label class="studio-field">
+  <span>Start Time</span>
 
-        <label class="studio-field">
-          <span>Time</span>
-          <input type="text" id="eventTime">
-        </label>
+  <input
+    type="datetime-local"
+    id="eventStart"
+  >
+</label>
+
+<label class="studio-field">
+  <span>End Time</span>
+
+  <input
+    type="datetime-local"
+    id="eventEnd"
+  >
+</label>
 
       </div>
 
@@ -644,8 +698,10 @@ function handlePreview() {
         ? getValue("restaurantHours")
         : getValue("placeHours"),
 
-    phone:
-      "+60 12-345 6789",
+phone:
+  isRestaurant
+    ? getValue("restaurantPhone")
+    : getValue("placePhone"),
 
     type:
       isRestaurant
