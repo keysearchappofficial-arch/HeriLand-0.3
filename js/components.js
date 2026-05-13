@@ -101,12 +101,12 @@ await loadComponent(
 );
 
 await loadComponent(
-  "#travelerDetailComponent",
+  "#travelerDetailContainer",
   "./components/traveler-detail.html"
 );
 
 await loadComponent(
-  "#eventDetailComponent",
+  "#eventDetailContainer",
   "./components/event-detail.html"
 );
 
