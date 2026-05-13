@@ -656,3 +656,72 @@
   }
 
 }
+
+.studio-hours-field {
+  grid-column: 1 / -1;
+}
+
+.studio-week-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.studio-day-row {
+  display: grid;
+  grid-template-columns: 150px 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px;
+
+  border: 1px solid var(--line);
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.72);
+}
+
+.studio-day-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.studio-day-check input {
+  width: 16px;
+  height: 16px;
+}
+
+.studio-day-row input[type="time"] {
+  height: 42px;
+  padding: 0 12px;
+
+  border: 1px solid var(--line);
+  border-radius: 13px;
+
+  background: rgba(255,255,255,.9);
+
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.studio-time-separator {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+@media (max-width: 820px) {
+  .studio-day-row {
+    grid-template-columns: 1fr;
+  }
+
+  .studio-time-separator {
+    display: none;
+  }
+}
