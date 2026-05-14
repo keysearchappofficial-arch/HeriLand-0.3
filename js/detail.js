@@ -76,7 +76,12 @@ images: [
 
   ...(place.images || [])
 
-].filter(Boolean),
+]
+.filter(Boolean)
+.filter(
+  (value, index, array) =>
+    array.indexOf(value) === index
+),
     intro:
       place.intro ||
       place.desc ||
