@@ -1334,8 +1334,8 @@ function normalizeImageUrls(results) {
     };
   }
 
-  const API_ORIGIN =
-    "http://127.0.0.1:14800";
+const API_ORIGIN =
+  "https://feof-tucson-ethical-spectrum.trycloudflare.com";
 
   const toFullUrl = path => {
     if (!path) return "";
