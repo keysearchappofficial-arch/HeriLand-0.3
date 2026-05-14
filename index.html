@@ -32,22 +32,17 @@
     <header class="mobile-top">
 <div>
 
-  <select
-    id="mobileCitySelect"
-    class="city-select"
-  >
-    <option value="sarawak">
-      Sarawak
-    </option>
+<select
+  id="mobileCitySelect"
+  class="city-select"
+>
+  <option value="sarawak">Sarawak</option>
+  <option value="kuching">Kuching</option>
+  <option value="sibu">Sibu</option>
+  <option value="miri">Miri</option>
+  <option value="bintulu">Bintulu</option>
+</select>
 
-    <option value="kuching">
-      Kuching
-    </option>
-
-    <option value="sibu">
-      Sibu
-    </option>
-  </select>
 </div>
 <button class="icon-btn" id="mobileMenuBtn" aria-label="menu">
   <svg viewBox="0 0 24 24">
@@ -72,7 +67,7 @@
       <div class="hero-content">
         <small>Today's Pick</small>
         <h2 id="heroTitle"></h2>
-        <button onclick="openDetail(currentPlaces[0])">Explore</button>
+        <button id="heroExploreBtn" type="button">Explore</button>
       </div>
     </section>
 
