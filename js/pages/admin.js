@@ -1,3 +1,5 @@
+import { supabase } from "../supabase-client.js";
+
 import {
   initDetail
 } from "../detail.js";
