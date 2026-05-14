@@ -1,7 +1,7 @@
 import { supabase } from "../supabase-client.js";
 
 const MEDIA_API =
-  "https://bringing-border-arlington-packages.trycloudflare.com";
+  "https://heriland-media.keysearch-app.com";
 
 import {
   initDetail
