@@ -284,119 +284,104 @@ ${weeklyHoursTemplate("restaurant")}
   `,
 
   event: `
-    <div class="studio-card">
+  <div class="studio-card">
 
-      <div class="studio-card-head">
-        <small>Event</small>
-        <h2>Event Information</h2>
-      </div>
+    <div class="studio-card-head">
+      <small>Event</small>
+      <h2>Event Information</h2>
+    </div>
 
-      <div class="studio-grid two">
+    <div class="studio-grid two">
 
-        <label class="studio-field">
-          <span>Event Title</span>
-          <input type="text" id="eventTitle">
-        </label>
+      <label class="studio-field">
+        <span>Event Title</span>
+        <input type="text" id="eventTitle">
+      </label>
 
-        <label class="studio-field">
-          <span>City</span>
+      <label class="studio-field">
+        <span>City</span>
+        <select id="eventCity">
+          <option value="kuching">Kuching</option>
+          <option value="sibu">Sibu</option>
+          <option value="miri">Miri</option>
+          <option value="bintulu">Bintulu</option>
+        </select>
+      </label>
 
-          <select id="eventCity">
-            <option value="kuching">Kuching</option>
-            <option value="sibu">Sibu</option>
-            <option value="miri">Miri</option>
-            <option value="bintulu">Bintulu</option>
-          </select>
-        </label>
-        
-<div class="studio-field">
-  <span>Feature Tags</span>
+      <label class="studio-field">
+        <span>Area</span>
+        <input type="text" id="eventArea" placeholder="Optional area">
+      </label>
 
-  <div class="studio-tag-box">
-    <div
-      class="studio-tag-list"
-      id="featureTagList"
-    ></div>
+      <label class="studio-field">
+        <span>Venue Name</span>
+        <input type="text" id="eventVenue" placeholder="Venue / Place name">
+      </label>
 
-    <input
-      type="text"
-      id="featureTagInput"
-      placeholder="Type tag and press Enter"
-    >
-  </div>
+      <label class="studio-field">
+        <span>Start Time</span>
+        <input type="datetime-local" id="eventStart">
+      </label>
 
-  <small>
-    Max 5 tags. Press Enter or comma to add.
-  </small>
-</div>
+      <label class="studio-field">
+        <span>End Time</span>
+        <input type="datetime-local" id="eventEnd">
+      </label>
 
- <label class="studio-field">
-  <span>Start Time</span>
+      <label class="studio-field">
+        <span>Organizer</span>
+        <input type="text" id="eventOrganizer" placeholder="Optional">
+      </label>
 
-  <input
-    type="datetime-local"
-    id="eventStart"
-  >
-</label>
+      <label class="studio-field">
+        <span>Ticket URL</span>
+        <input type="url" id="eventTicketUrl" placeholder="https://...">
+      </label>
 
-<label class="studio-field">
-  <span>End Time</span>
+      <label class="studio-field">
+        <span>Google Map URL</span>
+        <input type="url" id="eventGoogleMapUrl" placeholder="https://...">
+      </label>
 
-  <input
-    type="datetime-local"
-    id="eventEnd"
-  >
-</label>
+      <div class="studio-field">
+        <span>Tags</span>
 
-      </div>
+        <div class="studio-tag-box">
+          <div class="studio-tag-list" id="featureTagList"></div>
 
-      <div class="studio-grid one">
+          <input
+            type="text"
+            id="featureTagInput"
+            placeholder="Type tag and press Enter"
+          >
+        </div>
 
-        <label class="studio-field">
-          <span>Location</span>
-          <input type="text" id="eventLocation">
-        </label>
-
-        <label class="studio-field">
-          <span>Description</span>
-          <textarea id="eventDescription"></textarea>
-        </label>
-        
-<div class="studio-grid one">
-
-  <label class="studio-field">
-    <span>Before Event</span>
-    <input
-      type="text"
-      id="eventBefore"
-      placeholder="Grab a bite before heading over."
-    >
-  </label>
-
-  <label class="studio-field">
-    <span>During Event</span>
-    <input
-      type="text"
-      id="eventDuring"
-      placeholder="Take your time and explore slowly."
-    >
-  </label>
-
-  <label class="studio-field">
-    <span>After Event</span>
-    <input
-      type="text"
-      id="eventAfter"
-      placeholder="Take a walk nearby after the event."
-    >
-  </label>
-
-</div>
-
+        <small>Max 5 tags. Press Enter or comma to add.</small>
       </div>
 
     </div>
-  `,
+
+    <div class="studio-grid one">
+
+      <label class="studio-field">
+        <span>Address</span>
+        <input type="text" id="eventAddress" placeholder="Full address">
+      </label>
+
+      <label class="studio-field">
+        <span>Summary</span>
+        <textarea id="eventSummary" placeholder="Short event intro"></textarea>
+      </label>
+
+      <label class="studio-field">
+        <span>Content</span>
+        <textarea id="eventContent" placeholder="Full event description"></textarea>
+      </label>
+
+    </div>
+
+  </div>
+`,
 
   emergency: `
     <div class="studio-card">
@@ -1272,58 +1257,33 @@ function buildEventPayload(data, images) {
     data.title || "untitled-event";
 
   return {
-    slug: createSlug(
-      `${data.city}-${title}`
-    ),
+    slug: createSlug(`${data.city}-${title}`),
 
     title,
     city: data.city || "",
-    area: null,
+    area: data.area || null,
 
-    venue_name:
-      data.location || "",
+    venue_name: data.venueName || null,
+    address: data.address || "",
 
-    address:
-      data.location || "",
+    summary: data.summary || "",
+    content: data.content || data.summary || "",
 
-    summary:
-      data.description || "",
+    start_date: data.start || null,
+    end_date: data.end || null,
 
-    content:
-      data.description || "",
+    hero_image_url: images.hero_image_url,
+    card_image_url: images.card_image_url,
+    gallery_urls: images.gallery_urls,
 
-    start_date:
-      data.start || null,
+    organizer: data.organizer || null,
+    ticket_url: data.ticketUrl || null,
+    google_map_url: data.googleMapUrl || null,
 
-    end_date:
-      data.end || null,
+    tags: data.featureTags || [],
 
-    hero_image_url:
-      images.hero_image_url,
-
-    card_image_url:
-      images.card_image_url,
-
-    gallery_urls:
-      images.gallery_urls,
-
-    organizer:
-      null,
-
-    ticket_url:
-      null,
-
-    google_map_url:
-      null,
-
-    tags:
-      data.featureTags || [],
-
-    is_featured:
-      isFeatured,
-
-    status:
-      isPublished ? "published" : "draft"
+    is_featured: isFeatured,
+    status: isPublished ? "published" : "draft"
   };
 
 }
@@ -1439,17 +1399,16 @@ if (type === "event") {
   return {
     title: getValue("eventTitle"),
     city: getValue("eventCity"),
+    area: getValue("eventArea"),
+    venueName: getValue("eventVenue"),
+    address: getValue("eventAddress"),
+    summary: getValue("eventSummary"),
+    content: getValue("eventContent"),
     start: getValue("eventStart"),
     end: getValue("eventEnd"),
-    date: formatDateTimeDate(
-      getValue("eventStart")
-    ),
-    timeText: formatEventTimeRange(
-      getValue("eventStart"),
-      getValue("eventEnd")
-    ),
-    location: getValue("eventLocation"),
-    description: getValue("eventDescription"),
+    organizer: getValue("eventOrganizer"),
+    ticketUrl: getValue("eventTicketUrl"),
+    googleMapUrl: getValue("eventGoogleMapUrl"),
     featureTags
   };
 }
