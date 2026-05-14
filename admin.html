@@ -12,14 +12,13 @@
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/admin.css" />
   <link rel="stylesheet" href="./css/style.css" />
-  
-<link rel="stylesheet" href="./css/mobile.css" />
-<link rel="stylesheet" href="./css/mobile/detail-mobile.css" />
-<link rel="stylesheet" href="./css/mobile/home-mobile.css" />
 
-<link rel="stylesheet" href="./css/pages/event-detail.css">
-<link rel="stylesheet" href="./css/mobile/event-detail-mobile.css">
- 
+  <link rel="stylesheet" href="./css/mobile.css" />
+  <link rel="stylesheet" href="./css/mobile/detail-mobile.css" />
+  <link rel="stylesheet" href="./css/mobile/home-mobile.css" />
+
+  <link rel="stylesheet" href="./css/pages/event-detail.css" />
+  <link rel="stylesheet" href="./css/mobile/event-detail-mobile.css" />
 </head>
 
 <body>
@@ -40,141 +39,228 @@
     <button
       class="studio-save-btn"
       type="button"
+      id="studioSaveDraftBtn"
     >
       Save Draft
     </button>
 
   </header>
 
-  <!-- Studio Shell -->
-  <section class="studio-shell">
+  <!-- Admin Tabs -->
+  <nav class="studio-tabs">
+    <button
+      class="studio-tab active"
+      type="button"
+      data-studio-tab="submit"
+    >
+      Submit Content
+    </button>
 
-    <!-- Left Panel -->
-    <aside class="studio-side">
+    <button
+      class="studio-tab"
+      type="button"
+      data-studio-tab="manage"
+    >
+      Manage Data
+    </button>
+  </nav>
 
-      <div class="studio-side-card">
+  <!-- Submit Panel -->
+  <section
+    class="studio-tab-panel active"
+    id="studioSubmitPanel"
+  >
 
-        <label for="contentType">
-          Content Type
-        </label>
+    <!-- Studio Shell -->
+    <section class="studio-shell">
 
-        <select id="contentType">
-          <option value="attraction">Attraction</option>
-          <option value="restaurant">Restaurant</option>
-          <option value="event">Event</option>
-          <option value="emergency">Emergency Contact</option>
-          <option value="government">Government Contact</option>
-        </select>
+      <!-- Left Panel -->
+      <aside class="studio-side">
 
-      </div>
+        <div class="studio-side-card">
 
-      <div class="studio-side-card">
-
-        <small>Status</small>
-
-        <div class="studio-status-list">
-
-          <label>
-            <input type="checkbox" id="isPublished" />
-            Published
+          <label for="contentType">
+            Content Type
           </label>
 
-          <label>
-            <input type="checkbox" id="isRecommended" />
-            Recommended
-          </label>
-
-          <label>
-            <input type="checkbox" id="isFeatured" />
-            Featured Hero
-          </label>
+          <select id="contentType">
+            <option value="attraction">Attraction</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="event">Event</option>
+            <option value="emergency">Emergency Contact</option>
+            <option value="government">Government Contact</option>
+          </select>
 
         </div>
 
-      </div>
+        <div class="studio-side-card">
 
-      <div class="studio-side-note">
-        <strong>Image Rule</strong>
-        <p>
-          Upload original images. HeriLand will resize, crop, blurpad, and generate card / hero / thumbnail versions automatically.
-        </p>
-      </div>
+          <small>Status</small>
 
-    </aside>
+          <div class="studio-status-list">
 
-    <!-- Main Form -->
-    <form class="studio-form" id="studioForm">
+            <label>
+              <input type="checkbox" id="isPublished" />
+              Published
+            </label>
 
-      <!-- Dynamic Form -->
-      <div id="dynamicFormArea"></div>
+            <label>
+              <input type="checkbox" id="isRecommended" />
+              Recommended
+            </label>
 
-      <!-- Image Upload -->
-      <section
-        class="studio-card"
-        id="studioImageSection"
-      >
+            <label>
+              <input type="checkbox" id="isFeatured" />
+              Featured Hero
+            </label>
 
-        <div class="studio-card-head">
-          <small>Media</small>
-          <h2>Images</h2>
+          </div>
+
+        </div>
+
+        <div class="studio-side-note">
+          <strong>Image Rule</strong>
           <p>
-            Upload original images. Choose one image as thumbnail / main cover.
+            Upload original images. HeriLand will resize, crop, blurpad, and generate card / hero / thumbnail versions automatically.
           </p>
         </div>
 
-        <div class="studio-upload-box">
+      </aside>
 
-          <input
-            id="studioImageUpload"
-            type="file"
-            accept="image/*"
-            multiple
-            hidden
-          />
+      <!-- Main Form -->
+      <form class="studio-form" id="studioForm">
+
+        <!-- Dynamic Form -->
+        <div id="dynamicFormArea"></div>
+
+        <!-- Image Upload -->
+        <section
+          class="studio-card"
+          id="studioImageSection"
+        >
+
+          <div class="studio-card-head">
+            <small>Media</small>
+            <h2>Images</h2>
+            <p>
+              Upload original images. Choose one image as thumbnail / main cover.
+            </p>
+          </div>
+
+          <div class="studio-upload-box">
+
+            <input
+              id="studioImageUpload"
+              type="file"
+              accept="image/*"
+              multiple
+              hidden
+            />
+
+            <button
+              class="studio-upload-btn"
+              type="button"
+              onclick="document.getElementById('studioImageUpload').click()"
+            >
+              + Upload Images
+            </button>
+
+            <span>
+              Up to 10 images
+            </span>
+
+          </div>
+
+          <div
+            class="studio-image-grid"
+            id="studioImageGrid"
+          ></div>
+
+        </section>
+
+        <!-- Submit -->
+        <section class="studio-submit-bar">
 
           <button
-            class="studio-upload-btn"
+            class="studio-secondary-btn"
+            id="studioPreviewBtn"
             type="button"
-            onclick="document.getElementById('studioImageUpload').click()"
           >
-            + Upload Images
+            Preview
           </button>
 
-          <span>
-            Up to 10 images
-          </span>
+          <button
+            class="studio-primary-btn"
+            id="studioSubmitBtn"
+            type="button"
+          >
+            Submit Content
+          </button>
 
+        </section>
+
+      </form>
+
+    </section>
+
+  </section>
+
+  <!-- Manage Panel -->
+  <section
+    class="studio-tab-panel"
+    id="studioManagePanel"
+  >
+
+    <section class="studio-manage">
+
+      <div class="studio-manage-head">
+        <div>
+          <small>Database</small>
+          <h2>Manage Data</h2>
+          <p>
+            Edit Supabase records directly like an Excel table.
+          </p>
         </div>
 
-        <div
-          class="studio-image-grid"
-          id="studioImageGrid"
-        ></div>
+        <div class="studio-manage-actions">
 
-      </section>
+          <select id="adminManageTable">
+            <option value="attractions">Attractions</option>
+            <option value="restaurants">Restaurants</option>
+            <option value="events">Events</option>
+            <option value="emergency_contacts">Emergency Contacts</option>
+            <option value="government_contacts">Government Contacts</option>
+          </select>
 
-      <!-- Submit -->
-      <section class="studio-submit-bar">
+          <button
+            type="button"
+            id="adminRefreshBtn"
+          >
+            Refresh
+          </button>
 
-<button
-  class="studio-secondary-btn"
-  id="studioPreviewBtn"
-  type="button"
->
-  Preview
-</button>
+        </div>
+      </div>
 
-        <button
-          class="studio-primary-btn"
-          id="studioSubmitBtn"
-          type="button"
+      <div class="studio-manage-note">
+        <strong>Rules:</strong>
+        id / created_at / updated_at cannot be edited.
+        Other fields can be edited directly. When you leave the cell, it will auto-save to Supabase.
+      </div>
+
+      <div class="studio-table-wrap">
+
+        <table
+          class="studio-excel-table"
+          id="adminExcelTable"
         >
-          Submit Content
-        </button>
+          <thead></thead>
+          <tbody></tbody>
+        </table>
 
-      </section>
+      </div>
 
-    </form>
+    </section>
 
   </section>
 
