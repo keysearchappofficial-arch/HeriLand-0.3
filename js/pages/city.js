@@ -1,3 +1,5 @@
+import { supabase } from "../supabase-client.js";
+
 import { initDetail } from "../detail.js";
 import { initEventDetail } from "../event-detail.js";
 import { initTravelerDetail } from "../traveler-detail.js";
@@ -10,15 +12,14 @@ import {
 
 import {
   cities,
-  places,
-  spots,
-  restaurants,
-  events,
   reviews
 } from "../data.js";
 
 const params =   new URLSearchParams(window.location.search); 
 let activeCityId =   params.get("city") || "sibu";
+let places = [];
+let restaurants = [];
+let events = [];
 let showAllSpots = false;
 
 function getCityImage(city) {
@@ -37,7 +38,16 @@ function getCityAi(city) {
 }
 
 function getCityPlaces() {
-  return places.filter(item => item.city === activeCityId);
+
+  return places.filter(item => {
+
+    return (
+      item.city?.toLowerCase() ===
+      activeCityId.toLowerCase()
+    );
+
+  });
+
 }
 
 function getCitySpots() {
@@ -45,11 +55,29 @@ function getCitySpots() {
 }
 
 function getCityRestaurants() {
-  return restaurants.filter(item => item.city === activeCityId);
+
+  return restaurants.filter(item => {
+
+    return (
+      item.city?.toLowerCase() ===
+      activeCityId.toLowerCase()
+    );
+
+  });
+
 }
 
 function getCityEvents() {
-  return events.filter(item => item.city === activeCityId);
+
+  return events.filter(item => {
+
+    return (
+      item.city?.toLowerCase() ===
+      activeCityId.toLowerCase()
+    );
+
+  });
+
 }
 
 function getCityReviews() {
@@ -72,20 +100,22 @@ function truncateText(text, max) {
    Init
 ========================= */
 
-function init() {
+async function init() {
   bindMobileMenu();
 
   initDetail();
   initEventDetail();
   initTravelerDetail();
 
-  renderCityTabs();
+renderCityTabs();
 
-  const defaultCity =
-    cities.find(city => city.id === activeCityId) || cities[0];
+await loadSupabaseData();
 
-  renderCity(defaultCity);
-  renderCityList();
+const defaultCity =
+  cities.find(city => city.id === activeCityId) || cities[0];
+
+renderCity(defaultCity);
+renderCityList();
 
   bindSpotMore();
   bindSpotSheet();
@@ -95,6 +125,82 @@ function init() {
 
   bindEventControls();
   bindEventAutoSlide();
+}
+
+async function loadSupabaseData() {
+
+  try {
+
+    /* =========================
+       Places
+    ========================= */
+
+    const {
+      data: placeData,
+      error: placeError
+    } = await supabase
+      .from("places")
+      .select("*")
+      .eq("status", "published");
+
+    if (placeError) {
+      console.error(placeError);
+    }
+
+    const safePlaces =
+      placeData || [];
+
+    places =
+      safePlaces.filter(
+        item => item.type === "attraction"
+      );
+
+    restaurants =
+      safePlaces.filter(
+        item => item.type === "restaurant"
+      );
+
+    /* =========================
+       Events
+    ========================= */
+
+    const {
+      data: eventData,
+      error: eventError
+    } = await supabase
+      .from("events")
+      .select("*")
+      .eq("status", "published")
+      .order("start_date", {
+        ascending: true
+      });
+
+    if (eventError) {
+      console.error(eventError);
+    }
+
+    events =
+      eventData || [];
+
+    console.log(
+      "[supabase loaded]",
+      {
+        places,
+        restaurants,
+        events
+      }
+    );
+
+  }
+  catch (error) {
+
+    console.error(
+      "[supabase load failed]",
+      error
+    );
+
+  }
+
 }
 
 /* =========================
@@ -198,6 +304,10 @@ function renderCity(city) {
 function normalizeSpot(spot) {
   return {
     ...spot,
+    image:
+    spot.card_image_url ||
+    spot.hero_image_url ||
+    "",
     name: spot.name || spot.title,
     intro: spot.intro || spot.desc || "An attraction worth staying awhile.",
     location: spot.location || spot.meta || "Sarawak",
@@ -221,6 +331,10 @@ services: spot.services || [
 function normalizeRestaurant(restaurant) {
   return {
     ...restaurant,
+    image:
+    restaurant.card_image_url ||
+    restaurant.hero_image_url ||
+    "",
     name: restaurant.name || restaurant.title,
 intro:
   restaurant.intro ||
@@ -454,7 +568,11 @@ card.onclick = () =>
 
 card.innerHTML = `
   <div class="event-card-image">
-    <img src="${event.image}" alt="${event.title}">
+    <img src="${
+  event.card_image_url ||
+  event.hero_image_url ||
+  ""
+}" alt="${event.title}">
   </div>
 
   <div class="event-card-body">
