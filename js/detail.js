@@ -31,15 +31,38 @@ export function openDetail(place) {
   const normalized = {
     ...place,
     name: place.name || place.title || "Untitled Place",
-    image: place.image || "",
+    image:
+      place.image ||
+      place.card_image_url ||
+      place.hero_image_url ||
+      "",
     address: place.address || place.location || place.meta || "Sarawak",
     phone: place.phone || "Not Available",
     hours: place.hours || "Check Before Visiting",
     hoursData:place.hoursData || [],
     contactName: place.contactName || "HeriLand Guide",
+    short_description:
+      place.short_description || "",
+    
+    description:
+      place.description ||
+      place.full_description ||
+      "",
+    
+    aiNote:
+      place.aiNote ||
+      place.short_description ||
+      place.full_description ||
+      "",
+    
+    reviews:
+      Array.isArray(place.reviews)
+        ? place.reviews
+        : [],
     contactImage: place.contactImage || place.image || "",
     images:
       place.images ||
+      place.gallery_urls ||
       [
         place.image,
         place.image2,
@@ -63,8 +86,13 @@ export function openDetail(place) {
       place.location ||
       place.meta ||
       "Sarawak",
-    score: place.score || "4.8",
-    reviewCount: place.reviewCount || "128",
+    score:
+      Number(place.score || 0)
+        .toFixed(1),
+    
+    reviewCount:
+      place.reviewCount ??
+      0,
     tags:
       place.tags ||
       ["Slow Travel", "Photo Friendly", "Recommended"],
@@ -93,8 +121,21 @@ renderWeeklyHours(normalized.hoursData);
   setText("detailType", normalized.type);
   setText("detailArea", normalized.area);
   setText("detailScore", normalized.score);
-  setText("detailReviewCount", `${normalized.reviewCount} Reviews`);
-  setText("detailAiNote", normalized.intro);
+  setText(
+    "detailReviewCount",
+    Number(normalized.reviewCount) > 0
+      ? `${normalized.reviewCount} Reviews`
+      : "No Reviews Yet"
+  );
+  setText(
+    "detailAiNote",
+  
+    normalized.aiNote ||
+    normalized.short_description ||
+    normalized.intro ||
+    normalized.description ||
+    "A place worth slowing down for."
+  );
 
   renderDetailSlider(
     normalized.images || [normalized.image].filter(Boolean),
@@ -127,6 +168,20 @@ if (serviceList) {
         .map(tag => `<span>${tag}</span>`)
         .join("");
   }
+
+const travelerSection =
+  document.getElementById(
+    "travelerExperienceSection"
+  );
+
+if (travelerSection) {
+
+  travelerSection.style.display =
+    normalized.reviews?.length
+      ? "block"
+      : "none";
+
+}  
 
   bindSaveButton(normalized);
 
@@ -864,39 +919,19 @@ function renderReviewList() {
 
   if (!content) return;
 
-const reviews = [
-  {
-    name: "Mei Lin",
-    stars: 5,
-    time: "2 days ago",
-    helpful: 12,
-    text: "Best enjoyed in the evening, easygoing and relaxing.",
-    images: [
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=900&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop"
-    ]
-  },
+const reviews =
+  currentDetailItem?.reviews || [];
 
-  {
-    name: "Daniel",
-    stars: 5,
-    time: "1 week ago",
-    helpful: 5,
-    text: "Quiet and peaceful, perfect for a slow walk.",
-    images: [
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=900&auto=format&fit=crop"
-    ]
-  },
+if (!reviews.length) {
 
-  {
-    name: "Sarah",
-    stars: 4,
-    time: "3 days ago",
-    helpful: 8,
-    text: "Loved the atmosphere and local food nearby.",
-    images: []
-  }
-];
+  content.innerHTML = `
+    <div class="review-empty">
+      No traveler experiences yet.
+    </div>
+  `;
+
+  return;
+}
 
   content.innerHTML =
     reviews.map(review => `
