@@ -1059,3 +1059,36 @@
   }
 
 }
+
+.studio-excel-table th.select-col,
+.studio-excel-table td.select-col {
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
+
+  text-align: center;
+}
+
+.studio-excel-table .row-select,
+.studio-excel-table #adminSelectAll {
+  width: 16px;
+  height: 16px;
+
+  cursor: pointer;
+}
+
+#adminBulkPublishBtn {
+  background: var(--primary);
+  color: #fff;
+}
+
+#adminBulkDraftBtn {
+  background: #f6f8f7;
+  color: var(--primary-dark);
+  border: 1px solid var(--line);
+}
+
+#adminBulkDeleteBtn {
+  background: #c14545;
+  color: #fff;
+}
