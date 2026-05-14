@@ -1086,11 +1086,15 @@ async function handleSubmit() {
     const processedImages =
       await uploadImagesToBackend();
 
+    console.log("[processedImages]", processedImages);
+
     const formData =
       collectFormData();
 
     const imageData =
       normalizeImageUrls(processedImages);
+
+    console.log("[imageData]", imageData);
 
     let error;
 
