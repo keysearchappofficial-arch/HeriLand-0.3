@@ -1754,19 +1754,13 @@ function buildEventPayload(data, images) {
     content:
       data.content || data.summary || "",
 
-    start_date:
-      data.start || null,
+start_date: data.start || null,
+end_date: data.end || null,
 
-    end_date:
-      data.end || null,
-
-    time_rule: {
-      noEndDate:
-        data.noEndDate,
-
-      noEndTime:
-        data.noEndTime
-    },
+time_rule: {
+  noEndDate: data.noEndDate,
+  noEndTime: data.noEndTime
+},
 
     hero_image_url:
       images.hero_image_url,
@@ -2105,18 +2099,15 @@ function collectFormData() {
    Helpers
 ========================= */
 
-function formatEventDateRange(start, end) {
-  const startText =
-    formatDateTimeDate(start);
+function formatEventDateRange(start, end, rule = {}) {
+  const startText = formatDateOnly(start);
+  const endText = formatDateOnly(end);
 
-  const endText =
-    formatDateTimeDate(end);
+  if (rule.noEndDate) {
+    return startText;
+  }
 
-  if (
-    startText &&
-    endText &&
-    startText !== endText
-  ) {
+  if (startText && endText && startText !== endText) {
     return `${startText} - ${endText}`;
   }
 
@@ -2245,14 +2236,13 @@ function formatDateTimeDate(value) {
   );
 }
 
-function formatEventTimeRange(start, end) {
-  if (!start && !end) return "";
+function formatEventTimeRange(start, end, rule = {}) {
+  const startText = formatTimeOnly(start);
+  const endText = formatTimeOnly(end);
 
-  const startText =
-    formatDateTimeTime(start);
-
-  const endText =
-    formatDateTimeTime(end);
+  if (rule.noEndTime) {
+    return startText;
+  }
 
   if (startText && endText) {
     return `${startText} - ${endText}`;
