@@ -1068,30 +1068,96 @@ async function handleSubmit() {
 
   try {
 
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Uploading...";
+
+    const type =
+      formType.value;
+
+    if (
+      type !== "attraction" &&
+      type !== "restaurant" &&
+      type !== "event"
+    ) {
+      alert("This content type is not connected to Supabase yet.");
+      return;
+    }
+
     const processedImages =
       await uploadImagesToBackend();
 
-    const payload = {
+    const formData =
+      collectFormData();
 
-      type:
-        formType.value,
+    const imageData =
+      normalizeImageUrls(processedImages);
 
-      data:
-        collectFormData(),
+    let error;
 
-      images:
-        processedImages
+    if (
+      type === "attraction" ||
+      type === "restaurant"
+    ) {
 
-    };
+      const placePayload =
+        buildPlacePayload(
+          type,
+          formData,
+          imageData
+        );
 
-    console.log(
-      "[submit]",
-      payload
-    );
+      console.log(
+        "[supabase place payload]",
+        placePayload
+      );
 
-    alert(
-      "Upload Success"
-    );
+      const result =
+        await supabase
+          .from("places")
+          .insert(placePayload);
+
+      error = result.error;
+
+    }
+
+    if (type === "event") {
+
+      const eventPayload =
+        buildEventPayload(
+          formData,
+          imageData
+        );
+
+      console.log(
+        "[supabase event payload]",
+        eventPayload
+      );
+
+      const result =
+        await supabase
+          .from("events")
+          .insert(eventPayload);
+
+      error = result.error;
+
+    }
+
+    if (error) {
+      console.error(error);
+      alert("Upload Failed: " + error.message);
+      return;
+    }
+
+    alert("Upload Success");
+
+    document
+      .getElementById("studioForm")
+      ?.reset();
+
+    resetImages();
+
+    featureTags = [];
+    renderFeatureTags();
 
   }
   catch (error) {
@@ -1103,6 +1169,221 @@ async function handleSubmit() {
     );
 
   }
+  finally {
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Content";
+
+  }
+
+}
+
+function buildPlacePayload(type, data, images) {
+
+  const isPublished =
+    document.getElementById("isPublished")
+      ?.checked || false;
+
+  const isFeatured =
+    document.getElementById("isFeatured")
+      ?.checked || false;
+
+  const isRecommended =
+    document.getElementById("isRecommended")
+      ?.checked || false;
+
+  const name =
+    data.name || "untitled-place";
+
+  return {
+    type,
+    slug: createSlug(
+      `${data.city}-${name}`
+    ),
+
+    name,
+    city: data.city || "",
+    area: null,
+    address: data.address || "",
+
+    short_description:
+      data.description || "",
+
+    full_description:
+      data.description || "",
+
+    hero_image_url:
+      images.hero_image_url,
+
+    card_image_url:
+      images.card_image_url,
+
+    gallery_urls:
+      images.gallery_urls,
+
+    tags:
+      data.featureTags || [],
+
+    opening_hours:
+      data.hoursData || [],
+
+    phone:
+      data.phone || "",
+
+    website_url:
+      null,
+
+    google_map_url:
+      null,
+
+    price_level:
+      null,
+
+    is_featured:
+      isFeatured,
+
+    status:
+      isPublished ? "published" : "draft",
+
+    // 你 DB 如果還沒有 is_recommended，先不要放
+    // is_recommended: isRecommended
+  };
+
+}
+
+function buildEventPayload(data, images) {
+
+  const isPublished =
+    document.getElementById("isPublished")
+      ?.checked || false;
+
+  const isFeatured =
+    document.getElementById("isFeatured")
+      ?.checked || false;
+
+  const title =
+    data.title || "untitled-event";
+
+  return {
+    slug: createSlug(
+      `${data.city}-${title}`
+    ),
+
+    title,
+    city: data.city || "",
+    area: null,
+
+    venue_name:
+      data.location || "",
+
+    address:
+      data.location || "",
+
+    summary:
+      data.description || "",
+
+    content:
+      data.description || "",
+
+    start_date:
+      data.start || null,
+
+    end_date:
+      data.end || null,
+
+    hero_image_url:
+      images.hero_image_url,
+
+    card_image_url:
+      images.card_image_url,
+
+    gallery_urls:
+      images.gallery_urls,
+
+    organizer:
+      null,
+
+    ticket_url:
+      null,
+
+    google_map_url:
+      null,
+
+    tags:
+      data.featureTags || [],
+
+    is_featured:
+      isFeatured,
+
+    status:
+      isPublished ? "published" : "draft"
+  };
+
+}
+
+function normalizeImageUrls(results) {
+
+  if (!Array.isArray(results)) {
+    return {
+      hero_image_url: "",
+      card_image_url: "",
+      gallery_urls: []
+    };
+  }
+
+  const urls =
+    results
+      .map(item => {
+        if (typeof item === "string") {
+          return item;
+        }
+
+        return (
+          item.url ||
+          item.image_url ||
+          item.hero_url ||
+          item.card_url ||
+          item.publicUrl ||
+          ""
+        );
+      })
+      .filter(Boolean);
+
+  const selectedThumbnail =
+    uploadedImages.find(
+      image => image.thumbnail
+    );
+
+  let selectedIndex = 0;
+
+  if (selectedThumbnail) {
+    selectedIndex =
+      uploadedImages.findIndex(
+        image => image.id === selectedThumbnail.id
+      );
+  }
+
+  const selectedUrl =
+    urls[selectedIndex] ||
+    urls[0] ||
+    "";
+
+  return {
+    hero_image_url: selectedUrl,
+    card_image_url: selectedUrl,
+    gallery_urls: urls
+  };
+
+}
+
+function createSlug(text) {
+
+  return String(text || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80) + "-" + Date.now();
 
 }
 
