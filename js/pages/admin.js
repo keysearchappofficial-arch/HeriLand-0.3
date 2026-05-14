@@ -60,6 +60,15 @@ const adminRefreshBtn =
 
 const adminExcelTable =
   document.getElementById("adminExcelTable");
+  
+const adminBulkPublishBtn =
+  document.getElementById("adminBulkPublishBtn");
+
+const adminBulkDraftBtn =
+  document.getElementById("adminBulkDraftBtn");
+
+const adminBulkDeleteBtn =
+  document.getElementById("adminBulkDeleteBtn");
 
 let uploadedImages = [];
 let featureTags = [];
@@ -738,6 +747,17 @@ function bindEvents() {
     "click",
     loadAdminManageTable
   );
+  
+adminBulkPublishBtn?.addEventListener("click", () => {
+  handleBulkStatusUpdate("published");
+});
+
+adminBulkDraftBtn?.addEventListener("click", () => {
+  handleBulkStatusUpdate("draft");
+});
+
+adminBulkDeleteBtn?.addEventListener("click", handleBulkDelete);
+
 }
 
 /* =========================
@@ -891,13 +911,17 @@ function renderAdminManageTable(rows, config) {
   const tbody =
     adminExcelTable.querySelector("tbody");
 
-  thead.innerHTML = `
-    <tr>
-      ${config.columns.map(column => `
-        <th>${column}</th>
-      `).join("")}
-    </tr>
-  `;
+thead.innerHTML = `
+  <tr>
+    <th class="select-col">
+      <input type="checkbox" id="adminSelectAll">
+    </th>
+
+    ${config.columns.map(column => `
+      <th>${column}</th>
+    `).join("")}
+  </tr>
+`;
 
   if (!rows.length) {
     tbody.innerHTML = `
@@ -915,32 +939,41 @@ function renderAdminManageTable(rows, config) {
       const rowId =
         row[config.primaryKey];
 
+return `
+  <tr data-id="${escapeHtml(rowId)}">
+    <td class="select-col">
+      <input
+        type="checkbox"
+        class="row-select"
+        value="${escapeHtml(rowId)}"
+      >
+    </td>
+
+    ${config.columns.map(column => {
+      const readonly =
+        config.readonly.includes(column);
+
+      const rawValue =
+        row[column];
+
+      const displayValue =
+        formatCellValue(rawValue);
+
       return `
-        <tr data-id="${escapeHtml(rowId)}">
-          ${config.columns.map(column => {
-            const readonly =
-              config.readonly.includes(column);
-
-            const rawValue =
-              row[column];
-
-            const displayValue =
-              formatCellValue(rawValue);
-
-            return `
-              <td
-                class="${readonly ? "readonly" : ""}"
-                data-column="${column}"
-                data-original="${escapeHtml(displayValue)}"
-                ${readonly ? "" : `contenteditable="true"`}
-              >${escapeHtml(displayValue)}</td>
-            `;
-          }).join("")}
-        </tr>
+        <td
+          class="${readonly ? "readonly" : ""}"
+          data-column="${column}"
+          data-original="${escapeHtml(displayValue)}"
+          ${readonly ? "" : `contenteditable="true"`}
+        >${escapeHtml(displayValue)}</td>
       `;
+    }).join("")}
+  </tr>
+`;
     }).join("");
 
   bindAdminEditableCells(config);
+  bindAdminRowSelection();
 }
 
 function bindAdminEditableCells(config) {
@@ -1149,6 +1182,116 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function bindAdminRowSelection() {
+  const selectAll =
+    document.getElementById("adminSelectAll");
+
+  const checkboxes =
+    adminExcelTable.querySelectorAll(".row-select");
+
+  selectAll?.addEventListener("change", () => {
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = selectAll.checked;
+    });
+  });
+}
+
+function getSelectedAdminIds() {
+  return Array
+    .from(
+      adminExcelTable.querySelectorAll(".row-select:checked")
+    )
+    .map(input => input.value)
+    .filter(Boolean);
+}
+
+async function handleBulkStatusUpdate(status) {
+  const ids =
+    getSelectedAdminIds();
+
+  if (!ids.length) {
+    alert("Please select at least one row.");
+    return;
+  }
+
+  const key =
+    adminManageTable.value;
+
+  const config =
+    manageConfigs[key];
+
+  if (!config) return;
+
+  const ok =
+    confirm(`Update ${ids.length} item(s) to ${status}?`);
+
+  if (!ok) return;
+
+  const payload = {
+    status
+  };
+
+  if (config.columns.includes("updated_at")) {
+    payload.updated_at =
+      new Date().toISOString();
+  }
+
+  const { error } =
+    await supabase
+      .from(config.table)
+      .update(payload)
+      .in(config.primaryKey, ids);
+
+  if (error) {
+    console.error(error);
+    alert("Bulk update failed: " + error.message);
+    return;
+  }
+
+  alert("Bulk update success");
+
+  loadAdminManageTable();
+}
+
+async function handleBulkDelete() {
+  const ids =
+    getSelectedAdminIds();
+
+  if (!ids.length) {
+    alert("Please select at least one row.");
+    return;
+  }
+
+  const key =
+    adminManageTable.value;
+
+  const config =
+    manageConfigs[key];
+
+  if (!config) return;
+
+  const ok =
+    confirm(`Delete ${ids.length} item(s)? This cannot be undone.`);
+
+  if (!ok) return;
+
+  const { error } =
+    await supabase
+      .from(config.table)
+      .delete()
+      .in(config.primaryKey, ids);
+
+  if (error) {
+    console.error(error);
+    alert("Bulk delete failed: " + error.message);
+    return;
+  }
+
+  alert("Bulk delete success");
+
+  loadAdminManageTable();
 }
 
 /* =========================
