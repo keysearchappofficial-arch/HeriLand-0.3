@@ -92,6 +92,79 @@ function truncateText(text, max) {
   return text.slice(0, max) + "...";
 }
 
+function formatOpeningHours(hoursData) {
+  if (!Array.isArray(hoursData)) return "";
+
+  const filled = hoursData.filter(day =>
+    day.closed || day.open || day.close
+  );
+
+  if (!filled.length) return "";
+
+  return filled
+    .map(day => {
+      if (day.closed) {
+        return `${day.key || day.label} Closed`;
+      }
+
+      if (day.open && day.close) {
+        return `${day.key || day.label} ${day.open}-${day.close}`;
+      }
+
+      return `${day.key || day.label} ${day.open || day.close}`;
+    })
+    .join(" · ");
+}
+
+function formatEventDateRange(start, end) {
+  const startText = formatDateOnly(start);
+  const endText = formatDateOnly(end);
+
+  if (startText && endText && startText !== endText) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+}
+
+function formatEventTimeRange(start, end) {
+  const startText = formatTimeOnly(start);
+  const endText = formatTimeOnly(end);
+
+  if (startText && endText) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+}
+
+function formatDateOnly(value) {
+  if (!value) return "";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "";
+
+  return date.toLocaleDateString("en-MY", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
+
+function formatTimeOnly(value) {
+  if (!value) return "";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "";
+
+  return date.toLocaleTimeString("en-MY", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
 /* =========================
    Init
 ========================= */
@@ -298,59 +371,210 @@ function renderCity(city) {
 ========================= */
 
 function normalizeSpot(spot) {
-  return {
-    ...spot,
-    image:
+  const image =
     spot.card_image_url ||
     spot.hero_image_url ||
-    "",
-    name: spot.name || spot.title,
-    intro: spot.intro || spot.desc || "An attraction worth staying awhile.",
-    location: spot.location || spot.meta || "Sarawak",
-    type: spot.type || "Attraction",
-    address: spot.address || spot.meta || "Sarawak",
-    phone: spot.phone || "Not Available",
-    hours: spot.hours || "Best visited during the day",
-    contactName: spot.contactName || "HeriLand Guide",
-    contactImage: spot.contactImage || spot.image,
-    score: spot.score || "4.8",
-    reviewCount: spot.reviewCount || "128",
-tags: spot.tags || ["Attraction", "Slow Travel", "Photo Friendly"],
-services: spot.services || [
-  "Good for photos and slow visits",
-  "Can be added to your trip",
-  "Navigation available"
-]
+    "";
+
+  return {
+    ...spot,
+    image,
+    images: Array.isArray(spot.gallery_urls) ? spot.gallery_urls : [],
+
+    name: spot.name || "Untitled Attraction",
+    title: spot.name || "Untitled Attraction",
+
+    intro:
+      spot.short_description ||
+      spot.full_description ||
+      "An attraction worth staying awhile.",
+
+    desc:
+      spot.short_description ||
+      spot.full_description ||
+      "",
+
+    description:
+      spot.full_description ||
+      spot.short_description ||
+      "",
+
+    location:
+      spot.area ||
+      spot.city ||
+      "Sarawak",
+
+    type: "Attraction",
+
+    address:
+      spot.address ||
+      "Sarawak",
+
+    phone:
+      spot.phone ||
+      "Not Available",
+
+    hours:
+      formatOpeningHours(spot.opening_hours) ||
+      "Check Before Visiting",
+
+    hoursData:
+      spot.opening_hours || [],
+
+    contactName: "HeriLand Guide",
+    contactImage: image,
+
+    score: "4.8",
+    reviewCount: "128",
+
+    tags:
+      Array.isArray(spot.tags) && spot.tags.length
+        ? spot.tags
+        : ["Attraction", "Slow Travel"],
+
+    services:
+      Array.isArray(spot.tags) && spot.tags.length
+        ? spot.tags
+        : [
+            "Good for photos and slow visits",
+            "Can be added to your trip",
+            "Navigation available"
+          ]
+  };
+}
+
+function normalizeEvent(event) {
+  const image =
+    event.card_image_url ||
+    event.hero_image_url ||
+    "";
+
+  return {
+    ...event,
+    image,
+    images: Array.isArray(event.gallery_urls)
+      ? event.gallery_urls
+      : [],
+
+    title: event.title || "Untitled Event",
+    name: event.title || "Untitled Event",
+
+    desc:
+      event.summary ||
+      event.content ||
+      "An event worth exploring slowly.",
+
+    description:
+      event.content ||
+      event.summary ||
+      "",
+
+    location:
+      event.venue_name ||
+      event.address ||
+      event.city ||
+      "Sarawak",
+
+    address:
+      event.address ||
+      event.venue_name ||
+      "Sarawak",
+
+    date:
+      formatEventDateRange(event.start_date, event.end_date),
+
+    timeText:
+      formatEventTimeRange(event.start_date, event.end_date),
+
+    type: "Event",
+
+    tags:
+      Array.isArray(event.tags) && event.tags.length
+        ? event.tags
+        : ["Event", "Local Experience"],
+
+    aiNote:
+      "Perfect for anyone who wants to experience the city slowly."
   };
 }
 
 function normalizeRestaurant(restaurant) {
-  return {
-    ...restaurant,
-    image:
+  const image =
     restaurant.card_image_url ||
     restaurant.hero_image_url ||
-    "",
-    name: restaurant.name || restaurant.title,
-intro:
-  restaurant.intro ||
-  restaurant.desc ||
-  "A local restaurant worth trying.",
-    location: restaurant.location || restaurant.meta || "Sarawak",
-    type: restaurant.type || restaurant.food || "Restaurant",
-    address: restaurant.address || restaurant.meta || "Sarawak",
-phone: restaurant.phone || "Not Available",
-hours: restaurant.hours || "Check before dining",
-    contactName: restaurant.contactName || "HeriLand Guide",
-    contactImage: restaurant.contactImage || restaurant.image,
-    score: restaurant.score || "4.8",
-    reviewCount: restaurant.reviewCount || "128",
-tags: restaurant.tags || ["Restaurant", "Local", "Recommended"],
-services: restaurant.services || [
-  "Local restaurant recommendation",
-  "Can be added to your trip",
-  "Navigation available"
-]
+    "";
+
+  return {
+    ...restaurant,
+    image,
+    images: Array.isArray(restaurant.gallery_urls)
+      ? restaurant.gallery_urls
+      : [],
+
+    name: restaurant.name || "Untitled Restaurant",
+    title: restaurant.name || "Untitled Restaurant",
+
+    intro:
+      restaurant.short_description ||
+      restaurant.full_description ||
+      "A local restaurant worth trying.",
+
+    desc:
+      restaurant.short_description ||
+      restaurant.full_description ||
+      "",
+
+    description:
+      restaurant.full_description ||
+      restaurant.short_description ||
+      "",
+
+    location:
+      restaurant.area ||
+      restaurant.city ||
+      "Sarawak",
+
+    type: "Restaurant",
+
+    food:
+      Array.isArray(restaurant.tags) && restaurant.tags.length
+        ? restaurant.tags[0]
+        : "Restaurant",
+
+    address:
+      restaurant.address ||
+      "Sarawak",
+
+    phone:
+      restaurant.phone ||
+      "Not Available",
+
+    hours:
+      formatOpeningHours(restaurant.opening_hours) ||
+      "Check Before Dining",
+
+    hoursData:
+      restaurant.opening_hours || [],
+
+    contactName: "HeriLand Guide",
+    contactImage: image,
+
+    score: "4.8",
+    reviewCount: "128",
+
+    tags:
+      Array.isArray(restaurant.tags) && restaurant.tags.length
+        ? restaurant.tags
+        : ["Restaurant", "Local", "Recommended"],
+
+    services:
+      Array.isArray(restaurant.tags) && restaurant.tags.length
+        ? restaurant.tags
+        : [
+            "Local restaurant recommendation",
+            "Can be added to your trip",
+            "Navigation available"
+          ]
   };
 }
 
@@ -556,36 +780,33 @@ function renderEvents() {
 
   carousel.innerHTML = "";
 
-  getCityEvents().forEach(event => {
+  getCityEvents().forEach(rawEvent => {
+    const event = normalizeEvent(rawEvent);
+
     const card = document.createElement("article");
+    card.className = "event-card";
 
-card.className = "event-card";
+    card.onclick = () =>
+      window.openEventDetail(event);
 
-card.onclick = () =>
-  window.openEventDetail(event);
+    card.innerHTML = `
+      <div class="event-card-image">
+        <img src="${event.image}" alt="${event.title}">
+      </div>
 
-card.innerHTML = `
-  <div class="event-card-image">
-    <img src="${
-  event.card_image_url ||
-  event.hero_image_url ||
-  ""
-}" alt="${event.title}">
-  </div>
+      <div class="event-card-body">
+        <div class="event-card-meta">
+          <span>${event.date || "Upcoming"}</span>
+          <span>${event.timeText || "Time TBC"}</span>
+        </div>
 
-  <div class="event-card-body">
-    <div class="event-card-meta">
-<span>${event.day || event.date || "Upcoming"}</span>
-<span>${event.timeText || event.hour || "Time TBC"}</span>
-    </div>
+        <h3 class="event-card-title">${event.title}</h3>
 
-    <h3 class="event-card-title">${event.title}</h3>
-
-    <p class="event-card-desc">
-      ${event.desc || "An event worth exploring slowly."}
-    </p>
-  </div>
-`;
+        <p class="event-card-desc">
+          ${event.desc}
+        </p>
+      </div>
+    `;
 
     carousel.appendChild(card);
   });
