@@ -6,7 +6,6 @@
   <!-- Hero -->
   <div class="event-detail-hero">
 
-    <!-- Back -->
     <button
       class="event-detail-back"
       type="button"
@@ -14,7 +13,6 @@
       ‹
     </button>
 
-    <!-- Actions -->
     <div class="event-detail-actions">
 
       <button
@@ -35,7 +33,6 @@
 
     </div>
 
-    <!-- Slider -->
     <div
       class="event-detail-slider"
       id="eventDetailSlider">
@@ -62,20 +59,46 @@
       <h1 id="eventDetailTitle"></h1>
 
       <div class="event-detail-meta">
-        <span id="eventDetailDate">Tonight</span>
+        <span id="eventDetailDate">Upcoming</span>
         <span>｜</span>
-        <span id="eventDetailTime">7:00 PM</span>
+        <span id="eventDetailTime">Time TBC</span>
       </div>
 
     </section>
 
     <section class="event-detail-guide">
 
-      <small>HeriLand Guide</small>
+      <small>Event Summary</small>
 
-      <p id="eventDetailAiNote">
-        Perfect for anyone who wants to experience the city at night, slowly.
-      </p>
+      <p id="eventDetailAiNote"></p>
+
+    </section>
+
+    <section class="event-detail-info">
+
+      <div class="event-detail-info-item">
+        <div class="event-detail-info-label">Venue</div>
+        <div
+          class="event-detail-info-value"
+          id="eventDetailVenue">
+        </div>
+      </div>
+
+      <div class="event-detail-info-item">
+        <div class="event-detail-info-label">Address</div>
+        <div
+          class="event-detail-info-value"
+          id="eventDetailAddress">
+        </div>
+      </div>
+
+      <div class="event-detail-info-item">
+        <div class="event-detail-info-label">Organizer</div>
+        <div
+          class="event-detail-info-value"
+          id="eventDetailOrganizer">
+        </div>
+      </div>
 
     </section>
 
@@ -89,51 +112,43 @@
 
     <section class="event-detail-section">
 
-      <h2>Atmosphere</h2>
+      <h2>Tags</h2>
 
       <div
         class="event-detail-tags"
         id="eventDetailTags">
-
-        <span>Night</span>
-        <span>Relaxing</span>
-        <span>Local Vibes</span>
-
       </div>
 
     </section>
 
-    <section class="event-detail-timeline" style="display:none;">
+    <div class="event-detail-links">
 
-      <h2>Suggested Experience</h2>
+      <a
+        class="event-detail-link"
+        id="eventTicketLink"
+        href="#"
+        target="_blank"
+        rel="noopener">
+        Ticket / More Info
+      </a>
 
-      <div class="event-timeline-list">
+      <a
+        class="event-detail-link"
+        id="eventMapLink"
+        href="#"
+        target="_blank"
+        rel="noopener">
+        Open Map
+      </a>
 
-        <div>
-          <small>Before</small>
-          <p id="eventBeforeText">Grab a bite before heading over.</p>
-        </div>
-
-        <div>
-          <small>During</small>
-          <p id="eventDuringText">Take your time and explore slowly.</p>
-        </div>
-
-        <div>
-          <small>After</small>
-          <p id="eventAfterText">Take a walk nearby after the event.</p>
-        </div>
-
-      </div>
-
-    </section>
+    </div>
 
     <section class="event-detail-nearby">
 
       <h2>Nearby Places to Explore</h2>
 
       <p id="eventDetailNearby">
-        Explore nearby restaurants, river walks, or night markets.
+        Explore nearby restaurants, river walks, or local places around this event.
       </p>
 
     </section>
