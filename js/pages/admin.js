@@ -1064,30 +1064,43 @@ function renderImages() {
 
 async function handleSubmit() {
 
-  const processedImages =
-  await uploadImagesToBackend();
-  
-const payload = {
+  try {
 
-  type:
-    formType.value,
+    const processedImages =
+      await uploadImagesToBackend();
 
-  data:
-    collectFormData(),
+    const payload = {
 
-  images:
-    processedImages
+      type:
+        formType.value,
 
-};
+      data:
+        collectFormData(),
 
-  console.log(
-    "[submit]",
-    payload
-  );
+      images:
+        processedImages
 
-  alert(
-    "Ready to send backend"
-  );
+    };
+
+    console.log(
+      "[submit]",
+      payload
+    );
+
+    alert(
+      "Upload Success"
+    );
+
+  }
+  catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Upload Failed"
+    );
+
+  }
 
 }
 
