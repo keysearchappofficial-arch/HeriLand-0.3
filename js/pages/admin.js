@@ -318,15 +318,31 @@ ${weeklyHoursTemplate("restaurant")}
         <input type="text" id="eventVenue" placeholder="Venue / Place name">
       </label>
 
-      <label class="studio-field">
-        <span>Start Time</span>
-        <input type="datetime-local" id="eventStart">
-      </label>
+<label class="studio-field">
+  <span>Start Time</span>
+  <input type="datetime-local" id="eventStart">
+</label>
 
-      <label class="studio-field">
-        <span>End Time</span>
-        <input type="datetime-local" id="eventEnd">
-      </label>
+<label class="studio-field">
+  <span>End Time</span>
+  <input type="datetime-local" id="eventEnd">
+</label>
+
+<label class="studio-field">
+  <span>Date Display</span>
+  <label>
+    <input type="checkbox" id="eventNoEndDate">
+    No end date
+  </label>
+</label>
+
+<label class="studio-field">
+  <span>Time Display</span>
+  <label>
+    <input type="checkbox" id="eventNoEndTime">
+    No end time
+  </label>
+</label>
 
       <label class="studio-field">
         <span>Organizer</span>
@@ -1270,7 +1286,12 @@ function buildEventPayload(data, images) {
     content: data.content || data.summary || "",
 
     start_date: data.start || null,
-    end_date: data.end || null,
+end_date: data.end || null,
+
+time_rule: {
+  noEndDate: data.noEndDate,
+  noEndTime: data.noEndTime
+},
 
     hero_image_url: images.hero_image_url,
     card_image_url: images.card_image_url,
@@ -1406,6 +1427,13 @@ if (type === "event") {
     content: getValue("eventContent"),
     start: getValue("eventStart"),
     end: getValue("eventEnd"),
+
+    noEndDate:
+      document.getElementById("eventNoEndDate")?.checked || false,
+
+    noEndTime:
+      document.getElementById("eventNoEndTime")?.checked || false,
+
     organizer: getValue("eventOrganizer"),
     ticketUrl: getValue("eventTicketUrl"),
     googleMapUrl: getValue("eventGoogleMapUrl"),
