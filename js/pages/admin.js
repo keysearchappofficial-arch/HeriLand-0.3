@@ -1326,8 +1326,7 @@ function buildEventPayload(data, images) {
 }
 
 function normalizeImageUrls(results) {
-
-  if (!Array.isArray(results)) {
+  if (!Array.isArray(results) || !results.length) {
     return {
       hero_image_url: "",
       card_image_url: "",
@@ -1335,28 +1334,24 @@ function normalizeImageUrls(results) {
     };
   }
 
-  const urls =
-    results
-      .map(item => {
-        if (typeof item === "string") {
-          return item;
-        }
+  const API_ORIGIN =
+    "http://127.0.0.1:14800";
 
-        return (
-          item.url ||
-          item.image_url ||
-          item.hero_url ||
-          item.card_url ||
-          item.publicUrl ||
-          ""
-        );
-      })
-      .filter(Boolean);
+  const toFullUrl = path => {
+    if (!path) return "";
+
+    if (
+      path.startsWith("http://") ||
+      path.startsWith("https://")
+    ) {
+      return path;
+    }
+
+    return `${API_ORIGIN}${path}`;
+  };
 
   const selectedThumbnail =
-    uploadedImages.find(
-      image => image.thumbnail
-    );
+    uploadedImages.find(image => image.thumbnail);
 
   let selectedIndex = 0;
 
@@ -1367,17 +1362,23 @@ function normalizeImageUrls(results) {
       );
   }
 
-  const selectedUrl =
-    urls[selectedIndex] ||
-    urls[0] ||
-    "";
+  const selected =
+    results[selectedIndex] || results[0];
 
   return {
-    hero_image_url: selectedUrl,
-    card_image_url: selectedUrl,
-    gallery_urls: urls
-  };
+    hero_image_url:
+      toFullUrl(selected.hero || selected.detail || selected.url),
 
+    card_image_url:
+      toFullUrl(selected.card || selected.square || selected.url),
+
+    gallery_urls:
+      results
+        .map(item =>
+          toFullUrl(item.detail || item.hero || item.url)
+        )
+        .filter(Boolean)
+  };
 }
 
 function createSlug(text) {
