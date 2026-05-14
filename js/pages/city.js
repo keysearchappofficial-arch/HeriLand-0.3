@@ -264,6 +264,12 @@ async function loadSupabaseData() {
       }
     );
 
+    window.heriDebug = {
+  places,
+  restaurants,
+  events
+};
+
   }
   catch (error) {
 
@@ -375,10 +381,10 @@ function renderCity(city) {
 ========================= */
 
 function normalizeSpot(spot) {
-  const image =
-    spot.card_image_url ||
-    spot.hero_image_url ||
-    "";
+const image =
+  spot.card_image_url ||
+  spot.hero_image_url ||
+  "./assets/fallback.jpg";
 
   return {
     ...spot,
@@ -450,10 +456,10 @@ reviewCount:
 }
 
 function normalizeEvent(event) {
-  const image =
-    event.card_image_url ||
-    event.hero_image_url ||
-    "";
+const image =
+  event.card_image_url ||
+  event.hero_image_url ||
+  "./assets/fallback.jpg";
 
   return {
     ...event,
@@ -505,10 +511,10 @@ function normalizeEvent(event) {
 }
 
 function normalizeRestaurant(restaurant) {
-  const image =
-    restaurant.card_image_url ||
-    restaurant.hero_image_url ||
-    "";
+const image =
+  restaurant.card_image_url ||
+  restaurant.hero_image_url ||
+  "./assets/fallback.jpg";
 
   return {
     ...restaurant,
