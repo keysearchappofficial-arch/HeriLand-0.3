@@ -63,11 +63,8 @@ export async function openDetail(place) {
         : [],
     contactImage: place.contactImage || place.image || "",
 images: [
-
   place.hero_image_url ||
-
   place.image ||
-
   place.card_image_url,
 
   ...(Array.isArray(place.gallery_urls)
@@ -75,12 +72,10 @@ images: [
     : []),
 
   ...(place.images || [])
-
 ]
 .filter(Boolean)
-.filter(
-  (value, index, array) =>
-    array.indexOf(value) === index
+.filter((value, index, array) =>
+  array.indexOf(value) === index
 ),
     intro:
       place.intro ||
