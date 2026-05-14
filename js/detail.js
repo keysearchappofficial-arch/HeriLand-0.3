@@ -127,6 +127,13 @@ renderWeeklyHours(normalized.hoursData);
       ? `${normalized.reviewCount} Reviews`
       : "No Reviews Yet"
   );
+setText(
+  "reviewListTitle",
+
+  Number(normalized.reviewCount) > 0
+    ? `${normalized.score} · ${normalized.reviewCount} Reviews`
+    : "0.0 · No Reviews Yet"
+);
   setText(
     "detailAiNote",
   
