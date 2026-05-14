@@ -56,6 +56,7 @@ async function init() {
   bindRestaurantControls();
   bindMobileMenu();
   bindHomeEventAutoSlide();
+  bindHomeEventMore();
   bindCitySelects();
 
   initDetail();
@@ -641,6 +642,120 @@ card.innerHTML = `
 
     eventGrid.appendChild(card);
   });
+}
+
+function bindHomeEventMore() {
+  const btn =
+    document.getElementById("homeEventMoreBtn");
+
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    openHomeEventMore();
+  });
+}
+
+function openHomeEventMore() {
+  const filteredEvents =
+    activeCityId === "sarawak"
+      ? events
+      : events.filter(item => item.city === activeCityId);
+
+  if (!filteredEvents.length) {
+    alert("No more events yet.");
+    return;
+  }
+
+  const existing =
+    document.getElementById("homeEventMoreLayer");
+
+  if (existing) {
+    existing.remove();
+  }
+
+  const layer =
+    document.createElement("div");
+
+  layer.id = "homeEventMoreLayer";
+  layer.className = "home-more-layer show";
+
+  layer.innerHTML = `
+    <div class="home-more-backdrop"></div>
+
+    <section class="home-more-sheet">
+      <div class="home-more-head">
+        <div>
+          <small>HeriLand Events</small>
+          <h2>All Events</h2>
+        </div>
+
+        <button
+          class="home-more-close"
+          type="button">
+          ×
+        </button>
+      </div>
+
+      <div class="home-more-grid" id="homeEventMoreGrid"></div>
+    </section>
+  `;
+
+  document.body.appendChild(layer);
+  document.body.style.overflow = "hidden";
+
+  const grid =
+    document.getElementById("homeEventMoreGrid");
+
+  filteredEvents.forEach(event => {
+    const card =
+      document.createElement("article");
+
+    card.className = "event-card";
+
+    card.onclick = () => {
+      closeHomeEventMore();
+      openEventDetail(event);
+    };
+
+    card.innerHTML = `
+      <div class="event-card-image">
+        <img src="${event.image}" alt="${event.title}">
+      </div>
+
+      <div class="event-card-body">
+        <div class="event-card-meta">
+          <span>${event.date || "Upcoming"}</span>
+          <span>${event.timeText || "Time TBC"}</span>
+        </div>
+
+        <h3 class="event-card-title">
+          ${event.title}
+        </h3>
+
+        <p class="event-card-desc">
+          ${event.desc || event.location || "An event worth exploring slowly."}
+        </p>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  layer
+    .querySelector(".home-more-backdrop")
+    ?.addEventListener("click", closeHomeEventMore);
+
+  layer
+    .querySelector(".home-more-close")
+    ?.addEventListener("click", closeHomeEventMore);
+}
+
+function closeHomeEventMore() {
+  document
+    .getElementById("homeEventMoreLayer")
+    ?.remove();
+
+  document.body.style.overflow = "";
 }
 
 function bindHomeEventAutoSlide() {
