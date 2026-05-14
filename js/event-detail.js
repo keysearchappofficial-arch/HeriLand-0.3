@@ -125,10 +125,11 @@ timeRule:
   event.time_rule || {},
 
     date:
-      formatEventDateRange(
-        event.start_date || event.start,
-        event.end_date || event.end
-      ) || event.date || "Upcoming",
+  formatEventDateRange(
+    event.start_date || event.start,
+    event.end_date || event.end,
+    event.time_rule || {}
+  ) || event.date || "Upcoming",
 
 timeText:
   formatEventTimeRange(
