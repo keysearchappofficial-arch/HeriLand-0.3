@@ -1,3 +1,5 @@
+import { supabase } from "./supabase-client.js";
+
 import {
   saveItem,
   removeItem,
@@ -90,9 +92,12 @@ export function openDetail(place) {
       Number(place.score || 0)
         .toFixed(1),
     
-    reviewCount:
-      place.reviewCount ??
-      0,
+reviewCount:
+  Number(
+    place.reviewCount ||
+    place.review_count ||
+    0
+  ),
     tags:
       place.tags ||
       ["Slow Travel", "Photo Friendly", "Recommended"],
@@ -184,6 +189,8 @@ if (detailReviewList) {
 } 
 
   bindSaveButton(normalized);
+
+  reloadReviews();
 
   detailPage.classList.add("show");
 
@@ -723,7 +730,7 @@ function updateReviewStars() {
     });
 }
 
-function submitReview() {
+async function submitReview() {
   const comment =
     document.getElementById("reviewComment");
 
@@ -740,81 +747,39 @@ function submitReview() {
     return;
   }
 
-  const card =
-    document.createElement("article");
-    
-const imagePreview =
+const { error } =
+  await supabase
+    .from("reviews")
+    .insert({
+      place_id:
+        currentDetailItem.id,
 
-  document.getElementById("reviewUploadPreview");
+      reviewer_name:
+        "Guest Traveler",
 
-const imageHtml =
+      rating:
+        Number(selectedReviewRating),
 
-  imagePreview?.innerHTML
+      comment:
+        text,
 
-    ? `<div class="review-images">${imagePreview.innerHTML}</div>`
+      status:
+        "published"
+    });
 
-    : "";
+if (error) {
 
-  card.className =
-    "detail-review-card";
+  console.error(error);
 
-card.innerHTML = `
+  alert("Failed to submit review");
 
-  <div class="detail-review-user">
+  return;
 
-    <img
+}
 
-      src="https://i.pravatar.cc/120?img=45"
+await reloadReviews();
 
-      alt="You"
-
-    >
-
-    <div>
-
-      <strong>You</strong>
-
-      <div class="detail-review-meta">
-
-        <span class="review-stars">
-
-          ${"★".repeat(selectedReviewRating)}
-
-        </span>
-
-        <span class="review-time">
-
-          Just now
-
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <p>${escapeHtml(text)}</p>
-
-  ${imageHtml}
-
-  <div class="review-helpful">
-
-    <button type="button">
-
-      👍 Helpful
-
-    </button>
-
-    <span>0</span>
-
-  </div>
-
-`;
-
-  list.prepend(card);
-
-  closeReviewSheet();
+closeReviewSheet();
   
 comment.value = "";
 
@@ -830,6 +795,91 @@ if (imageInput) {
 }
 
   alert("Thanks for sharing your experience.");
+}
+
+async function reloadReviews() {
+
+  if (!currentDetailItem?.id) {
+    return;
+  }
+
+  const {
+    data,
+    error
+  } = await supabase
+    .from("reviews")
+    .select("*")
+    .eq(
+      "place_id",
+      currentDetailItem.id
+    )
+    .eq(
+      "status",
+      "published"
+    )
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    );
+
+  if (error) {
+
+    console.error(error);
+
+    return;
+
+  }
+
+  const reviews =
+    data || [];
+
+  currentDetailItem.reviews =
+    reviews;
+
+  const total =
+    reviews.reduce(
+      (sum, review) =>
+        sum + Number(review.rating || 0),
+      0
+    );
+
+  const avg =
+    reviews.length
+      ? (total / reviews.length)
+          .toFixed(1)
+      : "0.0";
+
+  currentDetailItem.score =
+    avg;
+
+  currentDetailItem.reviewCount =
+    reviews.length;
+
+  setText(
+    "detailScore",
+    avg
+  );
+
+  setText(
+    "detailReviewCount",
+
+    reviews.length
+      ? `${reviews.length} Reviews`
+      : "No Reviews Yet"
+  );
+
+  setText(
+    "reviewListTitle",
+
+    reviews.length
+      ? `${avg} · ${reviews.length} Reviews`
+      : "0.0 · No Reviews Yet"
+  );
+
+  renderReviewList();
+
 }
 
 function escapeHtml(text) {
@@ -863,7 +913,9 @@ function bindReviewMore() {
 
   moreBtn.addEventListener("click", () => {
 
-    renderReviewList();
+await reloadReviews();
+
+renderReviewList();
 
     layer.classList.add("show");
 
@@ -919,80 +971,86 @@ function renderReviewList() {
 
   if (!content) return;
 
-const reviews =
-  currentDetailItem?.reviews || [];
+  const reviews =
+    currentDetailItem?.reviews || [];
 
-if (!reviews.length) {
+  if (!reviews.length) {
 
-  content.innerHTML = `
-    <div class="review-empty">
-      No traveler experiences yet.
-    </div>
-  `;
+    content.innerHTML = `
+      <div class="review-empty">
+        No traveler experiences yet.
+      </div>
+    `;
 
-  return;
-}
+    return;
+  }
 
   content.innerHTML =
-    reviews.map(review => `
-      <article class="review-list-card">
+    reviews.map(review => {
 
-<div class="detail-review-user">
+      const stars =
+        Number(review.rating || 0);
 
-  <img
-    src="https://i.pravatar.cc/120?img=${Math.floor(Math.random() * 60)}"
-    alt="${review.name}"
-  >
+      const createdAt =
+        review.created_at
+          ? new Date(review.created_at)
+              .toLocaleDateString("en-MY", {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+              })
+          : "Recently";
 
-  <div>
+      return `
+        <article class="review-list-card">
 
-    <strong>${review.name}</strong>
+          <div class="detail-review-user">
 
-    <div class="detail-review-meta">
+            <img
+              src="https://i.pravatar.cc/120?img=${Math.floor(Math.random() * 60)}"
+              alt="${escapeHtml(review.reviewer_name || "Traveler")}"
+            >
 
-      <span class="review-stars">
-        ${"★".repeat(review.stars)}
-      </span>
+            <div>
 
-      <span class="review-time">
-        ${review.time || "2 days ago"}
-      </span>
+              <strong>
+                ${escapeHtml(review.reviewer_name || "Traveler")}
+              </strong>
 
-    </div>
+              <div class="detail-review-meta">
 
-  </div>
+                <span class="review-stars">
+                  ${"★".repeat(stars)}
+                </span>
 
-</div>
+                <span class="review-time">
+                  ${createdAt}
+                </span>
 
-<p>${review.text}</p>
+              </div>
 
-${review.images?.length ? `
+            </div>
 
-  <div class="review-images">
+          </div>
 
-    ${review.images.map(image => `
+          <p>
+            ${escapeHtml(review.comment || "")}
+          </p>
 
-      <img
-        src="${image}"
-        alt="${review.name}"
-      >
+          <div class="review-helpful">
 
-    `).join("")}
+            <button type="button">
+              👍 Helpful
+            </button>
 
-  </div>
+            <span>
+              ${review.helpful_count || 0}
+            </span>
 
-` : ""}
+          </div>
 
-<div class="review-helpful">
+        </article>
+      `;
 
-  <button type="button">
-    👍 Helpful
-  </button>
-
-  <span>${review.helpful || 0}</span>
-
-</div>
-
-      </article>
-    `).join("");
+    }).join("");
 }
