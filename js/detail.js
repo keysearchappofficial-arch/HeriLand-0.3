@@ -62,15 +62,21 @@ export async function openDetail(place) {
         ? place.reviews
         : [],
     contactImage: place.contactImage || place.image || "",
-    images:
-      place.images ||
-      place.gallery_urls ||
-      [
-        place.image,
-        place.image2,
-        place.image3,
-        place.image4
-      ].filter(Boolean),
+images: [
+
+  place.hero_image_url ||
+
+  place.image ||
+
+  place.card_image_url,
+
+  ...(Array.isArray(place.gallery_urls)
+    ? place.gallery_urls
+    : []),
+
+  ...(place.images || [])
+
+].filter(Boolean),
     intro:
       place.intro ||
       place.desc ||
