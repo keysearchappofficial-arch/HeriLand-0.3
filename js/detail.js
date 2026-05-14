@@ -40,7 +40,7 @@ export async function openDetail(place) {
       "",
     address: place.address || place.location || place.meta || "Sarawak",
     phone: place.phone || "Not Available",
-    hours: place.hours || "Check Before Visiting",
+    hours: "Check Before Visiting",
     hoursData:place.hoursData || [],
     contactName: place.contactName || "HeriLand Guide",
     short_description:
@@ -878,7 +878,8 @@ async function reloadReviews() {
       : "0.0 · No Reviews Yet"
   );
 
-  renderReviewList();
+renderInlineReviews();
+renderReviewList();
 
 }
 
@@ -1057,4 +1058,80 @@ const avatarId =
       `;
 
     }).join("");
+}
+
+function renderInlineReviews() {
+
+  const list =
+    document.getElementById("detailReviewList");
+
+  if (!list) return;
+
+  const reviews =
+    currentDetailItem?.reviews || [];
+
+  if (!reviews.length) {
+    list.innerHTML = "";
+    return;
+  }
+
+  list.innerHTML =
+    reviews
+      .slice(0, 4)
+      .map(review => {
+
+        const stars =
+          Number(review.rating || 0);
+
+        const createdAt =
+          review.created_at
+            ? new Date(review.created_at)
+                .toLocaleDateString("en-MY", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric"
+                })
+            : "Recently";
+
+        const avatarId =
+          (review.reviewer_name || "Traveler")
+            .length % 60;
+
+        return `
+          <article class="detail-review-card">
+
+            <div class="detail-review-user">
+
+              <img
+                src="https://i.pravatar.cc/120?img=${avatarId}"
+                alt="${escapeHtml(review.reviewer_name || "Traveler")}"
+              >
+
+              <div>
+                <strong>
+                  ${escapeHtml(review.reviewer_name || "Traveler")}
+                </strong>
+
+                <div class="detail-review-meta">
+                  <span class="review-stars">
+                    ${"★".repeat(stars)}
+                  </span>
+
+                  <span class="review-time">
+                    ${createdAt}
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            <p>
+              ${escapeHtml(review.comment || "")}
+            </p>
+
+          </article>
+        `;
+      })
+      .join("");
+
 }
