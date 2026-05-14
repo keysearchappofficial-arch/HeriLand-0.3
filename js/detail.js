@@ -20,7 +20,7 @@ export function initDetail() {
   window.closeDetail = closeDetail;
 }
 
-export function openDetail(place) {
+export async function openDetail(place) {
   if (!place) return;
 
   const detailPage =
@@ -190,9 +190,9 @@ if (detailReviewList) {
 
   bindSaveButton(normalized);
 
-  reloadReviews();
+await reloadReviews();
 
-  detailPage.classList.add("show");
+detailPage.classList.add("show");
 
   document.documentElement.classList.add("modal-lock");
   document.body.classList.add("modal-lock");
@@ -911,18 +911,18 @@ function bindReviewMore() {
     document.body.appendChild(layer);
   }
 
-  moreBtn.addEventListener("click", () => {
+moreBtn.addEventListener("click", async () => {
 
-await reloadReviews();
+  await reloadReviews();
 
-renderReviewList();
+  renderReviewList();
 
-    layer.classList.add("show");
+  layer.classList.add("show");
 
-    document.documentElement.classList.add("modal-lock");
-    document.body.classList.add("modal-lock");
+  document.documentElement.classList.add("modal-lock");
+  document.body.classList.add("modal-lock");
 
-  });
+});
 
   backdrop?.addEventListener(
     "click",
@@ -991,6 +991,10 @@ function renderReviewList() {
       const stars =
         Number(review.rating || 0);
 
+const avatarId =
+  (review.reviewer_name || "Traveler")
+    .length % 60;
+
       const createdAt =
         review.created_at
           ? new Date(review.created_at)
@@ -1007,7 +1011,7 @@ function renderReviewList() {
           <div class="detail-review-user">
 
             <img
-              src="https://i.pravatar.cc/120?img=${Math.floor(Math.random() * 60)}"
+              src="https://i.pravatar.cc/120?img=${avatarId}"
               alt="${escapeHtml(review.reviewer_name || "Traveler")}"
             >
 
