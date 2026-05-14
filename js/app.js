@@ -6,14 +6,16 @@ import {
 } from "./storage.js";
 
 import {
-  places,
   moodConfig,
   cities,
-  reviews,
-  spots,
-  restaurants,
-  events
+  reviews
 } from "./data.js";
+
+import { supabase } from "./supabase-client.js";
+
+let places = [];
+let restaurants = [];
+let events = [];
 
 import { initDetail } from "./detail.js";
 import { initTravelerDetail } from "./traveler-detail.js";
@@ -46,7 +48,7 @@ const els = {
 mobileCitySelect: document.getElementById("mobileCitySelect")
 };
 
-function init() {
+async function init() {
   bindMoodButtons();
   bindSearch();
   initLocation();
@@ -59,6 +61,8 @@ function init() {
   initDetail();
   initTravelerDetail();
   initEventDetail();
+  
+  await loadSupabaseData();
 
   renderMood("relax");
   renderCities();
@@ -68,6 +72,146 @@ function init() {
   renderEvents();
 
   openPendingDetail();
+}
+
+async function loadSupabaseData() {
+  const { data: placeData, error: placeError } =
+    await supabase
+      .from("places")
+      .select("*")
+      .eq("status", "published")
+      .order("created_at", { ascending: false });
+
+  if (placeError) {
+    console.error("[home places error]", placeError);
+  }
+
+  const safePlaces = placeData || [];
+
+  places = safePlaces
+    .filter(item => item.type === "attraction")
+    .map(normalizePlace);
+
+  restaurants = safePlaces
+    .filter(item => item.type === "restaurant")
+    .map(normalizeRestaurant);
+
+  const { data: eventData, error: eventError } =
+    await supabase
+      .from("events")
+      .select("*")
+      .eq("status", "published")
+      .order("start_date", { ascending: true });
+
+  if (eventError) {
+    console.error("[home events error]", eventError);
+  }
+
+  events = (eventData || []).map(normalizeEvent);
+
+  console.log("[home supabase loaded]", {
+    places,
+    restaurants,
+    events
+  });
+}
+
+function normalizePlace(item) {
+  return {
+    ...item,
+    image:
+      item.card_image_url ||
+      item.hero_image_url ||
+      "./assets/fallback.jpg",
+
+    images:
+      Array.isArray(item.gallery_urls)
+        ? item.gallery_urls
+        : [],
+
+    title: item.name,
+    mood: "relax",
+    score: "0.0",
+    reviewCount: 0,
+
+    desc:
+      item.short_description ||
+      item.full_description ||
+      "",
+
+    description:
+      item.full_description ||
+      item.short_description ||
+      "",
+
+    type: "Attraction"
+  };
+}
+
+function normalizeRestaurant(item) {
+  return {
+    ...item,
+    image:
+      item.card_image_url ||
+      item.hero_image_url ||
+      "./assets/fallback.jpg",
+
+    images:
+      Array.isArray(item.gallery_urls)
+        ? item.gallery_urls
+        : [],
+
+    title: item.name,
+    mood: "food",
+    food: item.tags?.[0] || "Restaurant",
+    score: "0.0",
+    reviewCount: 0,
+
+    desc:
+      item.short_description ||
+      item.full_description ||
+      "",
+
+    description:
+      item.full_description ||
+      item.short_description ||
+      "",
+
+    type: "Restaurant"
+  };
+}
+
+function normalizeEvent(item) {
+  return {
+    ...item,
+    image:
+      item.card_image_url ||
+      item.hero_image_url ||
+      "./assets/fallback.jpg",
+
+    images:
+      Array.isArray(item.gallery_urls)
+        ? item.gallery_urls
+        : [],
+
+    title: item.title,
+    desc: item.summary || item.content || "",
+    location: item.venue_name || item.address || item.city,
+
+    date:
+      formatEventDateRange(
+        item.start_date,
+        item.end_date,
+        item.time_rule || {}
+      ),
+
+    timeText:
+      formatEventTimeRange(
+        item.start_date,
+        item.end_date,
+        item.time_rule || {}
+      )
+  };
 }
 
 function renderMood(mood) {
