@@ -1337,8 +1337,7 @@ function normalizeImageUrls(results) {
     };
   }
 
-const API_ORIGIN =
-  "https://feof-tucson-ethical-spectrum.trycloudflare.com";
+const API_ORIGIN = MEDIA_API;
 
   const toFullUrl = path => {
     if (!path) return "";
@@ -1705,14 +1704,14 @@ async function uploadImagesToBackend() {
 
   });
 
-  const response =
-await fetch(
-  `${MEDIA_API}/api/media/upload`,
-      {
-        method: "POST",
-        body: formData
-      }
-    );
+const response =
+  await fetch(
+    `${MEDIA_API}/api/media/upload`,
+    {
+      method: "POST",
+      body: formData
+    }
+  );
 
   const data =
     await response.json();
