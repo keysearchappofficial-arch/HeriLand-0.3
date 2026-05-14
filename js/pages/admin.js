@@ -1,5 +1,8 @@
 import { supabase } from "../supabase-client.js";
 
+const MEDIA_API =
+  "https://feof-tucson-ethical-spectrum.trycloudflare.com";
+
 import {
   initDetail
 } from "../detail.js";
