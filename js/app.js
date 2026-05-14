@@ -214,6 +214,81 @@ function normalizeEvent(item) {
   };
 }
 
+function formatEventDateRange(start, end, rule = {}) {
+  const startText =
+    formatDateOnly(start);
+
+  const endText =
+    formatDateOnly(end);
+
+  if (rule.noEndDate) {
+    return startText;
+  }
+
+  if (
+    startText &&
+    endText &&
+    startText !== endText
+  ) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+}
+
+function formatEventTimeRange(start, end, rule = {}) {
+  const startText =
+    formatTimeOnly(start);
+
+  const endText =
+    formatTimeOnly(end);
+
+  if (rule.noEndTime) {
+    return startText;
+  }
+
+  if (startText && endText) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+}
+
+function formatDateOnly(value) {
+  if (!value) return "";
+
+  const date =
+    new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleDateString("en-MY", {
+    timeZone: "Asia/Kuala_Lumpur",
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
+
+function formatTimeOnly(value) {
+  if (!value) return "";
+
+  const date =
+    new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleTimeString("en-MY", {
+    timeZone: "Asia/Kuala_Lumpur",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
 function renderMood(mood) {
   currentMood = mood;
 
