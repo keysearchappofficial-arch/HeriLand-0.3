@@ -117,17 +117,21 @@ function normalizeEventDetail(event) {
       event.city ||
       "Sarawak",
 
+timeRule:
+  event.time_rule || {},
+
     date:
       formatEventDateRange(
         event.start_date || event.start,
         event.end_date || event.end
       ) || event.date || "Upcoming",
 
-    timeText:
-      formatEventTimeRange(
-        event.start_date || event.start,
-        event.end_date || event.end
-      ) || event.timeText || "Time TBC",
+timeText:
+  formatEventTimeRange(
+    event.start_date || event.start,
+    event.end_date || event.end,
+    event.time_rule || {}
+  ) || event.timeText || "Time TBC",
 
     summary:
       event.summary ||
@@ -457,12 +461,16 @@ window.continueEventAiGuide = function() {
   }, 120);
 };
 
-function formatEventDateRange(start, end) {
+function formatEventDateRange(start, end, rule = {}) {
   const startText =
     formatDateOnly(start);
 
   const endText =
     formatDateOnly(end);
+
+  if (rule.noEndDate) {
+    return startText;
+  }
 
   if (
     startText &&
@@ -475,12 +483,16 @@ function formatEventDateRange(start, end) {
   return startText || endText || "";
 }
 
-function formatEventTimeRange(start, end) {
+function formatEventTimeRange(start, end, rule = {}) {
   const startText =
     formatTimeOnly(start);
 
   const endText =
     formatTimeOnly(end);
+
+  if (rule.noEndTime) {
+    return startText;
+  }
 
   if (startText && endText) {
     return `${startText} - ${endText}`;
