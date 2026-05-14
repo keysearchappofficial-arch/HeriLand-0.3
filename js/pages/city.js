@@ -149,11 +149,12 @@ function formatDateOnly(value) {
 
   if (Number.isNaN(date.getTime())) return "";
 
-  return date.toLocaleDateString("en-MY", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+return date.toLocaleDateString("en-MY", {
+  timeZone: "Asia/Kuala_Lumpur",
+  year: "numeric",
+  month: "short",
+  day: "numeric"
+});
 }
 
 function formatTimeOnly(value) {
@@ -163,10 +164,11 @@ function formatTimeOnly(value) {
 
   if (Number.isNaN(date.getTime())) return "";
 
-  return date.toLocaleTimeString("en-MY", {
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+return date.toLocaleTimeString("en-MY", {
+  timeZone: "Asia/Kuala_Lumpur",
+  hour: "2-digit",
+  minute: "2-digit"
+});
 }
 
 /* =========================
