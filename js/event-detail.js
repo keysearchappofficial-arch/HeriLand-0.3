@@ -141,21 +141,6 @@ ticketUrl:
   setText("eventDetailAiNote", normalized.aiNote);
   setText("eventDetailNearby", normalized.nearby);
 
-  setText(
-    "eventBeforeText",
-    normalized.suggestedExperience.before
-  );
-
-  setText(
-    "eventDuringText",
-    normalized.suggestedExperience.during
-  );
-
-  setText(
-    "eventAfterText",
-    normalized.suggestedExperience.after
-  );
-
   renderEventTags(normalized.tags);
 
   bindEventSaveButton(normalized);
