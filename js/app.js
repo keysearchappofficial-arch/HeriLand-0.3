@@ -918,6 +918,15 @@ function bindCitySelects() {
   });
 }
 
+const heroExploreBtn =
+  document.getElementById("heroExploreBtn");
+
+heroExploreBtn?.addEventListener("click", () => {
+  if (currentPlaces[0]) {
+    openDetail(currentPlaces[0]);
+  }
+});
+
 function openPendingDetail() {
   const params =
     new URLSearchParams(window.location.search);
@@ -956,12 +965,12 @@ function openPendingDetail() {
   }
 }
 
-const allItems = [
-  ...places,
-  ...restaurants
-];
-
 window.toggleSaveItem = function(id) {
+  const allItems = [
+    ...places,
+    ...restaurants
+  ];
+
   const item = allItems.find(x => x.id === id);
   if (!item) return;
 
