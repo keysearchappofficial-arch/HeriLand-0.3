@@ -8,6 +8,7 @@ let currentEventItem = null;
 
 export function initEventDetail() {
   bindEventMoreMenu();
+  bindEventSaveButton();
 
   window.openEventDetail = openEventDetail;
   window.closeEventDetail = closeEventDetail;
@@ -23,6 +24,11 @@ export function openEventDetail(event) {
     normalizeEventDetail(event);
 
   currentEventItem = normalized;
+
+  updateEventSaveButton(
+  document.getElementById("eventDetailSaveBtn"),
+  normalized.id
+);
 
   renderEventDetailSlider(
     normalized.images,
@@ -45,8 +51,6 @@ export function openEventDetail(event) {
 
   renderEventTags(normalized.tags);
   renderEventLinks(normalized);
-
-  bindEventSaveButton(normalized);
 
   detail.classList.add("show");
 
@@ -295,24 +299,29 @@ function renderEventDetailSlider(images, altText) {
   };
 }
 
-function bindEventSaveButton(event) {
+function bindEventSaveButton() {
   const saveBtn =
     document.getElementById("eventDetailSaveBtn");
 
   if (!saveBtn) return;
 
-  updateEventSaveButton(saveBtn, event.id);
+  saveBtn.addEventListener("click", e => {
+    e.stopPropagation();
 
-  saveBtn.onclick = () => {
-    if (isSaved("savedEvents", event.id)) {
-      removeItem("savedEvents", event.id);
+    if (!currentEventItem?.id) return;
+
+    if (isSaved("savedEvents", currentEventItem.id)) {
+      removeItem("savedEvents", currentEventItem.id);
     }
     else {
-      saveItem("savedEvents", event);
+      saveItem("savedEvents", currentEventItem);
     }
 
-    updateEventSaveButton(saveBtn, event.id);
-  };
+    updateEventSaveButton(
+      saveBtn,
+      currentEventItem.id
+    );
+  });
 }
 
 function updateEventSaveButton(button, id) {
