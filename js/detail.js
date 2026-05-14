@@ -169,19 +169,12 @@ if (serviceList) {
         .join("");
   }
 
-const travelerSection =
-  document.getElementById(
-    "travelerExperienceSection"
-  );
+const detailReviewList =
+  document.getElementById("detailReviewList");
 
-if (travelerSection) {
-
-  travelerSection.style.display =
-    normalized.reviews?.length
-      ? "block"
-      : "none";
-
-}  
+if (detailReviewList) {
+  detailReviewList.innerHTML = "";
+} 
 
   bindSaveButton(normalized);
 
