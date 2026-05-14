@@ -111,6 +111,7 @@ reviewCount:
   };
 
   currentDetailItem = normalized;
+  window.currentDetailItem = normalized;
 
   setText("detailTitle", normalized.name);
   setText("detailAddress", normalized.address);
