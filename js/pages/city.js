@@ -50,10 +50,6 @@ function getCityPlaces() {
 
 }
 
-function getCitySpots() {
-  return spots.filter(item => item.city === activeCityId);
-}
-
 function getCityRestaurants() {
 
   return restaurants.filter(item => {
@@ -373,7 +369,9 @@ function renderSpots() {
 
   grid.innerHTML = "";
 
-  const citySpots = getCityPlaces().length ? getCityPlaces() : getCitySpots(); const renderItems = showAllSpots ? citySpots : citySpots.slice(0, 10);
+  const citySpots =
+  getCityPlaces();
+  const renderItems = showAllSpots ? citySpots : citySpots.slice(0, 10);
 
   renderItems.forEach(rawSpot => {
     const spot = normalizeSpot(rawSpot);
@@ -744,7 +742,9 @@ function renderSpotSheet() {
 
   grid.innerHTML = "";
 
-  const citySpots = getCityPlaces().length ? getCityPlaces() : getCitySpots();  citySpots.forEach(rawSpot => {
+  const citySpots =
+  getCityPlaces();  
+  citySpots.forEach(rawSpot => {
     const spot = normalizeSpot(rawSpot);
 
     const card = document.createElement("article");
@@ -842,12 +842,13 @@ function renderCityReviews() {
     });
 }
 
-const allCityItems = [
-  ...places,
-  ...restaurants
-];
-
 window.toggleCitySaveItem = function(id) {
+
+  const allCityItems = [
+    ...places,
+    ...restaurants
+  ];
+
   const item =
     allCityItems.find(x => x.id === id);
 
@@ -862,6 +863,7 @@ window.toggleCitySaveItem = function(id) {
 
   renderSpots();
   renderRestaurants();
+
 };
 
 let pageStarted = false;
