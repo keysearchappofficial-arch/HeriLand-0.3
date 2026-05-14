@@ -424,8 +424,11 @@ function normalizeSpot(spot) {
     contactName: "HeriLand Guide",
     contactImage: image,
 
-    score: "4.8",
-    reviewCount: "128",
+score:
+  Number(spot.score || 0).toFixed(1),
+
+reviewCount:
+  Number(spot.review_count || spot.reviewCount || 0),
 
     tags:
       Array.isArray(spot.tags) && spot.tags.length
@@ -559,8 +562,11 @@ function normalizeRestaurant(restaurant) {
     contactName: "HeriLand Guide",
     contactImage: image,
 
-    score: "4.8",
-    reviewCount: "128",
+score:
+  Number(restaurant.score || 0).toFixed(1),
+
+reviewCount:
+  Number(restaurant.review_count || restaurant.reviewCount || 0),
 
     tags:
       Array.isArray(restaurant.tags) && restaurant.tags.length
@@ -623,7 +629,11 @@ function renderSpots() {
           <span class="business-stars">★★★★★</span>
           <span>${spot.score}</span>
           <span>・</span>
-          <span>${spot.reviewCount} Reviews</span>
+<span>
+  ${Number(spot.reviewCount) > 0
+    ? `${spot.reviewCount} Reviews`
+    : "No Reviews Yet"}
+</span>
         </div>
 
         <div class="business-card-type">
@@ -679,7 +689,11 @@ getCityRestaurants()
           <span class="business-stars">★★★★★</span>
           <span>${restaurant.score}</span>
           <span>・</span>
-          <span>${restaurant.reviewCount} 則評論</span>
+<span>
+  ${Number(restaurant.reviewCount) > 0
+    ? `${restaurant.reviewCount} Reviews`
+    : "No Reviews Yet"}
+</span>
         </div>
 
         <div class="business-card-type">
