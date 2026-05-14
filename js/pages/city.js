@@ -120,9 +120,13 @@ function normalizeOpeningHours(value) {
   return Array.isArray(value) ? value : [];
 }
 
-function formatEventDateRange(start, end) {
+function formatEventDateRange(start, end, rule = {}) {
   const startText = formatDateOnly(start);
   const endText = formatDateOnly(end);
+
+  if (rule.noEndDate) {
+    return startText;
+  }
 
   if (startText && endText && startText !== endText) {
     return `${startText} - ${endText}`;
@@ -131,9 +135,13 @@ function formatEventDateRange(start, end) {
   return startText || endText || "";
 }
 
-function formatEventTimeRange(start, end) {
+function formatEventTimeRange(start, end, rule = {}) {
   const startText = formatTimeOnly(start);
   const endText = formatTimeOnly(end);
+
+  if (rule.noEndTime) {
+    return startText;
+  }
 
   if (startText && endText) {
     return `${startText} - ${endText}`;
@@ -494,11 +502,19 @@ const image =
       event.venue_name ||
       "Sarawak",
 
-    date:
-      formatEventDateRange(event.start_date, event.end_date),
+date:
+  formatEventDateRange(
+    event.start_date,
+    event.end_date,
+    event.time_rule || {}
+  ),
 
-    timeText:
-      formatEventTimeRange(event.start_date, event.end_date),
+timeText:
+  formatEventTimeRange(
+    event.start_date,
+    event.end_date,
+    event.time_rule || {}
+  ),
 
     type: "Event",
 
