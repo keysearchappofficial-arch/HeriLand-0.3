@@ -116,6 +116,10 @@ function formatOpeningHours(hoursData) {
     .join(" · ");
 }
 
+function normalizeOpeningHours(value) {
+  return Array.isArray(value) ? value : [];
+}
+
 function formatEventDateRange(start, end) {
   const startText = formatDateOnly(start);
   const endText = formatDateOnly(end);
@@ -414,12 +418,11 @@ function normalizeSpot(spot) {
       spot.phone ||
       "Not Available",
 
-    hours:
-      formatOpeningHours(spot.opening_hours) ||
-      "Check Before Visiting",
+hours:
+  "Check Before Visiting",
 
-    hoursData:
-      spot.opening_hours || [],
+hoursData:
+  normalizeOpeningHours(spot.opening_hours),
 
     contactName: "HeriLand Guide",
     contactImage: image,
@@ -552,12 +555,11 @@ function normalizeRestaurant(restaurant) {
       restaurant.phone ||
       "Not Available",
 
-    hours:
-      formatOpeningHours(restaurant.opening_hours) ||
-      "Check Before Dining",
+hours:
+  "Check Before Dining",
 
-    hoursData:
-      restaurant.opening_hours || [],
+hoursData:
+  normalizeOpeningHours(restaurant.opening_hours),
 
     contactName: "HeriLand Guide",
     contactImage: image,
