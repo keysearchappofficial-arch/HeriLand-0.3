@@ -31,21 +31,30 @@ export function openEventDetail(event) {
       event.title ||
       "Untitled Event",
 
-    image:
-      event.image || "",
+image:
+  event.hero_image_url ||
+  event.image ||
+  "",
 
-    images:
-      event.images ||
-      [
-        event.image,
-        event.image2,
-        event.image3,
-        event.image4
-      ].filter(Boolean),
+images:
+  Array.isArray(event.gallery_urls) &&
+  event.gallery_urls.length
+    ? event.gallery_urls
+    : (
+        event.images ||
+        [
+          event.hero_image_url,
+          event.image,
+          event.image2,
+          event.image3
+        ].filter(Boolean)
+      ),
 
-    location:
-      event.location ||
-      "Sarawak",
+location:
+  event.venue_name ||
+  event.location ||
+  event.address ||
+  "Sarawak",
 
     date:
       event.date ||
@@ -57,10 +66,29 @@ export function openEventDetail(event) {
       event.hour ||
       "",
 
-    desc:
-      event.desc ||
-      event.description ||
-      "An event worth exploring slowly.",
+desc:
+  event.summary ||
+  event.desc ||
+  event.content ||
+  event.description ||
+  "An event worth exploring slowly.",
+
+content:
+  event.content ||
+  event.description ||
+  "",
+
+organizer:
+  event.organizer ||
+  "HeriLand",
+
+mapUrl:
+  event.google_map_url ||
+  "",
+
+ticketUrl:
+  event.ticket_url ||
+  "",
 
     type:
       event.type ||
@@ -337,10 +365,16 @@ window.addEventToTrip = function() {
 window.openEventMap = function() {
   if (!currentEventItem) return;
 
-  const query =
-    currentEventItem.location ||
-    currentEventItem.title ||
-    "Sarawak";
+if (currentEventItem.mapUrl) {
+  window.open(currentEventItem.mapUrl, "_blank");
+  closeEventMoreMenu();
+  return;
+}
+
+const query =
+  currentEventItem.location ||
+  currentEventItem.title ||
+  "Sarawak";
 
   const url =
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
