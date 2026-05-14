@@ -19,111 +19,8 @@ export function openEventDetail(event) {
 
   if (!detail || !event) return;
 
-  const normalized = {
-    ...event,
-
-    id:
-      event.id ||
-      event.title ||
-      "event-detail",
-
-    title:
-      event.title ||
-      "Untitled Event",
-
-image:
-  event.hero_image_url ||
-  event.image ||
-  "",
-
-images:
-  Array.isArray(event.gallery_urls) &&
-  event.gallery_urls.length
-    ? event.gallery_urls
-    : (
-        event.images ||
-        [
-          event.hero_image_url,
-          event.image,
-          event.image2,
-          event.image3
-        ].filter(Boolean)
-      ),
-
-location:
-  event.venue_name ||
-  event.location ||
-  event.address ||
-  "Sarawak",
-
-    date:
-      event.date ||
-      event.day ||
-      "Upcoming Event",
-
-    timeText:
-      event.timeText ||
-      event.hour ||
-      "",
-
-desc:
-  event.summary ||
-  event.desc ||
-  event.content ||
-  event.description ||
-  "An event worth exploring slowly.",
-
-content:
-  event.content ||
-  event.description ||
-  "",
-
-organizer:
-  event.organizer ||
-  "HeriLand",
-
-mapUrl:
-  event.google_map_url ||
-  "",
-
-ticketUrl:
-  event.ticket_url ||
-  "",
-
-    type:
-      event.type ||
-      "Event",
-
-    aiNote:
-      event.aiNote ||
-      event.guide ||
-      "Perfect for anyone who wants to experience the city atmosphere slowly.",
-
-    tags:
-      event.tags ||
-      event.featureTags ||
-      [
-        "Relaxing",
-        "Local Vibes",
-        "Photo Friendly"
-      ],
-
-    suggestedExperience:
-      event.suggestedExperience || {
-        before:
-          "Grab a bite before heading over.",
-
-        during:
-          "Take your time and explore slowly.",
-
-        after:
-          "Take a walk nearby after the event."
-      },
-
-    nearby:
-      event.nearby ||
-      "Explore nearby restaurants, river walks, or night markets."
-  };
+  const normalized =
+    normalizeEventDetail(event);
 
   currentEventItem = normalized;
 
@@ -136,12 +33,18 @@ ticketUrl:
   setText("eventDetailType", normalized.type);
   setText("eventDetailLocation", normalized.location);
   setText("eventDetailDate", normalized.date);
-  setText("eventDetailTime", normalized.timeText || normalized.location);
-  setText("eventDetailDesc", normalized.desc);
-  setText("eventDetailAiNote", normalized.aiNote);
+  setText("eventDetailTime", normalized.timeText);
+  setText("eventDetailAiNote", normalized.summary);
+  setText("eventDetailDesc", normalized.content || normalized.summary);
+
+  setText("eventDetailVenue", normalized.venue);
+  setText("eventDetailAddress", normalized.address);
+  setText("eventDetailOrganizer", normalized.organizer);
+
   setText("eventDetailNearby", normalized.nearby);
 
   renderEventTags(normalized.tags);
+  renderEventLinks(normalized);
 
   bindEventSaveButton(normalized);
 
@@ -149,6 +52,147 @@ ticketUrl:
 
   document.documentElement.classList.add("modal-lock");
   document.body.classList.add("modal-lock");
+}
+
+function normalizeEventDetail(event) {
+  const images = [
+    event.hero_image_url || event.image,
+    ...(Array.isArray(event.gallery_urls)
+      ? event.gallery_urls
+      : []),
+    ...(Array.isArray(event.images)
+      ? event.images
+      : [])
+  ]
+    .filter(Boolean)
+    .filter((value, index, array) =>
+      array.indexOf(value) === index
+    );
+
+  return {
+    ...event,
+
+    id:
+      event.id ||
+      event.slug ||
+      event.title ||
+      "event-detail",
+
+    title:
+      event.title ||
+      "Untitled Event",
+
+    type:
+      "Event",
+
+    image:
+      event.hero_image_url ||
+      event.image ||
+      "",
+
+    images,
+
+    city:
+      event.city ||
+      "Sarawak",
+
+    area:
+      event.area ||
+      "",
+
+    venue:
+      event.venue_name ||
+      event.location ||
+      "Venue TBC",
+
+    address:
+      event.address ||
+      event.venue_name ||
+      event.location ||
+      "Address TBC",
+
+    location:
+      event.venue_name ||
+      event.address ||
+      event.city ||
+      "Sarawak",
+
+    date:
+      formatEventDateRange(
+        event.start_date || event.start,
+        event.end_date || event.end
+      ) || event.date || "Upcoming",
+
+    timeText:
+      formatEventTimeRange(
+        event.start_date || event.start,
+        event.end_date || event.end
+      ) || event.timeText || "Time TBC",
+
+    summary:
+      event.summary ||
+      event.desc ||
+      event.description ||
+      "An event worth exploring slowly.",
+
+    content:
+      event.content ||
+      event.description ||
+      event.summary ||
+      "",
+
+    organizer:
+      event.organizer ||
+      "HeriLand",
+
+    ticketUrl:
+      event.ticket_url ||
+      event.ticketUrl ||
+      "",
+
+    mapUrl:
+      event.google_map_url ||
+      event.mapUrl ||
+      "",
+
+    tags:
+      Array.isArray(event.tags) && event.tags.length
+        ? event.tags
+        : ["Event", "Local Experience"],
+
+    nearby:
+      event.nearby ||
+      "Explore nearby restaurants, river walks, or local places around this event."
+  };
+}
+
+function renderEventLinks(event) {
+  const ticketLink =
+    document.getElementById("eventTicketLink");
+
+  const mapLink =
+    document.getElementById("eventMapLink");
+
+  if (ticketLink) {
+    if (event.ticketUrl) {
+      ticketLink.href = event.ticketUrl;
+      ticketLink.style.display = "inline-flex";
+    }
+    else {
+      ticketLink.style.display = "none";
+    }
+  }
+
+  if (mapLink) {
+    const mapUrl =
+      event.mapUrl ||
+      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        event.address || event.venue || event.title || "Sarawak"
+      )}`;
+
+    mapLink.href = mapUrl;
+    mapLink.style.display = "inline-flex";
+  }
 }
 
 export function closeEventDetail() {
@@ -171,13 +215,8 @@ function renderEventTags(tags) {
 
   if (!tagWrap) return;
 
-  const safeTags =
-    Array.isArray(tags)
-      ? tags
-      : [];
-
   tagWrap.innerHTML =
-    safeTags
+    (Array.isArray(tags) ? tags : [])
       .slice(0, 5)
       .map(tag => `<span>${escapeHtml(tag)}</span>`)
       .join("");
@@ -211,7 +250,7 @@ function renderEventDetailSlider(images, altText) {
       "event-detail-slide";
 
     slide.innerHTML = `
-      <img src="${src}" alt="${escapeHtml(altText)}">
+      <img src="${escapeHtml(src)}" alt="${escapeHtml(altText)}">
     `;
 
     slider.appendChild(slide);
@@ -350,19 +389,14 @@ window.addEventToTrip = function() {
 window.openEventMap = function() {
   if (!currentEventItem) return;
 
-if (currentEventItem.mapUrl) {
-  window.open(currentEventItem.mapUrl, "_blank");
-  closeEventMoreMenu();
-  return;
-}
-
-const query =
-  currentEventItem.location ||
-  currentEventItem.title ||
-  "Sarawak";
-
   const url =
-    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    currentEventItem.mapUrl ||
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      currentEventItem.address ||
+      currentEventItem.venue ||
+      currentEventItem.title ||
+      "Sarawak"
+    )}`;
 
   window.open(url, "_blank");
 
@@ -377,7 +411,8 @@ window.shareEvent = async function() {
     "HeriLand Event";
 
   const text =
-    currentEventItem.desc ||
+    currentEventItem.summary ||
+    currentEventItem.content ||
     "Found this event on HeriLand.";
 
   const url =
@@ -421,6 +456,69 @@ window.continueEventAiGuide = function() {
     fab?.click();
   }, 120);
 };
+
+function formatEventDateRange(start, end) {
+  const startText =
+    formatDateOnly(start);
+
+  const endText =
+    formatDateOnly(end);
+
+  if (
+    startText &&
+    endText &&
+    startText !== endText
+  ) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+}
+
+function formatEventTimeRange(start, end) {
+  const startText =
+    formatTimeOnly(start);
+
+  const endText =
+    formatTimeOnly(end);
+
+  if (startText && endText) {
+    return `${startText} - ${endText}`;
+  }
+
+  return startText || endText || "";
+}
+
+function formatDateOnly(value) {
+  if (!value) return "";
+
+  const date =
+    new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "";
+
+  return date.toLocaleDateString("en-MY", {
+    timeZone: "Asia/Kuala_Lumpur",
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
+
+function formatTimeOnly(value) {
+  if (!value) return "";
+
+  const date =
+    new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "";
+
+  return date.toLocaleTimeString("en-MY", {
+    timeZone: "Asia/Kuala_Lumpur",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
 
 function setText(id, value) {
   const el =
