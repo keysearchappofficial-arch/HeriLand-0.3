@@ -1062,20 +1062,23 @@ function renderImages() {
    Submit
 ========================= */
 
-function handleSubmit() {
+async function handleSubmit() {
 
-  const payload = {
+  const processedImages =
+  await uploadImagesToBackend();
+  
+const payload = {
 
-    type:
-      formType.value,
+  type:
+    formType.value,
 
-    data:
-      collectFormData(),
+  data:
+    collectFormData(),
 
-    images:
-      uploadedImages
+  images:
+    processedImages
 
-  };
+};
 
   console.log(
     "[submit]",
@@ -1378,4 +1381,37 @@ function resetImages() {
 
   renderImages();
 
+}
+
+async function uploadImagesToBackend() {
+
+  if (!uploadedImages.length) {
+    return [];
+  }
+
+  const formData =
+    new FormData();
+
+  uploadedImages.forEach(image => {
+
+    formData.append(
+      "images",
+      image.file
+    );
+
+  });
+
+  const response =
+    await fetch(
+      "http://127.0.0.1:14800/api/media/upload",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+  const data =
+    await response.json();
+
+  return data.results;
 }
