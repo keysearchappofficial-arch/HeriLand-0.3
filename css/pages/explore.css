@@ -382,6 +382,10 @@ body.no-scroll{
     scale(1);
 }
 
+.card.active{
+  cursor:pointer;
+}
+
 .card.second{
   z-index:4;
 
@@ -608,6 +612,32 @@ body.no-scroll{
   font-size:24px;
 }
 
+.save{
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    color .2s ease;
+}
+
+.save:hover{
+  transform:scale(1.08);
+
+  background:
+    rgba(159,242,177,.14);
+
+  color:var(--green);
+}
+
+.save.is-saved{
+  background:
+    rgba(159,242,177,.18);
+
+  color:var(--green);
+
+  border:
+    1px solid rgba(159,242,177,.32);
+}
+
 /* =========================
    Desktop Arrows
 ========================= */
@@ -820,4 +850,13 @@ body.no-scroll{
   line-height:1.5;
 
   color:rgba(255,255,255,.78);
+}
+
+.card,
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  overscroll-behavior:none;
 }
