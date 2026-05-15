@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -20,6 +21,7 @@
 
   <main class="app">
 
+    <!-- Top -->
     <header class="top">
 
       <div class="brand">
@@ -28,130 +30,34 @@
       </div>
 
       <div class="city">
-        Kuching <span>⌄</span>
+        Kuching
+        <span>⌄</span>
       </div>
 
     </header>
 
+    <!-- Hint -->
     <div class="hint">
+
       Swipe to explore
+
       <div class="glow-dot"></div>
+
     </div>
 
-    <section class="stage">
+    <!-- Cards Stage -->
+    <section
+      class="stage"
+      id="exploreStage"
+    >
 
-      <!-- card -->
-      <article class="card active">
+      <!-- JS Render -->
 
-        <img
-          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-          alt=""
-        />
-
-        <div class="overlay"></div>
-
-        <div class="card-top">
-
-          <div class="pill">
-            ⌖ KUCHING
-          </div>
-
-          <div class="index">
-            1/25
-          </div>
-
-        </div>
-
-        <div class="copy">
-
-          <h2>
-            Evenings hit different here.
-          </h2>
-
-          <div class="line"></div>
-
-          <p>
-            Locals come here to slow down.
-            Good food, river breeze,
-            and the city lights.
-          </p>
-
-        </div>
-
-        <div class="card-bottom">
-
-          <div class="place">
-
-            <h3>
-              ≋ Kuching Waterfront
-            </h3>
-
-            <div class="tags">
-              Riverside · Sunset · Local Life
-            </div>
-
-          </div>
-
-          <div class="footer-row">
-
-            <div class="loved">
-              Loved by 342 travelers
-            </div>
-
-            <div class="save">
-              ♡
-            </div>
-
-          </div>
-
-        </div>
-
-      </article>
-
-      <!-- second -->
-      <article class="card second">
-
-        <img
-          src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80"
-          alt=""
-        />
-
-        <div class="overlay"></div>
-
-        <div class="back-index">
-          2/25
-        </div>
-
-        <div class="back-title">
-          The rain makes everything quieter.
-        </div>
-
-      </article>
-
-      <!-- third -->
-      <article class="card third">
-
-        <img
-          src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
-          alt=""
-        />
-
-        <div class="overlay"></div>
-
-        <div class="back-index">
-          3/25
-        </div>
-
-        <div class="back-title">
-          Small bowls. Big memories.
-        </div>
-
-      </article>
-
-      <!-- desktop arrows -->
+      <!-- Desktop Arrows -->
       <button
         class="nav-arrow nav-prev"
         type="button"
+        aria-label="Previous"
       >
         ‹
       </button>
@@ -159,12 +65,14 @@
       <button
         class="nav-arrow nav-next"
         type="button"
+        aria-label="Next"
       >
         ›
       </button>
 
     </section>
 
+    <!-- Swipe Hint -->
     <div class="swipe">
 
       <div class="arrow">
@@ -180,4 +88,5 @@
   <script src="./js/explore.js"></script>
 
 </body>
+
 </html>
