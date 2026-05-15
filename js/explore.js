@@ -21,6 +21,7 @@ async function loadExploreCards(){
   allCards = (data || []).map(item => ({
     contentType: item.content_type,
     city: item.city,
+cityKey: item.city.toLowerCase(),
     image: item.image_url,
     place: item.title,
     subtitle: item.subtitle,
@@ -254,7 +255,7 @@ function openDetailPage(cardEl) {
   }
 
   window.openDetail?.(slug);
-}q
+}
 
 function bindEvents() {
   document.querySelector(".nav-next")?.addEventListener("click", nextCard);
