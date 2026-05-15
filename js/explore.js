@@ -267,7 +267,7 @@ document.querySelector(".card.active")?.addEventListener("click", () => {
 
   if (!item.slug) return;
 
-  window.location.href = `./component/detail.html?slug=${item.slug}`;
+  openDetail(item.slug);
 });
 
 /* Mobile swipe left / right */
@@ -395,3 +395,27 @@ document.addEventListener("keydown", (event) => {
 });
 
 renderCards();
+
+
+async function openDetail(slug) {
+
+  const container =
+    document.getElementById("detailContainer");
+
+  if (!container.dataset.loaded) {
+
+    const response =
+      await fetch("./components/detail.html");
+
+    const html =
+      await response.text();
+
+    container.innerHTML = html;
+
+    container.dataset.loaded = "true";
+  }
+
+  container.classList.add("is-open");
+
+  loadDetail(slug);
+}
