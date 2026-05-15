@@ -1059,26 +1059,22 @@ body{
 
 .avatar-panel-menu{
   display:grid;
-  gap:10px;
 }
 
 .avatar-panel-menu button{
-  height:54px;
+  height:62px;
 
   border:none;
-  border-radius:18px;
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
 
-  background:
-    rgba(255,255,255,.05);
-
-  border:
-    1px solid rgba(255,255,255,.06);
+  background:none;
 
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:16px;
 
-  padding:0 18px;
+  padding:0;
 
   color:white;
 
@@ -1090,11 +1086,25 @@ body{
   transition:.2s ease;
 }
 
-.avatar-panel-menu button:hover{
-  background:
-    rgba(159,242,177,.12);
+.avatar-panel-menu button:last-child{
+  border-bottom:none;
+}
 
+.avatar-panel-menu button:hover{
   color:var(--green);
+}
+
+.avatar-panel-menu i{
+  width:22px;
+
+  font-style:normal;
+
+  font-size:18px;
+
+  color:
+    rgba(159,242,177,.88);
+
+  text-align:center;
 }
 
 .avatar-panel-menu button span{
