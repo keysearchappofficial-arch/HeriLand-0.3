@@ -680,15 +680,12 @@ function openAvatarSubPage(pageKey){
       .join("");
   }
 
-  if (page.layout === "info") {
+  if (
+    page.layout === "info" ||
+    page.layout === "emergency"
+  ) {
     avatarSubContent.innerHTML = page.items
-      .map(renderAvatarInfoCard)
-      .join("");
-  }
-
-  if (page.layout === "emergency") {
-    avatarSubContent.innerHTML = page.items
-      .map(renderAvatarEmergencyCard)
+      .map(renderAvatarListItem)
       .join("");
   }
 
