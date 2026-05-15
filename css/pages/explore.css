@@ -657,12 +657,6 @@ body{
 
 }
 
-.card{
-  transition:
-    transform .42s cubic-bezier(.22,.9,.28,1),
-    opacity .42s ease;
-}
-
 .card.swipe-left{
   transform:
     translateX(-145%)
@@ -677,6 +671,12 @@ body{
     rotate(16deg)
     scale(.96);
   opacity:0;
+}
+
+.card{
+  transition:
+    transform .42s cubic-bezier(.22,.9,.28,1),
+    opacity .42s ease;
 }
 
 .card.promote{
