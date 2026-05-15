@@ -111,7 +111,7 @@ body.no-scroll{
 .city{
   position:absolute;
   top:2px;
-  right:0;
+  right:62px;
   left:auto;
 
   transform:none;
@@ -125,6 +125,8 @@ body.no-scroll{
   font-weight:700;
 
   gap:8px;
+
+  cursor:pointer;
 }
 
 .city{
@@ -139,7 +141,7 @@ body.no-scroll{
   position:absolute;
 
   top:58px;
-  right:0;
+  right:62px;
   left:auto;
 
   width:320px;
@@ -148,11 +150,9 @@ body.no-scroll{
 
   border-radius:28px;
 
-  border:
-    1px solid rgba(159,242,177,.18);
+  border:1px solid rgba(159,242,177,.18);
 
-  background:
-    rgba(8,16,13,.88);
+  background:rgba(8,16,13,.88);
 
   backdrop-filter:blur(24px);
 
@@ -161,14 +161,10 @@ body.no-scroll{
     inset 0 1px 0 rgba(255,255,255,.04);
 
   opacity:0;
-
   pointer-events:none;
-
   z-index:50;
 
-  transform:
-    translateY(-10px)
-    scale(.96);
+  transform:translateY(-10px) scale(.96);
 
   transition:
     opacity .24s ease,
@@ -317,6 +313,7 @@ body.no-scroll{
 @media(max-width:390px){
 
   .filter-panel{
+    right:0;
     width:300px;
   }
 
@@ -833,6 +830,7 @@ body.no-scroll{
 
   .city{
     height:40px;
+    right:52px;
     padding:0 13px;
     font-size:14px;
   }
@@ -843,6 +841,11 @@ body.no-scroll{
 
   .copy h2{
     font-size:40px;
+  }
+
+    .top-avatar{
+    width:42px;
+    height:42px;
   }
 
 }
