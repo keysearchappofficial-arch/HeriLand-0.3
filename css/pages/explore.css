@@ -47,6 +47,11 @@ body{
     var(--bg);
 }
 
+body.no-scroll{
+  overflow:hidden;
+  touch-action:none;
+}
+
 /* =========================
    App
 ========================= */
