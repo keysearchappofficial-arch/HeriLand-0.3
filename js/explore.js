@@ -406,3 +406,33 @@ document.addEventListener("keydown", (event) => {
 });
 
 renderCards();
+
+
+/* =========================
+   Avatar Panel
+========================= */
+
+const topAvatarBtn =
+  document.getElementById("topAvatarBtn");
+
+const avatarPanelLayer =
+  document.getElementById("avatarPanelLayer");
+
+const avatarPanelBackdrop =
+  document.getElementById("avatarPanelBackdrop");
+
+topAvatarBtn?.addEventListener("click", (event) => {
+  event.stopPropagation();
+
+  avatarPanelLayer?.classList.add("is-open");
+
+  document.body.classList.add("no-scroll");
+});
+
+avatarPanelBackdrop?.addEventListener("click", closeAvatarPanel);
+
+function closeAvatarPanel(){
+  avatarPanelLayer?.classList.remove("is-open");
+
+  document.body.classList.remove("no-scroll");
+}
