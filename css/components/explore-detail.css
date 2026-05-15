@@ -462,3 +462,76 @@
   }
 
 }
+
+/* =========================
+   Detail More Sheet
+========================= */
+
+.detail-more-layer{
+  position:fixed;
+  inset:0;
+  z-index:12000;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.detail-more-layer.is-open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.detail-more-backdrop{
+  position:absolute;
+  inset:0;
+
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(6px);
+}
+
+.detail-more-menu{
+  position:absolute;
+
+  left:18px;
+  right:18px;
+  bottom:18px;
+
+  padding:12px;
+
+  border-radius:28px;
+
+  background:rgba(10,16,14,.96);
+
+  border:1px solid rgba(255,255,255,.06);
+
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.detail-more-menu button{
+  width:100%;
+  height:56px;
+
+  border:none;
+  border-radius:18px;
+
+  background:none;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:0 18px;
+
+  color:white;
+
+  font-size:16px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.detail-more-menu button span{
+  color:var(--green);
+}
