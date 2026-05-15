@@ -82,19 +82,13 @@ function renderActiveCard(item, index) {
       <div class="overlay"></div>
 
       <div class="card-top">
-        <div class="pill">⌖ ${item.city}</div>
+        <div class="pill">${item.city}</div>
         <div class="index">${index + 1}/${cards.length}</div>
-      </div>
-
-      <div class="copy">
-        <h2>${item.title}</h2>
-        <div class="line"></div>
-        <p>${item.desc}</p>
       </div>
 
       <div class="card-bottom">
         <div class="place">
-          <h3>≋ ${item.place}</h3>
+          <h3>${item.place}</h3>
           <div class="tags">${item.tags}</div>
         </div>
 
@@ -112,8 +106,13 @@ function renderBackCard(item, className, index) {
     <article class="card ${className}">
       <img src="${item.image}" alt="${item.place}" />
       <div class="overlay"></div>
-      <div class="back-index">${(index % cards.length) + 1}/${cards.length}</div>
-      <div class="back-title">${item.title}</div>
+
+      <div class="card-top">
+        <div class="pill">${item.city}</div>
+        <div class="index">${(index % cards.length) + 1}/${cards.length}</div>
+      </div>
+
+      <div class="back-title">${item.place}</div>
     </article>
   `;
 }
