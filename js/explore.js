@@ -74,7 +74,13 @@ function getCard(index) {
 filterToggle?.addEventListener("click", (event) => {
   event.stopPropagation();
 
-  filterPanel.classList.toggle("is-open");
+  const isOpen =
+    filterPanel.classList.toggle("is-open");
+
+  document.body.classList.toggle(
+    "no-scroll",
+    isOpen
+  );
 });
 
 /* =========================
@@ -86,7 +92,10 @@ document.addEventListener("click", (event) => {
     !filterPanel.contains(event.target) &&
     !filterToggle.contains(event.target)
   ) {
+
     filterPanel.classList.remove("is-open");
+
+    document.body.classList.remove("no-scroll");
   }
 });
 
@@ -113,6 +122,7 @@ document
       currentFilterLabel.textContent = label;
 
       filterPanel.classList.remove("is-open");
+      document.body.classList.remove("no-scroll");
 
       console.log("selected filter:", label);
 
