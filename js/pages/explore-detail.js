@@ -240,10 +240,9 @@ document
 document
   .getElementById("detailMoreBtn")
   ?.addEventListener("click", () => {
-
     document
       .getElementById("detailMoreLayer")
-      ?.classList.toggle("is-open");
+      ?.classList.add("is-open");
   });
 
 document
