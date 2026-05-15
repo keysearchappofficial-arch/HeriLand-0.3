@@ -210,9 +210,14 @@ function prevCard() {
 
 function openDetailPage() {
   const item = getCard(currentIndex);
+
   if (!item.slug) return;
 
-  window.location.href = `./components/detail.html?slug=${encodeURIComponent(item.slug)}`;
+  if (typeof window.openDetail === "function") {
+    window.openDetail(item.slug);
+  } else {
+    console.warn("openDetail() not found. Please load explore-detail.js before explore.js.");
+  }
 }
 
 function bindEvents() {
