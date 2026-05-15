@@ -468,93 +468,79 @@ function getAverageRating(){
   return (total / localReviews.length).toFixed(1);
 }
 
-function setupDetailSlider(total){
+function setupDetailSlider(total) {
+  const slider = document.getElementById("detailSlider");
+  const dots = document.querySelectorAll(".detail-dot");
 
-  const slider =
-    document.getElementById("detailSlider");
+  if (!slider || !total) return;
 
-  const dots =
-    document.querySelectorAll(".detail-dot");
+  currentDetailSlide = 0;
 
-  if (!slider) return;
-
-  let startX = 0;
-  let currentX = 0;
-  let isDragging = false;
-
-  function updateSlider(index){
-
-    currentDetailSlide = index;
+  function updateSlider(index) {
+    currentDetailSlide = Math.max(0, Math.min(index, total - 1));
 
     slider.style.transition =
       "transform .35s cubic-bezier(.22,.9,.28,1)";
 
     slider.style.transform =
-      `translateX(-${index * 100}%)`;
+      `translateX(-${currentDetailSlide * 100}%)`;
 
     dots.forEach((dot, dotIndex) => {
       dot.classList.toggle(
         "active",
-        dotIndex === index
+        dotIndex === currentDetailSlide
       );
     });
   }
 
   dots.forEach((dot, index) => {
-
-    dot.addEventListener("click", () => {
+    dot.onclick = () => {
       updateSlider(index);
-    });
-
+    };
   });
 
-  slider.addEventListener("touchstart", (event) => {
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
 
+  slider.ontouchstart = (event) => {
     startX = event.touches[0].clientX;
     currentX = startX;
-
     isDragging = true;
 
     slider.style.transition = "none";
+  };
 
-  });
-
-  slider.addEventListener("touchmove", (event) => {
-
+  slider.ontouchmove = (event) => {
     if (!isDragging) return;
 
     currentX = event.touches[0].clientX;
 
     const diffX = currentX - startX;
 
-    slider.style.transform = `
-      translateX(calc(
-        -${currentDetailSlide * 100}% + ${diffX}px
-      ))
-    `;
+    slider.style.transform =
+      `translateX(calc(-${currentDetailSlide * 100}% + ${diffX}px))`;
+  };
 
-  });
-
-  slider.addEventListener("touchend", () => {
-
+  slider.ontouchend = () => {
     if (!isDragging) return;
 
     isDragging = false;
 
     const diffX = currentX - startX;
 
-    if (diffX < -60 && currentDetailSlide < total - 1) {
-      currentDetailSlide++;
+    if (diffX < -60) {
+      updateSlider(currentDetailSlide + 1);
+      return;
     }
 
-    if (diffX > 60 && currentDetailSlide > 0) {
-      currentDetailSlide--;
+    if (diffX > 60) {
+      updateSlider(currentDetailSlide - 1);
+      return;
     }
 
     updateSlider(currentDetailSlide);
-
-  });
+  };
 
   updateSlider(0);
-
 }
