@@ -468,37 +468,6 @@ body{
 }
 
 /* =========================
-   Back Cards
-========================= */
-
-.back-index{
-  position:absolute;
-
-  top:28px;
-  right:28px;
-
-  z-index:2;
-
-  font-size:18px;
-  font-weight:700;
-}
-
-.back-title{
-  position:absolute;
-
-  left:26px;
-  right:26px;
-  bottom:120px;
-
-  z-index:2;
-
-  font-family:Georgia,serif;
-
-  font-size:34px;
-  line-height:1.05;
-}
-
-/* =========================
    Desktop Arrows
 ========================= */
 
