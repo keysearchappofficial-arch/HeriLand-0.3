@@ -1065,8 +1065,7 @@ body{
   height:62px;
 
   border:none;
-  border-bottom:
-    1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
 
   background:none;
 
@@ -1082,8 +1081,6 @@ body{
   font-weight:600;
 
   cursor:pointer;
-
-  transition:.2s ease;
 }
 
 .avatar-panel-menu button:last-child{
@@ -1095,14 +1092,12 @@ body{
 }
 
 .avatar-panel-menu i{
-  width:22px;
+  width:24px;
 
   font-style:normal;
-
   font-size:18px;
 
-  color:
-    rgba(159,242,177,.88);
+  color:rgba(159,242,177,.88);
 
   text-align:center;
 }
