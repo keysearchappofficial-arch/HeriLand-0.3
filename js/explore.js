@@ -114,14 +114,36 @@ function renderBackCard(item, className, index) {
   `;
 }
 
+let isAnimating = false;
+
 function nextCard() {
-  currentIndex = (currentIndex + 1) % cards.length;
-  renderCards();
+  if (isAnimating) return;
+
+  isAnimating = true;
+
+  const activeCard = document.querySelector(".card.active");
+  activeCard?.classList.add("swipe-left");
+
+  setTimeout(() => {
+    currentIndex = (currentIndex + 1) % cards.length;
+    renderCards();
+    isAnimating = false;
+  }, 420);
 }
 
 function prevCard() {
-  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-  renderCards();
+  if (isAnimating) return;
+
+  isAnimating = true;
+
+  const activeCard = document.querySelector(".card.active");
+  activeCard?.classList.add("swipe-right");
+
+  setTimeout(() => {
+    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+    renderCards();
+    isAnimating = false;
+  }, 420);
 }
 
 function bindEvents() {
