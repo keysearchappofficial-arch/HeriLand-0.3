@@ -678,3 +678,20 @@ body{
     scale(.96);
   opacity:0;
 }
+
+.card.promote{
+  transform:
+    translateX(-50%)
+    rotate(0deg)
+    scale(1);
+  opacity:1;
+}
+
+.card.third.promote-second{
+  display:block;
+  transform:
+    translateX(-45%)
+    rotate(7deg)
+    scale(.96);
+  opacity:.7;
+}
