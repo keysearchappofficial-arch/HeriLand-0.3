@@ -599,31 +599,43 @@ emergency: {
     ]
   },
 
-  account: {
-    title: "Account",
-    kicker: "Traveler Profile",
-    layout: "info",
-    items: [
-      {
-        icon: "◉",
-        title: "Andy",
-        text: "Traveler Account",
-        action: "Edit"
-      },
-      {
-        icon: "◉",
-        title: "Email",
-        text: "andy@example.com",
-        action: "Manage"
-      },
-      {
-        icon: "◉",
-        title: "Member Since",
-        text: "2026",
-        action: "View"
-      }
-    ]
-  },
+account: {
+  title: "Account",
+  kicker: "Traveler Profile",
+  layout: "info",
+  items: [
+    {
+      title: "Profile",
+      text: "Andy · Traveler Account",
+      action: "Edit"
+    },
+    {
+      title: "Email",
+      text: "andy@example.com",
+      action: "Manage"
+    },
+    {
+      title: "Login Method",
+      text: "Email / Google",
+      action: "Manage"
+    },
+    {
+      title: "Saved Data",
+      text: "Saved places, trips, and traveler reviews.",
+      action: "View"
+    },
+    {
+      title: "Privacy",
+      text: "Control your account visibility and data preferences.",
+      action: "Manage"
+    },
+    {
+      title: "Sign Out",
+      text: "Sign out from this device.",
+      action: "Sign Out"
+    }
+  ]
+},
 
   settings: {
     title: "Settings",
