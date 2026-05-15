@@ -529,54 +529,49 @@ const avatarPages = {
     ]
   },
 
-  government: {
-    title: "Government",
-    kicker: "Useful Info",
-    layout: "info",
-    items: [
-      {
-        icon: "▣",
-        title: "Tourism Office",
-        text: "Official visitor support and local travel information.",
-        action: "Call / Map"
-      },
-      {
-        icon: "▣",
-        title: "Immigration Office",
-        text: "Visa, entry, and document-related assistance.",
-        action: "Open Info"
-      },
-      {
-        icon: "▣",
-        title: "Local Council",
-        text: "City services, permits, and public facilities.",
-        action: "Open Info"
-      }
-    ]
-  },
+government: {
+  title: "Government",
+  kicker: "Useful Info",
+  layout: "info",
+  items: [
+    {
+      title: "Tourism Office",
+      text: "Official visitor support and local travel information.",
+      phone: true,
+      map: true,
+      website: true
+    },
 
-  emergency: {
-    title: "Emergency",
-    kicker: "Stay Safe",
-    layout: "emergency",
-    items: [
-      {
-        title: "999",
-        text: "Emergency Hotline",
-        action: "Tap to call"
-      },
-      {
-        title: "Police",
-        text: "Urgent police assistance.",
-        action: "Call 999"
-      },
-      {
-        title: "Hospital",
-        text: "Find nearby emergency medical help.",
-        action: "Open Map"
-      }
-    ]
-  },
+    {
+      title: "Immigration Office",
+      text: "Visa, entry, and document-related assistance.",
+      phone: true,
+      map: true,
+      website: true
+    }
+  ]
+},
+
+emergency: {
+  title: "Emergency",
+  kicker: "Stay Safe",
+  layout: "emergency",
+  items: [
+    {
+      title: "Emergency Hotline",
+      text: "Call local emergency services for urgent help.",
+      phone: true,
+      map: true
+    },
+
+    {
+      title: "Police",
+      text: "Urgent police assistance and nearby stations.",
+      phone: true,
+      map: true
+    }
+  ]
+},
 
   service: {
     title: "Customer Service",
@@ -685,17 +680,17 @@ function openAvatarSubPage(pageKey){
       .join("");
   }
 
-if (page.layout === "info") {
-  avatarSubContent.innerHTML = page.items
-    .map(renderAvatarListItem)
-    .join("");
-}
+  if (page.layout === "info") {
+    avatarSubContent.innerHTML = page.items
+      .map(renderAvatarInfoCard)
+      .join("");
+  }
 
-if (page.layout === "emergency") {
-  avatarSubContent.innerHTML = page.items
-    .map(renderAvatarListItem)
-    .join("");
-}
+  if (page.layout === "emergency") {
+    avatarSubContent.innerHTML = page.items
+      .map(renderAvatarEmergencyCard)
+      .join("");
+  }
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
@@ -725,28 +720,44 @@ function renderAvatarPlaceCard(item){
   `;
 }
 
-function renderAvatarInfoCard(item){
+function renderAvatarListItem(item){
   return `
-    <div class="avatar-info-card">
-      <div class="avatar-info-icon">
-        ${item.icon || "◇"}
-      </div>
+    <div class="avatar-list-item">
 
-      <div class="avatar-info-copy">
+      <div class="avatar-list-copy">
         <h4>${item.title}</h4>
-        <p>${item.text}</p>
-        <button type="button">${item.action}</button>
-      </div>
-    </div>
-  `;
-}
 
-function renderAvatarEmergencyCard(item){
-  return `
-    <div class="avatar-emergency-card">
-      <strong>${item.title}</strong>
-      <p>${item.text}</p>
-      <button type="button">${item.action}</button>
+        <p>${item.text}</p>
+
+        <div class="avatar-list-actions">
+
+          ${item.phone ? `
+            <button type="button">
+              Phone
+            </button>
+          ` : ""}
+
+          ${item.map ? `
+            <button type="button">
+              Map
+            </button>
+          ` : ""}
+
+          ${item.website ? `
+            <button type="button">
+              Website
+            </button>
+          ` : ""}
+
+          ${item.action ? `
+            <button type="button">
+              ${item.action}
+            </button>
+          ` : ""}
+
+        </div>
+      </div>
+
     </div>
   `;
 }
