@@ -267,6 +267,50 @@ body.no-scroll{
 }
 
 /* =========================
+   Avatar
+========================= */
+
+.top-avatar{
+  position:absolute;
+
+  top:0;
+  right:0;
+
+  width:52px;
+  height:52px;
+
+  padding:0;
+
+  border:none;
+  border-radius:50%;
+
+  overflow:hidden;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.12);
+
+  backdrop-filter:blur(18px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 24px rgba(0,0,0,.22);
+
+  cursor:pointer;
+}
+
+.top-avatar img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+/* =========================
    Mobile
 ========================= */
 
