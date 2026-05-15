@@ -695,3 +695,13 @@ body{
     scale(.96);
   opacity:.7;
 }
+
+.subtitle{
+  margin-top:8px;
+  margin-bottom:12px;
+
+  font-size:15px;
+  line-height:1.5;
+
+  color:rgba(255,255,255,.78);
+}
