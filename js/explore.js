@@ -8,7 +8,8 @@ const cards = [
       "Locals come here to slow down. Good food, river breeze, and the city lights.",
     place: "Kuching Waterfront",
     tags: "Riverside · Sunset · Local Life",
-    loved: "Loved by 342 travelers"
+    loved: "Loved by 342 travelers",
+    slug: "kuching-waterfront"
   },
   {
     city: "NATURE",
@@ -19,7 +20,8 @@ const cards = [
       "A quiet escape for travelers who want mist, trees, and slower mornings.",
     place: "Borneo Rainforest",
     tags: "Nature · Hiking · Quiet",
-    loved: "Loved by 218 travelers"
+    loved: "Loved by 218 travelers",
+    slug: "Borneo Rainforest"
   },
   {
     city: "FOOD",
@@ -30,7 +32,8 @@ const cards = [
       "Start your morning like a local with warm food and old conversations.",
     place: "Sarawak Laksa Spot",
     tags: "Breakfast · Local Food · Classic",
-    loved: "Loved by 489 travelers"
+    loved: "Loved by 489 travelers",
+    slug: "Sarawak Laksa Spot"
   },
   {
     city: "CULTURE",
@@ -41,7 +44,8 @@ const cards = [
       "A slower journey into longhouse life, river culture, and Sarawak memory.",
     place: "Longhouse Experience",
     tags: "Culture · River · Local Story",
-    loved: "Loved by 156 travelers"
+    loved: "Loved by 156 travelers",
+    slug: "Longhouse Experience"
   }
 ];
 
@@ -167,10 +171,13 @@ function bindEvents() {
       event.currentTarget.classList.contains("is-saved") ? "♥" : "♡";
   });
 
-  document.querySelector(".card.active")?.addEventListener("click", () => {
-    const item = getCard(currentIndex);
-    console.log("open detail:", item.place);
-  });
+document.querySelector(".card.active")?.addEventListener("click", () => {
+  const item = getCard(currentIndex);
+
+  if (!item.slug) return;
+
+  window.location.href = `./traveler-detail.html?slug=${item.slug}`;
+});
 }
 
 /* Mobile swipe left / right */
