@@ -1,4 +1,8 @@
+let allCards = [];
 let cards = [];
+
+let activeCityFilter = "all";
+let activeTypeFilter = "all";
 
 async function loadExploreCards(){
 
@@ -9,15 +13,12 @@ async function loadExploreCards(){
       .eq("is_active", true)
       .order("sort_order");
 
-  console.log("Supabase explore data:", data);
-  console.log("Supabase explore error:", error);
-
   if (error) {
     console.error(error);
     return;
   }
 
-  cards = (data || []).map(item => ({
+  allCards = (data || []).map(item => ({
     contentType: item.content_type,
     city: item.city,
     image: item.image_url,
@@ -28,8 +29,24 @@ async function loadExploreCards(){
     slug: item.slug
   }));
 
-  currentIndex = 0;
+  applyFilters();
+}
 
+function applyFilters(){
+
+  cards = allCards.filter(item => {
+    const matchCity =
+      activeCityFilter === "all" ||
+      item.city.toLowerCase() === activeCityFilter;
+
+    const matchType =
+      activeTypeFilter === "all" ||
+      item.contentType === activeTypeFilter;
+
+    return matchCity && matchType;
+  });
+
+  currentIndex = 0;
   renderCards();
 }
 
@@ -68,19 +85,31 @@ document.addEventListener("click", (event) => {
 
 document.querySelectorAll(".filter-grid button").forEach((button) => {
   button.addEventListener("click", () => {
-    document.querySelectorAll(".filter-grid button").forEach((btn) => {
-      btn.classList.remove("active");
-    });
+    const filter = button.dataset.filter;
+    const section = button.closest(".filter-section");
+    const sectionTitle = section?.querySelector("p")?.textContent;
+
+    section
+      ?.querySelectorAll("button")
+      .forEach((btn) => btn.classList.remove("active"));
 
     button.classList.add("active");
 
-    const label = button.textContent.trim();
-    currentFilterLabel.textContent = label;
+    if (sectionTitle === "Explore in") {
+      activeCityFilter = filter;
+    }
+
+    if (sectionTitle === "Explore Type") {
+      activeTypeFilter = filter;
+    }
+
+    currentFilterLabel.textContent =
+      button.textContent.trim();
 
     filterPanel.classList.remove("is-open");
     document.body.classList.remove("no-scroll");
 
-    console.log("selected filter:", label);
+    applyFilters();
   });
 });
 
@@ -114,7 +143,11 @@ function renderCards() {
 
 function renderActiveCard(item, index) {
   return `
-    <article class="card active">
+<article
+  class="card active"
+  data-slug="${item.slug}"
+  data-type="${item.contentType}"
+>
       <img src="${item.image}" alt="${item.place}" />
 
       <div class="overlay"></div>
@@ -209,18 +242,19 @@ function prevCard() {
   }, 420);
 }
 
-function openDetailPage() {
-  const item = getCard(currentIndex);
+function openDetailPage(cardEl) {
+  const slug = cardEl?.dataset.slug;
+  const type = cardEl?.dataset.type;
 
-  if (!item.slug) return;
+  if (!slug) return;
 
-  if (item.contentType === "event") {
-    window.openEventDetail?.(item.slug);
+  if (type === "event") {
+    window.openEventDetail?.(slug);
     return;
   }
 
-  window.openDetail?.(item.slug);
-}
+  window.openDetail?.(slug);
+}q
 
 function bindEvents() {
   document.querySelector(".nav-next")?.addEventListener("click", nextCard);
@@ -234,9 +268,9 @@ function bindEvents() {
       event.currentTarget.classList.contains("is-saved") ? "♥" : "♡";
   });
 
-  document.querySelector(".card.active")?.addEventListener("click", () => {
-    openDetailPage();
-  });
+document.querySelector(".card.active")?.addEventListener("click", (event) => {
+  openDetailPage(event.currentTarget);
+});
 }
 
 /* Mobile drag swipe */
@@ -317,7 +351,7 @@ document.addEventListener("touchend", (event) => {
     }
 
     if (target.closest(".card.active")) {
-      openDetailPage();
+      openDetailPage(target.closest(".card.active"));
     }
 
     return;
