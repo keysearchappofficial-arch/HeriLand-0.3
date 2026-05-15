@@ -945,21 +945,22 @@ body{
   right:20px;
 
   width:320px;
+  height:640px;
+  max-height:calc(100vh - 40px);
 
   padding:22px;
 
   border-radius:32px;
 
-  background:
-    rgba(8,16,13,.92);
+  background:rgba(8,16,13,.92);
 
-  border:
-    1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
 
   backdrop-filter:blur(28px);
 
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.45);
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+
+  overflow:hidden;
 
   transform:
     translateY(-12px)
@@ -976,6 +977,20 @@ body{
 }
 
 /* =========================
+   Views
+========================= */
+
+.avatar-view{
+  display:none;
+  height:100%;
+}
+
+.avatar-view.is-active{
+  display:flex;
+  flex-direction:column;
+}
+
+/* =========================
    Top
 ========================= */
 
@@ -985,6 +1000,8 @@ body{
   gap:16px;
 
   margin-bottom:24px;
+
+  flex-shrink:0;
 }
 
 .avatar-panel-image{
@@ -1005,8 +1022,7 @@ body{
   font-size:14px;
   line-height:1.6;
 
-  color:
-    rgba(255,255,255,.62);
+  color:rgba(255,255,255,.62);
 }
 
 /* =========================
@@ -1016,26 +1032,31 @@ body{
 .avatar-panel-stats{
   display:grid;
 
-  grid-template-columns:
-    repeat(3,1fr);
+  grid-template-columns:repeat(3,1fr);
 
   gap:12px;
 
   margin-bottom:24px;
+
+  flex-shrink:0;
 }
 
+.avatar-panel-stats button,
 .avatar-panel-stats div{
   padding:14px;
 
+  border:none;
   border-radius:20px;
 
   text-align:center;
 
-  background:
-    rgba(255,255,255,.04);
+  background:rgba(255,255,255,.04);
 
-  border:
-    1px solid rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.05);
+
+  color:white;
+
+  cursor:pointer;
 }
 
 .avatar-panel-stats strong{
@@ -1049,8 +1070,7 @@ body{
 .avatar-panel-stats span{
   font-size:13px;
 
-  color:
-    rgba(255,255,255,.58);
+  color:rgba(255,255,255,.58);
 }
 
 /* =========================
@@ -1058,11 +1078,22 @@ body{
 ========================= */
 
 .avatar-panel-menu{
-  display:grid;
+  flex:1;
+
+  overflow:auto;
+
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.avatar-panel-menu::-webkit-scrollbar{
+  display:none;
 }
 
 .avatar-panel-menu button{
   height:62px;
+
+  width:100%;
 
   border:none;
   border-bottom:1px solid rgba(255,255,255,.08);
@@ -1103,28 +1134,12 @@ body{
 }
 
 .avatar-panel-menu button span{
-  color:var(--green);
+  color:inherit;
 }
 
 /* =========================
-   Mobile
+   Sub Page Header
 ========================= */
-
-@media(max-width:768px){
-
-  .avatar-panel{
-    top:16px;
-    right:16px;
-    left:16px;
-
-    width:auto;
-  }
-
-}
-
-.avatar-view{
-  display:none;
-}
 
 .avatar-sub-head{
   display:flex;
@@ -1132,6 +1147,8 @@ body{
   gap:14px;
 
   margin-bottom:22px;
+
+  flex-shrink:0;
 }
 
 .avatar-sub-back{
@@ -1142,12 +1159,15 @@ body{
   border-radius:50%;
 
   background:rgba(255,255,255,.07);
+
   color:white;
 
   font-size:30px;
   line-height:1;
 
   cursor:pointer;
+
+  flex-shrink:0;
 }
 
 .avatar-sub-head small{
@@ -1166,61 +1186,47 @@ body{
   font-size:22px;
 }
 
-.avatar-sub-content{
-  display:grid;
-  gap:12px;
-}
-
-.avatar-mini-card{
-  padding:16px;
-
-  border-radius:20px;
-
-  background:rgba(255,255,255,.05);
-
-  border:1px solid rgba(255,255,255,.06);
-}
-
-.avatar-mini-card strong{
-  display:block;
-
-  margin-bottom:6px;
-
-  font-size:16px;
-}
-
-.avatar-mini-card p{
-  font-size:14px;
-  line-height:1.6;
-
-  color:rgba(255,255,255,.62);
-}
-
-.avatar-mini-card .danger{
-  color:#ff9d9d;
-}
-
-.avatar-mini-card .green{
-  color:var(--green);
-}
-
 /* =========================
-   Avatar Place Card
+   Sub Page Content
 ========================= */
 
 .avatar-sub-content{
-  display:grid;
-  gap:18px;
+  flex:1;
+
+  display:block;
+
+  overflow:auto;
+
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
+
+.avatar-sub-content::-webkit-scrollbar{
+  display:none;
+}
+
+.avatar-sub-content > * + *{
+  margin-top:18px;
+}
+
+/* =========================
+   Place List Item
+========================= */
 
 .avatar-place-card{
   display:flex;
   gap:14px;
 
+  height:auto;
+  min-height:auto;
+
   padding-bottom:18px;
 
-  border-bottom:
-    1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.avatar-place-card:last-child{
+  border-bottom:none;
 }
 
 .avatar-place-thumb{
@@ -1261,15 +1267,20 @@ body{
   font-size:13px;
   line-height:1.6;
 
-  color:
-    rgba(255,255,255,.58);
+  color:rgba(255,255,255,.58);
 }
 
+/* =========================
+   Info List Item
+========================= */
+
 .avatar-list-item{
+  height:auto;
+  min-height:auto;
+
   padding:18px 0;
 
-  border-bottom:
-    1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .avatar-list-item:last-child{
@@ -1287,8 +1298,7 @@ body{
   font-size:14px;
   line-height:1.7;
 
-  color:
-    rgba(255,255,255,.62);
+  color:rgba(255,255,255,.62);
 
   margin-bottom:14px;
 }
@@ -1307,11 +1317,9 @@ body{
   border:none;
   border-radius:999px;
 
-  background:
-    rgba(255,255,255,.06);
+  background:rgba(255,255,255,.06);
 
-  border:
-    1px solid rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
 
   color:white;
 
@@ -1324,48 +1332,26 @@ body{
 }
 
 .avatar-list-actions button:hover{
-  background:
-    rgba(159,242,177,.12);
+  background:rgba(159,242,177,.12);
 
   color:var(--green);
 }
 
-.avatar-panel{
-  height:640px;
-  max-height:calc(100vh - 40px);
+/* =========================
+   Mobile
+========================= */
 
-  overflow:hidden;
-}
+@media(max-width:768px){
 
-.avatar-view{
-  height:100%;
-}
+  .avatar-panel{
+    top:16px;
+    right:16px;
+    left:16px;
 
-.avatar-view.is-active{
-  display:flex;
-  flex-direction:column;
-}
+    width:auto;
 
-.avatar-sub-content{
-  flex:1;
-  overflow:auto;
+    height:640px;
+    max-height:calc(100vh - 32px);
+  }
 
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-}
-
-.avatar-sub-content::-webkit-scrollbar{
-  display:none;
-}
-
-.avatar-panel-menu{
-  flex:1;
-  overflow:auto;
-
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-}
-
-.avatar-panel-menu::-webkit-scrollbar{
-  display:none;
 }
