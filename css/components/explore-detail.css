@@ -203,6 +203,7 @@
   right:0;
   bottom:0;
   height:62vh;
+  overflow:auto; 
   background:#07110d;
   border-radius:
     34px
@@ -526,4 +527,26 @@
 
 .detail-more-menu button span{
   color:var(--green);
+}
+
+.detail-panel,
+.event-detail-panel{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.detail-panel::-webkit-scrollbar,
+.event-detail-panel::-webkit-scrollbar{
+  display:none;
+}
+
+.detail-page,
+.event-detail-page{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.detail-page::-webkit-scrollbar,
+.event-detail-page::-webkit-scrollbar{
+  display:none;
 }
