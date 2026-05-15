@@ -604,3 +604,26 @@
   }
 
 }
+
+.detail-panel,
+.event-detail-panel{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.detail-panel::-webkit-scrollbar,
+.event-detail-panel::-webkit-scrollbar{
+  display:none;
+}
+
+
+.detail-page,
+.event-detail-page{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.detail-page::-webkit-scrollbar,
+.event-detail-page::-webkit-scrollbar{
+  display:none;
+}
