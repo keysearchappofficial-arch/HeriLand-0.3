@@ -52,11 +52,80 @@ const cards = [
 
 const stage = document.getElementById("exploreStage");
 
+const filterToggle =
+  document.getElementById("filterToggle");
+
+const filterPanel =
+  document.getElementById("filterPanel");
+
+const currentFilterLabel =
+  document.getElementById("currentFilterLabel");
+
 let currentIndex = 0;
 
 function getCard(index) {
   return cards[(index + cards.length) % cards.length];
 }
+
+/* =========================
+   Filter Toggle
+========================= */
+
+filterToggle?.addEventListener("click", (event) => {
+  event.stopPropagation();
+
+  filterPanel.classList.toggle("is-open");
+});
+
+/* =========================
+   Close When Click Outside
+========================= */
+
+document.addEventListener("click", (event) => {
+  if (
+    !filterPanel.contains(event.target) &&
+    !filterToggle.contains(event.target)
+  ) {
+    filterPanel.classList.remove("is-open");
+  }
+});
+
+/* =========================
+   Filter Buttons
+========================= */
+
+document
+  .querySelectorAll(".filter-grid button")
+  .forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".filter-grid button")
+        .forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+      button.classList.add("active");
+
+      const label = button.textContent;
+
+      currentFilterLabel.textContent = label;
+
+      filterPanel.classList.remove("is-open");
+
+      console.log("selected filter:", label);
+
+      /*
+        之後這裡可以：
+
+        filter cards
+        fetch supabase
+        rerender explore
+      */
+    });
+
+  });
 
 function renderCards() {
   const active = getCard(currentIndex);
