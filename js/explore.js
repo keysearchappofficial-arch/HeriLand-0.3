@@ -267,9 +267,8 @@ document.querySelector(".card.active")?.addEventListener("click", () => {
 
   if (!item.slug) return;
 
-  window.location.href = `./traveler-detail.html?slug=${item.slug}`;
+  window.location.href = `./component/detail.html?slug=${item.slug}`;
 });
-}
 
 /* Mobile swipe left / right */
 /* Mobile drag swipe */
