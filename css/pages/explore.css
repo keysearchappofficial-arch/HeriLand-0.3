@@ -119,17 +119,13 @@ body.no-scroll{
   height:44px;
   padding:0 16px;
 
-  border-radius:20px;
+  border-radius:6px;
 
   font-size:16px;
   font-weight:700;
 
   gap:8px;
 
-  cursor:pointer;
-}
-
-.city{
   cursor:pointer;
 }
 
