@@ -436,3 +436,171 @@ function closeAvatarPanel(){
 
   document.body.classList.remove("no-scroll");
 }
+
+/* =========================
+   Avatar Sub Pages
+========================= */
+
+const avatarHomeView =
+  document.getElementById("avatarHomeView");
+
+const avatarSubView =
+  document.getElementById("avatarSubView");
+
+const avatarSubBack =
+  document.getElementById("avatarSubBack");
+
+const avatarSubTitle =
+  document.getElementById("avatarSubTitle");
+
+const avatarSubKicker =
+  document.getElementById("avatarSubKicker");
+
+const avatarSubContent =
+  document.getElementById("avatarSubContent");
+
+const avatarPages = {
+  saved: {
+    title: "Saved Places",
+    kicker: "Your Collection",
+    items: [
+      {
+        title: "Kuching Waterfront",
+        text: "Riverside · Sunset · Local Life"
+      },
+      {
+        title: "Borneo Rainforest",
+        text: "Nature · Hiking · Quiet"
+      }
+    ]
+  },
+
+  trip: {
+    title: "My Trip",
+    kicker: "Travel Plan",
+    items: [
+      {
+        title: "Kuching Weekend",
+        text: "3 saved places · 1 event"
+      },
+      {
+        title: "Food Walk",
+        text: "Laksa · Coffee · Local Market"
+      }
+    ]
+  },
+
+  reviews: {
+    title: "Traveler Reviews",
+    kicker: "Your Voice",
+    items: [
+      {
+        title: "Kuching Waterfront",
+        text: "★★★★★ A peaceful walk near the river."
+      },
+      {
+        title: "Rainforest Festival",
+        text: "★★★★☆ Great atmosphere and music."
+      }
+    ]
+  },
+
+  government: {
+    title: "Government",
+    kicker: "Useful Info",
+    items: [
+      {
+        title: "Tourism Office",
+        text: "Official visitor support and local travel information."
+      },
+      {
+        title: "Immigration Office",
+        text: "Visa, entry, and document-related assistance."
+      },
+      {
+        title: "Local Council",
+        text: "City services, permits, and public facilities."
+      }
+    ]
+  },
+
+  emergency: {
+    title: "Emergency",
+    kicker: "Stay Safe",
+    items: [
+      {
+        title: "Emergency Hotline",
+        text: "999",
+        danger: true
+      },
+      {
+        title: "Police",
+        text: "Call 999 for urgent police assistance."
+      },
+      {
+        title: "Hospital",
+        text: "Find the nearest emergency medical help."
+      }
+    ]
+  },
+
+  settings: {
+    title: "Settings",
+    kicker: "Preferences",
+    items: [
+      {
+        title: "Language",
+        text: "English"
+      },
+      {
+        title: "Location",
+        text: "Sarawak"
+      },
+      {
+        title: "Notifications",
+        text: "Travel alerts and saved trip reminders"
+      }
+    ]
+  }
+};
+
+document
+  .querySelectorAll("[data-avatar-page]")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
+      const pageKey = button.dataset.avatarPage;
+      openAvatarSubPage(pageKey);
+    });
+  });
+
+avatarSubBack?.addEventListener("click", () => {
+  avatarSubView?.classList.remove("is-active");
+  avatarHomeView?.classList.add("is-active");
+});
+
+function openAvatarSubPage(pageKey){
+  const page = avatarPages[pageKey];
+
+  if (!page) return;
+
+  avatarSubTitle.textContent = page.title;
+  avatarSubKicker.textContent = page.kicker;
+
+  avatarSubContent.innerHTML = page.items
+    .map((item) => {
+      return `
+        <div class="avatar-mini-card">
+          <strong class="${item.danger ? "danger" : ""}">
+            ${item.title}
+          </strong>
+          <p class="${item.danger ? "danger" : ""}">
+            ${item.text}
+          </p>
+        </div>
+      `;
+    })
+    .join("");
+
+  avatarHomeView?.classList.remove("is-active");
+  avatarSubView?.classList.add("is-active");
+}
