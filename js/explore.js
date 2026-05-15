@@ -52,6 +52,7 @@ let cards = [];
 
 let activeCityFilter = "all";
 let activeTypeFilter = "all";
+let currentOpenedItem = null;
 
 async function loadExploreCards(){
 
@@ -298,14 +299,15 @@ function prevCard() {
 }
 
 function openDetailPage(cardEl) {
-  currentOpenedItem =
-  cards.find(card => card.slug === slug) || null;
-  let currentOpenedItem = null;
   if (document.body.classList.contains("no-scroll")) return;
+
   const slug = cardEl?.dataset.slug;
   const type = cardEl?.dataset.type;
 
   if (!slug) return;
+
+  currentOpenedItem =
+    cards.find(card => card.slug === slug) || null;
 
   if (type === "event") {
     window.openEventDetail?.(slug);
