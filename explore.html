@@ -130,14 +130,11 @@
     id="avatarPanelBackdrop"
   ></div>
 
-  <aside
-    class="avatar-panel"
-    id="avatarPanel"
-  >
+<aside class="avatar-panel" id="avatarPanel">
 
-    <!-- Top -->
+  <div class="avatar-view is-active" id="avatarHomeView">
+
     <div class="avatar-panel-top">
-
       <img
         class="avatar-panel-image"
         src="https://i.pravatar.cc/200?img=12"
@@ -146,17 +143,11 @@
 
       <div class="avatar-panel-user">
         <h3>Andy</h3>
-
-        <p>
-          Travel slowly through Sarawak.
-        </p>
+        <p>Travel slowly through Sarawak.</p>
       </div>
-
     </div>
 
-    <!-- Stats -->
     <div class="avatar-panel-stats">
-
       <div>
         <strong>12</strong>
         <span>Saved</span>
@@ -171,45 +162,69 @@
         <strong>8</strong>
         <span>Reviews</span>
       </div>
-
     </div>
 
-    <!-- Menu -->
     <div class="avatar-panel-menu">
 
-      <button type="button">
+      <button type="button" data-avatar-page="saved">
         <span>♡</span>
         Saved Places
       </button>
 
-      <button type="button">
+      <button type="button" data-avatar-page="trip">
         <span>✈</span>
         My Trip
       </button>
 
-      <button type="button">
+      <button type="button" data-avatar-page="reviews">
         <span>✎</span>
         Traveler Reviews
       </button>
-      
-<button type="button">
-  <span>🏛</span>
-  Government
-</button>
 
-<button type="button">
-  <span>☎</span>
-  Emergency
-</button>
+      <button type="button" data-avatar-page="government">
+        <span>🏛</span>
+        Government
+      </button>
 
-      <button type="button">
+      <button type="button" data-avatar-page="emergency">
+        <span>☎</span>
+        Emergency
+      </button>
+
+      <button type="button" data-avatar-page="settings">
         <span>⚙</span>
         Settings
       </button>
 
     </div>
 
-  </aside>
+  </div>
+
+  <div class="avatar-view" id="avatarSubView">
+
+    <div class="avatar-sub-head">
+      <button
+        class="avatar-sub-back"
+        id="avatarSubBack"
+        type="button"
+      >
+        ‹
+      </button>
+
+      <div>
+        <small id="avatarSubKicker">HeriLand</small>
+        <h3 id="avatarSubTitle">Saved Places</h3>
+      </div>
+    </div>
+
+    <div
+      class="avatar-sub-content"
+      id="avatarSubContent"
+    ></div>
+
+  </div>
+
+</aside>
 
 </div>
 
