@@ -481,20 +481,25 @@ const avatarSubContent =
   document.getElementById("avatarSubContent");
 
 const avatarPages = {
-  saved: {
-    title: "Saved Places",
-    kicker: "Your Collection",
-    items: [
-      {
-        title: "Kuching Waterfront",
-        text: "Riverside · Sunset · Local Life"
-      },
-      {
-        title: "Borneo Rainforest",
-        text: "Nature · Hiking · Quiet"
-      }
-    ]
-  },
+saved: {
+  title: "Saved Places",
+  kicker: "Your Collection",
+  items: [
+    {
+      title: "Kuching Waterfront",
+      text: "Riverside · Sunset · Local Life",
+      rating: "4.9",
+      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+      title: "Borneo Rainforest",
+      text: "Nature · Hiking · Quiet",
+      rating: "4.7",
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+    }
+  ]
+},
 
   trip: {
     title: "My Trip",
@@ -607,20 +612,37 @@ function openAvatarSubPage(pageKey){
   avatarSubTitle.textContent = page.title;
   avatarSubKicker.textContent = page.kicker;
 
-  avatarSubContent.innerHTML = page.items
-    .map((item) => {
-      return `
-        <div class="avatar-mini-card">
-          <strong class="${item.danger ? "danger" : ""}">
+avatarSubContent.innerHTML = page.items
+  .map((item) => {
+    return `
+      <div class="avatar-place-card">
+
+        <img
+          class="avatar-place-thumb"
+          src="${item.image || "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"}"
+          alt="${item.title}"
+        >
+
+        <div class="avatar-place-copy">
+
+          <h4>
             ${item.title}
-          </strong>
-          <p class="${item.danger ? "danger" : ""}">
+          </h4>
+
+          <div class="avatar-place-rating">
+            ★ ${item.rating || "4.8"}
+          </div>
+
+          <div class="avatar-place-tags">
             ${item.text}
-          </p>
+          </div>
+
         </div>
-      `;
-    })
-    .join("");
+
+      </div>
+    `;
+  })
+  .join("");
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
