@@ -903,3 +903,216 @@ button{
 body{
   overscroll-behavior:none;
 }
+
+/* =========================
+   Avatar Panel
+========================= */
+
+.avatar-panel-layer{
+  position:fixed;
+  inset:0;
+
+  z-index:20000;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.avatar-panel-layer.is-open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.avatar-panel-backdrop{
+  position:absolute;
+  inset:0;
+
+  background:rgba(0,0,0,.36);
+
+  backdrop-filter:blur(8px);
+}
+
+/* =========================
+   Panel
+========================= */
+
+.avatar-panel{
+  position:absolute;
+
+  top:20px;
+  right:20px;
+
+  width:320px;
+
+  padding:22px;
+
+  border-radius:32px;
+
+  background:
+    rgba(8,16,13,.92);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(28px);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.45);
+
+  transform:
+    translateY(-12px)
+    scale(.96);
+
+  transition:
+    transform .25s cubic-bezier(.22,.9,.28,1);
+}
+
+.avatar-panel-layer.is-open .avatar-panel{
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+/* =========================
+   Top
+========================= */
+
+.avatar-panel-top{
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  margin-bottom:24px;
+}
+
+.avatar-panel-image{
+  width:68px;
+  height:68px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+}
+
+.avatar-panel-user h3{
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.avatar-panel-user p{
+  font-size:14px;
+  line-height:1.6;
+
+  color:
+    rgba(255,255,255,.62);
+}
+
+/* =========================
+   Stats
+========================= */
+
+.avatar-panel-stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:12px;
+
+  margin-bottom:24px;
+}
+
+.avatar-panel-stats div{
+  padding:14px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.05);
+}
+
+.avatar-panel-stats strong{
+  display:block;
+
+  margin-bottom:6px;
+
+  font-size:20px;
+}
+
+.avatar-panel-stats span{
+  font-size:13px;
+
+  color:
+    rgba(255,255,255,.58);
+}
+
+/* =========================
+   Menu
+========================= */
+
+.avatar-panel-menu{
+  display:grid;
+  gap:10px;
+}
+
+.avatar-panel-menu button{
+  height:54px;
+
+  border:none;
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:0 18px;
+
+  color:white;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.avatar-panel-menu button:hover{
+  background:
+    rgba(159,242,177,.12);
+
+  color:var(--green);
+}
+
+.avatar-panel-menu button span{
+  color:var(--green);
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media(max-width:768px){
+
+  .avatar-panel{
+    top:16px;
+    right:16px;
+    left:16px;
+
+    width:auto;
+  }
+
+}
