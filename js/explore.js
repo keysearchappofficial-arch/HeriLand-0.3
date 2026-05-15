@@ -141,27 +141,31 @@ function bindEvents() {
   });
 }
 
-/* Mobile swipe up/down */
-let touchStartY = 0;
-let touchEndY = 0;
+/* Mobile swipe left / right */
+let touchStartX = 0;
+let touchEndX = 0;
 
 document.addEventListener("touchstart", (event) => {
-  touchStartY = event.changedTouches[0].screenY;
+  touchStartX = event.changedTouches[0].screenX;
 });
 
 document.addEventListener("touchend", (event) => {
-  touchEndY = event.changedTouches[0].screenY;
+  touchEndX = event.changedTouches[0].screenX;
   handleSwipe();
 });
 
 function handleSwipe() {
-  const distance = touchStartY - touchEndY;
+  const distance = touchStartX - touchEndX;
 
   if (Math.abs(distance) < 50) return;
 
+  // 向左滑：下一張
   if (distance > 0) {
     nextCard();
-  } else {
+  }
+
+  // 向右滑：上一張
+  if (distance < 0) {
     prevCard();
   }
 }
