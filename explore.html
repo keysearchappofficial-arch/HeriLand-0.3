@@ -11,14 +11,9 @@
 
   <title>HeriLand Explore</title>
 
-  <link
-    rel="stylesheet"
-    href="./css/pages/explore.css"
-  />
+<link rel="stylesheet" href="./css/pages/explore.css"/>
 <link rel="stylesheet" href="./css/mobile/explore-detail.css" />
 
-<link rel="stylesheet" href="./css/pages/event-detail.css">
-<link rel="stylesheet" href="./css/mobile/event-detail-mobile.css">
 </head>
 
 <body>
@@ -110,9 +105,296 @@
 
   </main>
 
-  <div id="detailContainer"></div>
+    <div id="detailContainer">
+<section class="detail-page" id="detailPage">
 
-  <script src="./js/explore.js"></script>
+  <div class="detail-gallery">
+
+    <button
+      class="detail-back"
+      type="button"
+      onclick="closeDetail()"
+      aria-label="Back"
+    >
+      ‹
+    </button>
+
+    <div class="detail-actions">
+      <button
+        class="detail-action-btn detail-save"
+        id="detailSaveBtn"
+        type="button"
+        aria-label="Save place"
+      >
+        ♡
+      </button>
+
+      <button
+        class="detail-action-btn detail-more"
+        id="detailMoreBtn"
+        type="button"
+        aria-label="More actions"
+      >
+        ⋯
+      </button>
+    </div>
+
+    <div class="detail-slider" id="detailSlider"></div>
+    <div class="detail-dots" id="detailDots"></div>
+
+  </div>
+
+  <div class="detail-panel">
+
+    <section class="detail-head">
+
+      <div class="detail-kicker">
+        <span id="detailType">Recommended Place</span>
+        <span>・</span>
+        <span id="detailArea">Sarawak</span>
+      </div>
+
+      <h1 id="detailTitle">Place Name</h1>
+
+      <div class="detail-rating-row">
+        <span class="detail-stars">★★★★★</span>
+        <strong id="detailScore">4.8</strong>
+        <span>・</span>
+        <span id="detailReviewCount">0 Reviews</span>
+      </div>
+
+      <div class="detail-line">
+        <span id="detailAddress">Address not available</span>
+      </div>
+
+      <div class="detail-inline-info">
+        <span>
+          ☎ <strong id="detailPhone">Not Available</strong>
+        </span>
+
+        <span class="dot">｜</span>
+
+        <span>
+          🕒 <strong id="detailHours">Check Before Visiting</strong>
+        </span>
+      </div>
+
+      <div
+        class="detail-week-hours"
+        id="detailWeekHours"
+      ></div>
+
+    </section>
+
+    <section class="detail-guide">
+      <small>HeriLand Guide</small>
+
+      <p id="detailAiNote">
+        A place made for slowing down and staying awhile.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Intro</h2>
+      <p id="detailIntro"></p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Features</h2>
+      <ul id="detailServices"></ul>
+    </section>
+
+    <section
+      class="detail-reviews"
+      id="travelerExperienceSection"
+    >
+
+      <div class="detail-review-head">
+        <h2>Traveler</h2>
+
+        <button
+          class="detail-review-more"
+          id="detailReviewMoreBtn"
+          type="button"
+        >
+          more
+        </button>
+      </div>
+
+      <button
+        class="detail-write-review"
+        id="detailWriteReviewBtn"
+        type="button"
+      >
+        share your experience
+      </button>
+
+      <div
+        class="detail-review-list"
+        id="detailReviewList"
+      ></div>
+
+    </section>
+
+  </div>
+
+  <div
+    class="review-sheet-layer"
+    id="reviewSheetLayer"
+  >
+    <div
+      class="review-sheet-backdrop"
+      id="reviewSheetBackdrop"
+    ></div>
+
+    <div class="review-sheet-panel">
+
+      <div class="review-sheet-handle"></div>
+
+      <div class="review-sheet-head">
+        <div>
+          <small>Traveler Review</small>
+          <h2>Share your experience</h2>
+          <p
+            class="review-place-name"
+            id="reviewPlaceName"
+          ></p>
+        </div>
+
+        <button
+          id="reviewSheetClose"
+          type="button"
+        >
+          ×
+        </button>
+      </div>
+
+      <div
+        class="review-rating"
+        id="reviewRating"
+      >
+        <button type="button" data-rate="1">★</button>
+        <button type="button" data-rate="2">★</button>
+        <button type="button" data-rate="3">★</button>
+        <button type="button" data-rate="4">★</button>
+        <button type="button" data-rate="5">★</button>
+      </div>
+
+      <label class="review-upload">
+        <input
+          type="file"
+          id="reviewImageInput"
+          accept="image/*"
+          multiple
+          hidden
+        >
+
+        <span>＋ Add Photos</span>
+      </label>
+
+      <div
+        class="review-upload-preview"
+        id="reviewUploadPreview"
+      ></div>
+
+      <textarea
+        id="reviewComment"
+        placeholder="What did you feel about this place?"
+      ></textarea>
+
+      <button
+        class="review-submit-btn"
+        id="reviewSubmitBtn"
+        type="button"
+      >
+        Submit Review
+      </button>
+
+    </div>
+  </div>
+
+  <div
+    class="review-list-layer"
+    id="reviewListLayer"
+  >
+    <div
+      class="review-list-backdrop"
+      id="reviewListBackdrop"
+    ></div>
+
+    <div class="review-list-panel">
+
+      <div class="review-list-handle"></div>
+
+      <div class="review-list-head">
+        <div>
+          <small>Traveler Reviews</small>
+          <h2 id="reviewListTitle">0.0 · No Reviews Yet</h2>
+        </div>
+
+        <button
+          id="reviewListClose"
+          type="button"
+        >
+          ×
+        </button>
+      </div>
+
+      <div
+        class="review-list-content"
+        id="reviewListContent"
+      ></div>
+
+    </div>
+  </div>
+
+  <div
+    class="detail-more-layer"
+    id="detailMoreLayer"
+  >
+    <div
+      class="detail-more-backdrop"
+      id="detailMoreBackdrop"
+    ></div>
+
+    <div
+      class="detail-more-menu"
+      id="detailMoreMenu"
+    >
+
+      <button type="button" onclick="window.addPlaceToTrip()">
+        <span>⊞</span>
+        Add to Trip
+      </button>
+
+      <button type="button" onclick="window.openPlaceMap()">
+        <span>↗</span>
+        Open in Maps
+      </button>
+
+      <button type="button" onclick="window.sharePlace()">
+        <span>⤴</span>
+        Share Place
+      </button>
+
+      <button type="button" onclick="window.showNearbyPlaces()">
+        <span>◎</span>
+        Nearby Places
+      </button>
+
+      <button type="button" onclick="window.continueWithAiGuide()">
+        <span>✨</span>
+        Continue with AI Guide
+      </button>
+
+    </div>
+  </div>
+
+</section>
+    </div>
+
+<script src="./js/pages/explore-detail.js"></script>
+<script src="./js/explore.js"></script>
 
 </body>
 
