@@ -319,6 +319,7 @@ window.continueEventAiGuide = function () {
 };
 
 let currentEventSlide = 0;
+let eventSliderReady = false;
 
 function setupEventSlider(total) {
   const slider = document.getElementById("eventDetailSlider");
@@ -326,9 +327,8 @@ function setupEventSlider(total) {
 
   if (!slider || !total) return;
 
-  let startX = 0;
-  let currentX = 0;
-  let isDragging = false;
+  currentEventSlide = 0;
+  eventSliderReady = false;
 
   function updateSlider(index) {
     currentEventSlide = Math.max(0, Math.min(index, total - 1));
@@ -348,20 +348,24 @@ function setupEventSlider(total) {
   }
 
   dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
+    dot.onclick = () => {
       updateSlider(index);
-    });
+    };
   });
 
-  slider.addEventListener("touchstart", (event) => {
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+
+  slider.ontouchstart = (event) => {
     startX = event.touches[0].clientX;
     currentX = startX;
     isDragging = true;
 
     slider.style.transition = "none";
-  }, { passive:true });
+  };
 
-  slider.addEventListener("touchmove", (event) => {
+  slider.ontouchmove = (event) => {
     if (!isDragging) return;
 
     currentX = event.touches[0].clientX;
@@ -370,9 +374,9 @@ function setupEventSlider(total) {
 
     slider.style.transform =
       `translateX(calc(-${currentEventSlide * 100}% + ${diffX}px))`;
-  }, { passive:true });
+  };
 
-  slider.addEventListener("touchend", () => {
+  slider.ontouchend = () => {
     if (!isDragging) return;
 
     isDragging = false;
@@ -390,7 +394,7 @@ function setupEventSlider(total) {
     }
 
     updateSlider(currentEventSlide);
-  });
+  };
 
   updateSlider(0);
 }
