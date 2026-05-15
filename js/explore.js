@@ -244,6 +244,7 @@ function prevCard() {
 }
 
 function openDetailPage(cardEl) {
+  if (document.body.classList.contains("no-scroll")) return;
   const slug = cardEl?.dataset.slug;
   const type = cardEl?.dataset.type;
 
