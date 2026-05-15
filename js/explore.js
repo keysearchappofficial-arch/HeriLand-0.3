@@ -1,5 +1,6 @@
 const cards = [
   {
+    contentType: "event"
     city: "KUCHING",
     image:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
@@ -10,6 +11,7 @@ const cards = [
     slug: "kuching-waterfront"
   },
   {
+    contentType: "place"
     city: "NATURE",
     image:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80",
@@ -20,6 +22,7 @@ const cards = [
     slug: "borneo-rainforest"
   },
   {
+    contentType: "event"
     city: "FOOD",
     image:
       "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
@@ -30,6 +33,7 @@ const cards = [
     slug: "sarawak-laksa-spot"
   },
   {
+    contentType: "place"
     city: "CULTURE",
     image:
       "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
@@ -213,11 +217,12 @@ function openDetailPage() {
 
   if (!item.slug) return;
 
-  if (typeof window.openDetail === "function") {
-    window.openDetail(item.slug);
-  } else {
-    console.warn("openDetail() not found. Please load explore-detail.js before explore.js.");
+  if (item.contentType === "event") {
+    window.openEventDetail?.(item.slug);
+    return;
   }
+
+  window.openDetail?.(item.slug);
 }
 
 function bindEvents() {
