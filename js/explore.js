@@ -122,7 +122,12 @@ function nextCard() {
   isAnimating = true;
 
   const activeCard = document.querySelector(".card.active");
+  const secondCard = document.querySelector(".card.second");
+  const thirdCard = document.querySelector(".card.third");
+
   activeCard?.classList.add("swipe-left");
+  secondCard?.classList.add("promote");
+  thirdCard?.classList.add("promote-second");
 
   setTimeout(() => {
     currentIndex = (currentIndex + 1) % cards.length;
@@ -137,7 +142,12 @@ function prevCard() {
   isAnimating = true;
 
   const activeCard = document.querySelector(".card.active");
+  const secondCard = document.querySelector(".card.second");
+  const thirdCard = document.querySelector(".card.third");
+
   activeCard?.classList.add("swipe-right");
+  secondCard?.classList.add("promote");
+  thirdCard?.classList.add("promote-second");
 
   setTimeout(() => {
     currentIndex = (currentIndex - 1 + cards.length) % cards.length;
