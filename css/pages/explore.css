@@ -1126,10 +1126,6 @@ body{
   display:none;
 }
 
-.avatar-view.is-active{
-  display:block;
-}
-
 .avatar-sub-head{
   display:flex;
   align-items:center;
@@ -1332,4 +1328,44 @@ body{
     rgba(159,242,177,.12);
 
   color:var(--green);
+}
+
+.avatar-panel{
+  height:640px;
+  max-height:calc(100vh - 40px);
+
+  overflow:hidden;
+}
+
+.avatar-view{
+  height:100%;
+}
+
+.avatar-view.is-active{
+  display:flex;
+  flex-direction:column;
+}
+
+.avatar-sub-content{
+  flex:1;
+  overflow:auto;
+
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.avatar-sub-content::-webkit-scrollbar{
+  display:none;
+}
+
+.avatar-panel-menu{
+  flex:1;
+  overflow:auto;
+
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.avatar-panel-menu::-webkit-scrollbar{
+  display:none;
 }
