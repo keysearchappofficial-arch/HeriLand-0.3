@@ -7,6 +7,7 @@ const cards = [
     desc:
       "Locals come here to slow down. Good food, river breeze, and the city lights.",
     place: "Kuching Waterfront",
+    subtitle: "Where the river slows the city down.",
     tags: "Riverside · Sunset · Local Life",
     loved: "Loved by 342 travelers",
     slug: "kuching-waterfront"
@@ -89,6 +90,7 @@ function renderActiveCard(item, index) {
       <div class="card-bottom">
         <div class="place">
           <h3>${item.place}</h3>
+          <p class="subtitle">${item.subtitle}</p>
           <div class="tags">${item.tags}</div>
         </div>
 
