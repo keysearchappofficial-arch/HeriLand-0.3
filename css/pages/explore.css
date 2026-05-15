@@ -1202,3 +1202,64 @@ body{
 .avatar-mini-card .green{
   color:var(--green);
 }
+
+/* =========================
+   Avatar Place Card
+========================= */
+
+.avatar-sub-content{
+  display:grid;
+  gap:18px;
+}
+
+.avatar-place-card{
+  display:flex;
+  gap:14px;
+
+  padding-bottom:18px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
+}
+
+.avatar-place-thumb{
+  width:82px;
+  height:82px;
+
+  border-radius:18px;
+
+  object-fit:cover;
+
+  flex-shrink:0;
+}
+
+.avatar-place-copy{
+  flex:1;
+
+  min-width:0;
+}
+
+.avatar-place-copy h4{
+  font-size:16px;
+  line-height:1.4;
+
+  margin-bottom:8px;
+
+  font-weight:700;
+}
+
+.avatar-place-rating{
+  font-size:14px;
+
+  color:var(--green);
+
+  margin-bottom:8px;
+}
+
+.avatar-place-tags{
+  font-size:13px;
+  line-height:1.6;
+
+  color:
+    rgba(255,255,255,.58);
+}
