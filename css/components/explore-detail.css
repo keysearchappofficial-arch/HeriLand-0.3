@@ -202,26 +202,18 @@
   left:0;
   right:0;
   bottom:0;
-
   height:62vh;
-
-  overflow:auto;
-
   background:#07110d;
-
   border-radius:
     34px
     34px
     0
     0;
-
   padding:
     28px
     24px
     140px;
-
   margin-top:-34px;
-
   box-shadow:
     0 -10px 40px rgba(0,0,0,.35);
 }
