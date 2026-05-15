@@ -174,33 +174,117 @@ function bindEvents() {
 }
 
 /* Mobile swipe left / right */
-let touchStartX = 0;
-let touchEndX = 0;
+/* Mobile drag swipe */
+let startX = 0;
+let currentX = 0;
+let isDragging = false;
+
+const SWIPE_THRESHOLD = 90;
 
 document.addEventListener("touchstart", (event) => {
-  touchStartX = event.changedTouches[0].screenX;
+  if (isAnimating) return;
+
+  const activeCard = document.querySelector(".card.active");
+  if (!activeCard) return;
+
+  startX = event.touches[0].clientX;
+  currentX = startX;
+  isDragging = true;
+
+  activeCard.style.transition = "none";
 });
 
-document.addEventListener("touchend", (event) => {
-  touchEndX = event.changedTouches[0].screenX;
-  handleSwipe();
+document.addEventListener("touchmove", (event) => {
+  if (!isDragging || isAnimating) return;
+
+  const activeCard = document.querySelector(".card.active");
+  if (!activeCard) return;
+
+  currentX = event.touches[0].clientX;
+
+  const diffX = currentX - startX;
+  const rotate = diffX * 0.06;
+  const opacity = Math.max(1 - Math.abs(diffX) / 420, 0.35);
+
+  activeCard.style.transform = `
+    translateX(calc(-50% + ${diffX}px))
+    rotate(${rotate}deg)
+    scale(1)
+  `;
+
+  activeCard.style.opacity = opacity;
 });
 
-function handleSwipe() {
-  const distance = touchStartX - touchEndX;
+document.addEventListener("touchend", () => {
+  if (!isDragging || isAnimating) return;
 
-  if (Math.abs(distance) < 50) return;
+  isDragging = false;
+  isAnimating = true;
 
-  // 向左滑：下一張
-  if (distance > 0) {
-    nextCard();
+  const activeCard = document.querySelector(".card.active");
+  const secondCard = document.querySelector(".card.second");
+  const thirdCard = document.querySelector(".card.third");
+
+  if (!activeCard) return;
+
+  const diffX = currentX - startX;
+
+  activeCard.style.transition =
+    "transform .38s cubic-bezier(.22,.9,.28,1), opacity .38s ease";
+
+  if (Math.abs(diffX) < SWIPE_THRESHOLD) {
+    activeCard.style.transform = `
+      translateX(-50%)
+      rotate(0deg)
+      scale(1)
+    `;
+
+    activeCard.style.opacity = "1";
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 380);
+
+    return;
   }
 
-  // 向右滑：上一張
-  if (distance < 0) {
-    prevCard();
+  secondCard?.classList.add("promote");
+  thirdCard?.classList.add("promote-second");
+
+  if (diffX < 0) {
+    activeCard.style.transform = `
+      translateX(calc(-50% - 520px))
+      rotate(-18deg)
+      scale(.96)
+    `;
+
+    activeCard.style.opacity = "0";
+
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % cards.length;
+      renderCards();
+      isAnimating = false;
+    }, 380);
+
+    return;
   }
-}
+
+  if (diffX > 0) {
+    activeCard.style.transform = `
+      translateX(calc(-50% + 520px))
+      rotate(18deg)
+      scale(.96)
+    `;
+
+    activeCard.style.opacity = "0";
+
+    setTimeout(() => {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      renderCards();
+      isAnimating = false;
+    }, 380);
+  }
+});
 
 /* Desktop keyboard */
 document.addEventListener("keydown", (event) => {
