@@ -114,7 +114,18 @@ function renderBackCard(item, className, index) {
         <div class="index">${(index % cards.length) + 1}/${cards.length}</div>
       </div>
 
-      <div class="back-title">${item.place}</div>
+      <div class="card-bottom">
+        <div class="place">
+          <h3>${item.place}</h3>
+          <p class="subtitle">${item.subtitle || ""}</p>
+          <div class="tags">${item.tags}</div>
+        </div>
+
+        <div class="footer-row">
+          <div class="loved">${item.loved}</div>
+          <button class="save" type="button">♡</button>
+        </div>
+      </div>
     </article>
   `;
 }
