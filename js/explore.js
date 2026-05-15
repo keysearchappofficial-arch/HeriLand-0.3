@@ -585,31 +585,38 @@ emergency: {
   ]
 },
 
-  service: {
-    title: "Customer Service",
-    kicker: "Help Center",
-    layout: "info",
-    items: [
-      {
-        icon: "◇",
-        title: "Help Center",
-        text: "Common travel questions and platform guide.",
-        action: "Open"
-      },
-      {
-        icon: "◇",
-        title: "Contact Support",
-        text: "Send us a message about your trip or account.",
-        action: "Message"
-      },
-      {
-        icon: "◇",
-        title: "Report an Issue",
-        text: "Wrong info, closed place, or unsafe content.",
-        action: "Report"
-      }
-    ]
-  },
+service: {
+  title: "Help & Support",
+  kicker: "Need Assistance?",
+  layout: "info",
+  items: [
+    {
+      title: "Help Center",
+      text: "Common travel questions and platform guide.",
+      action: "Open"
+    },
+    {
+      title: "Contact Support",
+      text: "Send us a message about your trip or account.",
+      action: "Message"
+    },
+    {
+      title: "Report an Issue",
+      text: "Wrong info, closed place, or unsafe content.",
+      action: "Report"
+    },
+    {
+      title: "Privacy Policy",
+      text: "Learn how HeriLand handles your data.",
+      action: "View"
+    },
+    {
+      title: "Terms of Service",
+      text: "Platform usage terms and community guidelines.",
+      action: "View"
+    }
+  ]
+},
 
 account: {
   title: "Account",
