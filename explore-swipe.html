@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeriLand Explore Swipe</title>
+
+  <style>
+    :root {
+      --bg: #07110d;
+      --bg-soft: #0e1b15;
+      --green: #9ff2b1;
+      --green-deep: #234637;
+      --text: #f5f5f0;
+      --muted: rgba(255,255,255,.62);
+      --line: rgba(255,255,255,.16);
+      --glass: rgba(255,255,255,.08);
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(159,242,177,.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255,170,95,.12), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      margin: 0 auto;
+      padding: 24px 18px 96px;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+      z-index: 5;
+      position: relative;
+    }
+
+    .brand h1 {
+      font-family: Georgia, serif;
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -.8px;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 2px;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .city-select {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      color: white;
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+    }
+
+    .search-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      color: white;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(16px);
+    }
+
+    .hint {
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .card-stage {
+      position: relative;
+      height: calc(100vh - 250px);
+      min-height: 520px;
+    }
+
+    .travel-card {
+      position: absolute;
+      inset: 0;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.22);
+      background: #111;
+      box-shadow: var(--shadow);
+      transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .travel-card:nth-child(2) {
+      transform: translateX(28px) scale(.96);
+      opacity: .78;
+      z-index: 1;
+    }
+
+    .travel-card:nth-child(3) {
+      transform: translateX(54px) scale(.92);
+      opacity: .35;
+      z-index: 0;
+    }
+
+    .travel-card.active {
+      z-index: 3;
+    }
+
+    .travel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.92) contrast(1.05);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.42), transparent 28%),
+        linear-gradient(to top, rgba(0,0,0,.82), transparent 58%);
+    }
+
+    .card-top {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .4px;
+    }
+
+    .pill {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.34);
+      border: 1px solid rgba(255,255,255,.24);
+      backdrop-filter: blur(12px);
+    }
+
+    .card-copy {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 150px;
+    }
+
+    .card-copy h2 {
+      font-family: Georgia, serif;
+      font-size: 47px;
+      line-height: .98;
+      font-weight: 500;
+      letter-spacing: -1.5px;
+      margin-bottom: 18px;
+    }
+
+    .divider {
+      width: 42px;
+      height: 1px;
+      background: rgba(255,255,255,.7);
+      margin-bottom: 18px;
+    }
+
+    .card-copy p {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.88);
+      max-width: 280px;
+    }
+
+    .card-bottom {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .place h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .tags {
+      color: var(--green);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .save-btn {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.1);
+      color: white;
+      backdrop-filter: blur(12px);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .swipe-up {
+      text-align: center;
+      color: var(--muted);
+      margin: 20px 0 12px;
+      font-size: 14px;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      height: 72px;
+      border-radius: 32px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(20px);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      box-shadow: 0 18px 50px rgba(0,0,0,.38);
+    }
+
+    .nav-item {
+      text-align: center;
+      color: rgba(255,255,255,.68);
+      font-size: 12px;
+    }
+
+    .nav-item svg {
+      display: block;
+      margin: 0 auto 5px;
+    }
+
+    .nav-item.active {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .center-orb {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.25), rgba(255,255,255,.05));
+      border: 1px solid rgba(159,242,177,.42);
+      box-shadow: 0 0 28px rgba(159,242,177,.22);
+    }
+
+    @media (max-height: 760px) {
+      .card-stage {
+        min-height: 470px;
+      }
+
+      .card-copy h2 {
+        font-size: 40px;
+      }
+
+      .card-copy {
+        bottom: 130px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="topbar">
+      <div class="brand">
+        <h1>HeriLand</h1>
+        <span>DISCOVER SARAWAK</span>
+      </div>
+
+      <button class="city-select">
+        Kuching
+        <span>⌄</span>
+      </button>
+
+      <button class="search-btn">⌕</button>
+    </header>
+
+    <div class="hint">Swipe to explore</div>
+
+    <section class="card-stage">
+
+      <article class="travel-card active">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="">
+        <div class="card-overlay"></div>
+
+        <div class="card-top">
+          <div class="pill">📍 KUCHING</div>
+          <div>1/25</div>
+        </div>
+
+        <div class="card-copy">
+          <h2>Evenings hit different here.</h2>
+          <div class="divider"></div>
+          <p>
+            Locals come here to slow down.
+            Good food, river breeze,
+            and the city lights.
+          </p>
+        </div>
+
+        <div class="card-bottom">
+          <div class="place">
+            <h3>≋ Kuching Waterfront</h3>
+            <div class="tags">Riverside · Sunset · Local Life</div>
+          </div>
+
+          <button class="save-btn">♡</button>
+        </div>
+      </article>
+
+      <article class="travel-card">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80" alt="">
+        <div class="card-overlay"></div>
+
+        <div class="card-top">
+          <div class="pill">🌿 NATURE</div>
+          <div>2/25</div>
+        </div>
+
+        <div class="card-copy">
+          <h2>The forest feels older than memory.</h2>
+          <div class="divider"></div>
+          <p>
+            A quiet escape for travelers
+            who want mist, trees,
+            and slower mornings.
+          </p>
+        </div>
+
+        <div class="card-bottom">
+          <div class="place">
+            <h3>Borneo Rainforest</h3>
+            <div class="tags">Nature · Hiking · Quiet</div>
+          </div>
+
+          <button class="save-btn">♡</button>
+        </div>
+      </article>
+
+      <article class="travel-card">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80" alt="">
+        <div class="card-overlay"></div>
+
+        <div class="card-top">
+          <div class="pill">🍜 FOOD</div>
+          <div>3/25</div>
+        </div>
+
+        <div class="card-copy">
+          <h2>Start your morning like a local.</h2>
+          <div class="divider"></div>
+          <p>
+            A warm bowl, old tables,
+            and conversations that begin
+            before the city wakes.
+          </p>
+        </div>
+
+        <div class="card-bottom">
+          <div class="place">
+            <h3>Sarawak Laksa Spot</h3>
+            <div class="tags">Breakfast · Local Food · Classic</div>
+          </div>
+
+          <button class="save-btn">♡</button>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="swipe-up">⌃<br>Swipe up for next</div>
+
+    <nav class="bottom-nav">
+      <div class="nav-item active">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M20 4C10 4 4 10 4 20C14 20 20 14 20 4Z" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Explore
+      </div>
+
+      <div class="nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 21s7-6.1 7-12A7 7 0 0 0 5 9c0 5.9 7 12 7 12Z" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="9" r="2" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Map
+      </div>
+
+      <div class="nav-item">
+        <div class="center-orb">✦</div>
+      </div>
+
+      <div class="nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M6 4h12v17l-6-4-6 4V4Z" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Saved
+      </div>
+
+      <div class="nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+          <path d="M4 21c1.6-4 4.4-6 8-6s6.4 2 8 6" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Profile
+      </div>
+    </nav>
+
+  </main>
+</body>
+</html>
