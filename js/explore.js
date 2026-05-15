@@ -286,7 +286,7 @@ document.addEventListener("touchmove", (event) => {
   activeCard.style.opacity = opacity;
 });
 
-document.addEventListener("touchend", () => {
+document.addEventListener("touchend", (event) => {
   if (!isDragging || isAnimating) return;
 
   isDragging = false;
@@ -302,10 +302,24 @@ document.addEventListener("touchend", () => {
   activeCard.style.transition =
     "transform .38s cubic-bezier(.22,.9,.28,1), opacity .38s ease";
 
-  if (!hasMoved) {
-    openDetailPage();
+if (!hasMoved) {
+  const target = event.target;
+
+  if (
+    target.closest("button") ||
+    target.closest(".save") ||
+    target.closest(".filter-panel") ||
+    target.closest(".city")
+  ) {
     return;
   }
+
+  if (target.closest(".card.active")) {
+    openDetailPage();
+  }
+
+  return;
+}
 
   isAnimating = true;
 
