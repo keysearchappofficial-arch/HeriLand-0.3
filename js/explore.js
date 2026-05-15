@@ -9,6 +9,9 @@ async function loadExploreCards(){
       .eq("is_active", true)
       .order("sort_order");
 
+  console.log("Supabase explore data:", data);
+  console.log("Supabase explore error:", error);
+
   if (error) {
     console.error(error);
     return;
@@ -84,6 +87,15 @@ document.querySelectorAll(".filter-grid button").forEach((button) => {
 /* Render */
 
 function renderCards() {
+  if (!cards.length) {
+    stage.innerHTML = `
+      <div class="empty-state">
+        No explore items yet.
+      </div>
+    `;
+    return;
+  }
+
   const active = getCard(currentIndex);
   const second = getCard(currentIndex + 1);
   const third = getCard(currentIndex + 2);
