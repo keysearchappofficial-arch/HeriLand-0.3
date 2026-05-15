@@ -481,52 +481,50 @@ const avatarSubContent =
   document.getElementById("avatarSubContent");
 
 const avatarPages = {
-saved: {
-  title: "Saved Places",
-  kicker: "Your Collection",
-  items: [
-    {
-      title: "Kuching Waterfront",
-      text: "Riverside · Sunset · Local Life",
-      rating: "4.9",
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
-    },
-
-    {
-      title: "Borneo Rainforest",
-      text: "Nature · Hiking · Quiet",
-      rating: "4.7",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
-    }
-  ]
-},
+  saved: {
+    title: "Saved",
+    kicker: "Your Collection",
+    layout: "place",
+    items: [
+      {
+        title: "Kuching Waterfront",
+        rating: "4.9",
+        text: "Riverside · Sunset · Local Life",
+        image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        title: "Borneo Rainforest",
+        rating: "4.7",
+        text: "Nature · Hiking · Quiet",
+        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
 
   trip: {
     title: "My Trip",
     kicker: "Travel Plan",
+    layout: "place",
     items: [
       {
         title: "Kuching Weekend",
-        text: "3 saved places · 1 event"
-      },
-      {
-        title: "Food Walk",
-        text: "Laksa · Coffee · Local Market"
+        rating: "3 Places",
+        text: "Waterfront · Laksa · Culture",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
       }
     ]
   },
 
   reviews: {
-    title: "Traveler Reviews",
+    title: "Reviews",
     kicker: "Your Voice",
+    layout: "place",
     items: [
       {
-        title: "Kuching Waterfront",
-        text: "★★★★★ A peaceful walk near the river."
-      },
-      {
-        title: "Rainforest Festival",
-        text: "★★★★☆ Great atmosphere and music."
+        title: "Rainforest World Music Festival",
+        rating: "★★★★☆",
+        text: "Great atmosphere and music.",
+        image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80"
       }
     ]
   },
@@ -534,18 +532,25 @@ saved: {
   government: {
     title: "Government",
     kicker: "Useful Info",
+    layout: "info",
     items: [
       {
+        icon: "▣",
         title: "Tourism Office",
-        text: "Official visitor support and local travel information."
+        text: "Official visitor support and local travel information.",
+        action: "Call / Map"
       },
       {
+        icon: "▣",
         title: "Immigration Office",
-        text: "Visa, entry, and document-related assistance."
+        text: "Visa, entry, and document-related assistance.",
+        action: "Open Info"
       },
       {
+        icon: "▣",
         title: "Local Council",
-        text: "City services, permits, and public facilities."
+        text: "City services, permits, and public facilities.",
+        action: "Open Info"
       }
     ]
   },
@@ -553,19 +558,74 @@ saved: {
   emergency: {
     title: "Emergency",
     kicker: "Stay Safe",
+    layout: "emergency",
     items: [
       {
-        title: "Emergency Hotline",
-        text: "999",
-        danger: true
+        title: "999",
+        text: "Emergency Hotline",
+        action: "Tap to call"
       },
       {
         title: "Police",
-        text: "Call 999 for urgent police assistance."
+        text: "Urgent police assistance.",
+        action: "Call 999"
       },
       {
         title: "Hospital",
-        text: "Find the nearest emergency medical help."
+        text: "Find nearby emergency medical help.",
+        action: "Open Map"
+      }
+    ]
+  },
+
+  service: {
+    title: "Customer Service",
+    kicker: "Help Center",
+    layout: "info",
+    items: [
+      {
+        icon: "◇",
+        title: "Help Center",
+        text: "Common travel questions and platform guide.",
+        action: "Open"
+      },
+      {
+        icon: "◇",
+        title: "Contact Support",
+        text: "Send us a message about your trip or account.",
+        action: "Message"
+      },
+      {
+        icon: "◇",
+        title: "Report an Issue",
+        text: "Wrong info, closed place, or unsafe content.",
+        action: "Report"
+      }
+    ]
+  },
+
+  account: {
+    title: "Account",
+    kicker: "Traveler Profile",
+    layout: "info",
+    items: [
+      {
+        icon: "◉",
+        title: "Andy",
+        text: "Traveler Account",
+        action: "Edit"
+      },
+      {
+        icon: "◉",
+        title: "Email",
+        text: "andy@example.com",
+        action: "Manage"
+      },
+      {
+        icon: "◉",
+        title: "Member Since",
+        text: "2026",
+        action: "View"
       }
     ]
   },
@@ -573,18 +633,25 @@ saved: {
   settings: {
     title: "Settings",
     kicker: "Preferences",
+    layout: "info",
     items: [
       {
+        icon: "◌",
         title: "Language",
-        text: "English"
+        text: "English",
+        action: "Change"
       },
       {
-        title: "Location",
-        text: "Sarawak"
+        icon: "◌",
+        title: "Feedback",
+        text: "Send feedback to HeriLand.",
+        action: "Send"
       },
       {
-        title: "Notifications",
-        text: "Travel alerts and saved trip reminders"
+        icon: "◌",
+        title: "About",
+        text: "Version 1.0 · HeriLand",
+        action: "View"
       }
     ]
   }
@@ -612,38 +679,74 @@ function openAvatarSubPage(pageKey){
   avatarSubTitle.textContent = page.title;
   avatarSubKicker.textContent = page.kicker;
 
-avatarSubContent.innerHTML = page.items
-  .map((item) => {
-    return `
-      <div class="avatar-place-card">
+  if (page.layout === "place") {
+    avatarSubContent.innerHTML = page.items
+      .map(renderAvatarPlaceCard)
+      .join("");
+  }
 
-        <img
-          class="avatar-place-thumb"
-          src="${item.image || "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"}"
-          alt="${item.title}"
-        >
+  if (page.layout === "info") {
+    avatarSubContent.innerHTML = page.items
+      .map(renderAvatarInfoCard)
+      .join("");
+  }
 
-        <div class="avatar-place-copy">
-
-          <h4>
-            ${item.title}
-          </h4>
-
-          <div class="avatar-place-rating">
-            ★ ${item.rating || "4.8"}
-          </div>
-
-          <div class="avatar-place-tags">
-            ${item.text}
-          </div>
-
-        </div>
-
-      </div>
-    `;
-  })
-  .join("");
+  if (page.layout === "emergency") {
+    avatarSubContent.innerHTML = page.items
+      .map(renderAvatarEmergencyCard)
+      .join("");
+  }
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
+}
+
+function renderAvatarPlaceCard(item){
+  return `
+    <div class="avatar-place-card">
+      <img
+        class="avatar-place-thumb"
+        src="${item.image}"
+        alt="${item.title}"
+      >
+
+      <div class="avatar-place-copy">
+        <h4>${item.title}</h4>
+
+        <div class="avatar-place-rating">
+          ${item.rating}
+        </div>
+
+        <div class="avatar-place-tags">
+          ${item.text}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderAvatarInfoCard(item){
+  return `
+    <div class="avatar-info-card">
+      <div class="avatar-info-icon">
+        ${item.icon || "◇"}
+      </div>
+
+      <div class="avatar-info-copy">
+        <h4>${item.title}</h4>
+        <p>${item.text}</p>
+        <button type="button">${item.action}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderAvatarEmergencyCard(item){
+  return `
+    <div class="avatar-emergency-card">
+      <strong>${item.title}</strong>
+      <p>${item.text}</p>
+      <button type="button">${item.action}</button>
+    </div>
+  `;
 }
