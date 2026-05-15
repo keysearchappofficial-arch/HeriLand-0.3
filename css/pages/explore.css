@@ -1116,3 +1116,89 @@ body{
   }
 
 }
+
+.avatar-view{
+  display:none;
+}
+
+.avatar-view.is-active{
+  display:block;
+}
+
+.avatar-sub-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  margin-bottom:22px;
+}
+
+.avatar-sub-back{
+  width:44px;
+  height:44px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.07);
+  color:white;
+
+  font-size:30px;
+  line-height:1;
+
+  cursor:pointer;
+}
+
+.avatar-sub-head small{
+  display:block;
+
+  margin-bottom:4px;
+
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+
+  color:rgba(159,242,177,.7);
+}
+
+.avatar-sub-head h3{
+  font-size:22px;
+}
+
+.avatar-sub-content{
+  display:grid;
+  gap:12px;
+}
+
+.avatar-mini-card{
+  padding:16px;
+
+  border-radius:20px;
+
+  background:rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.avatar-mini-card strong{
+  display:block;
+
+  margin-bottom:6px;
+
+  font-size:16px;
+}
+
+.avatar-mini-card p{
+  font-size:14px;
+  line-height:1.6;
+
+  color:rgba(255,255,255,.62);
+}
+
+.avatar-mini-card .danger{
+  color:#ff9d9d;
+}
+
+.avatar-mini-card .green{
+  color:var(--green);
+}
