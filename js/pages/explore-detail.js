@@ -388,3 +388,79 @@ window.showNearbyPlaces = function () {
 window.continueWithAiGuide = function () {
   console.log("Continue with AI Guide");
 };
+
+/* =========================
+   Review List Sheet
+========================= */
+
+const detailReviewMoreBtn =
+  document.getElementById("detailReviewMoreBtn");
+
+const reviewListLayer =
+  document.getElementById("reviewListLayer");
+
+const reviewListBackdrop =
+  document.getElementById("reviewListBackdrop");
+
+const reviewListClose =
+  document.getElementById("reviewListClose");
+
+detailReviewMoreBtn?.addEventListener("click", () => {
+  renderAllDetailReviews();
+  reviewListLayer?.classList.add("is-open");
+});
+
+reviewListBackdrop?.addEventListener("click", closeReviewList);
+reviewListClose?.addEventListener("click", closeReviewList);
+
+function closeReviewList(){
+  reviewListLayer?.classList.remove("is-open");
+}
+
+function renderAllDetailReviews(){
+  const list =
+    document.getElementById("reviewListContent");
+
+  const title =
+    document.getElementById("reviewListTitle");
+
+  if (!list) return;
+
+  if (title) {
+    title.textContent =
+      localReviews.length
+        ? `${getAverageRating()} · ${localReviews.length} Reviews`
+        : "0.0 · No Reviews Yet";
+  }
+
+  if (!localReviews.length) {
+    list.innerHTML = `
+      <div class="detail-review-card">
+        <strong>No reviews yet</strong>
+        <p>Be the first traveler to share your experience.</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = localReviews
+    .map((review) => {
+      return `
+        <div class="detail-review-card">
+          <strong>${"★".repeat(review.rating)}</strong>
+          <p>${review.comment}</p>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function getAverageRating(){
+  if (!localReviews.length) return "0.0";
+
+  const total = localReviews.reduce((sum, review) => {
+    return sum + review.rating;
+  }, 0);
+
+  return (total / localReviews.length).toFixed(1);
+}
