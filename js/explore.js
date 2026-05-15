@@ -1,60 +1,34 @@
-const cards = [
-  {
-    contentType: "place",
-    city: "KUCHING",
-    image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-    place: "Kuching Waterfront",
-    subtitle: "Where the river slows the city down.",
-    tags: "Riverside · Sunset · Local Life",
-    loved: "Loved by 342 travelers",
-    slug: "kuching-waterfront"
-  },
-  {
-    contentType: "event",
-    city: "KUCHING",
-    image:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80",
-    place: "Rainforest World Music Festival",
-    subtitle: "Music, culture, and Borneo nights.",
-    tags: "Festival · Music · Culture",
-    loved: "12 Jul 2026",
-    slug: "rainforest-world-music-festival"
-  },
-  {
-    contentType: "place",
-    city: "NATURE",
-    image:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80",
-    place: "Borneo Rainforest",
-    subtitle: "A quiet escape into mist and trees.",
-    tags: "Nature · Hiking · Quiet",
-    loved: "Loved by 218 travelers",
-    slug: "borneo-rainforest"
-  },
-  {
-    contentType: "place",
-    city: "FOOD",
-    image:
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
-    place: "Sarawak Laksa Spot",
-    subtitle: "Start your morning like a local.",
-    tags: "Breakfast · Local Food · Classic",
-    loved: "Loved by 489 travelers",
-    slug: "sarawak-laksa-spot"
-  },
-  {
-    contentType: "place",
-    city: "CULTURE",
-    image:
-      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
-    place: "Longhouse Experience",
-    subtitle: "Some stories are older than roads.",
-    tags: "Culture · River · Local Story",
-    loved: "Loved by 156 travelers",
-    slug: "longhouse-experience"
+let cards = [];
+
+async function loadExploreCards(){
+
+  const { data, error } =
+    await supabase
+      .from("explore_items")
+      .select("*")
+      .eq("is_active", true)
+      .order("sort_order");
+
+  if (error) {
+    console.error(error);
+    return;
   }
-];
+
+  cards = (data || []).map(item => ({
+    contentType: item.content_type,
+    city: item.city,
+    image: item.image_url,
+    place: item.title,
+    subtitle: item.subtitle,
+    tags: item.tags,
+    loved: item.loved_text,
+    slug: item.slug
+  }));
+
+  currentIndex = 0;
+
+  renderCards();
+}
 
 const stage = document.getElementById("exploreStage");
 const filterToggle = document.getElementById("filterToggle");
@@ -405,7 +379,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-renderCards();
+loadExploreCards();
 
 
 /* =========================
