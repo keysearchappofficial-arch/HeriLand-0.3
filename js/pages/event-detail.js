@@ -215,6 +215,7 @@ function renderEventGallery(images) {
       `;
 
     }).join("");
+  setupEventSlider(images.length);
 }
 
 /* =========================
@@ -316,3 +317,80 @@ window.saveEventReminder = function () {
 window.continueEventAiGuide = function () {
   console.log("continue ai guide");
 };
+
+let currentEventSlide = 0;
+
+function setupEventSlider(total) {
+  const slider = document.getElementById("eventDetailSlider");
+  const dots = document.querySelectorAll(".event-detail-dot");
+
+  if (!slider || !total) return;
+
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+
+  function updateSlider(index) {
+    currentEventSlide = Math.max(0, Math.min(index, total - 1));
+
+    slider.style.transition =
+      "transform .35s cubic-bezier(.22,.9,.28,1)";
+
+    slider.style.transform =
+      `translateX(-${currentEventSlide * 100}%)`;
+
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle(
+        "active",
+        dotIndex === currentEventSlide
+      );
+    });
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      updateSlider(index);
+    });
+  });
+
+  slider.addEventListener("touchstart", (event) => {
+    startX = event.touches[0].clientX;
+    currentX = startX;
+    isDragging = true;
+
+    slider.style.transition = "none";
+  }, { passive:true });
+
+  slider.addEventListener("touchmove", (event) => {
+    if (!isDragging) return;
+
+    currentX = event.touches[0].clientX;
+
+    const diffX = currentX - startX;
+
+    slider.style.transform =
+      `translateX(calc(-${currentEventSlide * 100}% + ${diffX}px))`;
+  }, { passive:true });
+
+  slider.addEventListener("touchend", () => {
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    const diffX = currentX - startX;
+
+    if (diffX < -60) {
+      updateSlider(currentEventSlide + 1);
+      return;
+    }
+
+    if (diffX > 60) {
+      updateSlider(currentEventSlide - 1);
+      return;
+    }
+
+    updateSlider(currentEventSlide);
+  });
+
+  updateSlider(0);
+}
