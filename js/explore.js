@@ -637,31 +637,43 @@ account: {
   ]
 },
 
-  settings: {
-    title: "Settings",
-    kicker: "Preferences",
-    layout: "info",
-    items: [
-      {
-        icon: "◌",
-        title: "Language",
-        text: "English",
-        action: "Change"
-      },
-      {
-        icon: "◌",
-        title: "Feedback",
-        text: "Send feedback to HeriLand.",
-        action: "Send"
-      },
-      {
-        icon: "◌",
-        title: "About",
-        text: "Version 1.0 · HeriLand",
-        action: "View"
-      }
-    ]
-  }
+settings: {
+  title: "Settings",
+  kicker: "Preferences",
+  layout: "info",
+  items: [
+    {
+      title: "Language",
+      text: "English",
+      action: "Change"
+    },
+    {
+      title: "Notifications",
+      text: "Travel reminders and saved trip alerts.",
+      action: "Manage"
+    },
+    {
+      title: "Appearance",
+      text: "System / Dark",
+      action: "Change"
+    },
+    {
+      title: "Map Preference",
+      text: "Google Maps",
+      action: "Change"
+    },
+    {
+      title: "Content Preference",
+      text: "Nature · Food · Culture",
+      action: "Edit"
+    },
+    {
+      title: "About HeriLand",
+      text: "Version 1.0",
+      action: "View"
+    }
+  ]
+}
 };
 
 document
