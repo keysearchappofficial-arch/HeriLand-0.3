@@ -742,13 +742,13 @@ function renderAvatarPlaceCard(item){
 }
 
 function renderAvatarListItem(item){
+
   return `
     <div class="avatar-list-item">
 
-      <div class="avatar-list-copy">
-        <h4>${item.title}</h4>
+      <div class="avatar-list-top">
 
-        <p>${item.text}</p>
+        <h4>${item.title}</h4>
 
         <div class="avatar-list-actions">
 
@@ -777,7 +777,10 @@ function renderAvatarListItem(item){
           ` : ""}
 
         </div>
+
       </div>
+
+      <p>${item.text}</p>
 
     </div>
   `;
