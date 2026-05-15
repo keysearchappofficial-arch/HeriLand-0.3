@@ -1,3 +1,52 @@
+const SAVED_KEY = "heriland_saved_items";
+
+function getSavedItems(){
+  return JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
+}
+
+function saveSavedItems(items){
+  localStorage.setItem(SAVED_KEY, JSON.stringify(items));
+}
+
+function isSaved(slug){
+  return getSavedItems().some(item => item.slug === slug);
+}
+
+function toggleSaved(item){
+  let saved = getSavedItems();
+
+  if (isSaved(item.slug)) {
+    saved = saved.filter(savedItem => savedItem.slug !== item.slug);
+  } else {
+    saved.unshift(item);
+  }
+
+  saveSavedItems(saved);
+}
+
+const TRIP_KEY = "heriland_trip_items";
+
+function getTripItems(){
+  return JSON.parse(localStorage.getItem(TRIP_KEY) || "[]");
+}
+
+function saveTripItems(items){
+  localStorage.setItem(TRIP_KEY, JSON.stringify(items));
+}
+
+function isInTrip(slug){
+  return getTripItems().some(item => item.slug === slug);
+}
+
+function addToTrip(item){
+  if (!item || isInTrip(item.slug)) return;
+
+  const trip = getTripItems();
+  trip.unshift(item);
+
+  saveTripItems(trip);
+}
+
 let allCards = [];
 let cards = [];
 
@@ -167,7 +216,12 @@ function renderActiveCard(item, index) {
 
         <div class="footer-row">
           <div class="loved">${item.loved}</div>
-          <button class="save" type="button">♡</button>
+<button
+  class="save ${isSaved(item.slug) ? "is-saved" : ""}"
+  type="button"
+>
+  ${isSaved(item.slug) ? "♥" : "♡"}
+</button>
         </div>
       </div>
     </article>
@@ -244,6 +298,9 @@ function prevCard() {
 }
 
 function openDetailPage(cardEl) {
+  currentOpenedItem =
+  cards.find(card => card.slug === slug) || null;
+  let currentOpenedItem = null;
   if (document.body.classList.contains("no-scroll")) return;
   const slug = cardEl?.dataset.slug;
   const type = cardEl?.dataset.type;
@@ -262,13 +319,22 @@ function bindEvents() {
   document.querySelector(".nav-next")?.addEventListener("click", nextCard);
   document.querySelector(".nav-prev")?.addEventListener("click", prevCard);
 
-  document.querySelector(".save")?.addEventListener("click", (event) => {
-    event.stopPropagation();
+document.querySelector(".save")?.addEventListener("click", (event) => {
+  event.stopPropagation();
 
-    event.currentTarget.classList.toggle("is-saved");
-    event.currentTarget.textContent =
-      event.currentTarget.classList.contains("is-saved") ? "♥" : "♡";
-  });
+  const cardEl = event.currentTarget.closest(".card.active");
+  const slug = cardEl?.dataset.slug;
+
+  const item = cards.find(card => card.slug === slug);
+
+  if (!item) return;
+
+  toggleSaved(item);
+
+  event.currentTarget.classList.toggle("is-saved");
+  event.currentTarget.textContent =
+    event.currentTarget.classList.contains("is-saved") ? "♥" : "♡";
+});
 
 document.querySelector(".card.active")?.addEventListener("click", (event) => {
   openDetailPage(event.currentTarget);
@@ -498,34 +564,14 @@ const avatarPages = {
     title: "Saved",
     kicker: "Your Collection",
     layout: "place",
-    items: [
-      {
-        title: "Kuching Waterfront",
-        rating: "4.9",
-        text: "Riverside · Sunset · Local Life",
-        image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        title: "Borneo Rainforest",
-        rating: "4.7",
-        text: "Nature · Hiking · Quiet",
-        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
-      }
-    ]
+    items: []
   },
 
   trip: {
     title: "My Trip",
     kicker: "Travel Plan",
     layout: "place",
-    items: [
-      {
-        title: "Kuching Weekend",
-        rating: "3 Places",
-        text: "Waterfront · Laksa · Culture",
-        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
-      }
-    ]
+    items: []
   },
 
   reviews: {
@@ -714,6 +760,24 @@ function openAvatarSubPage(pageKey){
   const page = avatarPages[pageKey];
 
   if (!page) return;
+  
+if (pageKey === "saved") {
+  page.items = getSavedItems().map(item => ({
+    title: item.place,
+    rating: "Saved",
+    text: item.tags || item.subtitle || "",
+    image: item.image
+  }));
+}
+
+if (pageKey === "trip") {
+  page.items = getTripItems().map(item => ({
+    title: item.place,
+    rating: item.contentType?.toUpperCase() || "Trip",
+    text: item.tags || item.subtitle || "",
+    image: item.image
+  }));
+}
 
   avatarSubTitle.textContent = page.title;
   avatarSubKicker.textContent = page.kicker;
