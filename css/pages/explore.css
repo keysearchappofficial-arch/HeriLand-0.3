@@ -137,6 +137,158 @@ body{
     0 0 24px rgba(159,242,177,.08);
 }
 
+.city{
+  cursor:pointer;
+}
+
+/* =========================
+   Filter Panel
+========================= */
+
+.filter-panel{
+  position:absolute;
+
+  top:68px;
+  left:50%;
+
+  transform:
+    translateX(-50%)
+    translateY(-10px)
+    scale(.96);
+
+  width:320px;
+
+  padding:18px;
+
+  border-radius:28px;
+
+  border:
+    1px solid rgba(159,242,177,.18);
+
+  background:
+    rgba(8,16,13,.88);
+
+  backdrop-filter:blur(24px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.04);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  z-index:50;
+
+  transition:
+    opacity .24s ease,
+    transform .24s cubic-bezier(.22,.9,.28,1);
+}
+
+.filter-panel.is-open{
+  opacity:1;
+
+  pointer-events:auto;
+
+  transform:
+    translateX(-50%)
+    translateY(0)
+    scale(1);
+}
+
+/* =========================
+   Filter Section
+========================= */
+
+.filter-section + .filter-section{
+  margin-top:18px;
+}
+
+.filter-section p{
+  margin-bottom:12px;
+
+  font-size:12px;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
+
+  color:
+    rgba(159,242,177,.58);
+}
+
+/* =========================
+   Grid
+========================= */
+
+.filter-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:10px;
+}
+
+/* =========================
+   Filter Buttons
+========================= */
+
+.filter-grid button{
+  height:44px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  color:var(--text);
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.filter-grid button:hover{
+  background:
+    rgba(159,242,177,.12);
+
+  border:
+    1px solid rgba(159,242,177,.22);
+
+  color:var(--green);
+}
+
+.filter-grid button.active{
+  background:
+    rgba(159,242,177,.14);
+
+  border:
+    1px solid rgba(159,242,177,.28);
+
+  color:var(--green);
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media(max-width:390px){
+
+  .filter-panel{
+    width:290px;
+  }
+
+}
+
 /* =========================
    Hint
 ========================= */
