@@ -284,6 +284,7 @@ let hasMoved = false;
 const SWIPE_THRESHOLD = 90;
 
 document.addEventListener("touchstart", (event) => {
+  if (document.body.classList.contains("no-scroll")) return;
   if (isAnimating) return;
 
   const activeCard = document.querySelector(".card.active");
@@ -298,6 +299,7 @@ document.addEventListener("touchstart", (event) => {
 });
 
 document.addEventListener("touchmove", (event) => {
+  if (document.body.classList.contains("no-scroll")) return;
   if (!isDragging || isAnimating) return;
 
   const activeCard = document.querySelector(".card.active");
@@ -324,6 +326,7 @@ document.addEventListener("touchmove", (event) => {
 });
 
 document.addEventListener("touchend", (event) => {
+  if (document.body.classList.contains("no-scroll")) return;
   if (!isDragging || isAnimating) return;
 
   isDragging = false;
@@ -445,6 +448,8 @@ const avatarPanelBackdrop =
 topAvatarBtn?.addEventListener("click", (event) => {
   event.stopPropagation();
 
+  resetAvatarPanel();
+
   avatarPanelLayer?.classList.add("is-open");
 
   document.body.classList.add("no-scroll");
@@ -456,6 +461,13 @@ function closeAvatarPanel(){
   avatarPanelLayer?.classList.remove("is-open");
 
   document.body.classList.remove("no-scroll");
+
+  resetAvatarPanel();
+}
+
+function resetAvatarPanel(){
+  avatarSubView?.classList.remove("is-active");
+  avatarHomeView?.classList.add("is-active");
 }
 
 /* =========================
