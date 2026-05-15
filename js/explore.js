@@ -3,9 +3,6 @@ const cards = [
     city: "KUCHING",
     image:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-    title: "Evenings hit different here.",
-    desc:
-      "Locals come here to slow down. Good food, river breeze, and the city lights.",
     place: "Kuching Waterfront",
     subtitle: "Where the river slows the city down.",
     tags: "Riverside · Sunset · Local Life",
@@ -16,126 +13,86 @@ const cards = [
     city: "NATURE",
     image:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80",
-    title: "The rain makes everything quieter.",
-    desc:
-      "A quiet escape for travelers who want mist, trees, and slower mornings.",
     place: "Borneo Rainforest",
+    subtitle: "A quiet escape into mist and trees.",
     tags: "Nature · Hiking · Quiet",
     loved: "Loved by 218 travelers",
-    slug: "Borneo Rainforest"
+    slug: "borneo-rainforest"
   },
   {
     city: "FOOD",
     image:
       "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
-    title: "Small bowls. Big memories.",
-    desc:
-      "Start your morning like a local with warm food and old conversations.",
     place: "Sarawak Laksa Spot",
+    subtitle: "Start your morning like a local.",
     tags: "Breakfast · Local Food · Classic",
     loved: "Loved by 489 travelers",
-    slug: "Sarawak Laksa Spot"
+    slug: "sarawak-laksa-spot"
   },
   {
     city: "CULTURE",
     image:
       "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
-    title: "Some stories are older than roads.",
-    desc:
-      "A slower journey into longhouse life, river culture, and Sarawak memory.",
     place: "Longhouse Experience",
+    subtitle: "Some stories are older than roads.",
     tags: "Culture · River · Local Story",
     loved: "Loved by 156 travelers",
-    slug: "Longhouse Experience"
+    slug: "longhouse-experience"
   }
 ];
 
 const stage = document.getElementById("exploreStage");
-
-const filterToggle =
-  document.getElementById("filterToggle");
-
-const filterPanel =
-  document.getElementById("filterPanel");
-
-const currentFilterLabel =
-  document.getElementById("currentFilterLabel");
+const filterToggle = document.getElementById("filterToggle");
+const filterPanel = document.getElementById("filterPanel");
+const currentFilterLabel = document.getElementById("currentFilterLabel");
 
 let currentIndex = 0;
+let isAnimating = false;
 
 function getCard(index) {
   return cards[(index + cards.length) % cards.length];
 }
 
-/* =========================
-   Filter Toggle
-========================= */
+/* Filter */
 
 filterToggle?.addEventListener("click", (event) => {
   event.stopPropagation();
 
-  const isOpen =
-    filterPanel.classList.toggle("is-open");
-
-  document.body.classList.toggle(
-    "no-scroll",
-    isOpen
-  );
+  const isOpen = filterPanel.classList.toggle("is-open");
+  document.body.classList.toggle("no-scroll", isOpen);
 });
-
-/* =========================
-   Close When Click Outside
-========================= */
 
 document.addEventListener("click", (event) => {
   if (
+    filterPanel &&
+    filterToggle &&
     !filterPanel.contains(event.target) &&
     !filterToggle.contains(event.target)
   ) {
-
     filterPanel.classList.remove("is-open");
-
     document.body.classList.remove("no-scroll");
   }
 });
 
-/* =========================
-   Filter Buttons
-========================= */
-
-document
-  .querySelectorAll(".filter-grid button")
-  .forEach((button) => {
-
-    button.addEventListener("click", () => {
-
-      document
-        .querySelectorAll(".filter-grid button")
-        .forEach((btn) => {
-          btn.classList.remove("active");
-        });
-
-      button.classList.add("active");
-
-      const label = button.textContent;
-
-      currentFilterLabel.textContent = label;
-
-      filterPanel.classList.remove("is-open");
-      document.body.classList.remove("no-scroll");
-
-      console.log("selected filter:", label);
-
-      /*
-        之後這裡可以：
-
-        filter cards
-        fetch supabase
-        rerender explore
-      */
+document.querySelectorAll(".filter-grid button").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".filter-grid button").forEach((btn) => {
+      btn.classList.remove("active");
     });
 
+    button.classList.add("active");
+
+    const label = button.textContent.trim();
+    currentFilterLabel.textContent = label;
+
+    filterPanel.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+
+    console.log("selected filter:", label);
   });
+});
+
+/* Render */
 
 function renderCards() {
   const active = getCard(currentIndex);
@@ -169,7 +126,7 @@ function renderActiveCard(item, index) {
       <div class="card-bottom">
         <div class="place">
           <h3>${item.place}</h3>
-          <p class="subtitle">${item.subtitle}</p>
+          <p class="subtitle">${item.subtitle || ""}</p>
           <div class="tags">${item.tags}</div>
         </div>
 
@@ -209,7 +166,7 @@ function renderBackCard(item, className, index) {
   `;
 }
 
-let isAnimating = false;
+/* Navigation */
 
 function nextCard() {
   if (isAnimating) return;
@@ -251,30 +208,36 @@ function prevCard() {
   }, 420);
 }
 
+function openDetailPage() {
+  const item = getCard(currentIndex);
+  if (!item.slug) return;
+
+  window.location.href = `./components/detail.html?slug=${encodeURIComponent(item.slug)}`;
+}
+
 function bindEvents() {
   document.querySelector(".nav-next")?.addEventListener("click", nextCard);
   document.querySelector(".nav-prev")?.addEventListener("click", prevCard);
 
   document.querySelector(".save")?.addEventListener("click", (event) => {
     event.stopPropagation();
+
     event.currentTarget.classList.toggle("is-saved");
     event.currentTarget.textContent =
       event.currentTarget.classList.contains("is-saved") ? "♥" : "♡";
   });
 
-document.querySelector(".card.active")?.addEventListener("click", () => {
-  const item = getCard(currentIndex);
+  document.querySelector(".card.active")?.addEventListener("click", () => {
+    openDetailPage();
+  });
+}
 
-  if (!item.slug) return;
-
-  openDetail(item.slug);
-});
-
-/* Mobile swipe left / right */
 /* Mobile drag swipe */
+
 let startX = 0;
 let currentX = 0;
 let isDragging = false;
+let hasMoved = false;
 
 const SWIPE_THRESHOLD = 90;
 
@@ -287,6 +250,7 @@ document.addEventListener("touchstart", (event) => {
   startX = event.touches[0].clientX;
   currentX = startX;
   isDragging = true;
+  hasMoved = false;
 
   activeCard.style.transition = "none";
 });
@@ -300,6 +264,11 @@ document.addEventListener("touchmove", (event) => {
   currentX = event.touches[0].clientX;
 
   const diffX = currentX - startX;
+
+  if (Math.abs(diffX) > 8) {
+    hasMoved = true;
+  }
+
   const rotate = diffX * 0.06;
   const opacity = Math.max(1 - Math.abs(diffX) / 420, 0.35);
 
@@ -316,7 +285,6 @@ document.addEventListener("touchend", () => {
   if (!isDragging || isAnimating) return;
 
   isDragging = false;
-  isAnimating = true;
 
   const activeCard = document.querySelector(".card.active");
   const secondCard = document.querySelector(".card.second");
@@ -328,6 +296,13 @@ document.addEventListener("touchend", () => {
 
   activeCard.style.transition =
     "transform .38s cubic-bezier(.22,.9,.28,1), opacity .38s ease";
+
+  if (!hasMoved) {
+    openDetailPage();
+    return;
+  }
+
+  isAnimating = true;
 
   if (Math.abs(diffX) < SWIPE_THRESHOLD) {
     activeCard.style.transform = `
@@ -384,6 +359,7 @@ document.addEventListener("touchend", () => {
 });
 
 /* Desktop keyboard */
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight" || event.key === "ArrowUp") {
     nextCard();
@@ -395,27 +371,3 @@ document.addEventListener("keydown", (event) => {
 });
 
 renderCards();
-
-
-async function openDetail(slug) {
-
-  const container =
-    document.getElementById("detailContainer");
-
-  if (!container.dataset.loaded) {
-
-    const response =
-      await fetch("./components/detail.html");
-
-    const html =
-      await response.text();
-
-    container.innerHTML = html;
-
-    container.dataset.loaded = "true";
-  }
-
-  container.classList.add("is-open");
-
-  loadDetail(slug);
-}
