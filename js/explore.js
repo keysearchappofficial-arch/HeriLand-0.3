@@ -685,17 +685,17 @@ function openAvatarSubPage(pageKey){
       .join("");
   }
 
-  if (page.layout === "info") {
-    avatarSubContent.innerHTML = page.items
-      .map(renderAvatarInfoCard)
-      .join("");
-  }
+if (page.layout === "info") {
+  avatarSubContent.innerHTML = page.items
+    .map(renderAvatarListItem)
+    .join("");
+}
 
-  if (page.layout === "emergency") {
-    avatarSubContent.innerHTML = page.items
-      .map(renderAvatarEmergencyCard)
-      .join("");
-  }
+if (page.layout === "emergency") {
+  avatarSubContent.innerHTML = page.items
+    .map(renderAvatarListItem)
+    .join("");
+}
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
