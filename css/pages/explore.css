@@ -656,3 +656,25 @@ body{
   }
 
 }
+
+.card{
+  transition:
+    transform .42s cubic-bezier(.22,.9,.28,1),
+    opacity .42s ease;
+}
+
+.card.swipe-left{
+  transform:
+    translateX(-145%)
+    rotate(-16deg)
+    scale(.96);
+  opacity:0;
+}
+
+.card.swipe-right{
+  transform:
+    translateX(45%)
+    rotate(16deg)
+    scale(.96);
+  opacity:0;
+}
