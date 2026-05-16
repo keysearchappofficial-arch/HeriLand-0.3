@@ -614,6 +614,83 @@ window.submitReview = function () {
   alert("Review submitted");
 };
 
+const avatarAuthBtn = document.getElementById("avatarAuthBtn");
+const authLayer = document.getElementById("authLayer");
+const authBackdrop = document.getElementById("authBackdrop");
+const authEmail = document.getElementById("authEmail");
+const authPassword = document.getElementById("authPassword");
+const authLoginBtn = document.getElementById("authLoginBtn");
+const authSignupBtn = document.getElementById("authSignupBtn");
+
+async function updateAuthUI(){
+  const user = await getCurrentUser();
+
+  if (!avatarAuthBtn) return;
+
+  avatarAuthBtn.textContent = user ? "Logout" : "Login";
+}
+
+function openAuthModal(){
+  authLayer?.classList.add("is-open");
+  document.body.classList.add("no-scroll");
+}
+
+function closeAuthModal(){
+  authLayer?.classList.remove("is-open");
+  document.body.classList.remove("no-scroll");
+}
+
+avatarAuthBtn?.addEventListener("click", async () => {
+  const user = await getCurrentUser();
+
+  if (user) {
+    await logout();
+    await updateAuthUI();
+    alert("Logged out");
+    return;
+  }
+
+  openAuthModal();
+});
+
+authBackdrop?.addEventListener("click", closeAuthModal);
+
+authLoginBtn?.addEventListener("click", async () => {
+  const email = authEmail?.value.trim();
+  const password = authPassword?.value.trim();
+
+  if (!email || !password) {
+    alert("Please enter email and password.");
+    return;
+  }
+
+  const user = await loginWithEmail(email, password);
+
+  if (!user) return;
+
+  closeAuthModal();
+  await updateAuthUI();
+});
+
+authSignupBtn?.addEventListener("click", async () => {
+  const email = authEmail?.value.trim();
+  const password = authPassword?.value.trim();
+
+  if (!email || !password) {
+    alert("Please enter email and password.");
+    return;
+  }
+
+  const user = await signUpWithEmail(email, password);
+
+  if (!user) return;
+
+  alert("Account created. Please check your email if confirmation is required.");
+  closeAuthModal();
+  await updateAuthUI();
+});
+
+updateAuthUI();
 
 /* =========================
    Avatar Panel
