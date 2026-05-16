@@ -656,43 +656,53 @@ function closeLogoutSheet(){
 }
 
 async function updateAuthUI(){
-
   const user = await getCurrentUser();
 
   if (!user) {
+    if (avatarUserName) {
+      avatarUserName.textContent = "Welcome Traveler";
+    }
 
-    avatarUserName.textContent =
-      "Welcome Traveler";
+    if (avatarUserDesc) {
+      avatarUserDesc.textContent =
+        "Save places, build trips, and contribute to HeriLand.";
+    }
 
-    avatarUserDesc.textContent =
-      "Save places, build trips, and contribute to HeriLand.";
+    if (avatarLoginBtn) {
+      avatarLoginBtn.style.display = "block";
+    }
 
-    avatarLoginBtn.style.display = "block";
-    avatarSignupBtn.style.display = "block";
-
-    avatarSignupBtn.textContent = "Sign Up";
+    if (avatarSignupBtn) {
+      avatarSignupBtn.style.display = "block";
+      avatarSignupBtn.textContent = "Sign Up";
+    }
 
     return;
   }
 
   const profile =
     JSON.parse(
-      localStorage.getItem(
-        "heriland_account_profile"
-      ) || "{}"
+      localStorage.getItem("heriland_account_profile") || "{}"
     );
 
-  avatarUserName.textContent =
-    profile.name ||
-    user.email;
+  if (avatarUserName) {
+    avatarUserName.textContent =
+      profile.name || user.email;
+  }
 
-  avatarUserDesc.textContent =
-    "Travel slowly through Sarawak.";
+  if (avatarUserDesc) {
+    avatarUserDesc.textContent =
+      "Travel slowly through Sarawak.";
+  }
 
-  avatarLoginBtn.style.display = "none";
+  if (avatarLoginBtn) {
+    avatarLoginBtn.style.display = "none";
+  }
 
-  avatarSignupBtn.style.display = "block";
-  avatarSignupBtn.textContent = "Logout";
+  if (avatarSignupBtn) {
+    avatarSignupBtn.style.display = "block";
+    avatarSignupBtn.textContent = "Logout";
+  }
 }
 
 function openAuthModal(){
@@ -704,17 +714,6 @@ function closeAuthModal(){
   authLayer?.classList.remove("is-open");
   document.body.classList.remove("no-scroll");
 }
-
-avatarAuthBtn?.addEventListener("click", async () => {
-  const user = await getCurrentUser();
-
-if (user) {
-  openLogoutSheet();
-  return;
-}
-
-  openAuthModal();
-});
 
 avatarLoginBtn?.addEventListener(
   "click",
