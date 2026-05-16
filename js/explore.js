@@ -1211,13 +1211,21 @@ function bindContributePage(){
 function bindContributionSubmit(){
   document
     .getElementById("contributionSubmitBtn")
-    ?.addEventListener("click", () => {
+    ?.addEventListener("click", async () => {
+
+      const user = await getCurrentUser();
+
+      if (!user) {
+        alert("Please login before submitting.");
+        openAuthModal();
+        return;
+      }
 
       const type =
         document.getElementById("contributionSubmitBtn")?.dataset.type;
 
       const payload = {
-        user_id: "demo-user",
+        user_id: user.id,
         type,
         name: document.getElementById("contributionName")?.value || "",
         city: document.getElementById("contributionCity")?.value || "",
@@ -1242,9 +1250,18 @@ function bindContributionSubmit(){
         return;
       }
 
-      console.log("Contribution payload:", payload);
+      const { error } = await supabase
+        .from("user_submitted_places")
+        .insert(payload);
+
+      if (error) {
+        console.error("Contribution insert failed:", error);
+        alert("Submit failed. Please try again.");
+        return;
+      }
 
       alert("Submitted for review");
+      openAvatarSubPage("contribute");
     });
 }
 
