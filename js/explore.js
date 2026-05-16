@@ -18,14 +18,22 @@ async function toggleSaved(item){
   const alreadySaved = isSaved(item.slug);
 
   if (alreadySaved) {
+    const ok = await updateLovedCount(item.slug, -1);
+
+    if (!ok) return false;
+
     saved = saved.filter(savedItem => savedItem.slug !== item.slug);
-    await updateLovedCount(item.slug, -1);
   } else {
+    const ok = await updateLovedCount(item.slug, 1);
+
+    if (!ok) return false;
+
     saved.unshift(item);
-    await updateLovedCount(item.slug, 1);
   }
 
   saveSavedItems(saved);
+
+  return true;
 }
 
 function getLovedText(item){
@@ -35,32 +43,38 @@ function getLovedText(item){
 async function updateLovedCount(slug, delta){
   const item = allCards.find(card => card.slug === slug);
 
-  if (!item) return;
+  if (!item) return false;
 
   const nextCount =
     Math.max((item.lovedCount || 0) + delta, 0);
 
-  const { error } =
+  const { data, error } =
     await supabase
       .from("explore_items")
       .update({
         loved_count: nextCount
       })
-      .eq("slug", slug);
+      .eq("slug", slug)
+      .select("slug,loved_count")
+      .single();
 
   if (error) {
     console.error("update loved_count failed:", error);
-    return;
+    return false;
   }
 
-  item.lovedCount = nextCount;
+  const finalCount = data?.loved_count ?? nextCount;
+
+  item.lovedCount = finalCount;
 
   const current =
     cards.find(card => card.slug === slug);
 
   if (current) {
-    current.lovedCount = nextCount;
+    current.lovedCount = finalCount;
   }
+
+  return true;
 }
 
 const TRIP_KEY = "heriland_trip_items";
@@ -388,13 +402,14 @@ document.querySelector(".save")?.addEventListener("click", async (event) => {
 
   if (!item) return;
 
-await toggleSaved(item);
+const ok = await toggleSaved(item);
+
+if (!ok) return;
+
 updateAvatarStats();
 renderCards();
 
-  event.currentTarget.classList.toggle("is-saved");
-  event.currentTarget.textContent =
-    event.currentTarget.classList.contains("is-saved") ? "♥" : "♡";
+  
 });
 
 document.querySelector(".card.active")?.addEventListener("click", (event) => {
@@ -1004,22 +1019,31 @@ function bindAvatarPlaceSwipe(pageKey){
         }
       });
 
-      card
-        .querySelector(".avatar-place-delete")
-        ?.addEventListener("click", (event) => {
+card
+  .querySelector(".avatar-place-delete")
+  ?.addEventListener("click", async (event) => {
           event.stopPropagation();
 
           const slug = card.dataset.slug;
           const list = card.dataset.list;
 
-          if (list === "saved") {
-            const next = getSavedItems()
-              .filter(item => item.slug !== slug);
+if (list === "saved") {
+  const existed = getSavedItems()
+    .some(item => item.slug === slug);
 
-            saveSavedItems(next);
-            updateAvatarStats();
-            renderCards();
-          }
+  if (existed) {
+    const ok = await updateLovedCount(slug, -1);
+
+    if (!ok) return;
+  }
+
+  const next = getSavedItems()
+    .filter(item => item.slug !== slug);
+
+  saveSavedItems(next);
+  updateAvatarStats();
+  renderCards();
+}
 
           if (list === "trip") {
             const next = getTripItems()
