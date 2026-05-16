@@ -25,7 +25,7 @@ const rejectConfirmBtn = document.getElementById("rejectConfirmBtn");
 async function loadSubmissions(){
   tableBody.innerHTML = `
     <tr>
-      <td colspan="11">Loading...</td>
+      <td colspan="30">Loading...</td>
     </tr>
   `;
 
@@ -39,7 +39,7 @@ async function loadSubmissions(){
 
     tableBody.innerHTML = `
       <tr>
-        <td colspan="11">Load failed.</td>
+        <td colspan="30">Load failed.</td>
       </tr>
     `;
 
@@ -47,7 +47,6 @@ async function loadSubmissions(){
   }
 
   submissions = data || [];
-
   renderTable();
 }
 
@@ -79,7 +78,7 @@ function renderTable(){
   if (!rows.length) {
     tableBody.innerHTML = `
       <tr>
-        <td colspan="11">No submissions found.</td>
+        <td colspan="30">No submissions found.</td>
       </tr>
     `;
 
@@ -141,7 +140,7 @@ function renderRow(item){
       </td>
 
       <td>
-        <textarea data-field="address">${escapeValue(item.address)}</textarea>
+        <textarea data-field="address">${escapeValue(item.address || item.venue_name)}</textarea>
       </td>
 
       <td>
@@ -150,6 +149,119 @@ function renderRow(item){
 
       <td>
         <textarea data-field="full_description">${escapeValue(item.full_description)}</textarea>
+      </td>
+
+      <td>
+        <textarea data-field="why_recommend">${escapeValue(item.why_recommend)}</textarea>
+      </td>
+
+      <td>
+        <textarea data-field="tags">${escapeValue(formatTagsForInput(item.tags))}</textarea>
+      </td>
+
+      <td>
+        <input
+          data-field="image_url"
+          value="${escapeValue(item.image_url)}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="google_map_url"
+          value="${escapeValue(item.google_map_url)}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="phone"
+          value="${escapeValue(item.phone)}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="website_url"
+          value="${escapeValue(item.website_url)}"
+        >
+      </td>
+
+      <td>
+        <textarea data-field="opening_hours">${escapeValue(formatOpeningHoursForInput(item.opening_hours))}</textarea>
+      </td>
+
+      <td>
+        <input
+          data-field="price_level"
+          value="${escapeValue(item.price_level)}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="event_date"
+          type="date"
+          value="${escapeValue(item.event_date)}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="event_time"
+          value="${escapeValue(item.event_time)}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="organizer"
+          value="${escapeValue(item.organizer)}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="ticket_url"
+          value="${escapeValue(item.ticket_url)}"
+        >
+      </td>
+
+      <td>
+        <textarea data-field="cultural_background">${escapeValue(item.cultural_background)}</textarea>
+      </td>
+
+      <td>
+        <textarea data-field="what_to_notice">${escapeValue(item.what_to_notice)}</textarea>
+      </td>
+
+      <td>
+        <textarea data-field="etiquette_tips">${escapeValue(item.etiquette_tips)}</textarea>
+      </td>
+
+      <td>
+        <input
+          data-field="target_title"
+          value="${escapeValue(item.target_title || item.target_slug || "")}"
+        >
+      </td>
+
+      <td>
+        <input
+          data-field="correction_field"
+          value="${escapeValue(item.correction_field)}"
+        >
+      </td>
+
+      <td>
+        <textarea data-field="correction_detail">${escapeValue(item.correction_detail)}</textarea>
+      </td>
+
+      <td>
+        <input
+          data-field="source_url"
+          value="${escapeValue(item.source_url)}"
+        >
       </td>
 
       <td>
@@ -169,6 +281,10 @@ function renderRow(item){
     </tr>
   `;
 }
+
+/* =========================
+   Options
+========================= */
 
 function renderTypeOptions(value){
   const types = [
@@ -207,12 +323,103 @@ function renderStatusOptions(value){
   `).join("");
 }
 
+/* =========================
+   Helpers
+========================= */
+
 function escapeValue(value){
   return String(value || "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function formatTagsForInput(tags){
+  if (Array.isArray(tags)) {
+    return tags.join(", ");
+  }
+
+  if (typeof tags === "string") {
+    return tags;
+  }
+
+  return "";
+}
+
+function parseTags(value){
+  if (!value) return [];
+
+  return String(value)
+    .split(",")
+    .map(tag => tag.trim())
+    .filter(Boolean);
+}
+
+function formatOpeningHoursForInput(value){
+  if (!value) return "";
+
+  if (typeof value === "string") {
+    return value;
+  }
+
+  if (value.label) {
+    return value.label;
+  }
+
+  return JSON.stringify(value);
+}
+
+function buildOpeningHours(value){
+  if (!value) return null;
+
+  return {
+    label: value
+  };
+}
+
+function generateSlug(text = ""){
+  const base =
+    text
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  return `${base || "heriland"}-${Date.now()}`;
+}
+
+function getFallbackImage(type){
+  const map = {
+    place:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80",
+
+    restaurant:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+
+    event:
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=80",
+
+    culture:
+      "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1400&q=80",
+
+    "travel-tip":
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80"
+  };
+
+  return map[type] || map.place;
+}
+
+function getExploreContentType(type){
+  const map = {
+    place: "spot",
+    restaurant: "restaurant",
+    event: "event",
+    culture: "culture",
+    "travel-tip": "experience"
+  };
+
+  return map[type] || "spot";
 }
 
 /* =========================
@@ -225,12 +432,36 @@ function getRowPayload(row){
   row
     .querySelectorAll("[data-field]")
     .forEach((field) => {
-      payload[field.dataset.field] = field.value;
+      const key = field.dataset.field;
+
+      if (key === "tags") {
+        payload[key] = parseTags(field.value);
+        return;
+      }
+
+      if (key === "opening_hours") {
+        payload[key] = buildOpeningHours(field.value.trim());
+        return;
+      }
+
+      payload[key] = field.value;
     });
 
   payload.updated_at = new Date().toISOString();
 
   return payload;
+}
+
+async function getSubmissionFromRow(id){
+  const row =
+    document.querySelector(`tr[data-id="${id}"]`);
+
+  if (!row) return null;
+
+  return {
+    ...submissions.find(item => item.id === id),
+    ...getRowPayload(row)
+  };
 }
 
 /* =========================
@@ -263,6 +494,365 @@ async function saveRow(id){
   }
 
   await loadSubmissions();
+}
+
+/* =========================
+   Publish Pipeline
+========================= */
+
+async function publishSubmission(submission){
+  if (!submission) return false;
+
+  if (submission.type === "correction") {
+    alert("Correction should not be published directly. Please update the target content manually.");
+    return false;
+  }
+
+  const slug =
+    submission.slug ||
+    generateSlug(submission.name);
+
+  const image =
+    submission.image_url ||
+    getFallbackImage(submission.type);
+
+  if (submission.type === "place" || submission.type === "restaurant") {
+    return publishPlace(submission, slug, image);
+  }
+
+  if (submission.type === "event") {
+    return publishEvent(submission, slug, image);
+  }
+
+  if (submission.type === "culture") {
+    return publishCulture(submission, slug, image);
+  }
+
+  if (submission.type === "travel-tip") {
+    return publishTravelerStory(submission, slug, image);
+  }
+
+  return false;
+}
+
+async function publishPlace(submission, slug, image){
+  const placePayload = {
+    slug,
+
+    type:
+      submission.type === "restaurant"
+        ? "restaurant"
+        : "place",
+
+    title:
+      submission.name,
+
+    city:
+      submission.city,
+
+    area:
+      submission.area,
+
+    address:
+      submission.address,
+
+    short_description:
+      submission.short_description,
+
+    full_description:
+      submission.full_description,
+
+    opening_hours:
+      submission.opening_hours || null,
+
+    phone:
+      submission.phone,
+
+    website_url:
+      submission.website_url,
+
+    google_map_url:
+      submission.google_map_url,
+
+    price_level:
+      submission.price_level,
+
+    hero_image_url:
+      image,
+
+    card_image_url:
+      image,
+
+    gallery_urls:
+      [],
+
+    tags:
+      Array.isArray(submission.tags)
+        ? submission.tags
+        : parseTags(submission.tags),
+
+    status:
+      "published"
+  };
+
+  const { error } = await supabase
+    .from("heriland_places")
+    .insert(placePayload);
+
+  if (error) {
+    console.error("heriland_places insert failed:", error);
+    alert(error.message || "Place publish failed.");
+    return false;
+  }
+
+  return publishExploreItem(submission, slug, image);
+}
+
+async function publishEvent(submission, slug, image){
+  const eventPayload = {
+    slug,
+
+    title:
+      submission.name,
+
+    city:
+      submission.city,
+
+    area:
+      submission.area,
+
+    venue_name:
+      submission.venue_name || submission.address,
+
+    address:
+      submission.address,
+
+    summary:
+      submission.short_description,
+
+    content:
+      submission.full_description,
+
+    start_date:
+      submission.event_date || null,
+
+    end_date:
+      submission.event_date || null,
+
+    time_rule:
+      submission.event_time
+        ? { label: submission.event_time }
+        : null,
+
+    organizer:
+      submission.organizer,
+
+    ticket_url:
+      submission.ticket_url,
+
+    google_map_url:
+      submission.google_map_url,
+
+    hero_image_url:
+      image,
+
+    card_image_url:
+      image,
+
+    gallery_urls:
+      [],
+
+    tags:
+      Array.isArray(submission.tags)
+        ? submission.tags
+        : parseTags(submission.tags),
+
+    status:
+      "published"
+  };
+
+  const { error } = await supabase
+    .from("heriland_events")
+    .insert(eventPayload);
+
+  if (error) {
+    console.error("heriland_events insert failed:", error);
+    alert(error.message || "Event publish failed.");
+    return false;
+  }
+
+  return publishExploreItem(submission, slug, image);
+}
+
+async function publishCulture(submission, slug, image){
+  const culturePayload = {
+    slug,
+
+    title:
+      submission.name,
+
+    city:
+      submission.city,
+
+    area:
+      submission.area,
+
+    address:
+      submission.address,
+
+    short_description:
+      submission.short_description,
+
+    intro:
+      submission.full_description,
+
+    cultural_background:
+      submission.cultural_background,
+
+    what_to_notice:
+      submission.what_to_notice,
+
+    etiquette_tips:
+      submission.etiquette_tips,
+
+    google_map_url:
+      submission.google_map_url,
+
+    hero_image_url:
+      image,
+
+    card_image_url:
+      image,
+
+    gallery_urls:
+      [],
+
+    tags:
+      Array.isArray(submission.tags)
+        ? submission.tags
+        : parseTags(submission.tags),
+
+    status:
+      "published"
+  };
+
+  const { error } = await supabase
+    .from("heriland_cultures")
+    .insert(culturePayload);
+
+  if (error) {
+    console.error("heriland_cultures insert failed:", error);
+    alert(error.message || "Culture publish failed.");
+    return false;
+  }
+
+  return publishExploreItem(submission, slug, image);
+}
+
+async function publishTravelerStory(submission, slug, image){
+  const storyPayload = {
+    slug,
+
+    title:
+      submission.name,
+
+    city:
+      submission.city,
+
+    area:
+      submission.area,
+
+    short_description:
+      submission.short_description,
+
+    story:
+      submission.full_description,
+
+    why_recommend:
+      submission.why_recommend,
+
+    google_map_url:
+      submission.google_map_url,
+
+    hero_image_url:
+      image,
+
+    card_image_url:
+      image,
+
+    gallery_urls:
+      [],
+
+    tags:
+      Array.isArray(submission.tags)
+        ? submission.tags
+        : parseTags(submission.tags),
+
+    status:
+      "published"
+  };
+
+  const { error } = await supabase
+    .from("heriland_traveler_stories")
+    .insert(storyPayload);
+
+  if (error) {
+    console.error("heriland_traveler_stories insert failed:", error);
+    alert(error.message || "Traveler story publish failed.");
+    return false;
+  }
+
+  return publishExploreItem(submission, slug, image);
+}
+
+async function publishExploreItem(submission, slug, image){
+  const explorePayload = {
+    slug,
+
+    content_type:
+      getExploreContentType(submission.type),
+
+    city:
+      submission.city,
+
+    title:
+      submission.name,
+
+    subtitle:
+      submission.short_description || "",
+
+    tags:
+      Array.isArray(submission.tags)
+        ? submission.tags.join(", ")
+        : submission.tags || "",
+
+    image_url:
+      image,
+
+    loved_text:
+      "New from travelers",
+
+    loved_count:
+      0,
+
+    sort_order:
+      999,
+
+    is_active:
+      true
+  };
+
+  const { error } = await supabase
+    .from("explore_items")
+    .insert(explorePayload);
+
+  if (error) {
+    console.error("explore_items insert failed:", error);
+    alert(error.message || "Explore card publish failed.");
+    return false;
+  }
+
+  return true;
 }
 
 /* =========================
@@ -323,284 +913,8 @@ function getSelectedIds(){
 }
 
 /* =========================
-   Publish Pipeline
-========================= */
-
-function generateSlug(text = ""){
-
-  return (
-    text
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "") +
-    "-" +
-    Date.now()
-  );
-
-}
-
-function getContentType(type){
-
-  const map = {
-    place: "spot",
-    restaurant: "restaurant",
-    culture: "culture",
-    event: "event",
-    "travel-tip": "culture",
-    correction: "culture"
-  };
-
-  return map[type] || "spot";
-
-}
-
-function getFallbackImage(type){
-
-  const map = {
-
-    place:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200",
-
-    restaurant:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200",
-
-    event:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200",
-
-    culture:
-      "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200"
-
-  };
-
-  return map[type] || map.place;
-
-}
-
-async function publishSubmission(submission){
-
-  const slug =
-    generateSlug(submission.name);
-
-  const image =
-    submission.image_url ||
-    getFallbackImage(submission.type);
-
-  /* =========================
-     EVENT
-  ========================= */
-
-  if (submission.type === "event") {
-
-    const eventPayload = {
-
-      slug,
-
-      title:
-        submission.name,
-
-      city:
-        submission.city,
-
-      area:
-        submission.area,
-
-      venue_name:
-        submission.address,
-
-      address:
-        submission.address,
-
-      summary:
-        submission.short_description,
-
-      content:
-        submission.full_description,
-
-      start_date:
-        submission.event_date,
-
-      end_date:
-        submission.event_date,
-
-      organizer:
-        submission.organizer,
-
-      ticket_url:
-        submission.ticket_url,
-
-      google_map_url:
-        submission.google_map_url,
-
-      hero_image_url:
-        image,
-
-      card_image_url:
-        image,
-
-      status:
-        "published"
-
-    };
-
-    const { error:eventError } =
-      await supabase
-        .from("events")
-        .insert(eventPayload);
-
-    if (eventError) {
-      console.error("event insert failed", eventError);
-      return false;
-    }
-
-  }
-
-  /* =========================
-     PLACE / RESTAURANT / CULTURE
-  ========================= */
-
-  else {
-
-    const placePayload = {
-
-      slug,
-
-      type:
-        getContentType(submission.type),
-
-      name:
-        submission.name,
-
-      city:
-        submission.city,
-
-      area:
-        submission.area,
-
-      address:
-        submission.address,
-
-      short_description:
-        submission.short_description,
-
-      full_description:
-        submission.full_description,
-
-      hero_image_url:
-        image,
-
-      card_image_url:
-        image,
-
-      phone:
-        submission.phone,
-
-      website_url:
-        submission.website_url,
-
-      google_map_url:
-        submission.google_map_url,
-
-      status:
-        "published"
-
-    };
-
-    const { error:placeError } =
-      await supabase
-        .from("places")
-        .insert(placePayload);
-
-    if (placeError) {
-      console.error("place insert failed", placeError);
-      return false;
-    }
-
-  }
-
-  /* =========================
-     EXPLORE CARD
-  ========================= */
-
-  const explorePayload = {
-
-    slug,
-
-    content_type:
-      getContentType(submission.type),
-
-    city:
-      submission.city,
-
-    title:
-      submission.name,
-
-    subtitle:
-      submission.short_description || "",
-
-    tags:
-      submission.area || "",
-
-    image_url:
-      image,
-
-    loved_text:
-      "New from travelers",
-
-    loved_count:
-      0,
-
-    is_active:
-      true
-
-  };
-
-  const { error:exploreError } =
-    await supabase
-      .from("explore_items")
-      .insert(explorePayload);
-
-  if (exploreError) {
-    console.error(
-      "explore insert failed",
-      exploreError
-    );
-
-    return false;
-  }
-
-  return true;
-
-}
-
-/* =========================
    Batch
 ========================= */
-
-async function batchUpdateStatus(status){
-  const ids = getSelectedIds();
-
-  if (!ids.length) {
-    alert("Please select at least one row.");
-    return;
-  }
-
-  const { error } = await supabase
-    .from("user_submitted_places")
-    .update({
-      status,
-      updated_at: new Date().toISOString()
-    })
-    .in("id", ids);
-
-  if (error) {
-    console.error(error);
-    alert("Batch update failed.");
-    return;
-  }
-
-  await loadSubmissions();
-}
 
 async function batchSaveEdited(){
   const ids = getSelectedIds();
@@ -611,21 +925,7 @@ async function batchSaveEdited(){
   }
 
   for (const id of ids) {
-    const row =
-      document.querySelector(`tr[data-id="${id}"]`);
-
-    if (!row) continue;
-
-    const payload = getRowPayload(row);
-
-    const { error } = await supabase
-      .from("user_submitted_places")
-      .update(payload)
-      .eq("id", id);
-
-    if (error) {
-      console.error("Save failed:", id, error);
-    }
+    await saveRow(id);
   }
 
   await loadSubmissions();
@@ -667,48 +967,43 @@ checkAll?.addEventListener("change", () => {
     });
 });
 
-batchPublishBtn?.addEventListener(
-  "click",
-  async () => {
+batchPublishBtn?.addEventListener("click", async () => {
+  const ids = getSelectedIds();
 
-    const ids = getSelectedIds();
+  if (!ids.length) {
+    alert("Please select at least one row.");
+    return;
+  }
 
-    if (!ids.length) {
-      alert("Please select at least one row.");
+  for (const id of ids) {
+    const submission =
+      await getSubmissionFromRow(id);
+
+    if (!submission) continue;
+
+    const ok =
+      await publishSubmission(submission);
+
+    if (!ok) return;
+
+    const { error } = await supabase
+      .from("user_submitted_places")
+      .update({
+        status: "published",
+        updated_at: new Date().toISOString()
+      })
+      .eq("id", id);
+
+    if (error) {
+      console.error("submission status update failed:", error);
+      alert("Published content, but failed to update submission status.");
       return;
     }
-
-    for (const id of ids) {
-
-      const submission =
-        submissions.find(item => item.id === id);
-
-      if (!submission) continue;
-
-      const ok =
-        await publishSubmission(submission);
-
-      if (!ok) {
-        alert("Publish failed.");
-        return;
-      }
-
-      await supabase
-        .from("user_submitted_places")
-        .update({
-          status: "published",
-          updated_at: new Date().toISOString()
-        })
-        .eq("id", id);
-
-    }
-
-    alert("Published successfully.");
-
-    await loadSubmissions();
-
   }
-);
+
+  alert("Published successfully.");
+  await loadSubmissions();
+});
 
 batchRejectBtn?.addEventListener("click", () => {
   const ids = getSelectedIds();
