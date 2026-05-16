@@ -51,6 +51,12 @@ body.no-scroll{
   overflow:hidden;
 }
 
+input,
+textarea,
+select{
+  font-size:16px;
+}
+
 /* =========================
    App
 ========================= */
