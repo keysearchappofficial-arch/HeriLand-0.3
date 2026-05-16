@@ -441,6 +441,7 @@ let isDragging = false;
 let hasMoved = false;
 let avatarCurrentPageKey = null;
 let avatarSupportMode = false;
+let avatarContributeMode = false;
 
 const SWIPE_THRESHOLD = 90;
 
@@ -853,6 +854,12 @@ avatarSubBack?.addEventListener("click", () => {
     return;
   }
 
+  if (avatarContributeMode && avatarCurrentPageKey === "contribute") {
+    avatarContributeMode = false;
+    openAvatarSubPage("contribute");
+    return;
+  }
+
   avatarSubView?.classList.remove("is-active");
   avatarHomeView?.classList.add("is-active");
 });
@@ -861,6 +868,7 @@ function openAvatarSubPage(pageKey){
   const page = avatarPages[pageKey];
   avatarCurrentPageKey = pageKey;
   avatarSupportMode = false;
+  avatarContributeMode = false;
 
   if (!page) return;
   
@@ -1023,6 +1031,7 @@ function bindContributePage(){
 }
 
 function openContributionForm(type){
+  avatarContributeMode = true;
 
   avatarSubTitle.textContent =
     "Contribute";
