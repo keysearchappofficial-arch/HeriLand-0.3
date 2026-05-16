@@ -59,9 +59,10 @@ function formatTravelerLocation(data){
 async function loadTravelerDetail(slug){
 
   const { data, error } = await supabase
-    .from("places")
+    .from("heriland_traveler_stories")
     .select("*")
     .eq("slug", slug)
+    .eq("status", "published")
     .single();
 
   if (error) {
@@ -90,23 +91,26 @@ async function loadTravelerDetail(slug){
   ].filter(Boolean);
 
   renderTravelerDetail({
-    kicker: "Traveler Experience",
+    kicker:
+      "Traveler Experience",
 
     name:
-      data.name || "Traveler Experience",
+      data.title || "Traveler Experience",
 
     achievement:
-      `${formatTravelerLocation(data)} ・ Traveler Experience`,
+      `${formatTravelerLocation(data)} ・ Travel Tip`,
 
     guide:
       data.short_description ||
+      data.why_recommend ||
       "A slower way to experience Sarawak.",
 
     title:
-      data.name || "Traveler Experience",
+      data.title || "Traveler Experience",
 
     story:
-      data.full_description ||
+      data.story ||
+      data.why_recommend ||
       data.short_description ||
       "No traveler experience yet.",
 
