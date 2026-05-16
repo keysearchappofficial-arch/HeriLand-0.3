@@ -406,6 +406,11 @@ if (type === "experience") {
   return;
 }
 
+if (type === "culture") {
+  window.openTravelerDetail?.(slug);
+  return;
+}
+
   window.openDetail?.(slug);
 }
 
