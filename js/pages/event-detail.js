@@ -334,20 +334,18 @@ document
   .getElementById("eventDetailSaveBtn")
   ?.addEventListener("click", async () => {
 
-    const item =
-      window.currentOpenedItem;
+    const loggedIn = await requireLogin("save events");
+    if (!loggedIn) return;
 
+    const item = window.currentOpenedItem;
     if (!item) return;
 
-    const ok =
-      await toggleSaved(item);
-
+    const ok = await toggleSaved(item);
     if (!ok) return;
 
     updateAvatarStats();
     renderCards();
     syncEventSaveButton();
-
   });
 
 /* =========================
@@ -376,17 +374,17 @@ document
    Placeholder Actions
 ========================= */
 
-window.addEventToTrip = function () {
-  const item = window.currentOpenedItem;
+window.addEventToTrip = async function () {
+  const loggedIn = await requireLogin("add events to your trip");
+  if (!loggedIn) return;
 
+  const item = window.currentOpenedItem;
   if (!item) return;
 
   addToTrip(item);
   updateAvatarStats();
 
-  document
-    .getElementById("eventMoreLayer")
-    ?.classList.remove("is-open");
+  document.getElementById("eventMoreLayer")?.classList.remove("is-open");
 
   alert("Added to My Trip");
 };
