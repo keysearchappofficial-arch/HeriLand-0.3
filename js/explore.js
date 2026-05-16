@@ -1069,7 +1069,12 @@ avatarSubBack?.addEventListener("click", () => {
   avatarHomeView?.classList.add("is-active");
 });
 
-function openAvatarSubPage(pageKey){
+async function openAvatarSubPage(pageKey){
+  if (pageKey === "contribute") {
+  const loggedIn = await requireLogin("contribute");
+  if (!loggedIn) return;
+}
+
   const page = avatarPages[pageKey];
   avatarCurrentPageKey = pageKey;
   avatarSupportMode = false;
@@ -1223,6 +1228,8 @@ function bindContributePage(){
     .forEach((button) => {
 
       button.addEventListener("click", () => {
+        const pageKey = button.dataset.avatarPage;
+  await openAvatarSubPage(pageKey);
 
         const type =
           button.dataset.contributeType;
