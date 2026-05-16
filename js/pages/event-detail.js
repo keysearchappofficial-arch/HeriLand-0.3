@@ -67,9 +67,10 @@ function normalizeEventTags(tags){
 async function loadEventDetail(slug){
 
   const { data, error } = await supabase
-    .from("events")
+    .from("heriland_events")
     .select("*")
     .eq("slug", slug)
+    .eq("status", "published")
     .single();
 
   if (error) {
@@ -107,7 +108,7 @@ async function loadEventDetail(slug){
   ].filter(Boolean);
 
   renderEventDetail({
-    type: data.type || "Event",
+    type: "Event",
 
     location:
       `${data.city || "Sarawak"}${data.area ? " · " + data.area : ""}`,
@@ -119,33 +120,25 @@ async function loadEventDetail(slug){
       formatEventDate(data.start_date),
 
     time:
-      data.time_rule?.label ||
-      "Time TBC",
+      data.time_rule?.label || "Time TBC",
 
     venueMini:
-      data.venue_name ||
-      "Venue TBC",
+      data.venue_name || "Venue TBC",
 
     venue:
-      data.venue_name ||
-      "Venue TBC",
+      data.venue_name || "Venue TBC",
 
     address:
-      data.address ||
-      "Address not available",
+      data.address || "Address not available",
 
     organizer:
-      data.organizer ||
-      "Organizer TBC",
+      data.organizer || "Organizer TBC",
 
     ai:
-      data.summary ||
-      "A local event shared by travelers.",
+      data.summary || "A local event shared by travelers.",
 
     desc:
-      data.content ||
-      data.summary ||
-      "No event detail yet.",
+      data.content || data.summary || "No event detail yet.",
 
     goodToKnow:
       [],
@@ -154,19 +147,16 @@ async function loadEventDetail(slug){
       normalizeEventTags(data.tags),
 
     ticket:
-      data.ticket_url ||
-      "#",
+      data.ticket_url || "#",
 
     map:
-      data.google_map_url ||
-      "#",
+      data.google_map_url || "#",
 
     nearby:
       "Explore nearby restaurants, river walks, or local places around this event.",
 
     images
   });
-
 }
 
 /* =========================
