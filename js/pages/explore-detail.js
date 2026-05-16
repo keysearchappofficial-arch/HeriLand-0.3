@@ -227,12 +227,20 @@ document
   .getElementById("detailSaveBtn")
   ?.addEventListener("click", (event) => {
 
-    event.currentTarget.classList.toggle("is-saved");
+    if (!window.currentOpenedItem && !currentOpenedItem) return;
+
+    const item = currentOpenedItem;
+
+    toggleSaved(item);
+    updateAvatarStats();
+    renderCards();
+
+    const saved = isSaved(item.slug);
+
+    event.currentTarget.classList.toggle("is-saved", saved);
 
     event.currentTarget.textContent =
-      event.currentTarget.classList.contains("is-saved")
-        ? "♥"
-        : "♡";
+      saved ? "♥" : "♡";
   });
 
 /* =========================
