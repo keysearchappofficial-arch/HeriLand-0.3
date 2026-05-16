@@ -814,38 +814,7 @@ settings: {
   title: "Settings",
   kicker: "Preferences",
   layout: "info",
-  items: [
-    {
-      title: "Language",
-      text: "English",
-      action: "Change"
-    },
-    {
-      title: "Notifications",
-      text: "Travel reminders and saved trip alerts.",
-      action: "Manage"
-    },
-    {
-      title: "Appearance",
-      text: "System / Dark",
-      action: "Change"
-    },
-    {
-      title: "Map Preference",
-      text: "Google Maps",
-      action: "Change"
-    },
-    {
-      title: "Content Preference",
-      text: "Nature · Food · Culture",
-      action: "Edit"
-    },
-    {
-      title: "About HeriLand",
-      text: "Version 1.0",
-      action: "View"
-    }
-  ]
+  items: []
 }
 };
 
@@ -916,6 +885,11 @@ if (pageKey === "reviews") {
       .map(renderAvatarListItem)
       .join("");
   }
+  
+if (page.layout === "settings") {
+  avatarSubContent.innerHTML = renderSettingsPage();
+  bindSettingsPage();
+}
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
@@ -1001,6 +975,92 @@ function renderAvatarListItem(item){
 
     </div>
   `;
+}
+
+function renderSettingsPage(){
+  return `
+    <div class="settings-list">
+
+      <div class="settings-row">
+        <div>
+          <h4>Language</h4>
+          <p>Choose your display language.</p>
+        </div>
+
+        <select id="settingLanguage">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+        </select>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <h4>Notification</h4>
+          <p>Travel reminders and saved trip alerts.</p>
+        </div>
+
+        <button
+          class="setting-switch is-on"
+          id="settingNotification"
+          type="button"
+        >
+          <span></span>
+        </button>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <h4>Appearance</h4>
+          <p>Choose how HeriLand looks.</p>
+        </div>
+
+        <div class="setting-segment" id="settingAppearance">
+          <button type="button" data-value="system" class="active">System</button>
+          <button type="button" data-value="light">Light</button>
+          <button type="button" data-value="dark">Dark</button>
+        </div>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <h4>Map</h4>
+          <p>Choose your preferred map app.</p>
+        </div>
+
+        <select id="settingMap">
+          <option value="apple">Apple Map</option>
+          <option value="google">Google Map</option>
+        </select>
+      </div>
+
+      <div class="settings-about">
+        <h4>About HeriLand</h4>
+        <p>Version 1.0 · Explore Sarawak slowly.</p>
+      </div>
+
+    </div>
+  `;
+}
+
+function bindSettingsPage(){
+  const notification =
+    document.getElementById("settingNotification");
+
+  notification?.addEventListener("click", () => {
+    notification.classList.toggle("is-on");
+  });
+
+  document
+    .querySelectorAll("#settingAppearance button")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        document
+          .querySelectorAll("#settingAppearance button")
+          .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+      });
+    });
 }
 
 function bindAvatarPlaceSwipe(pageKey){
