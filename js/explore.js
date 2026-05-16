@@ -785,41 +785,36 @@ contribute: {
   kicker: "Share with Travelers",
   layout: "contribute",
   items: [
-    {
-      type: "place",
-      title: "Place",
-      text: "Share scenic spots, hidden gems, nature places, or local attractions."
-    },
-
-    {
-      type: "restaurant",
-      title: "Restaurant",
-      text: "Recommend local food, cafes, hawker spots, or unique dining experiences."
-    },
-
-    {
-      type: "event",
-      title: "Event",
-      text: "Share festivals, cultural events, markets, or local activities."
-    },
-
-    {
-      type: "culture",
-      title: "Culture",
-      text: "Introduce local traditions, longhouses, crafts, or cultural experiences."
-    },
-
-    {
-      type: "travel-tip",
-      title: "Travel Tip",
-      text: "Help travelers with useful local tips or transportation advice."
-    },
-
-    {
-      type: "correction",
-      title: "Suggest Correction",
-      text: "Help improve outdated information or wrong details."
-    }
+{
+  type: "place",
+  title: "Place",
+  text: "Share scenic spots, hidden gems, nature places, or local attractions."
+},
+{
+  type: "restaurant",
+  title: "Restaurant",
+  text: "Recommend local food, cafes, hawker spots, or unique dining experiences."
+},
+{
+  type: "event",
+  title: "Event",
+  text: "Share festivals, cultural events, markets, or local activities."
+},
+{
+  type: "culture",
+  title: "Culture",
+  text: "Introduce local traditions, longhouses, crafts, or cultural experiences."
+},
+{
+  type: "travel-tip",
+  title: "Travel Tip",
+  text: "Help travelers with useful local tips or transportation advice."
+},
+{
+  type: "correction",
+  title: "Suggest Correction",
+  text: "Help improve outdated information or wrong details."
+}
   ]
 },
 
@@ -1030,14 +1025,52 @@ function bindContributePage(){
 
 }
 
+function bindContributionSubmit(){
+  document
+    .getElementById("contributionSubmitBtn")
+    ?.addEventListener("click", () => {
+
+      const type =
+        document.getElementById("contributionSubmitBtn")?.dataset.type;
+
+      const payload = {
+        user_id: "demo-user",
+        type,
+        name: document.getElementById("contributionName")?.value || "",
+        city: document.getElementById("contributionCity")?.value || "",
+        area: document.getElementById("contributionArea")?.value || "",
+        address: document.getElementById("contributionAddress")?.value || "",
+        short_description: document.getElementById("contributionShortDescription")?.value || "",
+        full_description: document.getElementById("contributionFullDescription")?.value || "",
+        why_recommend: document.getElementById("contributionWhy")?.value || "",
+        phone: document.getElementById("contributionPhone")?.value || "",
+        website_url: document.getElementById("contributionWebsite")?.value || "",
+        google_map_url: document.getElementById("contributionMap")?.value || "",
+        image_url: document.getElementById("contributionImage")?.value || "",
+        event_date: document.getElementById("contributionEventDate")?.value || null,
+        event_time: document.getElementById("contributionEventTime")?.value || "",
+        organizer: document.getElementById("contributionOrganizer")?.value || "",
+        ticket_url: document.getElementById("contributionTicket")?.value || "",
+        status: "pending"
+      };
+
+      if (!payload.name || !payload.city || !payload.type) {
+        alert("Please fill in the required fields.");
+        return;
+      }
+
+      console.log("Contribution payload:", payload);
+
+      alert("Submitted for review");
+    });
+}
+
 function openContributionForm(type){
+
   avatarContributeMode = true;
 
-  avatarSubTitle.textContent =
-    "Contribute";
-
-  avatarSubKicker.textContent =
-    "Share with Travelers";
+  avatarSubTitle.textContent = "Contribute";
+  avatarSubKicker.textContent = "Share with Travelers";
 
   avatarSubContent.innerHTML = `
     <div class="contribution-form">
@@ -1048,41 +1081,218 @@ function openContributionForm(type){
 
       <div class="contribution-form-grid">
 
-        <input
-          class="contribution-input"
-          placeholder="Title"
-        >
-
-        <input
-          class="contribution-input"
-          placeholder="Location"
-        >
-
-        <textarea
-          class="contribution-textarea"
-          placeholder="Tell travelers more about this..."
-        ></textarea>
-
-        <input
-          class="contribution-input"
-          placeholder="Tags"
-        >
-
-        <input
-          class="contribution-input"
-          placeholder="Website or Social Link"
-        >
+        ${renderContributionFields(type)}
 
       </div>
 
       <button
         class="contribution-submit"
+        id="contributionSubmitBtn"
         type="button"
+        data-type="${type}"
       >
         Submit for Review
       </button>
 
     </div>
+  `;
+
+  bindContributionSubmit();
+}
+
+function renderContributionFields(type){
+
+  const commonBase = `
+    <input
+      class="contribution-input"
+      id="contributionName"
+      placeholder="Name / Title"
+    >
+
+    <select
+      class="contribution-input"
+      id="contributionCity"
+    >
+      <option value="kuching">Kuching</option>
+      <option value="sibu">Sibu</option>
+      <option value="miri">Miri</option>
+      <option value="bintulu">Bintulu</option>
+    </select>
+
+    <input
+      class="contribution-input"
+      id="contributionArea"
+      placeholder="Area"
+    >
+  `;
+
+  const descriptionFields = `
+    <input
+      class="contribution-input"
+      id="contributionShortDescription"
+      placeholder="Short description"
+    >
+
+    <textarea
+      class="contribution-textarea"
+      id="contributionFullDescription"
+      placeholder="Full description"
+    ></textarea>
+  `;
+
+  const contactFields = `
+    <input
+      class="contribution-input"
+      id="contributionPhone"
+      placeholder="Phone"
+    >
+
+    <input
+      class="contribution-input"
+      id="contributionWebsite"
+      placeholder="Website URL"
+    >
+
+    <input
+      class="contribution-input"
+      id="contributionMap"
+      placeholder="Google Map URL"
+    >
+
+    <input
+      class="contribution-input"
+      id="contributionImage"
+      placeholder="Image URL"
+    >
+  `;
+
+  if (
+    type === "place" ||
+    type === "restaurant" ||
+    type === "culture"
+  ) {
+    return `
+      ${commonBase}
+
+      <input
+        class="contribution-input"
+        id="contributionAddress"
+        placeholder="Address"
+      >
+
+      ${descriptionFields}
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionWhy"
+        placeholder="Why do you recommend this?"
+      ></textarea>
+
+      ${contactFields}
+    `;
+  }
+
+  if (type === "event") {
+    return `
+      ${commonBase}
+
+      <input
+        class="contribution-input"
+        id="contributionAddress"
+        placeholder="Venue / Address"
+      >
+
+      ${descriptionFields}
+
+      <input
+        class="contribution-input"
+        id="contributionEventDate"
+        type="date"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionEventTime"
+        placeholder="Event time, e.g. 6:00 PM"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionOrganizer"
+        placeholder="Organizer"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionTicket"
+        placeholder="Ticket / More Info URL"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionMap"
+        placeholder="Google Map URL"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionImage"
+        placeholder="Image URL"
+      >
+    `;
+  }
+
+  if (type === "travel-tip") {
+    return `
+      ${commonBase}
+
+      <input
+        class="contribution-input"
+        id="contributionShortDescription"
+        placeholder="Short tip"
+      >
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionFullDescription"
+        placeholder="Tell travelers your local tip."
+      ></textarea>
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionWhy"
+        placeholder="Why is this useful?"
+      ></textarea>
+    `;
+  }
+
+  if (type === "correction") {
+    return `
+      ${commonBase}
+
+      <input
+        class="contribution-input"
+        id="contributionMap"
+        placeholder="Related Google Map URL"
+      >
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionFullDescription"
+        placeholder="What information should be corrected?"
+      ></textarea>
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionWhy"
+        placeholder="Where did you find the correct information?"
+      ></textarea>
+    `;
+  }
+
+  return `
+    ${commonBase}
+    ${descriptionFields}
   `;
 }
 
