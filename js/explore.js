@@ -2108,6 +2108,7 @@ function renderAccountPage(){
 
       <button
         class="account-signout-btn"
+        id="accountSignOutBtn"
         type="button"
       >
         Sign Out
@@ -2137,6 +2138,27 @@ function bindAccountPage(){
 
     alert("Account updated");
   });
+  
+const signOutBtn =
+  document.getElementById("accountSignOutBtn");
+
+signOutBtn?.addEventListener("click", async () => {
+
+  const ok =
+    confirm("Sign out from HeriLand?");
+
+  if (!ok) return;
+
+  await logout();
+
+  closeAvatarPanel?.();
+
+  await updateAuthUI();
+
+  alert("Signed out");
+
+});
+
 }
 
 function renderSettingsPage(){
