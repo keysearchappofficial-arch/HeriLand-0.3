@@ -15,6 +15,8 @@ window.openDetail = async function (slug) {
 
   await loadDetail(slug);
 
+  syncDetailSaveButton();
+
 };
 
 /* =========================
@@ -223,24 +225,41 @@ function renderGallery(images) {
    Save
 ========================= */
 
+function syncDetailSaveButton(){
+  const saveBtn =
+    document.getElementById("detailSaveBtn");
+
+  const item =
+    window.currentOpenedItem;
+
+  if (!saveBtn || !item) return;
+
+  const saved =
+    isSaved(item.slug);
+
+  saveBtn.classList.toggle("is-saved", saved);
+
+  saveBtn.textContent =
+    saved ? "♥" : "♡";
+}
+
 document
   .getElementById("detailSaveBtn")
-  ?.addEventListener("click", (event) => {
+  ?.addEventListener("click", async (event) => {
 
-    if (!window.currentOpenedItem && !currentOpenedItem) return;
+    const item =
+      window.currentOpenedItem;
 
-    const item = currentOpenedItem;
+    if (!item) return;
 
-    toggleSaved(item);
+    const ok =
+      await toggleSaved(item);
+
+    if (!ok) return;
+
     updateAvatarStats();
     renderCards();
-
-    const saved = isSaved(item.slug);
-
-    event.currentTarget.classList.toggle("is-saved", saved);
-
-    event.currentTarget.textContent =
-      saved ? "♥" : "♡";
+    syncDetailSaveButton();
   });
 
 /* =========================
