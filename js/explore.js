@@ -838,6 +838,8 @@ function openAvatarSubPage(pageKey){
   
 if (pageKey === "saved") {
   page.items = getSavedItems().map(item => ({
+    slug: item.slug,
+    list: "saved",
     title: item.place,
     rating: "Saved",
     text: item.tags || item.subtitle || "",
@@ -847,6 +849,8 @@ if (pageKey === "saved") {
 
 if (pageKey === "trip") {
   page.items = getTripItems().map(item => ({
+    slug: item.slug,
+    list: "trip",
     title: item.place,
     rating: item.contentType?.toUpperCase() || "Trip",
     text: item.tags || item.subtitle || "",
@@ -883,11 +887,24 @@ if (pageKey === "reviews") {
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
+  bindAvatarPlaceSwipe(pageKey);
 }
 
 function renderAvatarPlaceCard(item){
   return `
-    <div class="avatar-place-card">
+    <div
+      class="avatar-place-card"
+      data-slug="${item.slug || ""}"
+      data-list="${item.list || ""}"
+    >
+
+      <button
+        class="avatar-place-delete"
+        type="button"
+      >
+        Delete
+      </button>
+
       <img
         class="avatar-place-thumb"
         src="${item.image}"
@@ -952,6 +969,69 @@ function renderAvatarListItem(item){
 
     </div>
   `;
+}
+
+function bindAvatarPlaceSwipe(pageKey){
+  document
+    .querySelectorAll(".avatar-place-card")
+    .forEach((card) => {
+
+      let startX = 0;
+      let currentX = 0;
+      let moved = false;
+
+      card.addEventListener("touchstart", (event) => {
+        startX = event.touches[0].clientX;
+        currentX = startX;
+        moved = false;
+      });
+
+      card.addEventListener("touchmove", (event) => {
+        currentX = event.touches[0].clientX;
+
+        const diffX = currentX - startX;
+
+        if (Math.abs(diffX) > 10) {
+          moved = true;
+        }
+
+        if (diffX < -40) {
+          card.classList.add("is-delete-ready");
+        }
+
+        if (diffX > 40) {
+          card.classList.remove("is-delete-ready");
+        }
+      });
+
+      card
+        .querySelector(".avatar-place-delete")
+        ?.addEventListener("click", (event) => {
+          event.stopPropagation();
+
+          const slug = card.dataset.slug;
+          const list = card.dataset.list;
+
+          if (list === "saved") {
+            const next = getSavedItems()
+              .filter(item => item.slug !== slug);
+
+            saveSavedItems(next);
+            updateAvatarStats();
+            renderCards();
+          }
+
+          if (list === "trip") {
+            const next = getTripItems()
+              .filter(item => item.slug !== slug);
+
+            saveTripItems(next);
+            updateAvatarStats();
+          }
+
+          openAvatarSubPage(pageKey);
+        });
+    });
 }
 
 function updateAvatarStats(){
