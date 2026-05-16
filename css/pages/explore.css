@@ -1283,6 +1283,35 @@ body{
   color:rgba(255,255,255,.58);
 }
 
+.avatar-place-card{
+  position:relative;
+  transition:
+    transform .28s cubic-bezier(.22,.9,.28,1),
+    opacity .28s ease;
+}
+
+.avatar-place-card.is-delete-ready{
+  transform:translateX(-86px);
+}
+
+.avatar-place-delete{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:18px;
+
+  width:72px;
+
+  border:none;
+  border-radius:18px;
+
+  background:rgba(255,255,255,.08);
+  color:white;
+
+  font-size:13px;
+  font-weight:700;
+}
+
 /* =========================
    Info List Item
 ========================= */
