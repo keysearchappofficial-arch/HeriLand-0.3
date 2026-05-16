@@ -280,20 +280,18 @@ document
   .getElementById("travelerDetailSaveBtn")
   ?.addEventListener("click", async () => {
 
-    const item =
-      window.currentOpenedItem;
+    const loggedIn = await requireLogin("save traveler experiences");
+    if (!loggedIn) return;
 
+    const item = window.currentOpenedItem;
     if (!item) return;
 
-    const ok =
-      await toggleSaved(item);
-
+    const ok = await toggleSaved(item);
     if (!ok) return;
 
     updateAvatarStats();
     renderCards();
     syncTravelerSaveButton();
-
   });
 
 /* =========================
@@ -323,35 +321,33 @@ document
 ========================= */
 
 window.saveTravelerStory = async function () {
-  const item = window.currentOpenedItem;
+  const loggedIn = await requireLogin("save traveler experiences");
+  if (!loggedIn) return;
 
+  const item = window.currentOpenedItem;
   if (!item) return;
 
-  const ok =
-    await toggleSaved(item);
-
+  const ok = await toggleSaved(item);
   if (!ok) return;
 
   updateAvatarStats();
   renderCards();
   syncTravelerSaveButton();
 
-  document
-    .getElementById("travelerMoreLayer")
-    ?.classList.remove("is-open");
+  document.getElementById("travelerMoreLayer")?.classList.remove("is-open");
 };
 
-window.saveTravelerRoute = function () {
-  const item = window.currentOpenedItem;
+window.saveTravelerRoute = async function () {
+  const loggedIn = await requireLogin("add traveler experiences to your trip");
+  if (!loggedIn) return;
 
+  const item = window.currentOpenedItem;
   if (!item) return;
 
   addToTrip(item);
   updateAvatarStats();
 
-  document
-    .getElementById("travelerMoreLayer")
-    ?.classList.remove("is-open");
+  document.getElementById("travelerMoreLayer")?.classList.remove("is-open");
 
   alert("Added to My Trip");
 };
