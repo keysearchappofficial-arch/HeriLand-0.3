@@ -12,28 +12,55 @@ function isSaved(slug){
   return getSavedItems().some(item => item.slug === slug);
 }
 
-function toggleSaved(item){
+async function toggleSaved(item){
   let saved = getSavedItems();
 
-  if (isSaved(item.slug)) {
+  const alreadySaved = isSaved(item.slug);
+
+  if (alreadySaved) {
     saved = saved.filter(savedItem => savedItem.slug !== item.slug);
+    await updateLovedCount(item.slug, -1);
   } else {
     saved.unshift(item);
+    await updateLovedCount(item.slug, 1);
   }
 
   saveSavedItems(saved);
 }
 
-function parseLovedNumber(text){
-  const match = String(text || "").match(/\d+/);
-  return match ? Number(match[0]) : 0;
+function getLovedText(item){
+  return `Loved by ${item.lovedCount || 0} travelers`;
 }
 
-function getLovedText(item){
-  const savedExtra = isSaved(item.slug) ? 1 : 0;
-  const total = (item.baseLoved || 0) + savedExtra;
+async function updateLovedCount(slug, delta){
+  const item = allCards.find(card => card.slug === slug);
 
-  return `Loved by ${total} travelers`;
+  if (!item) return;
+
+  const nextCount =
+    Math.max((item.lovedCount || 0) + delta, 0);
+
+  const { error } =
+    await supabase
+      .from("explore_items")
+      .update({
+        loved_count: nextCount
+      })
+      .eq("slug", slug);
+
+  if (error) {
+    console.error("update loved_count failed:", error);
+    return;
+  }
+
+  item.lovedCount = nextCount;
+
+  const current =
+    cards.find(card => card.slug === slug);
+
+  if (current) {
+    current.lovedCount = nextCount;
+  }
 }
 
 const TRIP_KEY = "heriland_trip_items";
@@ -106,8 +133,7 @@ cityKey: item.city.toLowerCase(),
     place: item.title,
     subtitle: item.subtitle,
     tags: item.tags,
-loved: item.loved_text,
-baseLoved: parseLovedNumber(item.loved_text),
+lovedCount: item.loved_count || 0,
 slug: item.slug
   }));
 
@@ -352,7 +378,7 @@ function bindEvents() {
   document.querySelector(".nav-next")?.addEventListener("click", nextCard);
   document.querySelector(".nav-prev")?.addEventListener("click", prevCard);
 
-document.querySelector(".save")?.addEventListener("click", (event) => {
+document.querySelector(".save")?.addEventListener("click", async (event) => {
   event.stopPropagation();
 
   const cardEl = event.currentTarget.closest(".card.active");
@@ -362,7 +388,7 @@ document.querySelector(".save")?.addEventListener("click", (event) => {
 
   if (!item) return;
 
-toggleSaved(item);
+await toggleSaved(item);
 updateAvatarStats();
 renderCards();
 
