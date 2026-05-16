@@ -364,6 +364,8 @@ reviewImageInput?.addEventListener("change", () => {
 });
 
 reviewSubmitBtn?.addEventListener("click", async () => {
+  const loggedIn = await requireLogin("write a review");
+if (!loggedIn) return;
   const comment = reviewComment?.value.trim();
 
   if (!selectedReviewRating || !comment) {
