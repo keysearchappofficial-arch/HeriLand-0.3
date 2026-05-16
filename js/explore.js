@@ -779,6 +779,13 @@ service: {
   ]
 },
 
+suggest: {
+  title: "Suggest a Place",
+  kicker: "Community Submission",
+  layout: "suggest",
+  items: []
+},
+
 account: {
   title: "Account",
   kicker: "Traveler Profile",
@@ -880,6 +887,11 @@ if (page.layout === "account") {
   bindAccountPage();
 }
 
+if (page.layout === "suggest") {
+  avatarSubContent.innerHTML = renderSuggestPlacePage();
+  bindSuggestPlacePage();
+}
+
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
   bindAvatarPlaceSwipe(pageKey);
@@ -923,6 +935,68 @@ function renderAvatarPlaceCard(item){
       </div>
     </div>
   `;
+}
+
+function renderSuggestPlacePage(){
+  return `
+    <div class="suggest-place-page">
+
+      <div class="suggest-place-note">
+        <h4>Share a place with HeriLand</h4>
+        <p>
+          Tell us about a place worth exploring. Submitted places will be reviewed before appearing on HeriLand.
+        </p>
+      </div>
+
+      <label class="suggest-field">
+        <span>Place Name</span>
+        <input id="suggestPlaceName" type="text" placeholder="e.g. Hidden Laksa Spot">
+      </label>
+
+      <label class="suggest-field">
+        <span>City</span>
+        <select id="suggestCity">
+          <option value="kuching">Kuching</option>
+          <option value="sibu">Sibu</option>
+          <option value="miri">Miri</option>
+          <option value="bintulu">Bintulu</option>
+        </select>
+      </label>
+
+      <label class="suggest-field">
+        <span>Type</span>
+        <select id="suggestType">
+          <option value="spot">Spot</option>
+          <option value="restaurant">Restaurant</option>
+          <option value="culture">Culture</option>
+          <option value="event">Event</option>
+        </select>
+      </label>
+
+      <label class="suggest-field">
+        <span>Address</span>
+        <input id="suggestAddress" type="text" placeholder="Address or nearby landmark">
+      </label>
+
+      <label class="suggest-field">
+        <span>Why is it worth visiting?</span>
+        <textarea id="suggestDescription" placeholder="Describe the mood, experience, or local story."></textarea>
+      </label>
+
+      <button class="suggest-submit-btn" id="suggestSubmitBtn" type="button">
+        Submit for Review
+      </button>
+
+    </div>
+  `;
+}
+
+function bindSuggestPlacePage(){
+  document
+    .getElementById("suggestSubmitBtn")
+    ?.addEventListener("click", () => {
+      alert("Submitted for review");
+    });
 }
 
 function renderAvatarListItem(item){
