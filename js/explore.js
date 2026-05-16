@@ -982,60 +982,112 @@ function renderSettingsPage(){
     <div class="settings-list">
 
       <div class="settings-row">
-        <div>
+
+        <div class="settings-head">
           <h4>Language</h4>
-          <p>Choose your display language.</p>
+          <p>Choose your preferred display language.</p>
         </div>
 
-        <select id="settingLanguage">
-          <option value="en">English</option>
-          <option value="zh">中文</option>
-        </select>
-      </div>
-
-      <div class="settings-row">
-        <div>
-          <h4>Notification</h4>
-          <p>Travel reminders and saved trip alerts.</p>
-        </div>
-
-        <button
-          class="setting-switch is-on"
-          id="settingNotification"
-          type="button"
+        <select
+          class="settings-select"
+          id="settingLanguage"
         >
-          <span></span>
-        </button>
-      </div>
+          <option value="en">
+            English
+          </option>
 
-      <div class="settings-row">
-        <div>
-          <h4>Appearance</h4>
-          <p>Choose how HeriLand looks.</p>
-        </div>
-
-        <div class="setting-segment" id="settingAppearance">
-          <button type="button" data-value="system" class="active">System</button>
-          <button type="button" data-value="light">Light</button>
-          <button type="button" data-value="dark">Dark</button>
-        </div>
-      </div>
-
-      <div class="settings-row">
-        <div>
-          <h4>Map</h4>
-          <p>Choose your preferred map app.</p>
-        </div>
-
-        <select id="settingMap">
-          <option value="apple">Apple Map</option>
-          <option value="google">Google Map</option>
+          <option value="zh">
+            中文
+          </option>
         </select>
+
+      </div>
+
+      <div class="settings-row">
+
+        <div class="settings-switch-row">
+
+          <div class="settings-head">
+            <h4>Notification</h4>
+            <p>Travel reminders and activity updates.</p>
+          </div>
+
+          <button
+            class="setting-switch is-on"
+            id="settingNotification"
+            type="button"
+          >
+            <span></span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="settings-row">
+
+        <div class="settings-head">
+          <h4>Appearance</h4>
+          <p>Choose how HeriLand looks on your device.</p>
+        </div>
+
+        <div
+          class="setting-segment"
+          id="settingAppearance"
+        >
+          <button
+            type="button"
+            data-value="system"
+            class="active"
+          >
+            System
+          </button>
+
+          <button
+            type="button"
+            data-value="light"
+          >
+            Light
+          </button>
+
+          <button
+            type="button"
+            data-value="dark"
+          >
+            Dark
+          </button>
+        </div>
+
+      </div>
+
+      <div class="settings-row">
+
+        <div class="settings-head">
+          <h4>Map</h4>
+          <p>Select your preferred navigation app.</p>
+        </div>
+
+        <select
+          class="settings-select"
+          id="settingMap"
+        >
+          <option value="apple">
+            Apple Maps
+          </option>
+
+          <option value="google">
+            Google Maps
+          </option>
+        </select>
+
       </div>
 
       <div class="settings-about">
         <h4>About HeriLand</h4>
-        <p>Version 1.0 · Explore Sarawak slowly.</p>
+
+        <p>
+          Version 1.0 · Explore Sarawak slowly.
+        </p>
       </div>
 
     </div>
