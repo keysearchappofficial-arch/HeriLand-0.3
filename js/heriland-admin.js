@@ -1,79 +1,52 @@
 let submissions = [];
-let dirtyMap = new Map();
 
-const tbody = document.getElementById("submissionTbody");
+const tableBody = document.getElementById("submissionTableBody");
 const refreshBtn = document.getElementById("refreshBtn");
-const saveBtn = document.getElementById("saveBtn");
-const bulkApproveBtn = document.getElementById("bulkApproveBtn");
-const bulkRejectBtn = document.getElementById("bulkRejectBtn");
+const typeFilter = document.getElementById("typeFilter");
 const statusFilter = document.getElementById("statusFilter");
-const searchInput = document.getElementById("searchInput");
-const selectAll = document.getElementById("selectAll");
+const checkAll = document.getElementById("checkAll");
 
-async function requireLogin(){
-  const user = await getCurrentUser();
-
-  if (!user) {
-    alert("Please login first.");
-    location.href = "./explore.html";
-    return null;
-  }
-
-  return user;
-}
+const batchApproveBtn = document.getElementById("batchApproveBtn");
+const batchRejectBtn = document.getElementById("batchRejectBtn");
+const batchSaveBtn = document.getElementById("batchSaveBtn");
 
 async function loadSubmissions(){
-  tbody.innerHTML = `
+  tableBody.innerHTML = `
     <tr>
-      <td colspan="20" class="empty-cell">Loading...</td>
+      <td colspan="11">Loading...</td>
     </tr>
   `;
 
-  let query = supabase
+  const { data, error } = await supabase
     .from("user_submitted_places")
     .select("*")
     .order("created_at", { ascending:false });
 
-  if (statusFilter.value !== "all") {
-    query = query.eq("status", statusFilter.value);
-  }
-
-  const { data, error } = await query;
-
   if (error) {
     console.error(error);
-    tbody.innerHTML = `
+    tableBody.innerHTML = `
       <tr>
-        <td colspan="20" class="empty-cell">Load failed</td>
+        <td colspan="11">Load failed.</td>
       </tr>
     `;
     return;
   }
 
   submissions = data || [];
-  dirtyMap.clear();
-
   renderTable();
 }
 
 function getFilteredSubmissions(){
-  const keyword = searchInput.value.trim().toLowerCase();
+  return submissions.filter((item) => {
+    const matchType =
+      typeFilter.value === "all" ||
+      item.type === typeFilter.value;
 
-  if (!keyword) return submissions;
+    const matchStatus =
+      statusFilter.value === "all" ||
+      item.status === statusFilter.value;
 
-  return submissions.filter(item => {
-    return [
-      item.name,
-      item.city,
-      item.type,
-      item.status,
-      item.short_description,
-      item.full_description
-    ]
-      .filter(Boolean)
-      .join(" ")
-      .toLowerCase()
-      .includes(keyword);
+    return matchType && matchStatus;
   });
 }
 
@@ -81,149 +54,194 @@ function renderTable(){
   const rows = getFilteredSubmissions();
 
   if (!rows.length) {
-    tbody.innerHTML = `
+    tableBody.innerHTML = `
       <tr>
-        <td colspan="20" class="empty-cell">No submissions found</td>
+        <td colspan="11">No submissions found.</td>
       </tr>
     `;
     return;
   }
 
-  tbody.innerHTML = rows.map(renderRow).join("");
-
-  bindTableInputs();
+  tableBody.innerHTML = rows.map(renderRow).join("");
+  bindRowEvents();
 }
 
 function renderRow(item){
   return `
     <tr data-id="${item.id}">
+
       <td>
-        <input class="row-check" type="checkbox">
+        <input
+          class="row-check"
+          type="checkbox"
+          data-id="${item.id}"
+        >
+      </td>
+
+      <td>
+        <select data-field="type">
+          ${renderTypeOptions(item.type)}
+        </select>
       </td>
 
       <td>
         <select data-field="status">
-          <option value="pending" ${item.status === "pending" ? "selected" : ""}>pending</option>
-          <option value="approved" ${item.status === "approved" ? "selected" : ""}>approved</option>
-          <option value="rejected" ${item.status === "rejected" ? "selected" : ""}>rejected</option>
+          ${renderStatusOptions(item.status)}
         </select>
       </td>
 
-      ${cellInput("type", item.type)}
-      ${cellInput("name", item.name)}
-      ${cellInput("city", item.city)}
-      ${cellInput("area", item.area)}
-      ${cellInput("address", item.address)}
-      ${cellInput("short_description", item.short_description)}
-      ${cellTextarea("full_description", item.full_description)}
-      ${cellTextarea("why_recommend", item.why_recommend)}
-      ${cellInput("phone", item.phone)}
-      ${cellInput("website_url", item.website_url)}
-      ${cellInput("google_map_url", item.google_map_url)}
-      ${cellInput("image_url", item.image_url)}
-      ${cellInput("event_date", item.event_date)}
-      ${cellInput("event_time", item.event_time)}
-      ${cellInput("organizer", item.organizer)}
-      ${cellInput("ticket_url", item.ticket_url)}
-      ${cellTextarea("admin_note", item.admin_note)}
+      <td>
+        <input data-field="name" value="${escapeValue(item.name)}">
+      </td>
 
       <td>
-        <input
-          value="${formatDate(item.created_at)}"
-          readonly
-        >
+        <input data-field="city" value="${escapeValue(item.city)}">
       </td>
+
+      <td>
+        <input data-field="area" value="${escapeValue(item.area)}">
+      </td>
+
+      <td>
+        <textarea data-field="address">${escapeValue(item.address)}</textarea>
+      </td>
+
+      <td>
+        <textarea data-field="short_description">${escapeValue(item.short_description)}</textarea>
+      </td>
+
+      <td>
+        <textarea data-field="full_description">${escapeValue(item.full_description)}</textarea>
+      </td>
+
+      <td>
+        <textarea data-field="admin_note">${escapeValue(item.admin_note)}</textarea>
+      </td>
+
+      <td>
+        <button
+          class="row-save-btn"
+          type="button"
+          data-id="${item.id}"
+        >
+          Save
+        </button>
+      </td>
+
     </tr>
   `;
 }
 
-function cellInput(field, value){
-  return `
-    <td>
-      <input
-        data-field="${field}"
-        value="${escapeHtml(value || "")}"
-      >
-    </td>
-  `;
+function renderTypeOptions(value){
+  const types = [
+    "place",
+    "restaurant",
+    "event",
+    "culture",
+    "travel-tip",
+    "correction"
+  ];
+
+  return types.map(type => `
+    <option
+      value="${type}"
+      ${type === value ? "selected" : ""}
+    >
+      ${type}
+    </option>
+  `).join("");
 }
 
-function cellTextarea(field, value){
-  return `
-    <td>
-      <textarea data-field="${field}">${escapeHtml(value || "")}</textarea>
-    </td>
-  `;
+function renderStatusOptions(value){
+  const statuses = [
+    "pending",
+    "approved",
+    "rejected"
+  ];
+
+  return statuses.map(status => `
+    <option
+      value="${status}"
+      ${status === value ? "selected" : ""}
+    >
+      ${status}
+    </option>
+  `).join("");
 }
 
-function bindTableInputs(){
-  tbody.querySelectorAll("input, textarea, select").forEach(el => {
-    if (el.classList.contains("row-check")) {
-      el.addEventListener("change", () => {
-        el.closest("tr").classList.toggle("is-selected", el.checked);
-      });
-      return;
-    }
+function escapeValue(value){
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
 
-    el.addEventListener("input", () => markDirty(el));
-    el.addEventListener("change", () => markDirty(el));
+function getRowPayload(row){
+  const payload = {};
 
-    el.addEventListener("keydown", event => {
-      if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        saveChanges();
-      }
+  row
+    .querySelectorAll("[data-field]")
+    .forEach((field) => {
+      payload[field.dataset.field] = field.value;
     });
-  });
+
+  payload.updated_at = new Date().toISOString();
+
+  return payload;
 }
 
-function markDirty(el){
-  const tr = el.closest("tr");
-  const id = tr.dataset.id;
-  const field = el.dataset.field;
+async function saveRow(id){
+  const row = document.querySelector(`tr[data-id="${id}"]`);
+  if (!row) return;
 
-  tr.classList.add("is-dirty");
+  const payload = getRowPayload(row);
 
-  const current = dirtyMap.get(id) || {};
-  current[field] = el.value;
+  const { error } = await supabase
+    .from("user_submitted_places")
+    .update(payload)
+    .eq("id", id);
 
-  dirtyMap.set(id, current);
-}
-
-async function saveChanges(){
-  if (!dirtyMap.size) {
-    alert("No changes to save.");
+  if (error) {
+    console.error(error);
+    alert("Save failed.");
     return;
   }
 
-  const updates = [...dirtyMap.entries()];
-
-  for (const [id, patch] of updates) {
-    patch.updated_at = new Date().toISOString();
-
-    const { error } = await supabase
-      .from("user_submitted_places")
-      .update(patch)
-      .eq("id", id);
-
-    if (error) {
-      console.error("Save failed:", id, error);
-      alert("Some changes failed. Check console.");
-      return;
-    }
-  }
-
-  alert("Changes saved.");
   await loadSubmissions();
 }
 
-function getSelectedIds(){
-  return [...tbody.querySelectorAll("tr")]
-    .filter(row => row.querySelector(".row-check")?.checked)
-    .map(row => row.dataset.id);
+function bindRowEvents(){
+  document
+    .querySelectorAll(".row-save-btn")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        saveRow(button.dataset.id);
+      });
+    });
+
+  document
+    .querySelectorAll(".admin-table input, .admin-table textarea, .admin-table select")
+    .forEach((field) => {
+      field.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+
+          const row = field.closest("tr");
+          const id = row?.dataset.id;
+
+          if (id) saveRow(id);
+        }
+      });
+    });
 }
 
-async function bulkUpdateStatus(status){
+function getSelectedIds(){
+  return [...document.querySelectorAll(".row-check:checked")]
+    .map(input => input.dataset.id);
+}
+
+async function batchUpdateStatus(status){
   const ids = getSelectedIds();
 
   if (!ids.length) {
@@ -241,45 +259,60 @@ async function bulkUpdateStatus(status){
 
   if (error) {
     console.error(error);
-    alert("Bulk update failed.");
+    alert("Batch update failed.");
     return;
   }
 
-  alert(`Updated to ${status}.`);
   await loadSubmissions();
 }
 
-function formatDate(value){
-  if (!value) return "";
-  return new Date(value).toLocaleString();
-}
+async function batchSaveEdited(){
+  const ids = getSelectedIds();
 
-function escapeHtml(value){
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
+  if (!ids.length) {
+    alert("Please select at least one row.");
+    return;
+  }
+
+  for (const id of ids) {
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    if (!row) continue;
+
+    const payload = getRowPayload(row);
+
+    const { error } = await supabase
+      .from("user_submitted_places")
+      .update(payload)
+      .eq("id", id);
+
+    if (error) {
+      console.error("Save failed:", id, error);
+    }
+  }
+
+  await loadSubmissions();
 }
 
 refreshBtn?.addEventListener("click", loadSubmissions);
-saveBtn?.addEventListener("click", saveChanges);
-bulkApproveBtn?.addEventListener("click", () => bulkUpdateStatus("approved"));
-bulkRejectBtn?.addEventListener("click", () => bulkUpdateStatus("rejected"));
+typeFilter?.addEventListener("change", renderTable);
+statusFilter?.addEventListener("change", renderTable);
 
-statusFilter?.addEventListener("change", loadSubmissions);
-searchInput?.addEventListener("input", renderTable);
-
-selectAll?.addEventListener("change", () => {
-  tbody.querySelectorAll(".row-check").forEach(check => {
-    check.checked = selectAll.checked;
-    check.closest("tr").classList.toggle("is-selected", check.checked);
-  });
+checkAll?.addEventListener("change", () => {
+  document
+    .querySelectorAll(".row-check")
+    .forEach((box) => {
+      box.checked = checkAll.checked;
+    });
 });
 
-(async function initAdmin(){
-  const user = await requireLogin();
-  if (!user) return;
+batchApproveBtn?.addEventListener("click", () => {
+  batchUpdateStatus("approved");
+});
 
-  await loadSubmissions();
-})();
+batchRejectBtn?.addEventListener("click", () => {
+  batchUpdateStatus("rejected");
+});
+
+batchSaveBtn?.addEventListener("click", batchSaveEdited);
+
+loadSubmissions();
