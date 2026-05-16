@@ -1,3 +1,14 @@
+async function requireLogin(actionText = "use this feature"){
+  const user = await getCurrentUser?.();
+
+  if (user) return true;
+
+  alert(`Please login to ${actionText}.`);
+  openAuthModal?.();
+
+  return false;
+}
+
 const SAVED_KEY = "heriland_saved_items";
 
 function getSavedItems(){
@@ -426,6 +437,9 @@ function bindEvents() {
 document.querySelector(".save")?.addEventListener("click", async (event) => {
   event.stopPropagation();
 
+  const loggedIn = await requireLogin("save places");
+  if (!loggedIn) return;
+
   const cardEl = event.currentTarget.closest(".card.active");
   const slug = cardEl?.dataset.slug;
 
@@ -433,14 +447,12 @@ document.querySelector(".save")?.addEventListener("click", async (event) => {
 
   if (!item) return;
 
-const ok = await toggleSaved(item);
+  const ok = await toggleSaved(item);
 
-if (!ok) return;
+  if (!ok) return;
 
-updateAvatarStats();
-renderCards();
-
-  
+  updateAvatarStats();
+  renderCards();
 });
 
 document.querySelector(".card.active")?.addEventListener("click", (event) => {
