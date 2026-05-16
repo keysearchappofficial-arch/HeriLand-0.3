@@ -47,6 +47,24 @@ function addToTrip(item){
   saveTripItems(trip);
 }
 
+const REVIEW_KEY = "heriland_reviews";
+
+function getReviews(){
+  return JSON.parse(localStorage.getItem(REVIEW_KEY) || "[]");
+}
+
+function saveReviews(items){
+  localStorage.setItem(REVIEW_KEY, JSON.stringify(items));
+}
+
+function addReview(review){
+  const reviews = getReviews();
+
+  reviews.unshift(review);
+
+  saveReviews(reviews);
+}
+
 let allCards = [];
 let cards = [];
 
@@ -582,14 +600,7 @@ const avatarPages = {
     title: "Reviews",
     kicker: "Your Voice",
     layout: "place",
-    items: [
-      {
-        title: "Rainforest World Music Festival",
-        rating: "★★★★☆",
-        text: "Great atmosphere and music.",
-        image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80"
-      }
-    ]
+    items: []
   },
 
 government: {
@@ -783,6 +794,15 @@ if (pageKey === "trip") {
   }));
 }
 
+if (pageKey === "reviews") {
+  page.items = getReviews().map(item => ({
+    title: item.title,
+    rating: item.rating,
+    text: item.text,
+    image: item.image
+  }));
+}
+
   avatarSubTitle.textContent = page.title;
   avatarSubKicker.textContent = page.kicker;
 
@@ -888,6 +908,6 @@ function updateAvatarStats(){
   }
 
   if (reviewCount) {
-    reviewCount.textContent = localReviews?.length || 0;
+    reviewCount.textContent = getReviews().length;
   }
 }
