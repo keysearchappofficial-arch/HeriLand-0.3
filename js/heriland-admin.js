@@ -1,14 +1,26 @@
 let submissions = [];
+let pendingRejectIds = [];
 
 const tableBody = document.getElementById("submissionTableBody");
+
 const refreshBtn = document.getElementById("refreshBtn");
 const typeFilter = document.getElementById("typeFilter");
 const statusFilter = document.getElementById("statusFilter");
 const checkAll = document.getElementById("checkAll");
 
-const batchApproveBtn = document.getElementById("batchApproveBtn");
+const batchPublishBtn = document.getElementById("batchPublishBtn");
 const batchRejectBtn = document.getElementById("batchRejectBtn");
 const batchSaveBtn = document.getElementById("batchSaveBtn");
+
+const rejectLayer = document.getElementById("rejectLayer");
+const rejectBackdrop = document.getElementById("rejectBackdrop");
+const rejectReasonInput = document.getElementById("rejectReasonInput");
+const rejectCancelBtn = document.getElementById("rejectCancelBtn");
+const rejectConfirmBtn = document.getElementById("rejectConfirmBtn");
+
+/* =========================
+   Load
+========================= */
 
 async function loadSubmissions(){
   tableBody.innerHTML = `
@@ -24,17 +36,24 @@ async function loadSubmissions(){
 
   if (error) {
     console.error(error);
+
     tableBody.innerHTML = `
       <tr>
         <td colspan="11">Load failed.</td>
       </tr>
     `;
+
     return;
   }
 
   submissions = data || [];
+
   renderTable();
 }
+
+/* =========================
+   Filter
+========================= */
 
 function getFilteredSubmissions(){
   return submissions.filter((item) => {
@@ -50,6 +69,10 @@ function getFilteredSubmissions(){
   });
 }
 
+/* =========================
+   Render
+========================= */
+
 function renderTable(){
   const rows = getFilteredSubmissions();
 
@@ -59,10 +82,13 @@ function renderTable(){
         <td colspan="11">No submissions found.</td>
       </tr>
     `;
+
     return;
   }
 
-  tableBody.innerHTML = rows.map(renderRow).join("");
+  tableBody.innerHTML =
+    rows.map(renderRow).join("");
+
   bindRowEvents();
 }
 
@@ -85,21 +111,33 @@ function renderRow(item){
       </td>
 
       <td>
-        <select data-field="status">
+        <select
+          class="status-select ${item.status || "pending"}"
+          data-field="status"
+        >
           ${renderStatusOptions(item.status)}
         </select>
       </td>
 
       <td>
-        <input data-field="name" value="${escapeValue(item.name)}">
+        <input
+          data-field="name"
+          value="${escapeValue(item.name)}"
+        >
       </td>
 
       <td>
-        <input data-field="city" value="${escapeValue(item.city)}">
+        <input
+          data-field="city"
+          value="${escapeValue(item.city)}"
+        >
       </td>
 
       <td>
-        <input data-field="area" value="${escapeValue(item.area)}">
+        <input
+          data-field="area"
+          value="${escapeValue(item.area)}"
+        >
       </td>
 
       <td>
@@ -120,7 +158,7 @@ function renderRow(item){
 
       <td>
         <button
-          class="row-save-btn"
+          class="save-row-btn"
           type="button"
           data-id="${item.id}"
         >
@@ -155,7 +193,7 @@ function renderTypeOptions(value){
 function renderStatusOptions(value){
   const statuses = [
     "pending",
-    "approved",
+    "published",
     "rejected"
   ];
 
@@ -177,6 +215,10 @@ function escapeValue(value){
     .replaceAll('"', "&quot;");
 }
 
+/* =========================
+   Payload
+========================= */
+
 function getRowPayload(row){
   const payload = {};
 
@@ -191,16 +233,23 @@ function getRowPayload(row){
   return payload;
 }
 
+/* =========================
+   Save Row
+========================= */
+
 async function saveRow(id){
-  const row = document.querySelector(`tr[data-id="${id}"]`);
+  const row =
+    document.querySelector(`tr[data-id="${id}"]`);
+
   if (!row) return;
 
   const payload = getRowPayload(row);
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("user_submitted_places")
     .update(payload)
-    .eq("id", id);
+    .eq("id", id)
+    .select();
 
   if (error) {
     console.error(error);
@@ -208,12 +257,21 @@ async function saveRow(id){
     return;
   }
 
+  if (!data || !data.length) {
+    alert("No row updated.");
+    return;
+  }
+
   await loadSubmissions();
 }
 
+/* =========================
+   Row Events
+========================= */
+
 function bindRowEvents(){
   document
-    .querySelectorAll(".row-save-btn")
+    .querySelectorAll(".save-row-btn")
     .forEach((button) => {
       button.addEventListener("click", () => {
         saveRow(button.dataset.id);
@@ -221,7 +279,23 @@ function bindRowEvents(){
     });
 
   document
-    .querySelectorAll(".admin-table input, .admin-table textarea, .admin-table select")
+    .querySelectorAll(".status-select")
+    .forEach((select) => {
+      select.addEventListener("change", () => {
+        select.classList.remove(
+          "pending",
+          "published",
+          "rejected"
+        );
+
+        select.classList.add(select.value);
+      });
+    });
+
+  document
+    .querySelectorAll(
+      ".admin-table input, .admin-table textarea, .admin-table select"
+    )
     .forEach((field) => {
       field.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && !event.shiftKey) {
@@ -230,16 +304,27 @@ function bindRowEvents(){
           const row = field.closest("tr");
           const id = row?.dataset.id;
 
-          if (id) saveRow(id);
+          if (id) {
+            saveRow(id);
+          }
         }
       });
     });
 }
 
+/* =========================
+   Selection
+========================= */
+
 function getSelectedIds(){
-  return [...document.querySelectorAll(".row-check:checked")]
-    .map(input => input.dataset.id);
+  return [
+    ...document.querySelectorAll(".row-check:checked")
+  ].map(input => input.dataset.id);
 }
+
+/* =========================
+   Batch
+========================= */
 
 async function batchUpdateStatus(status){
   const ids = getSelectedIds();
@@ -275,7 +360,9 @@ async function batchSaveEdited(){
   }
 
   for (const id of ids) {
-    const row = document.querySelector(`tr[data-id="${id}"]`);
+    const row =
+      document.querySelector(`tr[data-id="${id}"]`);
+
     if (!row) continue;
 
     const payload = getRowPayload(row);
@@ -293,7 +380,31 @@ async function batchSaveEdited(){
   await loadSubmissions();
 }
 
+/* =========================
+   Reject Modal
+========================= */
+
+function openRejectModal(ids){
+  pendingRejectIds = ids;
+
+  if (rejectReasonInput) {
+    rejectReasonInput.value = "";
+  }
+
+  rejectLayer?.classList.add("is-open");
+}
+
+function closeRejectModal(){
+  rejectLayer?.classList.remove("is-open");
+  pendingRejectIds = [];
+}
+
+/* =========================
+   Events
+========================= */
+
 refreshBtn?.addEventListener("click", loadSubmissions);
+
 typeFilter?.addEventListener("change", renderTable);
 statusFilter?.addEventListener("change", renderTable);
 
@@ -305,14 +416,55 @@ checkAll?.addEventListener("change", () => {
     });
 });
 
-batchApproveBtn?.addEventListener("click", () => {
-  batchUpdateStatus("approved");
+batchPublishBtn?.addEventListener("click", () => {
+  batchUpdateStatus("published");
 });
 
 batchRejectBtn?.addEventListener("click", () => {
-  batchUpdateStatus("rejected");
+  const ids = getSelectedIds();
+
+  if (!ids.length) {
+    alert("Please select at least one row.");
+    return;
+  }
+
+  openRejectModal(ids);
 });
 
 batchSaveBtn?.addEventListener("click", batchSaveEdited);
+
+rejectBackdrop?.addEventListener("click", closeRejectModal);
+rejectCancelBtn?.addEventListener("click", closeRejectModal);
+
+rejectConfirmBtn?.addEventListener("click", async () => {
+  const reason = rejectReasonInput?.value.trim();
+
+  if (!reason) {
+    alert("Please enter a reject reason.");
+    return;
+  }
+
+  const { error } = await supabase
+    .from("user_submitted_places")
+    .update({
+      status: "rejected",
+      admin_note: reason,
+      updated_at: new Date().toISOString()
+    })
+    .in("id", pendingRejectIds);
+
+  if (error) {
+    console.error(error);
+    alert("Reject failed.");
+    return;
+  }
+
+  closeRejectModal();
+  await loadSubmissions();
+});
+
+/* =========================
+   Init
+========================= */
 
 loadSubmissions();
