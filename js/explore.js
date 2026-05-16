@@ -519,6 +519,26 @@ document.addEventListener("keydown", (event) => {
 
 loadExploreCards();
 
+window.submitReview = function () {
+
+  if (!currentOpenedItem) return;
+
+  const review = {
+    title: currentOpenedItem.place,
+    text: "Amazing local experience.",
+    image: currentOpenedItem.image,
+    rating: "★★★★★",
+    slug: currentOpenedItem.slug,
+    createdAt: Date.now()
+  };
+
+  addReview(review);
+
+  updateAvatarStats();
+
+  alert("Review submitted");
+};
+
 
 /* =========================
    Avatar Panel
