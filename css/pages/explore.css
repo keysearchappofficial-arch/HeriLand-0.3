@@ -67,6 +67,10 @@ body{
   height:100%;
   overflow:hidden;
   overscroll-behavior:none;
+}
+
+.stage,
+.card{
   touch-action:none;
 }
 
