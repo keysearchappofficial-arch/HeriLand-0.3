@@ -257,6 +257,9 @@ function syncDetailSaveButton(){
 document
   .getElementById("detailSaveBtn")
   ?.addEventListener("click", async (event) => {
+    
+    const loggedIn = await requireLogin("save places");
+if (!loggedIn) return;
 
     const item =
       window.currentOpenedItem;
