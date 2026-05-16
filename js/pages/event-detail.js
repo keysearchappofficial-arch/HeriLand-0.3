@@ -31,91 +31,141 @@ window.closeEventDetail = function () {
 
 };
 
-/* =========================
-   Mock Data
-========================= */
+function formatEventDate(value){
+  if (!value) return "Date TBC";
 
-const eventData = {
+  const date = new Date(value);
 
-  "rainforest-world-music-festival": {
-
-    type: "Festival",
-
-    location: "Kuching · Sarawak",
-
-    title: "Rainforest World Music Festival",
-
-    date: "12 Jul 2026",
-
-    time: "4:00 PM — Late Night",
-
-    venueMini:
-      "Sarawak Cultural Village",
-
-    venue:
-      "Sarawak Cultural Village",
-
-    address:
-      "Pantai Damai Santubong, Kuching, Sarawak",
-
-    organizer:
-      "Sarawak Tourism Board",
-
-    ai:
-      "One of the most iconic music festivals in Borneo, surrounded by rainforest and local culture.",
-
-    desc:
-      "Rainforest World Music Festival brings together international musicians, local performers, cultural workshops, food experiences, and live performances in one of the most unique settings in Southeast Asia.",
-
-    goodToKnow: [
-      "Best visited before sunset",
-      "Expect large crowds at night",
-      "Bring light rain protection",
-      "Parking may be limited"
-    ],
-
-    tags: [
-      "Festival",
-      "Music",
-      "Culture",
-      "Outdoor",
-      "Sarawak"
-    ],
-
-    ticket:
-      "https://example.com",
-
-    map:
-      "https://maps.google.com",
-
-    nearby:
-      "Explore nearby beaches, seafood restaurants, and Santubong sunset spots before the event starts.",
-
-    images: [
-
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1400&q=80",
-
-      "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1400&q=80",
-
-      "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1400&q=80"
-
-    ]
-
+  if (Number.isNaN(date.getTime())) {
+    return "Date TBC";
   }
 
-};
+  return date.toLocaleDateString("en-MY", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+function normalizeEventTags(tags){
+  if (Array.isArray(tags)) return tags;
+
+  if (typeof tags === "string") {
+    return tags
+      .split(",")
+      .map(tag => tag.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+}
 
 /* =========================
    Load
 ========================= */
 
-async function loadEventDetail(slug) {
+async function loadEventDetail(slug){
 
-  const data = eventData[slug];
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error) {
+    console.error("load event detail failed:", error);
+
+    renderEventDetail({
+      type: "Event",
+      location: "Sarawak",
+      title: "Event not found",
+      date: "Date TBC",
+      time: "Time TBC",
+      venueMini: "Venue TBC",
+      venue: "Venue TBC",
+      address: "Address not available",
+      organizer: "Organizer TBC",
+      ai: "This event may not be available yet.",
+      desc: "",
+      goodToKnow: [],
+      tags: [],
+      ticket: "#",
+      map: "#",
+      nearby: "Explore nearby restaurants, river walks, or local places around this event.",
+      images: []
+    });
+
+    return;
+  }
 
   if (!data) return;
 
-  renderEventDetail(data);
+  const images = [
+    data.hero_image_url,
+    data.card_image_url,
+    ...(Array.isArray(data.gallery_urls) ? data.gallery_urls : [])
+  ].filter(Boolean);
+
+  renderEventDetail({
+    type: data.type || "Event",
+
+    location:
+      `${data.city || "Sarawak"}${data.area ? " · " + data.area : ""}`,
+
+    title:
+      data.title || "",
+
+    date:
+      formatEventDate(data.start_date),
+
+    time:
+      data.time_rule?.label ||
+      "Time TBC",
+
+    venueMini:
+      data.venue_name ||
+      "Venue TBC",
+
+    venue:
+      data.venue_name ||
+      "Venue TBC",
+
+    address:
+      data.address ||
+      "Address not available",
+
+    organizer:
+      data.organizer ||
+      "Organizer TBC",
+
+    ai:
+      data.summary ||
+      "A local event shared by travelers.",
+
+    desc:
+      data.content ||
+      data.summary ||
+      "No event detail yet.",
+
+    goodToKnow:
+      [],
+
+    tags:
+      normalizeEventTags(data.tags),
+
+    ticket:
+      data.ticket_url ||
+      "#",
+
+    map:
+      data.google_map_url ||
+      "#",
+
+    nearby:
+      "Explore nearby restaurants, river walks, or local places around this event.",
+
+    images
+  });
 
 }
 
@@ -187,6 +237,15 @@ function renderEventDetail(data) {
 
 function renderEventGallery(images) {
 
+  const fallbackImages = [
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=80"
+  ];
+
+  images =
+    images && images.length
+      ? images
+      : fallbackImages;
+
   const slider =
     document.getElementById("eventDetailSlider");
 
@@ -217,6 +276,7 @@ function renderEventGallery(images) {
       `;
 
     }).join("");
+
   setupEventSlider(images.length);
 }
 
