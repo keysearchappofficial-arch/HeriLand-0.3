@@ -818,6 +818,8 @@ logoutConfirmBtn?.addEventListener(
 
     closeLogoutSheet();
 
+    closeAvatarPanel?.();
+
     await updateAuthUI();
 
   }
@@ -1046,9 +1048,9 @@ settings: {
 document
   .querySelectorAll("[data-avatar-page]")
   .forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       const pageKey = button.dataset.avatarPage;
-      openAvatarSubPage(pageKey);
+      await openAvatarSubPage(pageKey);
     });
   });
 
@@ -1228,8 +1230,6 @@ function bindContributePage(){
     .forEach((button) => {
 
       button.addEventListener("click", () => {
-        const pageKey = button.dataset.avatarPage;
-  await openAvatarSubPage(pageKey);
 
         const type =
           button.dataset.contributeType;
