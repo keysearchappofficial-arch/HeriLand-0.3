@@ -59,9 +59,10 @@ function formatCultureLocation(data){
 async function loadCultureDetail(slug){
 
   const { data, error } = await supabase
-    .from("places")
+    .from("heriland_cultures")
     .select("*")
     .eq("slug", slug)
+    .eq("status", "published")
     .single();
 
   if (error) {
@@ -86,8 +87,7 @@ async function loadCultureDetail(slug){
 
   if (!data) return;
 
-  const tags =
-    normalizeCultureTags(data.tags);
+  const tags = normalizeCultureTags(data.tags);
 
   const images = [
     data.hero_image_url,
@@ -99,7 +99,7 @@ async function loadCultureDetail(slug){
     type: "Culture",
 
     title:
-      data.name || "Cultural Experience",
+      data.title || "Cultural Experience",
 
     location:
       formatCultureLocation(data),
@@ -109,29 +109,39 @@ async function loadCultureDetail(slug){
       "A slower way to understand Sarawak culture.",
 
     intro:
-      data.full_description ||
+      data.intro ||
       data.short_description ||
       "No introduction yet.",
 
     background:
-      data.full_description ||
+      data.cultural_background ||
       "This cultural experience is connected to local life, memory, and identity.",
 
     highlights:
-      tags.length
-        ? tags
-        : [
-            "Local heritage",
-            "Community tradition",
-            "Cultural memory"
-          ],
+      data.what_to_notice
+        ? data.what_to_notice
+            .split("\n")
+            .map(item => item.trim())
+            .filter(Boolean)
+        : tags.length
+          ? tags
+          : [
+              "Local heritage",
+              "Community tradition",
+              "Cultural memory"
+            ],
 
     tips:
-      [
-        "Be respectful when taking photos.",
-        "Ask before entering private or community spaces.",
-        "Check visiting hours before going."
-      ],
+      data.etiquette_tips
+        ? data.etiquette_tips
+            .split("\n")
+            .map(item => item.trim())
+            .filter(Boolean)
+        : [
+            "Be respectful when taking photos.",
+            "Ask before entering private or community spaces.",
+            "Check visiting hours before going."
+          ],
 
     tags,
 
@@ -140,7 +150,6 @@ async function loadCultureDetail(slug){
 
     images
   });
-
 }
 
 /* =========================
