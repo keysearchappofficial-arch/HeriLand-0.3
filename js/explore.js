@@ -125,6 +125,20 @@ let activeCityFilter = "all";
 let activeTypeFilter = "all";
 window.currentOpenedItem = null;
 
+function isInteractionLocked(){
+  return (
+    document.body.classList.contains("no-scroll") ||
+    document.querySelector(".avatar-panel-layer.is-open") ||
+    document.querySelector(".filter-panel.is-open") ||
+    document.querySelector(".detail-page.is-open") ||
+    document.querySelector(".event-detail-page.is-open") ||
+    document.querySelector(".review-sheet-layer.is-open") ||
+    document.querySelector(".review-list-layer.is-open") ||
+    document.querySelector(".detail-more-layer.is-open") ||
+    document.querySelector(".event-more-layer.is-open")
+  );
+}
+
 async function loadExploreCards(){
 
   const { data, error } =
@@ -330,6 +344,7 @@ function renderBackCard(item, className, index) {
 /* Navigation */
 
 function nextCard() {
+  if (isInteractionLocked()) return;
   if (isAnimating) return;
 
   isAnimating = true;
@@ -350,6 +365,7 @@ function nextCard() {
 }
 
 function prevCard() {
+  if (isInteractionLocked()) return;
   if (isAnimating) return;
 
   isAnimating = true;
@@ -370,7 +386,7 @@ function prevCard() {
 }
 
 function openDetailPage(cardEl) {
-  if (document.body.classList.contains("no-scroll")) return;
+  if (isInteractionLocked()) return;
 
   const slug = cardEl?.dataset.slug;
   const type = cardEl?.dataset.type;
@@ -427,7 +443,7 @@ let hasMoved = false;
 const SWIPE_THRESHOLD = 90;
 
 document.addEventListener("touchstart", (event) => {
-  if (document.body.classList.contains("no-scroll")) return;
+  if (isInteractionLocked()) return;
   if (isAnimating) return;
 
   const activeCard = document.querySelector(".card.active");
@@ -442,7 +458,7 @@ document.addEventListener("touchstart", (event) => {
 });
 
 document.addEventListener("touchmove", (event) => {
-  if (document.body.classList.contains("no-scroll")) return;
+  if (isInteractionLocked()) return;
   if (!isDragging || isAnimating) return;
 
   const activeCard = document.querySelector(".card.active");
@@ -469,7 +485,7 @@ document.addEventListener("touchmove", (event) => {
 });
 
 document.addEventListener("touchend", (event) => {
-  if (document.body.classList.contains("no-scroll")) return;
+  if (isInteractionLocked()) return;
   if (!isDragging || isAnimating) return;
 
   isDragging = false;
@@ -563,6 +579,7 @@ document.addEventListener("touchend", (event) => {
 /* Desktop keyboard */
 
 document.addEventListener("keydown", (event) => {
+  if (isInteractionLocked()) return;
   if (event.key === "ArrowRight" || event.key === "ArrowUp") {
     nextCard();
   }
