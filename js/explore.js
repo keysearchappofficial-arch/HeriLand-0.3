@@ -332,6 +332,7 @@ document.querySelector(".save")?.addEventListener("click", (event) => {
   if (!item) return;
 
   toggleSaved(item);
+  updateAvatarStats();
 
   event.currentTarget.classList.toggle("is-saved");
   event.currentTarget.textContent =
@@ -518,6 +519,7 @@ topAvatarBtn?.addEventListener("click", (event) => {
   event.stopPropagation();
 
   resetAvatarPanel();
+  updateAvatarStats();
 
   avatarPanelLayer?.classList.add("is-open");
 
@@ -870,4 +872,22 @@ function renderAvatarListItem(item){
 
     </div>
   `;
+}
+
+function updateAvatarStats(){
+  const savedCount = document.getElementById("savedCount");
+  const tripCount = document.getElementById("tripCount");
+  const reviewCount = document.getElementById("reviewCount");
+
+  if (savedCount) {
+    savedCount.textContent = getSavedItems().length;
+  }
+
+  if (tripCount) {
+    tripCount.textContent = getTripItems().length;
+  }
+
+  if (reviewCount) {
+    reviewCount.textContent = localReviews?.length || 0;
+  }
 }
