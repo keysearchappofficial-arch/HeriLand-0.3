@@ -614,13 +614,24 @@ window.submitReview = function () {
   alert("Review submitted");
 };
 
-const avatarAuthBtn = document.getElementById("avatarAuthBtn");
 const authLayer = document.getElementById("authLayer");
 const authBackdrop = document.getElementById("authBackdrop");
 const authEmail = document.getElementById("authEmail");
 const authPassword = document.getElementById("authPassword");
 const authLoginBtn = document.getElementById("authLoginBtn");
 const authSignupBtn = document.getElementById("authSignupBtn");
+
+const avatarLoginBtn =
+  document.getElementById("avatarLoginBtn");
+
+const avatarSignupBtn =
+  document.getElementById("avatarSignupBtn");
+
+const avatarUserName =
+  document.getElementById("avatarUserName");
+
+const avatarUserDesc =
+  document.getElementById("avatarUserDesc");
 
 const logoutLayer =
   document.getElementById("logoutLayer");
@@ -645,11 +656,43 @@ function closeLogoutSheet(){
 }
 
 async function updateAuthUI(){
+
   const user = await getCurrentUser();
 
-  if (!avatarAuthBtn) return;
+  if (!user) {
 
-  avatarAuthBtn.textContent = user ? "Logout" : "Login";
+    avatarUserName.textContent =
+      "Welcome Traveler";
+
+    avatarUserDesc.textContent =
+      "Save places, build trips, and contribute to HeriLand.";
+
+    avatarLoginBtn.style.display = "block";
+    avatarSignupBtn.style.display = "block";
+
+    avatarSignupBtn.textContent = "Sign Up";
+
+    return;
+  }
+
+  const profile =
+    JSON.parse(
+      localStorage.getItem(
+        "heriland_account_profile"
+      ) || "{}"
+    );
+
+  avatarUserName.textContent =
+    profile.name ||
+    user.email;
+
+  avatarUserDesc.textContent =
+    "Travel slowly through Sarawak.";
+
+  avatarLoginBtn.style.display = "none";
+
+  avatarSignupBtn.style.display = "block";
+  avatarSignupBtn.textContent = "Logout";
 }
 
 function openAuthModal(){
@@ -672,6 +715,27 @@ if (user) {
 
   openAuthModal();
 });
+
+avatarLoginBtn?.addEventListener(
+  "click",
+  openAuthModal
+);
+
+avatarSignupBtn?.addEventListener(
+  "click",
+  async () => {
+
+    const user = await getCurrentUser();
+
+    if (user) {
+      openLogoutSheet();
+      return;
+    }
+
+    openAuthModal();
+
+  }
+);
 
 authBackdrop?.addEventListener("click", closeAuthModal);
 
