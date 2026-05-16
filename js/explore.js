@@ -132,10 +132,14 @@ function isInteractionLocked(){
     document.querySelector(".filter-panel.is-open") ||
     document.querySelector(".detail-page.is-open") ||
     document.querySelector(".event-detail-page.is-open") ||
+    document.querySelector(".culture-detail-page.is-open") ||
+    document.querySelector(".traveler-detail-page.is-open") ||
     document.querySelector(".review-sheet-layer.is-open") ||
     document.querySelector(".review-list-layer.is-open") ||
     document.querySelector(".detail-more-layer.is-open") ||
-    document.querySelector(".event-more-layer.is-open")
+    document.querySelector(".event-more-layer.is-open") ||
+    document.querySelector(".culture-more-layer.is-open") ||
+    document.querySelector(".traveler-more-layer.is-open")
   );
 }
 
@@ -146,7 +150,8 @@ async function loadExploreCards(){
       .from("explore_items")
       .select("*")
       .eq("is_active", true)
-      .order("sort_order");
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false });
 
   if (error) {
     console.error(error);
@@ -156,13 +161,13 @@ async function loadExploreCards(){
   allCards = (data || []).map(item => ({
     contentType: item.content_type,
     city: item.city,
-cityKey: item.city.toLowerCase(),
+    cityKey: item.city?.toLowerCase() || "",
     image: item.image_url,
     place: item.title,
     subtitle: item.subtitle,
     tags: item.tags,
-lovedCount: item.loved_count || 0,
-slug: item.slug
+    lovedCount: item.loved_count || 0,
+    slug: item.slug
   }));
 
   applyFilters();
@@ -393,23 +398,23 @@ function openDetailPage(cardEl) {
 
   if (!slug) return;
 
-window.currentOpenedItem =
-  cards.find(card => card.slug === slug) || null;
+  window.currentOpenedItem =
+    cards.find(card => card.slug === slug) || null;
 
   if (type === "event") {
     window.openEventDetail?.(slug);
     return;
   }
-  
-if (type === "experience") {
-  window.openTravelerDetail?.(slug);
-  return;
-}
 
-if (type === "culture") {
-  window.openCultureDetail?.(slug);
-  return;
-}
+  if (type === "culture") {
+    window.openCultureDetail?.(slug);
+    return;
+  }
+
+  if (type === "experience") {
+    window.openTravelerDetail?.(slug);
+    return;
+  }
 
   window.openDetail?.(slug);
 }
