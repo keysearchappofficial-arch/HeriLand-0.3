@@ -299,7 +299,15 @@ document
 ========================= */
 
 window.addEventToTrip = function () {
-  console.log("add event to trip");
+  if (!currentOpenedItem) return;
+
+  addToTrip(currentOpenedItem);
+
+  document
+    .getElementById("eventMoreLayer")
+    ?.classList.remove("is-open");
+
+  alert("Added to My Trip");
 };
 
 window.openEventMap = function () {
