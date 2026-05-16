@@ -302,6 +302,7 @@ window.addEventToTrip = function () {
   if (!currentOpenedItem) return;
 
   addToTrip(currentOpenedItem);
+  updateAvatarStats();
 
   document
     .getElementById("eventMoreLayer")
