@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>HeriLand Admin</title>
+
+  <link rel="stylesheet" href="./css/pages/heriland-admin.css">
+</head>
+
+<body>
+
+  <main class="admin-app">
+
+    <header class="admin-top">
+      <div>
+        <h1>HeriLand Admin</h1>
+        <p>Community submissions review table</p>
+      </div>
+
+      <div class="admin-actions">
+        <button id="refreshBtn" type="button">
+          Refresh
+        </button>
+
+        <button id="saveBtn" type="button">
+          Save Changes
+        </button>
+
+        <button id="bulkApproveBtn" type="button">
+          Bulk Approve
+        </button>
+
+        <button id="bulkRejectBtn" type="button">
+          Bulk Reject
+        </button>
+      </div>
+    </header>
+
+    <section class="admin-filter">
+      <select id="statusFilter">
+        <option value="all">All Status</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search name, city, type..."
+      >
+    </section>
+
+    <section class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>
+              <input id="selectAll" type="checkbox">
+            </th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Area</th>
+            <th>Address</th>
+            <th>Short Description</th>
+            <th>Full Description</th>
+            <th>Why / Source</th>
+            <th>Phone</th>
+            <th>Website</th>
+            <th>Map</th>
+            <th>Image</th>
+            <th>Event Date</th>
+            <th>Event Time</th>
+            <th>Organizer</th>
+            <th>Ticket</th>
+            <th>Admin Note</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+
+        <tbody id="submissionTbody">
+          <tr>
+            <td colspan="20" class="empty-cell">
+              Loading...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/supabase-client.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/heriland-admin.js"></script>
+
+</body>
+</html>
