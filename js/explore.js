@@ -439,6 +439,8 @@ let startX = 0;
 let currentX = 0;
 let isDragging = false;
 let hasMoved = false;
+let avatarCurrentPageKey = null;
+let avatarSupportMode = false;
 
 const SWIPE_THRESHOLD = 90;
 
@@ -802,12 +804,20 @@ document
   });
 
 avatarSubBack?.addEventListener("click", () => {
+  if (avatarSupportMode && avatarCurrentPageKey === "service") {
+    avatarSupportMode = false;
+    openAvatarSubPage("service");
+    return;
+  }
+
   avatarSubView?.classList.remove("is-active");
   avatarHomeView?.classList.add("is-active");
 });
 
 function openAvatarSubPage(pageKey){
   const page = avatarPages[pageKey];
+  avatarCurrentPageKey = pageKey;
+  avatarSupportMode = false;
 
   if (!page) return;
   
@@ -964,6 +974,7 @@ ${item.action ? `
 }
 
 function openSupportPage(page){
+  avatarSupportMode = true;
   const pages = {
     help: {
       title: "Help Center",
