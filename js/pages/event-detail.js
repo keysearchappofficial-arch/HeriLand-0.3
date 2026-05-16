@@ -15,17 +15,7 @@ window.openEventDetail = async function (slug) {
 
   await loadEventDetail(slug);
 
-  const saveBtn =
-    document.getElementById("eventDetailSaveBtn");
-
-  const saved =
-    isSaved(slug);
-
-  saveBtn?.classList.toggle("is-saved", saved);
-
-  if (saveBtn) {
-    saveBtn.textContent = saved ? "♥" : "♡";
-  }
+  syncEventSaveButton();
 
 };
 
@@ -272,24 +262,42 @@ function renderGoodToKnow(items) {
    Save
 ========================= */
 
+function syncEventSaveButton(){
+  const saveBtn =
+    document.getElementById("eventDetailSaveBtn");
+
+  const item =
+    window.currentOpenedItem;
+
+  if (!saveBtn || !item) return;
+
+  const saved =
+    isSaved(item.slug);
+
+  saveBtn.classList.toggle("is-saved", saved);
+
+  saveBtn.textContent =
+    saved ? "♥" : "♡";
+}
+
 document
   .getElementById("eventDetailSaveBtn")
-  ?.addEventListener("click", (event) => {
+  ?.addEventListener("click", async () => {
 
-    const item = window.currentOpenedItem;
+    const item =
+      window.currentOpenedItem;
 
     if (!item) return;
 
-    toggleSaved(item);
+    const ok =
+      await toggleSaved(item);
+
+    if (!ok) return;
+
     updateAvatarStats();
     renderCards();
+    syncEventSaveButton();
 
-    const saved = isSaved(item.slug);
-
-    event.currentTarget.classList.toggle("is-saved", saved);
-
-    event.currentTarget.textContent =
-      saved ? "♥" : "♡";
   });
 
 /* =========================
@@ -319,9 +327,11 @@ document
 ========================= */
 
 window.addEventToTrip = function () {
-  if (!currentOpenedItem) return;
+  const item = window.currentOpenedItem;
 
-  addToTrip(currentOpenedItem);
+  if (!item) return;
+
+  addToTrip(item);
   updateAvatarStats();
 
   document
