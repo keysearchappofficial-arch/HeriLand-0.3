@@ -24,6 +24,18 @@ function toggleSaved(item){
   saveSavedItems(saved);
 }
 
+function parseLovedNumber(text){
+  const match = String(text || "").match(/\d+/);
+  return match ? Number(match[0]) : 0;
+}
+
+function getLovedText(item){
+  const savedExtra = isSaved(item.slug) ? 1 : 0;
+  const total = (item.baseLoved || 0) + savedExtra;
+
+  return `Loved by ${total} travelers`;
+}
+
 const TRIP_KEY = "heriland_trip_items";
 
 function getTripItems(){
@@ -94,8 +106,9 @@ cityKey: item.city.toLowerCase(),
     place: item.title,
     subtitle: item.subtitle,
     tags: item.tags,
-    loved: item.loved_text,
-    slug: item.slug
+loved: item.loved_text,
+baseLoved: parseLovedNumber(item.loved_text),
+slug: item.slug
   }));
 
   applyFilters();
@@ -234,7 +247,7 @@ function renderActiveCard(item, index) {
         </div>
 
         <div class="footer-row">
-          <div class="loved">${item.loved}</div>
+          <div class="loved">${getLovedText(item)}</div>
 <button
   class="save ${isSaved(item.slug) ? "is-saved" : ""}"
   type="button"
@@ -266,7 +279,7 @@ function renderBackCard(item, className, index) {
         </div>
 
         <div class="footer-row">
-          <div class="loved">${item.loved}</div>
+          <div class="loved">${getLovedText(item)}</div>
           <button class="save" type="button">♡</button>
         </div>
       </div>
@@ -349,8 +362,9 @@ document.querySelector(".save")?.addEventListener("click", (event) => {
 
   if (!item) return;
 
-  toggleSaved(item);
-  updateAvatarStats();
+toggleSaved(item);
+updateAvatarStats();
+renderCards();
 
   event.currentTarget.classList.toggle("is-saved");
   event.currentTarget.textContent =
