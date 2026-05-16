@@ -813,7 +813,7 @@ account: {
 settings: {
   title: "Settings",
   kicker: "Preferences",
-  layout: "info",
+  layout: "settings",
   items: []
 }
 };
