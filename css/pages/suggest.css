@@ -93,3 +93,9 @@
 
   cursor:pointer;
 }
+
+.suggest-event-fields{
+  display:none;
+  flex-direction:column;
+  gap:14px;
+}
