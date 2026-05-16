@@ -1218,63 +1218,6 @@ function bindContributePage(){
 
 }
 
-function bindContributionSubmit(){
-  document
-    .getElementById("contributionSubmitBtn")
-    ?.addEventListener("click", async () => {
-
-      const user = await getCurrentUser();
-
-      if (!user) {
-        alert("Please login before submitting.");
-        openAuthModal();
-        return;
-      }
-
-      const type =
-        document.getElementById("contributionSubmitBtn")?.dataset.type;
-
-      const payload = {
-        user_id: user.id,
-        type,
-        name: document.getElementById("contributionName")?.value || "",
-        city: document.getElementById("contributionCity")?.value || "",
-        area: document.getElementById("contributionArea")?.value || "",
-        address: document.getElementById("contributionAddress")?.value || "",
-        short_description: document.getElementById("contributionShortDescription")?.value || "",
-        full_description: document.getElementById("contributionFullDescription")?.value || "",
-        why_recommend: document.getElementById("contributionWhy")?.value || "",
-        phone: document.getElementById("contributionPhone")?.value || "",
-        website_url: document.getElementById("contributionWebsite")?.value || "",
-        google_map_url: document.getElementById("contributionMap")?.value || "",
-        image_url: document.getElementById("contributionImage")?.value || "",
-        event_date: document.getElementById("contributionEventDate")?.value || null,
-        event_time: document.getElementById("contributionEventTime")?.value || "",
-        organizer: document.getElementById("contributionOrganizer")?.value || "",
-        ticket_url: document.getElementById("contributionTicket")?.value || "",
-        status: "pending"
-      };
-
-      if (!payload.name || !payload.city || !payload.type) {
-        alert("Please fill in the required fields.");
-        return;
-      }
-
-      const { error } = await supabase
-        .from("user_submitted_places")
-        .insert(payload);
-
-      if (error) {
-        console.error("Contribution insert failed:", error);
-        alert("Submit failed. Please try again.");
-        return;
-      }
-
-      alert("Submitted for review");
-      openAvatarSubPage("contribute");
-    });
-}
-
 function openContributionForm(type){
 
   avatarContributeMode = true;
@@ -1290,9 +1233,7 @@ function openContributionForm(type){
       </div>
 
       <div class="contribution-form-grid">
-
         ${renderContributionFields(type)}
-
       </div>
 
       <button
@@ -1312,22 +1253,51 @@ function openContributionForm(type){
 
 function renderContributionFields(type){
 
-  const commonBase = `
-    <input
-      class="contribution-input"
-      id="contributionName"
-      placeholder="Name / Title"
-    >
-
+  const cityField = `
     <select
       class="contribution-input"
       id="contributionCity"
     >
+      <option value="">Select city</option>
       <option value="kuching">Kuching</option>
       <option value="sibu">Sibu</option>
       <option value="miri">Miri</option>
       <option value="bintulu">Bintulu</option>
     </select>
+  `;
+
+  const imageUploadField = `
+    <label class="contribution-upload">
+      <input
+        id="contributionImageFile"
+        type="file"
+        accept="image/*"
+        hidden
+      >
+
+      <span>＋ Upload Image</span>
+      <small id="contributionImageName">
+        No image selected
+      </small>
+    </label>
+  `;
+
+  const tagsField = `
+    <input
+      class="contribution-input"
+      id="contributionTags"
+      placeholder="Tags, e.g. nature, local, family"
+    >
+  `;
+
+  const commonBase = `
+    <input
+      class="contribution-input"
+      id="contributionName"
+      placeholder="Name / Title *"
+    >
+
+    ${cityField}
 
     <input
       class="contribution-input"
@@ -1336,50 +1306,9 @@ function renderContributionFields(type){
     >
   `;
 
-  const descriptionFields = `
-    <input
-      class="contribution-input"
-      id="contributionShortDescription"
-      placeholder="Short description"
-    >
-
-    <textarea
-      class="contribution-textarea"
-      id="contributionFullDescription"
-      placeholder="Full description"
-    ></textarea>
-  `;
-
-  const contactFields = `
-    <input
-      class="contribution-input"
-      id="contributionPhone"
-      placeholder="Phone"
-    >
-
-    <input
-      class="contribution-input"
-      id="contributionWebsite"
-      placeholder="Website URL"
-    >
-
-    <input
-      class="contribution-input"
-      id="contributionMap"
-      placeholder="Google Map URL"
-    >
-
-    <input
-      class="contribution-input"
-      id="contributionImage"
-      placeholder="Image URL"
-    >
-  `;
-
   if (
     type === "place" ||
-    type === "restaurant" ||
-    type === "culture"
+    type === "restaurant"
   ) {
     return `
       ${commonBase}
@@ -1390,15 +1319,54 @@ function renderContributionFields(type){
         placeholder="Address"
       >
 
-      ${descriptionFields}
+      <input
+        class="contribution-input"
+        id="contributionShortDescription"
+        placeholder="Short description for card"
+      >
 
       <textarea
         class="contribution-textarea"
-        id="contributionWhy"
-        placeholder="Why do you recommend this?"
+        id="contributionFullDescription"
+        placeholder="Full detail for detail page"
       ></textarea>
 
-      ${contactFields}
+      <input
+        class="contribution-input"
+        id="contributionPhone"
+        placeholder="Phone"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionWebsite"
+        placeholder="Website URL"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionMap"
+        placeholder="Google Map URL"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionOpeningHours"
+        placeholder="Opening hours, e.g. Daily 9:00 AM - 6:00 PM"
+      >
+
+      <select
+        class="contribution-input"
+        id="contributionPriceLevel"
+      >
+        <option value="">Price level</option>
+        <option value="$">$</option>
+        <option value="$$">$$</option>
+        <option value="$$$">$$$</option>
+      </select>
+
+      ${tagsField}
+      ${imageUploadField}
     `;
   }
 
@@ -1408,11 +1376,27 @@ function renderContributionFields(type){
 
       <input
         class="contribution-input"
-        id="contributionAddress"
-        placeholder="Venue / Address"
+        id="contributionVenueName"
+        placeholder="Venue name"
       >
 
-      ${descriptionFields}
+      <input
+        class="contribution-input"
+        id="contributionAddress"
+        placeholder="Venue address"
+      >
+
+      <input
+        class="contribution-input"
+        id="contributionShortDescription"
+        placeholder="Event summary for card"
+      >
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionFullDescription"
+        placeholder="Full event detail"
+      ></textarea>
 
       <input
         class="contribution-input"
@@ -1444,11 +1428,59 @@ function renderContributionFields(type){
         placeholder="Google Map URL"
       >
 
+      ${tagsField}
+      ${imageUploadField}
+    `;
+  }
+
+  if (type === "culture") {
+    return `
+      ${commonBase}
+
       <input
         class="contribution-input"
-        id="contributionImage"
-        placeholder="Image URL"
+        id="contributionAddress"
+        placeholder="Related place / address"
       >
+
+      <input
+        class="contribution-input"
+        id="contributionShortDescription"
+        placeholder="Short culture intro for card"
+      >
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionFullDescription"
+        placeholder="Introduction"
+      ></textarea>
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionCulturalBackground"
+        placeholder="Cultural background"
+      ></textarea>
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionWhatToNotice"
+        placeholder="What should travelers notice?"
+      ></textarea>
+
+      <textarea
+        class="contribution-textarea"
+        id="contributionEtiquetteTips"
+        placeholder="Etiquette and tips"
+      ></textarea>
+
+      <input
+        class="contribution-input"
+        id="contributionMap"
+        placeholder="Google Map URL"
+      >
+
+      ${tagsField}
+      ${imageUploadField}
     `;
   }
 
@@ -1459,13 +1491,13 @@ function renderContributionFields(type){
       <input
         class="contribution-input"
         id="contributionShortDescription"
-        placeholder="Short tip"
+        placeholder="Short travel tip for card"
       >
 
       <textarea
         class="contribution-textarea"
         id="contributionFullDescription"
-        placeholder="Tell travelers your local tip."
+        placeholder="Full traveler experience / tip"
       ></textarea>
 
       <textarea
@@ -1473,12 +1505,6 @@ function renderContributionFields(type){
         id="contributionWhy"
         placeholder="Why is this useful?"
       ></textarea>
-    `;
-  }
-
-  if (type === "correction") {
-    return `
-      ${commonBase}
 
       <input
         class="contribution-input"
@@ -1486,51 +1512,364 @@ function renderContributionFields(type){
         placeholder="Related Google Map URL"
       >
 
+      ${tagsField}
+      ${imageUploadField}
+    `;
+  }
+
+  if (type === "correction") {
+    return `
+      <select
+        class="contribution-input"
+        id="correctionTargetType"
+      >
+        <option value="">Target type</option>
+        <option value="detail">Place / Restaurant Detail</option>
+        <option value="event-detail">Event Detail</option>
+        <option value="culture-detail">Culture Detail</option>
+        <option value="traveler-detail">Traveler Experience Detail</option>
+      </select>
+
+      <input
+        class="contribution-input"
+        id="correctionTargetSlug"
+        placeholder="Target slug, if known"
+      >
+
+      <input
+        class="contribution-input"
+        id="correctionTargetTitle"
+        placeholder="Target title / place name *"
+      >
+
+      <select
+        class="contribution-input"
+        id="correctionField"
+      >
+        <option value="">What should be corrected?</option>
+        <option value="title">Title / Name</option>
+        <option value="address">Address</option>
+        <option value="opening_hours">Opening Hours</option>
+        <option value="phone">Phone</option>
+        <option value="description">Description</option>
+        <option value="map">Map Link</option>
+        <option value="image">Image</option>
+        <option value="other">Other</option>
+      </select>
+
       <textarea
         class="contribution-textarea"
-        id="contributionFullDescription"
-        placeholder="What information should be corrected?"
+        id="correctionDetail"
+        placeholder="What is wrong, and what should it be changed to? *"
       ></textarea>
+
+      <input
+        class="contribution-input"
+        id="correctionSourceUrl"
+        placeholder="Source URL / proof, if any"
+      >
 
       <textarea
         class="contribution-textarea"
         id="contributionWhy"
-        placeholder="Where did you find the correct information?"
+        placeholder="Why do you suggest this correction?"
       ></textarea>
     `;
   }
 
   return `
     ${commonBase}
-    ${descriptionFields}
+
+    <input
+      class="contribution-input"
+      id="contributionShortDescription"
+      placeholder="Short description"
+    >
+
+    <textarea
+      class="contribution-textarea"
+      id="contributionFullDescription"
+      placeholder="Full description"
+    ></textarea>
+
+    ${tagsField}
+    ${imageUploadField}
   `;
+}
+
+function bindContributionSubmit(){
+
+  const imageInput =
+    document.getElementById("contributionImageFile");
+
+  const imageName =
+    document.getElementById("contributionImageName");
+
+  imageInput?.addEventListener("change", () => {
+    const file = imageInput.files?.[0];
+
+    if (imageName) {
+      imageName.textContent =
+        file ? file.name : "No image selected";
+    }
+  });
+
+  document
+    .getElementById("contributionSubmitBtn")
+    ?.addEventListener("click", async () => {
+
+      const submitBtn =
+        document.getElementById("contributionSubmitBtn");
+
+      const type =
+        submitBtn?.dataset.type;
+
+      const user = await getCurrentUser?.();
+
+      const imageUrl =
+        await uploadContributionImage();
+
+      const payload = buildContributionPayload(
+        type,
+        user,
+        imageUrl
+      );
+
+      if (!validateContributionPayload(payload)) {
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const { error } = await supabase
+        .from("user_submitted_places")
+        .insert(payload);
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit for Review";
+
+      if (error) {
+        console.error("Contribution insert failed:", error);
+        alert(error.message || "Submit failed.");
+        return;
+      }
+
+      alert("Submitted for review");
+
+      openAvatarSubPage("contribute");
+    });
+}
+
+function buildContributionPayload(type, user, imageUrl){
+
+  if (type === "correction") {
+    return {
+      user_id: user?.id || null,
+      type: "correction",
+
+      name:
+        document.getElementById("correctionTargetTitle")?.value.trim() || "",
+
+      city:
+        "kuching",
+
+      target_type:
+        document.getElementById("correctionTargetType")?.value || "",
+
+      target_slug:
+        document.getElementById("correctionTargetSlug")?.value.trim() || "",
+
+      target_title:
+        document.getElementById("correctionTargetTitle")?.value.trim() || "",
+
+      correction_field:
+        document.getElementById("correctionField")?.value || "",
+
+      correction_detail:
+        document.getElementById("correctionDetail")?.value.trim() || "",
+
+      source_url:
+        document.getElementById("correctionSourceUrl")?.value.trim() || "",
+
+      why_recommend:
+        document.getElementById("contributionWhy")?.value.trim() || "",
+
+      status: "pending"
+    };
+  }
+
+  return {
+    user_id:
+      user?.id || null,
+
+    type,
+
+    name:
+      document.getElementById("contributionName")?.value.trim() || "",
+
+    city:
+      document.getElementById("contributionCity")?.value || "",
+
+    area:
+      document.getElementById("contributionArea")?.value.trim() || "",
+
+    address:
+      document.getElementById("contributionAddress")?.value.trim() || "",
+
+    short_description:
+      document.getElementById("contributionShortDescription")?.value.trim() || "",
+
+    full_description:
+      document.getElementById("contributionFullDescription")?.value.trim() || "",
+
+    why_recommend:
+      document.getElementById("contributionWhy")?.value.trim() || "",
+
+    phone:
+      document.getElementById("contributionPhone")?.value.trim() || "",
+
+    website_url:
+      document.getElementById("contributionWebsite")?.value.trim() || "",
+
+    google_map_url:
+      document.getElementById("contributionMap")?.value.trim() || "",
+
+    image_url:
+      imageUrl || "",
+
+    event_date:
+      document.getElementById("contributionEventDate")?.value || null,
+
+    event_time:
+      document.getElementById("contributionEventTime")?.value.trim() || "",
+
+    organizer:
+      document.getElementById("contributionOrganizer")?.value.trim() || "",
+
+    ticket_url:
+      document.getElementById("contributionTicket")?.value.trim() || "",
+
+    venue_name:
+      document.getElementById("contributionVenueName")?.value.trim() || "",
+
+    tags:
+      parseContributionTags(),
+
+    opening_hours:
+      buildOpeningHours(),
+
+    price_level:
+      document.getElementById("contributionPriceLevel")?.value || "",
+
+    cultural_background:
+      document.getElementById("contributionCulturalBackground")?.value.trim() || "",
+
+    what_to_notice:
+      document.getElementById("contributionWhatToNotice")?.value.trim() || "",
+
+    etiquette_tips:
+      document.getElementById("contributionEtiquetteTips")?.value.trim() || "",
+
+    status:
+      "pending"
+  };
+}
+
+function validateContributionPayload(payload){
+
+  if (!payload.type) {
+    alert("Missing contribution type.");
+    return false;
+  }
+
+  if (payload.type === "correction") {
+    if (!payload.target_title || !payload.correction_detail) {
+      alert("Please fill in target title and correction detail.");
+      return false;
+    }
+
+    return true;
+  }
+
+  if (!payload.name || !payload.city) {
+    alert("Please fill in name and city.");
+    return false;
+  }
+
+  return true;
+}
+
+function parseContributionTags(){
+
+  const value =
+    document.getElementById("contributionTags")?.value || "";
+
+  return value
+    .split(",")
+    .map(tag => tag.trim())
+    .filter(Boolean);
+}
+
+function buildOpeningHours(){
+
+  const value =
+    document.getElementById("contributionOpeningHours")?.value.trim();
+
+  if (!value) return null;
+
+  return {
+    label: value
+  };
+}
+
+async function uploadContributionImage(){
+
+  const input =
+    document.getElementById("contributionImageFile");
+
+  const file =
+    input?.files?.[0];
+
+  if (!file) return "";
+
+  const ext =
+    file.name.split(".").pop();
+
+  const fileName =
+    `contributions/${Date.now()}-${Math.random()
+      .toString(36)
+      .slice(2)}.${ext}`;
+
+  const { error } = await supabase.storage
+    .from("heriland-media")
+    .upload(fileName, file, {
+      cacheControl: "3600",
+      upsert: false
+    });
+
+  if (error) {
+    console.error("Image upload failed:", error);
+    alert("Image upload failed.");
+    return "";
+  }
+
+  const { data } = supabase.storage
+    .from("heriland-media")
+    .getPublicUrl(fileName);
+
+  return data.publicUrl;
 }
 
 function getContributionTitle(type){
 
   const map = {
-
-    place:
-      "Suggest a Place",
-
-    restaurant:
-      "Suggest a Restaurant",
-
-    event:
-      "Submit an Event",
-
-    culture:
-      "Share Local Culture",
-
-    "travel-tip":
-      "Share a Travel Tip",
-
-    correction:
-      "Suggest a Correction",
-
-    report:
-      "Report an Issue"
-
+    place: "Suggest a Place",
+    restaurant: "Suggest a Restaurant",
+    event: "Submit an Event",
+    culture: "Share Culture",
+    "travel-tip": "Share Travel Tip",
+    correction: "Suggest Correction"
   };
 
   return map[type] || "Contribute";
