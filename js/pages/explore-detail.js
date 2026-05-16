@@ -373,7 +373,15 @@ function renderDetailReviews(){
 }
 
 window.addPlaceToTrip = function () {
-  console.log("Add to trip");
+  if (!currentOpenedItem) return;
+
+  addToTrip(currentOpenedItem);
+
+  document
+    .getElementById("detailMoreLayer")
+    ?.classList.remove("is-open");
+
+  alert("Added to My Trip");
 };
 
 window.openPlaceMap = function () {
