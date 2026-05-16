@@ -943,28 +943,26 @@ function renderSuggestPlacePage(){
 
       <div class="suggest-place-note">
         <h4>Share a place with HeriLand</h4>
+
         <p>
-          Tell us about a place worth exploring. Submitted places will be reviewed before appearing on HeriLand.
+          Suggest hidden places, restaurants, cultural experiences,
+          or local events worth discovering in Sarawak.
         </p>
       </div>
 
       <label class="suggest-field">
         <span>Place Name</span>
-        <input id="suggestPlaceName" type="text" placeholder="e.g. Hidden Laksa Spot">
-      </label>
 
-      <label class="suggest-field">
-        <span>City</span>
-        <select id="suggestCity">
-          <option value="kuching">Kuching</option>
-          <option value="sibu">Sibu</option>
-          <option value="miri">Miri</option>
-          <option value="bintulu">Bintulu</option>
-        </select>
+        <input
+          id="suggestName"
+          type="text"
+          placeholder="e.g. Hidden Laksa Spot"
+        >
       </label>
 
       <label class="suggest-field">
         <span>Type</span>
+
         <select id="suggestType">
           <option value="spot">Spot</option>
           <option value="restaurant">Restaurant</option>
@@ -974,16 +972,155 @@ function renderSuggestPlacePage(){
       </label>
 
       <label class="suggest-field">
-        <span>Address</span>
-        <input id="suggestAddress" type="text" placeholder="Address or nearby landmark">
+        <span>City</span>
+
+        <select id="suggestCity">
+          <option value="kuching">Kuching</option>
+          <option value="sibu">Sibu</option>
+          <option value="miri">Miri</option>
+          <option value="bintulu">Bintulu</option>
+        </select>
       </label>
 
       <label class="suggest-field">
-        <span>Why is it worth visiting?</span>
-        <textarea id="suggestDescription" placeholder="Describe the mood, experience, or local story."></textarea>
+        <span>Area</span>
+
+        <input
+          id="suggestArea"
+          type="text"
+          placeholder="e.g. Waterfront"
+        >
       </label>
 
-      <button class="suggest-submit-btn" id="suggestSubmitBtn" type="button">
+      <label class="suggest-field">
+        <span>Address</span>
+
+        <input
+          id="suggestAddress"
+          type="text"
+          placeholder="Address or nearby landmark"
+        >
+      </label>
+
+      <label class="suggest-field">
+        <span>Short Description</span>
+
+        <input
+          id="suggestShortDescription"
+          type="text"
+          placeholder="Short subtitle for the place"
+        >
+      </label>
+
+      <label class="suggest-field">
+        <span>Full Description</span>
+
+        <textarea
+          id="suggestFullDescription"
+          placeholder="Tell travelers more about this place."
+        ></textarea>
+      </label>
+
+      <label class="suggest-field">
+        <span>Why Recommend?</span>
+
+        <textarea
+          id="suggestWhyRecommend"
+          placeholder="Why do you think people should visit here?"
+        ></textarea>
+      </label>
+
+      <label class="suggest-field">
+        <span>Phone</span>
+
+        <input
+          id="suggestPhone"
+          type="text"
+          placeholder="+60 ..."
+        >
+      </label>
+
+      <label class="suggest-field">
+        <span>Website</span>
+
+        <input
+          id="suggestWebsite"
+          type="text"
+          placeholder="https://..."
+        >
+      </label>
+
+      <label class="suggest-field">
+        <span>Google Map URL</span>
+
+        <input
+          id="suggestMap"
+          type="text"
+          placeholder="https://maps.google.com/..."
+        >
+      </label>
+
+      <label class="suggest-field">
+        <span>Cover Image URL</span>
+
+        <input
+          id="suggestImage"
+          type="text"
+          placeholder="https://..."
+        >
+      </label>
+
+      <div
+        class="suggest-event-fields"
+        id="suggestEventFields"
+      >
+
+        <label class="suggest-field">
+          <span>Event Date</span>
+
+          <input
+            id="suggestEventDate"
+            type="date"
+          >
+        </label>
+
+        <label class="suggest-field">
+          <span>Event Time</span>
+
+          <input
+            id="suggestEventTime"
+            type="text"
+            placeholder="e.g. 6:00 PM"
+          >
+        </label>
+
+        <label class="suggest-field">
+          <span>Organizer</span>
+
+          <input
+            id="suggestOrganizer"
+            type="text"
+            placeholder="Organizer name"
+          >
+        </label>
+
+        <label class="suggest-field">
+          <span>Ticket URL</span>
+
+          <input
+            id="suggestTicket"
+            type="text"
+            placeholder="https://..."
+          >
+        </label>
+
+      </div>
+
+      <button
+        class="suggest-submit-btn"
+        id="suggestSubmitBtn"
+        type="button"
+      >
         Submit for Review
       </button>
 
@@ -992,10 +1129,36 @@ function renderSuggestPlacePage(){
 }
 
 function bindSuggestPlacePage(){
+
+  const typeSelect =
+    document.getElementById("suggestType");
+
+  const eventFields =
+    document.getElementById("suggestEventFields");
+
+  function toggleEventFields(){
+    if (!eventFields || !typeSelect) return;
+
+    const isEvent =
+      typeSelect.value === "event";
+
+    eventFields.style.display =
+      isEvent ? "flex" : "none";
+  }
+
+  toggleEventFields();
+
+  typeSelect?.addEventListener(
+    "change",
+    toggleEventFields
+  );
+
   document
     .getElementById("suggestSubmitBtn")
     ?.addEventListener("click", () => {
+
       alert("Submitted for review");
+
     });
 }
 
