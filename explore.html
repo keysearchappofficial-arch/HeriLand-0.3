@@ -969,6 +969,231 @@
   </section>
 
 </div>
+
+<div id="cultureDetailContainer">
+
+<section
+  class="culture-detail-page"
+  id="cultureDetailPage"
+>
+
+  <!-- Hero -->
+  <div class="culture-detail-hero">
+
+    <button
+      class="culture-detail-back"
+      type="button"
+      onclick="closeCultureDetail()"
+      aria-label="Back"
+    >
+      ‹
+    </button>
+
+    <div class="culture-detail-actions">
+
+      <button
+        class="culture-detail-action culture-detail-save"
+        id="cultureDetailSaveBtn"
+        type="button"
+        aria-label="Save culture"
+      >
+        ♡
+      </button>
+
+      <button
+        class="culture-detail-action culture-detail-more"
+        id="cultureDetailMoreBtn"
+        type="button"
+        aria-label="More actions"
+      >
+        ⋯
+      </button>
+
+    </div>
+
+    <div
+      class="culture-detail-slider"
+      id="cultureDetailSlider"
+    ></div>
+
+    <div
+      class="culture-detail-dots"
+      id="cultureDetailDots"
+    ></div>
+
+    <div class="culture-detail-overlay">
+
+      <small id="cultureDetailType">
+        Culture
+      </small>
+
+      <h1 id="cultureDetailTitle">
+        Sarawak Cultural Experience
+      </h1>
+
+      <p id="cultureDetailLocation">
+        Kuching ・ Sarawak
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Panel -->
+  <div class="culture-detail-panel">
+
+    <section class="culture-detail-guide">
+
+      <small>HeriLand Culture Guide</small>
+
+      <p id="cultureDetailGuide">
+        A slower way to understand the traditions, rituals, and stories behind Sarawak.
+      </p>
+
+    </section>
+
+    <section class="culture-detail-section">
+
+      <h2>Introduction</h2>
+
+      <p id="cultureDetailIntro">
+        Cultural experiences are not only about visiting places, but understanding the people, history, and traditions behind them.
+      </p>
+
+    </section>
+
+    <section class="culture-detail-section">
+
+      <h2>Background</h2>
+
+      <p id="cultureDetailBackground">
+        Learn how local communities preserve stories, identity, food, music, and rituals across generations.
+      </p>
+
+    </section>
+
+    <section class="culture-detail-section">
+
+      <h2>What To Notice</h2>
+
+      <ul
+        class="culture-detail-list"
+        id="cultureDetailHighlights"
+      >
+      </ul>
+
+    </section>
+
+    <section class="culture-detail-section">
+
+      <h2>Etiquette & Tips</h2>
+
+      <ul
+        class="culture-detail-list"
+        id="cultureDetailTips"
+      >
+      </ul>
+
+    </section>
+
+    <section class="culture-detail-section">
+
+      <h2>Tags</h2>
+
+      <div
+        class="culture-detail-tags"
+        id="cultureDetailTags"
+      ></div>
+
+    </section>
+
+    <div class="culture-detail-links">
+
+      <a
+        class="culture-detail-link"
+        id="cultureMapLink"
+        href="#"
+        target="_blank"
+        rel="noopener"
+      >
+        Open Map
+      </a>
+
+      <a
+        class="culture-detail-link"
+        id="cultureNearbyLink"
+        href="#"
+      >
+        Explore Nearby
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- More -->
+  <div
+    class="culture-more-layer"
+    id="cultureMoreLayer"
+  >
+
+    <div
+      class="culture-more-backdrop"
+      id="cultureMoreBackdrop"
+    ></div>
+
+    <div
+      class="culture-more-menu"
+      id="cultureMoreMenu"
+    >
+
+      <button
+        type="button"
+        onclick="window.saveCulturePlace()"
+      >
+        <span>♡</span>
+        Save Culture
+      </button>
+
+      <button
+        type="button"
+        onclick="window.addCultureToTrip()"
+      >
+        <span>⊞</span>
+        Add to Trip
+      </button>
+
+      <button
+        type="button"
+        onclick="window.shareCulturePlace()"
+      >
+        <span>⤴</span>
+        Share Culture
+      </button>
+
+      <button
+        type="button"
+        onclick="window.openCultureMap()"
+      >
+        <span>↗</span>
+        Open Map
+      </button>
+
+      <button
+        type="button"
+        onclick="window.continueCultureAiGuide()"
+      >
+        <span>✨</span>
+        Continue with AI Guide
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
     
 <div
   class="logout-layer"
