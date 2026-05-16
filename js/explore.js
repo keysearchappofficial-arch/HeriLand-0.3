@@ -2106,13 +2106,13 @@ function renderAccountPage(){
         Save Changes
       </button>
 
-      <button
-        class="account-signout-btn"
-        id="accountSignOutBtn"
-        type="button"
-      >
-        Sign Out
-      </button>
+<button
+  class="account-signout-btn"
+  id="accountAuthActionBtn"
+  type="button"
+>
+  Account Action
+</button>
 
     </div>
   `;
@@ -2139,13 +2139,25 @@ function bindAccountPage(){
     alert("Account updated");
   });
   
-const signOutBtn =
-  document.getElementById("accountSignOutBtn");
+const accountAuthActionBtn =
+  document.getElementById("accountAuthActionBtn");
 
-signOutBtn?.addEventListener("click", () => {
+getCurrentUser?.().then((user) => {
+  if (!accountAuthActionBtn) return;
 
-  openLogoutSheet();
+  accountAuthActionBtn.textContent =
+    user ? "Sign Out" : "Sign In";
+});
 
+accountAuthActionBtn?.addEventListener("click", async () => {
+  const user = await getCurrentUser?.();
+
+  if (user) {
+    openLogoutSheet();
+    return;
+  }
+
+  openAuthModal();
 });
 
 }
