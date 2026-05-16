@@ -49,7 +49,6 @@ body{
 
 body.no-scroll{
   overflow:hidden;
-  touch-action:none;
 }
 
 /* =========================
@@ -1411,3 +1410,28 @@ body{
   }
 
 }
+
+.avatar-panel{
+  overflow:hidden;
+}
+
+.avatar-sub-content,
+.avatar-panel-menu{
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+body.no-scroll .stage{
+  pointer-events:none;
+}
+
+.avatar-panel,
+.avatar-sub-content,
+.detail-panel,
+.event-detail-panel,
+.review-sheet-panel,
+.review-list-panel{
+  touch-action:pan-y;
+  overscroll-behavior:contain;
+}
+
