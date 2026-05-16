@@ -82,7 +82,7 @@ let cards = [];
 
 let activeCityFilter = "all";
 let activeTypeFilter = "all";
-let currentOpenedItem = null;
+window.currentOpenedItem = null;
 
 async function loadExploreCards(){
 
@@ -337,8 +337,8 @@ function openDetailPage(cardEl) {
 
   if (!slug) return;
 
-  currentOpenedItem =
-    cards.find(card => card.slug === slug) || null;
+window.currentOpenedItem =
+  cards.find(card => card.slug === slug) || null;
 
   if (type === "event") {
     window.openEventDetail?.(slug);
