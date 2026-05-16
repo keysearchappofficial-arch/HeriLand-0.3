@@ -513,7 +513,10 @@ async function submitDetailReviewToSupabase(review){
   return true;
 }
 
-window.addPlaceToTrip = function () {
+window.addPlaceToTrip = async function () {
+  const loggedIn = await requireLogin("add places to your trip");
+  if (!loggedIn) return;
+  
   if (!currentOpenedItem) return;
 
   addToTrip(currentOpenedItem);
