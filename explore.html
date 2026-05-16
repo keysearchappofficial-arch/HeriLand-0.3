@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="./css/pages/contribute.css">
 <link rel="stylesheet" href="./css/components/auth.css">
 <link rel="stylesheet" href="./css/components/explore-detail.css" />
-
+<link rel="stylesheet" href="./css/components/traveler-X-detail.css">
 <link rel="stylesheet" href="./css/components/event-detail.css" />
 
 
@@ -806,6 +806,169 @@
 
 </section>
     </div>
+
+<div id="travelerDetailContainer">
+
+  <!-- Traveler Detail Page -->
+  <section
+    class="traveler-detail-page"
+    id="travelerDetailPage"
+  >
+
+    <div class="traveler-detail-hero">
+
+      <button
+        class="traveler-detail-back"
+        type="button"
+        onclick="closeTravelerDetail()"
+      >
+        ‹
+      </button>
+
+      <div class="traveler-detail-actions">
+
+        <button
+          class="traveler-detail-action traveler-detail-save"
+          id="travelerDetailSaveBtn"
+          type="button"
+        >
+          ♡
+        </button>
+
+        <button
+          class="traveler-detail-action traveler-detail-more"
+          id="travelerDetailMoreBtn"
+          type="button"
+        >
+          ⋯
+        </button>
+
+      </div>
+
+      <div
+        class="traveler-detail-slider"
+        id="travelerDetailSlider"
+      ></div>
+
+      <div
+        class="traveler-detail-dots"
+        id="travelerDetailDots"
+      ></div>
+
+      <div class="traveler-detail-overlay">
+
+        <small>
+          Traveler Experience
+        </small>
+
+        <h1 id="travelerDetailName">
+          Traveler Story
+        </h1>
+
+        <p id="travelerDetailAchievement">
+          Explore Sarawak Slowly
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="traveler-detail-panel">
+
+      <section class="traveler-story">
+
+        <small>
+          HeriLand Guide
+        </small>
+
+        <p id="travelerDetailGuide">
+          A slower way to explore Sarawak.
+        </p>
+
+      </section>
+
+      <section class="traveler-story">
+
+        <h2 id="travelerDetailTitle">
+          Traveler Story
+        </h2>
+
+        <p id="travelerDetailStory">
+          Experience details...
+        </p>
+
+      </section>
+
+      <div
+        class="traveler-detail-tags"
+        id="travelerDetailTags"
+      ></div>
+
+    </div>
+
+    <!-- More -->
+    <div
+      class="traveler-more-layer"
+      id="travelerMoreLayer"
+    >
+
+      <div
+        class="traveler-more-backdrop"
+        id="travelerMoreBackdrop"
+      ></div>
+
+      <div
+        class="traveler-more-menu"
+        id="travelerMoreMenu"
+      >
+
+        <button
+          type="button"
+          onclick="window.saveTravelerStory()"
+        >
+          <span>♡</span>
+          Save Story
+        </button>
+
+        <button
+          type="button"
+          onclick="window.saveTravelerRoute()"
+        >
+          <span>⊞</span>
+          Add to Trip
+        </button>
+
+        <button
+          type="button"
+          onclick="window.shareTravelerStory()"
+        >
+          <span>⤴</span>
+          Share Story
+        </button>
+
+        <button
+          type="button"
+          onclick="window.openTravelerMap()"
+        >
+          <span>↗</span>
+          Open Route Map
+        </button>
+
+        <button
+          type="button"
+          onclick="window.continueTravelerAiGuide()"
+        >
+          <span>✨</span>
+          Continue with AI Guide
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
     
 <div
   class="logout-layer"
@@ -853,6 +1016,7 @@
 
 <script src="./js/pages/explore-detail.js"></script>
 <script src="./js/pages/event-detail.js"></script>
+<script src="./js/pages/traveler-X-detail.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./js/supabase-client.js"></script>
 <script src="./js/auth.js"></script>
