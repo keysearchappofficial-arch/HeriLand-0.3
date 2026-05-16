@@ -400,6 +400,14 @@ window.currentOpenedItem =
     window.openEventDetail?.(slug);
     return;
   }
+  
+if (
+  type === "culture" ||
+  type === "travel-tip"
+) {
+  window.openTravelerDetail?.(slug);
+  return;
+}
 
   window.openDetail?.(slug);
 }
