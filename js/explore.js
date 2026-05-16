@@ -401,10 +401,7 @@ window.currentOpenedItem =
     return;
   }
   
-if (
-  type === "culture" ||
-  type === "travel-tip"
-) {
+if (type === "experience") {
   window.openTravelerDetail?.(slug);
   return;
 }
