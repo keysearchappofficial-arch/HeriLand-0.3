@@ -6,7 +6,11 @@ async function getCurrentUser(){
 async function signUpWithEmail(email, password){
   const { data, error } = await supabase.auth.signUp({
     email,
-    password
+    password,
+    options: {
+      emailRedirectTo:
+        "https://keysearchappofficial-arch.github.io/HeriLand-0.3/explore.html"
+    }
   });
 
   if (error) {
