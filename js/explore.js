@@ -1287,13 +1287,13 @@ function renderContributionFields(type){
     </label>
   `;
 
-  const tagsField = `
-    <input
-      class="contribution-input"
-      id="contributionTags"
-      placeholder="Tags, e.g. nature, local, family"
-    >
-  `;
+const tagsField = `
+  <textarea
+    class="contribution-textarea"
+    id="contributionTags"
+    placeholder="Tags, separated by comma or Enter&#10;e.g. nature, local&#10;family"
+  ></textarea>
+`;
 
   const commonBase = `
     <input
@@ -1811,7 +1811,7 @@ function parseContributionTags(){
     document.getElementById("contributionTags")?.value || "";
 
   return value
-    .split(",")
+    .split(/[,，\n]/)
     .map(tag => tag.trim())
     .filter(Boolean);
 }
