@@ -1,0 +1,180 @@
+<!-- Traveler Experience Detail Page -->
+<section
+  class="traveler-detail-page"
+  id="travelerDetailPage"
+>
+
+  <div class="traveler-detail-hero">
+
+    <button
+      class="traveler-detail-back"
+      type="button"
+      onclick="closeTravelerDetail()"
+      aria-label="Back"
+    >
+      ‹
+    </button>
+
+    <div class="traveler-detail-actions">
+
+      <button
+        class="traveler-detail-action traveler-detail-save"
+        id="travelerDetailSaveBtn"
+        type="button"
+        aria-label="Save experience"
+      >
+        ♡
+      </button>
+
+      <button
+        class="traveler-detail-action traveler-detail-more"
+        id="travelerDetailMoreBtn"
+        type="button"
+        aria-label="More actions"
+      >
+        ⋯
+      </button>
+
+    </div>
+
+    <div
+      class="traveler-detail-slider"
+      id="travelerDetailSlider"
+    ></div>
+
+    <div
+      class="traveler-detail-dots"
+      id="travelerDetailDots"
+    ></div>
+
+    <div class="traveler-detail-overlay">
+
+      <small id="travelerDetailKicker">
+        Traveler Experience
+      </small>
+
+      <h1 id="travelerDetailName">
+        Local Travel Tip
+      </h1>
+
+      <p id="travelerDetailMeta">
+        Sarawak ・ Shared by traveler
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="traveler-detail-panel">
+
+    <section class="traveler-guide">
+      <small>HeriLand Traveler Note</small>
+
+      <p id="travelerDetailAiNote">
+        A small local insight that helps travelers move more slowly and clearly.
+      </p>
+    </section>
+
+    <article class="traveler-story">
+
+      <h2 id="travelerDetailTitle">
+        Travel Experience Title
+      </h2>
+
+      <p id="travelerDetailStory">
+        This experience was shared by a traveler to help others understand the place before visiting.
+      </p>
+
+    </article>
+
+    <section class="traveler-detail-section">
+
+      <h2>Why It Matters</h2>
+
+      <p id="travelerDetailWhy">
+        A useful reminder for travelers who want a smoother local experience.
+      </p>
+
+    </section>
+
+    <section class="traveler-detail-section">
+
+      <h2>Location</h2>
+
+      <p id="travelerDetailLocation">
+        Sarawak
+      </p>
+
+    </section>
+
+    <div
+      class="traveler-detail-tags"
+      id="travelerDetailTags"
+    >
+      <span>#TravelTip</span>
+      <span>#Sarawak</span>
+    </div>
+
+  </div>
+
+  <!-- Traveler More Sheet -->
+  <div
+    class="traveler-more-layer"
+    id="travelerMoreLayer"
+  >
+
+    <div
+      class="traveler-more-backdrop"
+      id="travelerMoreBackdrop"
+    ></div>
+
+    <div
+      class="traveler-more-menu"
+      id="travelerMoreMenu"
+    >
+
+      <button
+        type="button"
+        onclick="window.saveTravelerExperience()"
+      >
+        <span>♡</span>
+        Save Experience
+      </button>
+
+      <button
+        type="button"
+        onclick="window.addTravelerExperienceToTrip()"
+      >
+        <span>⊞</span>
+        Add to Trip
+      </button>
+
+      <button
+        type="button"
+        onclick="window.shareTravelerExperience()"
+      >
+        <span>⤴</span>
+        Share Experience
+      </button>
+
+      <button
+        type="button"
+        onclick="window.openTravelerMap()"
+      >
+        <span>↗</span>
+        Open Related Map
+      </button>
+
+      <button
+        type="button"
+        onclick="window.continueTravelerAiGuide()"
+      >
+        <span>✨</span>
+        Continue with AI Guide
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
