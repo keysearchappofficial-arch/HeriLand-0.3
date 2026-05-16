@@ -1,3 +1,6 @@
+let currentDetailSlug = null;
+let currentDetailType = "place";
+
 const detailPage =
   document.getElementById("detailPage");
 
@@ -9,11 +12,22 @@ window.openDetail = async function (slug) {
 
   if (!detailPage) return;
 
+  currentDetailSlug = slug;
+
+  const item =
+    window.currentOpenedItem;
+
+  currentDetailType =
+    item?.contentType === "restaurant"
+      ? "restaurant"
+      : "place";
+
   detailPage.classList.add("is-open");
 
   document.body.classList.add("no-scroll");
 
   await loadDetail(slug);
+  await loadDetailReviews(slug);
 
   syncDetailSaveButton();
 
@@ -346,7 +360,7 @@ reviewImageInput?.addEventListener("change", () => {
   });
 });
 
-reviewSubmitBtn?.addEventListener("click", () => {
+reviewSubmitBtn?.addEventListener("click", async () => {
   const comment = reviewComment?.value.trim();
 
   if (!selectedReviewRating || !comment) {
@@ -360,11 +374,32 @@ reviewSubmitBtn?.addEventListener("click", () => {
     name: "Traveler"
   };
 
-  localReviews.unshift(review);
+const ok =
+  await submitDetailReviewToSupabase(review);
 
-  renderDetailReviews();
+if (!ok) return;
 
-  reviewComment.value = "";
+await loadDetailReviews(currentDetailSlug);
+
+addReview({
+  title:
+    document.getElementById("detailTitle")?.textContent || "",
+  text:
+    comment,
+  rating:
+    "★".repeat(selectedReviewRating),
+  image:
+    window.currentOpenedItem?.image || "",
+  slug:
+    window.currentOpenedItem?.slug || "",
+  createdAt:
+    Date.now()
+});
+
+updateAvatarStats();
+
+reviewComment.value = "";
+
   selectedReviewRating = 0;
 
   reviewRating
@@ -394,6 +429,85 @@ function renderDetailReviews(){
       `;
     })
     .join("");
+
+  syncDetailReviewStats();
+}
+
+function syncDetailReviewStats(){
+
+  const scoreEl =
+    document.getElementById("detailScore");
+
+  const countEl =
+    document.getElementById("detailReviewCount");
+
+  const count =
+    localReviews.length;
+
+  if (scoreEl) {
+    scoreEl.textContent =
+      count ? getAverageRating() : "0.0";
+  }
+
+  if (countEl) {
+    countEl.textContent =
+      count === 1
+        ? "1 Review"
+        : `${count} Reviews`;
+  }
+}
+
+async function loadDetailReviews(slug){
+
+  const { data, error } = await supabase
+    .from("heriland_reviews")
+    .select("*")
+    .eq("target_slug", slug)
+    .eq("status", "published")
+    .order("created_at", { ascending:false });
+
+  if (error) {
+    console.error("load reviews failed:", error);
+    localReviews = [];
+    renderDetailReviews();
+    return;
+  }
+
+  localReviews = (data || []).map(review => ({
+    id: review.id,
+    rating: review.rating,
+    comment: review.comment,
+    name: "Traveler",
+    createdAt: review.created_at
+  }));
+
+  renderDetailReviews();
+}
+
+async function submitDetailReviewToSupabase(review){
+
+  const user =
+    await getCurrentUser?.();
+
+  const { error } = await supabase
+    .from("heriland_reviews")
+    .insert({
+      user_id: user?.id || null,
+      target_slug: currentDetailSlug,
+      target_type: currentDetailType,
+      rating: review.rating,
+      comment: review.comment,
+      image_urls: [],
+      status: "published"
+    });
+
+  if (error) {
+    console.error("submit review failed:", error);
+    alert("Review submit failed.");
+    return false;
+  }
+
+  return true;
 }
 
 window.addPlaceToTrip = function () {
