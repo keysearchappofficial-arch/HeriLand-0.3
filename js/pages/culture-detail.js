@@ -306,20 +306,18 @@ document
   .getElementById("cultureDetailSaveBtn")
   ?.addEventListener("click", async () => {
 
-    const item =
-      window.currentOpenedItem;
+    const loggedIn = await requireLogin("save culture");
+    if (!loggedIn) return;
 
+    const item = window.currentOpenedItem;
     if (!item) return;
 
-    const ok =
-      await toggleSaved(item);
-
+    const ok = await toggleSaved(item);
     if (!ok) return;
 
     updateAvatarStats();
     renderCards();
     syncCultureSaveButton();
-
   });
 
 /* =========================
@@ -349,35 +347,33 @@ document
 ========================= */
 
 window.saveCulturePlace = async function () {
-  const item = window.currentOpenedItem;
+  const loggedIn = await requireLogin("save culture");
+  if (!loggedIn) return;
 
+  const item = window.currentOpenedItem;
   if (!item) return;
 
-  const ok =
-    await toggleSaved(item);
-
+  const ok = await toggleSaved(item);
   if (!ok) return;
 
   updateAvatarStats();
   renderCards();
   syncCultureSaveButton();
 
-  document
-    .getElementById("cultureMoreLayer")
-    ?.classList.remove("is-open");
+  document.getElementById("cultureMoreLayer")?.classList.remove("is-open");
 };
 
-window.addCultureToTrip = function () {
-  const item = window.currentOpenedItem;
+window.addCultureToTrip = async function () {
+  const loggedIn = await requireLogin("add culture to your trip");
+  if (!loggedIn) return;
 
+  const item = window.currentOpenedItem;
   if (!item) return;
 
   addToTrip(item);
   updateAvatarStats();
 
-  document
-    .getElementById("cultureMoreLayer")
-    ?.classList.remove("is-open");
+  document.getElementById("cultureMoreLayer")?.classList.remove("is-open");
 
   alert("Added to My Trip");
 };
