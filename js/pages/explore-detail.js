@@ -32,101 +32,87 @@ window.closeDetail = function () {
 };
 
 /* =========================
-   Mock Data
-========================= */
-
-const detailData = {
-  "kuching-waterfront": {
-    type: "Recommended Place",
-    area: "Kuching",
-
-    title: "Kuching Waterfront",
-
-    score: "4.8",
-    reviews: "128 Reviews",
-
-    address:
-      "93000 Kuching Waterfront, Sarawak",
-
-    phone:
-      "+60 82-000000",
-
-    hours:
-      "Open Daily · 24 Hours",
-
-    ai:
-      "A place where the city slows down with the river.",
-
-    intro:
-      "Kuching Waterfront is one of the most loved public spaces in Sarawak. Travelers come here for riverside walks, local food, sunsets, and the quiet rhythm of the city.",
-
-    services: [
-      "Riverside Walking Area",
-      "Local Food Nearby",
-      "Sunset Spot",
-      "Night View"
-    ],
-
-    images: [
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
-
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1400&q=80",
-
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
-    ]
-  },
-
-  "borneo-rainforest": {
-    type: "Nature",
-    area: "Sarawak",
-
-    title: "Borneo Rainforest",
-
-    score: "4.9",
-    reviews: "84 Reviews",
-
-    address:
-      "Borneo Rainforest Area, Sarawak",
-
-    phone:
-      "Not Available",
-
-    hours:
-      "Best Morning Visit",
-
-    ai:
-      "Mist, silence, and rainforest air that changes your pace.",
-
-    intro:
-      "A quieter side of Sarawak filled with rainforest sounds, morning fog, and slower trails made for travelers who want to disconnect.",
-
-    services: [
-      "Nature Trail",
-      "Rainforest View",
-      "Photography Spot",
-      "Quiet Escape"
-    ],
-
-    images: [
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=80",
-
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80"
-    ]
-  }
-};
-
-/* =========================
    Load Detail
 ========================= */
 
-async function loadDetail(slug) {
+async function loadDetail(slug){
 
-  const data = detailData[slug];
+  const { data, error } = await supabase
+    .from("places")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error) {
+    console.error("load detail failed:", error);
+
+    renderDetail({
+      type: "Place",
+      area: "Sarawak",
+      title: "Place not found",
+      score: "0.0",
+      reviews: "0 Reviews",
+      address: "Address not available",
+      phone: "Not Available",
+      hours: "Check Before Visiting",
+      ai: "This place may not be available yet.",
+      intro: "",
+      services: [],
+      images: []
+    });
+
+    return;
+  }
 
   if (!data) return;
 
-  renderDetail(data);
+  const images = [
+    data.hero_image_url,
+    data.card_image_url,
+    ...(Array.isArray(data.gallery_urls) ? data.gallery_urls : [])
+  ].filter(Boolean);
 
+  renderDetail({
+    type: formatPlaceType(data.type),
+    area: data.area || data.city || "Sarawak",
+
+    title: data.name || "",
+
+    score: "New",
+    reviews: "0 Reviews",
+
+    address: data.address || "Address not available",
+    phone: data.phone || "Not Available",
+    hours: "Check Before Visiting",
+
+    ai:
+      data.short_description ||
+      "A local place shared by travelers.",
+
+    intro:
+      data.full_description ||
+      data.short_description ||
+      "No description yet.",
+
+    services:
+      Array.isArray(data.tags)
+        ? data.tags
+        : [],
+
+    images
+  });
+
+}
+
+function formatPlaceType(type){
+  const map = {
+    spot: "Recommended Place",
+    place: "Recommended Place",
+    restaurant: "Restaurant",
+    culture: "Culture"
+  };
+
+  return map[type] || "Recommended Place";
 }
 
 /* =========================
@@ -191,6 +177,15 @@ function renderServices(items) {
 ========================= */
 
 function renderGallery(images) {
+
+  const fallbackImages = [
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80"
+  ];
+
+  images =
+    images && images.length
+      ? images
+      : fallbackImages;
 
   const slider =
     document.getElementById("detailSlider");
