@@ -407,7 +407,7 @@ if (type === "experience") {
 }
 
 if (type === "culture") {
-  window.openTravelerDetail?.(slug);
+  window.openCultureDetail?.(slug);
   return;
 }
 
