@@ -746,28 +746,33 @@ service: {
   items: [
     {
       title: "Help Center",
-      text: "Common travel questions and platform guide.",
-      action: "Open"
+      text: "Common questions, trip tools, saved places, and platform guide.",
+      action: "Open",
+      page: "help"
     },
     {
       title: "Contact Support",
-      text: "Send us a message about your trip or account.",
-      action: "Message"
+      text: "Send a message to HeriLand support for account or travel issues.",
+      action: "Message",
+      page: "contact"
     },
     {
       title: "Report an Issue",
-      text: "Wrong info, closed place, or unsafe content.",
-      action: "Report"
+      text: "Report wrong information, closed places, broken links, or unsafe content.",
+      action: "Report",
+      page: "report"
     },
     {
       title: "Privacy Policy",
-      text: "Learn how HeriLand handles your data.",
-      action: "View"
+      text: "Learn how HeriLand stores, uses, and protects your data.",
+      action: "View",
+      page: "privacy"
     },
     {
       title: "Terms of Service",
-      text: "Platform usage terms and community guidelines.",
-      action: "View"
+      text: "Read the platform rules, usage terms, and community guidelines.",
+      action: "View",
+      page: "terms"
     }
   ]
 },
@@ -868,6 +873,7 @@ if (page.layout === "account") {
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
   bindAvatarPlaceSwipe(pageKey);
+  bindSupportButtons();
 }
 
 function renderAvatarPlaceCard(item){
@@ -935,11 +941,14 @@ function renderAvatarListItem(item){
             </button>
           ` : ""}
 
-          ${item.action ? `
-            <button type="button">
-              ${item.action}
-            </button>
-          ` : ""}
+${item.action ? `
+  <button
+    type="button"
+    data-support-page="${item.page || ""}"
+  >
+    ${item.action}
+  </button>
+` : ""}
 
         </div>
 
@@ -949,6 +958,76 @@ function renderAvatarListItem(item){
 
     </div>
   `;
+}
+
+function openSupportPage(page){
+  const pages = {
+    help: {
+      title: "Help Center",
+      body: `
+        <p>Find basic guidance for saved places, trips, reviews, and exploring Sarawak with HeriLand.</p>
+        <p>You can swipe cards to explore, save places, add items to your trip, and check useful travel information from your traveler panel.</p>
+      `
+    },
+    contact: {
+      title: "Contact Support",
+      body: `
+        <input class="support-input" placeholder="Your email">
+        <textarea class="support-textarea" placeholder="How can we help?"></textarea>
+        <button class="support-submit" type="button">Send Message</button>
+      `
+    },
+    report: {
+      title: "Report an Issue",
+      body: `
+        <select class="support-input">
+          <option>Wrong information</option>
+          <option>Closed place</option>
+          <option>Broken link</option>
+          <option>Unsafe content</option>
+        </select>
+        <textarea class="support-textarea" placeholder="Tell us what happened."></textarea>
+        <button class="support-submit" type="button">Submit Report</button>
+      `
+    },
+    privacy: {
+      title: "Privacy Policy",
+      body: `
+        <p>HeriLand may store saved places, trips, reviews, and basic account preferences to improve your travel experience.</p>
+        <p>Your data should only be used to support platform features, personalization, and safety-related improvements.</p>
+      `
+    },
+    terms: {
+      title: "Terms of Service",
+      body: `
+        <p>By using HeriLand, travelers agree to use the platform responsibly and avoid submitting harmful, misleading, or illegal content.</p>
+        <p>Travel information should be checked before visiting, as opening hours, availability, and event details may change.</p>
+      `
+    }
+  };
+
+  const data = pages[page];
+  if (!data) return;
+
+  avatarSubTitle.textContent = data.title;
+  avatarSubKicker.textContent = "Help & Support";
+
+  avatarSubContent.innerHTML = `
+    <div class="support-page">
+      ${data.body}
+    </div>
+  `;
+}
+
+function bindSupportButtons(){
+  document
+    .querySelectorAll("[data-support-page]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const page = button.dataset.supportPage;
+        openSupportPage(page);
+      });
+    });
 }
 
 function renderAccountPage(){
