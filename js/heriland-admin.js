@@ -351,7 +351,7 @@ function parseTags(value){
   if (!value) return [];
 
   return String(value)
-    .split(",")
+    .split(/[,，\n]/)
     .map(tag => tag.trim())
     .filter(Boolean);
 }
