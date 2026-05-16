@@ -323,6 +323,257 @@ function getSelectedIds(){
 }
 
 /* =========================
+   Publish Pipeline
+========================= */
+
+function generateSlug(text = ""){
+
+  return (
+    text
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") +
+    "-" +
+    Date.now()
+  );
+
+}
+
+function getContentType(type){
+
+  const map = {
+    place: "spot",
+    restaurant: "restaurant",
+    culture: "culture",
+    event: "event",
+    "travel-tip": "culture",
+    correction: "culture"
+  };
+
+  return map[type] || "spot";
+
+}
+
+function getFallbackImage(type){
+
+  const map = {
+
+    place:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200",
+
+    restaurant:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200",
+
+    event:
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200",
+
+    culture:
+      "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200"
+
+  };
+
+  return map[type] || map.place;
+
+}
+
+async function publishSubmission(submission){
+
+  const slug =
+    generateSlug(submission.name);
+
+  const image =
+    submission.image_url ||
+    getFallbackImage(submission.type);
+
+  /* =========================
+     EVENT
+  ========================= */
+
+  if (submission.type === "event") {
+
+    const eventPayload = {
+
+      slug,
+
+      title:
+        submission.name,
+
+      city:
+        submission.city,
+
+      area:
+        submission.area,
+
+      venue_name:
+        submission.address,
+
+      address:
+        submission.address,
+
+      summary:
+        submission.short_description,
+
+      content:
+        submission.full_description,
+
+      start_date:
+        submission.event_date,
+
+      end_date:
+        submission.event_date,
+
+      organizer:
+        submission.organizer,
+
+      ticket_url:
+        submission.ticket_url,
+
+      google_map_url:
+        submission.google_map_url,
+
+      hero_image_url:
+        image,
+
+      card_image_url:
+        image,
+
+      status:
+        "published"
+
+    };
+
+    const { error:eventError } =
+      await supabase
+        .from("events")
+        .insert(eventPayload);
+
+    if (eventError) {
+      console.error("event insert failed", eventError);
+      return false;
+    }
+
+  }
+
+  /* =========================
+     PLACE / RESTAURANT / CULTURE
+  ========================= */
+
+  else {
+
+    const placePayload = {
+
+      slug,
+
+      type:
+        getContentType(submission.type),
+
+      name:
+        submission.name,
+
+      city:
+        submission.city,
+
+      area:
+        submission.area,
+
+      address:
+        submission.address,
+
+      short_description:
+        submission.short_description,
+
+      full_description:
+        submission.full_description,
+
+      hero_image_url:
+        image,
+
+      card_image_url:
+        image,
+
+      phone:
+        submission.phone,
+
+      website_url:
+        submission.website_url,
+
+      google_map_url:
+        submission.google_map_url,
+
+      status:
+        "published"
+
+    };
+
+    const { error:placeError } =
+      await supabase
+        .from("places")
+        .insert(placePayload);
+
+    if (placeError) {
+      console.error("place insert failed", placeError);
+      return false;
+    }
+
+  }
+
+  /* =========================
+     EXPLORE CARD
+  ========================= */
+
+  const explorePayload = {
+
+    slug,
+
+    content_type:
+      getContentType(submission.type),
+
+    city:
+      submission.city,
+
+    title:
+      submission.name,
+
+    subtitle:
+      submission.short_description || "",
+
+    tags:
+      submission.area || "",
+
+    image_url:
+      image,
+
+    loved_text:
+      "New from travelers",
+
+    loved_count:
+      0,
+
+    is_active:
+      true
+
+  };
+
+  const { error:exploreError } =
+    await supabase
+      .from("explore_items")
+      .insert(explorePayload);
+
+  if (exploreError) {
+    console.error(
+      "explore insert failed",
+      exploreError
+    );
+
+    return false;
+  }
+
+  return true;
+
+}
+
+/* =========================
    Batch
 ========================= */
 
@@ -416,9 +667,48 @@ checkAll?.addEventListener("change", () => {
     });
 });
 
-batchPublishBtn?.addEventListener("click", () => {
-  batchUpdateStatus("published");
-});
+batchPublishBtn?.addEventListener(
+  "click",
+  async () => {
+
+    const ids = getSelectedIds();
+
+    if (!ids.length) {
+      alert("Please select at least one row.");
+      return;
+    }
+
+    for (const id of ids) {
+
+      const submission =
+        submissions.find(item => item.id === id);
+
+      if (!submission) continue;
+
+      const ok =
+        await publishSubmission(submission);
+
+      if (!ok) {
+        alert("Publish failed.");
+        return;
+      }
+
+      await supabase
+        .from("user_submitted_places")
+        .update({
+          status: "published",
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", id);
+
+    }
+
+    alert("Published successfully.");
+
+    await loadSubmissions();
+
+  }
+);
 
 batchRejectBtn?.addEventListener("click", () => {
   const ids = getSelectedIds();
