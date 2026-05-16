@@ -873,7 +873,10 @@ if (page.layout === "account") {
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
   bindAvatarPlaceSwipe(pageKey);
+if (pageKey === "service") {
   bindSupportButtons();
+}
+
 }
 
 function renderAvatarPlaceCard(item){
@@ -1020,8 +1023,8 @@ function openSupportPage(page){
 }
 
 function bindSupportButtons(){
-  document
-    .querySelectorAll("[data-support-page]")
+  avatarSubContent
+    ?.querySelectorAll("[data-support-page]")
     .forEach((button) => {
       button.addEventListener("click", () => {
         const page = button.dataset.supportPage;
