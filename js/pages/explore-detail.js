@@ -38,9 +38,10 @@ window.closeDetail = function () {
 async function loadDetail(slug){
 
   const { data, error } = await supabase
-    .from("places")
+    .from("heriland_places")
     .select("*")
     .eq("slug", slug)
+    .eq("status", "published")
     .single();
 
   if (error) {
@@ -76,14 +77,17 @@ async function loadDetail(slug){
     type: formatPlaceType(data.type),
     area: data.area || data.city || "Sarawak",
 
-    title: data.name || "",
+    title: data.title || "",
 
     score: "New",
     reviews: "0 Reviews",
 
     address: data.address || "Address not available",
     phone: data.phone || "Not Available",
-    hours: "Check Before Visiting",
+
+    hours:
+      data.opening_hours?.label ||
+      "Check Before Visiting",
 
     ai:
       data.short_description ||
@@ -106,10 +110,8 @@ async function loadDetail(slug){
 
 function formatPlaceType(type){
   const map = {
-    spot: "Recommended Place",
     place: "Recommended Place",
-    restaurant: "Restaurant",
-    culture: "Culture"
+    restaurant: "Restaurant"
   };
 
   return map[type] || "Recommended Place";
