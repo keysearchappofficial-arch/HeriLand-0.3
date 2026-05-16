@@ -15,6 +15,18 @@ window.openEventDetail = async function (slug) {
 
   await loadEventDetail(slug);
 
+  const saveBtn =
+    document.getElementById("eventDetailSaveBtn");
+
+  const saved =
+    isSaved(slug);
+
+  saveBtn?.classList.toggle("is-saved", saved);
+
+  if (saveBtn) {
+    saveBtn.textContent = saved ? "♥" : "♡";
+  }
+
 };
 
 /* =========================
@@ -264,12 +276,20 @@ document
   .getElementById("eventDetailSaveBtn")
   ?.addEventListener("click", (event) => {
 
-    event.currentTarget.classList.toggle("is-saved");
+    const item = window.currentOpenedItem;
+
+    if (!item) return;
+
+    toggleSaved(item);
+    updateAvatarStats();
+    renderCards();
+
+    const saved = isSaved(item.slug);
+
+    event.currentTarget.classList.toggle("is-saved", saved);
 
     event.currentTarget.textContent =
-      event.currentTarget.classList.contains("is-saved")
-        ? "♥"
-        : "♡";
+      saved ? "♥" : "♡";
   });
 
 /* =========================
