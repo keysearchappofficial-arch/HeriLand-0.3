@@ -818,12 +818,6 @@ contribute: {
       type: "correction",
       title: "Suggest Correction",
       text: "Help improve outdated information or wrong details."
-    },
-
-    {
-      type: "report",
-      title: "Report Issue",
-      text: "Report unsafe, duplicate, or broken information."
     }
   ]
 },
@@ -981,11 +975,32 @@ function renderAvatarPlaceCard(item){
   `;
 }
 
-if (page.layout === "contribute") {
-  avatarSubContent.innerHTML =
-    renderContributePage(page.items);
+function renderContributePage(items){
 
-  bindContributePage();
+  return `
+    <div class="contribute-list">
+
+      ${items.map(item => `
+        <button
+          class="contribute-card"
+          type="button"
+          data-contribute-type="${item.type}"
+        >
+
+          <div class="contribute-copy">
+            <h4>${item.title}</h4>
+            <p>${item.text}</p>
+          </div>
+
+          <div class="contribute-arrow">
+            →
+          </div>
+
+        </button>
+      `).join("")}
+
+    </div>
+  `;
 }
 
 function bindContributePage(){
