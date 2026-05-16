@@ -622,6 +622,28 @@ const authPassword = document.getElementById("authPassword");
 const authLoginBtn = document.getElementById("authLoginBtn");
 const authSignupBtn = document.getElementById("authSignupBtn");
 
+const logoutLayer =
+  document.getElementById("logoutLayer");
+
+const logoutBackdrop =
+  document.getElementById("logoutBackdrop");
+
+const logoutCancelBtn =
+  document.getElementById("logoutCancelBtn");
+
+const logoutConfirmBtn =
+  document.getElementById("logoutConfirmBtn");
+
+function openLogoutSheet(){
+  logoutLayer?.classList.add("is-open");
+  document.body.classList.add("no-scroll");
+}
+
+function closeLogoutSheet(){
+  logoutLayer?.classList.remove("is-open");
+  document.body.classList.remove("no-scroll");
+}
+
 async function updateAuthUI(){
   const user = await getCurrentUser();
 
@@ -643,12 +665,10 @@ function closeAuthModal(){
 avatarAuthBtn?.addEventListener("click", async () => {
   const user = await getCurrentUser();
 
-  if (user) {
-    await logout();
-    await updateAuthUI();
-    alert("Logged out");
-    return;
-  }
+if (user) {
+  openLogoutSheet();
+  return;
+}
 
   openAuthModal();
 });
@@ -689,6 +709,29 @@ authSignupBtn?.addEventListener("click", async () => {
   closeAuthModal();
   await updateAuthUI();
 });
+
+logoutBackdrop?.addEventListener(
+  "click",
+  closeLogoutSheet
+);
+
+logoutCancelBtn?.addEventListener(
+  "click",
+  closeLogoutSheet
+);
+
+logoutConfirmBtn?.addEventListener(
+  "click",
+  async () => {
+
+    await logout();
+
+    closeLogoutSheet();
+
+    await updateAuthUI();
+
+  }
+);
 
 updateAuthUI();
 
