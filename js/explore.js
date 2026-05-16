@@ -2142,20 +2142,9 @@ function bindAccountPage(){
 const signOutBtn =
   document.getElementById("accountSignOutBtn");
 
-signOutBtn?.addEventListener("click", async () => {
+signOutBtn?.addEventListener("click", () => {
 
-  const ok =
-    confirm("Sign out from HeriLand?");
-
-  if (!ok) return;
-
-  await logout();
-
-  closeAvatarPanel?.();
-
-  await updateAuthUI();
-
-  alert("Signed out");
+  openLogoutSheet();
 
 });
 
