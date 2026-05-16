@@ -360,3 +360,55 @@
 .logout-confirm:hover{
   transform: translateY(-1px);
 }
+
+/* =========================
+   Avatar Auth
+========================= */
+
+.avatar-auth-actions{
+  display:flex;
+  gap:10px;
+
+  margin-top:16px;
+}
+
+.avatar-auth-btn{
+  flex:1;
+
+  height:36px;
+
+  border-radius:999px;
+  border:none;
+
+  cursor:pointer;
+
+  font-size:12px;
+  font-weight:700;
+
+  transition:.22s ease;
+}
+
+.avatar-auth-btn{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(159,242,177,.22),
+      rgba(159,242,177,.14)
+    );
+
+  color:#b8ffca;
+
+  border:1px solid rgba(159,242,177,.18);
+}
+
+.avatar-auth-btn.secondary{
+  background:rgba(255,255,255,.06);
+
+  color:white;
+
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.avatar-auth-btn:hover{
+  transform:translateY(-1px);
+}
