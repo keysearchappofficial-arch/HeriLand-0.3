@@ -376,6 +376,7 @@ window.addPlaceToTrip = function () {
   if (!currentOpenedItem) return;
 
   addToTrip(currentOpenedItem);
+  updateAvatarStats();
 
   document
     .getElementById("detailMoreLayer")
