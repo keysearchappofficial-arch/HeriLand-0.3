@@ -1,0 +1,72 @@
+/* =========================
+   Support Page
+========================= */
+
+.support-page{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.support-page p{
+  font-size:14px;
+  line-height:1.7;
+
+  color:rgba(255,255,255,.62);
+}
+
+.support-input,
+.support-textarea{
+  width:100%;
+
+  border:none;
+  outline:none;
+
+  border-radius:16px;
+
+  background:rgba(255,255,255,.06);
+
+  border:1px solid rgba(255,255,255,.07);
+
+  color:white;
+
+  font-size:14px;
+}
+
+.support-input{
+  height:42px;
+  padding:0 14px;
+}
+
+.support-textarea{
+  min-height:120px;
+
+  padding:14px;
+
+  resize:none;
+
+  line-height:1.6;
+}
+
+.support-input::placeholder,
+.support-textarea::placeholder{
+  color:rgba(255,255,255,.36);
+}
+
+.support-submit{
+  height:42px;
+
+  border:none;
+  border-radius:16px;
+
+  background:rgba(159,242,177,.16);
+
+  border:1px solid rgba(159,242,177,.22);
+
+  color:var(--green);
+
+  font-size:14px;
+  font-weight:700;
+
+  cursor:pointer;
+}
