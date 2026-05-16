@@ -14,6 +14,11 @@
 
   border-bottom:
     1px solid rgba(255,255,255,.06);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:18px;
 }
 
 .settings-row:last-child{
@@ -23,7 +28,9 @@
 /* Head */
 
 .settings-head{
-  margin-bottom:12px;
+  flex:1;
+
+  margin-bottom:0;
 }
 
 .settings-head h4,
@@ -49,6 +56,7 @@
 
 .settings-select{
   width:190px;
+  margin-left:auto;
   max-width:100%;
 
   height:38px;
@@ -135,6 +143,7 @@
 
 .setting-segment{
   display:inline-flex;
+  margin-left:auto;
 
   gap:6px;
 
