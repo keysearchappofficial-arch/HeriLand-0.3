@@ -775,39 +775,8 @@ service: {
 account: {
   title: "Account",
   kicker: "Traveler Profile",
-  layout: "info",
-  items: [
-    {
-      title: "Profile",
-      text: "Andy · Traveler Account",
-      action: "Edit"
-    },
-    {
-      title: "Email",
-      text: "andy@example.com",
-      action: "Manage"
-    },
-    {
-      title: "Login Method",
-      text: "Email / Google",
-      action: "Manage"
-    },
-    {
-      title: "Saved Data",
-      text: "Saved places, trips, and traveler reviews.",
-      action: "View"
-    },
-    {
-      title: "Privacy",
-      text: "Control your account visibility and data preferences.",
-      action: "Manage"
-    },
-    {
-      title: "Sign Out",
-      text: "Sign out from this device.",
-      action: "Sign Out"
-    }
-  ]
+  layout: "account",
+  items: []
 },
 
 settings: {
@@ -889,6 +858,11 @@ if (pageKey === "reviews") {
 if (page.layout === "settings") {
   avatarSubContent.innerHTML = renderSettingsPage();
   bindSettingsPage();
+}
+
+if (page.layout === "account") {
+  avatarSubContent.innerHTML = renderAccountPage();
+  bindAccountPage();
 }
 
   avatarHomeView?.classList.remove("is-active");
@@ -975,6 +949,127 @@ function renderAvatarListItem(item){
 
     </div>
   `;
+}
+
+function renderAccountPage(){
+  return `
+    <div class="account-list">
+
+      <div class="account-row">
+        <div class="account-head">
+          <h4>User Name</h4>
+          <p>Your traveler display name.</p>
+        </div>
+
+        <input
+          id="accountName"
+          class="account-input"
+          type="text"
+          value="Andy"
+        >
+      </div>
+
+      <div class="account-row">
+        <div class="account-head">
+          <h4>Phone</h4>
+          <p>Used for account and trip support.</p>
+        </div>
+
+        <input
+          id="accountPhone"
+          class="account-input"
+          type="tel"
+          value="+886 900 000 000"
+        >
+      </div>
+
+      <div class="account-row">
+        <div class="account-head">
+          <h4>Email</h4>
+          <p>Your login and notification email.</p>
+        </div>
+
+        <input
+          id="accountEmail"
+          class="account-input"
+          type="email"
+          value="andy@example.com"
+        >
+      </div>
+
+      <div class="account-row">
+        <div class="account-head">
+          <h4>Login Method</h4>
+          <p>Choose how you sign in.</p>
+        </div>
+
+        <select
+          id="accountLoginMethod"
+          class="account-select"
+        >
+          <option value="email">Email</option>
+          <option value="google">Google</option>
+          <option value="apple">Apple</option>
+        </select>
+      </div>
+
+      <div class="account-row">
+        <div class="account-head">
+          <h4>Region</h4>
+          <p>Your default travel region.</p>
+        </div>
+
+        <select
+          id="accountRegion"
+          class="account-select"
+        >
+          <option value="sarawak">Sarawak</option>
+          <option value="kuching">Kuching</option>
+          <option value="sibu">Sibu</option>
+          <option value="miri">Miri</option>
+          <option value="bintulu">Bintulu</option>
+        </select>
+      </div>
+
+      <button
+        class="account-save-btn"
+        id="accountSaveBtn"
+        type="button"
+      >
+        Save Changes
+      </button>
+
+      <button
+        class="account-signout-btn"
+        type="button"
+      >
+        Sign Out
+      </button>
+
+    </div>
+  `;
+}
+
+function bindAccountPage(){
+  const saveBtn =
+    document.getElementById("accountSaveBtn");
+
+  saveBtn?.addEventListener("click", () => {
+    const profile = {
+      name: document.getElementById("accountName")?.value || "",
+      phone: document.getElementById("accountPhone")?.value || "",
+      email: document.getElementById("accountEmail")?.value || "",
+      loginMethod: document.getElementById("accountLoginMethod")?.value || "",
+      region: document.getElementById("accountRegion")?.value || ""
+    };
+
+    localStorage.setItem(
+      "heriland_account_profile",
+      JSON.stringify(profile)
+    );
+
+    alert("Account updated");
+  });
 }
 
 function renderSettingsPage(){
