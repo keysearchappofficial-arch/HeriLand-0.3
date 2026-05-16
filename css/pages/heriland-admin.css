@@ -1,90 +1,117 @@
 :root{
-  --bg:#07110c;
-  --panel:#0d1812;
-  --panel-2:#101d16;
+  --bg:#07110d;
+  --panel:#0d1712;
+  --card:#101c16;
 
   --line:rgba(255,255,255,.08);
 
-  --text:#f5f7f5;
+  --text:#f5f5f0;
   --muted:rgba(255,255,255,.58);
 
-  --green:#86efac;
-  --green-soft:rgba(134,239,172,.12);
+  --green:#9ff2b1;
 
-  --red:#ffb4b4;
-  --red-soft:rgba(255,120,120,.12);
-
-  --yellow:#ffe7a3;
-  --yellow-soft:rgba(255,231,163,.12);
-
-  --radius:18px;
+  --danger:#ff8b8b;
 }
 
 *{
+  margin:0;
+  padding:0;
   box-sizing:border-box;
 }
 
 html,
 body{
-  margin:0;
-  padding:0;
-
-  background:var(--bg);
-  color:var(--text);
-
-  font-family:
-    Inter,
-    system-ui,
-    sans-serif;
+  width:100%;
+  min-height:100%;
 }
 
 body{
-  overflow-x:hidden;
-}
-
-/* =========================
-   Layout
-========================= */
-
-.admin-app{
-  padding:28px;
-}
-
-.admin-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-
-  gap:20px;
-
-  margin-bottom:22px;
-}
-
-.admin-top h1{
-  margin:0;
-  font-size:36px;
-  letter-spacing:-1.4px;
-}
-
-.admin-top p{
-  margin:8px 0 0;
-  color:var(--muted);
-  font-size:14px;
-}
-
-.admin-top button{
-  height:46px;
-  padding:0 18px;
-
-  border:none;
-  border-radius:14px;
-
-  background:var(--panel-2);
-  border:1px solid var(--line);
+  background:var(--bg);
 
   color:var(--text);
 
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
+
+  overflow:hidden;
+}
+
+/* =========================
+   App
+========================= */
+
+.admin-app{
+  height:100vh;
+
+  display:flex;
+  flex-direction:column;
+
+  padding:26px;
+}
+
+/* =========================
+   Top
+========================= */
+
+.admin-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+
+  margin-bottom:24px;
+
+  gap:20px;
+}
+
+.admin-top h1{
+  font-size:38px;
+  font-weight:700;
+
+  letter-spacing:-1px;
+
+  margin-bottom:6px;
+}
+
+.admin-top p{
+  font-size:15px;
+  line-height:1.6;
+
+  color:var(--muted);
+}
+
+.admin-top button{
+  height:48px;
+
+  padding:0 18px;
+
+  border:none;
+  border-radius:16px;
+
+  background:
+    rgba(159,242,177,.14);
+
+  border:
+    1px solid rgba(159,242,177,.18);
+
+  color:var(--green);
+
+  font-size:14px;
+  font-weight:700;
+
   cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.admin-top button:hover{
+  transform:translateY(-1px);
+
+  background:
+    rgba(159,242,177,.2);
 }
 
 /* =========================
@@ -107,91 +134,127 @@ body{
 
   border-radius:14px;
 
-  border:1px solid var(--line);
+  border:
+    1px solid rgba(255,255,255,.08);
 
-  background:var(--panel);
+  background:
+    rgba(255,255,255,.04);
 
-  color:var(--text);
+  color:white;
 
   font-size:14px;
+  font-weight:600;
+}
+
+.admin-toolbar select{
+  min-width:170px;
+
+  outline:none;
 }
 
 .admin-toolbar button{
   cursor:pointer;
+
+  transition:.2s ease;
 }
 
-#batchPublishBtn{
-  background:var(--green-soft);
-  border-color:rgba(134,239,172,.22);
+.admin-toolbar button:hover{
+  background:
+    rgba(159,242,177,.12);
+
+  border:
+    1px solid rgba(159,242,177,.22);
+
   color:var(--green);
 }
 
-#batchRejectBtn{
-  background:var(--red-soft);
-  border-color:rgba(255,120,120,.22);
-  color:var(--red);
+/* =========================
+   Table Wrap
+========================= */
+
+.admin-table-wrap{
+  flex:1;
+
+  overflow:auto;
+
+  border-radius:24px;
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.03);
+
+  backdrop-filter:blur(18px);
+
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+
+.admin-table-wrap::-webkit-scrollbar{
+  display:none;
 }
 
 /* =========================
    Table
 ========================= */
 
-.admin-table-wrap{
-  overflow:auto;
-
-  border-radius:24px;
-
-  border:1px solid var(--line);
-
-  background:var(--panel);
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.35);
-}
-
 .admin-table{
-  width:100%;
-  min-width:1600px;
+  width:max-content;
+  min-width:100%;
 
   border-collapse:collapse;
 }
 
 .admin-table thead{
-  background:#122019;
+  position:sticky;
+  top:0;
+
+  z-index:100;
+
+  background:#0d1712;
 }
 
 .admin-table th{
+  padding:
+    16px
+    14px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
+
   text-align:left;
 
-  padding:16px;
+  white-space:nowrap;
 
   font-size:13px;
-  font-weight:600;
+  font-weight:700;
 
-  color:var(--muted);
+  letter-spacing:.4px;
 
-  border-bottom:1px solid var(--line);
-
-  white-space:nowrap;
+  color:
+    rgba(159,242,177,.88);
 }
 
 .admin-table td{
-  padding:12px 16px;
-
-  border-bottom:1px solid var(--line);
+  padding:12px;
 
   vertical-align:top;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.05);
 }
 
 .admin-table tr:hover{
-  background:rgba(255,255,255,.02);
+  background:
+    rgba(255,255,255,.025);
 }
 
 /* =========================
    Inputs
 ========================= */
 
-.admin-table input[type="text"],
+.admin-table input,
 .admin-table textarea,
 .admin-table select{
   width:100%;
@@ -199,50 +262,194 @@ body{
   border:none;
   outline:none;
 
-  border-radius:12px;
+  border-radius:14px;
 
-  padding:10px 12px;
+  background:
+    rgba(255,255,255,.04);
 
-  background:#16231d;
+  border:
+    1px solid rgba(255,255,255,.05);
 
-  border:1px solid rgba(255,255,255,.06);
+  color:white;
 
-  color:var(--text);
+  padding:12px;
 
   font-size:14px;
+  line-height:1.5;
+
+  transition:.2s ease;
+}
+
+.admin-table input:focus,
+.admin-table textarea:focus,
+.admin-table select:focus{
+  border:
+    1px solid rgba(159,242,177,.28);
+
+  background:
+    rgba(159,242,177,.05);
 }
 
 .admin-table textarea{
   min-height:110px;
+
   resize:vertical;
 }
 
-.admin-table input[type="checkbox"]{
-  width:18px;
-  height:18px;
+/* =========================
+   Width Helpers
+========================= */
+
+.admin-table td:nth-child(4) input{
+  min-width:220px;
+}
+
+.admin-table td:nth-child(5) input{
+  min-width:120px;
+}
+
+.admin-table td:nth-child(6) input{
+  min-width:120px;
+}
+
+.admin-table td:nth-child(7) textarea{
+  min-width:260px;
+}
+
+.admin-table td:nth-child(8) textarea{
+  min-width:260px;
+}
+
+.admin-table td:nth-child(9) textarea{
+  min-width:340px;
+}
+
+.admin-table td:nth-child(10) textarea{
+  min-width:240px;
+}
+
+.admin-table td:nth-child(11) textarea{
+  min-width:220px;
+}
+
+.admin-table td:nth-child(12) input{
+  min-width:240px;
+}
+
+.admin-table td:nth-child(13) input{
+  min-width:220px;
+}
+
+.admin-table td:nth-child(14) input{
+  min-width:160px;
+}
+
+.admin-table td:nth-child(15) input{
+  min-width:220px;
+}
+
+.admin-table td:nth-child(16) textarea{
+  min-width:220px;
+}
+
+.admin-table td:nth-child(17) input{
+  min-width:120px;
+}
+
+.admin-table td:nth-child(18) input{
+  min-width:160px;
+}
+
+.admin-table td:nth-child(19) input{
+  min-width:160px;
+}
+
+.admin-table td:nth-child(20) input{
+  min-width:180px;
+}
+
+.admin-table td:nth-child(21) input{
+  min-width:240px;
+}
+
+.admin-table td:nth-child(22) textarea{
+  min-width:320px;
+}
+
+.admin-table td:nth-child(23) textarea{
+  min-width:280px;
+}
+
+.admin-table td:nth-child(24) textarea{
+  min-width:260px;
+}
+
+.admin-table td:nth-child(25) input{
+  min-width:220px;
+}
+
+.admin-table td:nth-child(26) input{
+  min-width:220px;
+}
+
+.admin-table td:nth-child(27) textarea{
+  min-width:300px;
+}
+
+.admin-table td:nth-child(28) input{
+  min-width:260px;
+}
+
+.admin-table td:nth-child(29) textarea{
+  min-width:240px;
+}
+
+/* =========================
+   Checkbox
+========================= */
+
+.row-check,
+#checkAll{
+  width:18px !important;
+  height:18px !important;
+
+  accent-color:var(--green);
+
+  cursor:pointer;
 }
 
 /* =========================
    Status
 ========================= */
 
-.status-select{
-  min-width:140px;
-}
-
 .status-select.pending{
-  background:var(--yellow-soft);
-  color:var(--yellow);
+  border:
+    1px solid rgba(255,205,96,.28);
+
+  background:
+    rgba(255,205,96,.08);
+
+  color:#ffd978;
 }
 
 .status-select.published{
-  background:var(--green-soft);
+  border:
+    1px solid rgba(159,242,177,.28);
+
+  background:
+    rgba(159,242,177,.08);
+
   color:var(--green);
 }
 
 .status-select.rejected{
-  background:var(--red-soft);
-  color:var(--red);
+  border:
+    1px solid rgba(255,139,139,.22);
+
+  background:
+    rgba(255,139,139,.08);
+
+  color:var(--danger);
 }
 
 /* =========================
@@ -250,39 +457,49 @@ body{
 ========================= */
 
 .save-row-btn{
-  height:40px;
-
-  padding:0 14px;
+  min-width:90px;
+  height:42px;
 
   border:none;
-  border-radius:12px;
+  border-radius:14px;
 
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08);
+  background:
+    rgba(159,242,177,.14);
 
-  color:white;
+  border:
+    1px solid rgba(159,242,177,.18);
+
+  color:var(--green);
+
+  font-size:14px;
+  font-weight:700;
 
   cursor:pointer;
+
+  transition:.2s ease;
 }
 
 .save-row-btn:hover{
-  background:rgba(255,255,255,.1);
+  transform:translateY(-1px);
+
+  background:
+    rgba(159,242,177,.2);
 }
 
 /* =========================
-   Reject Modal
+   Reject Layer
 ========================= */
 
 .reject-layer{
   position:fixed;
   inset:0;
 
-  z-index:9999;
+  z-index:30000;
 
   opacity:0;
   pointer-events:none;
 
-  transition:.22s ease;
+  transition:.25s ease;
 }
 
 .reject-layer.is-open{
@@ -294,10 +511,15 @@ body{
   position:absolute;
   inset:0;
 
-  background:rgba(0,0,0,.45);
+  background:
+    rgba(0,0,0,.5);
 
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(8px);
 }
+
+/* =========================
+   Reject Panel
+========================= */
 
 .reject-panel{
   position:absolute;
@@ -305,93 +527,121 @@ body{
   left:50%;
   top:50%;
 
-  transform:translate(-50%,-50%);
+  transform:
+    translate(-50%,-50%);
 
-  width:min(440px,calc(100vw - 32px));
+  width:min(92vw,520px);
 
-  padding:24px;
+  padding:28px;
 
-  border-radius:24px;
+  border-radius:28px;
 
-  background:#101a14;
+  background:#0f1914;
 
-  border:1px solid rgba(255,255,255,.08);
+  border:
+    1px solid rgba(255,255,255,.08);
 
   box-shadow:
-    0 30px 80px rgba(0,0,0,.45);
+    0 40px 100px rgba(0,0,0,.45);
 }
 
 .reject-panel h2{
-  margin:0 0 10px;
-  font-size:24px;
+  font-size:28px;
+
+  margin-bottom:12px;
 }
 
 .reject-panel p{
-  margin:0 0 18px;
+  font-size:15px;
+  line-height:1.7;
 
   color:var(--muted);
 
-  line-height:1.7;
-  font-size:14px;
+  margin-bottom:18px;
 }
 
 .reject-panel textarea{
   width:100%;
-  min-height:130px;
+  min-height:160px;
 
   border:none;
   outline:none;
 
   resize:none;
 
-  border-radius:16px;
+  padding:16px;
 
-  padding:14px;
+  border-radius:18px;
 
-  background:#16231d;
+  background:
+    rgba(255,255,255,.04);
 
-  border:1px solid rgba(255,255,255,.08);
+  border:
+    1px solid rgba(255,255,255,.06);
 
   color:white;
+
+  font-size:15px;
+  line-height:1.7;
 }
+
+/* =========================
+   Reject Actions
+========================= */
 
 .reject-actions{
   display:flex;
+  justify-content:flex-end;
   gap:12px;
 
-  margin-top:18px;
+  margin-top:20px;
 }
 
 .reject-actions button{
-  flex:1;
-
   height:46px;
+
+  padding:0 20px;
 
   border:none;
   border-radius:14px;
+
+  font-size:14px;
+  font-weight:700;
 
   cursor:pointer;
 }
 
 #rejectCancelBtn{
-  background:rgba(255,255,255,.06);
+  background:
+    rgba(255,255,255,.06);
+
   color:white;
 }
 
 #rejectConfirmBtn{
-  background:var(--red-soft);
-  border:1px solid rgba(255,120,120,.22);
+  background:
+    rgba(255,139,139,.14);
 
-  color:var(--red);
+  border:
+    1px solid rgba(255,139,139,.22);
+
+  color:var(--danger);
 }
 
 /* =========================
    Mobile
 ========================= */
 
-@media (max-width: 900px){
+@media(max-width:768px){
+
+  body{
+    overflow:auto;
+  }
 
   .admin-app{
+    height:auto;
+    min-height:100vh;
+
     padding:18px;
   }
 
@@ -401,16 +651,20 @@ body{
   }
 
   .admin-top h1{
-    font-size:28px;
+    font-size:32px;
   }
 
   .admin-toolbar{
-    flex-direction:column;
+    width:100%;
   }
 
   .admin-toolbar select,
   .admin-toolbar button{
     width:100%;
+  }
+
+  .admin-table-wrap{
+    overflow:auto;
   }
 
 }
