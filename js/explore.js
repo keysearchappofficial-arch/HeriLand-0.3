@@ -2402,20 +2402,26 @@ function bindSettingsPage(){
     document.getElementById("settingNotification");
 
   notificationToggle?.addEventListener("click", async (event) => {
-    event.stopPropagation();
+  event.stopPropagation();
 
-    const loggedIn =
-      await requireLogin("change notification settings");
+  const loggedIn =
+    await requireLogin("change notification settings");
 
-    if (!loggedIn) return;
+  if (!loggedIn) return;
 
-    notificationToggle.classList.toggle("is-on");
+  const nextValue =
+    !notificationToggle.classList.contains("is-on");
 
-    await saveNotificationSetting(
-      "push_enabled",
-      notificationToggle.classList.contains("is-on")
-    );
-  });
+  notificationToggle.classList.toggle("is-on", nextValue);
+
+  const ok =
+    await setAllNotificationDetails(nextValue);
+
+  if (!ok) {
+    notificationToggle.classList.toggle("is-on", !nextValue);
+    return;
+  }
+});
 
   notificationRow?.addEventListener("click", async () => {
     const loggedIn =
@@ -2471,6 +2477,7 @@ async function loadNotificationSettings(){
       !!data.push_enabled
     );
   }
+  await syncNotificationMasterToggle();
 }
 
 async function saveNotificationSetting(field, value){
@@ -2490,6 +2497,80 @@ async function saveNotificationSetting(field, value){
 
   if (error) {
     console.error("Save notification setting failed:", error);
+    alert("Save notification setting failed.");
+    return false;
+  }
+
+  return true;
+}
+
+async function getNotificationSettings(){
+  const user = await getCurrentUser?.();
+
+  if (!user) return null;
+
+  const { data, error } = await supabase
+    .from("heriland_notification_settings")
+    .select("*")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Get notification settings failed:", error);
+    return null;
+  }
+
+  return data;
+}
+
+async function syncNotificationMasterToggle(){
+  const data = await getNotificationSettings();
+
+  const masterBtn =
+    document.getElementById("settingNotification");
+
+  if (!masterBtn || !data) return;
+
+  const fields = [
+    "event_updates",
+    "place_updates",
+    "culture_updates",
+    "saved_updates",
+    "nearby_updates",
+    "email_updates"
+  ];
+
+  const hasAnyOn =
+    fields.some(field => data[field] === true);
+
+  masterBtn.classList.toggle("is-on", !!data.push_enabled && hasAnyOn);
+}
+
+async function setAllNotificationDetails(value){
+  const user = await getCurrentUser?.();
+
+  if (!user) return false;
+
+  const { error } = await supabase
+    .from("heriland_notification_settings")
+    .upsert({
+      user_id: user.id,
+
+      push_enabled: value,
+
+      event_updates: value,
+      place_updates: value,
+      culture_updates: value,
+      saved_updates: value,
+      nearby_updates: value,
+
+      updated_at: new Date().toISOString()
+    }, {
+      onConflict: "user_id"
+    });
+
+  if (error) {
+    console.error("Set all notification settings failed:", error);
     alert("Save notification setting failed.");
     return false;
   }
@@ -2541,7 +2622,10 @@ function bindNotificationDetailSettings(){
 
         if (!ok) {
           button.classList.toggle("is-on");
+          return;
         }
+
+        await syncNotificationMasterToggle();
       });
     });
 }
