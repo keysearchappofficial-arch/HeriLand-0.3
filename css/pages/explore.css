@@ -1442,4 +1442,11 @@ body.no-scroll .stage{
   overscroll-behavior:contain;
 }
 
+.notification-settings-page.is-loading{
+  opacity:0;
+}
 
+.notification-settings-page{
+  opacity:1;
+  transition:opacity .18s ease;
+}
