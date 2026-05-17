@@ -1460,7 +1460,7 @@ body.no-scroll .stage{
 }
 
 .notification-detail-row{
-  min-height:78px;
+  min-height:50px;
 
   display:flex;
   align-items:center;
