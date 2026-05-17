@@ -464,11 +464,17 @@ function bindEventAddressAction(){
 
 window.openEventMap = function () {
 
-  window.openMapByPreference({
-    title: currentEventTitle,
-    address: currentEventAddress,
-    mapUrl: currentEventMapUrl
-  });
+  if (typeof window.openMapByPreference === "function") {
+    window.openMapByPreference({
+      title: currentEventTitle,
+      address: currentEventAddress,
+      mapUrl: currentEventMapUrl
+    });
+
+    return;
+  }
+
+  openEventMapByProvider("auto");
 
 };
 
