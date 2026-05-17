@@ -1450,3 +1450,26 @@ body.no-scroll .stage{
   opacity:1;
   transition:opacity .18s ease;
 }
+
+.notification-settings-page{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+
+  padding-top:10px;
+}
+
+.notification-detail-row{
+  min-height:78px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:18px;
+
+  padding-bottom:18px;
+
+  border-bottom:
+    1px solid var(--border);
+}
