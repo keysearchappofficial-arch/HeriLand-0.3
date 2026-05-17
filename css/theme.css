@@ -940,3 +940,63 @@ body[data-theme="light"] .help-page i,
 body[data-theme="light"] .support-page i{
   color:#376b45 !important;
 }
+
+/* =========================================================
+   Placeholder + Contribute Text Theme Fix
+========================================================= */
+
+/* Global Placeholder */
+
+input::placeholder,
+textarea::placeholder{
+  color:var(--muted-2) !important;
+  opacity:1;
+}
+
+select{
+  color:var(--text) !important;
+}
+
+/* Contribute List / Form */
+
+.contribute-card,
+.contribution-form{
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+}
+
+.contribute-copy h4,
+.contribution-form-head{
+  color:var(--text) !important;
+}
+
+.contribute-copy p,
+.contribution-form p,
+.contribution-upload small,
+.contribution-upload span{
+  color:var(--muted) !important;
+}
+
+.contribution-input,
+.contribution-textarea{
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+}
+
+.contribution-upload{
+  background:var(--surface) !important;
+  border:1px dashed var(--border-strong) !important;
+  color:var(--muted) !important;
+}
+
+.contribution-submit{
+  background:var(--green-soft-2) !important;
+  border:1px solid var(--border-green) !important;
+  color:var(--green) !important;
+}
+
+.contribute-arrow{
+  color:var(--green) !important;
+}
