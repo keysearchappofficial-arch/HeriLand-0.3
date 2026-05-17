@@ -436,12 +436,12 @@ function buildCultureMapQuery(){
   return encodeURIComponent(parts.join(" "));
 }
 
-window.openEventMap = function () {
+window.openCultureMap = function () {
 
   window.openMapByPreference({
-    title: currentEventTitle,
-    address: currentEventAddress,
-    mapUrl: currentEventMapUrl
+    title: currentCultureTitle,
+    address: currentCultureAddress,
+    mapUrl: currentCultureMapUrl
   });
 
 };
