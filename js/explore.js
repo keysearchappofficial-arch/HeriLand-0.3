@@ -2141,14 +2141,25 @@ function renderAccountPage(){
         </div>
 
         <div class="account-identity">
-          <label>Traveler Name</label>
+<div class="account-name-top">
 
-          <input
-            id="accountName"
-            class="account-paper-input account-name-input"
-            type="text"
-            value="Andy"
-          >
+  <label>Traveler Name</label>
+
+  <button
+    class="account-inline-edit"
+    type="button"
+  >
+    Edit
+  </button>
+
+</div>
+
+<input
+  id="accountName"
+  class="account-paper-input account-name-input"
+  type="text"
+  value="Andy"
+>
 
           <p>
             Personal traveler profile for saved places, trips, reviews, and HeriLand activity.
