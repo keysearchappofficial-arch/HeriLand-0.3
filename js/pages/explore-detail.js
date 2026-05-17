@@ -629,6 +629,49 @@ window.openPlaceMap = function () {
   );
 };
 
+window.openMapChoiceSheet = function () {
+  document
+    .getElementById("detailMoreLayer")
+    ?.classList.remove("is-open");
+
+  document
+    .getElementById("mapChoiceLayer")
+    ?.classList.add("is-open");
+};
+
+document
+  .getElementById("mapChoiceBackdrop")
+  ?.addEventListener("click", () => {
+    document
+      .getElementById("mapChoiceLayer")
+      ?.classList.remove("is-open");
+  });
+
+window.openMapWith = function (provider) {
+  document
+    .getElementById("mapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  openPlaceMapByProvider(provider);
+};
+
+window.copyPlaceAddress = async function () {
+  const text = currentDetailAddress || currentDetailTitleText || "";
+
+  if (!text) {
+    alert("Address is not available.");
+    return;
+  }
+
+  await navigator.clipboard.writeText(text);
+
+  document
+    .getElementById("mapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  alert("Address copied.");
+};
+
 window.sharePlace = function () {
   console.log("Share place");
 };
@@ -792,4 +835,58 @@ function setupDetailSlider(total) {
   };
 
   updateSlider(0);
+}
+
+function openPlaceMapByProvider(provider = "auto") {
+  const query = buildMapQuery();
+
+  if (!query && currentDetailMapUrl) {
+    window.open(currentDetailMapUrl, "_blank");
+    return;
+  }
+
+  if (!query) {
+    alert("Map information is not available.");
+    return;
+  }
+
+  if (provider === "auto") {
+    window.openPlaceMap();
+    return;
+  }
+
+  if (provider === "apple") {
+    window.location.href =
+      `maps://maps.apple.com/?q=${query}`;
+
+    setTimeout(() => {
+      window.open(
+        `https://maps.apple.com/?q=${query}`,
+        "_blank"
+      );
+    }, 900);
+
+    return;
+  }
+
+  if (provider === "google") {
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      "_blank"
+    );
+
+    return;
+  }
+
+  if (provider === "waze") {
+    window.location.href =
+      `waze://?q=${query}&navigate=yes`;
+
+    setTimeout(() => {
+      window.open(
+        `https://waze.com/ul?q=${query}&navigate=yes`,
+        "_blank"
+      );
+    }, 900);
+  }
 }
