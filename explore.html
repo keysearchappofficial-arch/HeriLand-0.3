@@ -1085,13 +1085,13 @@
           Share Story
         </button>
 
-        <button
-          type="button"
-          onclick="window.openTravelerMap()"
-        >
-          <span>↗</span>
-          Open Route Map
-        </button>
+<button
+  type="button"
+  onclick="window.openTravelerMapChoiceSheet()"
+>
+  <span>↗</span>
+  Navigation
+</button>
 
         <button
           type="button"
@@ -1104,6 +1104,43 @@
       </div>
 
     </div>
+    
+<div
+  class="map-choice-layer"
+  id="travelerMapChoiceLayer"
+>
+  <div
+    class="map-choice-backdrop"
+    id="travelerMapChoiceBackdrop"
+  ></div>
+
+  <div class="map-choice-menu">
+    <button type="button" onclick="window.openTravelerMapWith('auto')">
+      <span>◎</span>
+      Automatic
+    </button>
+
+    <button type="button" onclick="window.openTravelerMapWith('apple')">
+      <span></span>
+      Apple Maps
+    </button>
+
+    <button type="button" onclick="window.openTravelerMapWith('google')">
+      <span>G</span>
+      Google Maps
+    </button>
+
+    <button type="button" onclick="window.openTravelerMapWith('waze')">
+      <span>◇</span>
+      Waze
+    </button>
+
+    <button type="button" onclick="window.copyTravelerLocation()">
+      <span>⧉</span>
+      Copy Location
+    </button>
+  </div>
+</div>
 
   </section>
 
