@@ -1995,7 +1995,7 @@ async function openNotificationSettingsPage(){
   avatarSubKicker.textContent = "Settings";
 
   avatarSubContent.innerHTML = `
-    <div class="notification-settings-page">
+    <div class="notification-settings-page is-loading">
 
       ${Object.entries(notificationDetailFields).map(([field, item]) => {
         return `
@@ -2571,9 +2571,15 @@ async function setAllNotificationDetails(value){
 }
 
 async function loadNotificationDetailSettings(){
+  const page =
+    document.querySelector(".notification-settings-page");
+
   const user = await getCurrentUser?.();
 
-  if (!user) return;
+  if (!user) {
+    page?.classList.remove("is-loading");
+    return;
+  }
 
   const { data, error } = await supabase
     .from("heriland_notification_settings")
@@ -2583,8 +2589,16 @@ async function loadNotificationDetailSettings(){
 
   if (error) {
     console.error("Load notification detail failed:", error);
+    page?.classList.remove("is-loading");
     return;
   }
+
+  if (!data) {
+    await setAllNotificationDetails(true);
+  }
+
+  const settings =
+    data || await getNotificationSettings();
 
   Object.entries(notificationDetailFields).forEach(([field, item]) => {
     const btn = document.getElementById(item.id);
@@ -2592,10 +2606,12 @@ async function loadNotificationDetailSettings(){
     if (!btn) return;
 
     const isOn =
-      data?.[field] !== false;
+      settings?.[field] !== false;
 
     btn.classList.toggle("is-on", isOn);
   });
+
+  page?.classList.remove("is-loading");
 }
 
 function bindNotificationDetailSettings(){
