@@ -2165,7 +2165,7 @@ accountAuthActionBtn?.addEventListener("click", async () => {
 const THEME_KEY = "heriland_theme";
 
 function getSavedTheme(){
-  return localStorage.getItem(THEME_KEY) || "system";
+  return localStorage.getItem(THEME_KEY) || "dark";
 }
 
 function getSystemTheme(){
