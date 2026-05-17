@@ -564,10 +564,10 @@
         Add to Trip
       </button>
 
-      <button type="button" onclick="window.openPlaceMap()">
-        <span>↗</span>
-        Open in Maps
-      </button>
+<button type="button" onclick="window.openMapChoiceSheet()">
+  <span>↗</span>
+  Navigation
+</button>
 
       <button type="button" onclick="window.sharePlace()">
         <span>⤴</span>
@@ -586,6 +586,45 @@
 
     </div>
   </div>
+  
+<div
+  class="map-choice-layer"
+  id="mapChoiceLayer"
+>
+  <div
+    class="map-choice-backdrop"
+    id="mapChoiceBackdrop"
+  ></div>
+
+  <div class="map-choice-menu">
+
+    <button type="button" onclick="window.openMapWith('auto')">
+      <span>◎</span>
+      Automatic
+    </button>
+
+    <button type="button" onclick="window.openMapWith('apple')">
+      <span></span>
+      Apple Maps
+    </button>
+
+    <button type="button" onclick="window.openMapWith('google')">
+      <span>G</span>
+      Google Maps
+    </button>
+
+    <button type="button" onclick="window.openMapWith('waze')">
+      <span>◇</span>
+      Waze
+    </button>
+
+    <button type="button" onclick="window.copyPlaceAddress()">
+      <span>⧉</span>
+      Copy Address
+    </button>
+
+  </div>
+</div>
 
 </section>
     </div>
