@@ -237,7 +237,7 @@
 
   overflow:auto;
 
-  background:var(--detail-bg);
+  background:var(--detail-panel-bg);
 
   border-radius:
     34px
@@ -368,11 +368,9 @@
 
   border-radius:24px;
 
-  background:
-    rgba(255,255,255,.04);
+  background:var(--detail-surface);
 
-  border:
-    1px solid rgba(255,255,255,.06);
+  border:1px solid var(--detail-border);
 }
 
 .detail-guide small{
@@ -886,3 +884,4 @@
   }
 
 }
+
