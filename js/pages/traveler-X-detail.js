@@ -1,3 +1,7 @@
+let currentTravelerMapUrl = "";
+let currentTravelerAddress = "";
+let currentTravelerTitle = "";
+
 const travelerDetailPage =
   document.getElementById("travelerDetailPage");
 
@@ -68,16 +72,19 @@ async function loadTravelerDetail(slug){
   if (error) {
     console.error("load traveler detail failed:", error);
 
-    renderTravelerDetail({
-      kicker: "Traveler Experience",
-      name: "Experience not found",
-      achievement: "Sarawak ・ Shared by traveler",
-      guide: "This traveler experience may not be available yet.",
-      title: "Experience not found",
-      story: "",
-      tags: [],
-      images: []
-    });
+renderTravelerDetail({
+  kicker: "Traveler Experience",
+  name: "Experience not found",
+  achievement: "Sarawak ・ Shared by traveler",
+  guide: "This traveler experience may not be available yet.",
+  title: "Experience not found",
+  story: "",
+  tags: [],
+  mapUrl: "",
+  addressRaw: "",
+  titleRaw: "Experience not found",
+  images: []
+});
 
     return;
   }
@@ -116,6 +123,15 @@ async function loadTravelerDetail(slug){
 
     tags:
       normalizeTravelerTags(data.tags),
+      
+    mapUrl:
+  data.google_map_url || "",
+
+addressRaw:
+  data.address || data.area || data.city || "",
+
+titleRaw:
+  data.title || "Traveler Experience",
 
     images
   });
@@ -127,6 +143,9 @@ async function loadTravelerDetail(slug){
 ========================= */
 
 function renderTravelerDetail(data) {
+  currentTravelerMapUrl = data.mapUrl || data.map || "";
+currentTravelerAddress = data.addressRaw || data.location || "";
+currentTravelerTitle = data.titleRaw || data.title || data.name || "";
 
   const kicker =
     document.getElementById("travelerDetailKicker");
@@ -357,7 +376,72 @@ window.shareTravelerStory = function () {
 };
 
 window.openTravelerMap = function () {
-  console.log("open traveler map");
+  if (typeof window.openMapByPreference === "function") {
+    window.openMapByPreference({
+      title: currentTravelerTitle,
+      address: currentTravelerAddress,
+      mapUrl: currentTravelerMapUrl
+    });
+    return;
+  }
+
+  alert("Route map is not available for this story yet.");
+};
+
+window.openTravelerMapChoiceSheet = function () {
+  document
+    .getElementById("travelerMoreLayer")
+    ?.classList.remove("is-open");
+
+  document
+    .getElementById("travelerMapChoiceLayer")
+    ?.classList.add("is-open");
+};
+
+document
+  .getElementById("travelerMapChoiceBackdrop")
+  ?.addEventListener("click", () => {
+    document
+      .getElementById("travelerMapChoiceLayer")
+      ?.classList.remove("is-open");
+  });
+
+window.openTravelerMapWith = function (provider) {
+  document
+    .getElementById("travelerMapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  if (typeof window.openMapByProvider === "function") {
+    window.openMapByProvider({
+      provider,
+      title: currentTravelerTitle,
+      address: currentTravelerAddress,
+      mapUrl: currentTravelerMapUrl
+    });
+    return;
+  }
+
+  window.openTravelerMap();
+};
+
+window.copyTravelerLocation = async function () {
+  const text =
+    currentTravelerAddress ||
+    currentTravelerTitle ||
+    "";
+
+  if (!text) {
+    alert("Location is not available.");
+    return;
+  }
+
+  await navigator.clipboard.writeText(text);
+
+  document
+    .getElementById("travelerMapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  alert("Location copied.");
 };
 
 window.continueTravelerAiGuide = function () {
