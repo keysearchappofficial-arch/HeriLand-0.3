@@ -2464,19 +2464,11 @@ async function loadNotificationSettings(){
   }
 
   if (!data) {
-    await saveNotificationSetting("push_enabled", true);
+    await setAllNotificationDetails(true);
+    await syncNotificationMasterToggle();
     return;
   }
 
-  const notificationToggle =
-    document.getElementById("settingNotification");
-
-  if (notificationToggle) {
-    notificationToggle.classList.toggle(
-      "is-on",
-      !!data.push_enabled
-    );
-  }
   await syncNotificationMasterToggle();
 }
 
