@@ -941,3 +941,82 @@
 
   border:1px solid var(--border-green);
 }
+
+/* =========================
+   Map Choice Sheet
+========================= */
+
+.map-choice-layer{
+  position:fixed;
+  inset:0;
+
+  z-index:13000;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.map-choice-layer.is-open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.map-choice-backdrop{
+  position:absolute;
+  inset:0;
+
+  background:var(--detail-backdrop);
+
+  backdrop-filter:blur(6px);
+}
+
+.map-choice-menu{
+  position:absolute;
+
+  left:18px;
+  right:18px;
+  bottom:18px;
+
+  padding:12px;
+
+  border-radius:28px;
+
+  background:var(--detail-sheet);
+
+  border:1px solid var(--detail-border);
+
+  box-shadow:var(--shadow);
+}
+
+.map-choice-menu button{
+  width:100%;
+  height:56px;
+
+  border:none;
+  border-radius:18px;
+
+  background:none;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:0 18px;
+
+  color:var(--detail-text);
+
+  font-size:16px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.map-choice-menu button span{
+  width:24px;
+
+  color:var(--green);
+
+  text-align:center;
+}
