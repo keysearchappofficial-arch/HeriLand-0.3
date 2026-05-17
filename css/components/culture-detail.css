@@ -574,3 +574,61 @@
   }
 
 }
+
+/* =========================
+   Light Theme
+========================= */
+
+body[data-theme="light"] .culture-detail-page,
+body[data-theme="light"] .culture-detail-panel{
+  background:#f4f3ec;
+  color:var(--text);
+}
+
+body[data-theme="light"] .culture-detail-guide,
+body[data-theme="light"] .culture-detail-link{
+  background:rgba(23,34,27,.04);
+  border:1px solid rgba(23,34,27,.08);
+}
+
+body[data-theme="light"] .culture-detail-overlay p,
+body[data-theme="light"] .culture-detail-guide p,
+body[data-theme="light"] .culture-detail-section p,
+body[data-theme="light"] .culture-detail-list li{
+  color:rgba(23,34,27,.76);
+}
+
+body[data-theme="light"] .culture-detail-overlay h1,
+body[data-theme="light"] .culture-detail-section h2{
+  color:white;
+}
+
+body[data-theme="light"] .culture-detail-link{
+  color:var(--text);
+}
+
+body[data-theme="light"] .culture-detail-link:hover{
+  background:rgba(47,125,79,.1);
+  border:1px solid rgba(47,125,79,.18);
+  color:var(--green);
+}
+
+body[data-theme="light"] .culture-detail-tags span{
+  background:rgba(47,125,79,.1);
+  border:1px solid rgba(47,125,79,.16);
+  color:var(--green);
+}
+
+body[data-theme="light"] .culture-more-backdrop{
+  background:rgba(23,34,27,.28);
+}
+
+body[data-theme="light"] .culture-more-menu{
+  background:rgba(255,255,250,.96);
+  border:1px solid rgba(23,34,27,.08);
+  box-shadow:0 20px 60px rgba(0,0,0,.16);
+}
+
+body[data-theme="light"] .culture-more-menu button{
+  color:var(--text);
+}
