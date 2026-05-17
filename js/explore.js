@@ -1055,6 +1055,11 @@ document
   });
 
 avatarSubBack?.addEventListener("click", () => {
+  if (avatarCurrentPageKey === "settings-notification") {
+    openAvatarSubPage("settings");
+    return;
+  }
+
   if (avatarSupportMode && avatarCurrentPageKey === "service") {
     avatarSupportMode = false;
     openAvatarSubPage("service");
@@ -1947,71 +1952,78 @@ ${item.action ? `
   `;
 }
 
-function openNotificationSettingsPage(){
+const notificationDetailFields = {
+  event_updates: {
+    id: "notifEventUpdates",
+    title: "Event Updates",
+    desc: "Festival, market, and local event alerts."
+  },
+  place_updates: {
+    id: "notifPlaceUpdates",
+    title: "New Places",
+    desc: "New attractions, restaurants, and hidden spots."
+  },
+  culture_updates: {
+    id: "notifCultureUpdates",
+    title: "Culture Stories",
+    desc: "Local culture, traditions, and heritage updates."
+  },
+  saved_updates: {
+    id: "notifSavedUpdates",
+    title: "Saved Item Updates",
+    desc: "Updates about places you saved."
+  },
+  nearby_updates: {
+    id: "notifNearbyUpdates",
+    title: "Nearby Updates",
+    desc: "Useful travel updates near your selected city."
+  },
+  email_updates: {
+    id: "notifEmailUpdates",
+    title: "Email Updates",
+    desc: "Receive important HeriLand updates by email."
+  }
+};
 
-  const page = document.createElement("div");
+async function openNotificationSettingsPage(){
 
-  page.className = "avatar-sub-page";
+  avatarSupportMode = false;
+  avatarContributeMode = false;
+  avatarCurrentPageKey = "settings-notification";
 
-  page.innerHTML = `
-    <div class="avatar-sub-head">
+  avatarSubTitle.textContent = "Notification";
+  avatarSubKicker.textContent = "Settings";
 
-      <button class="avatar-sub-back">
-        ←
-      </button>
+  avatarSubContent.innerHTML = `
+    <div class="notification-settings-page">
 
-      <div>
-        <small>Settings</small>
-        <h3>Notification</h3>
-      </div>
+      ${Object.entries(notificationDetailFields).map(([field, item]) => {
+        return `
+          <div class="settings-switch-row notification-detail-row">
 
-    </div>
+            <div class="settings-head">
+              <h4>${item.title}</h4>
+              <p>${item.desc}</p>
+            </div>
 
-    <div class="settings-toggle-list">
+            <button
+              class="setting-switch"
+              id="${item.id}"
+              type="button"
+              data-notification-field="${field}"
+            >
+              <span></span>
+            </button>
 
-      <div class="settings-toggle-row">
-        <div>
-          <h4>Event Updates</h4>
-          <p>Festival and local event alerts.</p>
-        </div>
-
-        <button class="setting-switch is-on">
-          <span></span>
-        </button>
-      </div>
-
-      <div class="settings-toggle-row">
-        <div>
-          <h4>Culture Stories</h4>
-          <p>Traditional stories and heritage updates.</p>
-        </div>
-
-        <button class="setting-switch">
-          <span></span>
-        </button>
-      </div>
+          </div>
+        `;
+      }).join("")}
 
     </div>
   `;
 
-  document.body.appendChild(page);
-
-  requestAnimationFrame(() => {
-    page.classList.add("is-open");
-  });
-
-  page
-    .querySelector(".avatar-sub-back")
-    ?.addEventListener("click", () => {
-
-      page.classList.remove("is-open");
-
-      setTimeout(() => {
-        page.remove();
-      }, 300);
-
-    });
-
+  await loadNotificationDetailSettings();
+  bindNotificationDetailSettings();
 }
 
 function openSupportPage(page){
@@ -2483,6 +2495,55 @@ async function saveNotificationSetting(field, value){
   }
 
   return true;
+}
+
+async function loadNotificationDetailSettings(){
+  const user = await getCurrentUser?.();
+
+  if (!user) return;
+
+  const { data, error } = await supabase
+    .from("heriland_notification_settings")
+    .select("*")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Load notification detail failed:", error);
+    return;
+  }
+
+  Object.entries(notificationDetailFields).forEach(([field, item]) => {
+    const btn = document.getElementById(item.id);
+
+    if (!btn) return;
+
+    const isOn =
+      data?.[field] !== false;
+
+    btn.classList.toggle("is-on", isOn);
+  });
+}
+
+function bindNotificationDetailSettings(){
+  document
+    .querySelectorAll("[data-notification-field]")
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        const field = button.dataset.notificationField;
+
+        button.classList.toggle("is-on");
+
+        const ok = await saveNotificationSetting(
+          field,
+          button.classList.contains("is-on")
+        );
+
+        if (!ok) {
+          button.classList.toggle("is-on");
+        }
+      });
+    });
 }
 
 function bindAvatarPlaceSwipe(pageKey){
