@@ -2248,6 +2248,49 @@ function renderAccountPage(){
         </div>
 
       </div>
+      
+<div class="account-badge-section">
+
+  <div class="account-badge-head">
+
+    <div>
+      <small>Traveler Badge</small>
+      <h4>Slow Explorer</h4>
+    </div>
+
+    <select
+      id="accountBadgeSelect"
+      class="account-badge-select"
+    >
+      <option value="slow-explorer">
+        Slow Explorer
+      </option>
+
+      <option value="food-hunter">
+        Food Hunter
+      </option>
+
+      <option value="culture-walker">
+        Culture Walker
+      </option>
+
+      <option value="hidden-gem">
+        Hidden Gem Finder
+      </option>
+
+      <option value="river-traveler">
+        River Traveler
+      </option>
+    </select>
+
+  </div>
+
+  <p>
+    Travelers who prefer slower journeys,
+    quiet local experiences, and meaningful places.
+  </p>
+
+</div>
 
       <div class="account-paper-actions">
 
