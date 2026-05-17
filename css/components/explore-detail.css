@@ -872,3 +872,72 @@
   }
 
 }
+
+/* =========================
+   Detail Address Action
+========================= */
+
+.detail-address-row{
+  margin-bottom:18px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.detail-address-main{
+  flex:1;
+
+  min-height:46px;
+
+  padding:0;
+
+  border:none;
+  background:none;
+
+  text-align:left;
+
+  color:var(--detail-subtle);
+
+  font-size:15px;
+  line-height:1.6;
+
+  cursor:pointer;
+}
+
+.detail-address-main:hover{
+  color:var(--green);
+}
+
+.detail-address-action{
+  width:42px;
+  height:42px;
+
+  flex-shrink:0;
+
+  border:none;
+  border-radius:50%;
+
+  background:var(--detail-surface);
+
+  border:1px solid var(--detail-border);
+
+  color:var(--green);
+
+  font-size:18px;
+
+  display:grid;
+  place-items:center;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.detail-address-action:hover{
+  transform:scale(1.06);
+
+  background:var(--green-soft-2);
+
+  border:1px solid var(--border-green);
+}
