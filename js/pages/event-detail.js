@@ -463,7 +463,13 @@ function bindEventAddressAction(){
 }
 
 window.openEventMap = function () {
-  openEventMapByProvider("auto");
+
+  window.openMapByPreference({
+    title: currentEventTitle,
+    address: currentEventAddress,
+    mapUrl: currentEventMapUrl
+  });
+
 };
 
 function openEventMapByProvider(provider = "auto") {
