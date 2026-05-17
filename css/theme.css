@@ -848,3 +848,95 @@ body[data-theme="light"] .avatar-place-rating{
   border:1px solid var(--border-green) !important;
   color:var(--green) !important;
 }
+
+/* =========================================================
+   Help & Support Theme Fix
+========================================================= */
+
+.help-detail-page,
+.support-detail-page,
+.help-page,
+.support-page{
+  background:var(--detail-bg) !important;
+  color:var(--text) !important;
+}
+
+/* Head */
+
+.help-detail-page h1,
+.help-detail-page h2,
+.help-detail-page h3,
+.help-detail-page h4,
+
+.support-detail-page h1,
+.support-detail-page h2,
+.support-detail-page h3,
+.support-detail-page h4,
+
+.help-page h1,
+.help-page h2,
+.help-page h3,
+.help-page h4,
+
+.support-page h1,
+.support-page h2,
+.support-page h3,
+.support-page h4{
+  color:var(--text) !important;
+}
+
+/* Description */
+
+.help-detail-page p,
+.help-detail-page span,
+.help-detail-page small,
+
+.support-detail-page p,
+.support-detail-page span,
+.support-detail-page small,
+
+.help-page p,
+.help-page span,
+.help-page small,
+
+.support-page p,
+.support-page span,
+.support-page small{
+  color:var(--muted) !important;
+}
+
+/* Card */
+
+.help-detail-card,
+.support-detail-card,
+.help-card,
+.support-card{
+  background:var(--surface-panel) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+}
+
+/* Buttons */
+
+.help-detail-page button,
+.support-detail-page button,
+.help-page button,
+.support-page button{
+  color:var(--text) !important;
+}
+
+/* Icon */
+
+.help-detail-page i,
+.support-detail-page i,
+.help-page i,
+.support-page i{
+  color:var(--green) !important;
+}
+
+body[data-theme="light"] .help-detail-page i,
+body[data-theme="light"] .support-detail-page i,
+body[data-theme="light"] .help-page i,
+body[data-theme="light"] .support-page i{
+  color:#376b45 !important;
+}
