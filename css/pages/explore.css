@@ -1854,3 +1854,63 @@ body.no-scroll .stage{
 
   transform:translateY(-1px);
 }
+
+/* =========================
+   Badge Reward
+========================= */
+
+.account-badge-copy{
+  flex:1;
+  min-width:0;
+}
+
+.account-badge-title-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin-top:2px;
+}
+
+.account-badge-reward{
+  height:28px;
+
+  padding:0 12px;
+
+  border:none;
+  outline:none;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,215,120,.22),
+      rgba(255,190,80,.12)
+    );
+
+  border:1px solid
+    rgba(255,215,120,.28);
+
+  color:#f5d27a;
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.5px;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+.account-badge-reward:hover{
+  transform:translateY(-1px);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,215,120,.3),
+      rgba(255,190,80,.16)
+    );
+}
