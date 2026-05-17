@@ -1,15 +1,12 @@
 /* =========================================================
    HeriLand Theme System
-   Global Theme Tokens
 ========================================================= */
 
 /* =========================
-   Default Theme
-   (Night)
+   Night Theme
 ========================= */
 
 :root{
-
   color-scheme:dark;
 
   --bg:#07110d;
@@ -31,251 +28,148 @@
   --border-strong:rgba(255,255,255,.14);
   --border-green:rgba(159,242,177,.22);
 
-  --shadow:
-    0 30px 90px rgba(0,0,0,.45);
+  --shadow:0 30px 90px rgba(0,0,0,.45);
+  --shadow-soft:0 16px 40px rgba(0,0,0,.24);
 
-  --shadow-soft:
-    0 16px 40px rgba(0,0,0,.24);
+  --overlay-dark:rgba(0,0,0,.45);
 
-  --card-shadow:
-    0 40px 110px rgba(0,0,0,.65);
+  --star:#ffe082;
 
-  /* Detail */
+  --card-text:#ffffff;
+  --card-muted:rgba(255,255,255,.78);
+  --card-subtle:rgba(255,255,255,.65);
+  --card-shadow:0 40px 110px rgba(0,0,0,.65);
 
   --detail-bg:#07110d;
-
   --detail-panel-bg:#07110d;
-
   --detail-surface:rgba(255,255,255,.04);
-
   --detail-border:rgba(255,255,255,.06);
-
   --detail-text:#f5f5f0;
-
   --detail-muted:rgba(255,255,255,.82);
-
   --detail-subtle:rgba(255,255,255,.62);
-
   --detail-sheet:rgba(10,16,14,.96);
-
+  --detail-backdrop:rgba(0,0,0,.45);
+  --detail-hero-top:rgba(0,0,0,.42);
+  --detail-hero-bottom:rgba(0,0,0,.72);
 }
 
-/* =========================================================
-   Light Theme
-========================================================= */
+/* =========================
+   Day Theme
+========================= */
 
 body[data-theme="light"]{
-
   color-scheme:light;
 
-  --bg:#efece2;
+  --bg:#f5f7f4;
 
   --text:#18231c;
   --muted:rgba(24,35,28,.72);
   --muted-2:rgba(24,35,28,.52);
 
   --green:#376b45;
+  --green-soft:rgba(55,107,69,.10);
+  --green-soft-2:rgba(55,107,69,.16);
 
-  --green-soft:
-    rgba(55,107,69,.10);
+  --surface:rgba(255,255,255,.62);
+  --surface-hover:rgba(255,255,255,.78);
+  --surface-panel:rgba(255,255,255,.86);
+  --surface-strong:rgba(255,255,255,.96);
 
-  --green-soft-2:
-    rgba(55,107,69,.16);
+  --border:rgba(24,35,28,.08);
+  --border-strong:rgba(24,35,28,.14);
+  --border-green:rgba(55,107,69,.18);
 
-  --surface:
-    rgba(255,255,248,.58);
+  --shadow:0 28px 80px rgba(74,65,44,.14);
+  --shadow-soft:0 16px 45px rgba(74,65,44,.10);
 
-  --surface-hover:
-    rgba(255,255,248,.76);
+  --overlay-dark:rgba(24,35,28,.24);
 
-  --surface-panel:
-    rgba(255,255,248,.82);
+  --star:#b47b00;
 
-  --surface-strong:
-    rgba(255,255,248,.96);
-
-  --border:
-    rgba(24,35,28,.08);
-
-  --border-strong:
-    rgba(24,35,28,.14);
-
-  --border-green:
-    rgba(55,107,69,.18);
-
-  --shadow:
-    0 28px 80px rgba(74,65,44,.14);
-
-  --shadow-soft:
-    0 16px 45px rgba(74,65,44,.10);
-
+  --card-text:#ffffff;
+  --card-muted:rgba(255,255,255,.78);
+  --card-subtle:rgba(255,255,255,.66);
   --card-shadow:
     0 34px 90px rgba(74,65,44,.24),
     0 10px 30px rgba(74,65,44,.12);
 
-  /* Detail */
-
-  --detail-bg:#efece2;
-
-  --detail-panel-bg:#f7f4ea;
-
-  --detail-surface:
-    rgba(255,255,248,.62);
-
-  --detail-border:
-    rgba(24,35,28,.08);
-
+  --detail-bg:#f5f7f4;
+  --detail-panel-bg:#f5f7f4;
+  --detail-surface:#ffffff;
+  --detail-border:rgba(24,35,28,.08);
   --detail-text:#18231c;
+  --detail-muted:rgba(24,35,28,.82);
+  --detail-subtle:rgba(24,35,28,.62);
+  --detail-sheet:#ffffff;
+  --detail-backdrop:rgba(24,35,28,.24);
+  --detail-hero-top:rgba(0,0,0,.28);
+  --detail-hero-bottom:rgba(0,0,0,.56);
 
-  --detail-muted:
-    rgba(24,35,28,.82);
-
-  --detail-subtle:
-    rgba(24,35,28,.62);
-
-  --detail-sheet:
-    rgba(255,255,248,.96);
-
-  background:
-    radial-gradient(
-      circle at 50% 16%,
-      rgba(55,107,69,.10),
-      transparent 24%
-    ),
-
-    radial-gradient(
-      circle at 12% 86%,
-      rgba(210,154,84,.16),
-      transparent 28%
-    ),
-
-    radial-gradient(
-      circle at 88% 58%,
-      rgba(255,255,255,.62),
-      transparent 24%
-    ),
-
-    var(--bg);
+  background:#f5f7f4;
 }
 
-:root{
-  --card-text:#ffffff;
-  --card-muted:rgba(255,255,255,.78);
-  --card-subtle:rgba(255,255,255,.65);
-}
-
-body[data-theme="light"]{
-  --card-text:#ffffff;
-  --card-muted:rgba(255,255,255,.78);
-  --card-subtle:rgba(255,255,255,.66);
-}
-
-/* =========================================================
-   System Theme
-========================================================= */
+/* =========================
+   System Light
+========================= */
 
 @media (prefers-color-scheme:light){
-
   body[data-theme="system"]{
-
     color-scheme:light;
 
-    --bg:#efece2;
+    --bg:#f5f7f4;
 
     --text:#18231c;
     --muted:rgba(24,35,28,.72);
     --muted-2:rgba(24,35,28,.52);
 
     --green:#376b45;
+    --green-soft:rgba(55,107,69,.10);
+    --green-soft-2:rgba(55,107,69,.16);
 
-    --green-soft:
-      rgba(55,107,69,.10);
+    --surface:rgba(255,255,255,.62);
+    --surface-hover:rgba(255,255,255,.78);
+    --surface-panel:rgba(255,255,255,.86);
+    --surface-strong:rgba(255,255,255,.96);
 
-    --green-soft-2:
-      rgba(55,107,69,.16);
+    --border:rgba(24,35,28,.08);
+    --border-strong:rgba(24,35,28,.14);
+    --border-green:rgba(55,107,69,.18);
 
-    --surface:
-      rgba(255,255,248,.58);
+    --shadow:0 28px 80px rgba(74,65,44,.14);
+    --shadow-soft:0 16px 45px rgba(74,65,44,.10);
 
-    --surface-hover:
-      rgba(255,255,248,.76);
+    --overlay-dark:rgba(24,35,28,.24);
 
-    --surface-panel:
-      rgba(255,255,248,.82);
+    --star:#b47b00;
 
-    --surface-strong:
-      rgba(255,255,248,.96);
-
-    --border:
-      rgba(24,35,28,.08);
-
-    --border-strong:
-      rgba(24,35,28,.14);
-
-    --border-green:
-      rgba(55,107,69,.18);
-
-    --shadow:
-      0 28px 80px rgba(74,65,44,.14);
-
-    --shadow-soft:
-      0 16px 45px rgba(74,65,44,.10);
-
+    --card-text:#ffffff;
+    --card-muted:rgba(255,255,255,.78);
+    --card-subtle:rgba(255,255,255,.66);
     --card-shadow:
       0 34px 90px rgba(74,65,44,.24),
       0 10px 30px rgba(74,65,44,.12);
 
-    --detail-bg:#efece2;
-
-    --detail-panel-bg:#f7f4ea;
-
-    --detail-surface:
-      rgba(255,255,248,.62);
-
-    --detail-border:
-      rgba(24,35,28,.08);
-
+    --detail-bg:#f5f7f4;
+    --detail-panel-bg:#f5f7f4;
+    --detail-surface:#ffffff;
+    --detail-border:rgba(24,35,28,.08);
     --detail-text:#18231c;
+    --detail-muted:rgba(24,35,28,.82);
+    --detail-subtle:rgba(24,35,28,.62);
+    --detail-sheet:#ffffff;
+    --detail-backdrop:rgba(24,35,28,.24);
+    --detail-hero-top:rgba(0,0,0,.28);
+    --detail-hero-bottom:rgba(0,0,0,.56);
 
-    --detail-muted:
-      rgba(24,35,28,.82);
-
-    --detail-subtle:
-      rgba(24,35,28,.62);
-
-    --detail-sheet:
-      rgba(255,255,248,.96);
-
-    background:
-      radial-gradient(
-        circle at 50% 16%,
-        rgba(55,107,69,.10),
-        transparent 24%
-      ),
-
-      radial-gradient(
-        circle at 12% 86%,
-        rgba(210,154,84,.16),
-        transparent 28%
-      ),
-
-      radial-gradient(
-        circle at 88% 58%,
-        rgba(255,255,255,.62),
-        transparent 24%
-      ),
-
-      var(--bg);
+    background:#f5f7f4;
   }
-
 }
 
 /* =========================================================
-   Global Base
+   Base Background
 ========================================================= */
 
 body{
-
   color:var(--text);
 
   background:
@@ -284,19 +178,16 @@ body{
       rgba(159,242,177,.18),
       transparent 22%
     ),
-
     radial-gradient(
       circle at 12% 86%,
       rgba(213,154,77,.14),
       transparent 24%
     ),
-
     radial-gradient(
       circle at 88% 60%,
       rgba(255,255,255,.06),
       transparent 20%
     ),
-
     var(--bg);
 
   transition:
@@ -304,705 +195,17 @@ body{
     color .25s ease;
 }
 
-/* =========================================================
-   Generic Surface
-========================================================= */
-
-.filter-panel,
-.avatar-panel,
-.review-sheet-panel,
-.review-list-panel,
-.detail-more-menu,
-.event-more-menu,
-.culture-more-menu,
-.traveler-more-menu{
-
-  background:var(--surface-panel);
-
-  border:
-    1px solid var(--border);
-
-  box-shadow:var(--shadow);
-
-  color:var(--text);
+body[data-theme="light"],
+body[data-theme="system"]{
+  background:#f5f7f4;
 }
 
 /* =========================================================
-   Buttons
+   Light Leaf Silhouette Background
 ========================================================= */
 
-button{
-  color:var(--text);
-}
-
-.filter-grid button,
-.avatar-list-actions button,
-.detail-link,
-.event-detail-link,
-.culture-detail-link,
-.save,
-.nav-arrow{
-
-  background:var(--surface);
-
-  border:
-    1px solid var(--border);
-
-  color:var(--text);
-}
-
-.filter-grid button.active,
-.save.is-saved,
-.detail-action-btn.is-saved,
-.event-detail-action.is-saved,
-.culture-detail-action.is-saved,
-.traveler-detail-action.is-saved{
-
-  background:var(--green-soft-2);
-
-  border:
-    1px solid var(--border-green);
-
-  color:var(--green);
-}
-
-/* =========================================================
-   Cards
-========================================================= */
-
-.card{
-
-  border:
-    1px solid var(--border-strong);
-
-  box-shadow:var(--card-shadow);
-}
-
-.card-bottom,
-.place,
-.place h3,
-.subtitle,
-.loved,
-.index,
-.copy p{
-  color:var(--card-text);
-}
-
-.subtitle{
-  color:var(--card-muted);
-}
-
-.loved{
-  color:var(--card-subtle);
-}
-
-.tags,
-.brand span,
-.detail-kicker,
-.event-detail-kicker,
-.culture-detail-overlay small,
-.traveler-detail-overlay small{
-  color:var(--green);
-}
-
-/* =========================================================
-   Detail Shared
-========================================================= */
-
-.detail-page,
-.event-detail-page,
-.culture-detail-page,
-.traveler-detail-page{
-
-  background:var(--detail-bg);
-
-  color:var(--detail-text);
-}
-
-/* =========================================================
-   Detail Panels
-========================================================= */
-
-.detail-panel,
-.event-detail-panel,
-.culture-detail-panel,
-.traveler-detail-panel{
-
-  background:var(--detail-panel-bg);
-
-  color:var(--detail-text);
-}
-
-/* =========================================================
-   Detail Surface Blocks
-========================================================= */
-
-.detail-guide,
-.event-detail-guide,
-.culture-detail-guide,
-.traveler-story:first-child,
-.detail-review-card,
-.event-detail-info-item{
-
-  background:var(--detail-surface);
-
-  border:
-    1px solid var(--detail-border);
-}
-
-/* =========================================================
-   Detail Typography
-========================================================= */
-
-.detail-section p,
-.detail-section li,
-.detail-line,
-.detail-inline-info,
-.detail-week-hours,
-.event-detail-section p,
-.event-detail-good-list li,
-.event-detail-info-value,
-.event-detail-venue-line,
-.culture-detail-section p,
-.culture-detail-list li,
-.traveler-story p{
-
-  color:var(--detail-muted);
-}
-
-/* =========================================================
-   Detail Titles
-========================================================= */
-
-.detail-head h1,
-.event-detail-head h1,
-.culture-detail-overlay h1,
-.traveler-detail-overlay h1{
-
-  color:var(--detail-text);
-}
-
-/* =========================================================
-   Sheets
-========================================================= */
-
-.review-sheet-panel,
-.review-list-panel,
-.detail-more-menu,
-.event-more-menu,
-.culture-more-menu,
-.traveler-more-menu{
-
-  background:var(--detail-sheet);
-}
-
-/* =========================================================
-   Inputs
-========================================================= */
-
-input,
-textarea,
-select{
-
-  background:var(--surface);
-
-  border:
-    1px solid var(--border);
-
-  color:var(--text);
-}
-
-/* =========================================================
-   Appearance Segment
-========================================================= */
-
-.setting-segment{
-
-  background:var(--surface);
-
-  border:
-    1px solid var(--border);
-}
-
-.setting-segment button{
-
-  color:var(--muted);
-}
-
-.setting-segment button.active{
-
-  background:var(--green-soft-2);
-
-  color:var(--green);
-}
-
-/* =========================================================
-   Smooth Theme Transition
-========================================================= */
-
-body,
-.card,
-.avatar-panel,
-.filter-panel,
-.detail-panel,
-.event-detail-panel,
-.culture-detail-panel,
-.traveler-detail-panel,
-button,
-input,
-textarea,
-select{
-
-  transition:
-    background .28s ease,
-    border-color .28s ease,
-    color .22s ease,
-    box-shadow .28s ease;
-}
-
-/* =========================================================
-   Modal / Sheet Light Support
-========================================================= */
-
-.auth-panel,
-.logout-sheet,
-.review-sheet-panel,
-.review-list-panel,
-.detail-more-menu,
-.event-more-menu,
-.culture-more-menu,
-.traveler-more-menu{
-  background:var(--surface-strong);
-  border:1px solid var(--border);
-  color:var(--text);
-  box-shadow:var(--shadow);
-}
-
-.auth-panel h2,
-.logout-sheet h3,
-.review-sheet-head h2,
-.review-list-head h2{
-  color:var(--text);
-}
-
-.auth-panel p,
-.logout-sheet p,
-.review-place-name{
-  color:var(--muted);
-}
-
-.auth-panel input,
-#reviewComment,
-.review-rating button{
-  background:var(--surface);
-  border:1px solid var(--border);
-  color:var(--text);
-}
-
-.auth-backdrop,
-.logout-backdrop,
-.review-sheet-backdrop,
-.review-list-backdrop,
-.detail-more-backdrop,
-.event-more-backdrop,
-.culture-more-backdrop,
-.traveler-more-backdrop{
-  background:var(--overlay-dark);
-}
-
-.logout-cancel,
-#reviewSheetClose,
-#reviewListClose{
-  background:var(--surface);
-  color:var(--text);
-  border:1px solid var(--border);
-}
-
-.logout-confirm,
-.auth-panel button,
-.review-submit-btn{
-  background:var(--green-soft-2);
-  color:var(--green);
-  border:1px solid var(--border-green);
-}
-
-/* =========================================================
-   Detail Text Force Theme Fix
-========================================================= */
-
-body[data-theme="light"] .detail-panel,
-body[data-theme="light"] .detail-panel *{
-  color:var(--detail-text);
-}
-
-body[data-theme="light"] .detail-rating-row,
-body[data-theme="light"] .detail-line,
-body[data-theme="light"] .detail-inline-info,
-body[data-theme="light"] .detail-week-hours,
-body[data-theme="light"] .detail-guide p,
-body[data-theme="light"] .detail-section p,
-body[data-theme="light"] .detail-section li,
-body[data-theme="light"] .detail-review-card p,
-body[data-theme="light"] .review-place-name{
-  color:var(--detail-muted);
-}
-
-body[data-theme="light"] .detail-inline-info strong,
-body[data-theme="light"] .detail-head h1,
-body[data-theme="light"] .detail-section h2,
-body[data-theme="light"] .detail-review-head h2,
-body[data-theme="light"] .review-sheet-head h2,
-body[data-theme="light"] .review-list-head h2{
-  color:var(--detail-text);
-}
-
-body[data-theme="light"] .detail-kicker,
-body[data-theme="light"] .detail-guide small,
-body[data-theme="light"] .review-sheet-head small,
-body[data-theme="light"] .review-list-head small,
-body[data-theme="light"] .detail-review-more,
-body[data-theme="light"] .review-submit-btn,
-body[data-theme="light"] .detail-write-review{
-  color:var(--green);
-}
-
-body[data-theme="light"] .detail-stars,
-body[data-theme="light"] .review-rating button.is-active{
-  color:var(--star);
-}
-
-body[data-theme="light"] .detail-guide,
-body[data-theme="light"] .detail-review-card,
-body[data-theme="light"] .review-rating button,
-body[data-theme="light"] .review-upload,
-body[data-theme="light"] #reviewComment{
-  background:var(--detail-surface);
-  border:1px solid var(--detail-border);
-}
-
-body[data-theme="light"] .detail-more-menu,
-body[data-theme="light"] .review-sheet-panel,
-body[data-theme="light"] .review-list-panel{
-  background:var(--detail-sheet);
-  border:1px solid var(--detail-border);
-  color:var(--detail-text);
-}
-
-body[data-theme="light"] .detail-more-menu button,
-body[data-theme="light"] .review-sheet-panel,
-body[data-theme="light"] .review-list-panel{
-  color:var(--detail-text);
-}
-
-body[data-theme="light"] .detail-more-menu button span{
-  color:var(--green);
-}
-
-body[data-theme="light"] .detail-more-backdrop,
-body[data-theme="light"] .review-sheet-backdrop,
-body[data-theme="light"] .review-list-backdrop{
-  background:var(--detail-backdrop);
-}
-
-body[data-theme="light"] #reviewSheetClose,
-body[data-theme="light"] #reviewListClose{
-  background:var(--surface);
-  border:1px solid var(--border);
-  color:var(--text);
-}
-
-body[data-theme="light"] #reviewComment{
-  color:var(--detail-text);
-}
-
-body[data-theme="light"] .review-upload{
-  color:var(--detail-muted);
-}
-
-/* =========================
-   Avatar / Traveler Panel Theme
-========================= */
-
-:root{
-
-  --avatar-bg:#07110d;
-  --avatar-surface:rgba(255,255,255,.05);
-
-  --avatar-border:rgba(255,255,255,.08);
-
-  --avatar-text:#ffffff;
-  --avatar-muted:rgba(255,255,255,.72);
-  --avatar-subtle:rgba(255,255,255,.52);
-
-  --avatar-icon:var(--green);
-}
-
-html.light{
-
-  --avatar-bg:#f6f8f6;
-
-  --avatar-surface:#ffffff;
-
-  --avatar-border:rgba(15,23,42,.08);
-
-  --avatar-text:#142018;
-  --avatar-muted:#4b5b52;
-  --avatar-subtle:#7d8b84;
-
-  --avatar-icon:#3f6f57;
-}
-
-/* =========================================================
-   Avatar Panel Theme Force Fix
-========================================================= */
-
-.avatar-panel,
-.avatar-panel *{
-  color:var(--text);
-}
-
-.avatar-panel{
-  background:var(--surface-panel);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-}
-
-.avatar-panel-user p,
-.avatar-panel-stats span,
-.avatar-place-tags,
-.avatar-list-item p{
-  color:var(--muted);
-}
-
-.avatar-panel-stats button,
-.avatar-panel-stats div,
-.avatar-sub-back,
-.avatar-place-delete,
-.avatar-list-actions button{
-  background:var(--surface);
-  border:1px solid var(--border);
-  color:var(--text);
-}
-
-.avatar-panel-menu button{
-  color:var(--text);
-  border-bottom:1px solid var(--border);
-}
-
-.avatar-panel-menu i,
-.avatar-sub-head small,
-.avatar-place-rating,
-.avatar-list-actions button:hover{
-  color:var(--green);
-}
-
-body[data-theme="light"] .avatar-panel-menu i,
-body[data-theme="light"] .avatar-sub-head small,
-body[data-theme="light"] .avatar-place-rating{
-  color:#376b45;
-}
-
-.avatar-place-card,
-.avatar-list-item{
-  border-bottom:1px solid var(--border);
-}
-
-.avatar-place-copy h4,
-.avatar-list-top h4,
-.avatar-panel-user h3,
-.avatar-sub-head h3{
-  color:var(--text);
-}
-
-/* =========================================================
-   Account / Settings Text Force Fix
-========================================================= */
-
-.account-head p,
-.settings-head p,
-.settings-about p,
-.account-row p,
-.settings-row p{
-  color:var(--muted) !important;
-}
-
-.account-head h4,
-.settings-head h4,
-.settings-about h4,
-.account-row h4,
-.settings-row h4{
-  color:var(--text) !important;
-}
-
-.account-input,
-.account-select,
-.settings-select{
-  background:var(--surface) !important;
-  border:1px solid var(--border) !important;
-  color:var(--text) !important;
-}
-
-.account-save-btn,
-.account-signout-btn{
-  background:var(--green-soft-2) !important;
-  border:1px solid var(--border-green) !important;
-  color:var(--green) !important;
-}
-
-/* =========================================================
-   Help & Support Theme Fix
-========================================================= */
-
-.help-detail-page,
-.support-detail-page,
-.help-page,
-.support-page{
-  color:var(--text) !important;
-}
-
-/* Head */
-
-.help-detail-page h1,
-.help-detail-page h2,
-.help-detail-page h3,
-.help-detail-page h4,
-
-.support-detail-page h1,
-.support-detail-page h2,
-.support-detail-page h3,
-.support-detail-page h4,
-
-.help-page h1,
-.help-page h2,
-.help-page h3,
-.help-page h4,
-
-.support-page h1,
-.support-page h2,
-.support-page h3,
-.support-page h4{
-  color:var(--text) !important;
-}
-
-/* Description */
-
-.help-detail-page p,
-.help-detail-page span,
-.help-detail-page small,
-
-.support-detail-page p,
-.support-detail-page span,
-.support-detail-page small,
-
-.help-page p,
-.help-page span,
-.help-page small,
-
-.support-page p,
-.support-page span,
-.support-page small{
-  color:var(--muted) !important;
-}
-
-/* Card */
-
-.help-detail-card,
-.support-detail-card,
-.help-card,
-.support-card{
-  border:1px solid var(--border) !important;
-  color:var(--text) !important;
-}
-
-/* Buttons */
-
-.help-detail-page button,
-.support-detail-page button,
-.help-page button,
-.support-page button{
-  color:var(--text) !important;
-}
-
-/* Icon */
-
-.help-detail-page i,
-.support-detail-page i,
-.help-page i,
-.support-page i{
-  color:var(--green) !important;
-}
-
-body[data-theme="light"] .help-detail-page i,
-body[data-theme="light"] .support-detail-page i,
-body[data-theme="light"] .help-page i,
-body[data-theme="light"] .support-page i{
-  color:#376b45 !important;
-}
-
-/* =========================================================
-   Placeholder + Contribute Text Theme Fix
-========================================================= */
-
-/* Global Placeholder */
-
-input::placeholder,
-textarea::placeholder{
-  color:var(--muted-2) !important;
-  opacity:1;
-}
-
-select{
-  color:var(--text) !important;
-}
-
-/* Contribute List / Form */
-
-.contribution-form{
-  background:var(--surface) !important;
-  border:1px solid var(--border) !important;
-  color:var(--text) !important;
-}
-
-.contribute-copy h4,
-.contribution-form-head{
-  color:var(--text) !important;
-}
-
-.contribute-copy p,
-.contribution-form p,
-.contribution-upload small,
-.contribution-upload span{
-  color:var(--muted) !important;
-}
-
-.contribution-input,
-.contribution-textarea{
-  background:var(--surface) !important;
-  border:1px solid var(--border) !important;
-  color:var(--text) !important;
-}
-
-.contribution-upload{
-  background:var(--surface) !important;
-  border:1px dashed var(--border-strong) !important;
-  color:var(--muted) !important;
-}
-
-.contribution-submit{
-  background:var(--green-soft-2) !important;
-  border:1px solid var(--border-green) !important;
-  color:var(--green) !important;
-}
-
-.contribute-arrow{
-  color:var(--green) !important;
-}
-
-/* =========================================================
-   Light Mode Leaf Silhouette Background
-========================================================= */
-
-body[data-theme="light"]::before{
+body[data-theme="light"]::before,
+body[data-theme="system"]::before{
   content:"";
   position:fixed;
   inset:0;
@@ -1015,11 +218,11 @@ body[data-theme="light"]::before{
     radial-gradient(ellipse at 76% 78%, rgba(55,107,69,.07) 0 9%, transparent 10%),
     radial-gradient(ellipse at 24% 86%, rgba(210,154,84,.07) 0 8%, transparent 9%);
 
-  filter:blur(.2px);
   opacity:.9;
 }
 
-body[data-theme="light"]::after{
+body[data-theme="light"]::after,
+body[data-theme="system"]::after{
   content:"";
   position:fixed;
   inset:0;
@@ -1038,5 +241,334 @@ body[data-theme="light"]::after{
     20px 40px,
     90px 120px;
 
-  opacity:.65;
+  opacity:.55;
+}
+
+/* =========================================================
+   Generic Surfaces
+========================================================= */
+
+.filter-panel,
+.avatar-panel,
+.auth-panel,
+.logout-sheet,
+.review-sheet-panel,
+.review-list-panel,
+.detail-more-menu,
+.event-more-menu,
+.culture-more-menu,
+.traveler-more-menu{
+  background:var(--surface-strong) !important;
+  border:1px solid var(--border) !important;
+  box-shadow:var(--shadow) !important;
+  color:var(--text) !important;
+}
+
+/* =========================================================
+   Cards
+========================================================= */
+
+.card{
+  border:1px solid rgba(255,255,255,.28) !important;
+  box-shadow:var(--card-shadow) !important;
+}
+
+.card,
+.card *{
+  color:var(--card-text) !important;
+}
+
+.card .subtitle{
+  color:var(--card-muted) !important;
+}
+
+.card .loved{
+  color:var(--card-subtle) !important;
+}
+
+.card .tags{
+  color:#9ff2b1 !important;
+}
+
+/* =========================================================
+   Detail Shared
+========================================================= */
+
+.detail-page,
+.event-detail-page,
+.culture-detail-page,
+.traveler-detail-page{
+  background:var(--detail-bg) !important;
+  color:var(--detail-text) !important;
+}
+
+.detail-panel,
+.event-detail-panel,
+.culture-detail-panel,
+.traveler-detail-panel{
+  background:var(--detail-panel-bg) !important;
+  color:var(--detail-text) !important;
+}
+
+.detail-guide,
+.event-detail-guide,
+.culture-detail-guide,
+.traveler-story:first-child,
+.detail-review-card,
+.event-detail-info-item{
+  background:var(--detail-surface) !important;
+  border:1px solid var(--detail-border) !important;
+}
+
+.detail-section p,
+.detail-section li,
+.detail-line,
+.detail-inline-info,
+.detail-week-hours,
+.event-detail-section p,
+.event-detail-good-list li,
+.event-detail-info-value,
+.event-detail-venue-line,
+.culture-detail-section p,
+.culture-detail-list li,
+.traveler-story p,
+.detail-review-card p,
+.review-place-name{
+  color:var(--detail-muted) !important;
+}
+
+.detail-head h1,
+.event-detail-head h1,
+.culture-detail-section h2,
+.traveler-story h2,
+.detail-section h2,
+.detail-review-head h2,
+.review-sheet-head h2,
+.review-list-head h2{
+  color:var(--detail-text) !important;
+}
+
+.detail-kicker,
+.event-detail-kicker,
+.culture-detail-overlay small,
+.traveler-detail-overlay small,
+.detail-guide small,
+.event-detail-guide small,
+.culture-detail-guide small,
+.review-sheet-head small,
+.review-list-head small{
+  color:var(--green) !important;
+}
+
+.culture-detail-overlay h1,
+.culture-detail-overlay p,
+.traveler-detail-overlay h1,
+.traveler-detail-overlay p{
+  color:white !important;
+}
+
+/* =========================================================
+   Sheets / Backdrops
+========================================================= */
+
+.auth-backdrop,
+.logout-backdrop,
+.review-sheet-backdrop,
+.review-list-backdrop,
+.detail-more-backdrop,
+.event-more-backdrop,
+.culture-more-backdrop,
+.traveler-more-backdrop{
+  background:var(--overlay-dark) !important;
+}
+
+.detail-more-menu button,
+.event-more-menu button,
+.culture-more-menu button,
+.traveler-more-menu button{
+  color:var(--text) !important;
+}
+
+.detail-more-menu button span,
+.event-more-menu button span,
+.culture-more-menu button span,
+.traveler-more-menu button span{
+  color:var(--green) !important;
+}
+
+/* =========================================================
+   Avatar Panel
+========================================================= */
+
+.avatar-panel,
+.avatar-panel *{
+  color:var(--text) !important;
+}
+
+.avatar-panel-user p,
+.avatar-panel-stats span,
+.avatar-place-tags,
+.avatar-list-item p{
+  color:var(--muted) !important;
+}
+
+.avatar-panel-stats button,
+.avatar-panel-stats div,
+.avatar-sub-back,
+.avatar-place-delete,
+.avatar-list-actions button{
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+}
+
+.avatar-panel-menu button{
+  color:var(--text) !important;
+  border-bottom:1px solid var(--border) !important;
+}
+
+.avatar-panel-menu i,
+.avatar-sub-head small,
+.avatar-place-rating,
+.avatar-list-actions button:hover{
+  color:var(--green) !important;
+}
+
+.avatar-place-card,
+.avatar-list-item{
+  border-bottom:1px solid var(--border) !important;
+}
+
+/* =========================================================
+   Account / Settings / Support / Contribute
+========================================================= */
+
+.account-head p,
+.settings-head p,
+.settings-about p,
+.account-row p,
+.settings-row p,
+.contribute-copy p,
+.contribution-form p,
+.contribution-upload small,
+.contribution-upload span,
+.help-page p,
+.help-page span,
+.help-page small,
+.support-page p,
+.support-page span,
+.support-page small{
+  color:var(--muted) !important;
+}
+
+.account-head h4,
+.settings-head h4,
+.settings-about h4,
+.account-row h4,
+.settings-row h4,
+.contribute-copy h4,
+.contribution-form-head,
+.help-page h1,
+.help-page h2,
+.help-page h3,
+.help-page h4,
+.support-page h1,
+.support-page h2,
+.support-page h3,
+.support-page h4{
+  color:var(--text) !important;
+}
+
+.account-input,
+.account-select,
+.settings-select,
+.contribution-input,
+.contribution-textarea,
+input,
+textarea,
+select{
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:var(--muted-2) !important;
+  opacity:1;
+}
+
+.account-save-btn,
+.account-signout-btn,
+.contribution-submit,
+.review-submit-btn,
+.auth-panel button,
+.logout-confirm{
+  background:var(--green-soft-2) !important;
+  border:1px solid var(--border-green) !important;
+  color:var(--green) !important;
+}
+
+/* =========================================================
+   Buttons / Active
+========================================================= */
+
+button{
+  color:var(--text);
+}
+
+.filter-grid button,
+.avatar-list-actions button,
+.detail-link,
+.event-detail-link,
+.culture-detail-link,
+.save,
+.nav-arrow{
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+}
+
+.filter-grid button.active,
+.save.is-saved,
+.detail-action-btn.is-saved,
+.event-detail-action.is-saved,
+.culture-detail-action.is-saved,
+.traveler-detail-action.is-saved{
+  background:var(--green-soft-2) !important;
+  border:1px solid var(--border-green) !important;
+  color:var(--green) !important;
+}
+
+/* =========================================================
+   Light Clean Sub Pages
+========================================================= */
+
+body[data-theme="light"] .detail-page,
+body[data-theme="light"] .event-detail-page,
+body[data-theme="light"] .culture-detail-page,
+body[data-theme="light"] .traveler-detail-page,
+body[data-theme="light"] .avatar-panel,
+body[data-theme="light"] .review-sheet-panel,
+body[data-theme="light"] .review-list-panel,
+body[data-theme="light"] .detail-more-menu,
+body[data-theme="light"] .event-more-menu,
+body[data-theme="light"] .culture-more-menu,
+body[data-theme="light"] .traveler-more-menu{
+  background:#f5f7f4 !important;
+}
+
+body[data-theme="light"] .detail-guide,
+body[data-theme="light"] .detail-review-card,
+body[data-theme="light"] .event-detail-guide,
+body[data-theme="light"] .event-detail-info-item,
+body[data-theme="light"] .culture-detail-guide,
+body[data-theme="light"] .traveler-story:first-child,
+body[data-theme="light"] .avatar-panel-stats button,
+body[data-theme="light"] .avatar-panel-stats div{
+  background:#ffffff !important;
+  border:1px solid rgba(15,23,42,.06) !important;
+  box-shadow:
+    0 1px 2px rgba(15,23,42,.03),
+    0 10px 30px rgba(15,23,42,.04);
 }
