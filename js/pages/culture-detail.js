@@ -436,8 +436,14 @@ function buildCultureMapQuery(){
   return encodeURIComponent(parts.join(" "));
 }
 
-window.openCultureMap = function () {
-  openCultureMapByProvider("auto");
+window.openEventMap = function () {
+
+  window.openMapByPreference({
+    title: currentEventTitle,
+    address: currentEventAddress,
+    mapUrl: currentEventMapUrl
+  });
+
 };
 
 function openCultureMapByProvider(provider = "auto") {
