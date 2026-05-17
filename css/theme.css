@@ -397,3 +397,181 @@ body{
     var(--line-strong)
     transparent;
 }
+
+/* ========================================
+   Detail System Tokens
+======================================== */
+
+:root{
+
+  /* =========================
+     Detail Background
+  ========================= */
+
+  --detail-bg:#07110d;
+
+  --detail-panel-bg:#07110d;
+
+  /* =========================
+     Detail Surface
+  ========================= */
+
+  --detail-surface:
+    rgba(255,255,255,.04);
+
+  --detail-surface-hover:
+    rgba(255,255,255,.06);
+
+  --detail-border:
+    rgba(255,255,255,.06);
+
+  /* =========================
+     Detail Text
+  ========================= */
+
+  --detail-text:#ffffff;
+
+  --detail-muted:
+    rgba(255,255,255,.82);
+
+  --detail-subtle:
+    rgba(255,255,255,.68);
+
+  /* =========================
+     Detail Hero
+  ========================= */
+
+  --detail-hero-top:
+    rgba(0,0,0,.42);
+
+  --detail-hero-bottom:
+    rgba(0,0,0,.72);
+
+  /* =========================
+     Detail Glass
+  ========================= */
+
+  --detail-glass:
+    rgba(0,0,0,.32);
+
+  --detail-glass-border:
+    rgba(255,255,255,.16);
+
+  /* =========================
+     Detail Sheet
+  ========================= */
+
+  --detail-sheet:
+    rgba(10,16,14,.96);
+
+  --detail-sheet-border:
+    rgba(255,255,255,.06);
+
+  --detail-backdrop:
+    rgba(0,0,0,.45);
+
+}
+
+/* ========================================
+   Light Theme Detail
+======================================== */
+
+body[data-theme="light"]{
+
+  --detail-bg:#f4f3ec;
+
+  --detail-panel-bg:#f4f3ec;
+
+  --detail-surface:
+    rgba(23,34,27,.04);
+
+  --detail-surface-hover:
+    rgba(23,34,27,.06);
+
+  --detail-border:
+    rgba(23,34,27,.08);
+
+  --detail-text:#17221b;
+
+  --detail-muted:
+    rgba(23,34,27,.76);
+
+  --detail-subtle:
+    rgba(23,34,27,.62);
+
+  --detail-hero-top:
+    rgba(0,0,0,.28);
+
+  --detail-hero-bottom:
+    rgba(0,0,0,.56);
+
+  --detail-glass:
+    rgba(255,255,255,.42);
+
+  --detail-glass-border:
+    rgba(255,255,255,.22);
+
+  --detail-sheet:
+    rgba(255,255,250,.96);
+
+  --detail-sheet-border:
+    rgba(23,34,27,.08);
+
+  --detail-backdrop:
+    rgba(23,34,27,.26);
+
+}
+
+/* ========================================
+   System Theme Detail
+======================================== */
+
+@media (prefers-color-scheme: light){
+
+  body[data-theme="system"]{
+
+    --detail-bg:#f4f3ec;
+
+    --detail-panel-bg:#f4f3ec;
+
+    --detail-surface:
+      rgba(23,34,27,.04);
+
+    --detail-surface-hover:
+      rgba(23,34,27,.06);
+
+    --detail-border:
+      rgba(23,34,27,.08);
+
+    --detail-text:#17221b;
+
+    --detail-muted:
+      rgba(23,34,27,.76);
+
+    --detail-subtle:
+      rgba(23,34,27,.62);
+
+    --detail-hero-top:
+      rgba(0,0,0,.28);
+
+    --detail-hero-bottom:
+      rgba(0,0,0,.56);
+
+    --detail-glass:
+      rgba(255,255,255,.42);
+
+    --detail-glass-border:
+      rgba(255,255,255,.22);
+
+    --detail-sheet:
+      rgba(255,255,250,.96);
+
+    --detail-sheet-border:
+      rgba(23,34,27,.08);
+
+    --detail-backdrop:
+      rgba(23,34,27,.26);
+
+  }
+
+}
