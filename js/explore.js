@@ -2262,17 +2262,31 @@ function renderAccountPage(){
       
 <div class="account-badge-section">
 
-  <div class="account-badge-head">
+<div class="account-badge-head">
 
-    <div>
-      <small>Traveler Badge</small>
+  <div class="account-badge-copy">
+
+    <small>Traveler Badge</small>
+
+    <div class="account-badge-title-row">
+
       <h4>Slow Explorer</h4>
+
+      <button
+        class="account-badge-reward"
+        type="button"
+      >
+        Reward
+      </button>
+
     </div>
 
-    <select
-      id="accountBadgeSelect"
-      class="account-badge-select"
-    >
+  </div>
+
+  <select
+    id="accountBadgeSelect"
+    class="account-badge-select"
+  >
       <option value="slow-explorer">
         Slow Explorer
       </option>
