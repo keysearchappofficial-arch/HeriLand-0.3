@@ -1947,6 +1947,73 @@ ${item.action ? `
   `;
 }
 
+function openNotificationSettingsPage(){
+
+  const page = document.createElement("div");
+
+  page.className = "avatar-sub-page";
+
+  page.innerHTML = `
+    <div class="avatar-sub-head">
+
+      <button class="avatar-sub-back">
+        ←
+      </button>
+
+      <div>
+        <small>Settings</small>
+        <h3>Notification</h3>
+      </div>
+
+    </div>
+
+    <div class="settings-toggle-list">
+
+      <div class="settings-toggle-row">
+        <div>
+          <h4>Event Updates</h4>
+          <p>Festival and local event alerts.</p>
+        </div>
+
+        <button class="setting-switch is-on">
+          <span></span>
+        </button>
+      </div>
+
+      <div class="settings-toggle-row">
+        <div>
+          <h4>Culture Stories</h4>
+          <p>Traditional stories and heritage updates.</p>
+        </div>
+
+        <button class="setting-switch">
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(page);
+
+  requestAnimationFrame(() => {
+    page.classList.add("is-open");
+  });
+
+  page
+    .querySelector(".avatar-sub-back")
+    ?.addEventListener("click", () => {
+
+      page.classList.remove("is-open");
+
+      setTimeout(() => {
+        page.remove();
+      }, 300);
+
+    });
+
+}
+
 function openSupportPage(page){
   avatarSupportMode = true;
   const pages = {
