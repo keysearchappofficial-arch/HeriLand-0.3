@@ -725,15 +725,36 @@
         </div>
       </div>
 
-      <div class="event-detail-info-item">
-        <div class="event-detail-info-label">Address</div>
-        <div
-          class="event-detail-info-value"
-          id="eventDetailAddress"
-        >
-          Address not available
-        </div>
-      </div>
+<div class="event-detail-info-item">
+
+  <div class="event-detail-info-label">
+    Address
+  </div>
+
+  <div class="event-detail-address-row">
+
+    <button
+      class="event-detail-address-main"
+      id="eventDetailAddressBtn"
+      type="button"
+    >
+      <span id="eventDetailAddress">
+        Address not available
+      </span>
+    </button>
+
+    <button
+      class="event-detail-address-action"
+      id="eventDetailAddressActionBtn"
+      type="button"
+      aria-label="Open map"
+    >
+      ↗
+    </button>
+
+  </div>
+
+</div>
 
       <div class="event-detail-info-item">
         <div class="event-detail-info-label">Organizer</div>
@@ -828,13 +849,13 @@
         Add to Trip
       </button>
 
-      <button
-        type="button"
-        onclick="window.openEventMap()"
-      >
-        <span>↗</span>
-        Open in Maps
-      </button>
+<button
+  type="button"
+  onclick="window.openEventMapChoiceSheet()"
+>
+  <span>↗</span>
+  Navigation
+</button>
 
       <button
         type="button"
@@ -861,8 +882,66 @@
       </button>
 
     </div>
+    
+<div
+  class="map-choice-layer"
+  id="eventMapChoiceLayer"
+>
+
+  <div
+    class="map-choice-backdrop"
+    id="eventMapChoiceBackdrop"
+  ></div>
+
+  <div class="map-choice-menu">
+
+    <button
+      type="button"
+      onclick="window.openEventMapWith('auto')"
+    >
+      <span>◎</span>
+      Automatic
+    </button>
+
+    <button
+      type="button"
+      onclick="window.openEventMapWith('apple')"
+    >
+      <span></span>
+      Apple Maps
+    </button>
+
+    <button
+      type="button"
+      onclick="window.openEventMapWith('google')"
+    >
+      <span>G</span>
+      Google Maps
+    </button>
+
+    <button
+      type="button"
+      onclick="window.openEventMapWith('waze')"
+    >
+      <span>◇</span>
+      Waze
+    </button>
+
+    <button
+      type="button"
+      onclick="window.copyEventAddress()"
+    >
+      <span>⧉</span>
+      Copy Address
+    </button>
 
   </div>
+
+</div>
+
+  </div>
+  
+  
 
 </section>
     </div>
