@@ -89,9 +89,9 @@ async function loadEventDetail(slug){
       venueMini: "Venue TBC",
       venue: "Venue TBC",
       address: "Address not available",
-      mapUrl:data.google_map_url || "",
-      addressRaw:data.address || "",
-      titleRaw:data.title || "Event not found",
+mapUrl: "",
+addressRaw: "",
+titleRaw: "Event not found",
       organizer: "Organizer TBC",
       ai: "This event may not be available yet.",
       desc: "",
@@ -158,6 +158,15 @@ async function loadEventDetail(slug){
 
     map:
       data.google_map_url || "#",
+      
+    mapUrl:
+  data.google_map_url || "",
+
+addressRaw:
+  data.address || "",
+
+titleRaw:
+  data.title || "",
 
     nearby:
       "Explore nearby restaurants, river walks, or local places around this event.",
@@ -235,9 +244,14 @@ currentEventTitle =
     ticketLink.href = data.ticket || "#";
   }
 
-  if (mapLink) {
-    mapLink.href = data.map || "#";
-  }
+if (mapLink) {
+  mapLink.href = "#";
+
+  mapLink.onclick = (event) => {
+    event.preventDefault();
+    window.openEventMap?.();
+  };
+}
   bindEventAddressAction();
 }
 
