@@ -813,3 +813,38 @@ body[data-theme="light"] .avatar-place-rating{
 .avatar-sub-head h3{
   color:var(--text);
 }
+
+/* =========================================================
+   Account / Settings Text Force Fix
+========================================================= */
+
+.account-head p,
+.settings-head p,
+.settings-about p,
+.account-row p,
+.settings-row p{
+  color:var(--muted) !important;
+}
+
+.account-head h4,
+.settings-head h4,
+.settings-about h4,
+.account-row h4,
+.settings-row h4{
+  color:var(--text) !important;
+}
+
+.account-input,
+.account-select,
+.settings-select{
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+}
+
+.account-save-btn,
+.account-signout-btn{
+  background:var(--green-soft-2) !important;
+  border:1px solid var(--border-green) !important;
+  color:var(--green) !important;
+}
