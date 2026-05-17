@@ -2362,6 +2362,62 @@ function bindSettingsPage(){
   loadNotificationSettings();
 }
 
+async function loadNotificationSettings(){
+  const user = await getCurrentUser?.();
+
+  if (!user) return;
+
+  const { data, error } = await supabase
+    .from("heriland_notification_settings")
+    .select("*")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Load notification settings failed:", error);
+    return;
+  }
+
+  if (!data) {
+    await saveNotificationSetting("push_enabled", true);
+    return;
+  }
+
+  const notificationToggle =
+    document.getElementById("settingNotification");
+
+  if (notificationToggle) {
+    notificationToggle.classList.toggle(
+      "is-on",
+      !!data.push_enabled
+    );
+  }
+}
+
+async function saveNotificationSetting(field, value){
+  const user = await getCurrentUser?.();
+
+  if (!user) return false;
+
+  const { error } = await supabase
+    .from("heriland_notification_settings")
+    .upsert({
+      user_id: user.id,
+      [field]: value,
+      updated_at: new Date().toISOString()
+    }, {
+      onConflict: "user_id"
+    });
+
+  if (error) {
+    console.error("Save notification setting failed:", error);
+    alert("Save notification setting failed.");
+    return false;
+  }
+
+  return true;
+}
+
 function bindAvatarPlaceSwipe(pageKey){
   document
     .querySelectorAll(".avatar-place-card")
