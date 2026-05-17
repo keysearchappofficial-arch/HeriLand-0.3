@@ -1806,3 +1806,51 @@ body.no-scroll .stage{
   }
 
 }
+
+/* =========================
+   Inline Edit
+========================= */
+
+.account-name-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+}
+
+.account-inline-edit{
+  height:28px;
+
+  padding:0 12px;
+
+  border:none;
+  outline:none;
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:1px solid var(--border);
+
+  color:var(--muted);
+
+  font-size:11px;
+  font-weight:700;
+
+  letter-spacing:.4px;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+.account-inline-edit:hover{
+  background:
+    rgba(255,255,255,.09);
+
+  color:var(--text);
+
+  transform:translateY(-1px);
+}
