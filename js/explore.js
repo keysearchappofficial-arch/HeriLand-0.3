@@ -2120,99 +2120,154 @@ function bindSupportButtons(){
 
 function renderAccountPage(){
   return `
-    <div class="account-list">
+    <div class="account-paper">
 
-      <div class="account-row">
-        <div class="account-head">
-          <h4>User Name</h4>
-          <p>Your traveler display name.</p>
+      <div class="account-paper-head">
+
+        <div class="account-avatar-block">
+          <div class="account-avatar">
+            <img
+              src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=300&q=80"
+              alt="Traveler Avatar"
+            >
+          </div>
+
+          <button
+            class="account-avatar-edit"
+            type="button"
+          >
+            Change Photo
+          </button>
         </div>
 
-        <input
-          id="accountName"
-          class="account-input"
-          type="text"
-          value="Andy"
-        >
-      </div>
+        <div class="account-identity">
+          <label>Traveler Name</label>
 
-      <div class="account-row">
-        <div class="account-head">
-          <h4>Phone</h4>
-          <p>Used for account and trip support.</p>
+          <input
+            id="accountName"
+            class="account-paper-input account-name-input"
+            type="text"
+            value="Andy"
+          >
+
+          <p>
+            Personal traveler profile for saved places, trips, reviews, and HeriLand activity.
+          </p>
         </div>
 
-        <input
-          id="accountPhone"
-          class="account-input"
-          type="tel"
-          value="+886 900 000 000"
-        >
       </div>
 
-      <div class="account-row">
-        <div class="account-head">
-          <h4>Email</h4>
-          <p>Your login and notification email.</p>
+      <div class="account-paper-line"></div>
+
+      <div class="account-section-title">
+        Personal Information
+      </div>
+
+      <div class="account-paper-grid">
+
+        <div class="account-field">
+          <label>Date of Birth</label>
+          <input
+            id="accountBirth"
+            class="account-paper-input"
+            type="date"
+          >
         </div>
 
-        <input
-          id="accountEmail"
-          class="account-input"
-          type="email"
-          value="andy@example.com"
-        >
-      </div>
-
-      <div class="account-row">
-        <div class="account-head">
-          <h4>Login Method</h4>
-          <p>Choose how you sign in.</p>
+        <div class="account-field">
+          <label>Phone</label>
+          <input
+            id="accountPhone"
+            class="account-paper-input"
+            type="tel"
+            value="+886 900 000 000"
+          >
         </div>
 
-        <select
-          id="accountLoginMethod"
-          class="account-select"
-        >
-          <option value="email">Email</option>
-          <option value="google">Google</option>
-          <option value="apple">Apple</option>
-        </select>
-      </div>
-
-      <div class="account-row">
-        <div class="account-head">
-          <h4>Region</h4>
-          <p>Your default travel region.</p>
+        <div class="account-field account-field-full">
+          <label>Email</label>
+          <input
+            id="accountEmail"
+            class="account-paper-input"
+            type="email"
+            value="andy@example.com"
+          >
         </div>
 
-        <select
-          id="accountRegion"
-          class="account-select"
-        >
-          <option value="sarawak">Sarawak</option>
-          <option value="kuching">Kuching</option>
-          <option value="sibu">Sibu</option>
-          <option value="miri">Miri</option>
-          <option value="bintulu">Bintulu</option>
-        </select>
       </div>
 
-      <button
-        class="account-save-btn"
-        id="accountSaveBtn"
-        type="button"
-      >
-        Save Changes
-      </button>
+      <div class="account-section-title">
+        Travel Profile
+      </div>
 
-<button
-  class="account-signout-btn"
-  id="accountAuthActionBtn"
-  type="button"
->
-  Account Action
-</button>
+      <div class="account-paper-grid">
+
+        <div class="account-field">
+          <label>Default Region</label>
+          <select
+            id="accountRegion"
+            class="account-paper-select"
+          >
+            <option value="sarawak">Sarawak</option>
+            <option value="kuching">Kuching</option>
+            <option value="sibu">Sibu</option>
+            <option value="miri">Miri</option>
+            <option value="bintulu">Bintulu</option>
+          </select>
+        </div>
+
+        <div class="account-field">
+          <label>Login Method</label>
+          <select
+            id="accountLoginMethod"
+            class="account-paper-select"
+          >
+            <option value="email">Email</option>
+            <option value="google">Google</option>
+            <option value="apple">Apple</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="account-travel-stats">
+
+        <div>
+          <strong id="accountSavedStat">${getSavedItems().length}</strong>
+          <span>Saved</span>
+        </div>
+
+        <div>
+          <strong id="accountTripStat">${getTripItems().length}</strong>
+          <span>Trips</span>
+        </div>
+
+        <div>
+          <strong id="accountReviewStat">${getReviews().length}</strong>
+          <span>Reviews</span>
+        </div>
+
+      </div>
+
+      <div class="account-paper-actions">
+
+        <button
+          class="account-save-btn"
+          id="accountSaveBtn"
+          type="button"
+        >
+          Save Profile
+        </button>
+
+        <button
+          class="account-signout-btn"
+          id="accountAuthActionBtn"
+          type="button"
+        >
+          Account Action
+        </button>
+
+      </div>
 
     </div>
   `;
