@@ -1473,3 +1473,246 @@ body.no-scroll .stage{
   border-bottom:
     1px solid var(--border);
 }
+
+/* =========================
+   Account Paper Profile
+========================= */
+
+.account-paper{
+  padding:22px;
+
+  border-radius:26px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,.035)
+    );
+
+  border:1px solid var(--border);
+
+  color:var(--text);
+
+  box-shadow:var(--shadow-soft);
+}
+
+.account-paper-head{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+
+.account-avatar-block{
+  width:92px;
+  flex-shrink:0;
+}
+
+.account-avatar{
+  width:82px;
+  height:82px;
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  border:1px solid var(--border);
+  background:var(--surface);
+}
+
+.account-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.account-avatar-edit{
+  margin-top:10px;
+
+  width:82px;
+  height:30px;
+
+  border:none;
+  border-radius:999px;
+
+  background:var(--green-soft);
+  border:1px solid var(--border-green);
+
+  color:var(--green);
+
+  font-size:11px;
+  font-weight:700;
+}
+
+.account-identity{
+  flex:1;
+  min-width:0;
+}
+
+.account-identity label,
+.account-field label{
+  display:block;
+
+  margin-bottom:8px;
+
+  font-size:11px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+
+  color:var(--green);
+}
+
+.account-identity p{
+  margin-top:10px;
+
+  font-size:13px;
+  line-height:1.6;
+
+  color:var(--muted);
+}
+
+.account-name-input{
+  font-family:Georgia,serif;
+
+  font-size:26px !important;
+  letter-spacing:-.8px;
+}
+
+.account-paper-line{
+  height:1px;
+
+  margin:22px 0;
+
+  background:var(--border);
+}
+
+.account-section-title{
+  margin:20px 0 14px;
+
+  font-size:12px;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+
+  color:var(--muted);
+}
+
+.account-paper-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.account-field-full{
+  grid-column:1 / -1;
+}
+
+.account-paper-input,
+.account-paper-select{
+  width:100%;
+  height:46px;
+
+  border:none;
+  outline:none;
+
+  border-radius:16px;
+
+  padding:0 14px;
+
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  color:var(--text);
+
+  font-size:14px;
+}
+
+.account-travel-stats{
+  margin-top:22px;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.account-travel-stats div{
+  padding:14px 10px;
+
+  border-radius:18px;
+
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  text-align:center;
+}
+
+.account-travel-stats strong{
+  display:block;
+
+  margin-bottom:5px;
+
+  font-size:20px;
+
+  color:var(--text);
+}
+
+.account-travel-stats span{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.account-paper-actions{
+  margin-top:22px;
+
+  display:grid;
+  gap:10px;
+}
+
+.account-save-btn,
+.account-signout-btn{
+  height:50px;
+
+  border:none;
+  border-radius:18px;
+
+  font-size:14px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.account-save-btn{
+  background:var(--green-soft-2);
+  border:1px solid var(--border-green);
+  color:var(--green);
+}
+
+.account-signout-btn{
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+@media(max-width:380px){
+  .account-paper{
+    padding:18px;
+  }
+
+  .account-paper-head{
+    gap:14px;
+  }
+
+  .account-paper-grid{
+    grid-template-columns:1fr;
+  }
+
+  .account-field-full{
+    grid-column:auto;
+  }
+
+  .account-name-input{
+    font-size:23px !important;
+  }
+}
