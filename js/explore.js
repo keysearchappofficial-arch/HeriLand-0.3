@@ -452,25 +452,28 @@ function bindEvents() {
   document.querySelector(".nav-next")?.addEventListener("click", nextCard);
   document.querySelector(".nav-prev")?.addEventListener("click", prevCard);
 
-document.querySelector(".save")?.addEventListener("click", async (event) => {
-  event.stopPropagation();
+stage?.querySelectorAll(".card.active .save").forEach((button) => {
+  button.addEventListener("click", async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
 
-  const loggedIn = await requireLogin("save places");
-  if (!loggedIn) return;
+    const loggedIn = await requireLogin("save places");
+    if (!loggedIn) return;
 
-  const cardEl = event.currentTarget.closest(".card.active");
-  const slug = cardEl?.dataset.slug;
+    const cardEl = button.closest(".card.active");
+    const slug = cardEl?.dataset.slug;
 
-  const item = cards.find(card => card.slug === slug);
+    const item = cards.find(card => card.slug === slug);
 
-  if (!item) return;
+    if (!item) return;
 
-  const ok = await toggleSaved(item);
+    const ok = await toggleSaved(item);
 
-  if (!ok) return;
+    if (!ok) return;
 
-  updateAvatarStats();
-  renderCards();
+    updateAvatarStats();
+    renderCards();
+  });
 });
 
 document.querySelector(".card.active")?.addEventListener("click", (event) => {
