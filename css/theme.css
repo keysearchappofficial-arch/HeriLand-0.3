@@ -718,3 +718,36 @@ body[data-theme="light"] #reviewComment{
 body[data-theme="light"] .review-upload{
   color:var(--detail-muted);
 }
+
+/* =========================
+   Avatar / Traveler Panel Theme
+========================= */
+
+:root{
+
+  --avatar-bg:#07110d;
+  --avatar-surface:rgba(255,255,255,.05);
+
+  --avatar-border:rgba(255,255,255,.08);
+
+  --avatar-text:#ffffff;
+  --avatar-muted:rgba(255,255,255,.72);
+  --avatar-subtle:rgba(255,255,255,.52);
+
+  --avatar-icon:var(--green);
+}
+
+html.light{
+
+  --avatar-bg:#f6f8f6;
+
+  --avatar-surface:#ffffff;
+
+  --avatar-border:rgba(15,23,42,.08);
+
+  --avatar-text:#142018;
+  --avatar-muted:#4b5b52;
+  --avatar-subtle:#7d8b84;
+
+  --avatar-icon:#3f6f57;
+}
