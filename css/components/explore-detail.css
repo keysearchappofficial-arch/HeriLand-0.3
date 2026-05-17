@@ -98,12 +98,12 @@
   background:
     linear-gradient(
       to bottom,
-      rgba(0,0,0,.42),
+      var(--detail-hero-top),
       transparent 30%
     ),
     linear-gradient(
       to top,
-      rgba(0,0,0,.62),
+      var(--detail-hero-bottom),
       transparent 38%
     );
 }
@@ -126,8 +126,7 @@
   border:none;
   border-radius:50%;
 
-  background:
-    rgba(0,0,0,.32);
+  background:rgba(0,0,0,.32);
 
   border:
     1px solid rgba(255,255,255,.16);
@@ -165,8 +164,7 @@
   border:none;
   border-radius:50%;
 
-  background:
-    rgba(0,0,0,.32);
+  background:rgba(0,0,0,.32);
 
   border:
     1px solid rgba(255,255,255,.16);
@@ -183,11 +181,10 @@
 .detail-action-btn.is-saved{
   color:var(--green);
 
-  background:
-    rgba(159,242,177,.16);
+  background:var(--green-soft-2);
 
   border:
-    1px solid rgba(159,242,177,.32);
+    1px solid var(--border-green);
 }
 
 /* =========================
@@ -253,7 +250,7 @@
   margin-top:-34px;
 
   box-shadow:
-    0 -10px 40px rgba(0,0,0,.35);
+    0 -10px 40px rgba(0,0,0,.16);
 
   scrollbar-width:none;
   -ms-overflow-style:none;
@@ -280,8 +277,7 @@
 
   text-transform:uppercase;
 
-  color:
-    rgba(159,242,177,.72);
+  color:var(--green);
 }
 
 .detail-head h1{
@@ -295,6 +291,8 @@
   letter-spacing:-1.8px;
 
   margin-bottom:18px;
+
+  color:var(--detail-text);
 }
 
 /* =========================
@@ -308,12 +306,11 @@
 
   margin-bottom:18px;
 
-  color:
-    rgba(255,255,255,.82);
+  color:var(--detail-muted);
 }
 
 .detail-stars{
-  color:#ffe082;
+  color:var(--star);
 }
 
 .detail-line{
@@ -322,8 +319,7 @@
   font-size:15px;
   line-height:1.6;
 
-  color:
-    rgba(255,255,255,.68);
+  color:var(--detail-subtle);
 }
 
 /* =========================
@@ -338,12 +334,11 @@
   font-size:14px;
   line-height:1.7;
 
-  color:
-    rgba(255,255,255,.75);
+  color:var(--detail-muted);
 }
 
 .detail-inline-info strong{
-  color:white;
+  color:var(--detail-text);
   font-weight:600;
 }
 
@@ -353,8 +348,7 @@
   font-size:14px;
   line-height:1.7;
 
-  color:
-    rgba(255,255,255,.68);
+  color:var(--detail-subtle);
 }
 
 /* =========================
@@ -370,7 +364,8 @@
 
   background:var(--detail-surface);
 
-  border:1px solid var(--detail-border);
+  border:
+    1px solid var(--detail-border);
 }
 
 .detail-guide small{
@@ -384,16 +379,14 @@
 
   text-transform:uppercase;
 
-  color:
-    rgba(159,242,177,.72);
+  color:var(--green);
 }
 
 .detail-guide p{
   font-size:17px;
   line-height:1.8;
 
-  color:
-    rgba(255,255,255,.88);
+  color:var(--detail-muted);
 }
 
 /* =========================
@@ -408,14 +401,15 @@
   font-size:24px;
 
   margin-bottom:18px;
+
+  color:var(--detail-text);
 }
 
 .detail-section p{
   font-size:16px;
   line-height:1.9;
 
-  color:
-    rgba(255,255,255,.82);
+  color:var(--detail-muted);
 }
 
 .detail-section ul{
@@ -428,8 +422,7 @@
   font-size:16px;
   line-height:1.7;
 
-  color:
-    rgba(255,255,255,.82);
+  color:var(--detail-muted);
 }
 
 /* =========================
@@ -450,6 +443,8 @@
 
 .detail-review-head h2{
   font-size:24px;
+
+  color:var(--detail-text);
 }
 
 .detail-review-more{
@@ -474,8 +469,7 @@
 
   margin-bottom:22px;
 
-  background:
-    rgba(159,242,177,.14);
+  background:var(--green-soft-2);
 
   color:var(--green);
 
@@ -490,11 +484,10 @@
 
   border-radius:22px;
 
-  background:
-    rgba(255,255,255,.04);
+  background:var(--detail-surface);
 
   border:
-    1px solid rgba(255,255,255,.06);
+    1px solid var(--detail-border);
 
   margin-bottom:12px;
 }
@@ -503,11 +496,12 @@
   display:block;
 
   margin-bottom:8px;
+
+  color:var(--star);
 }
 
 .detail-review-card p{
-  color:
-    rgba(255,255,255,.76);
+  color:var(--detail-muted);
 
   line-height:1.7;
 }
@@ -541,8 +535,7 @@
 
   inset:0;
 
-  background:
-    rgba(0,0,0,.45);
+  background:var(--detail-backdrop);
 
   backdrop-filter:blur(6px);
 }
@@ -558,14 +551,12 @@
 
   border-radius:28px;
 
-  background:
-    rgba(10,16,14,.96);
+  background:var(--detail-sheet);
 
   border:
-    1px solid rgba(255,255,255,.06);
+    1px solid var(--detail-border);
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.45);
+  box-shadow:var(--shadow);
 }
 
 .detail-more-menu button{
@@ -583,7 +574,7 @@
 
   padding:0 18px;
 
-  color:white;
+  color:var(--detail-text);
 
   font-size:16px;
   font-weight:600;
@@ -627,8 +618,7 @@
 
   inset:0;
 
-  background:
-    rgba(0,0,0,.48);
+  background:var(--detail-backdrop);
 
   backdrop-filter:blur(6px);
 }
@@ -649,14 +639,12 @@
 
   border-radius:30px;
 
-  background:
-    rgba(10,16,14,.98);
+  background:var(--detail-sheet);
 
   border:
-    1px solid rgba(255,255,255,.08);
+    1px solid var(--detail-border);
 
-  box-shadow:
-    0 24px 70px rgba(0,0,0,.5);
+  box-shadow:var(--shadow);
 
   scrollbar-width:none;
   -ms-overflow-style:none;
@@ -674,8 +662,7 @@
 
   border-radius:999px;
 
-  background:
-    rgba(255,255,255,.22);
+  background:var(--border-strong);
 
   margin:0 auto 18px;
 }
@@ -701,21 +688,21 @@
 
   text-transform:uppercase;
 
-  color:
-    rgba(159,242,177,.72);
+  color:var(--green);
 }
 
 .review-sheet-head h2,
 .review-list-head h2{
   font-size:24px;
   line-height:1.2;
+
+  color:var(--detail-text);
 }
 
 .review-place-name{
   margin-top:6px;
 
-  color:
-    rgba(255,255,255,.6);
+  color:var(--detail-subtle);
 
   font-size:14px;
 }
@@ -729,10 +716,12 @@
 
   border-radius:50%;
 
-  background:
-    rgba(255,255,255,.07);
+  background:var(--detail-surface);
 
-  color:white;
+  border:
+    1px solid var(--detail-border);
+
+  color:var(--detail-text);
 
   font-size:24px;
 
@@ -757,11 +746,12 @@
   border:none;
   border-radius:14px;
 
-  background:
-    rgba(255,255,255,.06);
+  background:var(--detail-surface);
 
-  color:
-    rgba(255,255,255,.38);
+  border:
+    1px solid var(--detail-border);
+
+  color:var(--detail-subtle);
 
   font-size:22px;
 
@@ -769,10 +759,9 @@
 }
 
 .review-rating button.is-active{
-  color:#ffe082;
+  color:var(--star);
 
-  background:
-    rgba(255,224,130,.12);
+  background:var(--green-soft);
 }
 
 .review-upload{
@@ -786,14 +775,12 @@
 
   margin-bottom:14px;
 
-  background:
-    rgba(255,255,255,.05);
+  background:var(--detail-surface);
 
   border:
-    1px dashed rgba(255,255,255,.18);
+    1px dashed var(--detail-border);
 
-  color:
-    rgba(255,255,255,.78);
+  color:var(--detail-muted);
 
   cursor:pointer;
 }
@@ -831,10 +818,12 @@
 
   margin-bottom:16px;
 
-  background:
-    rgba(255,255,255,.06);
+  background:var(--detail-surface);
 
-  color:white;
+  border:
+    1px solid var(--detail-border);
+
+  color:var(--detail-text);
 
   font-size:15px;
   line-height:1.6;
@@ -848,8 +837,7 @@
 
   border-radius:18px;
 
-  background:
-    rgba(159,242,177,.16);
+  background:var(--green-soft-2);
 
   color:var(--green);
 
@@ -884,4 +872,3 @@
   }
 
 }
-
