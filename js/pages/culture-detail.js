@@ -1,3 +1,7 @@
+let currentCultureMapUrl = "";
+let currentCultureAddress = "";
+let currentCultureTitle = "";
+
 const cultureDetailPage =
   document.getElementById("cultureDetailPage");
 
@@ -79,6 +83,9 @@ async function loadCultureDetail(slug){
       tips: [],
       tags: [],
       map: "#",
+      mapUrl: "",
+      addressRaw: "",
+      titleRaw: "Culture not found",
       images: []
     });
 
@@ -144,9 +151,18 @@ async function loadCultureDetail(slug){
           ],
 
     tags,
-
-    map:
+    
+        map:
       data.google_map_url || "#",
+
+    mapUrl:
+      data.google_map_url || "",
+
+    addressRaw:
+      data.address || data.area || data.city || "",
+
+    titleRaw:
+      data.title || "Cultural Experience",
 
     images
   });
@@ -157,6 +173,18 @@ async function loadCultureDetail(slug){
 ========================= */
 
 function renderCultureDetail(data) {
+    currentCultureMapUrl =
+    data.mapUrl || data.map || "";
+
+  currentCultureAddress =
+    data.addressRaw ||
+    data.location ||
+    "";
+
+  currentCultureTitle =
+    data.titleRaw ||
+    data.title ||
+    "";
 
   document.getElementById("cultureDetailType").textContent =
     data.type || "Culture";
@@ -193,7 +221,12 @@ function renderCultureDetail(data) {
     document.getElementById("cultureMapLink");
 
   if (mapLink) {
-    mapLink.href = data.map || "#";
+    mapLink.href = "#";
+
+    mapLink.onclick = (event) => {
+      event.preventDefault();
+      window.openCultureMap?.();
+    };
   }
 
 }
@@ -382,16 +415,170 @@ window.shareCulturePlace = function () {
   console.log("share culture");
 };
 
-window.openCultureMap = function () {
-  const mapLink =
-    document.getElementById("cultureMapLink")?.href;
+function isCultureIOS(){
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (
+      navigator.platform === "MacIntel" &&
+      navigator.maxTouchPoints > 1
+    );
+}
 
-  if (mapLink && mapLink !== "#") {
-    window.open(mapLink, "_blank");
+function isCultureAndroid(){
+  return /Android/i.test(navigator.userAgent);
+}
+
+function buildCultureMapQuery(){
+  const parts = [
+    currentCultureTitle,
+    currentCultureAddress
+  ].filter(Boolean);
+
+  return encodeURIComponent(parts.join(" "));
+}
+
+window.openCultureMap = function () {
+  openCultureMapByProvider("auto");
+};
+
+function openCultureMapByProvider(provider = "auto") {
+  const query = buildCultureMapQuery();
+
+  if (!query && currentCultureMapUrl) {
+    window.open(currentCultureMapUrl, "_blank");
     return;
   }
 
-  console.log("open culture map");
+  if (!query) {
+    alert("Map information is not available.");
+    return;
+  }
+
+  if (provider === "auto") {
+    if (isCultureIOS()) {
+      window.location.href =
+        `maps://maps.apple.com/?q=${query}`;
+
+      setTimeout(() => {
+        window.open(
+          `https://www.google.com/maps/search/?api=1&query=${query}`,
+          "_blank"
+        );
+      }, 900);
+
+      return;
+    }
+
+    if (isCultureAndroid()) {
+      window.location.href =
+        `geo:0,0?q=${query}`;
+
+      setTimeout(() => {
+        window.open(
+          `https://www.google.com/maps/search/?api=1&query=${query}`,
+          "_blank"
+        );
+      }, 900);
+
+      return;
+    }
+
+    window.open(
+      currentCultureMapUrl ||
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      "_blank"
+    );
+
+    return;
+  }
+
+  if (provider === "apple") {
+    window.location.href =
+      `maps://maps.apple.com/?q=${query}`;
+
+    setTimeout(() => {
+      window.open(
+        `https://maps.apple.com/?q=${query}`,
+        "_blank"
+      );
+    }, 900);
+
+    return;
+  }
+
+  if (provider === "google") {
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      "_blank"
+    );
+
+    return;
+  }
+
+  if (provider === "waze") {
+    window.location.href =
+      `waze://?q=${query}&navigate=yes`;
+
+    setTimeout(() => {
+      window.open(
+        `https://waze.com/ul?q=${query}&navigate=yes`,
+        "_blank"
+      );
+    }, 900);
+  }
+}
+
+window.openCultureMapChoiceSheet = function () {
+
+  document
+    .getElementById("cultureMoreLayer")
+    ?.classList.remove("is-open");
+
+  document
+    .getElementById("cultureMapChoiceLayer")
+    ?.classList.add("is-open");
+
+};
+
+document
+  .getElementById("cultureMapChoiceBackdrop")
+  ?.addEventListener("click", () => {
+
+    document
+      .getElementById("cultureMapChoiceLayer")
+      ?.classList.remove("is-open");
+
+  });
+
+window.openCultureMapWith = function (provider) {
+
+  document
+    .getElementById("cultureMapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  openCultureMapByProvider(provider);
+
+};
+
+window.copyCultureAddress = async function () {
+
+  const text =
+    currentCultureAddress ||
+    currentCultureTitle ||
+    "";
+
+  if (!text) {
+    alert("Location is not available.");
+    return;
+  }
+
+  await navigator.clipboard.writeText(text);
+
+  document
+    .getElementById("cultureMapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  alert("Location copied.");
+
 };
 
 window.continueCultureAiGuide = function () {
