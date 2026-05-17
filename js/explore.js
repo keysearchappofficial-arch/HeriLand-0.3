@@ -1696,7 +1696,7 @@ function buildContributionPayload(type, user, imageUrl){
         document.getElementById("correctionTargetTitle")?.value.trim() || "",
 
       city:
-        "kuching",
+        "All",
 
       target_type:
         document.getElementById("correctionTargetType")?.value || "",
