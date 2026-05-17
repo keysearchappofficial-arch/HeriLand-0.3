@@ -1716,3 +1716,93 @@ body.no-scroll .stage{
     font-size:23px !important;
   }
 }
+
+/* =========================
+   Account Badge
+========================= */
+
+.account-badge-section{
+  margin-top:18px;
+
+  padding:18px;
+
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(126,211,160,.14),
+      rgba(255,255,255,.03)
+    );
+
+  border:1px solid rgba(126,211,160,.16);
+}
+
+.account-badge-head{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-start;
+}
+
+.account-badge-head small{
+  display:block;
+
+  margin-bottom:6px;
+
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+
+  color:var(--green);
+}
+
+.account-badge-head h4{
+  margin:0;
+
+  font-size:22px;
+  letter-spacing:-.6px;
+
+  color:var(--text);
+}
+
+.account-badge-section p{
+  margin:14px 0 0;
+
+  line-height:1.7;
+  font-size:13px;
+
+  color:var(--muted);
+}
+
+.account-badge-select{
+  min-width:150px;
+  height:42px;
+
+  border:none;
+  outline:none;
+
+  border-radius:14px;
+
+  padding:0 12px;
+
+  background:rgba(255,255,255,.06);
+
+  border:1px solid var(--border);
+
+  color:var(--text);
+
+  font-size:13px;
+}
+
+@media(max-width:520px){
+
+  .account-badge-head{
+    flex-direction:column;
+  }
+
+  .account-badge-select{
+    width:100%;
+  }
+
+}
