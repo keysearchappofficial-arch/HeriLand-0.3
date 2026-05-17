@@ -7,7 +7,7 @@
   inset:0;
   z-index:10000;
 
-  background:#07110d;
+  background:var(--detail-bg);
 
   overflow:hidden;
 
@@ -237,7 +237,7 @@
 
   overflow:auto;
 
-  background:#07110d;
+  background:var(--detail-bg);
 
   border-radius:
     34px
