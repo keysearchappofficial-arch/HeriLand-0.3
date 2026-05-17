@@ -857,7 +857,6 @@ body[data-theme="light"] .avatar-place-rating{
 .support-detail-page,
 .help-page,
 .support-page{
-  background:var(--detail-bg) !important;
   color:var(--text) !important;
 }
 
@@ -911,7 +910,6 @@ body[data-theme="light"] .avatar-place-rating{
 .support-detail-card,
 .help-card,
 .support-card{
-  background:var(--surface-panel) !important;
   border:1px solid var(--border) !important;
   color:var(--text) !important;
 }
@@ -959,7 +957,6 @@ select{
 
 /* Contribute List / Form */
 
-.contribute-card,
 .contribution-form{
   background:var(--surface) !important;
   border:1px solid var(--border) !important;
