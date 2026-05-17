@@ -634,3 +634,70 @@
   }
 
 }
+
+/* =========================
+   Event Address Action
+========================= */
+
+.event-detail-address-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.event-detail-address-main{
+  flex:1;
+
+  min-height:46px;
+
+  padding:0;
+
+  border:none;
+  background:none;
+
+  text-align:left;
+
+  color:var(--detail-muted);
+
+  font-size:16px;
+  line-height:1.7;
+
+  cursor:pointer;
+}
+
+.event-detail-address-main:hover{
+  color:var(--green);
+}
+
+.event-detail-address-action{
+  width:42px;
+  height:42px;
+
+  flex-shrink:0;
+
+  border:none;
+  border-radius:50%;
+
+  background:var(--detail-surface);
+
+  border:1px solid var(--detail-border);
+
+  color:var(--green);
+
+  font-size:18px;
+
+  display:grid;
+  place-items:center;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.event-detail-address-action:hover{
+  transform:scale(1.06);
+
+  background:var(--green-soft-2);
+
+  border:1px solid var(--border-green);
+}
