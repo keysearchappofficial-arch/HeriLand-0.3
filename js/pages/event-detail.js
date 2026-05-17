@@ -114,65 +114,67 @@ titleRaw: "Event not found",
     ...(Array.isArray(data.gallery_urls) ? data.gallery_urls : [])
   ].filter(Boolean);
 
-  renderEventDetail({
-    type: "Event",
+renderEventDetail({
+  type: "Event",
 
-    location:
-      `${data.city || "Sarawak"}${data.area ? " · " + data.area : ""}`,
+  location:
+    `${data.city || "Sarawak"}${data.area ? " · " + data.area : ""}`,
 
-    title:
-      data.title || "",
+  title:
+    data.title || "",
 
-    date:
-      formatEventDate(data.start_date),
+  date:
+    formatEventDate(data.start_date),
 
-    time:
-      data.time_rule?.label || "Time TBC",
+  time:
+    data.time_rule?.label || "Time TBC",
 
-    venueMini:
-      data.venue_name || "Venue TBC",
+  venueMini:
+    data.venue_name || "Venue TBC",
 
-    venue:
-      data.venue_name || "Venue TBC",
+  venue:
+    data.venue_name || "Venue TBC",
 
-    address:
-      data.address || "Address not available",
+  address:
+    data.address || "Address not available",
 
-    organizer:
-      data.organizer || "Organizer TBC",
+  organizer:
+    data.organizer || "Organizer TBC",
 
-    ai:
-      data.summary || "A local event shared by travelers.",
+  ai:
+    data.summary || "A local event shared by travelers.",
 
-    desc:
-      data.content || data.summary || "No event detail yet.",
+  desc:
+    data.content ||
+    data.summary ||
+    "No event detail yet.",
 
-    goodToKnow:
-      [],
+  goodToKnow: [],
 
-    tags:
-      normalizeEventTags(data.tags),
+  tags:
+    normalizeEventTags(data.tags),
 
-    ticket:
-      data.ticket_url || "#",
+  ticket:
+    data.ticket_url || "#",
 
-    map:
-      data.google_map_url || "#",
-      
-    mapUrl:
-  data.google_map_url || "",
+  map:
+    data.google_map_url || "#",
 
-addressRaw:
-  data.address || "",
+  mapUrl:
+    data.google_map_url || "",
 
-titleRaw:
-  data.title || "",
+  addressRaw:
+    data.address || "",
 
-    nearby:
-      "Explore nearby restaurants, river walks, or local places around this event.",
+  titleRaw:
+    data.title || "",
 
-    images
-  });
+  nearby:
+    "Explore nearby restaurants, river walks, or local places around this event.",
+
+  images
+});
+  }
 
 /* =========================
    Render
