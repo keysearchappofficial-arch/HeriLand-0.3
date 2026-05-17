@@ -2411,7 +2411,62 @@ function renderSettingsPage(){
   `;
 }
 
+const MAP_PROVIDER_KEY =
+  "heriland_map_provider";
+
+function getDefaultMapProvider(){
+
+  const isIOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (
+      navigator.platform === "MacIntel" &&
+      navigator.maxTouchPoints > 1
+    );
+
+  if (isIOS) {
+    return "apple";
+  }
+
+  return "google";
+}
+
+function getSavedMapProvider(){
+
+  return (
+    localStorage.getItem(MAP_PROVIDER_KEY) ||
+    getDefaultMapProvider()
+  );
+
+}
+
+function saveMapProvider(provider){
+
+  localStorage.setItem(
+    MAP_PROVIDER_KEY,
+    provider
+  );
+
+}
+
 function bindSettingsPage(){
+  
+  const mapSelect =
+  document.getElementById("settingMap");
+
+if (mapSelect) {
+
+  mapSelect.value =
+    getSavedMapProvider();
+
+  mapSelect.addEventListener("change", () => {
+
+    saveMapProvider(
+      mapSelect.value
+    );
+
+  });
+
+}
 
   const notificationRow =
     document.getElementById("notificationSettingRow");
@@ -2755,3 +2810,74 @@ function updateAvatarStats(){
     reviewCount.textContent = getReviews().length;
   }
 }
+
+window.openMapByPreference = function ({
+  title = "",
+  address = "",
+  mapUrl = ""
+}) {
+
+  const provider =
+    getSavedMapProvider();
+
+  const query =
+    encodeURIComponent(
+      [title, address]
+        .filter(Boolean)
+        .join(" ")
+    );
+
+  if (!query && mapUrl) {
+    window.open(mapUrl, "_blank");
+    return;
+  }
+
+  if (!query) {
+    alert("Map information is not available.");
+    return;
+  }
+
+  if (provider === "apple") {
+
+    window.location.href =
+      `maps://maps.apple.com/?q=${query}`;
+
+    setTimeout(() => {
+
+      window.open(
+        `https://maps.apple.com/?q=${query}`,
+        "_blank"
+      );
+
+    }, 900);
+
+    return;
+  }
+
+  if (provider === "google") {
+
+    if (/Android/i.test(navigator.userAgent)) {
+
+      window.location.href =
+        `geo:0,0?q=${query}`;
+
+      setTimeout(() => {
+
+        window.open(
+          `https://www.google.com/maps/search/?api=1&query=${query}`,
+          "_blank"
+        );
+
+      }, 900);
+
+      return;
+    }
+
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      "_blank"
+    );
+
+  }
+
+};
