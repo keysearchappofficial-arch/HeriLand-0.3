@@ -559,3 +559,69 @@ select{
     color .22s ease,
     box-shadow .28s ease;
 }
+
+/* =========================================================
+   Modal / Sheet Light Support
+========================================================= */
+
+.auth-panel,
+.logout-sheet,
+.review-sheet-panel,
+.review-list-panel,
+.detail-more-menu,
+.event-more-menu,
+.culture-more-menu,
+.traveler-more-menu{
+  background:var(--surface-strong);
+  border:1px solid var(--border);
+  color:var(--text);
+  box-shadow:var(--shadow);
+}
+
+.auth-panel h2,
+.logout-sheet h3,
+.review-sheet-head h2,
+.review-list-head h2{
+  color:var(--text);
+}
+
+.auth-panel p,
+.logout-sheet p,
+.review-place-name{
+  color:var(--muted);
+}
+
+.auth-panel input,
+#reviewComment,
+.review-rating button{
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.auth-backdrop,
+.logout-backdrop,
+.review-sheet-backdrop,
+.review-list-backdrop,
+.detail-more-backdrop,
+.event-more-backdrop,
+.culture-more-backdrop,
+.traveler-more-backdrop{
+  background:var(--overlay-dark);
+}
+
+.logout-cancel,
+#reviewSheetClose,
+#reviewListClose{
+  background:var(--surface);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.logout-confirm,
+.auth-panel button,
+.review-submit-btn{
+  background:var(--green-soft-2);
+  color:var(--green);
+  border:1px solid var(--border-green);
+}
