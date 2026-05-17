@@ -158,6 +158,18 @@ body[data-theme="light"]{
     var(--bg);
 }
 
+:root{
+  --card-text:#ffffff;
+  --card-muted:rgba(255,255,255,.78);
+  --card-subtle:rgba(255,255,255,.65);
+}
+
+body[data-theme="light"]{
+  --card-text:#ffffff;
+  --card-muted:rgba(255,255,255,.78);
+  --card-subtle:rgba(255,255,255,.66);
+}
+
 /* =========================================================
    System Theme
 ========================================================= */
@@ -368,11 +380,20 @@ button{
 
 .card-bottom,
 .place,
+.place h3,
 .subtitle,
 .loved,
 .index,
 .copy p{
-  color:var(--text);
+  color:var(--card-text);
+}
+
+.subtitle{
+  color:var(--card-muted);
+}
+
+.loved{
+  color:var(--card-subtle);
 }
 
 .tags,
