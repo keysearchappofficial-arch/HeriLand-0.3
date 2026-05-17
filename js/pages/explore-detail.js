@@ -1,5 +1,8 @@
 let currentDetailSlug = null;
 let currentDetailType = "place";
+let currentDetailMapUrl = "";
+let currentDetailAddress = "";
+let currentDetailTitleText = "";
 
 const detailPage =
   document.getElementById("detailPage");
@@ -62,18 +65,40 @@ async function loadDetail(slug){
     console.error("load detail failed:", error);
 
     renderDetail({
-      type: "Place",
-      area: "Sarawak",
-      title: "Place not found",
-      score: "0.0",
+      type: formatPlaceType(data.type),
+      area: data.area || data.city || "Sarawak",
+    
+      title: data.title || data.name || "",
+    
+      score: "New",
       reviews: "0 Reviews",
-      address: "Address not available",
-      phone: "Not Available",
-      hours: "Check Before Visiting",
-      ai: "This place may not be available yet.",
-      intro: "",
-      services: [],
-      images: []
+    
+      address: data.address || "Address not available",
+      addressRaw: data.address || "",
+      titleRaw: data.title || data.name || "",
+      mapUrl: data.google_map_url || "",
+    
+      phone: data.phone || "Not Available",
+    
+      hours:
+        data.opening_hours?.label ||
+        "Check Before Visiting",
+    
+      ai:
+        data.short_description ||
+        "A local place shared by travelers.",
+    
+      intro:
+        data.full_description ||
+        data.short_description ||
+        "No description yet.",
+    
+      services:
+        Array.isArray(data.tags)
+          ? data.tags
+          : [],
+    
+      images
     });
 
     return;
@@ -136,6 +161,10 @@ function formatPlaceType(type){
 ========================= */
 
 function renderDetail(data) {
+
+currentDetailMapUrl = data.mapUrl || "";
+currentDetailAddress = data.addressRaw || data.address || "";
+currentDetailTitleText = data.titleRaw || data.title || "";
 
   document.getElementById("detailType").textContent =
     data.type || "";
@@ -531,8 +560,73 @@ window.addPlaceToTrip = async function () {
   alert("Added to My Trip");
 };
 
+function isIOS(){
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (
+      navigator.platform === "MacIntel" &&
+      navigator.maxTouchPoints > 1
+    );
+}
+
+function isAndroid(){
+  return /Android/i.test(navigator.userAgent);
+}
+
+function buildMapQuery(){
+  const parts = [
+    currentDetailTitleText,
+    currentDetailAddress
+  ].filter(Boolean);
+
+  return encodeURIComponent(parts.join(" "));
+}
+
 window.openPlaceMap = function () {
-  console.log("Open map");
+  const query = buildMapQuery();
+
+  if (!query && currentDetailMapUrl) {
+    window.open(currentDetailMapUrl, "_blank");
+    return;
+  }
+
+  if (!query) {
+    alert("Map information is not available.");
+    return;
+  }
+
+  if (isIOS()) {
+    window.location.href =
+      `maps://maps.apple.com/?q=${query}`;
+
+    setTimeout(() => {
+      window.open(
+        `https://www.google.com/maps/search/?api=1&query=${query}`,
+        "_blank"
+      );
+    }, 900);
+
+    return;
+  }
+
+  if (isAndroid()) {
+    window.location.href =
+      `geo:0,0?q=${query}`;
+
+    setTimeout(() => {
+      window.open(
+        `https://www.google.com/maps/search/?api=1&query=${query}`,
+        "_blank"
+      );
+    }, 900);
+
+    return;
+  }
+
+  window.open(
+    currentDetailMapUrl ||
+    `https://www.google.com/maps/search/?api=1&query=${query}`,
+    "_blank"
+  );
 };
 
 window.sharePlace = function () {
