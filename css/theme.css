@@ -1,577 +1,540 @@
-/* ========================================
+/* =========================================================
    HeriLand Theme System
-======================================== */
+   Global Theme Tokens
+========================================================= */
+
+/* =========================
+   Default Theme
+   (Night)
+========================= */
 
 :root{
 
-  /* =========================
-     Core
-  ========================= */
+  color-scheme:dark;
 
   --bg:#07110d;
 
   --text:#f5f5f0;
-
-  --muted:rgba(255,255,255,.72);
-
-  --muted-2:rgba(255,255,255,.56);
-
-  --line:rgba(255,255,255,.08);
-
-  --line-strong:rgba(255,255,255,.16);
+  --muted:rgba(255,255,255,.68);
+  --muted-2:rgba(255,255,255,.52);
 
   --green:#9ff2b1;
-
   --green-soft:rgba(159,242,177,.12);
-
   --green-soft-2:rgba(159,242,177,.18);
 
-  /* =========================
-     Surface
-  ========================= */
-
-  --surface:rgba(255,255,255,.04);
-
-  --surface-hover:rgba(255,255,255,.06);
-
-  --surface-panel:rgba(8,16,13,.92);
-
+  --surface:rgba(255,255,255,.05);
+  --surface-hover:rgba(255,255,255,.08);
+  --surface-panel:rgba(8,16,13,.88);
   --surface-strong:rgba(10,16,14,.96);
 
-  --surface-glass:rgba(0,0,0,.32);
-
-  /* =========================
-     Border
-  ========================= */
-
   --border:rgba(255,255,255,.08);
-
-  --border-strong:rgba(255,255,255,.16);
-
+  --border-strong:rgba(255,255,255,.14);
   --border-green:rgba(159,242,177,.22);
-
-  /* =========================
-     Shadow
-  ========================= */
 
   --shadow:
     0 30px 90px rgba(0,0,0,.45);
 
   --shadow-soft:
-    0 20px 60px rgba(0,0,0,.32);
-
-  /* =========================
-     Overlay
-  ========================= */
-
-  --overlay-dark:rgba(0,0,0,.45);
-
-  --overlay-soft:rgba(0,0,0,.26);
-
-  /* =========================
-     Hero Overlay
-  ========================= */
-
-  --hero-top:rgba(0,0,0,.42);
-
-  --hero-bottom:rgba(0,0,0,.72);
-
-  /* =========================
-     Rating
-  ========================= */
-
-  --star:#ffe082;
-
-  /* =========================
-     Danger
-  ========================= */
-
-  --danger:#ff7d7d;
-
-  /* ========================================
-     Explore Card Tokens
-  ======================================== */
-
-  --card-bg:#101510;
-
-  --card-border:rgba(255,255,255,.28);
+    0 16px 40px rgba(0,0,0,.24);
 
   --card-shadow:
     0 40px 110px rgba(0,0,0,.65);
 
-  --card-img-filter:
-    saturate(.92)
-    contrast(1.06);
-
-  --card-overlay-top:
-    rgba(0,0,0,.42);
-
-  --card-overlay-bottom:
-    rgba(0,0,0,.86);
-
-  --card-glass:
-    rgba(0,0,0,.34);
-
-  --card-glass-border:
-    rgba(255,255,255,.22);
-
-  --card-text:#ffffff;
-
-  --card-muted:
-    rgba(255,255,255,.78);
-
-  --card-subtle:
-    rgba(255,255,255,.65);
-
-  --card-save-bg:
-    rgba(255,255,255,.07);
-
-  --card-save-border:
-    rgba(255,255,255,.22);
-
-}
-
-/* ========================================
-   Light Theme
-======================================== */
-
-body[data-theme="light"]{
-
-  /* =========================
-     Core
-  ========================= */
-
-  --bg:#f4f3ec;
-
-  --text:#17221b;
-
-  --muted:rgba(23,34,27,.72);
-
-  --muted-2:rgba(23,34,27,.56);
-
-  --line:rgba(23,34,27,.08);
-
-  --line-strong:rgba(23,34,27,.14);
-
-  --green:#2f7d4f;
-
-  --green-soft:rgba(47,125,79,.10);
-
-  --green-soft-2:rgba(47,125,79,.16);
-
-  /* =========================
-     Surface
-  ========================= */
-
-  --surface:rgba(23,34,27,.04);
-
-  --surface-hover:rgba(23,34,27,.06);
-
-  --surface-panel:rgba(255,255,250,.90);
-
-  --surface-strong:rgba(255,255,250,.96);
-
-  --surface-glass:rgba(255,255,255,.42);
-
-  /* =========================
-     Border
-  ========================= */
-
-  --border:rgba(23,34,27,.08);
-
-  --border-strong:rgba(23,34,27,.14);
-
-  --border-green:rgba(47,125,79,.18);
-
-  /* =========================
-     Shadow
-  ========================= */
-
-  --shadow:
-    0 24px 70px rgba(0,0,0,.12);
-
-  --shadow-soft:
-    0 14px 40px rgba(0,0,0,.08);
-
-  /* =========================
-     Overlay
-  ========================= */
-
-  --overlay-dark:rgba(23,34,27,.26);
-
-  --overlay-soft:rgba(23,34,27,.16);
-
-  /* =========================
-     Hero Overlay
-  ========================= */
-
-  --hero-top:rgba(0,0,0,.26);
-
-  --hero-bottom:rgba(0,0,0,.56);
-
-  /* =========================
-     Rating
-  ========================= */
-
-  --star:#b47b00;
-
-  /* =========================
-     Danger
-  ========================= */
-
-  --danger:#c54b4b;
-
-  /* ========================================
-     Explore Card Tokens
-  ======================================== */
-
-  --card-bg:#101510;
-
-  --card-border:rgba(255,255,255,.28);
-
-  --card-shadow:
-    0 34px 90px rgba(23,34,27,.28),
-    0 10px 30px rgba(23,34,27,.16);
-
-  --card-img-filter:
-    saturate(.96)
-    contrast(1.04)
-    brightness(.92);
-
-  --card-overlay-top:
-    rgba(0,0,0,.46);
-
-  --card-overlay-bottom:
-    rgba(0,0,0,.82);
-
-  --card-glass:
-    rgba(0,0,0,.36);
-
-  --card-glass-border:
-    rgba(255,255,255,.22);
-
-  --card-text:#ffffff;
-
-  --card-muted:
-    rgba(255,255,255,.78);
-
-  --card-subtle:
-    rgba(255,255,255,.66);
-
-  --card-save-bg:
-    rgba(0,0,0,.26);
-
-  --card-save-border:
-    rgba(255,255,255,.22);
-
-}
-
-/* ========================================
-   System Theme
-======================================== */
-
-@media (prefers-color-scheme: light){
-
-  body[data-theme="system"]{
-
-    --bg:#f4f3ec;
-
-    --text:#17221b;
-
-    --muted:rgba(23,34,27,.72);
-
-    --muted-2:rgba(23,34,27,.56);
-
-    --line:rgba(23,34,27,.08);
-
-    --line-strong:rgba(23,34,27,.14);
-
-    --green:#2f7d4f;
-
-    --green-soft:rgba(47,125,79,.10);
-
-    --green-soft-2:rgba(47,125,79,.16);
-
-    --surface:rgba(23,34,27,.04);
-
-    --surface-hover:rgba(23,34,27,.06);
-
-    --surface-panel:rgba(255,255,250,.90);
-
-    --surface-strong:rgba(255,255,250,.96);
-
-    --surface-glass:rgba(255,255,255,.42);
-
-    --border:rgba(23,34,27,.08);
-
-    --border-strong:rgba(23,34,27,.14);
-
-    --border-green:rgba(47,125,79,.18);
-
-    --shadow:
-      0 24px 70px rgba(0,0,0,.12);
-
-    --shadow-soft:
-      0 14px 40px rgba(0,0,0,.08);
-
-    --overlay-dark:rgba(23,34,27,.26);
-
-    --overlay-soft:rgba(23,34,27,.16);
-
-    --hero-top:rgba(0,0,0,.26);
-
-    --hero-bottom:rgba(0,0,0,.56);
-
-    --star:#b47b00;
-
-    --danger:#c54b4b;
-
-    --card-bg:#101510;
-
-    --card-border:rgba(255,255,255,.28);
-
-    --card-shadow:
-      0 34px 90px rgba(23,34,27,.28),
-      0 10px 30px rgba(23,34,27,.16);
-
-    --card-img-filter:
-      saturate(.96)
-      contrast(1.04)
-      brightness(.92);
-
-    --card-overlay-top:
-      rgba(0,0,0,.46);
-
-    --card-overlay-bottom:
-      rgba(0,0,0,.82);
-
-    --card-glass:
-      rgba(0,0,0,.36);
-
-    --card-glass-border:
-      rgba(255,255,255,.22);
-
-    --card-text:#ffffff;
-
-    --card-muted:
-      rgba(255,255,255,.78);
-
-    --card-subtle:
-      rgba(255,255,255,.66);
-
-    --card-save-bg:
-      rgba(0,0,0,.26);
-
-    --card-save-border:
-      rgba(255,255,255,.22);
-
-  }
-
-}
-
-/* ========================================
-   Base
-======================================== */
-
-html,
-body{
-  background:var(--bg);
-  color:var(--text);
-}
-
-/* ========================================
-   Selection
-======================================== */
-
-::selection{
-  background:var(--green-soft-2);
-  color:var(--text);
-}
-
-/* ========================================
-   Scrollbar
-======================================== */
-
-*{
-  scrollbar-color:
-    var(--line-strong)
-    transparent;
-}
-
-/* ========================================
-   Detail System Tokens
-======================================== */
-
-:root{
-
-  /* =========================
-     Detail Background
-  ========================= */
+  /* Detail */
 
   --detail-bg:#07110d;
 
   --detail-panel-bg:#07110d;
 
-  /* =========================
-     Detail Surface
-  ========================= */
+  --detail-surface:rgba(255,255,255,.04);
 
-  --detail-surface:
-    rgba(255,255,255,.04);
+  --detail-border:rgba(255,255,255,.06);
 
-  --detail-surface-hover:
-    rgba(255,255,255,.06);
+  --detail-text:#f5f5f0;
 
-  --detail-border:
-    rgba(255,255,255,.06);
+  --detail-muted:rgba(255,255,255,.82);
 
-  /* =========================
-     Detail Text
-  ========================= */
+  --detail-subtle:rgba(255,255,255,.62);
 
-  --detail-text:#ffffff;
-
-  --detail-muted:
-    rgba(255,255,255,.82);
-
-  --detail-subtle:
-    rgba(255,255,255,.68);
-
-  /* =========================
-     Detail Hero
-  ========================= */
-
-  --detail-hero-top:
-    rgba(0,0,0,.42);
-
-  --detail-hero-bottom:
-    rgba(0,0,0,.72);
-
-  /* =========================
-     Detail Glass
-  ========================= */
-
-  --detail-glass:
-    rgba(0,0,0,.32);
-
-  --detail-glass-border:
-    rgba(255,255,255,.16);
-
-  /* =========================
-     Detail Sheet
-  ========================= */
-
-  --detail-sheet:
-    rgba(10,16,14,.96);
-
-  --detail-sheet-border:
-    rgba(255,255,255,.06);
-
-  --detail-backdrop:
-    rgba(0,0,0,.45);
+  --detail-sheet:rgba(10,16,14,.96);
 
 }
 
-/* ========================================
-   Light Theme Detail
-======================================== */
+/* =========================================================
+   Light Theme
+========================================================= */
 
 body[data-theme="light"]{
 
-  --detail-bg:#f4f3ec;
+  color-scheme:light;
 
-  --detail-panel-bg:#f4f3ec;
+  --bg:#efece2;
+
+  --text:#18231c;
+  --muted:rgba(24,35,28,.72);
+  --muted-2:rgba(24,35,28,.52);
+
+  --green:#376b45;
+
+  --green-soft:
+    rgba(55,107,69,.10);
+
+  --green-soft-2:
+    rgba(55,107,69,.16);
+
+  --surface:
+    rgba(255,255,248,.58);
+
+  --surface-hover:
+    rgba(255,255,248,.76);
+
+  --surface-panel:
+    rgba(255,255,248,.82);
+
+  --surface-strong:
+    rgba(255,255,248,.96);
+
+  --border:
+    rgba(24,35,28,.08);
+
+  --border-strong:
+    rgba(24,35,28,.14);
+
+  --border-green:
+    rgba(55,107,69,.18);
+
+  --shadow:
+    0 28px 80px rgba(74,65,44,.14);
+
+  --shadow-soft:
+    0 16px 45px rgba(74,65,44,.10);
+
+  --card-shadow:
+    0 34px 90px rgba(74,65,44,.24),
+    0 10px 30px rgba(74,65,44,.12);
+
+  /* Detail */
+
+  --detail-bg:#efece2;
+
+  --detail-panel-bg:#f7f4ea;
 
   --detail-surface:
-    rgba(23,34,27,.04);
-
-  --detail-surface-hover:
-    rgba(23,34,27,.06);
+    rgba(255,255,248,.62);
 
   --detail-border:
-    rgba(23,34,27,.08);
+    rgba(24,35,28,.08);
 
-  --detail-text:#17221b;
+  --detail-text:#18231c;
 
   --detail-muted:
-    rgba(23,34,27,.76);
+    rgba(24,35,28,.82);
 
   --detail-subtle:
-    rgba(23,34,27,.62);
-
-  --detail-hero-top:
-    rgba(0,0,0,.28);
-
-  --detail-hero-bottom:
-    rgba(0,0,0,.56);
-
-  --detail-glass:
-    rgba(255,255,255,.42);
-
-  --detail-glass-border:
-    rgba(255,255,255,.22);
+    rgba(24,35,28,.62);
 
   --detail-sheet:
-    rgba(255,255,250,.96);
+    rgba(255,255,248,.96);
 
-  --detail-sheet-border:
-    rgba(23,34,27,.08);
+  background:
+    radial-gradient(
+      circle at 50% 16%,
+      rgba(55,107,69,.10),
+      transparent 24%
+    ),
 
-  --detail-backdrop:
-    rgba(23,34,27,.26);
+    radial-gradient(
+      circle at 12% 86%,
+      rgba(210,154,84,.16),
+      transparent 28%
+    ),
 
+    radial-gradient(
+      circle at 88% 58%,
+      rgba(255,255,255,.62),
+      transparent 24%
+    ),
+
+    var(--bg);
 }
 
-/* ========================================
-   System Theme Detail
-======================================== */
+/* =========================================================
+   System Theme
+========================================================= */
 
-@media (prefers-color-scheme: light){
+@media (prefers-color-scheme:light){
 
   body[data-theme="system"]{
 
-    --detail-bg:#f4f3ec;
+    color-scheme:light;
 
-    --detail-panel-bg:#f4f3ec;
+    --bg:#efece2;
+
+    --text:#18231c;
+    --muted:rgba(24,35,28,.72);
+    --muted-2:rgba(24,35,28,.52);
+
+    --green:#376b45;
+
+    --green-soft:
+      rgba(55,107,69,.10);
+
+    --green-soft-2:
+      rgba(55,107,69,.16);
+
+    --surface:
+      rgba(255,255,248,.58);
+
+    --surface-hover:
+      rgba(255,255,248,.76);
+
+    --surface-panel:
+      rgba(255,255,248,.82);
+
+    --surface-strong:
+      rgba(255,255,248,.96);
+
+    --border:
+      rgba(24,35,28,.08);
+
+    --border-strong:
+      rgba(24,35,28,.14);
+
+    --border-green:
+      rgba(55,107,69,.18);
+
+    --shadow:
+      0 28px 80px rgba(74,65,44,.14);
+
+    --shadow-soft:
+      0 16px 45px rgba(74,65,44,.10);
+
+    --card-shadow:
+      0 34px 90px rgba(74,65,44,.24),
+      0 10px 30px rgba(74,65,44,.12);
+
+    --detail-bg:#efece2;
+
+    --detail-panel-bg:#f7f4ea;
 
     --detail-surface:
-      rgba(23,34,27,.04);
-
-    --detail-surface-hover:
-      rgba(23,34,27,.06);
+      rgba(255,255,248,.62);
 
     --detail-border:
-      rgba(23,34,27,.08);
+      rgba(24,35,28,.08);
 
-    --detail-text:#17221b;
+    --detail-text:#18231c;
 
     --detail-muted:
-      rgba(23,34,27,.76);
+      rgba(24,35,28,.82);
 
     --detail-subtle:
-      rgba(23,34,27,.62);
-
-    --detail-hero-top:
-      rgba(0,0,0,.28);
-
-    --detail-hero-bottom:
-      rgba(0,0,0,.56);
-
-    --detail-glass:
-      rgba(255,255,255,.42);
-
-    --detail-glass-border:
-      rgba(255,255,255,.22);
+      rgba(24,35,28,.62);
 
     --detail-sheet:
-      rgba(255,255,250,.96);
+      rgba(255,255,248,.96);
 
-    --detail-sheet-border:
-      rgba(23,34,27,.08);
+    background:
+      radial-gradient(
+        circle at 50% 16%,
+        rgba(55,107,69,.10),
+        transparent 24%
+      ),
 
-    --detail-backdrop:
-      rgba(23,34,27,.26);
+      radial-gradient(
+        circle at 12% 86%,
+        rgba(210,154,84,.16),
+        transparent 28%
+      ),
 
+      radial-gradient(
+        circle at 88% 58%,
+        rgba(255,255,255,.62),
+        transparent 24%
+      ),
+
+      var(--bg);
   }
 
+}
+
+/* =========================================================
+   Global Base
+========================================================= */
+
+body{
+
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(159,242,177,.18),
+      transparent 22%
+    ),
+
+    radial-gradient(
+      circle at 12% 86%,
+      rgba(213,154,77,.14),
+      transparent 24%
+    ),
+
+    radial-gradient(
+      circle at 88% 60%,
+      rgba(255,255,255,.06),
+      transparent 20%
+    ),
+
+    var(--bg);
+
+  transition:
+    background .35s ease,
+    color .25s ease;
+}
+
+/* =========================================================
+   Generic Surface
+========================================================= */
+
+.filter-panel,
+.avatar-panel,
+.review-sheet-panel,
+.review-list-panel,
+.detail-more-menu,
+.event-more-menu,
+.culture-more-menu,
+.traveler-more-menu{
+
+  background:var(--surface-panel);
+
+  border:
+    1px solid var(--border);
+
+  box-shadow:var(--shadow);
+
+  color:var(--text);
+}
+
+/* =========================================================
+   Buttons
+========================================================= */
+
+button{
+  color:var(--text);
+}
+
+.filter-grid button,
+.avatar-list-actions button,
+.detail-link,
+.event-detail-link,
+.culture-detail-link,
+.save,
+.nav-arrow{
+
+  background:var(--surface);
+
+  border:
+    1px solid var(--border);
+
+  color:var(--text);
+}
+
+.filter-grid button.active,
+.save.is-saved,
+.detail-action-btn.is-saved,
+.event-detail-action.is-saved,
+.culture-detail-action.is-saved,
+.traveler-detail-action.is-saved{
+
+  background:var(--green-soft-2);
+
+  border:
+    1px solid var(--border-green);
+
+  color:var(--green);
+}
+
+/* =========================================================
+   Cards
+========================================================= */
+
+.card{
+
+  border:
+    1px solid var(--border-strong);
+
+  box-shadow:var(--card-shadow);
+}
+
+.card-bottom,
+.place,
+.subtitle,
+.loved,
+.index,
+.copy p{
+  color:var(--text);
+}
+
+.tags,
+.brand span,
+.detail-kicker,
+.event-detail-kicker,
+.culture-detail-overlay small,
+.traveler-detail-overlay small{
+  color:var(--green);
+}
+
+/* =========================================================
+   Detail Shared
+========================================================= */
+
+.detail-page,
+.event-detail-page,
+.culture-detail-page,
+.traveler-detail-page{
+
+  background:var(--detail-bg);
+
+  color:var(--detail-text);
+}
+
+/* =========================================================
+   Detail Panels
+========================================================= */
+
+.detail-panel,
+.event-detail-panel,
+.culture-detail-panel,
+.traveler-detail-panel{
+
+  background:var(--detail-panel-bg);
+
+  color:var(--detail-text);
+}
+
+/* =========================================================
+   Detail Surface Blocks
+========================================================= */
+
+.detail-guide,
+.event-detail-guide,
+.culture-detail-guide,
+.traveler-story:first-child,
+.detail-review-card,
+.event-detail-info-item{
+
+  background:var(--detail-surface);
+
+  border:
+    1px solid var(--detail-border);
+}
+
+/* =========================================================
+   Detail Typography
+========================================================= */
+
+.detail-section p,
+.detail-section li,
+.detail-line,
+.detail-inline-info,
+.detail-week-hours,
+.event-detail-section p,
+.event-detail-good-list li,
+.event-detail-info-value,
+.event-detail-venue-line,
+.culture-detail-section p,
+.culture-detail-list li,
+.traveler-story p{
+
+  color:var(--detail-muted);
+}
+
+/* =========================================================
+   Detail Titles
+========================================================= */
+
+.detail-head h1,
+.event-detail-head h1,
+.culture-detail-overlay h1,
+.traveler-detail-overlay h1{
+
+  color:var(--detail-text);
+}
+
+/* =========================================================
+   Sheets
+========================================================= */
+
+.review-sheet-panel,
+.review-list-panel,
+.detail-more-menu,
+.event-more-menu,
+.culture-more-menu,
+.traveler-more-menu{
+
+  background:var(--detail-sheet);
+}
+
+/* =========================================================
+   Inputs
+========================================================= */
+
+input,
+textarea,
+select{
+
+  background:var(--surface);
+
+  border:
+    1px solid var(--border);
+
+  color:var(--text);
+}
+
+/* =========================================================
+   Appearance Segment
+========================================================= */
+
+.setting-segment{
+
+  background:var(--surface);
+
+  border:
+    1px solid var(--border);
+}
+
+.setting-segment button{
+
+  color:var(--muted);
+}
+
+.setting-segment button.active{
+
+  background:var(--green-soft-2);
+
+  color:var(--green);
+}
+
+/* =========================================================
+   Smooth Theme Transition
+========================================================= */
+
+body,
+.card,
+.avatar-panel,
+.filter-panel,
+.detail-panel,
+.event-detail-panel,
+.culture-detail-panel,
+.traveler-detail-panel,
+button,
+input,
+textarea,
+select{
+
+  transition:
+    background .28s ease,
+    border-color .28s ease,
+    color .22s ease,
+    box-shadow .28s ease;
 }
