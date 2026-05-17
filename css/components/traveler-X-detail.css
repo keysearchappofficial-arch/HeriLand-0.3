@@ -8,6 +8,7 @@
   z-index:10000;
 
   background:var(--detail-bg);
+
   overflow:hidden;
 
   transform:translateY(100%);
@@ -97,12 +98,12 @@
   background:
     linear-gradient(
       to bottom,
-      rgba(0,0,0,.42),
+      var(--detail-hero-top),
       transparent 30%
     ),
     linear-gradient(
       to top,
-      rgba(0,0,0,.72),
+      var(--detail-hero-bottom),
       transparent 45%
     );
 }
@@ -125,8 +126,7 @@
   border:none;
   border-radius:50%;
 
-  background:
-    rgba(0,0,0,.32);
+  background:rgba(0,0,0,.32);
 
   border:
     1px solid rgba(255,255,255,.16);
@@ -164,8 +164,7 @@
   border:none;
   border-radius:50%;
 
-  background:
-    rgba(0,0,0,.32);
+  background:rgba(0,0,0,.32);
 
   border:
     1px solid rgba(255,255,255,.16);
@@ -182,11 +181,10 @@
 .traveler-detail-action.is-saved{
   color:var(--green);
 
-  background:
-    rgba(159,242,177,.16);
+  background:var(--green-soft-2);
 
   border:
-    1px solid rgba(159,242,177,.32);
+    1px solid var(--border-green);
 }
 
 /* =========================
@@ -212,8 +210,7 @@
   letter-spacing:1.8px;
   text-transform:uppercase;
 
-  color:
-    rgba(159,242,177,.78);
+  color:var(--green);
 }
 
 .traveler-detail-overlay h1{
@@ -227,14 +224,15 @@
   letter-spacing:-1.8px;
 
   margin-bottom:12px;
+
+  color:white;
 }
 
 .traveler-detail-overlay p{
   font-size:15px;
   line-height:1.7;
 
-  color:
-    rgba(255,255,255,.8);
+  color:rgba(255,255,255,.8);
 }
 
 /* =========================
@@ -284,7 +282,7 @@
 
   overflow:auto;
 
-  background:var(--detail-bg);
+  background:var(--detail-panel-bg);
 
   border-radius:
     34px
@@ -300,7 +298,7 @@
   margin-top:-34px;
 
   box-shadow:
-    0 -10px 40px rgba(0,0,0,.35);
+    0 -10px 40px rgba(0,0,0,.16);
 
   scrollbar-width:none;
   -ms-overflow-style:none;
@@ -321,11 +319,10 @@
 
   border-radius:24px;
 
-  background:
-    rgba(255,255,255,.04);
+  background:var(--detail-surface);
 
   border:
-    1px solid rgba(255,255,255,.06);
+    1px solid var(--detail-border);
 }
 
 .traveler-story:first-child small{
@@ -339,16 +336,14 @@
 
   text-transform:uppercase;
 
-  color:
-    rgba(159,242,177,.72);
+  color:var(--green);
 }
 
 .traveler-story:first-child p{
   font-size:17px;
   line-height:1.8;
 
-  color:
-    rgba(255,255,255,.88);
+  color:var(--detail-muted);
 }
 
 /* =========================
@@ -364,14 +359,15 @@
 
   font-size:28px;
   line-height:1.25;
+
+  color:var(--detail-text);
 }
 
 .traveler-story p{
   font-size:16px;
   line-height:1.9;
 
-  color:
-    rgba(255,255,255,.82);
+  color:var(--detail-muted);
 }
 
 /* =========================
@@ -393,11 +389,10 @@
 
   border-radius:999px;
 
-  background:
-    rgba(159,242,177,.12);
+  background:var(--green-soft);
 
   border:
-    1px solid rgba(159,242,177,.18);
+    1px solid var(--border-green);
 
   color:var(--green);
 
@@ -432,8 +427,7 @@
   position:absolute;
   inset:0;
 
-  background:
-    rgba(0,0,0,.45);
+  background:var(--detail-backdrop);
 
   backdrop-filter:blur(6px);
 }
@@ -453,14 +447,12 @@
 
   border-radius:28px;
 
-  background:
-    rgba(10,16,14,.96);
+  background:var(--detail-sheet);
 
   border:
-    1px solid rgba(255,255,255,.06);
+    1px solid var(--detail-border);
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.45);
+  box-shadow:var(--shadow);
 }
 
 .traveler-more-menu button{
@@ -478,7 +470,7 @@
 
   padding:0 18px;
 
-  color:white;
+  color:var(--detail-text);
 
   font-size:16px;
   font-weight:600;
