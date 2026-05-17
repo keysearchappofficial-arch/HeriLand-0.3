@@ -430,6 +430,24 @@ function openDetailPage(cardEl) {
   window.openDetail?.(slug);
 }
 
+function bindDetailAddressMapAction(){
+  const addressBtn =
+    document.getElementById("detailAddressBtn");
+
+  const addressActionBtn =
+    document.getElementById("detailAddressActionBtn");
+
+  addressBtn?.addEventListener("click", () => {
+    window.openPlaceMap?.();
+  });
+
+  addressActionBtn?.addEventListener("click", () => {
+    window.openPlaceMap?.();
+  });
+}
+
+bindDetailAddressMapAction();
+
 function bindEvents() {
   document.querySelector(".nav-next")?.addEventListener("click", nextCard);
   document.querySelector(".nav-prev")?.addEventListener("click", prevCard);
