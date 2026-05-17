@@ -453,13 +453,17 @@ function bindEventAddressAction(){
   const actionBtn =
     document.getElementById("eventDetailAddressActionBtn");
 
-  addressBtn?.onclick = () => {
-    window.openEventMap?.();
-  };
+  if (addressBtn) {
+    addressBtn.onclick = () => {
+      window.openEventMap?.();
+    };
+  }
 
-  actionBtn?.onclick = () => {
-    window.openEventMap?.();
-  };
+  if (actionBtn) {
+    actionBtn.onclick = () => {
+      window.openEventMap?.();
+    };
+  }
 
 }
 
