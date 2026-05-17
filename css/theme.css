@@ -625,3 +625,96 @@ select{
   color:var(--green);
   border:1px solid var(--border-green);
 }
+
+/* =========================================================
+   Detail Text Force Theme Fix
+========================================================= */
+
+body[data-theme="light"] .detail-panel,
+body[data-theme="light"] .detail-panel *{
+  color:var(--detail-text);
+}
+
+body[data-theme="light"] .detail-rating-row,
+body[data-theme="light"] .detail-line,
+body[data-theme="light"] .detail-inline-info,
+body[data-theme="light"] .detail-week-hours,
+body[data-theme="light"] .detail-guide p,
+body[data-theme="light"] .detail-section p,
+body[data-theme="light"] .detail-section li,
+body[data-theme="light"] .detail-review-card p,
+body[data-theme="light"] .review-place-name{
+  color:var(--detail-muted);
+}
+
+body[data-theme="light"] .detail-inline-info strong,
+body[data-theme="light"] .detail-head h1,
+body[data-theme="light"] .detail-section h2,
+body[data-theme="light"] .detail-review-head h2,
+body[data-theme="light"] .review-sheet-head h2,
+body[data-theme="light"] .review-list-head h2{
+  color:var(--detail-text);
+}
+
+body[data-theme="light"] .detail-kicker,
+body[data-theme="light"] .detail-guide small,
+body[data-theme="light"] .review-sheet-head small,
+body[data-theme="light"] .review-list-head small,
+body[data-theme="light"] .detail-review-more,
+body[data-theme="light"] .review-submit-btn,
+body[data-theme="light"] .detail-write-review{
+  color:var(--green);
+}
+
+body[data-theme="light"] .detail-stars,
+body[data-theme="light"] .review-rating button.is-active{
+  color:var(--star);
+}
+
+body[data-theme="light"] .detail-guide,
+body[data-theme="light"] .detail-review-card,
+body[data-theme="light"] .review-rating button,
+body[data-theme="light"] .review-upload,
+body[data-theme="light"] #reviewComment{
+  background:var(--detail-surface);
+  border:1px solid var(--detail-border);
+}
+
+body[data-theme="light"] .detail-more-menu,
+body[data-theme="light"] .review-sheet-panel,
+body[data-theme="light"] .review-list-panel{
+  background:var(--detail-sheet);
+  border:1px solid var(--detail-border);
+  color:var(--detail-text);
+}
+
+body[data-theme="light"] .detail-more-menu button,
+body[data-theme="light"] .review-sheet-panel,
+body[data-theme="light"] .review-list-panel{
+  color:var(--detail-text);
+}
+
+body[data-theme="light"] .detail-more-menu button span{
+  color:var(--green);
+}
+
+body[data-theme="light"] .detail-more-backdrop,
+body[data-theme="light"] .review-sheet-backdrop,
+body[data-theme="light"] .review-list-backdrop{
+  background:var(--detail-backdrop);
+}
+
+body[data-theme="light"] #reviewSheetClose,
+body[data-theme="light"] #reviewListClose{
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+body[data-theme="light"] #reviewComment{
+  color:var(--detail-text);
+}
+
+body[data-theme="light"] .review-upload{
+  color:var(--detail-muted);
+}
