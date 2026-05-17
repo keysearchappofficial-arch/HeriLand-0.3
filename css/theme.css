@@ -201,47 +201,66 @@ body[data-theme="system"]{
 }
 
 /* =========================================================
-   Light Leaf Silhouette Background
+   Light Nature Background
 ========================================================= */
 
 body[data-theme="light"]::before,
 body[data-theme="system"]::before{
   content:"";
+
   position:fixed;
-  inset:0;
-  z-index:-1;
+  left:0;
+  bottom:0;
+
+  width:680px;
+  height:680px;
+
   pointer-events:none;
+  z-index:-1;
+
+  opacity:.22;
 
   background:
-    radial-gradient(ellipse at 18% 24%, rgba(55,107,69,.08) 0 8%, transparent 9%),
-    radial-gradient(ellipse at 82% 18%, rgba(55,107,69,.06) 0 7%, transparent 8%),
-    radial-gradient(ellipse at 76% 78%, rgba(55,107,69,.07) 0 9%, transparent 10%),
-    radial-gradient(ellipse at 24% 86%, rgba(210,154,84,.07) 0 8%, transparent 9%);
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(62,110,72,.22),
+      transparent 58%
+    );
 
-  opacity:.9;
+  mask-image:
+    radial-gradient(circle at bottom left, black 18%, transparent 72%);
+
+  -webkit-mask-image:
+    radial-gradient(circle at bottom left, black 18%, transparent 72%);
 }
+
+/* =========================
+   Leaf Layer
+========================= */
 
 body[data-theme="light"]::after,
 body[data-theme="system"]::after{
   content:"";
+
   position:fixed;
-  inset:0;
+
+  left:-40px;
+  bottom:-30px;
+
+  width:560px;
+  height:560px;
+
   z-index:-1;
+
   pointer-events:none;
 
+  opacity:.16;
+
   background-image:
-    linear-gradient(35deg, transparent 48%, rgba(55,107,69,.055) 49%, rgba(55,107,69,.055) 51%, transparent 52%),
-    linear-gradient(145deg, transparent 48%, rgba(55,107,69,.04) 49%, rgba(55,107,69,.04) 51%, transparent 52%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560' viewBox='0 0 560 560'%3E%3Cg fill='none' stroke='%23376b45' stroke-opacity='.35' stroke-width='2'%3E%3Cpath d='M40 520 C120 420 170 360 260 300'/%3E%3Cellipse cx='120' cy='450' rx='16' ry='34' transform='rotate(-30 120 450)' fill='%23376b45' fill-opacity='.22'/%3E%3Cellipse cx='170' cy='390' rx='14' ry='30' transform='rotate(-18 170 390)' fill='%23376b45' fill-opacity='.18'/%3E%3Cellipse cx='230' cy='330' rx='12' ry='28' transform='rotate(12 230 330)' fill='%23376b45' fill-opacity='.18'/%3E%3Cpath d='M0 560 C80 500 140 460 220 420'/%3E%3Cellipse cx='80' cy='500' rx='14' ry='30' transform='rotate(-24 80 500)' fill='%23376b45' fill-opacity='.18'/%3E%3Cellipse cx='150' cy='450' rx='12' ry='26' transform='rotate(20 150 450)' fill='%23376b45' fill-opacity='.18'/%3E%3C/g%3E%3C/svg%3E");
 
-  background-size:
-    180px 180px,
-    220px 220px;
-
-  background-position:
-    20px 40px,
-    90px 120px;
-
-  opacity:.55;
+  background-repeat:no-repeat;
+  background-size:contain;
 }
 
 /* =========================================================
