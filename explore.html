@@ -1248,15 +1248,15 @@
 
     <div class="culture-detail-links">
 
-      <a
-        class="culture-detail-link"
-        id="cultureMapLink"
-        href="#"
-        target="_blank"
-        rel="noopener"
-      >
-        Open Map
-      </a>
+<a
+  class="culture-detail-link"
+  id="cultureMapLink"
+  href="#"
+  target="_blank"
+  rel="noopener"
+>
+  Navigate
+</a>
 
       <a
         class="culture-detail-link"
@@ -1310,13 +1310,13 @@
         Share Culture
       </button>
 
-      <button
-        type="button"
-        onclick="window.openCultureMap()"
-      >
-        <span>↗</span>
-        Open Map
-      </button>
+<button
+  type="button"
+  onclick="window.openCultureMapChoiceSheet()"
+>
+  <span>↗</span>
+  Navigation
+</button>
 
       <button
         type="button"
@@ -1329,6 +1329,45 @@
     </div>
 
   </div>
+  
+<div
+  class="map-choice-layer"
+  id="cultureMapChoiceLayer"
+>
+  <div
+    class="map-choice-backdrop"
+    id="cultureMapChoiceBackdrop"
+  ></div>
+
+  <div class="map-choice-menu">
+
+    <button type="button" onclick="window.openCultureMapWith('auto')">
+      <span>◎</span>
+      Automatic
+    </button>
+
+    <button type="button" onclick="window.openCultureMapWith('apple')">
+      <span></span>
+      Apple Maps
+    </button>
+
+    <button type="button" onclick="window.openCultureMapWith('google')">
+      <span>G</span>
+      Google Maps
+    </button>
+
+    <button type="button" onclick="window.openCultureMapWith('waze')">
+      <span>◇</span>
+      Waze
+    </button>
+
+    <button type="button" onclick="window.copyCultureAddress()">
+      <span>⧉</span>
+      Copy Location
+    </button>
+
+  </div>
+</div>
 
 </section>
 
