@@ -2162,6 +2162,39 @@ accountAuthActionBtn?.addEventListener("click", async () => {
 
 }
 
+const THEME_KEY = "heriland_theme";
+
+function getSavedTheme(){
+  return localStorage.getItem(THEME_KEY) || "system";
+}
+
+function getSystemTheme(){
+  return window.matchMedia("(prefers-color-scheme: light)").matches
+    ? "light"
+    : "dark";
+}
+
+function applyTheme(theme){
+  const finalTheme =
+    theme === "system"
+      ? getSystemTheme()
+      : theme;
+
+  document.body.dataset.theme = finalTheme;
+
+  localStorage.setItem(THEME_KEY, theme);
+}
+
+applyTheme(getSavedTheme());
+
+window
+  .matchMedia("(prefers-color-scheme: light)")
+  .addEventListener("change", () => {
+    if (getSavedTheme() === "system") {
+      applyTheme("system");
+    }
+  });
+
 function renderSettingsPage(){
   return `
     <div class="settings-list">
@@ -2287,15 +2320,26 @@ function bindSettingsPage(){
     notification.classList.toggle("is-on");
   });
 
+  const savedTheme = getSavedTheme();
+
   document
     .querySelectorAll("#settingAppearance button")
     .forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.dataset.value === savedTheme
+      );
+
       button.addEventListener("click", () => {
+        const value = button.dataset.value;
+
         document
           .querySelectorAll("#settingAppearance button")
           .forEach(btn => btn.classList.remove("active"));
 
         button.classList.add("active");
+
+        applyTheme(value);
       });
     });
 }
