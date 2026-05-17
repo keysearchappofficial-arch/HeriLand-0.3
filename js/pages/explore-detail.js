@@ -65,40 +65,26 @@ async function loadDetail(slug){
     console.error("load detail failed:", error);
 
     renderDetail({
-      type: formatPlaceType(data.type),
-      area: data.area || data.city || "Sarawak",
-    
-      title: data.title || data.name || "",
-    
-      score: "New",
+      type: "Recommended Place",
+      area: "Sarawak",
+
+      title: "Place not found",
+
+      score: "0.0",
       reviews: "0 Reviews",
-    
-      address: data.address || "Address not available",
-      addressRaw: data.address || "",
-      titleRaw: data.title || data.name || "",
-      mapUrl: data.google_map_url || "",
-    
-      phone: data.phone || "Not Available",
-    
-      hours:
-        data.opening_hours?.label ||
-        "Check Before Visiting",
-    
-      ai:
-        data.short_description ||
-        "A local place shared by travelers.",
-    
-      intro:
-        data.full_description ||
-        data.short_description ||
-        "No description yet.",
-    
-      services:
-        Array.isArray(data.tags)
-          ? data.tags
-          : [],
-    
-      images
+
+      address: "Address not available",
+      addressRaw: "",
+      titleRaw: "Place not found",
+      mapUrl: "",
+
+      phone: "Not Available",
+      hours: "Check Before Visiting",
+
+      ai: "This place may not be available yet.",
+      intro: "",
+      services: [],
+      images: []
     });
 
     return;
@@ -116,12 +102,16 @@ async function loadDetail(slug){
     type: formatPlaceType(data.type),
     area: data.area || data.city || "Sarawak",
 
-    title: data.title || "",
+    title: data.title || data.name || "",
 
     score: "New",
     reviews: "0 Reviews",
 
     address: data.address || "Address not available",
+    addressRaw: data.address || "",
+    titleRaw: data.title || data.name || "",
+    mapUrl: data.google_map_url || "",
+
     phone: data.phone || "Not Available",
 
     hours:
@@ -582,51 +572,18 @@ function buildMapQuery(){
 }
 
 window.openPlaceMap = function () {
-  const query = buildMapQuery();
 
-  if (!query && currentDetailMapUrl) {
-    window.open(currentDetailMapUrl, "_blank");
-    return;
-  }
-
-  if (!query) {
-    alert("Map information is not available.");
-    return;
-  }
-
-  if (isIOS()) {
-    window.location.href =
-      `maps://maps.apple.com/?q=${query}`;
-
-    setTimeout(() => {
-      window.open(
-        `https://www.google.com/maps/search/?api=1&query=${query}`,
-        "_blank"
-      );
-    }, 900);
+  if (typeof window.openMapByPreference === "function") {
+    window.openMapByPreference({
+      title: currentDetailTitleText,
+      address: currentDetailAddress,
+      mapUrl: currentDetailMapUrl
+    });
 
     return;
   }
 
-  if (isAndroid()) {
-    window.location.href =
-      `geo:0,0?q=${query}`;
-
-    setTimeout(() => {
-      window.open(
-        `https://www.google.com/maps/search/?api=1&query=${query}`,
-        "_blank"
-      );
-    }, 900);
-
-    return;
-  }
-
-  window.open(
-    currentDetailMapUrl ||
-    `https://www.google.com/maps/search/?api=1&query=${query}`,
-    "_blank"
-  );
+  openPlaceMapByProvider("auto");
 };
 
 window.openMapChoiceSheet = function () {
