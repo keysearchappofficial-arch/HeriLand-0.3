@@ -2223,22 +2223,24 @@ function renderSettingsPage(){
 
       <div class="settings-row">
 
-        <div class="settings-switch-row">
+<div
+  class="settings-switch-row"
+  id="notificationSettingRow"
+>
+  <div class="settings-head">
+    <h4>Notification</h4>
+    <p>Travel reminders and activity updates.</p>
+  </div>
 
-          <div class="settings-head">
-            <h4>Notification</h4>
-            <p>Travel reminders and activity updates.</p>
-          </div>
-
-          <button
-            class="setting-switch is-on"
-            id="settingNotification"
-            type="button"
-          >
-            <span></span>
-          </button>
-
-        </div>
+  <button
+    class="setting-switch is-on"
+    id="settingNotification"
+    type="button"
+    aria-label="Notification toggle"
+  >
+    <span></span>
+  </button>
+</div>
 
       </div>
 
