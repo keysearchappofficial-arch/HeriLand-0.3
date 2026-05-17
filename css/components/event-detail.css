@@ -649,3 +649,66 @@
   }
 
 }
+
+/* =========================
+   Light Theme
+========================= */
+
+body[data-theme="light"] .event-detail-page,
+body[data-theme="light"] .event-detail-panel{
+  background:#f4f3ec;
+  color:var(--text);
+}
+
+body[data-theme="light"] .event-detail-guide,
+body[data-theme="light"] .event-detail-info-item,
+body[data-theme="light"] .event-detail-link{
+  background:rgba(23,34,27,.04);
+  border:1px solid rgba(23,34,27,.08);
+}
+
+body[data-theme="light"] .event-detail-meta,
+body[data-theme="light"] .event-detail-venue-line,
+body[data-theme="light"] .event-detail-guide p,
+body[data-theme="light"] .event-detail-info-value,
+body[data-theme="light"] .event-detail-section p,
+body[data-theme="light"] .event-detail-good-list li,
+body[data-theme="light"] .event-detail-nearby p{
+  color:rgba(23,34,27,.76);
+}
+
+body[data-theme="light"] .event-detail-head h1,
+body[data-theme="light"] .event-detail-section h2,
+body[data-theme="light"] .event-detail-nearby h2{
+  color:var(--text);
+}
+
+body[data-theme="light"] .event-detail-link{
+  color:var(--text);
+}
+
+body[data-theme="light"] .event-detail-link:hover{
+  background:rgba(47,125,79,.1);
+  border:1px solid rgba(47,125,79,.18);
+  color:var(--green);
+}
+
+body[data-theme="light"] .event-more-backdrop{
+  background:rgba(23,34,27,.28);
+}
+
+body[data-theme="light"] .event-more-menu{
+  background:rgba(255,255,250,.96);
+  border:1px solid rgba(23,34,27,.08);
+  box-shadow:0 20px 60px rgba(0,0,0,.16);
+}
+
+body[data-theme="light"] .event-more-menu button{
+  color:var(--text);
+}
+
+body[data-theme="light"] .event-detail-tags span{
+  background:rgba(47,125,79,.1);
+  border:1px solid rgba(47,125,79,.16);
+  color:var(--green);
+}
