@@ -1,3 +1,7 @@
+let currentEventMapUrl = "";
+let currentEventAddress = "";
+let currentEventTitle = "";
+
 const eventDetailPage =
   document.getElementById("eventDetailPage");
 
@@ -85,6 +89,9 @@ async function loadEventDetail(slug){
       venueMini: "Venue TBC",
       venue: "Venue TBC",
       address: "Address not available",
+      mapUrl:data.google_map_url || "",
+      addressRaw:data.address || "",
+      titleRaw:data.title || "Event not found",
       organizer: "Organizer TBC",
       ai: "This event may not be available yet.",
       desc: "",
@@ -164,6 +171,19 @@ async function loadEventDetail(slug){
 ========================= */
 
 function renderEventDetail(data) {
+  
+currentEventMapUrl =
+  data.mapUrl || "";
+
+currentEventAddress =
+  data.addressRaw ||
+  data.address ||
+  "";
+
+currentEventTitle =
+  data.titleRaw ||
+  data.title ||
+  "";
 
   document.getElementById("eventDetailType").textContent =
     data.type || "";
@@ -218,7 +238,7 @@ function renderEventDetail(data) {
   if (mapLink) {
     mapLink.href = data.map || "#";
   }
-
+  bindEventAddressAction();
 }
 
 /* =========================
@@ -389,8 +409,188 @@ window.addEventToTrip = async function () {
   alert("Added to My Trip");
 };
 
+function isEventIOS(){
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (
+      navigator.platform === "MacIntel" &&
+      navigator.maxTouchPoints > 1
+    );
+}
+
+function isEventAndroid(){
+  return /Android/i.test(navigator.userAgent);
+}
+
+function buildEventMapQuery(){
+  const parts = [
+    currentEventTitle,
+    currentEventAddress
+  ].filter(Boolean);
+
+  return encodeURIComponent(parts.join(" "));
+}
+
+function bindEventAddressAction(){
+
+  const addressBtn =
+    document.getElementById("eventDetailAddressBtn");
+
+  const actionBtn =
+    document.getElementById("eventDetailAddressActionBtn");
+
+  addressBtn?.onclick = () => {
+    window.openEventMap?.();
+  };
+
+  actionBtn?.onclick = () => {
+    window.openEventMap?.();
+  };
+
+}
+
 window.openEventMap = function () {
-  console.log("open map");
+  openEventMapByProvider("auto");
+};
+
+function openEventMapByProvider(provider = "auto") {
+  const query = buildEventMapQuery();
+
+  if (!query && currentEventMapUrl) {
+    window.open(currentEventMapUrl, "_blank");
+    return;
+  }
+
+  if (!query) {
+    alert("Map information is not available.");
+    return;
+  }
+
+  if (provider === "auto") {
+    if (isEventIOS()) {
+      window.location.href =
+        `maps://maps.apple.com/?q=${query}`;
+
+      setTimeout(() => {
+        window.open(
+          `https://www.google.com/maps/search/?api=1&query=${query}`,
+          "_blank"
+        );
+      }, 900);
+
+      return;
+    }
+
+    if (isEventAndroid()) {
+      window.location.href =
+        `geo:0,0?q=${query}`;
+
+      setTimeout(() => {
+        window.open(
+          `https://www.google.com/maps/search/?api=1&query=${query}`,
+          "_blank"
+        );
+      }, 900);
+
+      return;
+    }
+
+    window.open(
+      currentEventMapUrl ||
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      "_blank"
+    );
+
+    return;
+  }
+
+  if (provider === "apple") {
+    window.location.href =
+      `maps://maps.apple.com/?q=${query}`;
+
+    setTimeout(() => {
+      window.open(
+        `https://maps.apple.com/?q=${query}`,
+        "_blank"
+      );
+    }, 900);
+
+    return;
+  }
+
+  if (provider === "google") {
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      "_blank"
+    );
+
+    return;
+  }
+
+  if (provider === "waze") {
+    window.location.href =
+      `waze://?q=${query}&navigate=yes`;
+
+    setTimeout(() => {
+      window.open(
+        `https://waze.com/ul?q=${query}&navigate=yes`,
+        "_blank"
+      );
+    }, 900);
+  }
+}
+
+window.openEventMapChoiceSheet = function () {
+
+  document
+    .getElementById("eventMoreLayer")
+    ?.classList.remove("is-open");
+
+  document
+    .getElementById("eventMapChoiceLayer")
+    ?.classList.add("is-open");
+
+};
+
+document
+  .getElementById("eventMapChoiceBackdrop")
+  ?.addEventListener("click", () => {
+
+    document
+      .getElementById("eventMapChoiceLayer")
+      ?.classList.remove("is-open");
+
+  });
+
+window.openEventMapWith = function (provider) {
+
+  document
+    .getElementById("eventMapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  openEventMapByProvider(provider);
+
+};
+
+window.copyEventAddress = async function () {
+
+  const text =
+    currentEventAddress ||
+    currentEventTitle ||
+    "";
+
+  if (!text) {
+    alert("Address is not available.");
+    return;
+  }
+
+  await navigator.clipboard.writeText(text);
+
+  document
+    .getElementById("eventMapChoiceLayer")
+    ?.classList.remove("is-open");
+
+  alert("Address copied.");
+
 };
 
 window.shareEvent = function () {
