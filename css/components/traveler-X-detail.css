@@ -7,7 +7,7 @@
   inset:0;
   z-index:10000;
 
-  background:#07110d;
+  background:var(--detail-bg);
   overflow:hidden;
 
   transform:translateY(100%);
@@ -284,7 +284,7 @@
 
   overflow:auto;
 
-  background:#07110d;
+  background:var(--detail-bg);
 
   border-radius:
     34px
