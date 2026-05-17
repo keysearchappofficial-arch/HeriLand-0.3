@@ -997,3 +997,46 @@ select{
 .contribute-arrow{
   color:var(--green) !important;
 }
+
+/* =========================================================
+   Light Mode Leaf Silhouette Background
+========================================================= */
+
+body[data-theme="light"]::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+
+  background:
+    radial-gradient(ellipse at 18% 24%, rgba(55,107,69,.08) 0 8%, transparent 9%),
+    radial-gradient(ellipse at 82% 18%, rgba(55,107,69,.06) 0 7%, transparent 8%),
+    radial-gradient(ellipse at 76% 78%, rgba(55,107,69,.07) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 24% 86%, rgba(210,154,84,.07) 0 8%, transparent 9%);
+
+  filter:blur(.2px);
+  opacity:.9;
+}
+
+body[data-theme="light"]::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+
+  background-image:
+    linear-gradient(35deg, transparent 48%, rgba(55,107,69,.055) 49%, rgba(55,107,69,.055) 51%, transparent 52%),
+    linear-gradient(145deg, transparent 48%, rgba(55,107,69,.04) 49%, rgba(55,107,69,.04) 51%, transparent 52%);
+
+  background-size:
+    180px 180px,
+    220px 220px;
+
+  background-position:
+    20px 40px,
+    90px 120px;
+
+  opacity:.65;
+}
