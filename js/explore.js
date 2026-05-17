@@ -2402,26 +2402,25 @@ function bindSettingsPage(){
     document.getElementById("settingNotification");
 
   notificationToggle?.addEventListener("click", async (event) => {
-  event.stopPropagation();
+    event.stopPropagation();
 
-  const loggedIn =
-    await requireLogin("change notification settings");
+    const loggedIn =
+      await requireLogin("change notification settings");
 
-  if (!loggedIn) return;
+    if (!loggedIn) return;
 
-  const nextValue =
-    !notificationToggle.classList.contains("is-on");
+    const nextValue =
+      !notificationToggle.classList.contains("is-on");
 
-  notificationToggle.classList.toggle("is-on", nextValue);
+    notificationToggle.classList.toggle("is-on", nextValue);
 
-  const ok =
-    await setAllNotificationDetails(nextValue);
+    const ok =
+      await setAllNotificationDetails(nextValue);
 
-  if (!ok) {
-    notificationToggle.classList.toggle("is-on", !nextValue);
-    return;
-  }
-});
+    if (!ok) {
+      notificationToggle.classList.toggle("is-on", !nextValue);
+    }
+  });
 
   notificationRow?.addEventListener("click", async () => {
     const loggedIn =
@@ -2432,15 +2431,26 @@ function bindSettingsPage(){
     openNotificationSettingsPage();
   });
 
+  const savedTheme = getSavedTheme();
+
   document
     .querySelectorAll("#settingAppearance button")
     .forEach((button) => {
+      const value = button.dataset.value;
+
+      button.classList.toggle(
+        "active",
+        value === savedTheme
+      );
+
       button.addEventListener("click", () => {
         document
           .querySelectorAll("#settingAppearance button")
           .forEach(btn => btn.classList.remove("active"));
 
         button.classList.add("active");
+
+        applyTheme(value);
       });
     });
 
