@@ -2315,35 +2315,51 @@ function renderSettingsPage(){
 }
 
 function bindSettingsPage(){
-  const notification =
+
+  const notificationRow =
+    document.getElementById("notificationSettingRow");
+
+  const notificationToggle =
     document.getElementById("settingNotification");
 
-  notification?.addEventListener("click", () => {
-    notification.classList.toggle("is-on");
+  notificationToggle?.addEventListener("click", async (event) => {
+    event.stopPropagation();
+
+    const loggedIn =
+      await requireLogin("change notification settings");
+
+    if (!loggedIn) return;
+
+    notificationToggle.classList.toggle("is-on");
+
+    await saveNotificationSetting(
+      "push_enabled",
+      notificationToggle.classList.contains("is-on")
+    );
   });
 
-  const savedTheme = getSavedTheme();
+  notificationRow?.addEventListener("click", async () => {
+    const loggedIn =
+      await requireLogin("change notification settings");
+
+    if (!loggedIn) return;
+
+    openNotificationSettingsPage();
+  });
 
   document
     .querySelectorAll("#settingAppearance button")
     .forEach((button) => {
-      button.classList.toggle(
-        "active",
-        button.dataset.value === savedTheme
-      );
-
       button.addEventListener("click", () => {
-        const value = button.dataset.value;
-
         document
           .querySelectorAll("#settingAppearance button")
           .forEach(btn => btn.classList.remove("active"));
 
         button.classList.add("active");
-
-        applyTheme(value);
       });
     });
+
+  loadNotificationSettings();
 }
 
 function bindAvatarPlaceSwipe(pageKey){
