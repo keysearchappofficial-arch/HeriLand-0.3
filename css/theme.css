@@ -751,3 +751,65 @@ html.light{
 
   --avatar-icon:#3f6f57;
 }
+
+/* =========================================================
+   Avatar Panel Theme Force Fix
+========================================================= */
+
+.avatar-panel,
+.avatar-panel *{
+  color:var(--text);
+}
+
+.avatar-panel{
+  background:var(--surface-panel);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+.avatar-panel-user p,
+.avatar-panel-stats span,
+.avatar-place-tags,
+.avatar-list-item p{
+  color:var(--muted);
+}
+
+.avatar-panel-stats button,
+.avatar-panel-stats div,
+.avatar-sub-back,
+.avatar-place-delete,
+.avatar-list-actions button{
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.avatar-panel-menu button{
+  color:var(--text);
+  border-bottom:1px solid var(--border);
+}
+
+.avatar-panel-menu i,
+.avatar-sub-head small,
+.avatar-place-rating,
+.avatar-list-actions button:hover{
+  color:var(--green);
+}
+
+body[data-theme="light"] .avatar-panel-menu i,
+body[data-theme="light"] .avatar-sub-head small,
+body[data-theme="light"] .avatar-place-rating{
+  color:#376b45;
+}
+
+.avatar-place-card,
+.avatar-list-item{
+  border-bottom:1px solid var(--border);
+}
+
+.avatar-place-copy h4,
+.avatar-list-top h4,
+.avatar-panel-user h3,
+.avatar-sub-head h3{
+  color:var(--text);
+}
