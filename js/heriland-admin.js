@@ -11,8 +11,7 @@ async function requireAdmin(){
   console.log("User error:", userError);
 
   if (!user) {
-    alert("Please login as admin.");
-    location.href = "./explore.html";
+    openAdminLogin();
     return false;
   }
 
@@ -31,13 +30,110 @@ async function requireAdmin(){
   }
 
   if (!data) {
-    alert("Not admin.");
-    location.href = "./explore.html";
+    openAdminLogin("This account is not an admin.");
     return false;
   }
 
+  closeAdminLogin();
   return true;
 }
+
+
+const adminLoginLayer =
+  document.getElementById("adminLoginLayer");
+
+const adminLoginEmail =
+  document.getElementById("adminLoginEmail");
+
+const adminLoginPassword =
+  document.getElementById("adminLoginPassword");
+
+const adminLoginBtn =
+  document.getElementById("adminLoginBtn");
+
+const adminGoogleLoginBtn =
+  document.getElementById("adminGoogleLoginBtn");
+
+const adminLoginMessage =
+  document.getElementById("adminLoginMessage");
+
+function openAdminLogin(message = ""){
+  adminLoginLayer?.classList.add("is-open");
+
+  if (adminLoginMessage) {
+    adminLoginMessage.textContent = message;
+  }
+}
+
+function closeAdminLogin(){
+  adminLoginLayer?.classList.remove("is-open");
+
+  if (adminLoginMessage) {
+    adminLoginMessage.textContent = "";
+  }
+}
+
+adminLoginBtn?.addEventListener("click", async () => {
+  const email =
+    adminLoginEmail?.value.trim();
+
+  const password =
+    adminLoginPassword?.value.trim();
+
+  if (!email || !password) {
+    adminLoginMessage.textContent =
+      "Please enter email and password.";
+    return;
+  }
+
+  adminLoginBtn.disabled = true;
+  adminLoginBtn.textContent = "Logging in...";
+
+  const { error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  adminLoginBtn.disabled = false;
+  adminLoginBtn.textContent = "Login";
+
+  if (error) {
+    adminLoginMessage.textContent =
+      error.message || "Login failed.";
+    return;
+  }
+
+  const ok = await requireAdmin();
+
+  if (ok) {
+    await loadSubmissions();
+  }
+});
+
+adminGoogleLoginBtn?.addEventListener("click", async () => {
+  const { error } =
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.href
+      }
+    });
+
+  if (error) {
+    adminLoginMessage.textContent =
+      error.message || "Google login failed.";
+  }
+});
+
+supabase.auth.onAuthStateChange(async () => {
+  const ok = await requireAdmin();
+
+  if (ok) {
+    await loadSubmissions();
+  }
+});
+
 let submissions = [];
 let pendingRejectIds = [];
 
