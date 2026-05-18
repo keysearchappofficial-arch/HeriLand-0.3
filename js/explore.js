@@ -2368,8 +2368,15 @@ async function bindAccountPage(){
 const badgeRewardBtn =
   document.getElementById("accountBadgeRewardBtn");
 
-badgeRewardBtn?.addEventListener("click", () => {
+badgeRewardBtn?.addEventListener("click", async () => {
+
+  const loggedIn =
+    await requireLogin("view traveler rewards");
+
+  if (!loggedIn) return;
+
   openBadgeWallPage();
+
 });
 
   const editBtn =
@@ -2449,6 +2456,23 @@ function saveAccountProfile(profile){
 }
 
 async function loadAccountProfileToUI(){
+const rewardBtn =
+  document.getElementById("accountBadgeRewardBtn");
+
+const user =
+  await getCurrentUser?.();
+
+if (rewardBtn) {
+
+  rewardBtn.disabled = !user;
+
+  rewardBtn.classList.toggle(
+    "is-disabled",
+    !user
+  );
+
+}
+
   const user =
     await getCurrentUser?.();
 
