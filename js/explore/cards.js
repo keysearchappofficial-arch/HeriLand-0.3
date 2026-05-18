@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { isSaved } from "./storage.js";
 import { bindEvents } from "./interactions.js";
+import { getLovedText } from "./saved.js";
 
 console.log("✅ cards.js loaded");
 
@@ -124,7 +125,7 @@ function renderActiveCard(item, index){
         </div>
 
         <div class="footer-row">
-          <div class="loved">Loved by ${item.lovedCount || 0} travelers</div>
+          <div class="loved">${getLovedText(item)}</div>
           <button class="save ${isSaved(item.slug) ? "is-saved" : ""}" type="button">
             ${isSaved(item.slug) ? "♥" : "♡"}
           </button>
