@@ -18,6 +18,11 @@ import {
 
 import { bindSupportButtons } from "./support.js";
 
+import {
+  renderContributePage,
+  bindContributePage
+} from "./contribute.js";
+
 console.log("✅ avatar-pages.js loaded");
 
 const avatarPages = {
@@ -121,6 +126,13 @@ const avatarPages = {
       }
     ]
   },
+  
+contribute: {
+  title: "Contribute",
+  kicker: "Share with Travelers",
+  layout: "empty",
+  items: []
+},
 
   account: {
     title: "Account",
@@ -254,7 +266,24 @@ export async function openAvatarSubPage(pageKey){
       page.items.map(renderAvatarListItem).join("");
   }
 
-if (pageKey === "account") {
+if (pageKey === "contribute") {
+
+  const loggedIn =
+    await window.requireLogin?.("contribute");
+
+  if (!loggedIn) {
+    console.log("⛔ contribute blocked: not logged in");
+    return;
+  }
+
+  avatarSubContent.innerHTML =
+    renderContributePage();
+
+  bindContributePage();
+
+}
+
+else if (pageKey === "account") {
 
   avatarSubContent.innerHTML =
     renderAccountPage();
@@ -266,7 +295,6 @@ if (pageKey === "account") {
 else if (pageKey === "settings") {
 
   avatarSubContent.innerHTML =
-
     renderSettingsPage();
 
   bindSettingsPage();
