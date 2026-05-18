@@ -10,7 +10,10 @@
 
   <title>HeriLand Admin</title>
 
-  <link rel="stylesheet" href="./css/pages/heriland-admin.css">
+  <link
+    rel="stylesheet"
+    href="./css/pages/heriland-admin.css"
+  >
 </head>
 
 <body>
@@ -18,44 +21,100 @@
   <main class="admin-app">
 
     <header class="admin-top">
+
       <div>
         <h1>HeriLand Admin</h1>
-        <p>Community submissions review and publishing</p>
+
+        <p>
+          Community submissions review and publishing
+        </p>
       </div>
 
-      <button id="refreshBtn" type="button">
-        Refresh
-      </button>
+      <div class="admin-top-actions">
+
+        <button
+          id="refreshBtn"
+          type="button"
+        >
+          Refresh
+        </button>
+
+      </div>
+
     </header>
 
     <section class="admin-toolbar">
 
       <select id="typeFilter">
-        <option value="all">All Types</option>
-        <option value="place">Place</option>
-        <option value="restaurant">Restaurant</option>
-        <option value="event">Event</option>
-        <option value="culture">Culture</option>
-        <option value="travel-tip">Travel Tip</option>
-        <option value="correction">Correction</option>
+
+        <option value="all">
+          All Types
+        </option>
+
+        <option value="place">
+          Place
+        </option>
+
+        <option value="restaurant">
+          Restaurant
+        </option>
+
+        <option value="event">
+          Event
+        </option>
+
+        <option value="culture">
+          Culture
+        </option>
+
+        <option value="travel-tip">
+          Travel Tip
+        </option>
+
+        <option value="correction">
+          Correction
+        </option>
+
       </select>
 
       <select id="statusFilter">
-        <option value="all">All Status</option>
-        <option value="pending">Pending</option>
-        <option value="published">Published</option>
-        <option value="rejected">Rejected</option>
+
+        <option value="all">
+          All Status
+        </option>
+
+        <option value="pending">
+          Pending
+        </option>
+
+        <option value="published">
+          Published
+        </option>
+
+        <option value="rejected">
+          Rejected
+        </option>
+
       </select>
 
-      <button id="batchPublishBtn" type="button">
+      <button
+        id="batchPublishBtn"
+        type="button"
+      >
         Batch Publish
       </button>
 
-      <button id="batchRejectBtn" type="button">
+      <button
+        id="batchRejectBtn"
+        type="button"
+      >
         Batch Reject
       </button>
 
-      <button id="batchSaveBtn" type="button">
+      <button
+        id="batchSaveBtn"
+        type="button"
+      >
         Save Edited
       </button>
 
@@ -64,10 +123,16 @@
     <section class="admin-table-wrap">
 
       <table class="admin-table">
+
         <thead>
+
           <tr>
+
             <th>
-              <input type="checkbox" id="checkAll">
+              <input
+                type="checkbox"
+                id="checkAll"
+              >
             </th>
 
             <th>Type</th>
@@ -106,60 +171,38 @@
             <th>Source URL</th>
 
             <th>Admin Note</th>
+
             <th>Save</th>
             <th>Action</th>
+
           </tr>
+
         </thead>
 
         <tbody id="submissionTableBody">
+
           <tr>
+
             <td colspan="31">
-              Loading...
+              Loading submissions...
             </td>
+
           </tr>
+
         </tbody>
+
       </table>
 
     </section>
 
   </main>
 
-<div class="admin-login-layer" id="adminLoginLayer">
-  <div class="admin-login-panel">
-    <h2>Admin Login</h2>
-    <p>Please login with your HeriLand admin account.</p>
+  <!-- Reject Modal -->
 
-    <input
-      id="adminLoginEmail"
-      type="email"
-      placeholder="Admin email"
-    >
-
-    <input
-      id="adminLoginPassword"
-      type="password"
-      placeholder="Password"
-    >
-
-    <button
-      id="adminLoginBtn"
-      type="button"
-    >
-      Login
-    </button>
-
-    <button
-      id="adminGoogleLoginBtn"
-      type="button"
-    >
-      Continue with Google
-    </button>
-
-    <small id="adminLoginMessage"></small>
-  </div>
-</div>
-
-  <div class="reject-layer" id="rejectLayer">
+  <div
+    class="reject-layer"
+    id="rejectLayer"
+  >
 
     <div
       class="reject-backdrop"
@@ -168,7 +211,9 @@
 
     <div class="reject-panel">
 
-      <h2>Reject Submission</h2>
+      <h2>
+        Reject Submission
+      </h2>
 
       <p>
         Please add a reason for rejecting this submission.
@@ -202,7 +247,9 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="./js/supabase-client.js"></script>
+
   <script src="./js/heriland-admin.js"></script>
 
 </body>
