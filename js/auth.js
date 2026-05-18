@@ -1,12 +1,31 @@
 async function getCurrentUser(){
-  const { data } = await supabase.auth.getUser();
-  return data?.user || null;
+
+  const {
+    data,
+    error
+  } = await supabase.auth.getSession();
+
+  if (error) {
+    console.warn(
+      "Get session failed:",
+      error
+    );
+
+    return null;
+  }
+
+  return data?.session?.user || null;
 }
 
 async function signUpWithEmail(email, password){
-  const { data, error } = await supabase.auth.signUp({
+
+  const {
+    data,
+    error
+  } = await supabase.auth.signUp({
     email,
     password,
+
     options: {
       emailRedirectTo:
         "https://keysearchappofficial-arch.github.io/HeriLand-0.3/explore.html"
@@ -14,27 +33,44 @@ async function signUpWithEmail(email, password){
   });
 
   if (error) {
+    console.error("Signup failed:", error);
+
     alert(error.message);
+
     return null;
   }
 
-  return data.user;
+  return data?.user || null;
 }
 
 async function loginWithEmail(email, password){
-  const { data, error } = await supabase.auth.signInWithPassword({
+
+  const {
+    data,
+    error
+  } = await supabase.auth.signInWithPassword({
     email,
     password
   });
 
   if (error) {
+    console.error("Login failed:", error);
+
     alert(error.message);
+
     return null;
   }
 
-  return data.user;
+  return data?.user || null;
 }
 
 async function logout(){
-  await supabase.auth.signOut();
+
+  const { error } =
+    await supabase.auth.signOut();
+
+  if (error) {
+    console.error("Logout failed:", error);
+  }
+
 }
