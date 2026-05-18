@@ -2038,3 +2038,81 @@ body[data-theme="light"] .account-badge-select:disabled{
 
   transform:none !important;
 }
+
+.auth-logo{
+  font-size:13px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+
+  opacity:.6;
+
+  margin-bottom:18px;
+}
+
+.auth-social-btn{
+  width:100%;
+
+  height:54px;
+
+  border:none;
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+
+  background:#fff;
+  color:#111;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.auth-social-btn img{
+  width:20px;
+  height:20px;
+}
+
+.auth-social-btn:hover{
+  transform:translateY(-1px);
+}
+
+.auth-divider{
+  position:relative;
+
+  text-align:center;
+
+  margin:18px 0;
+}
+
+.auth-divider::before{
+  content:"";
+
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+
+  height:1px;
+
+  background:rgba(255,255,255,.08);
+}
+
+.auth-divider span{
+  position:relative;
+
+  padding:0 12px;
+
+  background:#111;
+
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+
+  opacity:.5;
+}
