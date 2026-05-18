@@ -1,5 +1,7 @@
 // explore/contribute.js
 
+import { bindContributionSubmit } from "./contribution-submit.js";
+
 console.log("✅ contribute.js loaded");
 
 export const contributeItems = [
@@ -138,7 +140,9 @@ export function openContributionForm(type){
     </div>
   `;
 
-  bindContributionFormBasic();
+bindContributionFormBasic();
+bindContributionSubmit();
+  
 
   console.log("✅ contribution form opened:", type);
 }
@@ -514,18 +518,6 @@ function bindContributionFormBasic(){
       "🖼️ contribution image selected:",
       file?.name || null
     );
-  });
-
-  const submitBtn =
-    document.getElementById("contributionSubmitBtn");
-
-  submitBtn?.addEventListener("click", () => {
-    console.log(
-      "📝 submit clicked, not wired yet:",
-      submitBtn.dataset.type
-    );
-
-    alert("Submit wiring will be connected next.");
   });
 }
 
