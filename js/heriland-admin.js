@@ -352,6 +352,16 @@ function renderRow(item){
         </button>
       </td>
 
+<td>
+  <button
+    class="publish-row-btn"
+    type="button"
+    data-id="${item.id}"
+  >
+    Publish
+  </button>
+</td>
+
     </tr>
   `;
 }
