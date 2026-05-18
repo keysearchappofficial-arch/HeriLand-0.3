@@ -126,14 +126,6 @@ adminGoogleLoginBtn?.addEventListener("click", async () => {
   }
 });
 
-supabase.auth.onAuthStateChange(async () => {
-  const ok = await requireAdmin();
-
-  if (ok) {
-    await loadSubmissions();
-  }
-});
-
 let submissions = [];
 let pendingRejectIds = [];
 
@@ -1242,15 +1234,39 @@ rejectConfirmBtn?.addEventListener("click", async () => {
    Init
 ========================= */
 
-(async () => {
+window.addEventListener("load", async () => {
+
   console.log("Admin init start");
 
-  const ok = await requireAdmin();
-  console.log("requireAdmin result:", ok);
+  try {
 
-  if (!ok) return;
+    const timeout = new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(new Error("Auth timeout"));
+      }, 5000);
+    });
 
-  console.log("Loading submissions...");
-  await loadSubmissions();
-  console.log("Submissions loaded");
-})();
+    const result = await Promise.race([
+      supabase.auth.getUser(),
+      timeout
+    ]);
+
+    console.log("getUser result:", result);
+
+    const ok = await requireAdmin();
+
+    console.log("requireAdmin result:", ok);
+
+    if (!ok) return;
+
+    await loadSubmissions();
+
+  } catch (err) {
+
+    console.error("INIT CRASH:", err);
+
+    alert(err.message);
+
+  }
+
+});
