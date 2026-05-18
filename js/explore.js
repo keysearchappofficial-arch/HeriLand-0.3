@@ -727,6 +727,14 @@ async function updateAuthUI(){
 
     return;
   }
+  
+const accountAuthActionBtn =
+  document.getElementById("accountAuthActionBtn");
+
+if (accountAuthActionBtn) {
+  accountAuthActionBtn.textContent =
+    user ? "Sign Out" : "Sign In";
+}
 
 const profile =
   getAccountProfile();
