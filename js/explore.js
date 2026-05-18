@@ -156,6 +156,8 @@ function isInteractionLocked(){
 
 async function loadExploreCards(){
 
+  console.log("loadExploreCards start");
+
   const { data, error } =
     await supabase
       .from("explore_items")
@@ -164,24 +166,58 @@ async function loadExploreCards(){
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false });
 
+  console.log("explore data:", data);
+  console.log("explore error:", error);
+
   if (error) {
-    console.error(error);
+    console.error("loadExploreCards error:", error);
+
+    if (stage) {
+      stage.innerHTML = `
+        <div class="empty-state">
+          Load failed: ${error.message}
+        </div>
+      `;
+    }
+
     return;
   }
 
   allCards = (data || []).map(item => ({
-    contentType: item.content_type,
-    city: item.city,
-    cityKey: item.city?.toLowerCase() || "",
-image:
-  item.card_image_url ||
-  item.image_url,
-    place: item.title,
-    subtitle: item.subtitle,
-    tags: item.tags,
-    lovedCount: item.loved_count || 0,
-    slug: item.slug
-  }));
+    contentType:
+      item.content_type || "spot",
+
+    city:
+      item.city || "Sarawak",
+
+    cityKey:
+      item.city?.toLowerCase() || "sarawak",
+
+    image:
+      item.image_url ||
+      item.card_image_url ||
+      item.hero_image_url ||
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80",
+
+    place:
+      item.title || "Untitled",
+
+    subtitle:
+      item.subtitle || "",
+
+    tags:
+      Array.isArray(item.tags)
+        ? item.tags.join(", ")
+        : item.tags || "",
+
+    lovedCount:
+      item.loved_count || 0,
+
+    slug:
+      item.slug
+  })).filter(item => item.slug);
+
+  console.log("mapped allCards:", allCards.length);
 
   applyFilters();
 }
@@ -189,9 +225,12 @@ image:
 function applyFilters(){
 
   cards = allCards.filter(item => {
+    const city =
+      item.city?.toLowerCase?.() || "";
+
     const matchCity =
       activeCityFilter === "all" ||
-      item.city.toLowerCase() === activeCityFilter;
+      city === activeCityFilter;
 
     const matchType =
       activeTypeFilter === "all" ||
@@ -201,6 +240,9 @@ function applyFilters(){
   });
 
   currentIndex = 0;
+
+  console.log("filtered cards:", cards.length);
+
   renderCards();
 }
 
