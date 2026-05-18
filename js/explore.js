@@ -173,7 +173,9 @@ async function loadExploreCards(){
     contentType: item.content_type,
     city: item.city,
     cityKey: item.city?.toLowerCase() || "",
-    image: item.image_url,
+image:
+  item.card_image_url ||
+  item.image_url,
     place: item.title,
     subtitle: item.subtitle,
     tags: item.tags,
@@ -1751,14 +1753,14 @@ function bindContributionSubmit(){
 
       const user = await getCurrentUser?.();
 
-      const imageUrl =
-        await uploadContributionImage();
+const images =
+  await uploadContributionImage();
 
-      const payload = buildContributionPayload(
-        type,
-        user,
-        imageUrl
-      );
+const payload = buildContributionPayload(
+  type,
+  user,
+  images
+);
 
       if (!validateContributionPayload(payload)) {
         return;
@@ -1786,7 +1788,7 @@ function bindContributionSubmit(){
     });
 }
 
-function buildContributionPayload(type, user, imageUrl){
+function buildContributionPayload(type, user, images){
 
   if (type === "correction") {
     return {
@@ -1860,8 +1862,30 @@ function buildContributionPayload(type, user, imageUrl){
     google_map_url:
       document.getElementById("contributionMap")?.value.trim() || "",
 
-    image_url:
-      imageUrl || "",
+ image_url:
+  images?.cardUrl ||
+  images?.imageUrl ||
+  "",
+
+card_image_url:
+  images?.cardUrl ||
+  images?.imageUrl ||
+  "",
+
+detail_image_url:
+  images?.detailUrl ||
+  images?.imageUrl ||
+  "",
+
+hero_image_url:
+  images?.heroUrl ||
+  images?.imageUrl ||
+  "",
+
+original_image_url:
+  images?.originalUrl ||
+  images?.imageUrl ||
+  "",
 
     event_date:
       document.getElementById("contributionEventDate")?.value || null,
@@ -3523,5 +3547,5 @@ async function uploadImageToLocalServer(file, type, slug){
     throw new Error(data.message || "Upload failed");
   }
 
-  return data.imageUrl;
+  return data.images || data;
 }
