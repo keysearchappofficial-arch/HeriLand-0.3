@@ -2,6 +2,8 @@ import { state } from "./state.js";
 import { isSaved } from "./storage.js";
 import { bindEvents } from "./interactions.js";
 
+console.log("✅ cards.js loaded");
+
 const stage = document.getElementById("exploreStage");
 
 export async function loadExploreCards(){
@@ -61,6 +63,21 @@ function getCard(index){
 }
 
 export function renderCards(){
+
+  console.log(
+  "🎴 renderCards()"
+);
+
+console.log(
+  "cards length:",
+  state.cards.length
+);
+
+console.log(
+  "currentIndex:",
+  state.currentIndex
+);
+  
   if (!stage) return;
 
   if (!state.cards.length) {
@@ -80,6 +97,11 @@ export function renderCards(){
     <button class="nav-arrow nav-prev" type="button" aria-label="Previous">‹</button>
     <button class="nav-arrow nav-next" type="button" aria-label="Next">›</button>
   `;
+
+  console.log(
+  "✅ stage rendered"
+);
+  
   bindEvents();
 }
 
