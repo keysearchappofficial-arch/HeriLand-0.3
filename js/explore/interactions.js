@@ -2,6 +2,7 @@
 
 import { state } from "./state.js";
 import { renderCards } from "./cards.js";
+import { toggleSaved } from "./saved.js";
 
 console.log("✅ interactions.js loaded");
 
@@ -56,6 +57,49 @@ export function bindEvents(){
     prevCard();
 
   });
+
+const saveBtn =
+  document.querySelector(".card.active .save");
+
+console.log("❤️ save button:", !!saveBtn);
+
+saveBtn?.addEventListener("click", async (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  console.log("❤️ save clicked");
+
+  const loggedIn =
+    await window.requireLogin?.("save places");
+
+  if (!loggedIn) {
+    console.log("⛔ save blocked: not logged in");
+    return;
+  }
+
+  const cardEl =
+    saveBtn.closest(".card.active");
+
+  const slug =
+    cardEl?.dataset.slug;
+
+  const item =
+    state.cards.find(card => card.slug === slug);
+
+  if (!item) {
+    console.log("⛔ save item not found:", slug);
+    return;
+  }
+
+  const ok =
+    await toggleSaved(item);
+
+  if (!ok) return;
+
+  window.updateAvatarStats?.();
+
+  renderCards();
+});
 
   activeCard?.addEventListener("click", (event) => {
 
