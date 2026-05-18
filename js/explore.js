@@ -750,27 +750,34 @@ function closeLogoutSheet(){
 async function updateAuthUI(){
   const user = await getCurrentUser();
 
-  if (!user) {
-    if (avatarUserName) {
-      avatarUserName.textContent = "Welcome Traveler";
-    }
-
-    if (avatarUserDesc) {
-      avatarUserDesc.textContent =
-        "Save places, build trips, and contribute to HeriLand.";
-    }
-
-    if (avatarLoginBtn) {
-      avatarLoginBtn.style.display = "block";
-    }
-
-    if (avatarSignupBtn) {
-      avatarSignupBtn.style.display = "block";
-      avatarSignupBtn.textContent = "Sign Up";
-    }
-
-    return;
+if (!user) {
+  if (avatarUserName) {
+    avatarUserName.textContent = "Welcome Traveler";
   }
+
+  if (avatarUserDesc) {
+    avatarUserDesc.textContent =
+      "Save places, build trips, and contribute to HeriLand.";
+  }
+
+  const avatarPanelImage =
+    document.querySelector(".avatar-panel-image");
+
+  if (avatarPanelImage) {
+    avatarPanelImage.src = DEFAULT_AVATAR_URL;
+  }
+
+  if (avatarLoginBtn) {
+    avatarLoginBtn.style.display = "block";
+  }
+
+  if (avatarSignupBtn) {
+    avatarSignupBtn.style.display = "block";
+    avatarSignupBtn.textContent = "Sign Up";
+  }
+
+  return;
+}
   
 const accountAuthActionBtn =
   document.getElementById("accountAuthActionBtn");
@@ -936,13 +943,69 @@ logoutConfirmBtn?.addEventListener(
     localStorage.removeItem(REVIEW_KEY);
     localStorage.removeItem(ACCOUNT_PROFILE_KEY);
 
+    // 清空 Avatar Panel
+    if (avatarUserName) {
+      avatarUserName.textContent = "Welcome Traveler";
+    }
+
+    if (avatarUserDesc) {
+      avatarUserDesc.textContent =
+        "Save places, build trips, and contribute to HeriLand.";
+    }
+
+    const avatarPanelImage =
+      document.querySelector(".avatar-panel-image");
+
+    if (avatarPanelImage) {
+      avatarPanelImage.src = DEFAULT_AVATAR_URL;
+    }
+
+    // 清空 Account 頁，如果目前有開著
+    const accountAvatarImg =
+      document.getElementById("accountAvatarImg");
+
+    if (accountAvatarImg) {
+      accountAvatarImg.src = DEFAULT_AVATAR_URL;
+    }
+
+    const accountName =
+      document.getElementById("accountName");
+
+    if (accountName) {
+      accountName.value = "Welcome Traveler";
+    }
+
+    const accountEmail =
+      document.getElementById("accountEmail");
+
+    if (accountEmail) {
+      accountEmail.value = "";
+    }
+
+    const accountPhone =
+      document.getElementById("accountPhone");
+
+    if (accountPhone) {
+      accountPhone.value = "";
+    }
+
+    const accountBirth =
+      document.getElementById("accountBirth");
+
+    if (accountBirth) {
+      accountBirth.value = "";
+    }
+
     updateAvatarStats();
+    syncAccountStats?.();
 
     closeLogoutSheet();
 
     closeAvatarPanel?.();
 
     await updateAuthUI();
+
+    await loadExploreCards();
 
     renderCards();
 
