@@ -2456,25 +2456,21 @@ function saveAccountProfile(profile){
 }
 
 async function loadAccountProfileToUI(){
-const rewardBtn =
-  document.getElementById("accountBadgeRewardBtn");
-
-const user =
-  await getCurrentUser?.();
-
-if (rewardBtn) {
-
-  rewardBtn.disabled = !user;
-
-  rewardBtn.classList.toggle(
-    "is-disabled",
-    !user
-  );
-
-}
 
   const user =
     await getCurrentUser?.();
+
+  const rewardBtn =
+    document.getElementById("accountBadgeRewardBtn");
+
+  if (rewardBtn) {
+    rewardBtn.disabled = !user;
+
+    rewardBtn.classList.toggle(
+      "is-disabled",
+      !user
+    );
+  }
 
   const profile =
     getAccountProfile();
