@@ -5,6 +5,10 @@ import {
   bindAuthUI,
   updateAuthUI
 } from "./auth-ui.js";
+import {
+  bindAvatarPanel,
+  updateAvatarStats
+} from "./avatar-panel.js";
 
 console.log("✅ app.js loaded");
 
@@ -19,10 +23,13 @@ async function bootExplore(){
   document.body.classList.remove("no-scroll");
 
   bindAuthUI();
+  bindAvatarPanel();
   bindFilters();
   bindSwipe();
 
   await updateAuthUI();
+
+  updateAvatarStats();
 
   await loadExploreCards();
 
