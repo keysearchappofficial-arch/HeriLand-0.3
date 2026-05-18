@@ -64,34 +64,50 @@ const rejectConfirmBtn = document.getElementById("rejectConfirmBtn");
 
 async function loadSubmissions(){
   console.log("loadSubmissions called");
+
   tableBody.innerHTML = `
     <tr>
-      <td colspan="31">Loading...</td>
+      <td colspan="31">Loading submissions...</td>
     </tr>
   `;
 
-const { data, error } = await supabase
-  .from("user_submitted_places")
-  .select("*")
-  .order("created_at", { ascending:false });
+  try {
+    const { data, error } = await supabase
+      .from("user_submitted_places")
+      .select("*")
+      .order("created_at", { ascending:false });
 
-console.log("submission data:", data);
-console.log("submission error:", error);
+    console.log("submission data:", data);
+    console.log("submission error:", error);
 
-  if (error) {
-    console.error(error);
+    if (error) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="31">
+            Load failed: ${escapeValue(error.message)}
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    submissions = data || [];
+
+    console.log("submission count:", submissions.length);
+
+    renderTable();
+
+  } catch (err) {
+    console.error("loadSubmissions crash:", err);
 
     tableBody.innerHTML = `
       <tr>
-        <td colspan="30">Load failed.</td>
+        <td colspan="31">
+          JS crashed: ${escapeValue(err.message)}
+        </td>
       </tr>
     `;
-
-    return;
   }
-
-  submissions = data || [];
-  renderTable();
 }
 
 /* =========================
@@ -117,22 +133,36 @@ function getFilteredSubmissions(){
 ========================= */
 
 function renderTable(){
-  const rows = getFilteredSubmissions();
+  try {
+    const rows = getFilteredSubmissions();
 
-  if (!rows.length) {
+    console.log("filtered rows:", rows);
+
+    if (!rows.length) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="31">No submissions found.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    tableBody.innerHTML =
+      rows.map(renderRow).join("");
+
+    bindRowEvents();
+
+  } catch (err) {
+    console.error("renderTable crash:", err);
+
     tableBody.innerHTML = `
       <tr>
-        <td colspan="30">No submissions found.</td>
+        <td colspan="31">
+          Render failed: ${escapeValue(err.message)}
+        </td>
       </tr>
     `;
-
-    return;
   }
-
-  tableBody.innerHTML =
-    rows.map(renderRow).join("");
-
-  bindRowEvents();
 }
 
 function renderRow(item){
