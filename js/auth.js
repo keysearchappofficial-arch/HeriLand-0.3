@@ -1,31 +1,32 @@
 async function getCurrentUser(){
-
-  const {
-    data,
-    error
-  } = await supabase.auth.getSession();
+  const { data, error } = await supabase.auth.getSession();
 
   if (error) {
-    console.warn(
-      "Get session failed:",
-      error
-    );
-
+    console.error("Get session failed:", error);
     return null;
   }
 
   return data?.session?.user || null;
 }
 
-async function signUpWithEmail(email, password){
+async function loginWithEmail(email, password){
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
 
-  const {
-    data,
-    error
-  } = await supabase.auth.signUp({
+  if (error) {
+    alert(error.message);
+    return null;
+  }
+
+  return data?.user || null;
+}
+
+async function signUpWithEmail(email, password){
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
-
     options: {
       emailRedirectTo:
         "https://keysearchappofficial-arch.github.io/HeriLand-0.3/explore.html"
@@ -33,44 +34,45 @@ async function signUpWithEmail(email, password){
   });
 
   if (error) {
-    console.error("Signup failed:", error);
-
     alert(error.message);
-
     return null;
   }
 
   return data?.user || null;
 }
 
-async function loginWithEmail(email, password){
-
-  const {
-    data,
-    error
-  } = await supabase.auth.signInWithPassword({
-    email,
-    password
+async function loginWithGoogle(){
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo:
+        "https://keysearchappofficial-arch.github.io/HeriLand-0.3/explore.html"
+    }
   });
 
   if (error) {
-    console.error("Login failed:", error);
-
-    alert(error.message);
-
-    return null;
+    console.error("Google login failed:", error);
+    alert("Google login failed.");
   }
-
-  return data?.user || null;
 }
 
 async function logout(){
+  await supabase.auth.signOut({ scope: "global" });
 
-  const { error } =
-    await supabase.auth.signOut();
+  Object.keys(localStorage).forEach((key) => {
+    if (
+      key.startsWith("sb-") ||
+      key.includes("supabase")
+    ) {
+      localStorage.removeItem(key);
+    }
+  });
 
-  if (error) {
-    console.error("Logout failed:", error);
-  }
-
+  sessionStorage.clear();
 }
+
+window.getCurrentUser = getCurrentUser;
+window.loginWithEmail = loginWithEmail;
+window.signUpWithEmail = signUpWithEmail;
+window.loginWithGoogle = loginWithGoogle;
+window.logout = logout;
