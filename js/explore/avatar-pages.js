@@ -23,6 +23,10 @@ import {
   bindContributePage
 } from "./contribute.js";
 
+import {
+  bindAvatarPlaceActions
+} from "./avatar-place-actions.js";
+
 console.log("✅ avatar-pages.js loaded");
 
 const avatarPages = {
@@ -313,6 +317,14 @@ else if (page.layout === "empty") {
   
   if (pageKey === "service") {
   bindSupportButtons();
+}
+
+if (
+  pageKey === "saved" ||
+  pageKey === "trip" ||
+  pageKey === "reviews"
+) {
+  bindAvatarPlaceActions();
 }
 
   console.log("✅ avatar page opened:", pageKey);
