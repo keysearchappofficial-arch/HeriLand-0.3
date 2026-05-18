@@ -4,6 +4,8 @@ import {
   uploadImageFile
 } from "./media-upload.js";
 
+import { insertUserSubmission } from "./supabase-api.js";
+
 console.log("✅ contribution-submit.js loaded");
 
 export function bindContributionSubmit(){
@@ -56,16 +58,7 @@ export function bindContributionSubmit(){
         return;
       }
 
-      const { error } =
-        await window.supabase
-          .from("user_submitted_places")
-          .insert(payload);
-
-      if (error) {
-        console.error("❌ submit failed:", error);
-        alert(error.message || "Submit failed.");
-        return;
-      }
+await insertUserSubmission(payload);
 
       alert("Submitted for review");
 
