@@ -12,6 +12,7 @@ import {
 import { bindAvatarPages } from "./avatar-pages.js";
 import "./map.js";
 import "./reviews.js";
+import "./trip.js";
 
 console.log("✅ app.js loaded");
 
