@@ -6,6 +6,11 @@ import {
   getReviews
 } from "./storage.js";
 
+import {
+  renderAccountPage,
+  bindAccountPage
+} from "./account.js";
+
 console.log("✅ avatar-pages.js loaded");
 
 const avatarPages = {
@@ -242,10 +247,21 @@ export async function openAvatarSubPage(pageKey){
       page.items.map(renderAvatarListItem).join("");
   }
 
-  if (page.layout === "empty") {
-    avatarSubContent.innerHTML =
-      renderEmptyState(pageKey);
-  }
+if (pageKey === "account") {
+
+  avatarSubContent.innerHTML =
+    renderAccountPage();
+
+  await bindAccountPage();
+
+}
+
+else if (page.layout === "empty") {
+
+  avatarSubContent.innerHTML =
+    renderEmptyState(pageKey);
+
+}
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
