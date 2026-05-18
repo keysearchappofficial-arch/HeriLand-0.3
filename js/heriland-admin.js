@@ -70,10 +70,13 @@ async function loadSubmissions(){
     </tr>
   `;
 
-  const { data, error } = await supabase
-    .from("user_submitted_places")
-    .select("*")
-    .order("created_at", { ascending:false });
+const { data, error } = await supabase
+  .from("user_submitted_places")
+  .select("*")
+  .order("created_at", { ascending:false });
+
+console.log("submission data:", data);
+console.log("submission error:", error);
 
   if (error) {
     console.error(error);
