@@ -1949,7 +1949,6 @@ function buildOpeningHours(){
 }
 
 async function uploadContributionImage(){
-
   const input =
     document.getElementById("contributionImageFile");
 
@@ -1958,32 +1957,34 @@ async function uploadContributionImage(){
 
   if (!file) return "";
 
-  const ext =
-    file.name.split(".").pop();
+  const submitBtn =
+    document.getElementById("contributionSubmitBtn");
 
-  const fileName =
-    `contributions/${Date.now()}-${Math.random()
-      .toString(36)
-      .slice(2)}.${ext}`;
+  const type =
+    submitBtn?.dataset.type || "place";
 
-  const { error } = await supabase.storage
-    .from("heriland-media")
-    .upload(fileName, file, {
-      cacheControl: "3600",
-      upsert: false
-    });
+  const name =
+    document
+      .getElementById("contributionName")
+      ?.value
+      ?.trim() || "heriland";
 
-  if (error) {
+  const imageType =
+    type === "event"
+      ? "details"
+      : "cards";
+
+  try {
+    return await uploadImageToLocalServer(
+      file,
+      imageType,
+      name
+    );
+  } catch (error) {
     console.error("Image upload failed:", error);
     alert("Image upload failed.");
     return "";
   }
-
-  const { data } = supabase.storage
-    .from("heriland-media")
-    .getPublicUrl(fileName);
-
-  return data.publicUrl;
 }
 
 function getContributionTitle(type){
@@ -2528,36 +2529,59 @@ function bindAccountAvatarUpload(){
     input?.click();
   });
 
-  input?.addEventListener("change", () => {
+  input?.addEventListener("change", async () => {
     if (editBtn?.disabled) {
       input.value = "";
       return;
     }
 
     const file = input.files?.[0];
-
     if (!file) return;
 
-    const url =
-      URL.createObjectURL(file);
+    const user = await getCurrentUser?.();
 
-    if (img) {
-      img.src = url;
+    if (!user) {
+      alert("Please login to change your profile photo.");
+      input.value = "";
+      return;
     }
 
-    const profile =
-      getAccountProfile();
+    try {
+      editBtn.disabled = true;
+      editBtn.textContent = "Uploading...";
 
-    profile.avatarUrl = url;
+      const imageUrl =
+        await uploadImageToLocalServer(
+          file,
+          "avatars",
+          user.id
+        );
 
-    saveAccountProfile(profile);
+      if (img) {
+        img.src = imageUrl;
+      }
 
-    const avatarPanelImage =
-      document.querySelector(".avatar-panel-image");
+      const profile = getAccountProfile();
 
-    if (avatarPanelImage) {
-      avatarPanelImage.src = url;
+      profile.avatarUrl = imageUrl;
+
+      saveAccountProfile(profile);
+
+      const avatarPanelImage =
+        document.querySelector(".avatar-panel-image");
+
+      if (avatarPanelImage) {
+        avatarPanelImage.src = imageUrl;
+      }
+
+    } catch (error) {
+      console.error("Avatar upload failed:", error);
+      alert("Avatar upload failed.");
     }
+
+    editBtn.disabled = false;
+    editBtn.textContent = "Change Photo";
+    input.value = "";
   });
 }
 
@@ -3478,3 +3502,26 @@ window.openMapByPreference = function ({
   }
 
 };
+
+const MEDIA_SERVER_URL = "http://localhost:14800";
+
+async function uploadImageToLocalServer(file, type, slug){
+  const formData = new FormData();
+
+  formData.append("image", file);
+  formData.append("type", type);
+  formData.append("slug", slug || "heriland");
+
+  const res = await fetch(`${MEDIA_SERVER_URL}/api/upload-image`, {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  if (!data.ok) {
+    throw new Error(data.message || "Upload failed");
+  }
+
+  return data.imageUrl;
+}
