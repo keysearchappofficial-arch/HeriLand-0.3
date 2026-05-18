@@ -1,5 +1,6 @@
 import { state } from "./state.js";
 import { isSaved } from "./storage.js";
+import { bindEvents } from "./interactions.js";
 
 const stage = document.getElementById("exploreStage");
 
