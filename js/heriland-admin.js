@@ -1,29 +1,43 @@
 async function requireAdmin(){
 
+  console.log("Checking admin...");
+
   const {
-    data: { user }
+    data: { user },
+    error: userError
   } = await supabase.auth.getUser();
 
+  console.log("Current user:", user);
+  console.log("User error:", userError);
+
   if (!user) {
-    location.href = "/";
+    alert("Please login as admin.");
+    location.href = "./explore.html";
     return false;
   }
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("heriland_admins")
     .select("*")
     .eq("user_id", user.id)
     .maybeSingle();
 
+  console.log("Admin row:", data);
+  console.log("Admin error:", error);
+
+  if (error) {
+    alert("Admin check failed.");
+    return false;
+  }
+
   if (!data) {
     alert("Not admin.");
-    location.href = "/";
+    location.href = "./explore.html";
     return false;
   }
 
   return true;
 }
-
 let submissions = [];
 let pendingRejectIds = [];
 
@@ -49,9 +63,10 @@ const rejectConfirmBtn = document.getElementById("rejectConfirmBtn");
 ========================= */
 
 async function loadSubmissions(){
+  console.log("loadSubmissions called");
   tableBody.innerHTML = `
     <tr>
-      <td colspan="30">Loading...</td>
+      <td colspan="31">Loading...</td>
     </tr>
   `;
 
@@ -1089,11 +1104,14 @@ rejectConfirmBtn?.addEventListener("click", async () => {
 ========================= */
 
 (async () => {
+  console.log("Admin init start");
 
   const ok = await requireAdmin();
+  console.log("requireAdmin result:", ok);
 
   if (!ok) return;
 
-  loadSubmissions();
-
+  console.log("Loading submissions...");
+  await loadSubmissions();
+  console.log("Submissions loaded");
 })();
