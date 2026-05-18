@@ -9,6 +9,7 @@ import {
   bindAvatarPanel,
   updateAvatarStats
 } from "./avatar-panel.js";
+import { bindAvatarPages } from "./avatar-pages.js";
 
 console.log("✅ app.js loaded");
 
@@ -24,6 +25,7 @@ async function bootExplore(){
 
   bindAuthUI();
   bindAvatarPanel();
+  bindAvatarPages();
   bindFilters();
   bindSwipe();
 
