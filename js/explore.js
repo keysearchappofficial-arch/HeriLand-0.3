@@ -1100,6 +1100,11 @@ avatarSubBack?.addEventListener("click", () => {
     openAvatarSubPage("contribute");
     return;
   }
+  
+if (avatarCurrentPageKey === "account-badge-wall") {
+  openAvatarSubPage("account");
+  return;
+}
 
   avatarSubView?.classList.remove("is-active");
   avatarHomeView?.classList.add("is-active");
@@ -2288,12 +2293,13 @@ function renderAccountPage(){
 
       <h4>Slow Explorer</h4>
 
-      <button
-        class="account-badge-reward"
-        type="button"
-      >
-        Reward
-      </button>
+<button
+  class="account-badge-reward"
+  id="accountBadgeRewardBtn"
+  type="button"
+>
+  Reward
+</button>
 
     </div>
 
@@ -2359,6 +2365,12 @@ function renderAccountPage(){
 }
 
 async function bindAccountPage(){
+const badgeRewardBtn =
+  document.getElementById("accountBadgeRewardBtn");
+
+badgeRewardBtn?.addEventListener("click", () => {
+  openBadgeWallPage();
+});
 
   const editBtn =
     document.getElementById("accountEditBtn");
@@ -2618,6 +2630,71 @@ function syncAccountStats(){
   if (review) {
     review.textContent = getReviews().length;
   }
+}
+
+function openBadgeWallPage(){
+  avatarCurrentPageKey = "account-badge-wall";
+
+  avatarSubTitle.textContent = "Badge Wall";
+  avatarSubKicker.textContent = "Traveler Rewards";
+
+  avatarSubContent.innerHTML = `
+    <div class="badge-wall-page">
+
+      ${renderBadgeWallCard({
+        title: "Slow Explorer",
+        desc: "For travelers who enjoy quiet places and slower journeys.",
+        icon: "🌿",
+        active: true
+      })}
+
+      ${renderBadgeWallCard({
+        title: "Food Hunter",
+        desc: "For travelers who collect local food memories.",
+        icon: "🍜"
+      })}
+
+      ${renderBadgeWallCard({
+        title: "Culture Walker",
+        desc: "For travelers who explore traditions, crafts, and heritage.",
+        icon: "🏺"
+      })}
+
+      ${renderBadgeWallCard({
+        title: "Hidden Gem Finder",
+        desc: "For travelers who discover places most people miss.",
+        icon: "✦"
+      })}
+
+      ${renderBadgeWallCard({
+        title: "River Traveler",
+        desc: "For travelers who follow rivers, towns, and slower routes.",
+        icon: "〰"
+      })}
+
+    </div>
+  `;
+}
+
+function renderBadgeWallCard(item){
+  return `
+    <div class="badge-wall-card ${item.active ? "is-active" : "is-locked"}">
+
+      <div class="badge-wall-icon">
+        ${item.icon}
+      </div>
+
+      <div class="badge-wall-copy">
+        <h4>${item.title}</h4>
+        <p>${item.desc}</p>
+      </div>
+
+      <div class="badge-wall-status">
+        ${item.active ? "Active" : "Locked"}
+      </div>
+
+    </div>
+  `;
 }
 
 const THEME_KEY = "heriland_theme";
