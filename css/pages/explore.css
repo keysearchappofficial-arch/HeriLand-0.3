@@ -1933,3 +1933,98 @@ body[data-theme="light"] .account-badge-select:disabled{
 .account-save-btn{
   display:none;
 }
+
+/* =========================
+   Badge Wall
+========================= */
+
+.badge-wall-page{
+  display:grid;
+  gap:12px;
+}
+
+.badge-wall-card{
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:16px;
+
+  border-radius:22px;
+
+  background:var(--surface);
+  border:1px solid var(--border);
+
+  color:var(--text);
+}
+
+.badge-wall-card.is-active{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(126,211,160,.16),
+      rgba(255,255,255,.04)
+    );
+
+  border:1px solid var(--border-green);
+}
+
+.badge-wall-icon{
+  width:46px;
+  height:46px;
+
+  flex-shrink:0;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:16px;
+
+  background:var(--green-soft);
+
+  color:var(--green);
+
+  font-size:22px;
+}
+
+.badge-wall-copy{
+  flex:1;
+  min-width:0;
+}
+
+.badge-wall-copy h4{
+  margin-bottom:6px;
+
+  font-size:15px;
+  color:var(--text);
+}
+
+.badge-wall-copy p{
+  font-size:13px;
+  line-height:1.55;
+
+  color:var(--muted);
+}
+
+.badge-wall-status{
+  flex-shrink:0;
+
+  padding:7px 10px;
+
+  border-radius:999px;
+
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  color:var(--muted);
+
+  font-size:11px;
+  font-weight:800;
+}
+
+.badge-wall-card.is-active .badge-wall-status{
+  background:var(--green-soft-2);
+  border:1px solid var(--border-green);
+  color:var(--green);
+}
