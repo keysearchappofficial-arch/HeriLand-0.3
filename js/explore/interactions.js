@@ -3,6 +3,7 @@
 import { state } from "./state.js";
 import { renderCards } from "./cards.js";
 import { toggleSaved } from "./saved.js";
+import { openCardDetail } from "./detail-bridge.js";
 
 console.log("✅ interactions.js loaded");
 
@@ -81,13 +82,13 @@ export function bindEvents(){
     renderCards();
   });
 
-  activeCard?.addEventListener("click", (event) => {
-    console.log("🃏 card clicked");
+activeCard?.addEventListener("click", (event) => {
+  console.log("🃏 card clicked");
 
-    openDetailPage(
-      event.currentTarget
-    );
-  });
+  openCardDetail(
+    event.currentTarget
+  );
+});
 
 }
 
@@ -153,38 +154,4 @@ export function prevCard(){
     state.isAnimating = false;
     console.log("✅ animation finished");
   }, 300);
-}
-
-function openDetailPage(cardEl){
-
-  console.log("📄 openDetailPage()");
-
-  const slug =
-    cardEl?.dataset.slug;
-
-  const type =
-    cardEl?.dataset.type;
-
-  console.log("slug:", slug);
-  console.log("type:", type);
-
-  if (!slug) {
-    console.log("⛔ no slug");
-    return;
-  }
-
-  if (type === "event") {
-    console.log("🎉 openEventDetail");
-    window.openEventDetail?.(slug);
-    return;
-  }
-
-  if (type === "culture") {
-    console.log("🏺 openCultureDetail");
-    window.openCultureDetail?.(slug);
-    return;
-  }
-
-  console.log("📍 openDetail");
-  window.openDetail?.(slug);
 }
