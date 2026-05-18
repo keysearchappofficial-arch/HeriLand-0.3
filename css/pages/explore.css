@@ -2116,3 +2116,9 @@ body[data-theme="light"] .account-badge-select:disabled{
 
   opacity:.5;
 }
+
+.account-avatar-edit.is-disabled{
+  opacity:.4;
+
+  pointer-events:none;
+}
