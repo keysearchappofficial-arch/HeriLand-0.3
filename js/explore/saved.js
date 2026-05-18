@@ -5,6 +5,8 @@ import {
   isSaved
 } from "./storage.js";
 
+import { updateExploreLovedCount } from "./supabase-api.js";
+
 console.log("✅ saved.js loaded");
 
 export function getLovedText(item){
@@ -25,23 +27,19 @@ export async function updateLovedCount(slug, delta){
   const nextCount =
     Math.max((item.lovedCount || 0) + delta, 0);
 
-  const { data, error } =
-    await window.supabase
-      .from("explore_items")
-      .update({
-        loved_count: nextCount
-      })
-      .eq("slug", slug)
-      .select("slug,loved_count")
-      .single();
+let data = null;
 
-  if (error) {
-    console.error("❌ update loved_count failed:", error);
-    return false;
-  }
+try {
+  data = await updateExploreLovedCount(
+    slug,
+    nextCount
+  );
+} catch (error) {
+  return false;
+}
 
-  const finalCount =
-    data?.loved_count ?? nextCount;
+const finalCount =
+  data?.loved_count ?? nextCount;
 
   item.lovedCount = finalCount;
 
