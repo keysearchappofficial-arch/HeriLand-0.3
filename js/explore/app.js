@@ -1,5 +1,6 @@
 import { loadExploreCards } from "./cards.js";
 import { bindFilters } from "./filters.js";
+import { bindSwipe } from "./swipe.js";
 
 console.log("✅ app.js loaded");
 
@@ -14,6 +15,7 @@ async function bootExplore(){
   document.body.classList.remove("no-scroll");
 
   bindFilters();
+  bindSwipe();
 
   await loadExploreCards();
 
