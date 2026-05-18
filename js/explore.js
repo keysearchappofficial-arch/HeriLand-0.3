@@ -668,6 +668,8 @@ const authEmail = document.getElementById("authEmail");
 const authPassword = document.getElementById("authPassword");
 const authLoginBtn = document.getElementById("authLoginBtn");
 const authSignupBtn = document.getElementById("authSignupBtn");
+const authGoogleBtn =
+  document.getElementById("authGoogleBtn");
 
 const avatarLoginBtn =
   document.getElementById("avatarLoginBtn");
@@ -738,6 +740,14 @@ if (accountAuthActionBtn) {
 
 const profile =
   getAccountProfile();
+  
+if (!profile.name && user?.email) {
+
+  profile.name = user.email;
+
+  saveAccountProfile(profile);
+
+}
   
 const avatarPanelImage =
   document.querySelector(".avatar-panel-image");
@@ -837,6 +847,33 @@ authSignupBtn?.addEventListener("click", async () => {
   await updateAuthUI();
 });
 
+authGoogleBtn?.addEventListener(
+  "click",
+  async () => {
+
+    const { error } =
+      await supabase.auth.signInWithOAuth({
+
+        provider: "google",
+
+        options: {
+          redirectTo: window.location.origin
+        }
+
+      });
+
+    if (error) {
+      console.error(
+        "Google login failed:",
+        error
+      );
+
+      alert("Google login failed.");
+    }
+
+  }
+);
+
 logoutBackdrop?.addEventListener(
   "click",
   closeLogoutSheet
@@ -867,6 +904,16 @@ logoutConfirmBtn?.addEventListener(
     await updateAuthUI();
 
     renderCards();
+
+  }
+);
+
+supabase.auth.onAuthStateChange(
+  async () => {
+
+    await updateAuthUI();
+
+    updateAvatarStats();
 
   }
 );
