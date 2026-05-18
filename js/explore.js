@@ -2729,6 +2729,20 @@ function setAccountEditMode(isEditing){
       !isEditing
     );
   });
+  
+  const avatarEditBtn =
+  document.getElementById("accountAvatarEditBtn");
+
+if (avatarEditBtn) {
+
+  avatarEditBtn.disabled = !isEditing;
+
+  avatarEditBtn.classList.toggle(
+    "is-disabled",
+    !isEditing
+  );
+
+}
 
   const saveBtn =
     document.getElementById("accountSaveBtn");
