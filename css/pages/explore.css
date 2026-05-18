@@ -2028,3 +2028,13 @@ body[data-theme="light"] .account-badge-select:disabled{
   border:1px solid var(--border-green);
   color:var(--green);
 }
+
+.account-badge-reward.is-disabled{
+  opacity:.42;
+
+  cursor:not-allowed;
+
+  filter:grayscale(.2);
+
+  transform:none !important;
+}
