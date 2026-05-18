@@ -1914,3 +1914,22 @@ body.no-scroll .stage{
       rgba(255,190,80,.16)
     );
 }
+
+.account-paper-input:disabled,
+.account-paper-select:disabled,
+.account-badge-select:disabled{
+  opacity:.62;
+  cursor:not-allowed;
+  background:rgba(255,255,255,.035);
+  color:var(--muted);
+}
+
+body[data-theme="light"] .account-paper-input:disabled,
+body[data-theme="light"] .account-paper-select:disabled,
+body[data-theme="light"] .account-badge-select:disabled{
+  background:rgba(24,35,28,.035);
+}
+
+.account-save-btn{
+  display:none;
+}
