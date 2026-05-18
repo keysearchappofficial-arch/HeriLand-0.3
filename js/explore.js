@@ -642,8 +642,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-loadExploreCards();
-
 window.submitReview = function () {
 
   if (!currentOpenedItem) return;
@@ -858,7 +856,8 @@ authGoogleBtn?.addEventListener(
         provider: "google",
 
         options: {
-          redirectTo: window.location.href
+redirectTo:
+  "https://keysearchappofficial-arch.github.io/HeriLand-0.3/explore.html"
         }
       });
 
@@ -907,18 +906,6 @@ logoutConfirmBtn?.addEventListener(
 
   }
 );
-
-supabase.auth.onAuthStateChange(
-  async () => {
-
-    await updateAuthUI();
-
-    updateAvatarStats();
-
-  }
-);
-
-updateAuthUI();
 
 /* =========================
    Avatar Panel
@@ -3549,3 +3536,70 @@ async function uploadImageToLocalServer(file, type, slug){
 
   return data.images || data;
 }
+
+let herilandAppStarted = false;
+
+async function startHeriLandApp(){
+
+  if (herilandAppStarted) return;
+
+  herilandAppStarted = true;
+
+  document.body.classList.remove("no-scroll");
+
+  document
+    .querySelectorAll(".auth-layer.is-open")
+    .forEach(el => el.classList.remove("is-open"));
+
+  await updateAuthUI();
+
+  await loadExploreCards();
+
+  updateAvatarStats();
+
+  renderCards();
+}
+
+supabase.auth.onAuthStateChange(
+  async (event, session) => {
+
+    console.log(
+      "Explore auth changed:",
+      event,
+      session?.user?.email || null
+    );
+
+    if (
+      event === "INITIAL_SESSION" ||
+      event === "SIGNED_IN" ||
+      event === "TOKEN_REFRESHED"
+    ) {
+      document.body.classList.remove("no-scroll");
+
+      document
+        .querySelectorAll(".auth-layer.is-open")
+        .forEach(el => el.classList.remove("is-open"));
+
+      await updateAuthUI();
+
+      await loadExploreCards();
+
+      updateAvatarStats();
+
+      renderCards();
+    }
+
+    if (event === "SIGNED_OUT") {
+      await updateAuthUI();
+
+      await loadExploreCards();
+
+      updateAvatarStats();
+
+      renderCards();
+    }
+
+  }
+);
+
+window.addEventListener("DOMContentLoaded", startHeriLandApp);
