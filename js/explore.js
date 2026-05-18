@@ -3602,46 +3602,53 @@ async function startHeriLandApp(){
   renderCards();
 }
 
-supabase.auth.onAuthStateChange(
-  async (event, session) => {
+async function initAuthListener(){
 
-    console.log(
-      "Explore auth changed:",
-      event,
-      session?.user?.email || null
-    );
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
 
-    if (
-      event === "INITIAL_SESSION" ||
-      event === "SIGNED_IN" ||
-      event === "TOKEN_REFRESHED"
-    ) {
-      document.body.classList.remove("no-scroll");
+  console.log("session:", session);
 
-      document
-        .querySelectorAll(".auth-layer.is-open")
-        .forEach(el => el.classList.remove("is-open"));
+  await updateAuthUI();
 
-      await updateAuthUI();
+  await loadExploreCards();
 
-      await loadExploreCards();
+  updateAvatarStats();
 
-      updateAvatarStats();
+  renderCards();
 
-      renderCards();
+  supabase.auth.onAuthStateChange(
+    async (event) => {
+
+      console.log("auth changed:", event);
+
+      if (
+        event === "SIGNED_IN" ||
+        event === "SIGNED_OUT"
+      ) {
+
+        await updateAuthUI();
+
+        await loadExploreCards();
+
+        updateAvatarStats();
+
+        renderCards();
+
+      }
+
     }
+  );
 
-    if (event === "SIGNED_OUT") {
-      await updateAuthUI();
+}
 
-      await loadExploreCards();
+window.addEventListener("DOMContentLoaded", async () => {
 
-      updateAvatarStats();
+  if (herilandAppStarted) return;
 
-      renderCards();
-    }
+  herilandAppStarted = true;
 
-  }
-);
+  await initAuthListener();
 
-window.addEventListener("DOMContentLoaded", startHeriLandApp);
+});
