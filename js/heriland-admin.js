@@ -1,3 +1,29 @@
+async function requireAdmin(){
+
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    location.href = "/";
+    return false;
+  }
+
+  const { data } = await supabase
+    .from("heriland_admins")
+    .select("*")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (!data) {
+    alert("Not admin.");
+    location.href = "/";
+    return false;
+  }
+
+  return true;
+}
+
 let submissions = [];
 let pendingRejectIds = [];
 
@@ -597,7 +623,9 @@ async function publishPlace(submission, slug, image){
 
   const { error } = await supabase
     .from("heriland_places")
-    .insert(placePayload);
+    .upsert(placePayload, {
+  onConflict: "slug"
+});
 
   if (error) {
     console.error("heriland_places insert failed:", error);
@@ -673,7 +701,9 @@ async function publishEvent(submission, slug, image){
 
   const { error } = await supabase
     .from("heriland_events")
-    .insert(eventPayload);
+    .upsert(eventPayload, {
+  onConflict: "slug"
+});
 
   if (error) {
     console.error("heriland_events insert failed:", error);
@@ -738,7 +768,9 @@ async function publishCulture(submission, slug, image){
 
   const { error } = await supabase
     .from("heriland_cultures")
-    .insert(culturePayload);
+    .upsert(culturePayload, {
+  onConflict: "slug"
+});
 
   if (error) {
     console.error("heriland_cultures insert failed:", error);
@@ -794,7 +826,9 @@ async function publishTravelerStory(submission, slug, image){
 
   const { error } = await supabase
     .from("heriland_traveler_stories")
-    .insert(storyPayload);
+    .upsert(storyPayload, {
+  onConflict: "slug"
+});
 
   if (error) {
     console.error("heriland_traveler_stories insert failed:", error);
@@ -844,7 +878,9 @@ async function publishExploreItem(submission, slug, image){
 
   const { error } = await supabase
     .from("explore_items")
-    .insert(explorePayload);
+    .upsert(explorePayload, {
+  onConflict: "slug"
+});
 
   if (error) {
     console.error("explore_items insert failed:", error);
@@ -1052,4 +1088,12 @@ rejectConfirmBtn?.addEventListener("click", async () => {
    Init
 ========================= */
 
-loadSubmissions();
+(async () => {
+
+  const ok = await requireAdmin();
+
+  if (!ok) return;
+
+  loadSubmissions();
+
+})();
