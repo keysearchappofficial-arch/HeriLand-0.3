@@ -2518,6 +2518,8 @@ function bindAccountAvatarUpload(){
     document.getElementById("accountAvatarImg");
 
   editBtn?.addEventListener("click", async () => {
+    if (editBtn.disabled) return;
+
     const loggedIn =
       await requireLogin("change your profile photo");
 
@@ -2527,6 +2529,11 @@ function bindAccountAvatarUpload(){
   });
 
   input?.addEventListener("change", () => {
+    if (editBtn?.disabled) {
+      input.value = "";
+      return;
+    }
+
     const file = input.files?.[0];
 
     if (!file) return;
