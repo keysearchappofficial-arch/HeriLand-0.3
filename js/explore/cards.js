@@ -80,6 +80,7 @@ export function renderCards(){
     <button class="nav-arrow nav-prev" type="button" aria-label="Previous">‹</button>
     <button class="nav-arrow nav-next" type="button" aria-label="Next">›</button>
   `;
+  bindEvents();
 }
 
 function renderActiveCard(item, index){
