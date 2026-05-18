@@ -10,6 +10,7 @@ import {
   updateAvatarStats
 } from "./avatar-panel.js";
 import { bindAvatarPages } from "./avatar-pages.js";
+import "./map.js";
 
 console.log("✅ app.js loaded");
 
