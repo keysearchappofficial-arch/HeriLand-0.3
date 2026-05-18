@@ -217,36 +217,36 @@ export async function openAvatarSubPage(pageKey){
   const avatarSubContent =
     document.getElementById("avatarSubContent");
 
-  if (pageKey === "saved") {
-    page.items = getSavedItems().map(item => ({
-      slug: item.slug,
-      list: "saved",
-      title: item.place,
-      rating: "Saved",
-      text: item.tags || item.subtitle || "",
-      image: item.image
-    }));
-  }
+if (pageKey === "saved") {
+  page.items = getSavedItems().map(item => ({
+    slug: item.slug,
+    list: "saved",
+    type: item.contentType || "place",
+    title: item.place,
+    rating: "Saved",
+    text: item.tags || item.subtitle || "",
+    image: item.image
+  }));
+}
 
-  if (pageKey === "trip") {
-    page.items = getTripItems().map(item => ({
-      slug: item.slug,
-      list: "trip",
-      title: item.place,
-      rating: item.contentType?.toUpperCase() || "Trip",
-      text: item.tags || item.subtitle || "",
-      image: item.image
-    }));
-  }
+if (pageKey === "trip") {
+  page.items = getTripItems().map(item => ({
+    slug: item.slug,
+    list: "trip",
+    type: item.contentType || "place",
+    title: item.place,
+    rating: item.contentType?.toUpperCase() || "Trip",
+    text: item.tags || item.subtitle || "",
+    image: item.image
+  }));
+}
 
-  if (pageKey === "reviews") {
-    page.items = getReviews().map(item => ({
-      title: item.title,
-      rating: item.rating,
-      text: item.text,
-      image: item.image
-    }));
-  }
+if (
+  pageKey === "saved" ||
+  pageKey === "trip"
+) {
+  bindAvatarPlaceActions();
+}
 
   if (avatarSubTitle) {
     avatarSubTitle.textContent = page.title;
@@ -331,15 +331,34 @@ if (
 }
 
 function renderAvatarPlaceCard(item){
+
+  const isSavedItem =
+    item.list === "saved";
+
+  const isTripItem =
+    item.list === "trip";
+
   return `
     <div
-      class="avatar-place-card"
-      data-slug="${item.slug || ""}"
+      class="avatar-place-card traveler-place-row"
+      data-open-slug="${item.slug || ""}"
+      data-type="${item.type || item.contentType || "place"}"
       data-list="${item.list || ""}"
     >
+
       <button
-        class="avatar-place-delete"
+        class="avatar-place-delete traveler-remove-btn"
         type="button"
+        ${
+          isSavedItem
+            ? `data-remove-saved="${item.slug || ""}"`
+            : ""
+        }
+        ${
+          isTripItem
+            ? `data-remove-trip="${item.slug || ""}"`
+            : ""
+        }
       >
         Delete
       </button>
