@@ -2,24 +2,28 @@ import { state } from "./state.js";
 import { isSaved } from "./storage.js";
 import { bindEvents } from "./interactions.js";
 import { getLovedText } from "./saved.js";
+import { fetchExploreItems } from "./supabase-api.js";
 
 console.log("✅ cards.js loaded");
 
 const stage = document.getElementById("exploreStage");
 
 export async function loadExploreCards(){
-  const { data, error } = await window.supabase
-    .from("explore_items")
-    .select("*")
-    .eq("is_active", true)
-    .order("sort_order", { ascending: true })
-    .order("created_at", { ascending: false });
+let data = [];
 
-  if (error) {
-    console.error("loadExploreCards error:", error);
-    stage.innerHTML = `<div class="empty-state">Load failed: ${error.message}</div>`;
-    return;
-  }
+try {
+  data = await fetchExploreItems();
+} catch (error) {
+  console.error("loadExploreCards error:", error);
+
+  stage.innerHTML = `
+    <div class="empty-state">
+      Load failed: ${error.message}
+    </div>
+  `;
+
+  return;
+}
 
   state.allCards = (data || []).map(item => ({
     contentType: item.content_type || "spot",
