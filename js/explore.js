@@ -728,15 +728,23 @@ async function updateAuthUI(){
     return;
   }
 
-  const profile =
-    JSON.parse(
-      localStorage.getItem("heriland_account_profile") || "{}"
-    );
+const profile =
+  getAccountProfile();
+  
+const avatarPanelImage =
+  document.querySelector(".avatar-panel-image");
 
-  if (avatarUserName) {
-    avatarUserName.textContent =
-      profile.name || user.email;
-  }
+if (avatarPanelImage) {
+  avatarPanelImage.src =
+    profile.avatarUrl ||
+    DEFAULT_AVATAR_URL;
+}
+
+if (avatarUserName) {
+  avatarUserName.textContent =
+    profile.name ||
+    user.email;
+}
 
   if (avatarUserDesc) {
     avatarUserDesc.textContent =
@@ -2126,10 +2134,11 @@ function renderAccountPage(){
 
         <div class="account-avatar-block">
           <div class="account-avatar">
-            <img
-              src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=300&q=80"
-              alt="Traveler Avatar"
-            >
+ <img
+  id="accountAvatarImg"
+  src=""
+  alt="Traveler Avatar"
+>
           </div>
 
           <button
@@ -2145,12 +2154,13 @@ function renderAccountPage(){
 
   <label>Traveler Name</label>
 
-  <button
-    class="account-inline-edit"
-    type="button"
-  >
-    Edit
-  </button>
+<button
+  class="account-inline-edit"
+  id="accountEditBtn"
+  type="button"
+>
+  Edit
+</button>
 
 </div>
 
@@ -2158,7 +2168,8 @@ function renderAccountPage(){
   id="accountName"
   class="account-paper-input account-name-input"
   type="text"
-  value="Andy"
+  value=""
+  disabled
 >
 
           <p>
@@ -2182,6 +2193,7 @@ function renderAccountPage(){
             id="accountBirth"
             class="account-paper-input"
             type="date"
+            disabled
           >
         </div>
 
@@ -2191,7 +2203,8 @@ function renderAccountPage(){
             id="accountPhone"
             class="account-paper-input"
             type="tel"
-            value="+886 900 000 000"
+            value=""
+            disabled
           >
         </div>
 
@@ -2201,7 +2214,8 @@ function renderAccountPage(){
             id="accountEmail"
             class="account-paper-input"
             type="email"
-            value="andy@example.com"
+            value=""
+            disabled
           >
         </div>
 
@@ -2218,6 +2232,7 @@ function renderAccountPage(){
           <select
             id="accountRegion"
             class="account-paper-select"
+            disabled
           >
             <option value="sarawak">Sarawak</option>
             <option value="kuching">Kuching</option>
@@ -2232,6 +2247,7 @@ function renderAccountPage(){
           <select
             id="accountLoginMethod"
             class="account-paper-select"
+            disabled
           >
             <option value="email">Email</option>
             <option value="google">Google</option>
@@ -2286,6 +2302,7 @@ function renderAccountPage(){
   <select
     id="accountBadgeSelect"
     class="account-badge-select"
+    disabled
   >
       <option value="slow-explorer">
         Slow Explorer
@@ -2341,48 +2358,256 @@ function renderAccountPage(){
   `;
 }
 
-function bindAccountPage(){
+async function bindAccountPage(){
+
+  const editBtn =
+    document.getElementById("accountEditBtn");
+
   const saveBtn =
     document.getElementById("accountSaveBtn");
 
-  saveBtn?.addEventListener("click", () => {
-    const profile = {
-      name: document.getElementById("accountName")?.value || "",
-      phone: document.getElementById("accountPhone")?.value || "",
-      email: document.getElementById("accountEmail")?.value || "",
-      loginMethod: document.getElementById("accountLoginMethod")?.value || "",
-      region: document.getElementById("accountRegion")?.value || ""
-    };
+  const accountAuthActionBtn =
+    document.getElementById("accountAuthActionBtn");
 
-    localStorage.setItem(
-      "heriland_account_profile",
-      JSON.stringify(profile)
-    );
+  await loadAccountProfileToUI();
+
+  setAccountEditMode(false);
+
+  editBtn?.addEventListener("click", () => {
+    setAccountEditMode(true);
+  });
+
+  saveBtn?.addEventListener("click", async () => {
+    saveAccountProfileFromUI();
+
+    setAccountEditMode(false);
+
+    await updateAuthUI();
 
     alert("Account updated");
   });
-  
-const accountAuthActionBtn =
-  document.getElementById("accountAuthActionBtn");
 
-getCurrentUser?.().then((user) => {
-  if (!accountAuthActionBtn) return;
+  getCurrentUser?.().then((user) => {
+    if (!accountAuthActionBtn) return;
 
-  accountAuthActionBtn.textContent =
-    user ? "Sign Out" : "Sign In";
-});
+    accountAuthActionBtn.textContent =
+      user ? "Sign Out" : "Sign In";
+  });
 
-accountAuthActionBtn?.addEventListener("click", async () => {
-  const user = await getCurrentUser?.();
+  accountAuthActionBtn?.addEventListener("click", async () => {
+    const user = await getCurrentUser?.();
 
-  if (user) {
-    openLogoutSheet();
-    return;
+    if (user) {
+      openLogoutSheet();
+      return;
+    }
+
+    openAuthModal();
+  });
+
+}
+
+const ACCOUNT_PROFILE_KEY =
+  "heriland_account_profile";
+
+const DEFAULT_AVATAR_URL =
+  "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=300&q=80";
+
+function getAccountProfile(){
+  return JSON.parse(
+    localStorage.getItem(ACCOUNT_PROFILE_KEY) || "{}"
+  );
+}
+
+function saveAccountProfile(profile){
+  localStorage.setItem(
+    ACCOUNT_PROFILE_KEY,
+    JSON.stringify(profile)
+  );
+}
+
+async function loadAccountProfileToUI(){
+  const user =
+    await getCurrentUser?.();
+
+  const profile =
+    getAccountProfile();
+
+  const fallbackName =
+    profile.name ||
+    user?.email ||
+    "Welcome Traveler";
+
+  const avatarUrl =
+    profile.avatarUrl ||
+    DEFAULT_AVATAR_URL;
+
+  const accountAvatarImg =
+    document.getElementById("accountAvatarImg");
+
+  if (accountAvatarImg) {
+    accountAvatarImg.src = avatarUrl;
   }
 
-  openAuthModal();
-});
+  const accountName =
+    document.getElementById("accountName");
 
+  if (accountName) {
+    accountName.value = fallbackName;
+  }
+
+  const accountEmail =
+    document.getElementById("accountEmail");
+
+  if (accountEmail) {
+    accountEmail.value =
+      profile.email ||
+      user?.email ||
+      "";
+  }
+
+  const accountPhone =
+    document.getElementById("accountPhone");
+
+  if (accountPhone) {
+    accountPhone.value =
+      profile.phone || "";
+  }
+
+  const accountBirth =
+    document.getElementById("accountBirth");
+
+  if (accountBirth) {
+    accountBirth.value =
+      profile.birth || "";
+  }
+
+  const accountRegion =
+    document.getElementById("accountRegion");
+
+  if (accountRegion) {
+    accountRegion.value =
+      profile.region || "sarawak";
+  }
+
+  const accountLoginMethod =
+    document.getElementById("accountLoginMethod");
+
+  if (accountLoginMethod) {
+    accountLoginMethod.value =
+      profile.loginMethod || "email";
+  }
+
+  const accountBadgeSelect =
+    document.getElementById("accountBadgeSelect");
+
+  if (accountBadgeSelect) {
+    accountBadgeSelect.value =
+      profile.badge || "slow-explorer";
+  }
+
+  syncAccountStats();
+}
+
+function saveAccountProfileFromUI(){
+  const oldProfile =
+    getAccountProfile();
+
+  const profile = {
+    ...oldProfile,
+
+    avatarUrl:
+      oldProfile.avatarUrl ||
+      DEFAULT_AVATAR_URL,
+
+    name:
+      document.getElementById("accountName")?.value.trim() || "",
+
+    birth:
+      document.getElementById("accountBirth")?.value || "",
+
+    phone:
+      document.getElementById("accountPhone")?.value.trim() || "",
+
+    email:
+      document.getElementById("accountEmail")?.value.trim() || "",
+
+    region:
+      document.getElementById("accountRegion")?.value || "sarawak",
+
+    loginMethod:
+      document.getElementById("accountLoginMethod")?.value || "email",
+
+    badge:
+      document.getElementById("accountBadgeSelect")?.value || "slow-explorer"
+  };
+
+  saveAccountProfile(profile);
+}
+
+function setAccountEditMode(isEditing){
+  const fields = [
+    "accountName",
+    "accountBirth",
+    "accountPhone",
+    "accountEmail",
+    "accountRegion",
+    "accountLoginMethod",
+    "accountBadgeSelect"
+  ];
+
+  fields.forEach((id) => {
+    const el =
+      document.getElementById(id);
+
+    if (!el) return;
+
+    el.disabled = !isEditing;
+
+    el.classList.toggle(
+      "is-disabled",
+      !isEditing
+    );
+  });
+
+  const saveBtn =
+    document.getElementById("accountSaveBtn");
+
+  const editBtn =
+    document.getElementById("accountEditBtn");
+
+  if (saveBtn) {
+    saveBtn.style.display =
+      isEditing ? "block" : "none";
+  }
+
+  if (editBtn) {
+    editBtn.textContent =
+      isEditing ? "Editing" : "Edit";
+  }
+}
+
+function syncAccountStats(){
+  const saved =
+    document.getElementById("accountSavedStat");
+
+  const trip =
+    document.getElementById("accountTripStat");
+
+  const review =
+    document.getElementById("accountReviewStat");
+
+  if (saved) {
+    saved.textContent = getSavedItems().length;
+  }
+
+  if (trip) {
+    trip.textContent = getTripItems().length;
+  }
+
+  if (review) {
+    review.textContent = getReviews().length;
+  }
 }
 
 const THEME_KEY = "heriland_theme";
