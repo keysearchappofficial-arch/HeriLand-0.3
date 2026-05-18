@@ -2373,19 +2373,29 @@ async function bindAccountPage(){
 
   setAccountEditMode(false);
 
-  editBtn?.addEventListener("click", () => {
-    setAccountEditMode(true);
-  });
+editBtn?.addEventListener("click", async () => {
+  const loggedIn =
+    await requireLogin("edit your account profile");
 
-  saveBtn?.addEventListener("click", async () => {
-    saveAccountProfileFromUI();
+  if (!loggedIn) return;
 
-    setAccountEditMode(false);
+  setAccountEditMode(true);
+});
 
-    await updateAuthUI();
+saveBtn?.addEventListener("click", async () => {
+  const loggedIn =
+    await requireLogin("save your account profile");
 
-    alert("Account updated");
-  });
+  if (!loggedIn) return;
+
+  saveAccountProfileFromUI();
+
+  setAccountEditMode(false);
+
+  await updateAuthUI();
+
+  alert("Account updated");
+});
 
   getCurrentUser?.().then((user) => {
     if (!accountAuthActionBtn) return;
