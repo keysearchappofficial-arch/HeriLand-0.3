@@ -1,9 +1,10 @@
 // explore/contribution-submit.js
 
-console.log("✅ contribution-submit.js loaded");
+import {
+  uploadImageFile
+} from "./media-upload.js";
 
-const MEDIA_SERVER_URL =
-  "http://localhost:14800";
+console.log("✅ contribution-submit.js loaded");
 
 export function bindContributionSubmit(){
 
@@ -298,49 +299,14 @@ async function uploadContributionImage(type){
       ? "details"
       : "cards";
 
-  const imageUrl =
-    await uploadImageToLocalServer(
-      file,
-      imageType,
-      name
-    );
+const imageUrl =
+  await uploadImageFile({
+    file,
+    type: imageType,
+    slug: name
+  });
 
   console.log("✅ image uploaded:", imageUrl);
 
   return imageUrl;
-}
-
-async function uploadImageToLocalServer(file, type, slug){
-
-  console.log("🖼️ uploadImageToLocalServer:", {
-    file: file.name,
-    type,
-    slug
-  });
-
-  const formData =
-    new FormData();
-
-  formData.append("image", file);
-  formData.append("type", type);
-  formData.append("slug", slug || "heriland");
-
-  const res =
-    await fetch(`${MEDIA_SERVER_URL}/api/upload-image`, {
-      method: "POST",
-      body: formData
-    });
-
-  const data =
-    await res.json();
-
-  console.log("🖼️ media server response:", data);
-
-  if (!data.ok) {
-    throw new Error(
-      data.message || "Upload failed"
-    );
-  }
-
-  return data.imageUrl;
 }
