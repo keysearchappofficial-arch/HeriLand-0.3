@@ -2208,12 +2208,20 @@ function renderAccountPage(){
 >
           </div>
 
-          <button
-            class="account-avatar-edit"
-            type="button"
-          >
-            Change Photo
-          </button>
+<button
+  class="account-avatar-edit"
+  id="accountAvatarEditBtn"
+  type="button"
+>
+  Change Photo
+</button>
+          
+<input
+  id="accountAvatarInput"
+  type="file"
+  accept="image/*"
+  hidden
+>
         </div>
 
         <div class="account-identity">
@@ -2451,6 +2459,7 @@ badgeRewardBtn?.addEventListener("click", async () => {
     document.getElementById("accountAuthActionBtn");
 
   await loadAccountProfileToUI();
+  bindAccountAvatarUpload();
 
   setAccountEditMode(false);
 
@@ -2496,6 +2505,53 @@ saveBtn?.addEventListener("click", async () => {
     openAuthModal();
   });
 
+}
+
+function bindAccountAvatarUpload(){
+  const editBtn =
+    document.getElementById("accountAvatarEditBtn");
+
+  const input =
+    document.getElementById("accountAvatarInput");
+
+  const img =
+    document.getElementById("accountAvatarImg");
+
+  editBtn?.addEventListener("click", async () => {
+    const loggedIn =
+      await requireLogin("change your profile photo");
+
+    if (!loggedIn) return;
+
+    input?.click();
+  });
+
+  input?.addEventListener("change", () => {
+    const file = input.files?.[0];
+
+    if (!file) return;
+
+    const url =
+      URL.createObjectURL(file);
+
+    if (img) {
+      img.src = url;
+    }
+
+    const profile =
+      getAccountProfile();
+
+    profile.avatarUrl = url;
+
+    saveAccountProfile(profile);
+
+    const avatarPanelImage =
+      document.querySelector(".avatar-panel-image");
+
+    if (avatarPanelImage) {
+      avatarPanelImage.src = url;
+    }
+  });
 }
 
 const ACCOUNT_PROFILE_KEY =
