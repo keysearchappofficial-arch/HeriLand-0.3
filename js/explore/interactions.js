@@ -69,16 +69,22 @@ saveBtn?.addEventListener("click", async (event) => {
 
   console.log("❤️ save clicked");
 
+  const requireLogin =
+    window.requireLogin || async () => true;
+
   const loggedIn =
-    await window.requireLogin?.("save places");
+    await requireLogin("save places");
 
   if (!loggedIn) {
     console.log("⛔ save blocked: not logged in");
     return;
   }
 
+  const button =
+    event.currentTarget;
+
   const cardEl =
-    saveBtn.closest(".card.active");
+    button.closest(".card.active");
 
   const slug =
     cardEl?.dataset.slug;
@@ -114,6 +120,10 @@ saveBtn?.addEventListener("click", async (event) => {
 }
 
 export function nextCard(){
+  if (!state.cards.length) {
+  console.log("⛔ no cards");
+  return;
+}
 
   console.log("➡️ nextCard()");
 
