@@ -16,6 +16,8 @@ import {
   bindSettingsPage
 } from "./settings.js";
 
+import { bindSupportButtons } from "./support.js";
+
 console.log("✅ avatar-pages.js loaded");
 
 const avatarPages = {
@@ -280,6 +282,10 @@ else if (page.layout === "empty") {
 
   avatarHomeView?.classList.remove("is-active");
   avatarSubView?.classList.add("is-active");
+  
+  if (pageKey === "service") {
+  bindSupportButtons();
+}
 
   console.log("✅ avatar page opened:", pageKey);
 }
