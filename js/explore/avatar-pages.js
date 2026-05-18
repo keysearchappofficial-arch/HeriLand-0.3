@@ -11,6 +11,11 @@ import {
   bindAccountPage
 } from "./account.js";
 
+import {
+  renderSettingsPage,
+  bindSettingsPage
+} from "./settings.js";
+
 console.log("✅ avatar-pages.js loaded");
 
 const avatarPages = {
@@ -253,6 +258,16 @@ if (pageKey === "account") {
     renderAccountPage();
 
   await bindAccountPage();
+
+}
+
+else if (pageKey === "settings") {
+
+  avatarSubContent.innerHTML =
+
+    renderSettingsPage();
+
+  bindSettingsPage();
 
 }
 
