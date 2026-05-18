@@ -845,11 +845,20 @@ logoutConfirmBtn?.addEventListener(
 
     await logout();
 
+    localStorage.removeItem(SAVED_KEY);
+    localStorage.removeItem(TRIP_KEY);
+    localStorage.removeItem(REVIEW_KEY);
+    localStorage.removeItem(ACCOUNT_PROFILE_KEY);
+
+    updateAvatarStats();
+
     closeLogoutSheet();
 
     closeAvatarPanel?.();
 
     await updateAuthUI();
+
+    renderCards();
 
   }
 );
