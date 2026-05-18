@@ -1,6 +1,10 @@
 import { loadExploreCards } from "./cards.js";
 import { bindFilters } from "./filters.js";
 import { bindSwipe } from "./swipe.js";
+import {
+  bindAuthUI,
+  updateAuthUI
+} from "./auth-ui.js";
 
 console.log("✅ app.js loaded");
 
@@ -14,8 +18,11 @@ async function bootExplore(){
 
   document.body.classList.remove("no-scroll");
 
+  bindAuthUI();
   bindFilters();
   bindSwipe();
+
+  await updateAuthUI();
 
   await loadExploreCards();
 
