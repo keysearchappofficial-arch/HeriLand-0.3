@@ -1,34 +1,91 @@
+// explore/interactions.js
+
 import { state } from "./state.js";
 import { renderCards } from "./cards.js";
+
+console.log("✅ interactions.js loaded");
 
 const stage =
   document.getElementById("exploreStage");
 
+console.log(
+  "✅ exploreStage:",
+  !!stage
+);
+
 export function bindEvents(){
 
-  document
-    .querySelector(".nav-next")
-    ?.addEventListener("click", nextCard);
+  console.log("🔄 bindEvents()");
 
-  document
-    .querySelector(".nav-prev")
-    ?.addEventListener("click", prevCard);
+  const nextBtn =
+    document.querySelector(".nav-next");
 
-  document
-    .querySelector(".card.active")
-    ?.addEventListener("click", (event) => {
+  const prevBtn =
+    document.querySelector(".nav-prev");
 
-      openDetailPage(
-        event.currentTarget
-      );
+  const activeCard =
+    document.querySelector(".card.active");
 
-    });
+  console.log(
+    "➡️ next button:",
+    !!nextBtn
+  );
+
+  console.log(
+    "⬅️ prev button:",
+    !!prevBtn
+  );
+
+  console.log(
+    "🃏 active card:",
+    !!activeCard
+  );
+
+  nextBtn?.addEventListener("click", () => {
+
+    console.log("➡️ next clicked");
+
+    nextCard();
+
+  });
+
+  prevBtn?.addEventListener("click", () => {
+
+    console.log("⬅️ prev clicked");
+
+    prevCard();
+
+  });
+
+  activeCard?.addEventListener("click", (event) => {
+
+    console.log("🃏 card clicked");
+
+    openDetailPage(
+      event.currentTarget
+    );
+
+  });
 
 }
 
 export function nextCard(){
 
-  if (state.isAnimating) return;
+  console.log("➡️ nextCard()");
+
+  console.log(
+    "before currentIndex:",
+    state.currentIndex
+  );
+
+  if (state.isAnimating) {
+
+    console.log(
+      "⛔ blocked: animating"
+    );
+
+    return;
+  }
 
   state.isAnimating = true;
 
@@ -36,17 +93,42 @@ export function nextCard(){
     (state.currentIndex + 1)
     % state.cards.length;
 
+  console.log(
+    "after currentIndex:",
+    state.currentIndex
+  );
+
   renderCards();
 
   setTimeout(() => {
+
     state.isAnimating = false;
+
+    console.log(
+      "✅ animation finished"
+    );
+
   }, 300);
 
 }
 
 export function prevCard(){
 
-  if (state.isAnimating) return;
+  console.log("⬅️ prevCard()");
+
+  console.log(
+    "before currentIndex:",
+    state.currentIndex
+  );
+
+  if (state.isAnimating) {
+
+    console.log(
+      "⛔ blocked: animating"
+    );
+
+    return;
+  }
 
   state.isAnimating = true;
 
@@ -56,15 +138,30 @@ export function prevCard(){
       state.cards.length
     ) % state.cards.length;
 
+  console.log(
+    "after currentIndex:",
+    state.currentIndex
+  );
+
   renderCards();
 
   setTimeout(() => {
+
     state.isAnimating = false;
+
+    console.log(
+      "✅ animation finished"
+    );
+
   }, 300);
 
 }
 
 function openDetailPage(cardEl){
+
+  console.log(
+    "📄 openDetailPage()"
+  );
 
   const slug =
     cardEl?.dataset.slug;
@@ -73,22 +170,49 @@ function openDetailPage(cardEl){
     cardEl?.dataset.type;
 
   console.log(
-    "open detail:",
-    slug,
+    "slug:",
+    slug
+  );
+
+  console.log(
+    "type:",
     type
   );
 
-  if (!slug) return;
+  if (!slug) {
+
+    console.log(
+      "⛔ no slug"
+    );
+
+    return;
+  }
 
   if (type === "event") {
+
+    console.log(
+      "🎉 openEventDetail"
+    );
+
     window.openEventDetail?.(slug);
+
     return;
   }
 
   if (type === "culture") {
+
+    console.log(
+      "🏺 openCultureDetail"
+    );
+
     window.openCultureDetail?.(slug);
+
     return;
   }
+
+  console.log(
+    "📍 openDetail"
+  );
 
   window.openDetail?.(slug);
 
