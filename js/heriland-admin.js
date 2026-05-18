@@ -1,131 +1,3 @@
-async function requireAdmin(){
-
-  console.log("Checking admin...");
-
-  const {
-    data: { user },
-    error: userError
-  } = await supabase.auth.getUser();
-
-  console.log("Current user:", user);
-  console.log("User error:", userError);
-
-  if (!user) {
-    openAdminLogin();
-    return false;
-  }
-
-  const { data, error } = await supabase
-    .from("heriland_admins")
-    .select("*")
-    .eq("user_id", user.id)
-    .maybeSingle();
-
-  console.log("Admin row:", data);
-  console.log("Admin error:", error);
-
-  if (error) {
-    alert("Admin check failed.");
-    return false;
-  }
-
-  if (!data) {
-    openAdminLogin("This account is not an admin.");
-    return false;
-  }
-
-  closeAdminLogin();
-  return true;
-}
-
-
-const adminLoginLayer =
-  document.getElementById("adminLoginLayer");
-
-const adminLoginEmail =
-  document.getElementById("adminLoginEmail");
-
-const adminLoginPassword =
-  document.getElementById("adminLoginPassword");
-
-const adminLoginBtn =
-  document.getElementById("adminLoginBtn");
-
-const adminGoogleLoginBtn =
-  document.getElementById("adminGoogleLoginBtn");
-
-const adminLoginMessage =
-  document.getElementById("adminLoginMessage");
-
-function openAdminLogin(message = ""){
-  adminLoginLayer?.classList.add("is-open");
-
-  if (adminLoginMessage) {
-    adminLoginMessage.textContent = message;
-  }
-}
-
-function closeAdminLogin(){
-  adminLoginLayer?.classList.remove("is-open");
-
-  if (adminLoginMessage) {
-    adminLoginMessage.textContent = "";
-  }
-}
-
-adminLoginBtn?.addEventListener("click", async () => {
-  const email =
-    adminLoginEmail?.value.trim();
-
-  const password =
-    adminLoginPassword?.value.trim();
-
-  if (!email || !password) {
-    adminLoginMessage.textContent =
-      "Please enter email and password.";
-    return;
-  }
-
-  adminLoginBtn.disabled = true;
-  adminLoginBtn.textContent = "Logging in...";
-
-  const { error } =
-    await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-  adminLoginBtn.disabled = false;
-  adminLoginBtn.textContent = "Login";
-
-  if (error) {
-    adminLoginMessage.textContent =
-      error.message || "Login failed.";
-    return;
-  }
-
-  const ok = await requireAdmin();
-
-  if (ok) {
-    await loadSubmissions();
-  }
-});
-
-adminGoogleLoginBtn?.addEventListener("click", async () => {
-  const { error } =
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: window.location.href
-      }
-    });
-
-  if (error) {
-    adminLoginMessage.textContent =
-      error.message || "Google login failed.";
-  }
-});
-
 let submissions = [];
 let pendingRejectIds = [];
 
@@ -163,7 +35,7 @@ async function loadSubmissions(){
     const { data, error } = await supabase
       .from("user_submitted_places")
       .select("*")
-      .order("created_at", { ascending:false });
+      .order("created_at", { ascending: false });
 
     console.log("submission data:", data);
     console.log("submission error:", error);
@@ -180,8 +52,6 @@ async function loadSubmissions(){
     }
 
     submissions = data || [];
-
-    console.log("submission count:", submissions.length);
 
     renderTable();
 
@@ -223,8 +93,6 @@ function getFilteredSubmissions(){
 function renderTable(){
   try {
     const rows = getFilteredSubmissions();
-
-    console.log("filtered rows:", rows);
 
     if (!rows.length) {
       tableBody.innerHTML = `
@@ -440,15 +308,15 @@ function renderRow(item){
         </button>
       </td>
 
-<td>
-  <button
-    class="publish-row-btn"
-    type="button"
-    data-id="${item.id}"
-  >
-    Publish
-  </button>
-</td>
+      <td>
+        <button
+          class="publish-row-btn"
+          type="button"
+          data-id="${item.id}"
+        >
+          Publish
+        </button>
+      </td>
 
     </tr>
   `;
@@ -631,7 +499,7 @@ async function getSubmissionFromRow(id){
   if (!row) return null;
 
   return {
-    ...submissions.find(item => item.id === id),
+    ...submissions.find(item => String(item.id) === String(id)),
     ...getRowPayload(row)
   };
 }
@@ -688,7 +556,10 @@ async function publishSubmission(submission){
     submission.image_url ||
     getFallbackImage(submission.type);
 
-  if (submission.type === "place" || submission.type === "restaurant") {
+  if (
+    submission.type === "place" ||
+    submission.type === "restaurant"
+  ) {
     return publishPlace(submission, slug, image);
   }
 
@@ -770,8 +641,8 @@ async function publishPlace(submission, slug, image){
   const { error } = await supabase
     .from("heriland_places")
     .upsert(placePayload, {
-  onConflict: "slug"
-});
+      onConflict: "slug"
+    });
 
   if (error) {
     console.error("heriland_places insert failed:", error);
@@ -848,8 +719,8 @@ async function publishEvent(submission, slug, image){
   const { error } = await supabase
     .from("heriland_events")
     .upsert(eventPayload, {
-  onConflict: "slug"
-});
+      onConflict: "slug"
+    });
 
   if (error) {
     console.error("heriland_events insert failed:", error);
@@ -915,8 +786,8 @@ async function publishCulture(submission, slug, image){
   const { error } = await supabase
     .from("heriland_cultures")
     .upsert(culturePayload, {
-  onConflict: "slug"
-});
+      onConflict: "slug"
+    });
 
   if (error) {
     console.error("heriland_cultures insert failed:", error);
@@ -973,8 +844,8 @@ async function publishTravelerStory(submission, slug, image){
   const { error } = await supabase
     .from("heriland_traveler_stories")
     .upsert(storyPayload, {
-  onConflict: "slug"
-});
+      onConflict: "slug"
+    });
 
   if (error) {
     console.error("heriland_traveler_stories insert failed:", error);
@@ -1025,8 +896,8 @@ async function publishExploreItem(submission, slug, image){
   const { error } = await supabase
     .from("explore_items")
     .upsert(explorePayload, {
-  onConflict: "slug"
-});
+      onConflict: "slug"
+    });
 
   if (error) {
     console.error("explore_items insert failed:", error);
@@ -1047,6 +918,41 @@ function bindRowEvents(){
     .forEach((button) => {
       button.addEventListener("click", () => {
         saveRow(button.dataset.id);
+      });
+    });
+
+  document
+    .querySelectorAll(".publish-row-btn")
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        const id = button.dataset.id;
+
+        const submission =
+          await getSubmissionFromRow(id);
+
+        if (!submission) return;
+
+        const ok =
+          await publishSubmission(submission);
+
+        if (!ok) return;
+
+        const { error } = await supabase
+          .from("user_submitted_places")
+          .update({
+            status: "published",
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", id);
+
+        if (error) {
+          console.error("submission status update failed:", error);
+          alert("Published content, but failed to update submission status.");
+          return;
+        }
+
+        alert("Published successfully.");
+        await loadSubmissions();
       });
     });
 
@@ -1235,38 +1141,6 @@ rejectConfirmBtn?.addEventListener("click", async () => {
 ========================= */
 
 window.addEventListener("load", async () => {
-
   console.log("Admin init start");
-
-  try {
-
-    const timeout = new Promise((_, reject) => {
-      setTimeout(() => {
-        reject(new Error("Auth timeout"));
-      }, 5000);
-    });
-
-    const result = await Promise.race([
-      supabase.auth.getUser(),
-      timeout
-    ]);
-
-    console.log("getUser result:", result);
-
-    const ok = await requireAdmin();
-
-    console.log("requireAdmin result:", ok);
-
-    if (!ok) return;
-
-    await loadSubmissions();
-
-  } catch (err) {
-
-    console.error("INIT CRASH:", err);
-
-    alert(err.message);
-
-  }
-
+  await loadSubmissions();
 });
